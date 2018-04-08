@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">海外地产</string>
+    <string name="shouye">首页</string>
+    <string name="weiliao">微聊</string>
+    <string name="tuijian">推荐</string>
+    <string name="mine">我的</string>
 </resources>

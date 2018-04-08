@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#c7977f</color>
+    <color name="colorPrimaryDark">#c7977f</color>
+    <color name="colorAccent">#c7977f</color>
     <color name="title">#333333</color>
     <color name="backgourd">#F5F5F5</color>
     <color name="green">#47B546</color>
@@ -19,4 +19,8 @@
     <color name="gray1">#F0F0F0</color>
     <color name="gray2">#F4F4F4</color>
     <color name="huise">#cccccc</color>
+    <color name="tab_text_selected_color">#c7977f</color>
+    <color name="tab_text_normal_color">#cccccc</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#fff</color>
 </resources>

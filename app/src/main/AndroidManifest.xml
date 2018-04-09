@@ -3,11 +3,11 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".MyApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".login.RegisterActivity"/>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.ForgetPswActivity"/>
+        <activity android:name=".login.UserAgreementActivity"/>
+        <activity android:name=".login.LauncherActivity"/>
+        <activity android:name=".login.GuidePageActivity"/>
     </application>
 
 </manifest>

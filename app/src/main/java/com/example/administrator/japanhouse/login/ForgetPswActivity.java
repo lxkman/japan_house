@@ -1,0 +1,15 @@
+package com.example.administrator.japanhouse.login;
+
+import android.os.Bundle;
+
+import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.base.BaseActivity;
+
+public class ForgetPswActivity extends BaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_forget_psw);
+    }
+}

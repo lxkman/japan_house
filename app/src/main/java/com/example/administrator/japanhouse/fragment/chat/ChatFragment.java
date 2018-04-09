@@ -20,5 +20,16 @@ public class ChatFragment extends BaseFragment {
     @Override
     protected void initLazyData() {
 
+
+
+
+
+
+
+
+
+
+
+
     }
 }

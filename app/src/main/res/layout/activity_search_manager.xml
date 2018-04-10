@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lianxiren"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.chat.StartWechatActivity">
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="@string/searchmanager"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:padding="13dp"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:padding="15dip"
+            android:src="@drawable/yello_search"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <EditText
+            android:background="@null"
+            android:textSize="15dip"
+            android:hint="@string/manager_number"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="@color/shihuangse"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:text="@string/search"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:padding="15dip"
+            android:src="@drawable/green_saoyisao"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <EditText
+            android:background="@null"
+            android:textSize="15dip"
+            android:hint="@string/green_saoyisao"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

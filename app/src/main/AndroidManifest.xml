@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.administrator.japanhouse"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.japanhouse">
 
     <application
         android:name=".MyApplication"
@@ -9,19 +9,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.LancherActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.RegisterActivity"/>
-        <activity android:name=".login.LoginActivity"/>
-        <activity android:name=".login.ForgetPswActivity"/>
-        <activity android:name=".login.UserAgreementActivity"/>
-        <activity android:name=".login.LauncherActivity"/>
-        <activity android:name=".login.GuidePageActivity"/>
+        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.ForgetPswActivity" />
+        <activity android:name=".login.UserAgreementActivity" />
+        <activity android:name=".login.LauncherActivity" />
+        <activity android:name=".login.GuidePageActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".fragment.chat.SearchActivity" />
+        <activity android:name=".fragment.chat.StartWechatActivity" />
+        <activity android:name=".fragment.chat.SearchManagerActivity" />
+        <activity android:name=".fragment.chat.ManagerActivity" />
+        <activity android:name=".fragment.comment.NewHousedetailsActivity" />
+        <activity android:name=".fragment.comment.SeeMoreActivity" />
+        <activity android:name=".fragment.comment.ZuHousedetailsActivity" />
+        <activity android:name=".fragment.comment.OldHousedetailsActivity" />
+        <activity android:name=".fragment.comment.TudidetailsActivity" />
+        <activity android:name=".fragment.home.NewHouseActivity"></activity>
     </application>
 
 </manifest>

@@ -4,4 +4,17 @@
     <string name="weiliao">微聊</string>
     <string name="tuijian">推荐</string>
     <string name="mine">我的</string>
+    <string name="jiazaizhong">加载中...</string>
+    <string name="wl">微聊</string>
+    <string name="sousuo">请输入查询内容</string>
+    <string name="quxiao">取消</string>
+    <string name="saoyisao">扫一扫</string>
+    <string name="faqiweiliao">发起微聊</string>
+    <string name="zhaojingjiren">找经纪人</string>
+    <string name="faqi">发起微聊</string>
+    <string name="xuanzelianxiren">请选择一个联系人进行微聊</string>
+    <string name="searchmanager">找经纪人</string>
+    <string name="manager_number">请输入经纪人手机号</string>
+    <string name="search">搜索</string>
+    <string name="green_saoyisao">扫一扫</string>
 </resources>

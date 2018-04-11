@@ -123,7 +123,7 @@
         <activity android:name=".fragment.mine.MineMsgActivity"/>
         <activity android:name=".fragment.mine.WenJuanActivity"/>
         <activity android:name=".fragment.mine.MsgDetailActivity"/>
-        <activity android:name=".fragment.mine.BindPhoneActivity"/>
+        <activity android:name=".fragment.mine.MineBindPhoneActivity"/>
         <activity android:name=".fragment.mine.ChangePhoneActivity"/>
         <activity android:name=".fragment.mine.LanguageActivity"/>
         <activity android:name=".fragment.mine.AboutUsActivity"/>

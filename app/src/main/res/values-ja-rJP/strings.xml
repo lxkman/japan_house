@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">海外地产</string>
-    <string name="shouye">トップページ</string>
-    <string name="weiliao">即時会話</string>
-    <string name="tuijian">おすすめ</string>
-    <string name="mine">Ｍｙ</string>
-    <string name="jiazaizhong">加载中...</string>
-</resources>

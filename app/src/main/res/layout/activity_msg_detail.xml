@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/userxiyi"
+            android:text="@string/xiaoxixiagnqing"
             android:textColor="#fff"
             android:textSize="18sp"/>
         <ImageView
@@ -30,4 +30,13 @@
             android:layout_height="50dip"
             android:padding="13dp"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:lineSpacingExtra="2dp"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:text="萨芬军多扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩"
+        android:textColor="@color/text_black"/>
 </LinearLayout>

@@ -60,8 +60,6 @@ public class OldhouseFragment extends BaseFragment {
         });
     }
 
-
-
     @Override
     protected void initLazyData() {
 

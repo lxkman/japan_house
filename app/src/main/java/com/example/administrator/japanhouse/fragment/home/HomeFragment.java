@@ -66,8 +66,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        UltimateBar ultimateBar = new UltimateBar(getActivity());
-        ultimateBar.setImmersionBar(false);
         View view = inflater.inflate(R.layout.fragment_home, null);
         unbinder = ButterKnife.bind(this, view);
         initViewData(view);

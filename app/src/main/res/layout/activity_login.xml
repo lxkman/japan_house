@@ -37,15 +37,17 @@
             android:layout_height="50dip" />
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="25dip"
+        android:layout_marginBottom="28dip"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="180dip"
+        android:layout_height="wrap_content"
         >
         <ImageView
-            android:src="@drawable/login_logo"
-            android:layout_width="140dip"
-            android:layout_height="140dip" />
+            android:src="@drawable/login_logo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -134,14 +136,14 @@
         android:id="@+id/btn_login"
         android:text="@string/denglu"
         android:textColor="#fff"
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="28dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
         android:background="@drawable/round_shihuangse"
         android:layout_width="match_parent"
         android:layout_height="45dip" />
     <LinearLayout
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="28dip"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dip">
@@ -181,7 +183,7 @@
             android:layout_height="match_parent" />
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="10dip"
+        android:layout_marginTop="18dip"
         android:paddingRight="20dip"
         android:paddingLeft="20dip"
         android:orientation="horizontal"

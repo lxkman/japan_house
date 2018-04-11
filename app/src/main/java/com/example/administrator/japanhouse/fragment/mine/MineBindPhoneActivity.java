@@ -16,7 +16,7 @@ import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BindPhoneActivity extends BaseActivity implements View.OnClickListener {
+public class MineBindPhoneActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -34,7 +34,7 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bind_phone);
+        setContentView(R.layout.activity_mine_bind_phone);
         ButterKnife.bind(this);
         backImg.setOnClickListener(this);
         tvGetcode.setOnClickListener(this);

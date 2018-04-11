@@ -66,7 +66,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.tv_phone:
-                startActivity(new Intent(this,BindPhoneActivity.class));
+                startActivity(new Intent(this,MineBindPhoneActivity.class));
                 break;
         }
     }

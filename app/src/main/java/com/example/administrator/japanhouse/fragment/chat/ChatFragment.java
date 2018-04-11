@@ -1,13 +1,19 @@
 package com.example.administrator.japanhouse.fragment.chat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +27,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +53,15 @@ public class ChatFragment extends BaseFragment {
     private LiebiaoAdapter liebiaoAdapter;
     private View popupView;
     private PopupWindow basePopupWindow;
+    int REQUEST_CODE = 1;
+
+
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_weichart, null);
         unbinder = ButterKnife.bind(this, view);
+        getCameraPermission();
         return view;
     }
 
@@ -82,7 +94,7 @@ public class ChatFragment extends BaseFragment {
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext,ManagerActivity.class));
+//                startActivity(new Intent(mContext,ManagerActivity.class));
             }
         });
     }
@@ -159,7 +171,12 @@ public class ChatFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 basePopupWindow.dismiss();
-                Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
+                if (isCameraUseable()){
+                    Intent intent1 = new Intent(mContext, MyZxingActivity.class);
+                    startActivityForResult(intent1, REQUEST_CODE);
+                }else {
+                    Toast.makeText(mContext, "开启权限后执行该操作", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         //发起微聊
@@ -182,4 +199,77 @@ public class ChatFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Log.d("ChatFragment", result);
+//                    Intent intent=new Intent(mContext,WebActivity.class);
+//                    intent.putExtra("result",result);
+//                    startActivity(intent);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    public void getCameraPermission()
+    {
+        if (Build.VERSION.SDK_INT>22){
+            if (ContextCompat.checkSelfPermission(mContext,
+                    android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                //先判断有没有权限 ，没有就在这里进行权限的申请
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{android.Manifest.permission.CAMERA},2);
+            }else {
+                //说明已经获取到摄像头权限了 想干嘛干嘛
+            }
+        }else {
+            //这个说明系统版本在6.0之下，不需要动态获取权限。
+        }
+    }
+
+    //是否开启摄像头权限
+    public static boolean isCameraUseable() {
+
+        boolean canUse =true;
+
+        Camera mCamera =null;
+
+        try{
+
+            mCamera = Camera.open();
+
+// setParameters 是针对魅族MX5。MX5通过Camera.open()拿到的Camera对象不为null
+
+            Camera.Parameters mParameters = mCamera.getParameters();
+
+            mCamera.setParameters(mParameters);
+
+        }catch(Exception e) {
+
+            canUse =false;
+
+        }
+
+        if(mCamera !=null) {
+
+            mCamera.release();
+
+        }
+        return canUse;
+
+    }
+
+
 }

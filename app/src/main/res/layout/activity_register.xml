@@ -1,16 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:id="@+id/activity_register"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.login.RegisterActivity">
-    <TextView
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="@string/zhuce"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_login"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:text="@string/denglu"
+            android:gravity="center"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+    <LinearLayout
+        android:paddingLeft="15dip"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_marginTop="10dip"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+            <TextView
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/to_bottom_onex_black"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="#333"
+                android:text="+86"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_margin="15dip"
+                android:layout_marginBottom="15dip"
+                android:layout_marginTop="15dip"
+                android:background="#eee"
+                android:layout_width="1dip"
+                android:layout_height="match_parent"></View>
+            <EditText
+                android:id="@+id/edt_phone"
+                android:background="@null"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:hint="@string/phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="15dip"
+        android:layout_marginLeft="15dip"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"></View>
+    <LinearLayout
+        android:background="#fff"
+        android:paddingLeft="1dip"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        >
+        <ImageView
+            android:padding="14dip"
+            android:src="@drawable/yanzhengma"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <EditText
+            android:id="@+id/edt_yanzheng_code"
+            android:background="@null"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:hint="@string/yanzhengma"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_get_code"
+            android:layout_marginRight="15dip"
+            android:gravity="center"
+            android:textColor="@color/shihuangse"
+            android:text="获取验证码"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_marginRight="15dip"
+        android:layout_marginLeft="15dip"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"></View>
+    <LinearLayout
+        android:background="#fff"
+        android:paddingLeft="1dip"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        >
+        <ImageView
+            android:padding="14dip"
+            android:src="@drawable/register_pass"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/edt_pass"
+            android:background="@null"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:hint="@string/pass"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_marginRight="15dip"
+        android:layout_marginLeft="15dip"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"></View>
+    <LinearLayout
+        android:background="#fff"
+        android:paddingLeft="1dip"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        >
+        <ImageView
+            android:padding="14dip"
+            android:src="@drawable/register_pass"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/edt_pass_sure"
+            android:background="@null"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:hint="@string/surepass"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_login"
+        android:text="@string/denglu"
+        android:textColor="#fff"
+        android:layout_marginTop="50dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:background="@drawable/round_shihuangse"
+        android:layout_width="match_parent"
+        android:layout_height="45dip" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_width="match_parent"
+        android:layout_height="30dip">
+        <TextView
+            android:gravity="center_vertical"
+            android:text="@string/zhucejibiaoshitongyi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/people_xieyi"
+            android:textColor="@color/shihuangse"
+            android:gravity="center_vertical"
+            android:text="@string/yonghuxieyi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center_vertical"
+            android:text="@string/yu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/private_xieyi"
+            android:textColor="@color/shihuangse"
+            android:gravity="center_vertical"
+            android:text="@string/yinsixieyia"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <TextView
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/shihuangse"
+            android:layout_width="0dip"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="#ccc"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="1dip"></View>
+        <TextView
+            android:text="@string/disanfangdenglu"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#777"
+            android:layout_width="0dip"
+            android:layout_weight="1.3"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="#ccc"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="1dip"></View>
+        <TextView
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/shihuangse"
+            android:layout_width="0dip"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dip"
+        android:paddingRight="20dip"
+        android:paddingLeft="20dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/img_weixin"
+            android:src="@drawable/weixin"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_weibo"
+            android:src="@drawable/weibo"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_qq"
+            android:src="@drawable/qqa"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_line"
+            android:src="@drawable/linea"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -50,6 +50,10 @@
         <item name="android:windowExitAnimation">@anim/translate_out</item>
     </style>
 
+    <style name="animTranslate_xia_to_shang">
+        <item name="android:windowEnterAnimation">@anim/translate_out</item>
+        <item name="android:windowExitAnimation">@anim/translate_in</item>
+    </style>
     <style name="buy_below_style">
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>

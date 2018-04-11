@@ -1,14 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:id="@+id/activity_login"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/login_bg"
     tools:context="com.example.administrator.japanhouse.login.LoginActivity">
+    <LinearLayout
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="@string/denglu"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_register"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:text="@string/zhuce"
+            android:gravity="center"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="180dip"
+        >
+        <ImageView
+            android:src="@drawable/login_logo"
+            android:layout_width="140dip"
+            android:layout_height="140dip" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="130dip"
+        >
+        <LinearLayout
+            android:paddingLeft="15dip"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_show_pop"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/to_bottom_onex"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="#fff"
+                android:text="+86"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_margin="10dip"
+                android:background="#fff"
+                android:layout_width="1dip"
+                android:layout_height="match_parent"></View>
+            <EditText
+                android:id="@+id/edt_phone"
+                android:background="@null"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:hint="@string/phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginRight="15dip"
+            android:layout_marginLeft="15dip"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"></View>
+        <LinearLayout
+            android:paddingLeft="1dip"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+            <ImageView
+                android:padding="14dip"
+                android:src="@drawable/password"
+                android:layout_width="50dip"
+                android:layout_height="50dip" />
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/edt_pass"
+                android:background="@null"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:hint="@string/pass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginRight="15dip"
+            android:layout_marginLeft="15dip"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"></View>
+        <TextView
+            android:layout_marginRight="15dip"
+            android:id="@+id/tv_forget_pass"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:text="@string/forgetpass"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_login"
+        android:text="@string/denglu"
+        android:textColor="#fff"
+        android:layout_marginTop="40dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:background="@drawable/round_shihuangse"
+        android:layout_width="match_parent"
+        android:layout_height="45dip" />
+    <LinearLayout
+        android:layout_marginTop="40dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <TextView
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/shihuangse"
+            android:layout_width="0dip"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="1dip"></View>
+        <TextView
+            android:text="@string/disanfangdenglu"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#fff"
+            android:layout_width="0dip"
+            android:layout_weight="1.3"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="1dip"></View>
+        <TextView
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/shihuangse"
+            android:layout_width="0dip"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dip"
+        android:paddingRight="20dip"
+        android:paddingLeft="20dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/img_weixin"
+            android:src="@drawable/weixin"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_weibo"
+            android:src="@drawable/weibo"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_qq"
+            android:src="@drawable/qqa"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_line"
+            android:src="@drawable/linea"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="50dip" />
 
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

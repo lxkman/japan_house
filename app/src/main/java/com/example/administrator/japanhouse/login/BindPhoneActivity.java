@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ForgetPswActivity extends BaseActivity {
+public class BindPhoneActivity extends BaseActivity {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -34,7 +34,7 @@ public class ForgetPswActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forget_psw);
+        setContentView(R.layout.activity_bind_phone);
         ButterKnife.bind(this);
     }
 
@@ -47,6 +47,7 @@ public class ForgetPswActivity extends BaseActivity {
             case R.id.tv_get_code:
                 break;
             case R.id.btn_find_pass:
+
                 break;
         }
     }

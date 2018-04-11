@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -42,10 +44,22 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
         android:background="#fff"
         android:layout_marginTop="10dip"
         android:id="@+id/mrecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
+
+    <!--<com.example.administrator.japanhouse.view.SwitchButton-->
+        <!--android:id="@+id/sb_xxtz"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--app:sb_checked="true"-->
+        <!--app:sb_show_indicator="false"-->
+        <!--app:sb_uncheck_color="#fff"-->
+        <!--app:sb_checked_color="#FFF8B702"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--/>-->
 </LinearLayout>

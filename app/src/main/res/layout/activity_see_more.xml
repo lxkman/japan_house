@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.overseas.overseas.mine.LiShiActivity">
+    tools:context=".fragment.comment.SeeMoreActivity">
 
     <LinearLayout
         android:background="@color/shihuangse"

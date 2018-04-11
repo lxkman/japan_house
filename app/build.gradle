@@ -40,4 +40,6 @@ dependencies {
     compile 'cn.jzvd:jiaozivideoplayer:6.2.7'
     //下拉选择
     compile 'com.github.dongjunkun:DropDownMenu:1.0.3'
+    //扫描二维码
+    compile 'cn.yipianfengye.android:zxing-library:2.1'
 }

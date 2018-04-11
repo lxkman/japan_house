@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -34,7 +33,7 @@ public class LancherActivity extends BaseActivity {
                     finish();
 
                 } else {
-                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LancherActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
 

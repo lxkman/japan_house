@@ -18,7 +18,6 @@ import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.utils.TUtils;
 
-import org.zackratos.ultimatebar.UltimateBar;
 
 import java.util.ArrayList;
 import java.util.List;

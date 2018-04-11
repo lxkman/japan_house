@@ -1,15 +1,91 @@
 package com.example.administrator.japanhouse.login;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class RegisterActivity extends BaseActivity {
+
+    @BindView(R.id.back_img)
+    ImageView backImg;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
+    @BindView(R.id.edt_phone)
+    EditText edtPhone;
+    @BindView(R.id.edt_yanzheng_code)
+    EditText edtYanzhengCode;
+    @BindView(R.id.tv_get_code)
+    TextView tvGetCode;
+    @BindView(R.id.edt_pass)
+    EditText edtPass;
+    @BindView(R.id.edt_pass_sure)
+    EditText edtPassSure;
+    @BindView(R.id.btn_login)
+    Button btnLogin;
+    @BindView(R.id.img_weixin)
+    ImageView imgWeixin;
+    @BindView(R.id.img_weibo)
+    ImageView imgWeibo;
+    @BindView(R.id.img_qq)
+    ImageView imgQq;
+    @BindView(R.id.img_line)
+    ImageView imgLine;
+    @BindView(R.id.people_xieyi)
+    TextView peopleXieyi;
+    @BindView(R.id.private_xieyi)
+    TextView privateXieyi;
+    @BindView(R.id.activity_register)
+    LinearLayout activityRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        ButterKnife.bind(this);
     }
+
+    @OnClick({R.id.back_img, R.id.tv_login, R.id.tv_get_code, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq, R.id.img_line,R.id.people_xieyi, R.id.private_xieyi})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.back_img:
+                finish();
+                break;
+            case R.id.tv_login:
+                finish();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                break;
+            case R.id.tv_get_code:
+                break;
+            case R.id.btn_login:
+                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
+                break;
+            case R.id.img_weixin:
+                break;
+            case R.id.img_weibo:
+                break;
+            case R.id.img_qq:
+                break;
+            case R.id.img_line:
+                break;
+            case R.id.people_xieyi:
+                startActivity(new Intent(RegisterActivity.this, PeopleXieyiActivity.class));
+                break;
+            case R.id.private_xieyi:
+                startActivity(new Intent(RegisterActivity.this, PrivateActivity.class));
+                break;
+        }
+    }
+
 }

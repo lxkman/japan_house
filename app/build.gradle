@@ -35,6 +35,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'org.zackratos:ultimatebar:1.1.1'
     //饺子播放器
     compile 'cn.jzvd:jiaozivideoplayer:6.2.7'
     //下拉选择

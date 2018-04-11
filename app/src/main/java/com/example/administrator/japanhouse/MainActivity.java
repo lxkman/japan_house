@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void initView() {
         rgp.check(R.id.rb_home);
+        addFragments(new HomeFragment());
         rbHome.setOnClickListener(this);
         rbChat.setOnClickListener(this);
         rbComment.setOnClickListener(this);

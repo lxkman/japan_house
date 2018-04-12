@@ -43,12 +43,6 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         }
         MsgAdapter msgAdapter=new MsgAdapter(R.layout.item_msg,list);
         recyclerMsg.setAdapter(msgAdapter);
-        msgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(MineMsgActivity.this,MsgDetailActivity.class));
-            }
-        });
     }
 
     @Override
@@ -68,6 +62,12 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
+            helper.getView(R.id.content).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MineMsgActivity.this,MsgDetailActivity.class));
+                }
+            });
         }
     }
 }

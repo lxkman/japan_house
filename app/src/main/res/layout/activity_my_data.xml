@@ -65,6 +65,7 @@
         android:layout_marginRight="10dip"
         android:background="#eee"></View>
     <LinearLayout
+        android:id="@+id/ll_name"
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:background="#fff"

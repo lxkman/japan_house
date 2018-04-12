@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -93,6 +95,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mrecycler.setAdapter(liebiaoAdapter);
+        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
+            }
+        });
 
     }
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

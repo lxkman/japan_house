@@ -51,6 +51,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initView();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+    }
+
     private void addFragments(BaseFragment f) {
         // 第一步：得到fragment管理类
         FragmentManager manager = getSupportFragmentManager();

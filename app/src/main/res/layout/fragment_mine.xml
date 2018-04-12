@@ -116,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
             <RelativeLayout
+                android:id="@+id/rel_lianxiren_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -150,6 +151,7 @@
                     android:background="@color/huise"></View>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/rel_lookhouse_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -184,6 +186,7 @@
                     android:background="@color/huise"></View>
             </RelativeLayout>
             <LinearLayout
+                android:id="@+id/rel_lishi_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

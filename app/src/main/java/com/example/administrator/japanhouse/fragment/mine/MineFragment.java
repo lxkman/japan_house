@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -71,15 +74,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.tv_qustion)
     ImageView tvQustion;
     Unbinder unbinder;
+    @BindView(R.id.rel_lianxiren_layout)
+    RelativeLayout relLianxirenLayout;
+    @BindView(R.id.rel_lookhouse_layout)
+    RelativeLayout relLookhouseLayout;
+    @BindView(R.id.rel_lishi_layout)
+    LinearLayout relLishiLayout;
+    Unbinder unbinder1;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, rootView);
-        ivHead.setOnClickListener(this);
-        ivSetting.setOnClickListener(this);
-        ivMsg.setOnClickListener(this);
-        tvQustion.setOnClickListener(this);
         return rootView;
     }
 
@@ -91,34 +97,59 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
-        List<String> list=new ArrayList<>();
-        for (int i=0;i<3;i++){
+        recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
             list.add("");
         }
-        FootAdapter footAdapter=new FootAdapter(R.layout.item_myfoot,list);
+        FootAdapter footAdapter = new FootAdapter(R.layout.item_myfoot, list);
         recyclerFoot.setAdapter(footAdapter);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout, R.id.rel_lookhouse_layout,
+            R.id.rel_lishi_layout, R.id.tv_qustion,R.id.tv_collect_count,R.id.tv_subscription_count,R.id.tv_myorder})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_head:
-                startActivity(new Intent(mContext,MyDataActivity.class));
+                startActivity(new Intent(mContext, MyDataActivity.class));
                 break;
             case R.id.iv_setting:
-                startActivity(new Intent(mContext,SettingActivity.class));
+                startActivity(new Intent(mContext, SettingActivity.class));
                 break;
             case R.id.iv_msg:
-                startActivity(new Intent(mContext,MineMsgActivity.class));
+                startActivity(new Intent(mContext, MineMsgActivity.class));
                 break;
             case R.id.tv_qustion:
-                startActivity(new Intent(mContext,WenJuanActivity.class));
+                startActivity(new Intent(mContext, WenJuanActivity.class));
+                break;
+            //联系人
+            case R.id.rel_lianxiren_layout:
+                startActivity(new Intent(mContext, LianxirenActivity.class));
+                break;
+            //看房记录
+            case R.id.tv_lookhouse_count:
+                break;
+            //历史记录
+            case R.id.rel_lishi_layout:
+                startActivity(new Intent(mContext, ShouCangActivity.class));
+                break;
+            //收藏
+            case R.id.tv_collect_count:
+                startActivity(new Intent(mContext, ShouCangActivity.class));
+                break;
+            //订阅
+            case R.id.tv_subscription_count:
+                startActivity(new Intent(mContext, DingYueActivity.class));
+                break;
+            //订单
+            case R.id.tv_myorder:
+                startActivity(new Intent(mContext, DingDanActivity.class));
                 break;
         }
     }
 
-    private class FootAdapter extends BaseQuickAdapter<String,BaseViewHolder>{
+
+    private class FootAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public FootAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);

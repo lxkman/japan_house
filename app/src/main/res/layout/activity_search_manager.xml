@@ -70,7 +70,8 @@
             android:src="@drawable/green_saoyisao"
             android:layout_width="50dip"
             android:layout_height="50dip" />
-        <EditText
+        <TextView
+            android:gravity="center_vertical"
             android:background="@null"
             android:textSize="15dip"
             android:hint="@string/green_saoyisao"

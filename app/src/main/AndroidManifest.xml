@@ -129,22 +129,27 @@
         <activity android:name=".fragment.mine.ChangePhoneActivity" />
         <activity android:name=".fragment.mine.LanguageActivity" />
         <activity android:name=".fragment.mine.AboutUsActivity" />
+        <activity android:name=".fragment.mine.LianxirenActivity" />
+        <activity android:name=".fragment.mine.LiShiJiLuActivity" />
+        <activity android:name=".fragment.mine.DingDanActivity" />
+        <activity android:name=".fragment.mine.DingYueActivity" />
+        <activity android:name=".fragment.mine.ShouCangActivity" />
         <activity android:name=".fragment.home.LocationActivity" />
         <activity android:name=".login.PeopleXieyiActivity" />
         <activity android:name=".login.PrivateActivity" />
         <activity android:name=".fragment.chat.MyZxingActivity" />
-        <activity android:name=".fragment.home.HomeSearchActivity"></activity>
+        <activity android:name=".fragment.home.HomeSearchActivity" />
         <activity android:name=".fragment.home.ui.activity.QuestionActivity" />
         <activity android:name=".fragment.home.ui.activity.QuizActivity" />
         <activity android:name=".fragment.home.ui.activity.WendaItemActivity" />
         <activity android:name=".fragment.home.ui.activity.SearchActivity" />
         <activity android:name=".fragment.home.ui.activity.ZhinengActivity" />
-        <activity android:name=".fragment.home.ui.activity.ToutiaoActivity">
-        </activity>
+        <activity android:name=".fragment.home.ui.activity.ToutiaoActivity" />
         <activity android:name=".fragment.home.ui.activity.TouDetailActivity" />
-        <activity android:name=".fragment.home.ui.activity.Buyhouse_Baike_Activity"></activity>
-        <activity android:name=".fragment.home.ui.activity.Daikuan_Activity"/>
-        <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity"/>
+        <activity android:name=".fragment.home.ui.activity.Buyhouse_Baike_Activity" />
+        <activity android:name=".fragment.home.ui.activity.Daikuan_Activity" />
+        <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity" />
+
     </application>
 
 </manifest>

@@ -386,6 +386,7 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext,LocationActivity.class));
                 break;
             case R.id.search_tv:
+                startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
             case R.id.map_tv:
                 break;

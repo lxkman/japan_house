@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.japanhouse">
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
@@ -87,6 +88,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -96,37 +98,37 @@
         android:theme="@style/AppTheme">
         <activity android:name=".login.LancherActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.RegisterActivity"/>
-        <activity android:name=".login.LoginActivity"/>
-        <activity android:name=".login.ForgetPswActivity"/>
-        <activity android:name=".login.UserAgreementActivity"/>
-        <!--<activity android:name=".login.LauncherActivity"/>-->
-        <activity android:name=".login.GuidePageActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".fragment.chat.SearchActivity"/>
-        <activity android:name=".fragment.chat.StartWechatActivity"/>
-        <activity android:name=".fragment.chat.SearchManagerActivity"/>
-        <activity android:name=".fragment.chat.ManagerActivity"/>
-        <activity android:name=".fragment.comment.NewHousedetailsActivity"/>
-        <activity android:name=".fragment.comment.SeeMoreActivity"/>
-        <activity android:name=".fragment.comment.ZuHousedetailsActivity"/>
-        <activity android:name=".fragment.comment.OldHousedetailsActivity"/>
-        <activity android:name=".fragment.comment.TudidetailsActivity"/>
-        <activity android:name=".fragment.home.NewHouseActivity"/>
-        <activity android:name=".fragment.mine.MyDataActivity"/>
-        <activity android:name=".fragment.mine.SettingActivity"/>
-        <activity android:name=".fragment.mine.MineMsgActivity"/>
-        <activity android:name=".fragment.mine.WenJuanActivity"/>
-        <activity android:name=".fragment.mine.MsgDetailActivity"/>
-        <activity android:name=".fragment.mine.MineBindPhoneActivity"/>
-        <activity android:name=".fragment.mine.ChangePhoneActivity"/>
-        <activity android:name=".fragment.mine.LanguageActivity"/>
-        <activity android:name=".fragment.mine.AboutUsActivity"/>
+        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.ForgetPswActivity" />
+        <activity android:name=".login.UserAgreementActivity" />
+        <!-- <activity android:name=".login.LauncherActivity"/> -->
+        <activity android:name=".login.GuidePageActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".fragment.chat.SearchActivity" />
+        <activity android:name=".fragment.chat.StartWechatActivity" />
+        <activity android:name=".fragment.chat.SearchManagerActivity" />
+        <activity android:name=".fragment.chat.ManagerActivity" />
+        <activity android:name=".fragment.comment.NewHousedetailsActivity" />
+        <activity android:name=".fragment.comment.SeeMoreActivity" />
+        <activity android:name=".fragment.comment.ZuHousedetailsActivity" />
+        <activity android:name=".fragment.comment.OldHousedetailsActivity" />
+        <activity android:name=".fragment.comment.TudidetailsActivity" />
+        <activity android:name=".fragment.home.NewHouseActivity" />
+        <activity android:name=".fragment.mine.MyDataActivity" />
+        <activity android:name=".fragment.mine.SettingActivity" />
+        <activity android:name=".fragment.mine.MineMsgActivity" />
+        <activity android:name=".fragment.mine.WenJuanActivity" />
+        <activity android:name=".fragment.mine.MsgDetailActivity" />
+        <activity android:name=".fragment.mine.MineBindPhoneActivity" />
+        <activity android:name=".fragment.mine.ChangePhoneActivity" />
+        <activity android:name=".fragment.mine.LanguageActivity" />
+        <activity android:name=".fragment.mine.AboutUsActivity" />
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.ForgetPswActivity" />
@@ -144,11 +146,12 @@
         <activity android:name=".fragment.comment.OldHousedetailsActivity" />
         <activity android:name=".fragment.comment.TudidetailsActivity" />
         <activity android:name=".fragment.home.NewHouseActivity" />
-        <activity android:name=".fragment.home.LocationActivity"></activity>
+        <activity android:name=".fragment.home.LocationActivity" />
         <activity android:name=".fragment.home.NewHouseActivity" />
         <activity android:name=".login.PeopleXieyiActivity" />
-        <activity android:name=".login.PrivateActivity"></activity>
-        <activity android:name=".fragment.chat.MyZxingActivity"></activity>
+        <activity android:name=".login.PrivateActivity" />
+        <activity android:name=".fragment.chat.MyZxingActivity" />
+        <activity android:name=".fragment.home.HomeSearchActivity"></activity>
     </application>
 
 </manifest>

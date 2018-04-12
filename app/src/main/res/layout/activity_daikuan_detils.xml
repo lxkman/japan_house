@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.DaikuanDetilsActivity">
     <RelativeLayout
         android:id="@+id/liner"
@@ -35,18 +34,24 @@
         android:background="@color/gray1"/>
 
     <TextView
+        android:layout_below="@+id/xian"
         android:id="@+id/dai_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="贷款名称"
-        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textSize="16sp"
         android:layout_margin="10dp"
         />
     <View
+        android:id="@+id/xian1"
+        android:layout_below="@+id/dai_name"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray1"/>
     <LinearLayout
+        android:id="@+id/line1"
+        android:layout_below="@+id/xian1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -59,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="月息0.59%"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -69,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="贷款利率"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 />
@@ -90,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="最高200万"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -100,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="范围额度"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 />
@@ -121,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1-36年"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -131,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="最高年限"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 />
@@ -139,24 +144,28 @@
 
     </LinearLayout>
     <View
+        android:id="@+id/xian3"
+        android:layout_below="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray1"/>
 
     <LinearLayout
+        android:id="@+id/liner2"
+        android:layout_below="@+id/xian3"
         android:padding="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="放款方式："
             />
         <TextView
-            android:textSize="16sp"
-            android:id="@+id/qixian"
+            android:textSize="14sp"
+            android:id="@+id/fk_fangshi"
             android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,23 +173,247 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:layout_below="@+id/liner2"
+        android:id="@+id/liner3"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="还款时间："
             />
         <TextView
-            android:textSize="16sp"
+            android:id="@+id/hk_time"
+            android:textSize="14sp"
             android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="随借随还"
             />
     </LinearLayout>
+      <View
+          android:id="@+id/xian4"
+          android:layout_below="@+id/liner3"
+          android:layout_marginTop="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="10dp"
+          android:background="@color/gray1"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/lc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_below="@+id/xian4"
+        android:layout_margin="10dp"
+        android:textSize="15sp"
+        android:text="办理流程" />
+
+    <LinearLayout
+        android:id="@+id/liner4"
+        android:padding="5dp"
+        android:layout_below="@+id/lc"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+         <RelativeLayout
+             android:layout_weight="1"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content">
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/beijing"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="申请贷款"
+                 android:textSize="11sp"
+                 android:layout_centerVertical="true"
+                 android:layout_marginLeft="8dp"
+                 android:textColor="@color/colorAccent"
+                 />
+         </RelativeLayout>
+        <ImageView
+            android:layout_weight="0.5"
+            android:src="@drawable/jiantou"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/beijing"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电话初审"
+                android:textSize="11sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/colorAccent"
+                />
+        </RelativeLayout>
+        <ImageView
+            android:layout_weight="0.5"
+            android:src="@drawable/jiantou"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/beijing"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="贷款处理"
+                android:textSize="11sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/colorAccent"
+                />
+        </RelativeLayout>
+        <ImageView
+            android:layout_weight="0.5"
+            android:src="@drawable/jiantou"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/beijing"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申请放贷"
+                android:textSize="11sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/colorAccent"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+     <View
+         android:id="@+id/xian5"
+         android:layout_width="match_parent"
+         android:layout_height="2dp"
+         android:background="@color/gray1"
+         android:layout_below="@+id/liner4"/>
+    <TextView
+        android:id="@+id/tiaojian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/xian5"
+        android:layout_margin="10dp"
+        android:textSize="15sp"
+        android:text="申请条件" />
+    <LinearLayout
+        android:layout_below="@+id/tiaojian"
+        android:id="@+id/liner6"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年龄要求："
+            />
+        <TextView
+            android:id="@+id/nl_yaoyiu"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18岁以上"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/liner6"
+        android:id="@+id/liner7"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="户籍要求："
+            />
+        <TextView
+            android:id="@+id/hj_yaoqiu"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中国大陆"
+            />
+    </LinearLayout>
+    <View
+        android:id="@+id/xian6"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray1"
+        android:layout_below="@+id/liner7"/>
+    <TextView
+        android:id="@+id/cailiao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/xian6"
+        android:layout_margin="10dp"
+        android:textSize="15sp"
+        android:text="所需材料" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cailiao"
+            android:text="身份证、户口本"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:textSize="14sp"
+            />
+        <Button
+            android:id="@+id/shenqing"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:text="立即申请"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
+            android:textSize="14sp"
+            />
+    <ImageView
+        android:id="@+id/kefu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kefu"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/shenqing"
+        android:layout_margin="5dp"
+        />
+</RelativeLayout>

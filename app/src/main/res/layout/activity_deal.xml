@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.DealActivity">
+    <RelativeLayout
+        android:id="@+id/liner"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="15dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/img_beak"
+            android:src="@drawable/img_beak"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户协议"
+            android:layout_centerInParent="true"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+    <TextView
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="《地产客用户服务协议》及《地产客隐私权政策》"
+        />
+    <TextView
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="【特别提示】"
+        />
+    <TextView
+        android:id="@+id/deal_neirong"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="如您同意成为地产客的用户或者使用地产客的服务的，请您务必仔细阅读、充分理解以下《地产客用户服务协议》及《地产客隐私权政策》中的各项条款。尤其协议中的以粗体方式或者加下划线的方式提示您重点注意。"
+        />
+
+
+</LinearLayout>

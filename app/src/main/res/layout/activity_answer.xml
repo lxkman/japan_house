@@ -16,14 +16,14 @@
             android:src="@drawable/img_beak"
             android:layout_width="20dp"
             android:layout_height="20dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="提问"
-                android:layout_centerInParent="true"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回答"
+            android:layout_centerInParent="true"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -50,29 +50,30 @@
             android:layout_height="1dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-              android:background="@color/gray1"
+            android:background="@color/gray1"
             />
         <EditText
             android:textSize="14sp"
             android:id="@+id/ed_wen_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入您的问题"
+            android:hint="请输入回答内容"
             android:background="@null"
             android:layout_margin="15dp"
             />
     </LinearLayout>
-      <Button
-          android:id="@+id/tijiao"
-          android:textSize="16sp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="提交"
-          android:textColor="@color/white"
-          android:layout_marginTop="30dp"
-           android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:background="@drawable/shape_tijiao"
-          />
+    <Button
+        android:id="@+id/tijiao"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_tijiao"
+        />
 
 </LinearLayout>
+

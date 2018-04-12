@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.fragment.home.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.DaikuanDetilsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,8 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
       holder.view.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              
+              Intent intent = new Intent(context, DaikuanDetilsActivity.class);
+              context.startActivity(intent);
           }
       });
     }

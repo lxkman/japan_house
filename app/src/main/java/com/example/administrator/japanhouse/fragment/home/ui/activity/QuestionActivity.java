@@ -87,8 +87,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                   startActivity(intent1);
                   break;
               case R.id.liner1:
-                  text_buyfang.setTextColor(R.color.colorAccent);
-                  text_sellfang.setTextColor(R.color.text_black);
+                  text_sellfang.setTextColor(R.color.colorAccent);
+                  text_buyfang.setTextColor(R.color.text_black);
                      if(buyhouse_fragment==null){
                          buyhouse_fragment = new Buyhouse_Fragment();
                      }
@@ -96,8 +96,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                   //转换页面
                   break;
               case R.id.liner2:
-                  text_buyfang.setTextColor(R.color.text_black);
-                  text_sellfang.setTextColor(R.color.colorAccent);
+                  text_sellfang.setTextColor(R.color.text_black);
+                  text_buyfang.setTextColor(R.color.colorAccent);
                   if(sellhouse_fragment==null){
                       sellhouse_fragment = new Sellhouse_Fragment();
                   }

@@ -1,4 +1,4 @@
-package com.example.administrator.japanhouse.fragment.home.ui.activity;
+package com.example.administrator.japanhouse.fragment.home.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +17,10 @@ import java.util.List;
  * Created by Mr赵 on 2018/4/11.
  */
 
-public class ToutiaoAdapter extends RecyclerView.Adapter<ToutiaoAdapter.ViewHolder> {
+public class WenDa_Detil_Adapter extends RecyclerView.Adapter<WenDa_Detil_Adapter.ViewHolder> {
     Context context;
     List<String>list=new ArrayList<>();
-    public ToutiaoAdapter(Context context) {
+    public WenDa_Detil_Adapter(Context context) {
         this.context = context;
         data();
     }

@@ -148,7 +148,11 @@
         <activity android:name=".fragment.home.ui.activity.TouDetailActivity" />
         <activity android:name=".fragment.home.ui.activity.Buyhouse_Baike_Activity" />
         <activity android:name=".fragment.home.ui.activity.Daikuan_Activity" />
+        <activity android:name=".fragment.home.ui.activity.DaikuanDetilsActivity" />
+        <activity android:name=".fragment.home.ui.activity.WenDa_Detils_Activity" />
+        <activity android:name=".fragment.home.ui.activity.AnswerActivity" />
         <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity" />
+        <activity android:name=".fragment.home.ui.activity.DealActivity"></activity>
 
     </application>
 

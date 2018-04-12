@@ -12,9 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
-
-import butterknife.internal.Utils;
-import okhttp3.internal.Util;
+import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdapter;
 
 public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener {
 

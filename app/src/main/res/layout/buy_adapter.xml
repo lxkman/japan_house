@@ -7,7 +7,7 @@
         android:id="@+id/text_title"
         android:layout_margin="10dp"
         android:text="动态标题内容，标题，标题"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/text_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -23,7 +23,7 @@
         android:id="@+id/text_neirong"
         android:layout_margin="10dp"
         android:text="面对美好的事物我们总是习惯观望，单号的额产品不会一只为你等待，绝代风华举世无双独一无二千古难求。立即会务儿发挥阿卡金黄色..."
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
        <RelativeLayout

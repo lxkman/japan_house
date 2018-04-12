@@ -44,4 +44,7 @@ dependencies {
     compile project (':indexlib')
     //扫描二维码
     compile 'cn.yipianfengye.android:zxing-library:2.1'
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.1'
+    compile 'com.lai.weavey:dialog:2.0.1'
+    compile 'com.contrarywind:Android-PickerView:3.2.6'
 }

@@ -139,6 +139,9 @@ public class HomeFragment extends BaseFragment {
                     Object obj = gridView.getItemAtPosition(position);
                     if (obj != null && obj instanceof HomeItemBean) {
                         TUtils.showShort(mContext, ((HomeItemBean) obj).getTitle());
+                        if (position==1){
+                            startActivity(new Intent(mContext,NewHouseActivity.class));
+                        }
                     }
                 }
             });

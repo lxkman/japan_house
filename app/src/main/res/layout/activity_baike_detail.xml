@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.BaikeDetailActivity">
+    <RelativeLayout
+        android:id="@+id/liner"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="15dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/img_beak"
+            android:src="@drawable/img_beak"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详情"
+            android:layout_centerInParent="true"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+    <View
+        android:id="@+id/xian"
+        android:layout_below="@+id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/gray1"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_margin="10dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:id="@+id/title"
+            android:text="动态标题内容，标题，标题"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="2018.01.11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/time"
+                />
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="14:20:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sfm"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/neirong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="奥术大师大所多所奥术大师大所多奥术大师大所大所多阿三大叔大叔大叔大奥术大师大所大所大所多奥术大师大所大所大所大所大所大所奥术大师大所大所大所大分公司的发送到发送到的说法是发送到发送到"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/gray1"/>
+    </LinearLayout>
+</LinearLayout>

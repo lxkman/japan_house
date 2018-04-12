@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.SearchActivity">
+      <RelativeLayout
+          android:background="@color/colorAccent"
+          android:layout_width="match_parent"
+          android:layout_height="50dp">
+  <LinearLayout
+      android:layout_centerVertical="true"
+      android:background="@color/white"
+      android:layout_toLeftOf="@+id/beak"
+      android:layout_marginLeft="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="30dp">
+      <EditText
+          android:id="@+id/sou"
+          android:layout_marginLeft="10dp"
+          android:gravity="center|left"
+          android:drawablePadding="10dp"
+          android:drawableLeft="@drawable/seach_img"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:textSize="16sp"
+          android:hint="请输入问题关键字"
+          android:background="@null"
+
+          />
+
+  </LinearLayout>
+          <TextView
+              android:id="@+id/beak"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="取消"
+              android:textSize="16sp"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:textColor="@color/white"
+              android:layout_margin="10dp"
+              />
+      </RelativeLayout>
+    <TextView
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:text="热门搜索"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+          <com.example.administrator.japanhouse.fragment.home.ui.utils.flow
+              android:id="@+id/ffff"
+              android:layout_width="match_parent"
+              android:layout_margin="10dp"
+              android:layout_height="100dp">
+          </com.example.administrator.japanhouse.fragment.home.ui.utils.flow>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="历史记录"
+            android:textStyle="bold"
+            android:id="@+id/lishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+          <ImageView
+              android:layout_width="20dp"
+              android:layout_height="20dp"
+              android:id="@+id/shanchu"
+              android:layout_alignParentRight="true"
+              android:src="@drawable/shanchu"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="10dp"
+              />
+    </RelativeLayout>
+
+
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray1"/>
+</LinearLayout>

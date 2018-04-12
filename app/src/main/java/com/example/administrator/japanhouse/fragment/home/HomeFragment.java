@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,12 +24,16 @@ import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.Buyhouse_Baike_Activity;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.Daikuan_Activity;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.QuestionActivity;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.ZhinengActivity;
 import com.example.administrator.japanhouse.utils.BannerUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +94,8 @@ public class HomeFragment extends BaseFragment {
     RecyclerView tjtdRecycler;
     @BindView(R.id.cnxh_recycler)
     RecyclerView cnxhRecycler;
+    @BindView(R.id.view_011)
+    LinearLayout view011;
     private int totalPage; //总的页数
     private int mPageSize = 10; //每页显示的最大的数量
     private ImageView[] ivPoints;//小圆点图片的集合
@@ -252,7 +259,7 @@ public class HomeFragment extends BaseFragment {
         //-----猜你喜欢-----
         cnxhRecycler.setNestedScrollingEnabled(false);
         cnxhRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        CnxhAdapter cnxhAdapter = new CnxhAdapter(R.layout.item_cnxh_layout,tjyxjjrList);
+        CnxhAdapter cnxhAdapter = new CnxhAdapter(R.layout.item_cnxh_layout, tjyxjjrList);
         cnxhRecycler.setAdapter(cnxhAdapter);
         //-----猜你喜欢-----
     }
@@ -360,7 +367,7 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    private class CnxhAdapter extends BaseQuickAdapter<String, BaseViewHolder>{
+    private class CnxhAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public CnxhAdapter(int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
@@ -379,25 +386,31 @@ public class HomeFragment extends BaseFragment {
     }
 
     @OnClick({R.id.location_tv, R.id.search_tv, R.id.map_tv, R.id.jrdk_tv, R.id.gfbk_tv,
-            R.id.fcwd_tv, R.id.znmf_tv})
+            R.id.fcwd_tv, R.id.znmf_tv,R.id.view_011})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.location_tv:
-                startActivity(new Intent(mContext,LocationActivity.class));
+                startActivity(new Intent(mContext, LocationActivity.class));
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext, HomeSearchActivity.class));
                 break;
             case R.id.map_tv:
                 break;
             case R.id.jrdk_tv:
+                startActivity(new Intent(mContext, Daikuan_Activity.class));
                 break;
             case R.id.gfbk_tv:
+                startActivity(new Intent(mContext, Buyhouse_Baike_Activity.class));
                 break;
             case R.id.fcwd_tv:
+                startActivity(new Intent(mContext, QuestionActivity.class));
                 break;
             case R.id.znmf_tv:
+                startActivity(new Intent(mContext, ZhinengActivity.class));
                 break;
+            case R.id.view_011:
+                startActivity(new Intent(mContext, ToutiaoActivity.class));
         }
     }
 

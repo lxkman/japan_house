@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.QuestionActivity">
+      <LinearLayout
+          android:id="@+id/liner"
+          android:background="@color/colorAccent"
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="40dp">
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/img_beak"
+                  android:src="@drawable/img_beak"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+               <LinearLayout
+                   android:id="@+id/search"
+                   android:gravity="center_vertical"
+                   android:layout_marginRight="20dp"
+                   android:layout_gravity="center"
+                   android:background="@color/white"
+                   android:layout_width="match_parent"
+                   android:layout_height="30dp">
+                   <TextView
+                       android:layout_marginLeft="10dp"
+                       android:gravity="center|left"
+                       android:drawablePadding="10dp"
+                       android:drawableLeft="@drawable/seach_img"
+                       android:background="@null"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:hint="请输入查询内容"
+                       android:textSize="16sp"
+                       />
+
+               </LinearLayout>
+      </LinearLayout>
+    <LinearLayout
+        android:id="@+id/liners"
+        android:layout_below="@+id/liner"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/liner1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:id="@+id/text_buyfang"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:text="买房"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_margin="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.01"
+            android:background="#cfc8c8"
+            ></View>
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/liner2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_black"
+                android:id="@+id/text_sellfang"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:text="卖房"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/xian"
+        android:layout_below="@+id/liners"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/gray1"
+        ></View>
+        <FrameLayout
+            android:id="@+id/fl"
+            android:layout_below="@+id/xian"
+            android:layout_above="@+id/liner5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/liner5"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="#c79881"
+            android:padding="5dp"
+            android:id="@+id/liner3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white"
+                android:id="@+id/text_tiwen"
+                android:gravity="center"
+
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:text="我要提问"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:background="#d79369"
+            android:padding="5dp"
+            android:id="@+id/liner4"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/text_huida"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:layout_margin="5dp"
+                android:text="我来回答"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

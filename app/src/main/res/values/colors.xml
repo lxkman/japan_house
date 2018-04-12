@@ -24,4 +24,6 @@
     <color name="transparent">#00000000</color>
     <color name="white">#fff</color>
     <color name="shihuangse">#C7977F</color>
+    <color name="partTranslucent">#10000000</color>
+
 </resources>

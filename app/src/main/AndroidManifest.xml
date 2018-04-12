@@ -144,6 +144,8 @@
         <activity android:name=".fragment.comment.OldHousedetailsActivity" />
         <activity android:name=".fragment.comment.TudidetailsActivity" />
         <activity android:name=".fragment.home.NewHouseActivity" />
+        <activity android:name=".fragment.home.LocationActivity"></activity>
+        <activity android:name=".fragment.home.NewHouseActivity" />
         <activity android:name=".login.PeopleXieyiActivity" />
         <activity android:name=".login.PrivateActivity"></activity>
         <activity android:name=".fragment.chat.MyZxingActivity"></activity>

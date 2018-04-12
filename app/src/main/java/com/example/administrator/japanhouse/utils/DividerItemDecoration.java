@@ -1,4 +1,9 @@
-package com.example.administrator.japanhouse.utils;
+package com.example.administrator.japanhouse.utils;/*
+ * Copyright (C) 2014 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * limitations under the License.
+ */
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,6 +14,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+
+/**
+ * This class is from the v7 samples of the Android SDK. It's not by me!
+ * <p/>
+ * See the license above for details.
+ */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{
@@ -19,14 +30,13 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
-    private Drawable mDivider;
+    protected Drawable mDivider;
 
     private int mOrientation;
 
     public DividerItemDecoration(Context context, int orientation) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
-
         a.recycle();
         setOrientation(orientation);
     }
@@ -40,7 +50,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent) {
-
 
         if (mOrientation == VERTICAL_LIST) {
             drawVertical(c, parent);
@@ -58,7 +67,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
-            android.support.v7.widget.RecyclerView v = new android.support.v7.widget.RecyclerView(parent.getContext());
+            //RecyclerView v = new RecyclerView(parent.getContext());
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
             final int top = child.getBottom() + params.bottomMargin;
@@ -82,16 +91,13 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
         }
-
-
     }
 
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
         if (mOrientation == VERTICAL_LIST) {
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
-        }
-            else {
+        } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }
     }

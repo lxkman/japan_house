@@ -21,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomeSearchActivity extends BaseActivity {
 
@@ -65,7 +66,7 @@ public class HomeSearchActivity extends BaseActivity {
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    TUtils.showShort(mContext,"点击了---" + hotNameList.get(finalI));
+                    TUtils.showShort(mContext, "点击了---" + hotNameList.get(finalI));
                 }
             });
         }
@@ -79,11 +80,16 @@ public class HomeSearchActivity extends BaseActivity {
         historyList.add("阿富汗");
         historyRecycler.setNestedScrollingEnabled(false);
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
-        HistoryAdapter historyAdapter = new HistoryAdapter(R.layout.item_history_search,historyList);
+        HistoryAdapter historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
         historyRecycler.setAdapter(historyAdapter);
     }
 
-    private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder>{
+    @OnClick(R.id.cancle_tv)
+    public void onViewClicked() {
+        finish();
+    }
+
+    private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public HistoryAdapter(int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);

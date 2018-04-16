@@ -156,7 +156,8 @@
         <activity android:name=".fragment.home.ui.activity.DealActivity" />
         <activity android:name=".fragment.mine.SingUpActivity" />
         <activity android:name=".fragment.mine.SingUpDetailsActivity" />
-        <activity android:name=".fragment.mine.SellHouseActivity"></activity>
+        <activity android:name=".fragment.mine.SellHouseActivity" />
+        <activity android:name=".fragment.mine.Myhouse_price_Activity"></activity>
     </application>
 
 </manifest>

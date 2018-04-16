@@ -1,16 +1,16 @@
-package com.example.administrator.japanhouse.fragment.mine;
+package com.example.administrator.japanhouse.fragment.mine.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.ImageView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.fragment.home.ui.adapter.MaiFang_house_Adapter;
+import com.example.administrator.japanhouse.fragment.home.ui.adapter.Rent_house_Adapter;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -21,25 +21,29 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+/**
+ * Created by Mr赵 on 2018/4/16.
+ */
 
-public class DingDanActivity extends BaseActivity {
-    @BindView(R.id.back_img)
-    ImageView backImg;
-    @BindView(R.id.mrecycler)
-    SwipeMenuRecyclerView mrecycler;
-    private List<String> mList=new ArrayList();
-    private LiebiaoAdapter liebiaoAdapter;
+public class Rent_house_Fragment extends BaseFragment {
+
+    private SwipeMenuRecyclerView mrecycler;
+    private Rent_house_Adapter rent_house_adapter;
+    List<String>mList=new ArrayList<>();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ding_dan);
-        ButterKnife.bind(this);
-        initData();
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.sell_house_fragment, container, false);
+        mrecycler = (SwipeMenuRecyclerView) view.findViewById(R.id.mrecycler);
+        return view;
     }
-    private void initData() {
+
+    @Override
+    protected void initLazyData() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
         if (mList.size()<=0){
             mList.add("");
             mList.add("");
@@ -47,10 +51,10 @@ public class DingDanActivity extends BaseActivity {
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,mList);
-        mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
+
+        mrecycler.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        rent_house_adapter = new Rent_house_Adapter(getActivity(),mList);
         // 设置监听器。
         mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
 
@@ -59,10 +63,12 @@ public class DingDanActivity extends BaseActivity {
             public void onItemClick(SwipeMenuBridge menuBridge) {
                 mList.remove( menuBridge.getAdapterPosition());
                 menuBridge.closeMenu();
-                liebiaoAdapter.notifyDataSetChanged();
+                rent_house_adapter.notifyDataSetChanged();
+
             }
         });
-        mrecycler.setAdapter(liebiaoAdapter);
+        mrecycler.setAdapter(rent_house_adapter);
+
     }
     // 创建菜单:
     SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
@@ -70,9 +76,9 @@ public class DingDanActivity extends BaseActivity {
         public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
 //            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
 //            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
-            SwipeMenuItem deleteItem = new SwipeMenuItem(DingDanActivity.this); // 各种文字和图标属性设置。
+            SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity()); // 各种文字和图标属性设置。
             deleteItem.setWeight(100);
-            deleteItem.setHeight(380);
+            deleteItem.setHeight(280);
             deleteItem.setText("   删除   ");
             deleteItem.setTextSize(14);
             deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
@@ -81,16 +87,6 @@ public class DingDanActivity extends BaseActivity {
             // 注意:哪边不想要菜单,那么不要添加即可。
         }
     };
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId,data);
-        }
-        @Override
-        protected void convert(BaseViewHolder helper,String item) {
-        }
-    }
-    @OnClick(R.id.back_img)
-    public void onClick() {
-        finish();
-    }
+
+
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sell_house"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.example.administrator.japanhouse.fragment.mine.SellHouseActivity">
     <LinearLayout
@@ -34,5 +35,90 @@
             android:layout_width="50dip"
             android:layout_height="50dip" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/liners"
+        android:layout_below="@+id/liner"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/liner1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
 
+                android:textColor="@color/colorAccent"
+                android:id="@+id/text_sell"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:text="出售"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:id="@+id/xian1"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:layout_below="@+id/text_sell"
+
+                />
+        </RelativeLayout>
+
+        <View
+            android:layout_margin="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.01"
+            android:background="#cfc8c8"
+            ></View>
+        <RelativeLayout
+            android:padding="5dp"
+            android:id="@+id/liner2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_black"
+                android:id="@+id/text_rent"
+                android:gravity="center"
+                android:padding="3dp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:text="出租"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:id="@+id/xian2"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:layout_below="@+id/text_rent"
+
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_below="@+id/liners"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/gray1"
+        ></View>
+
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </FrameLayout>
 </LinearLayout>

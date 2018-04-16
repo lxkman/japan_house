@@ -5,7 +5,7 @@
     android:orientation="vertical"
     >
 
-        <LinearLayout
+    <LinearLayout
             android:id="@+id/layout_all_height"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -86,12 +86,9 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
         </LinearLayout>
-
-
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#eee"></View>
+        android:background="#eee"/>
 
 </LinearLayout>

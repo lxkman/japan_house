@@ -119,7 +119,8 @@
         <activity android:name=".fragment.comment.ZuHousedetailsActivity" />
         <activity android:name=".fragment.comment.OldHousedetailsActivity" />
         <activity android:name=".fragment.comment.TudidetailsActivity" />
-        <activity android:name=".fragment.home.NewHouseActivity" />
+        <activity android:name=".fragment.home.NewHouseActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".fragment.mine.MyDataActivity" />
         <activity android:name=".fragment.mine.SettingActivity" />
         <activity android:name=".fragment.mine.MineMsgActivity" />

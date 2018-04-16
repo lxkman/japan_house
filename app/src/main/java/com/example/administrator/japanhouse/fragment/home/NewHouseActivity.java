@@ -16,6 +16,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
+    private List<OneCheckBean> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,60 +53,71 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     }
 
     private void initView() {
-
         /**
          * 第一个界面
          * */
-        List<OneCheckBean> list = new ArrayList<>();
+        list = new ArrayList<>();
         list.add(new OneCheckBean(false, "不限"));
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
         FirstView firstView = new FirstView(NewHouseActivity.this);
-        firstView.setListener(this);
-        firstView.insertData(list);
         popupViews.add(firstView.firstView());
+        firstView.insertData(list,dropDownMenu);
+        firstView.setListener(this);
+
         /**
          * 第二个界面
          * */
-        list.clear();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "地下室"));
-        list.add(new OneCheckBean(false, "1"));
-        list.add(new OneCheckBean(false, "2"));
-        list.add(new OneCheckBean(false, "3"));
-        list.add(new OneCheckBean(false, "4"));
+        List<OneCheckBean> list1 = new ArrayList<>();
+        list1.add(new OneCheckBean(false, "不限"));
+        list1.add(new OneCheckBean(false, "地下室"));
+        list1.add(new OneCheckBean(false, "1"));
+        list1.add(new OneCheckBean(false, "2"));
+        list1.add(new OneCheckBean(false, "3"));
+        list1.add(new OneCheckBean(false, "4"));
         SecView secView = new SecView(NewHouseActivity.this);
-        secView.setListener(this);
-        secView.insertData(list);
         popupViews.add(secView.secView());
+        secView.setListener(this);
+        secView.insertData(list1,dropDownMenu);
 
         /**
          * 第三个界面
          * */
-        list.clear();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "地下室"));
-        list.add(new OneCheckBean(false, "1"));
-        list.add(new OneCheckBean(false, "2"));
-        list.add(new OneCheckBean(false, "3"));
-        list.add(new OneCheckBean(false, "4"));
+        List<OneCheckBean> list2 = new ArrayList<>();
+        list2.add(new OneCheckBean(false, "不限"));
+        list2.add(new OneCheckBean(false, "1990"));
+        list2.add(new OneCheckBean(false, "1990"));
+        list2.add(new OneCheckBean(false, "1990"));
+        list2.add(new OneCheckBean(false, "1990"));
+        list2.add(new OneCheckBean(false, "1990"));
+        list2.add(new OneCheckBean(false, "1990"));
+        list2.add(new OneCheckBean(false, "1990"));
         SecView threeView = new SecView(NewHouseActivity.this);
-        threeView.insertData(list);
-        threeView.setListener(this);
         popupViews.add(threeView.secView());
+        threeView.insertData(list2,dropDownMenu);
+        threeView.setListener(this);
         /**
          * 第四个界面
          * */
-        SecView fourView = new SecView(NewHouseActivity.this);
-        fourView.setListener(this);
+        List<OneCheckBean> list3 = new ArrayList<>();
+        list3.add(new OneCheckBean(false, "区域"));
+        list3.add(new OneCheckBean(false, "构造"));
+        list3.add(new OneCheckBean(false, "地段"));
+        list3.add(new OneCheckBean(false, "朝向"));
+        list3.add(new OneCheckBean(false, "面积(平米)"));
+        list3.add(new OneCheckBean(false, "室内设施"));
+        MoreView fourView = new MoreView(NewHouseActivity.this);
         popupViews.add(fourView.secView());
+        fourView.insertData(list3,dropDownMenu);
+        fourView.setListener(this);
         /**
          * Dropdownmenu下面的主体部分
          * */
         View fifthView = LayoutInflater.from(NewHouseActivity.this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+
         initData();
     }
 
@@ -116,7 +129,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, mList);
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setAdapter(liebiaoAdapter);

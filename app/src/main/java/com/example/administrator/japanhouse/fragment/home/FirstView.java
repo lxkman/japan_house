@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ class FirstView {
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<OneCheckBean> mList=new ArrayList();
     private Button btn_sure;
+    private DropDownMenu dropDownMenu;
 
     FirstView(Context context) {
         this.context = context;
@@ -39,16 +41,22 @@ class FirstView {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_first, null);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
-        initData();
         return view;
     }
 
-    void insertData(List<OneCheckBean> list) {
+    void insertData(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
         mList = list;
+        this.dropDownMenu = dropDownMenu;
         initData();
     }
 
     private void initData() {
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dropDownMenu.closeMenu();
+            }
+        });
         if (mLiebiaoAdapter == null) {
             mLiebiaoAdapter = new LiebiaoAdapter(R.layout.leixing_item,mList);
         }

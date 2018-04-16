@@ -10,6 +10,8 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
+import org.zackratos.ultimatebar.UltimateBar;
+
 /**
  * Created by Administrator on 2017/8/24.
  */
@@ -21,6 +23,9 @@ public class LancherActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //拉伸图片覆盖标题栏
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_launcher);
         iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
         mHandler.postDelayed(new Runnable() {

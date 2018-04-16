@@ -21,6 +21,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 
+import org.zackratos.ultimatebar.UltimateBar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +49,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
     TextView tvSeeMore;
     @BindView(R.id.love_Recycler)
     RecyclerView loveRecycler;
+    @BindView(R.id.back_img)
+    ImageView backImg;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList = new ArrayList();
@@ -57,6 +61,9 @@ public class ZuHousedetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //拉伸图片覆盖标题栏
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_lishi_zu_house);
         ButterKnife.bind(this);
         initData();
@@ -64,11 +71,12 @@ public class ZuHousedetailsActivity extends BaseActivity {
         //猜你喜欢
         initLoveRecycler();
     }
+
     private void initLoveRecycler() {
         if (loveAdapter == null) {
             loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         loveRecycler.setNestedScrollingEnabled(false);
         loveRecycler.setAdapter(loveAdapter);
         loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -78,6 +86,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
+
 
     class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
@@ -92,7 +102,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
-            mBaseFragmentList.add(new VidioFragment());
+//            mBaseFragmentList.add(new VidioFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
@@ -175,7 +185,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More,R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -187,6 +197,9 @@ public class ZuHousedetailsActivity extends BaseActivity {
             case R.id.tv_See_More:
                 Intent intent = new Intent(ZuHousedetailsActivity.this, SeeMoreActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.back_img:
+                finish();
                 break;
         }
     }

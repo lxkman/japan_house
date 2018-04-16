@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/layout_all_height"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="120dip">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="120dip">
+            <ImageView
+                android:src="@drawable/house"
+                android:layout_marginLeft="15dip"
+                android:layout_gravity="center_vertical"
+                android:layout_width="132dip"
+                android:layout_height="90dip" />
+            <LinearLayout
+                android:paddingTop="30dip"
+                android:paddingBottom="30dip"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:orientation="vertical"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:textColor="#333"
+                    android:text="标题内容"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:textColor="@color/shihuangse"
+                        android:text="报名时间：2018.01.11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eee"></View>
+
+</LinearLayout>

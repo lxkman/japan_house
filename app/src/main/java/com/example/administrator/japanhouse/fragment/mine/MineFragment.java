@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
 import com.example.administrator.japanhouse.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -80,7 +81,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout relLookhouseLayout;
     @BindView(R.id.rel_lishi_layout)
     LinearLayout relLishiLayout;
-    Unbinder unbinder1;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,7 +107,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout, R.id.rel_lookhouse_layout,
-            R.id.rel_lishi_layout, R.id.tv_qustion,R.id.tv_collect_count,R.id.tv_subscription_count,R.id.tv_myorder})
+            R.id.rel_lishi_layout, R.id.tv_qustion,R.id.tv_collect_count,R.id.tv_subscription_count,R.id.tv_myorder,
+            R.id.tv_myask,R.id.tv_mysignup})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
@@ -131,7 +132,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //历史记录
             case R.id.rel_lishi_layout:
-                startActivity(new Intent(mContext, ShouCangActivity.class));
+                startActivity(new Intent(mContext, LiShiJiLuActivity.class));
                 break;
             //收藏
             case R.id.tv_collect_count:
@@ -144,6 +145,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             //订单
             case R.id.tv_myorder:
                 startActivity(new Intent(mContext, DingDanActivity.class));
+                break;
+            //我的问答
+            case R.id.tv_myask:
+                startActivity(new Intent(mContext, WendaItemActivity.class));
+                break;
+            case R.id.tv_mysignup:
+                startActivity(new Intent(mContext, SingUpActivity.class));
+                break;
+            case R.id.tv_sellinghouse:
+                startActivity(new Intent(mContext, SellHouseActivity.class));
                 break;
         }
     }

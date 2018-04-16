@@ -152,8 +152,10 @@
         <activity android:name=".fragment.home.ui.activity.WenDa_Detils_Activity" />
         <activity android:name=".fragment.home.ui.activity.AnswerActivity" />
         <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity" />
-        <activity android:name=".fragment.home.ui.activity.DealActivity"></activity>
-
+        <activity android:name=".fragment.home.ui.activity.DealActivity" />
+        <activity android:name=".fragment.mine.SingUpActivity" />
+        <activity android:name=".fragment.mine.SingUpDetailsActivity" />
+        <activity android:name=".fragment.mine.SellHouseActivity"></activity>
     </application>
 
 </manifest>

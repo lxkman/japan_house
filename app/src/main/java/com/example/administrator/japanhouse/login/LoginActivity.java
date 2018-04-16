@@ -68,7 +68,6 @@ public class LoginActivity extends BaseActivity {
                 break;
             //注册
             case R.id.tv_register:
-                finish();
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
             //忘记密码
@@ -82,12 +81,16 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 break;
             case R.id.img_weixin:
+                startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_weibo:
+                startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_qq:
+                startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_line:
+                startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.tv_show_pop:
                 initPop();

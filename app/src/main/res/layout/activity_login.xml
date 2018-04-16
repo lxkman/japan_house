@@ -9,7 +9,7 @@
     android:background="@drawable/login_bg"
     tools:context="com.example.administrator.japanhouse.login.LoginActivity">
     <LinearLayout
-        android:layout_marginTop="10dip"
+        android:layout_marginTop="20dip"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dip">

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".fragment.comment.TudidetailsActivity">
+    android:focusable="true"
+    tools:context=".fragment.comment.NewHousedetailsActivity">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,7 +17,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <RelativeLayout
                 android:background="@color/shihuangse"
                 android:layout_width="match_parent"
@@ -24,10 +24,8 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/vp_vidio"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
                 </android.support.v4.view.ViewPager>
-
                 <ImageView
                     android:layout_marginTop="10dip"
                     android:id="@+id/back_img"
@@ -88,8 +86,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                 </RelativeLayout>
-
-
             </RelativeLayout>
             <LinearLayout
                 android:background="#fff"
@@ -101,15 +97,14 @@
                     android:gravity="center_vertical"
                     android:textSize="15sp"
                     android:textColor="#333"
-                    android:text="格林豪泰酒店"
+                    android:text="泰和·金府大厦"
                     android:layout_weight="1"
                     android:layout_width="0dip"
                     android:layout_height="match_parent" />
 
-            </LinearLayout>
+</LinearLayout>
             <LinearLayout
                 android:paddingBottom="20dip"
-                android:paddingTop="10dip"
                 android:background="#fff"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -172,7 +167,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="是否街角："
+                            android:text="水源充足："
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -180,26 +175,6 @@
                             android:textSize="14sp"
                             android:gravity="center_vertical"
                             android:text="是"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:paddingLeft="15dip"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:textSize="14sp"
-                            android:gravity="center_vertical"
-                            android:text="能否高建筑："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textColor="#000"
-                            android:textSize="14sp"
-                            android:gravity="center_vertical"
-                            android:text="能"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
@@ -224,7 +199,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="周围采光："
+                            android:text="地形："
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -243,7 +218,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="周围风景："
+                            android:text="土壤："
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -262,14 +237,14 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="车站距离："
+                            android:text="环境："
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
                             android:textColor="#000"
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="**************外观相关信息    "
+                            android:text="********************************外观相关信息    "
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
@@ -281,14 +256,14 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="临街距离："
-                            android:layout_width="70dip"
+                            android:text="交通："
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
                             android:textColor="#000"
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="距啊手机客户吃饭商业街1000米"
+                            android:text="交通便利"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
@@ -317,11 +292,11 @@
                         android:orientation="horizontal"
                         android:layout_height="35dip">
 
-                       <ImageView
-                           android:layout_gravity="center_vertical"
-                           android:src="@drawable/dingwei"
-                           android:layout_width="15dip"
-                           android:layout_height="15dip" />
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/dingwei"
+                            android:layout_width="15dip"
+                            android:layout_height="15dip" />
 
                         <TextView
                             android:layout_marginLeft="5dip"
@@ -392,8 +367,8 @@
                 android:background="#eee"
                 android:layout_width="match_parent"
                 android:layout_height="1dip"></View>
-        </LinearLayout>
 
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
     <LinearLayout
         android:layout_alignParentBottom="true"

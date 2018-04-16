@@ -43,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dip">
             <TextView
+                android:id="@+id/check_quyu"
                 android:drawablePadding="5dp"
                 android:drawableRight="@drawable/to_bottom_onex_black"
                 android:gravity="center_vertical"

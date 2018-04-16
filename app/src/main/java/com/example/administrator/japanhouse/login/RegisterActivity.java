@@ -1,12 +1,17 @@
 package com.example.administrator.japanhouse.login;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
@@ -48,7 +53,10 @@ public class RegisterActivity extends BaseActivity {
     TextView privateXieyi;
     @BindView(R.id.activity_register)
     LinearLayout activityRegister;
-
+    @BindView(R.id.check_quyu)
+    TextView checkQuyu;
+    private View popupView;
+    private PopupWindow basePopupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +64,15 @@ public class RegisterActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.back_img, R.id.tv_login, R.id.tv_get_code, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq, R.id.img_line,R.id.people_xieyi, R.id.private_xieyi})
+
+    @OnClick({R.id.back_img, R.id.tv_login, R.id.tv_get_code, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq,
+            R.id.img_line, R.id.people_xieyi, R.id.private_xieyi,R.id.check_quyu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
                 finish();
                 break;
             case R.id.tv_login:
-                finish();
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
             case R.id.tv_get_code:
@@ -72,12 +81,16 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_weixin:
+                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_weibo:
+                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_qq:
+                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_line:
+                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.people_xieyi:
                 startActivity(new Intent(RegisterActivity.this, PeopleXieyiActivity.class));
@@ -85,7 +98,35 @@ public class RegisterActivity extends BaseActivity {
             case R.id.private_xieyi:
                 startActivity(new Intent(RegisterActivity.this, PrivateActivity.class));
                 break;
+            case R.id.check_quyu:
+                initPop();
+                basePopupWindow.showAsDropDown(view);
+                break;
         }
     }
+    private void initPop() {
+        //屏幕变暗
+        WindowManager.LayoutParams lp =  getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(lp);
 
+        popupView = View.inflate(mContext,R.layout.layout_check_popupwindow, null);
+
+        basePopupWindow = (PopupWindow) new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        basePopupWindow.setTouchable(true);
+        basePopupWindow.setOutsideTouchable(true);
+        basePopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //消失的监听，屏幕还原
+        basePopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp =  getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                getWindow().setAttributes(lp);
+            }
+        });
+    }
 }

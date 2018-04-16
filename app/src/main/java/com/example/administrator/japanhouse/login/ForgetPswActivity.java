@@ -1,10 +1,17 @@
 package com.example.administrator.japanhouse.login;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
@@ -30,7 +37,12 @@ public class ForgetPswActivity extends BaseActivity {
     EditText edtPassSure;
     @BindView(R.id.btn_find_pass)
     Button btnFindPass;
-
+    @BindView(R.id.check_quyu)
+    TextView checkQuyu;
+    @BindView(R.id.activity_register)
+    LinearLayout activityRegister;
+    private View popupView;
+    private PopupWindow basePopupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +50,7 @@ public class ForgetPswActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.back_img, R.id.tv_get_code, R.id.btn_find_pass})
+    @OnClick({R.id.back_img, R.id.tv_get_code, R.id.btn_find_pass,R.id.check_quyu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
@@ -47,7 +59,39 @@ public class ForgetPswActivity extends BaseActivity {
             case R.id.tv_get_code:
                 break;
             case R.id.btn_find_pass:
+                finish();
+                startActivity(new Intent(ForgetPswActivity.this, LoginActivity.class));
+                break;
+            case R.id.check_quyu:
+                initPop();
+                basePopupWindow.showAsDropDown(view);
                 break;
         }
+    }
+
+    private void initPop() {
+        //屏幕变暗
+        WindowManager.LayoutParams lp =  getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(lp);
+
+        popupView = View.inflate(mContext,R.layout.layout_check_popupwindow, null);
+
+        basePopupWindow = (PopupWindow) new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        basePopupWindow.setTouchable(true);
+        basePopupWindow.setOutsideTouchable(true);
+        basePopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //消失的监听，屏幕还原
+        basePopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp =  getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                getWindow().setAttributes(lp);
+            }
+        });
     }
 }

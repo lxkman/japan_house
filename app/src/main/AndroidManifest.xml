@@ -107,6 +107,7 @@
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.ForgetPswActivity" />
         <activity android:name=".login.UserAgreementActivity" />
+        <activity android:name=".login.BindPhoneActivity" />
         <!-- <activity android:name=".login.LauncherActivity"/> -->
         <activity android:name=".login.GuidePageActivity" />
         <activity android:name=".MainActivity" />
@@ -156,6 +157,11 @@
         <activity android:name=".fragment.home.ui.activity.DealActivity" />
         <activity android:name=".fragment.mine.SingUpActivity" />
         <activity android:name=".fragment.mine.SingUpDetailsActivity" />
+        <activity android:name=".fragment.mine.SellHouseActivity" />
+        <activity android:name=".fragment.comment.GaoerfuDetailsActivity" />
+        <activity android:name=".fragment.comment.JiudianDetailsActivity" />
+        <activity android:name=".fragment.comment.XiezilouDetailsActivity" />
+        <activity android:name=".fragment.comment.ShangpuDetailsActivity"></activity>
         <activity android:name=".fragment.mine.SellHouseActivity" />
         <activity android:name=".fragment.mine.Myhouse_price_Activity"></activity>
     </application>

@@ -18,16 +18,17 @@ import com.example.administrator.japanhouse.bean.OneCheckBean;
 import java.util.ArrayList;
 import java.util.List;
 
-class FirstView {
+class MoreView {
 
     private Context context;
     private MyItemClickListener listener;
     private RecyclerView mrecycler;
     private LiebiaoAdapter mLiebiaoAdapter;
-    private List<OneCheckBean> mList=new ArrayList();
+    private List<OneCheckBean> mList = new ArrayList();
+    private List<OneCheckBean> mItemList = new ArrayList();
     private Button btn_sure;
 
-    FirstView(Context context) {
+    MoreView(Context context) {
         this.context = context;
     }
 
@@ -35,62 +36,60 @@ class FirstView {
         this.listener = listener;
     }
 
-    View firstView() {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_first, null);
+    View secView() {
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_more, null);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
-        initData();
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
         return view;
     }
 
     void insertData(List<OneCheckBean> list) {
         mList = list;
+        mItemList=new ArrayList<>();
         initData();
     }
 
     private void initData() {
         if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.leixing_item,mList);
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.more_item, mList);
         }
-        mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false));
+        mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setAdapter(mLiebiaoAdapter);
-        mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-            }
-        });
     }
+
     class LiebiaoAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OneCheckBean> data) {
-            super(layoutResId,data);
+            super(layoutResId, data);
         }
 
         @Override
         protected void convert(final BaseViewHolder helper, OneCheckBean item) {
-            helper.setText(R.id.rb_title,item.getName());
-            helper.setChecked(R.id.rb_title, item.isChecked());
-            helper.setVisible(R.id.img_isCheck,item.isChecked());
-            helper.getView(R.id.rb_title).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //直接在外层用adapter的点击事件就不管用，真是邪门
-                    for (int i = 0; i < mList.size(); i++) {
-                        if (helper.getAdapterPosition() == i) {
-                            mList.get(i).setChecked(true);
-                        } else {
-                            mList.get(i).setChecked(false);
-                        }
-                    }
-                    mLiebiaoAdapter.notifyDataSetChanged();
-                }
-
-            });
-
+            helper.setText(R.id.rb_title, item.getName());
+            RecyclerView recycler_item = helper.getView(R.id.recycler_item);
+//            recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,));
         }
     }
+
+    class ItemAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
+
+        public ItemAdapter(@LayoutRes int layoutResId, @Nullable List<OneCheckBean> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(final BaseViewHolder helper, OneCheckBean item) {
+            helper.setText(R.id.rb_title, item.getName());
+            RecyclerView recycler_item = helper.getView(R.id.recycler_item);
+        }
+    }
+
     private class mClick implements View.OnClickListener {
 
         String string;
@@ -101,7 +100,7 @@ class FirstView {
 
         @Override
         public void onClick(View v) {
-            listener.onItemClick(v, 1, string);
+            listener.onItemClick(v, 2, string);
         }
     }
 

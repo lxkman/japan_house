@@ -43,16 +43,15 @@ class SecView {
             public void onClick(View view) {
             }
         });
-        initData();
         return view;
     }
-    private void initData() {
-        if (mList.size()<=0){
-            for (int i = 0; i < 6; i++) {
-                mList.add(new OneCheckBean(false,(i+1)+"个月"));
-            }
 
-        }
+    void insertData(List<OneCheckBean> list) {
+        mList = list;
+        initData();
+    }
+
+    private void initData() {
         if (mLiebiaoAdapter == null) {
             mLiebiaoAdapter = new LiebiaoAdapter(R.layout.shijian_item,mList);
         }

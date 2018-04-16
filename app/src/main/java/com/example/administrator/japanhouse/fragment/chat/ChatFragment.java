@@ -147,7 +147,7 @@ public class ChatFragment extends BaseFragment {
         basePopupWindow = (PopupWindow) new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         basePopupWindow.setTouchable(true);
         basePopupWindow.setOutsideTouchable(true);
-        basePopupWindow.setAnimationStyle(R.style.animTranslate);
+//        basePopupWindow.setAnimationStyle(R.style.animTranslate);
         basePopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //消失的监听，屏幕还原

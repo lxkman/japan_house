@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sell_house"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.japanhouse.fragment.mine.SellHouseActivity">
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="卖房管理"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/tv_register"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:text="@string/zhuce"
+            android:gravity="center"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+
+</LinearLayout>

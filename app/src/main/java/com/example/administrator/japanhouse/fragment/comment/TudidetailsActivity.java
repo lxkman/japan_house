@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+
+import org.zackratos.ultimatebar.UltimateBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,12 @@ public class TudidetailsActivity extends BaseActivity {
     ImageView imgStart;
     @BindView(R.id.love_Recycler)
     RecyclerView loveRecycler;
+    @BindView(R.id.back_img)
+    ImageView backImg;
+    @BindView(R.id.tv_suiyi)
+    TextView tvSuiyi;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
@@ -51,6 +60,9 @@ public class TudidetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lishi_shang_ye);
+        //拉伸图片覆盖标题栏
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setImmersionBar(false);
         ButterKnife.bind(this);
         initData();
         initViewPager();
@@ -61,7 +73,7 @@ public class TudidetailsActivity extends BaseActivity {
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
-            mBaseFragmentList.add(new VidioFragment());
+//            mBaseFragmentList.add(new VidioFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
@@ -95,7 +107,7 @@ public class TudidetailsActivity extends BaseActivity {
         if (loveAdapter == null) {
             loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         loveRecycler.setNestedScrollingEnabled(false);
         loveRecycler.setAdapter(loveAdapter);
         loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -116,6 +128,7 @@ public class TudidetailsActivity extends BaseActivity {
         protected void convert(BaseViewHolder helper, String item) {
         }
     }
+
     @Override
     public void onBackPressed() {
         if (JZVideoPlayer.backPress()) {
@@ -156,7 +169,7 @@ public class TudidetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start})
+    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -164,6 +177,9 @@ public class TudidetailsActivity extends BaseActivity {
                 break;
             case R.id.img_start:
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.back_img:
+                finish();
                 break;
         }
     }

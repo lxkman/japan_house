@@ -16,6 +16,8 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
+import org.zackratos.ultimatebar.UltimateBar;
+
 
 /**
  * Created by lxk on 2017/6/30.
@@ -29,6 +31,9 @@ public class GuidePageActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //拉伸图片覆盖标题栏
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_guide);
         vp = (ViewPager) findViewById(R.id.vp);
         if (mGuidePagerAdapter == null) {

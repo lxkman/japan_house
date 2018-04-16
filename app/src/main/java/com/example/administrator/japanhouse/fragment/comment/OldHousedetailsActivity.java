@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+
+import org.zackratos.ultimatebar.UltimateBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,12 @@ public class OldHousedetailsActivity extends BaseActivity {
     TextView tvSeeMore;
     @BindView(R.id.love_Recycler)
     RecyclerView loveRecycler;
+    @BindView(R.id.back_img)
+    ImageView backImg;
+    @BindView(R.id.tv_suiyi)
+    TextView tvSuiyi;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList = new ArrayList();
@@ -57,6 +66,9 @@ public class OldHousedetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //拉伸图片覆盖标题栏
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_lishi_old_house);
         ButterKnife.bind(this);
         //banner
@@ -69,7 +81,7 @@ public class OldHousedetailsActivity extends BaseActivity {
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
-            mBaseFragmentList.add(new VidioFragment());
+//            mBaseFragmentList.add(new VidioFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
@@ -139,7 +151,7 @@ public class OldHousedetailsActivity extends BaseActivity {
         if (loveAdapter == null) {
             loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         loveRecycler.setNestedScrollingEnabled(false);
         loveRecycler.setAdapter(loveAdapter);
         loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -149,6 +161,7 @@ public class OldHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -165,7 +178,7 @@ public class OldHousedetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More,R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -177,6 +190,9 @@ public class OldHousedetailsActivity extends BaseActivity {
             case R.id.tv_See_More:
                 Intent intent = new Intent(OldHousedetailsActivity.this, SeeMoreActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.back_img:
+                finish();
                 break;
         }
     }

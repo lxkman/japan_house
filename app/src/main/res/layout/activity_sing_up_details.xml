@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sing_up_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.example.administrator.japanhouse.fragment.mine.SingUpDetailsActivity">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="报名详情"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:padding="13dp"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/singup_bg"
+        android:layout_width="match_parent"
+        android:layout_height="176dip" />
+
+    <LinearLayout
+        android:background="#fff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="81dip">
+        <LinearLayout
+            android:layout_marginTop="12sp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="20dip">
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dip"
+                android:textColor="#444"
+                android:textSize="15sp"
+                android:text="活动名称"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"></View>
+            <TextView
+                android:drawablePadding="5dip"
+                android:layout_marginRight="15dip"
+                android:drawableLeft="@drawable/singupnum"
+                android:textSize="12sp"
+                android:text="283人已报名"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:paddingLeft="15dip"
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#444"
+                android:drawablePadding="5dip"
+                android:drawableLeft="@drawable/timelogo"
+                android:textSize="14sp"
+                android:text="剩余"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/shihuangse"
+                android:textSize="14sp"
+                android:text="11"
+                android:layout_width="wrap_content"
+                android:layout_height="15dip" />
+            <TextView
+                android:textColor="#444"
+                android:textSize="14sp"
+                android:text="天"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/shihuangse"
+                android:textSize="14sp"
+                android:text="10"
+                android:layout_width="wrap_content"
+                android:layout_height="15dip" />
+            <TextView
+                android:textColor="#444"
+                android:textSize="14sp"
+                android:text="小时"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/shihuangse"
+                android:textSize="14sp"
+                android:text="20"
+                android:layout_width="wrap_content"
+                android:layout_height="15dip" />
+            <TextView
+                android:textColor="#444"
+                android:textSize="14sp"
+                android:text="分"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"></View>
+            <Button
+                android:textColor="#fff"
+                android:text="立即报名"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/round_chengse"
+                android:layout_width="87dip"
+                android:layout_height="30dip" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#f8f8f8"
+        android:layout_width="match_parent"
+        android:layout_height="10dip"></View>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:paddingLeft="15dip"
+        >
+        <TextView
+            android:gravity="center_vertical"
+            android:textColor="#333"
+            android:textSize="16sp"
+            android:text="活动说明"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="15dip"
+        android:layout_marginLeft="15dip"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"></View>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:paddingLeft="15dip">
+        <TextView
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="活动详情:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:paddingLeft="10dip"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="详情说明"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:paddingLeft="15dip">
+        <TextView
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="适用范围:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:paddingLeft="10dip"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="范围说明"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:orientation="vertical"
+        android:layout_marginTop="10dip"
+        android:layout_marginRight="20dip"
+        android:layout_marginLeft="20dip"
+        android:background="@drawable/yinying"
+        android:layout_width="match_parent"
+        android:layout_height="100dip">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:paddingLeft="15dip"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dip">
+            <ImageView
+                android:src="@drawable/phont"
+                android:layout_width="25dip"
+                android:layout_height="25dip" />
+            <TextView
+                android:paddingLeft="10dip"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/shihuangse"
+                android:text="400-026-0323"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dip">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:textColor="#333"
+                android:text="最新开盘·户型以及优惠信息，免费致电售楼处"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:paddingLeft="15dip"
+        >
+        <TextView
+            android:gravity="center_vertical"
+            android:textColor="#333"
+            android:textSize="16sp"
+            android:text="楼盘详情"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="15dip"
+        android:layout_marginLeft="15dip"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"></View>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:paddingLeft="15dip">
+        <TextView
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="住宅大小:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:paddingLeft="10dip"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="1200元/平"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:paddingLeft="15dip">
+        <TextView
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="开盘日期:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:paddingLeft="10dip"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:text="2018.11.10"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:paddingLeft="15dip">
+                <TextView
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"
+                    android:text="地址:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:paddingLeft="10dip"
+                    android:textColor="#333"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"
+                    android:text="北京海淀区"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginBottom="50dip"
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <LinearLayout
+            android:paddingLeft="10dip"
+            android:orientation="horizontal"
+            android:layout_weight="0.7"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+            <ImageView
+                android:padding="5dip"
+                android:src="@drawable/deful_touxiang"
+                android:layout_width="50dip"
+                android:layout_height="50dip" />
+            <TextView
+                android:gravity="center_vertical"
+                android:textColor="#333"
+                android:textSize="14dip"
+                android:paddingLeft="10dip"
+                android:text="杨金金"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="#c79880"
+            android:layout_weight="0.5"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="14dip"
+                android:paddingLeft="10dip"
+                android:text="微聊"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="#d79369"
+            android:layout_weight="0.5"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="14dip"
+                android:paddingLeft="10dip"
+                android:text="电话"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

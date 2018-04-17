@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lishi_new_house"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context=".fragment.comment.TudidetailsActivity">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:background="@color/shihuangse"
+                android:layout_width="match_parent"
+                android:layout_height="255dip">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_vidio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                </android.support.v4.view.ViewPager>
+
+                <ImageView
+                    android:layout_marginTop="10dip"
+                    android:id="@+id/back_img"
+                    android:padding="15dip"
+                    android:src="@drawable/back"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <ImageView
+                    android:layout_marginTop="10dip"
+                    android:id="@+id/img_share"
+                    android:layout_alignParentRight="true"
+                    android:padding="14dip"
+                    android:src="@drawable/share"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <ImageView
+                    android:layout_marginTop="10dip"
+                    android:id="@+id/img_start"
+                    android:layout_marginRight="50dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="14dip"
+                    android:src="@drawable/shoucang"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dip">
+                    <ImageView
+                        android:src="@drawable/touming"
+                        android:layout_width="65dip"
+                        android:layout_height="50dip" />
+                    <TextView
+                        android:id="@+id/tv_to_num"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="15dp"
+                        android:text="1"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tv_suiyi"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@id/tv_to_num"
+                        android:textColor="#fff"
+                        android:text="/"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:layout_toRightOf="@id/tv_suiyi"
+                        android:id="@+id/tv_all_num"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="5dp"
+                        android:text="10"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+            <LinearLayout
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dip">
+                <TextView
+                    android:paddingLeft="15dip"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:textColor="#333"
+                    android:text="格林豪泰酒店"
+                    android:layout_weight="1"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:paddingBottom="20dip"
+                android:paddingTop="10dip"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dip">
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="参考均价："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/shihuangse"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="17500万"
+                            android:layout_width="70dip"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="停车位："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#333"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="有"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dip">
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="建筑年代："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="1995"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="竣工时间："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="2015.01.01"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginRight="15dip"
+                    android:layout_marginLeft="15dip"
+                    android:background="#eee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"></View>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="35dip">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="开发企业："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="所处交通便利赴京多处大型商场环境地段 "
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="35dip">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="物业公司："
+                            android:layout_width="70dip"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="所处交通便利赴京多处大型商场环境地段 "
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="35dip">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="周边配套："
+                            android:layout_width="70dip"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="**************外观相关信息    "
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="35dip">
+                        <TextView
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="具体位置："
+                            android:layout_width="70dip"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="具体位置信息展示、精确到都、道、府、县"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="15dip"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="35dip">
+
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/dingwei"
+                            android:layout_width="15dip"
+                            android:layout_height="15dip" />
+
+                        <TextView
+                            android:layout_marginLeft="5dip"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:gravity="center_vertical"
+                            android:text="花香满橙小区"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="5dip"></View>
+            <LinearLayout
+                android:layout_marginTop="10dip"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dip">
+                <TextView
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/shihuangse"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shihuangse"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dip"
+                    android:layout_height="2dip"></View>
+                <TextView
+                    android:text="猜你喜欢"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="#333"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shihuangse"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dip"
+                    android:layout_height="2dip"></View>
+                <TextView
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/shihuangse"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:paddingBottom="50dip"
+                android:background="#fff"
+                android:id="@+id/love_Recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+            <View
+                android:layout_marginTop="10dip"
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <LinearLayout
+            android:paddingLeft="10dip"
+            android:orientation="horizontal"
+            android:layout_weight="0.7"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+            <ImageView
+                android:padding="5dip"
+                android:src="@drawable/deful_touxiang"
+                android:layout_width="50dip"
+                android:layout_height="50dip" />
+            <TextView
+                android:gravity="center_vertical"
+                android:textColor="#333"
+                android:textSize="14dip"
+                android:paddingLeft="10dip"
+                android:text="杨金金"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="#c79880"
+            android:layout_weight="0.5"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="14dip"
+                android:paddingLeft="10dip"
+                android:text="微聊"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="#d79369"
+            android:layout_weight="0.5"
+            android:layout_width="0dip"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="14dip"
+                android:paddingLeft="10dip"
+                android:text="电话"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

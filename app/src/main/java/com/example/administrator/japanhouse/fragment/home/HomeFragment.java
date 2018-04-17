@@ -23,7 +23,7 @@ import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
-import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Buyhouse_Baike_Activity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Daikuan_Activity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.QuestionActivity;
@@ -142,8 +142,7 @@ public class HomeFragment extends BaseFragment {
                             startActivity(new Intent(mContext,NewHouseActivity.class));
                         }else if (position==4){
                             //商业地产
-                            startActivity(new Intent(mContext,ShangpuDetailsActivity.class));
-
+                            startActivity(new Intent(mContext,XiaoQuDetailsActivity.class));
                         }
                     }
                 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -96,6 +98,8 @@ public class HomeFragment extends BaseFragment {
     RecyclerView cnxhRecycler;
     @BindView(R.id.view_011)
     LinearLayout view011;
+    @BindView(R.id.srcollview)
+    NestedScrollView scrollView;
     private int totalPage; //总的页数
     private int mPageSize = 10; //每页显示的最大的数量
     private ImageView[] ivPoints;//小圆点图片的集合
@@ -131,6 +135,7 @@ public class HomeFragment extends BaseFragment {
             final GridView gridView = (GridView) View.inflate(mContext, R.layout.item_gridview, null);
             gridView.setAdapter(new MyGridViewAdpter(mContext, homeItemBeanList, i, mPageSize));
             //添加item点击监听
+            final int finalI = i;
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1,
@@ -138,11 +143,38 @@ public class HomeFragment extends BaseFragment {
                     // TODO Auto-generated method stub
                     Object obj = gridView.getItemAtPosition(position);
                     if (obj != null && obj instanceof HomeItemBean) {
-                        if (position==1){
-                            startActivity(new Intent(mContext,NewHouseActivity.class));
-                        }else if (position==4){
-                            //商业地产
-                            startActivity(new Intent(mContext,XiaoQuDetailsActivity.class));
+                        switch (position) {
+                            case 0:
+                                if (finalI == 0) {
+
+                                } else {//海外地产
+                                    startActivity(new Intent(mContext, HaiWaiActivity.class));
+                                }
+                                break;
+                            case 1://新房
+                                startActivity(new Intent(mContext, NewHouseActivity.class));
+                                break;
+                            case 2://土地
+                                startActivity(new Intent(mContext, TudiActivity.class));
+                                break;
+                            case 3:
+                                break;
+                            case 4://商业地产
+                                startActivity(new Intent(mContext, BusinessDichanActivity.class));
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                break;
+                            case 7:
+                                startActivity(new Intent(mContext, ZhaoxiaoquActivity.class));
+                                break;
+                            case 8:
+                                break;
+                            case 9:
+                                break;
+                            case 10://海外地产
+                                break;
                         }
                     }
                 }
@@ -418,13 +450,4 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext, ToutiaoActivity.class));
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
 }

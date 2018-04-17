@@ -141,7 +141,9 @@
         <activity android:name=".login.PeopleXieyiActivity" />
         <activity android:name=".login.PrivateActivity" />
         <activity android:name=".fragment.chat.MyZxingActivity" />
-        <activity android:name=".fragment.home.HomeSearchActivity" />
+        <activity
+            android:name=".fragment.home.HomeSearchActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".fragment.home.ui.activity.QuestionActivity" />
         <activity android:name=".fragment.home.ui.activity.QuizActivity" />
         <activity android:name=".fragment.home.ui.activity.WendaItemActivity" />
@@ -159,14 +161,23 @@
         <activity android:name=".fragment.mine.SingUpActivity" />
         <activity android:name=".fragment.mine.SingUpDetailsActivity" />
         <activity android:name=".fragment.mine.SellHouseActivity" />
+        <activity
+            android:name=".fragment.home.BusinessDichanActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".fragment.home.SydcSearchActivity" />
+        <activity
+            android:name=".fragment.home.TudiActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".fragment.home.HaiWaiActivity" />
+        <activity android:name=".fragment.home.ZhaoxiaoquActivity" />
         <activity android:name=".fragment.comment.GaoerfuDetailsActivity" />
         <activity android:name=".fragment.comment.JiudianDetailsActivity" />
         <activity android:name=".fragment.comment.XiezilouDetailsActivity" />
         <activity android:name=".fragment.comment.ShangpuDetailsActivity" />
-        <activity android:name=".fragment.mine.SellHouseActivity" />
         <activity android:name=".fragment.mine.Myhouse_price_Activity" />
         <activity android:name=".fragment.comment.HaiWaiDetailsActivity" />
-        <activity android:name=".fragment.comment.XiaoQuDetailsActivity"></activity>
+        <activity android:name=".fragment.comment.XiaoQuDetailsActivity" />
+        <activity android:name=".fragment.home.SydcLiebiaoActivity"></activity>
     </application>
 
 </manifest>

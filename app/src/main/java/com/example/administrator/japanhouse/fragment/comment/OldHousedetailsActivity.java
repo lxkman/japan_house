@@ -57,8 +57,6 @@ public class OldHousedetailsActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.tv_suiyi)
     TextView tvSuiyi;
-    @BindView(R.id.activity_lishi_new_house)
-    RelativeLayout activityLishiNewHouse;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList = new ArrayList();

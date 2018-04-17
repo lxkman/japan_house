@@ -8,15 +8,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewHouseActivity extends BaseActivity implements MyItemClickListener {
+public class TudiActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -38,8 +38,9 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
-    TextView searchTv;
-    private String headers[] = {"售价", "楼层", "建筑年份", "更多"};
+    EditText searchTv;
+
+    private String headers[] = {"价格", "面积", "车站距离"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -49,7 +50,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_house);
+        setContentView(R.layout.activity_tudi);
         ButterKnife.bind(this);
         initView();
     }
@@ -63,7 +64,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
-        FirstView firstView = new FirstView(NewHouseActivity.this);
+        FirstView firstView = new FirstView(TudiActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -73,12 +74,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "1"));
-        list1.add(new OneCheckBean(false, "2"));
-        list1.add(new OneCheckBean(false, "3"));
-        list1.add(new OneCheckBean(false, "4"));
-        SecView secView = new SecView(NewHouseActivity.this);
+        list1.add(new OneCheckBean(false, "20平方米以下"));
+        list1.add(new OneCheckBean(false, "20-40平方米"));
+        list1.add(new OneCheckBean(false, "40-80平方米"));
+        list1.add(new OneCheckBean(false, "80-100平方米"));
+        list1.add(new OneCheckBean(false, "100平方米以上"));
+        SecView secView = new SecView(TudiActivity.this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -88,35 +89,20 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        SecView threeView = new SecView(NewHouseActivity.this);
+        list2.add(new OneCheckBean(false, "100m以内"));
+        list2.add(new OneCheckBean(false, "200m以内"));
+        list2.add(new OneCheckBean(false, "500m以内"));
+        list2.add(new OneCheckBean(false, "1000m以内"));
+        list2.add(new OneCheckBean(false, "2000m以内"));
+        SecView threeView = new SecView(TudiActivity.this);
         popupViews.add(threeView.secView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
-        /**
-         * 第四个界面
-         * */
-        List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "区域"));
-        list3.add(new OneCheckBean(false, "构造"));
-        list3.add(new OneCheckBean(false, "地段"));
-        list3.add(new OneCheckBean(false, "朝向"));
-        list3.add(new OneCheckBean(false, "面积(平米)"));
-        list3.add(new OneCheckBean(false, "室内设施"));
-        MoreView fourView = new MoreView(NewHouseActivity.this);
-        popupViews.add(fourView.secView());
-        fourView.insertData(list3, dropDownMenu);
-        fourView.setListener(this);
+
         /**
          * Dropdownmenu下面的主体部分
          * */
-        View fifthView = LayoutInflater.from(NewHouseActivity.this).inflate(R.layout.activity_main_view, null);
+        View fifthView = LayoutInflater.from(TudiActivity.this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
 
@@ -138,10 +124,9 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
+                startActivity(new Intent(mContext, TudidetailsActivity.class));
             }
         });
-
     }
 
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
@@ -156,16 +141,14 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         }
     }
 
-    @OnClick({R.id.back_img, R.id.img_dingwei, R.id.img_message, R.id.search_tv})
-    public void onClick(View view) {
+    @OnClick({R.id.back_img, R.id.img_dingwei, R.id.img_message})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_img:
                 finish();
                 break;
-            //地图
             case R.id.img_dingwei:
                 break;
-            //消息
             case R.id.img_message:
                 break;
             case R.id.search_tv:

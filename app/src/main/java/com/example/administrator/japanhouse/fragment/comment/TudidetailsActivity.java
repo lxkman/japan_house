@@ -51,8 +51,6 @@ public class TudidetailsActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.tv_suiyi)
     TextView tvSuiyi;
-    @BindView(R.id.activity_lishi_new_house)
-    RelativeLayout activityLishiNewHouse;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
     private List<Fragment> mBaseFragmentList = new ArrayList<>();

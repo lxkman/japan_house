@@ -9,8 +9,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.view.BaseDialog;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -173,7 +176,7 @@ public class XiaoQuDetailsActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
-                Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
+                showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.img_start:
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
@@ -183,5 +186,63 @@ public class XiaoQuDetailsActivity extends BaseActivity {
                 break;
         }
     }
+    private void showDialog(int grary, int animationStyle) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        //设置触摸dialog外围是否关闭
+        //设置监听事件
+        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(grary)
+                //设置动画
+                .setAnimation(animationStyle)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        LinearLayout weiliao_layout = (LinearLayout) dialog.findViewById(R.id.weiliao_layout);
+        LinearLayout weixin_layout = (LinearLayout) dialog.findViewById(R.id.weixin_layout);
+        LinearLayout pengyouquan_layout = (LinearLayout) dialog.findViewById(R.id.pengyouquan_layout);
+        LinearLayout weibo_layout = (LinearLayout) dialog.findViewById(R.id.weibo_layout);
+        TextView tv_dismiss = (TextView) dialog.findViewById(R.id.tv_dismiss);
+        //微聊分享
+        weiliao_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        //微信分享
+        weixin_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //朋友圈分享
+        pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //微博分享
+        weibo_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //取消
+        tv_dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
 }

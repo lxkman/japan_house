@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.RentalDetailsActivity;
+import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +36,14 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
     }
 
     @Override
-    public void onBindViewHolder(Viewholder holder, int position) {
-
+    public void onBindViewHolder(final Viewholder holder, int position) {
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转
+                RentalDetailsActivity.invoke(context,new RentalDetailsBean(context.getString(R.string.rent_details),0,null,null,null,holder.weizhi.getText().toString(),holder.juli.getText().toString(),null,holder.mianji.getText().toString(),null,null,holder.chaoxiang.getText().toString(),null,null,null));
+            }
+        });
     }
 
     @Override
@@ -45,14 +53,23 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
 
     public class Viewholder extends RecyclerView.ViewHolder{
 
-        private final ImageView sell_img;
-        private final TextView sell_state;
+        public ImageView sell_img;
+        public TextView sell_state;
+        public TextView chaoxiang;
+        public TextView weizhi;
+        public TextView juli;
+        public TextView mianji;
+        public View view;
 
         public Viewholder(View itemView) {
             super(itemView);
+            view = itemView;
             sell_img = (ImageView) itemView.findViewById(R.id.sell_img);
             sell_state = (TextView) itemView.findViewById(R.id.sell_state);
-
+            weizhi = (TextView) itemView.findViewById(R.id.weizhi);
+            juli = (TextView) itemView.findViewById(R.id.juli);
+            mianji = (TextView) itemView.findViewById(R.id.mianji);
+            chaoxiang = (TextView) itemView.findViewById(R.id.chaoxiang);
         }
     }
 }

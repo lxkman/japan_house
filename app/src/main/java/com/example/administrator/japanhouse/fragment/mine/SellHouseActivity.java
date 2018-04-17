@@ -2,7 +2,9 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -59,7 +61,7 @@ public class SellHouseActivity extends BaseActivity implements View.OnClickListe
 
     }
 
-    @SuppressLint("ResourceAsColor")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -69,8 +71,8 @@ public class SellHouseActivity extends BaseActivity implements View.OnClickListe
              case R.id.liner1:
                  xian1.setVisibility(View.VISIBLE);
                  xian2.setVisibility(View.INVISIBLE);
-                 text_sell.setTextColor(R.color.colorAccent);
-                 text_rent.setTextColor(Color.BLACK);
+                 text_sell.setTextColor(getColor(R.color.colorAccent));
+                 text_rent.setTextColor(getColor(R.color.black));
                  if(sell_house_fragment==null){
                      sell_house_fragment = new Sell_house_Fragment();
                  }
@@ -79,8 +81,8 @@ public class SellHouseActivity extends BaseActivity implements View.OnClickListe
             case R.id.liner2:
                 xian1.setVisibility(View.INVISIBLE);
                 xian2.setVisibility(View.VISIBLE);
-                text_rent.setTextColor(R.color.colorAccent);
-                text_sell.setTextColor(Color.BLACK);
+                text_rent.setTextColor(getColor(R.color.colorAccent));
+                text_sell.setTextColor(getColor(R.color.black));
                 if(rent_house_fragment==null){
                     rent_house_fragment = new Rent_house_Fragment();
                 }

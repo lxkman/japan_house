@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sell_house"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.japanhouse.fragment.mine.SellHouseActivity">
+    android:orientation="vertical"
+    android:background="@color/gray1"
+    tools:context="com.example.administrator.japanhouse.fragment.mine.Calculator_DetilsActivity">
     <LinearLayout
         android:background="@color/shihuangse"
         android:orientation="horizontal"
@@ -21,7 +22,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="卖房管理"
+            android:text="房贷计算器"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -35,7 +36,9 @@
             android:layout_width="50dip"
             android:layout_height="50dip" />
     </LinearLayout>
+
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/liners"
         android:layout_below="@+id/liner"
         android:orientation="horizontal"
@@ -50,12 +53,12 @@
             <TextView
 
                 android:textColor="@color/colorAccent"
-                android:id="@+id/text_sell"
+                android:id="@+id/text_benxi"
                 android:gravity="center"
                 android:padding="3dp"
                 android:textStyle="bold"
                 android:layout_margin="5dp"
-                android:text="出售"
+                android:text="等额本息"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -66,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"
-                android:layout_below="@+id/text_sell"
+                android:layout_below="@+id/text_benxi"
 
                 />
         </RelativeLayout>
@@ -86,12 +89,12 @@
             android:layout_height="wrap_content">
             <TextView
                 android:textColor="@color/text_black"
-                android:id="@+id/text_rent"
+                android:id="@+id/text_benjin"
                 android:gravity="center"
                 android:padding="3dp"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
-                android:text="出租"
+                android:text="等额本金"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -101,22 +104,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"
-                android:layout_below="@+id/text_rent"
+                android:layout_below="@+id/text_benjin"
 
                 />
         </RelativeLayout>
-
     </LinearLayout>
-    <View
-        android:layout_below="@+id/liners"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/gray1"
-        ></View>
+         <FrameLayout
+             android:id="@+id/fl"
+             android:layout_marginTop="10dp"
+             android:background="@color/white"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"></FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </FrameLayout>
+
+
 </LinearLayout>

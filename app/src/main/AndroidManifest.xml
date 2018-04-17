@@ -161,6 +161,7 @@
         <activity android:name=".fragment.mine.SingUpActivity" />
         <activity android:name=".fragment.mine.SingUpDetailsActivity" />
         <activity android:name=".fragment.mine.SellHouseActivity" />
+
         <activity
             android:name=".fragment.home.BusinessDichanActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -184,6 +185,10 @@
         <activity android:name=".activity.RentalActivity"/>
         <activity android:name=".activity.FreeApartmentActivity"/>
         <activity android:name=".activity.RentalDetailsActivity"/>
+        <activity android:name=".fragment.mine.CalculatorActivity" />
+        <activity android:name=".fragment.mine.Calculator_DetilsActivity" />
+        <activity android:name=".fragment.mine.FeedbackActivity" />
+        <activity android:name=".fragment.mine.DingDan_DetilsActivity"></activity>
     </application>
 
 </manifest>

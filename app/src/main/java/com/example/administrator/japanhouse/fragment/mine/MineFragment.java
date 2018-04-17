@@ -108,7 +108,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout, R.id.rel_lookhouse_layout,
             R.id.rel_lishi_layout, R.id.tv_qustion,R.id.tv_collect_count,R.id.tv_subscription_count,R.id.tv_myorder,
-            R.id.tv_myask,R.id.tv_mysignup,R.id.tv_sellinghouse,R.id.tv_myhouse_price})
+            R.id.tv_myask,R.id.tv_mysignup,R.id.tv_sellinghouse,R.id.tv_myhouse_price,R.id.tv_calculator,R.id.tv_feedback})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
@@ -157,6 +157,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 //我的房价
             case R.id.tv_myhouse_price:
                 startActivity(new Intent(mContext, Myhouse_price_Activity.class));
+                break;
+                case R.id.tv_calculator:
+                startActivity(new Intent(mContext,CalculatorActivity.class));
+                break;
+            case R.id.tv_feedback:
+                startActivity(new Intent(mContext,FeedbackActivity.class));
                 break;
         }
     }

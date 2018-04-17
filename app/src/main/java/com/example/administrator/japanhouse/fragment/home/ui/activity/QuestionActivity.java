@@ -2,7 +2,9 @@ package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -74,6 +76,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         AddFragment(buyhouse_fragment);
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ResourceAsColor")
     @Override
     public void onClick(View view) {
@@ -87,8 +90,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                   startActivity(intent1);
                   break;
               case R.id.liner1:
-                  text_sellfang.setTextColor(R.color.colorAccent);
-                  text_buyfang.setTextColor(R.color.text_black);
+                  text_buyfang.setTextColor(getColor(R.color.colorAccent));
+                  text_sellfang.setTextColor(getColor(R.color.black));
                      if(buyhouse_fragment==null){
                          buyhouse_fragment = new Buyhouse_Fragment();
                      }
@@ -96,8 +99,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                   //转换页面
                   break;
               case R.id.liner2:
-                  text_sellfang.setTextColor(R.color.text_black);
-                  text_buyfang.setTextColor(R.color.colorAccent);
+                  text_sellfang.setTextColor(getColor(R.color.colorAccent));
+                  text_buyfang.setTextColor(getColor(R.color.black));
                   if(sellhouse_fragment==null){
                       sellhouse_fragment = new Sellhouse_Fragment();
                   }

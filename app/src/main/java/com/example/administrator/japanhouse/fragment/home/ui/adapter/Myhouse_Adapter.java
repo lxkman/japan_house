@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.fragment.home.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,12 @@ public class Myhouse_Adapter extends RecyclerView.Adapter<Myhouse_Adapter.Viewho
 
     @Override
     public void onBindViewHolder(Viewholder holder, int position) {
-
+          holder.view.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  context.startActivity(new Intent(context, ZuHousedetailsActivity.class));
+              }
+          });
     }
 
     @Override
@@ -48,9 +55,11 @@ public class Myhouse_Adapter extends RecyclerView.Adapter<Myhouse_Adapter.Viewho
         public TextView fj_time;
         public ImageView fj_img;
         public TextView fj_title;
+        public View view;
 
         public Viewholder(View itemView) {
             super(itemView);
+            view = itemView;
             fj_img = (ImageView) itemView.findViewById(R.id.fj_img);
             fj_title = (TextView) itemView.findViewById(R.id.fj_title);
             fj_time = (TextView) itemView.findViewById(R.id.fj_time);

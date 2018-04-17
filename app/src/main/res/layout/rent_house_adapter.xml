@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
             <ImageView
+                android:layout_marginBottom="10dp"
                 android:id="@+id/sell_img"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/house"
@@ -25,6 +26,7 @@
                           android:text="房屋位置："
                           />
                            <TextView
+                               android:id="@+id/weizhi"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:text="东京"
@@ -46,6 +48,7 @@
                     android:text="车站距离："
                     />
                 <TextView
+                    android:id="@+id/juli"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5公里以内"
@@ -67,9 +70,10 @@
             android:text="面积："
             />
         <TextView
+            android:id="@+id/mianji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="150—170"
+            android:text="150m²—170m²"
             android:textColor="#000"
             />
     </LinearLayout>
@@ -88,6 +92,7 @@
             android:text="朝向："
             />
         <TextView
+            android:id="@+id/chaoxiang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="向南"
@@ -110,6 +115,5 @@
         android:layout_height="1dp"
         android:background="@color/gray1"
         android:layout_below="@+id/sell_img"
-        android:layout_marginTop="10dp"
         />
 </RelativeLayout>

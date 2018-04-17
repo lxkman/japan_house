@@ -121,4 +121,6 @@
     <string name="activity_rental_bathroomTogether">洗卫一体:</string>
     <string name="activity_rental_roomPic">房源图片:</string>
     <string name="activity_rental_roomVideo">房源视频:</string>
+    <string name="rent_details">出租详情</string>
+    <string name="sell_details">出售详情</string>
 </resources>

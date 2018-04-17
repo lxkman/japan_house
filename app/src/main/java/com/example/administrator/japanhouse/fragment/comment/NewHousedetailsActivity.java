@@ -22,8 +22,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.home.NewHouseActivity;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -77,6 +80,30 @@ public class NewHousedetailsActivity extends BaseActivity {
         initData();
         //猜你喜欢
         initLoveRecycler();
+        //请求网络
+        initNet();
+    }
+
+    private void initNet() {
+        OkGo.post("")//URL
+                .tag(this)
+                .params("","")
+               .execute(new JsonCallback<Object>() {
+                   @Override
+                   public void onSuccess(com.lzy.okgo.model.Response<Object> response) {
+
+                   }
+
+                   @Override
+                   public void onError(Response<Object> response) {
+                       super.onError(response);
+                   }
+
+                   @Override
+                   public void onFinish() {
+                       super.onFinish();
+                   }
+               });
     }
 
     private void initViewPager() {

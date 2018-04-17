@@ -178,6 +178,12 @@
         <activity android:name=".fragment.comment.HaiWaiDetailsActivity" />
         <activity android:name=".fragment.comment.XiaoQuDetailsActivity" />
         <activity android:name=".fragment.home.SydcLiebiaoActivity"></activity>
+        <activity android:name=".activity.OwnerActivity"/>
+        <activity android:name=".activity.OwnerWikipediaActivity"/>
+        <activity android:name=".activity.OwnerDetailsActivity"/>
+        <activity android:name=".activity.RentalActivity"/>
+        <activity android:name=".activity.FreeApartmentActivity"/>
+        <activity android:name=".activity.RentalDetailsActivity"/>
     </application>
 
 </manifest>

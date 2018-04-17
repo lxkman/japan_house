@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
+import com.example.administrator.japanhouse.activity.OwnerActivity;
 import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
@@ -170,8 +172,10 @@ public class HomeFragment extends BaseFragment {
                                 startActivity(new Intent(mContext, ZhaoxiaoquActivity.class));
                                 break;
                             case 8:
+                                OwnerActivity.invoke(getActivity());
                                 break;
                             case 9:
+                                FreeApartmentActivity.invoke(getActivity());
                                 break;
                             case 10://海外地产
                                 break;

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/act_rental_details_back"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            />
+
+        <TextView
+            android:id="@+id/act_rental_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:text="@string/activity_owner_rental"
+            />
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_rentalState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_rentalState"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_rentalState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_refuseReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_refuseReason"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_refuseReason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_lessorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_lessorName"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_lessorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_lessorPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_lessorPhone"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_lessorPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_location"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_distance"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_floor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_floor"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_floor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_area"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_pattern"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_pattern"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_pattern"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_bathroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_bathroomTogether"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_bathroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_toward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_toward"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_toward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_equipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_equipment"
+                    />
+
+                <TextView
+                    android:id="@+id/act_rental_details_equipment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#2A2A2A"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_roomPic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_roomPic"
+                    />
+
+                <GridView
+                    android:id="@+id/act_rental_details_roomPic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:verticalSpacing="8dp"
+                    android:horizontalSpacing="8dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_rental_details_liner_roomVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="24dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:text="@string/activity_rental_roomVideo"
+                    />
+
+                <cn.jzvd.JZVideoPlayerStandard
+                    android:background="#fff"
+                    android:id="@+id/act_rental_details_videoPlayer"
+                    android:layout_width="110dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="24dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

@@ -9,7 +9,25 @@ import java.util.List;
  * Created by   admin on 2018/4/17.
  */
 
-public class RentalDetailsBean implements Parcelable{
+public class RentalDetailsBean implements Parcelable {
+
+    /**
+     *   title; 标题
+     *   roomState; 审核状态
+     *   refuseReason;  拒绝理由
+     *   lessorName;    出租人姓名
+     *   lessorPhone;   出租人电话
+     *   location;  房屋位置
+     *   distance;  车站距离
+     *   floor;     楼层
+     *   area;      面积
+     *   pattern;   格局
+     *   bathroom;  洗卫一体
+     *   toward;    朝向
+     *   equipment; 周边设备
+     *   picList;   房源图片   //集合
+     *   videoList; 房源视频
+     */
 
     private String title;
     private int roomState;

@@ -23,7 +23,7 @@
                       <TextView
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="房屋位置："
+                          android:text="@string/activity_rental_location"
                           />
                            <TextView
                                android:id="@+id/weizhi"
@@ -45,7 +45,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="车站距离："
+                    android:text="@string/activity_rental_distance"
                     />
                 <TextView
                     android:id="@+id/juli"
@@ -67,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="面积："
+            android:text="@string/activity_rental_area"
             />
         <TextView
             android:id="@+id/mianji"
@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="朝向："
+            android:text="@string/activity_rental_toward"
             />
         <TextView
             android:id="@+id/chaoxiang"

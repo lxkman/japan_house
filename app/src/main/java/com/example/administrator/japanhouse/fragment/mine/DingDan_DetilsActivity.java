@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.DingDan_Adapter;
 
-public class DingDan_DetilsActivity extends AppCompatActivity {
+public class DingDan_DetilsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView back_img;
     private TextView dd_price;
@@ -38,12 +39,19 @@ public class DingDan_DetilsActivity extends AppCompatActivity {
         dd_geju = (TextView) findViewById(R.id.dd_geju);
         dd_smll = (TextView) findViewById(R.id.dd_smll);
         dd_recycler = (RecyclerView) findViewById(R.id.dd_recycler);
-
+            back_img.setOnClickListener(this);
         dd_recycler.setLayoutManager(new GridLayoutManager(this,3));
         dd_recycler.setNestedScrollingEnabled(false);
         DingDan_Adapter dingDan_adapter = new DingDan_Adapter(this);
         dd_recycler.setAdapter(dingDan_adapter);
+    }
 
-
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.back_img:
+                finish();
+                break;
+        }
     }
 }

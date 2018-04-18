@@ -2,7 +2,9 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -90,7 +92,7 @@ public class Calculator_DetilsActivity extends AppCompatActivity implements View
     }
 
 
-    @SuppressLint("ResourceAsColor")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -99,8 +101,8 @@ public class Calculator_DetilsActivity extends AppCompatActivity implements View
                 break;
 
             case R.id.liner1:
-                text_benxi.setTextColor(R.color.colorAccent);
-                text_benjin.setTextColor(R.color.text_black);
+                text_benxi.setTextColor(getColor(R.color.colorAccent));
+                text_benjin.setTextColor(getColor(R.color.black));
                 xian1.setVisibility(View.VISIBLE);
                 xian2.setVisibility(View.INVISIBLE);
                 if (calcul_detil_fragment == null) {
@@ -110,8 +112,8 @@ public class Calculator_DetilsActivity extends AppCompatActivity implements View
                 EventBus.getDefault().postSticky(new FragEventBug(shoufu,daikuan,lixi));
                 break;
             case R.id.liner2:
-                text_benjin.setTextColor(R.color.colorAccent);
-                text_benxi.setTextColor(R.color.text_black);
+                text_benjin.setTextColor(getColor(R.color.colorAccent));
+                text_benxi.setTextColor(getColor(R.color.black));
                 xian2.setVisibility(View.VISIBLE);
                 xian1.setVisibility(View.INVISIBLE);
                 if (calcul_detil_fragment == null) {

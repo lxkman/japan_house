@@ -17,17 +17,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="首         付："
+                android:text="@string/calcul_shoufu"
                 android:textSize="16sp"
                 />
-            <TextView
-                android:id="@+id/js_sf"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0万"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/js_sf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calcul_wan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
         </LinearLayout>
         <View
             android:layout_marginTop="10dp"
@@ -43,17 +56,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="贷款总额："
+                android:text="@string/calcul_dkze"
                 android:textSize="16sp"
                 />
-            <TextView
-                android:id="@+id/js_dkze"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0万"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+
+              <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content">
+                  <TextView
+                      android:id="@+id/js_dkze"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="0"
+                      android:textColor="@color/black"
+                      android:textSize="16sp"
+                      />
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/calcul_wan"
+                      android:textColor="@color/black"
+                      android:textSize="16sp"
+                      />
+              </LinearLayout>
         </LinearLayout>
         <View
             android:layout_marginTop="10dp"
@@ -68,17 +94,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="利息总计："
+                android:text="@string/calcul_lxzj"
                 android:textSize="16sp"
                 />
-            <TextView
-                android:id="@+id/js_lxzj"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0万"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/js_lxzj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calcul_wan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+
+
         </LinearLayout>
         <View
             android:layout_marginTop="10dp"
@@ -93,17 +134,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="月         供："
+                android:text="@string/calcul_yuegong"
                 android:textSize="16sp"
                 />
-            <TextView
-                android:id="@+id/js_yg"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3245万"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/js_yg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3245"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calcul_wan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -113,7 +167,7 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="重新计算"
+        android:text="@string/calcul_cxjs"
         android:background="@drawable/shape_jisuan"
         android:textColor="@color/white"
         android:textSize="16sp"

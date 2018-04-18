@@ -61,40 +61,89 @@
                     android:text="小豆子"
                     android:textColor="@color/white"
                 />
-                <TextView
-                    android:id="@+id/tv_platform_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="您加入平台已100天~"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
-                />
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/mine_jiaru"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_platform_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="100"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/mine_tian"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
                 android:background="@drawable/bg_white_wanjiao">
-                <TextView
-                    android:id="@+id/tv_collect_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <LinearLayout
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="收藏22"
-                    android:textColor="@color/text_gray"/>
-                <TextView
-                    android:id="@+id/tv_subscription_count"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginRight="20dp"
-                    android:text="订阅22"
-                    android:textColor="@color/text_gray"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+
+                        android:text="@string/mine_shoucang"
+                        android:textColor="@color/text_gray"/>
+                    <TextView
+                        android:id="@+id/tv_collect_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="22"
+                        android:textColor="@color/text_gray"/>
+                </LinearLayout>
+                  <LinearLayout
+                      android:layout_gravity="right|center_vertical"
+                      android:layout_width="wrap_content"
+                      android:layout_marginRight="20dp"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      >
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginBottom="2dp"
+                          android:text="@string/mine_dingyue"
+                          android:textColor="@color/text_gray"/>
+                      <TextView
+                          android:id="@+id/tv_subscription_count"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginBottom="2dp"
+                          android:text="22"
+                          android:textColor="@color/text_gray"/>
+
+                  </LinearLayout>
+
             </FrameLayout>
         </FrameLayout>
         <TextView
@@ -102,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/buyandsellhouse"
+            android:text="@string/mine_buyandsellhouse"
             android:textColor="@color/text_black"
             android:textSize="15sp"
         />
@@ -139,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
-                        android:text="@string/contacts"
+                        android:text="@string/mine_contacts"
                         android:textColor="@color/text_gray"
                         android:textSize="13sp"/>
                 </LinearLayout>
@@ -150,41 +199,7 @@
                     android:layout_centerVertical="true"
                     android:background="@color/huise"></View>
             </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/rel_lookhouse_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-            >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tv_lookhouse_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="0"
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/lookhouserecord"
-                        android:textColor="@color/text_gray"
-                        android:textSize="13sp"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@color/huise"></View>
-            </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/rel_lishi_layout"
                 android:layout_width="0dp"
@@ -200,14 +215,15 @@
                     android:text="0"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:text="@string/historyrecord"
+                    android:text="@string/mine_historyrecord"
                     android:textColor="@color/text_gray"
-                    android:textSize="13sp"/>
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
         <View
@@ -220,16 +236,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
             <TextView
-                android:id="@+id/tv_myhouse_price"
+                android:id="@+id/tv_mysignup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="5dp"
-                android:drawableTop="@drawable/myfangjia"
+                android:drawableTop="@drawable/wodebaoming"
                 android:gravity="center"
-                android:text="@string/myhouseprice"
+                android:text="@string/mine_mybaoming"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
+
             <TextView
                 android:id="@+id/tv_myorder"
                 android:layout_width="0dp"
@@ -238,7 +255,7 @@
                 android:drawablePadding="5dp"
                 android:drawableTop="@drawable/myorder"
                 android:gravity="center"
-                android:text="@string/myorder"
+                android:text="@string/mine_myorder"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
             <TextView
@@ -249,7 +266,7 @@
                 android:drawablePadding="5dp"
                 android:drawableTop="@drawable/maifangmanager"
                 android:gravity="center"
-                android:text="@string/sellhousemanager"
+                android:text="@string/mine_sellhousemanager"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -267,19 +284,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/toolservice"
+                android:text="@string/mine_toolservice"
                 android:textColor="@color/text_black"
                 android:textSize="15sp"
             />
-            <TextView
+            <!--<TextView
                 android:id="@+id/tv_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="@string/lookrecord"
+                android:text="@string/mine_lookrecord"
                 android:textColor="@color/shihuangse"
                 android:textSize="15sp"
-            />
+            />-->
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -297,7 +314,19 @@
                 android:drawablePadding="5dp"
                 android:drawableTop="@drawable/fangdaijisuanqi"
                 android:gravity="center"
-                android:text="@string/fangdaijisuanqi"
+                android:text="@string/mine_fangdaijisuanqi"
+                android:textColor="@color/text_gray"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_myhouse_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/myfangjia"
+                android:gravity="center"
+                android:text="@string/mine_myhouseprice"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
             <TextView
@@ -308,18 +337,7 @@
                 android:drawablePadding="5dp"
                 android:drawableTop="@drawable/wodewenda"
                 android:gravity="center"
-                android:text="@string/myask"
-                android:textColor="@color/text_gray"
-                android:textSize="13sp"/>
-            <TextView
-                android:id="@+id/tv_mysignup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/wodebaoming"
-                android:gravity="center"
-                android:text="@string/mybaoming"
+                android:text="@string/mine_myask"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
             <TextView
@@ -330,7 +348,7 @@
                 android:drawablePadding="5dp"
                 android:drawableTop="@drawable/yonghufankui"
                 android:gravity="center"
-                android:text="@string/userfeedback"
+                android:text="@string/mine_userfeedback"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -362,7 +380,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="@string/newfooter"
+                        android:text="@string/mine_newfooter"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                     />

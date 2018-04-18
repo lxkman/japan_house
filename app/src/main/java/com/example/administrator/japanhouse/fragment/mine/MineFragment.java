@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
+import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -50,8 +51,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     TextView tvSubscriptionCount;
     @BindView(R.id.tv_contacts_count)
     TextView tvContactsCount;
-    @BindView(R.id.tv_lookhouse_count)
-    TextView tvLookhouseCount;
     @BindView(R.id.tv_histroy_count)
     TextView tvHistroyCount;
     @BindView(R.id.tv_myhouse_price)
@@ -60,8 +59,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     TextView tvMyorder;
     @BindView(R.id.tv_sellinghouse)
     TextView tvSellinghouse;
-    @BindView(R.id.tv_report)
-    TextView tvReport;
     @BindView(R.id.tv_calculator)
     TextView tvCalculator;
     @BindView(R.id.tv_myask)
@@ -77,8 +74,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     Unbinder unbinder;
     @BindView(R.id.rel_lianxiren_layout)
     RelativeLayout relLianxirenLayout;
-    @BindView(R.id.rel_lookhouse_layout)
-    RelativeLayout relLookhouseLayout;
     @BindView(R.id.rel_lishi_layout)
     LinearLayout relLishiLayout;
 
@@ -106,7 +101,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         recyclerFoot.setAdapter(footAdapter);
     }
 
-    @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout, R.id.rel_lookhouse_layout,
+    @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,
             R.id.rel_lishi_layout, R.id.tv_qustion,R.id.tv_collect_count,R.id.tv_subscription_count,R.id.tv_myorder,
             R.id.tv_myask,R.id.tv_mysignup,R.id.tv_sellinghouse,R.id.tv_myhouse_price,R.id.tv_calculator,R.id.tv_feedback})
     public void onClick(View view) {
@@ -156,7 +151,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
                 //我的房价
             case R.id.tv_myhouse_price:
-                startActivity(new Intent(mContext, Myhouse_price_Activity.class));
+                ToastUtils.getToast(getActivity(),"地图");
                 break;
                 case R.id.tv_calculator:
                 startActivity(new Intent(mContext,CalculatorActivity.class));
@@ -173,7 +168,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         public FootAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
         }
-
         @Override
         protected void convert(BaseViewHolder helper, String item) {
 

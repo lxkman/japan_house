@@ -50,9 +50,9 @@ public class Calcul_Detil_Fragment extends BaseFragment {
             EventBus.getDefault().register(this);
             flag=false;
         }
-        js_sf.setText(shoufu+"万");
-        js_dkze.setText(daikuan+"万");
-        js_lxzj.setText(lixi+"万");
+        js_sf.setText(shoufu+"");
+        js_dkze.setText(daikuan+"");
+        js_lxzj.setText(lixi+"");
     }
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void fangfa(FragEventBug eveen){

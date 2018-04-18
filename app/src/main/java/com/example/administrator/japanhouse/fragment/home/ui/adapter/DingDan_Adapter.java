@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.example.administrator.japanhouse.R;
 
 import java.util.ArrayList;
@@ -28,9 +27,7 @@ public class DingDan_Adapter extends RecyclerView.Adapter<DingDan_Adapter.ViewHo
         for (int i=0;i<5;i++){
             list.add("");
         }
-
     }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.dingdan_adapter, parent, false);
@@ -52,7 +49,6 @@ public class DingDan_Adapter extends RecyclerView.Adapter<DingDan_Adapter.ViewHo
 
         public ImageView imag;
         public View view;
-
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;

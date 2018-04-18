@@ -78,7 +78,7 @@ public class Sell_house_Fragment extends BaseFragment {
             SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity()); // 各种文字和图标属性设置。
             deleteItem.setWeight(100);
             deleteItem.setHeight(380);
-            deleteItem.setText("   删除   ");
+            deleteItem.setText(getString(R.string.shanchu));
             deleteItem.setTextSize(14);
             deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
             deleteItem.setTextColor(Color.WHITE);

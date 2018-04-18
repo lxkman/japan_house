@@ -29,7 +29,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
     RecyclerView recyclerMsg;
     @BindView(R.id.activity_zui_jin)
     LinearLayout activityZuiJin;
-
+    List<String> list= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         ButterKnife.bind(this);
         backImg.setOnClickListener(this);
         recyclerMsg.setLayoutManager(new LinearLayoutManager(this));
-        List<String> list=new ArrayList<>();
+
         for (int i=0;i<10;i++){
             list.add("");
         }
@@ -61,13 +61,14 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(final BaseViewHolder helper, String item) {
             helper.getView(R.id.content).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(MineMsgActivity.this,MsgDetailActivity.class));
                 }
             });
+
         }
     }
 }

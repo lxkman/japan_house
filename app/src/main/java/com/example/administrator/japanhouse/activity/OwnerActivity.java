@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.OwnerAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
+
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -26,7 +28,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/4/16.
  */
 
-public class OwnerActivity extends BaseActivity {
+public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickItemListener{
 
     @BindView(R.id.act_owner_back)
     ImageView back;
@@ -48,7 +50,11 @@ public class OwnerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner);
         ButterKnife.bind(this);
-
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerview.setLayoutManager(manager);
+        ownerAdapter = new OwnerAdapter(this);
+        ownerAdapter.setOnClickItemListener(this);
+        recyclerview.setAdapter(ownerAdapter);
     }
 
     @OnClick({R.id.act_owner_back, R.id.act_owner_message, R.id.act_owner_rental, R.id.act_owner_prices, R.id.act_owner_wikipedia})
@@ -60,7 +66,6 @@ public class OwnerActivity extends BaseActivity {
 
             case R.id.act_owner_message:
                 //跳转到微聊
-
                 break;
 
             case R.id.act_owner_rental:
@@ -81,5 +86,10 @@ public class OwnerActivity extends BaseActivity {
     public static void invoke(Context context){
         Intent intent = new Intent(context, OwnerActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick() {
+        OwnerDetailsActivity.invoke(this, 1);
     }
 }

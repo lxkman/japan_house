@@ -141,4 +141,26 @@
     <string name="dialog_checkRoom_name">请输入您的姓名</string>
     <string name="dialog_checkroom_confirm">报名</string>
     <string name="item_free_apartment_sale">待售</string>
+    <string name="see_more_fy">房源信息</string>
+    <string name="see_more_fymc">房源名称</string>
+    <string name="see_more_xqmc">小区名称：</string>
+    <string name="see_more_cx">朝向：</string>
+    <string name="see_more_jznf">建筑年份：</string>
+    <string name="see_more_glf">管理费：</string>
+    <string name="see_more_jzgz">建筑构造：</string>
+    <string name="see_more_df">电费：</string>
+    <string name="see_more_sf">水费：</string>
+    <string name="see_more_lc">楼层：</string>
+    <string name="see_more_ys">洋室：</string>
+    <string name="see_more_hs">和室：</string>
+    <string name="see_more_my">沐浴一体：</string>
+    <string name="see_more_glhs">管理会社：</string>
+    <string name="see_more_jtwz">具体位置：</string>
+    <string name="see_more_sb">设备：</string>
+    <string name="see_more_ws">瓦斯：</string>
+    <string name="see_more_zxcz">装修材质：</string>
+    <string name="see_more_czjl">车站距离：</string>
+    <string name="see_more_cwfj">窗外风景：</string>
+    <string name="see_more_wg">外观：</string>
+    <string name="see_more_ng">内观：</string>
 </resources>

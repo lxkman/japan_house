@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/item_owner_lt"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EDEDED"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        />
 
     <TextView
         android:id="@+id/item_owner_title"
@@ -14,6 +24,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:ellipsize="end"
+        android:text="动态标题内容，标题，标题"
         />
 
     <TextView
@@ -28,5 +39,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="15dp"
         android:ellipsize="end"
+        android:text="面对美好的实物我们总是习惯观望，但好的产品不会一直为你等待. 绝代风华举世无双独一无二千古难求。立即恢复而发挥滚房源回复大场面大小风景回顾回姐..."
         />
 </LinearLayout>

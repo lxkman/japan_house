@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F5F5F5"
+        />
     
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,6 +39,18 @@
             android:drawableLeft="@drawable/free_apartment_num"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
+            android:text="283人已报名"
+            />
+
+        <TextView
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/item_free_apartment_rent"
+            android:text="@string/item_free_apartment_sale"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
             />
     </RelativeLayout>
 
@@ -46,6 +65,7 @@
         android:layout_marginTop="12dp"
         android:maxLines="1"
         android:ellipsize="end"
+        android:text="活动标题内容，标题，标题"
         />
 
     <RelativeLayout
@@ -64,6 +84,7 @@
             android:textSize="14sp"
             android:drawableLeft="@drawable/free_apartment_time"
             android:drawablePadding="10dp"
+            android:text="剩余11天10小时20分"
             />
 
         <TextView

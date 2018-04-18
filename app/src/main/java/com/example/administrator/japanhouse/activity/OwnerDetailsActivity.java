@@ -15,19 +15,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- *
- *  百科详情
+ * 百科详情
  * Created by   admin on 2018/4/17.
  */
 
 public class OwnerDetailsActivity extends BaseActivity {
 
-    @BindView(R.id.act_owner_details_title)
-    TextView tvTitle;
-    @BindView(R.id.act_owner_details_time)
-    TextView tvTime;
-    @BindView(R.id.act_owner_details_msg)
-    TextView tvMsg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,17 +28,29 @@ public class OwnerDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_owner_details);
         ButterKnife.bind(this);
 
+        final int state = getIntent().getIntExtra("state", 0);
+
         findViewById(R.id.act_owner_details_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2018/4/17 跳转操作 看UE图 执行逻辑
+
+                if (state != 0) {
+                    OwnerWikipediaActivity.invoke(OwnerDetailsActivity.this);
+                }
+
                 finish();
             }
         });
     }
 
-    public static void invoke(Context context){
+    public static void invoke(Context context) {
         Intent intent = new Intent(context, OwnerDetailsActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void invoke(Context context, int state) {
+        Intent intent = new Intent(context, OwnerDetailsActivity.class);
+        intent.putExtra("state", state);
         context.startActivity(intent);
     }
 }

@@ -640,13 +640,38 @@
                     android:paddingLeft="15dp"
                     />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/act_rental_videoRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/act_rental_relativelt"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
+                    android:visibility="gone"
+                    >
+
+                    <ImageView
+                        android:id="@+id/act_rental_videoImg"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/start_video"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/act_rental_addVideo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/add_pic"
                     />
             </LinearLayout>
 

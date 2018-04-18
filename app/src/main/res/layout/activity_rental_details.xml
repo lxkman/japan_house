@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/act_rental_details_back"
-            android:padding="15dp"
-            android:src="@drawable/back"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            />
+            android:padding="15dp"
+            android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/act_rental_details_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"
             android:text="@string/activity_owner_rental"
-            />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -35,377 +33,349 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginTop="10dp"
             android:background="@color/white"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_rentalState"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_rentalState"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_rentalState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    />
+                    android:text="审核中"
+                    android:textColor="@color/green"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_refuseReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_refuseReason"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_refuseReason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_lessorName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_lessorName"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_lessorName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_lessorPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_lessorPhone"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_lessorPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_location"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_distance"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_floor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_floor"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_floor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_area"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_pattern"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_pattern"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_pattern"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_bathroom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_bathroomTogether"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_bathroom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_toward"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_toward"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_toward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_equipment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_equipment"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_details_equipment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="#2A2A2A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_roomPic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_roomPic"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
                 <GridView
                     android:id="@+id/act_rental_details_roomPic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:numColumns="3"
-                    android:verticalSpacing="8dp"
-                    android:horizontalSpacing="8dp"
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="7dp"
-                    />
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="8dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/act_rental_details_liner_roomVideo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:paddingBottom="24dp"
-                >
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:textSize="14sp"
                     android:text="@string/activity_rental_roomVideo"
-                    />
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
 
-                <cn.jzvd.JZVideoPlayerStandard
-                    android:background="#fff"
-                    android:id="@+id/act_rental_details_videoPlayer"
-                    android:layout_width="110dp"
-                    android:layout_height="75dp"
-                    android:layout_marginTop="10dp"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    />
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/act_rental_details_img"
+                        android:layout_width="110dp"
+                        android:layout_height="75dp"
+                         />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/start_video"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

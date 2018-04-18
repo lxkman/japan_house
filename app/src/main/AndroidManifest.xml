@@ -189,6 +189,7 @@
         <activity android:name=".fragment.mine.Calculator_DetilsActivity" />
         <activity android:name=".fragment.mine.FeedbackActivity" />
         <activity android:name=".fragment.mine.DingDan_DetilsActivity"></activity>
+        <activity android:name=".activity.FullScreenActivity"/>
     </application>
 
 </manifest>

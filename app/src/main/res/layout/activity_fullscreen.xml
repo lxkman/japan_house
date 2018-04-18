@@ -3,10 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/item_rental_details_picImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+    <cn.jzvd.JZVideoPlayerStandard
+        android:background="#ffffff"
+        android:id="@+id/act_rental_details_videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
 </LinearLayout>

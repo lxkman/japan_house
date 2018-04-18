@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
@@ -22,6 +23,12 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
         this.activity = activity;
     }
 
+    private onItemClickListener clickListener;
+
+    public void setOnItemClickListener(onItemClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(activity).inflate(R.layout.item_owner_wikipedia, null);
@@ -31,13 +38,20 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof OwnerWikipediaViewHolder) {
+            OwnerWikipediaViewHolder holder = (OwnerWikipediaViewHolder) viewHolder;
 
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onItemClick();
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 5;
     }
 
     class OwnerWikipediaViewHolder extends RecyclerView.ViewHolder {
@@ -45,6 +59,7 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
         TextView tvTitle;
         TextView tvTime;
         TextView tvNum;
+        LinearLayout layout;
 
         public OwnerWikipediaViewHolder(View itemView) {
             super(itemView);
@@ -52,6 +67,11 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
             tvTitle = (TextView) itemView.findViewById(R.id.item_owner_wikipedia_title);
             tvTime = (TextView) itemView.findViewById(R.id.item_owner_wikipedia_time);
             tvNum = (TextView) itemView.findViewById(R.id.item_owner_wikipedia_num);
+            layout = (LinearLayout) itemView.findViewById(R.id.item_owner_wikipedia_lt);
         }
+    }
+
+    public interface onItemClickListener{
+        void onItemClick();
     }
 }

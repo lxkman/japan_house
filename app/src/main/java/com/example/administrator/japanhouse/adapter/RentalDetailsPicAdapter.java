@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
@@ -51,6 +52,11 @@ public class RentalDetailsPicAdapter extends BaseAdapter{
         } else {
             vh = (PicViewHolder) convertView.getTag();
         }
+
+        LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) vh.img.getLayoutParams();
+        linearParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        linearParams.height = linearParams.width * 22 / 15;
+        vh.img.setLayoutParams(linearParams);
 
         Glide.with(activity)
                 .load(list.get(position))

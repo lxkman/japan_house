@@ -2,11 +2,15 @@ package com.example.administrator.japanhouse.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,12 +19,14 @@ import com.example.administrator.japanhouse.adapter.RentalDetailsPicAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.jzvd.JZVideoPlayerStandard;
 
 /**
- *  出租 / 出售 详情
+ * 出租 / 出售 详情
  * Created by   admin on 2018/4/17.
  */
 
@@ -80,12 +86,14 @@ public class RentalDetailsActivity extends BaseActivity {
     GridView roomPic;
     @BindView(R.id.act_rental_details_liner_roomPic)
     LinearLayout ltRoomPic;
-    @BindView(R.id.act_rental_details_videoPlayer)
-    JZVideoPlayerStandard roomVideo;
+    @BindView(R.id.act_rental_details_img)
+    ImageView roomVideo;
     @BindView(R.id.act_rental_details_liner_roomVideo)
     LinearLayout ltRoomVideo;
 
     private RentalDetailsPicAdapter picAdapter;
+
+    private String path;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,12 +105,20 @@ public class RentalDetailsActivity extends BaseActivity {
 
         tvTitle.setText(detailsBean.getTitle());
 
+
         init(detailsBean);
 
         findViewById(R.id.act_rental_details_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        roomVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FullScreenActivity.invoke(RentalDetailsActivity.this, path);
             }
         });
     }
@@ -193,11 +209,44 @@ public class RentalDetailsActivity extends BaseActivity {
         }
 
         if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
-            roomVideo.setUp(detailsBean.getVideoList(), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "");
-            roomVideo.thumbImageView.setImageResource(R.drawable.bgxq);
+            path = detailsBean.getVideoList();
+            roomVideo.setImageBitmap(getLocalVideoBitmap(path));
         } else {
             ltRoomVideo.setVisibility(View.GONE);
         }
+    }
+
+    public static Bitmap getNetVideoBitmap(String videoUrl) {
+        Bitmap bitmap = null;
+
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            //根据url获取缩略图
+            retriever.setDataSource(videoUrl, new HashMap());
+            //获得第一帧图片
+            bitmap = retriever.getFrameAtTime();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } finally {
+            retriever.release();
+        }
+        return bitmap;
+    }
+
+    public static Bitmap getLocalVideoBitmap(String localPath) {
+        Bitmap bitmap = null;
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            //根据文件路径获取缩略图
+            retriever.setDataSource(localPath);
+            //获得第一帧图片
+            bitmap = retriever.getFrameAtTime();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } finally {
+            retriever.release();
+        }
+        return bitmap;
     }
 
     public static void invoke(Context context, RentalDetailsBean detailsBean) {

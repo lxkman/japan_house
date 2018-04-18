@@ -22,7 +22,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="房源信息"
+            android:text="@string/see_more_fy"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -53,7 +53,7 @@
         <TextView
             android:paddingLeft="6dip"
             android:gravity="center_vertical"
-            android:text="房源名称"
+            android:text="@string/see_more_fymc"
             android:textSize="16sp"
             android:textColor="#444"
             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="小区名称："
+                    android:text="@string/see_more_xqmc"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -105,7 +105,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="朝向："
+                    android:text="@string/see_more_cx"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -130,7 +130,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="建筑年份："
+                    android:text="@string/see_more_jznf"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -150,7 +150,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="管理费："
+                    android:text="@string/see_more_glf"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -175,7 +175,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="建筑构造："
+                    android:text="@string/see_more_jzgz"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -195,7 +195,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="电费："
+                    android:text="@string/see_more_df"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -220,7 +220,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="水费："
+                    android:text="@string/see_more_sf"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -240,7 +240,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="楼层："
+                    android:text="@string/see_more_lc"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -265,7 +265,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="洋室："
+                    android:text="@string/see_more_ys"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -285,7 +285,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="和室："
+                    android:text="@string/see_more_hs"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -311,7 +311,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="沐浴一体："
+                    android:text="@string/see_more_my"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -343,7 +343,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="管理会社："
+                    android:text="@string/see_more_glhs"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -362,7 +362,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="具体位置："
+                    android:text="@string/see_more_jtwz"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -381,7 +381,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="设备："
+                    android:text="@string/see_more_sb"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -400,7 +400,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="瓦斯："
+                    android:text="@string/see_more_ws"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -419,7 +419,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="装修材质："
+                    android:text="@string/see_more_zxcz"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -439,7 +439,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="车站距离："
+                    android:text="@string/see_more_czjl"
                     android:layout_width="70dip"
                     android:layout_height="match_parent"
                     android:id="@+id/textView" />
@@ -460,7 +460,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="窗外风景："
+                    android:text="@string/see_more_cwfj"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -479,7 +479,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="外观："
+                    android:text="@string/see_more_wg"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView
@@ -498,7 +498,7 @@
                 <TextView
                     android:textSize="14sp"
                     android:gravity="center_vertical"
-                    android:text="内观："
+                    android:text="@string/see_more_ng"
                     android:layout_width="70dip"
                     android:layout_height="match_parent" />
                 <TextView

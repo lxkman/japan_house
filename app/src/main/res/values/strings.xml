@@ -123,4 +123,9 @@
     <string name="activity_rental_roomVideo">房源视频:</string>
     <string name="rent_details">出租详情</string>
     <string name="sell_details">出售详情</string>
+    <string name="dialog_checkRoom_apply">报名活动</string>
+    <string name="dialog_checkRoom_action">活动名称展示</string>
+    <string name="dialog_checkRoom_name">请输入您的姓名</string>
+    <string name="dialog_checkroom_confirm">报名</string>
+    <string name="item_free_apartment_sale">待售</string>
 </resources>

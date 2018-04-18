@@ -3,7 +3,6 @@ package com.example.administrator.japanhouse.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.DropBoxManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +14,7 @@ import android.widget.LinearLayout;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.FreeApartmentAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.view.BaseDialog;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,6 +87,12 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 .isOnTouchCanceled(true)
                 //设置监听事件
                 .builder();
+        dialog.getView(R.id.iv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
 
     }

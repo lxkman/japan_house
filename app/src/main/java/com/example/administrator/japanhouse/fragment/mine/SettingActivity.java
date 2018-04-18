@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
 import butterknife.BindView;
@@ -74,6 +75,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                removeAllActivitys();
+                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
             }
         });
         btndismiss.setOnClickListener(new View.OnClickListener() {

@@ -89,7 +89,7 @@
             android:layout_marginTop="85dip"
             android:layout_marginRight="15dip"
             android:layout_marginLeft="15dip"
-            android:background="@drawable/mine_bg"
+            android:background="@drawable/manager_bga"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="84dip"

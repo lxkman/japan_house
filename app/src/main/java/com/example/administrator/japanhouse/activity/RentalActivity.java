@@ -14,22 +14,17 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.PicRentalAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
-import com.example.administrator.japanhouse.view.BaseDialog;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -38,7 +33,6 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,6 +205,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
                     RentalDetailsActivity.invoke(this, bean);
                 }
+
                 break;
         }
     }

@@ -117,7 +117,7 @@
                 <TextView
                     android:paddingLeft="15dip"
                     android:gravity="center_vertical"
-                    android:text="价格："
+                    android:text="@string/gaoerfu_price"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
@@ -137,7 +137,7 @@
                     android:gravity="center_vertical"
                     android:textSize="15sp"
                     android:textColor="#888"
-                    android:text="更多信息"
+                    android:text="@string/see_more"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <ImageView
@@ -155,7 +155,7 @@
                 <TextView
                     android:paddingLeft="15dip"
                     android:gravity="center_vertical"
-                    android:text="面积："
+                    android:text="@string/gaoerfu_mianji"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
@@ -204,7 +204,7 @@
                 android:background="#fff"
                 android:paddingLeft="15dip"
                 android:gravity="center_vertical"
-                android:text="户型图"
+                android:text="@string/huxingtu"
                 android:layout_width="match_parent"
                 android:layout_height="45dip" />
 
@@ -238,7 +238,7 @@
                     android:layout_width="0dip"
                     android:layout_height="2dip"></View>
                 <TextView
-                    android:text="猜你喜欢"
+                    android:text="@string/cainixihuan"
                     android:gravity="center"
                     android:textSize="16sp"
                     android:textColor="#333"
@@ -260,7 +260,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:paddingBottom="50dip"
                 android:background="#fff"
                 android:id="@+id/love_Recycler"
                 android:layout_width="match_parent"
@@ -310,7 +309,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -325,7 +324,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

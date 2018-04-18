@@ -118,7 +118,7 @@
             <TextView
                 android:paddingLeft="15dip"
                 android:gravity="center_vertical"
-                android:text="价格："
+                android:text="@string/new_house_price"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -138,7 +138,7 @@
                 android:gravity="center_vertical"
                 android:textSize="15sp"
                 android:textColor="#888"
-                android:text="更多信息"
+                android:text="@string/see_more"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <ImageView
@@ -156,7 +156,7 @@
             <TextView
                 android:paddingLeft="15dip"
                 android:gravity="center_vertical"
-                android:text="面积："
+                android:text="@string/new_house_mianji"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -205,7 +205,7 @@
             android:background="#fff"
             android:paddingLeft="15dip"
             android:gravity="center_vertical"
-            android:text="户型图"
+            android:text="@string/huxingtu"
             android:layout_width="match_parent"
             android:layout_height="45dip" />
 
@@ -256,7 +256,7 @@
                     android:gravity="center"
                     android:textSize="13sp"
                     android:textColor="#333"
-                    android:text="最新开盘·户型以及优惠信息，免费致电售楼处"
+                    android:text="@string/new_house_show"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -272,7 +272,7 @@
                 android:layout_marginRight="10dip"
                 android:gravity="center"
                 android:textColor="#ffa726"
-                android:text="变价通知"
+                android:text="@string/new_house_bianjia"
                 android:background="@drawable/border_shihuangse"
                 android:layout_weight="1"
                 android:layout_width="0dip"
@@ -281,7 +281,7 @@
                 android:layout_marginLeft="10dip"
                 android:gravity="center"
                 android:textColor="#ffa726"
-                android:text="开盘通知"
+                android:text="@string/new_house_kaipan"
                 android:background="#ffd09c"
                 android:layout_weight="1"
                 android:layout_width="0dip"
@@ -292,7 +292,7 @@
             android:gravity="center_vertical"
             android:textSize="16sp"
             android:textColor="#333"
-            android:text="周边设施"
+            android:text="@string/new_house_zhoubian"
             android:layout_width="match_parent"
             android:layout_height="50dip" />
         <LinearLayout
@@ -319,7 +319,7 @@
                     android:textColor="#666"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="商场"
+                    android:text="@string/new_house_shop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -337,7 +337,7 @@
                     android:textColor="#666"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="学校"
+                    android:text="@string/new_house_school"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -355,7 +355,7 @@
                     android:textColor="#666"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="幼儿园"
+                    android:text="@string/new_house_youeryuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -373,7 +373,7 @@
                     android:textColor="#666"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:text="医院"
+                    android:text="@string/new_house_yiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -402,7 +402,7 @@
                 android:layout_width="0dip"
                 android:layout_height="2dip"></View>
             <TextView
-                android:text="猜你喜欢"
+                android:text="@string/cainixihuan"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="#333"
@@ -473,7 +473,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -488,7 +488,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

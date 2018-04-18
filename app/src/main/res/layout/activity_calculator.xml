@@ -22,7 +22,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="房贷计算器"
+            android:text="@string/calc_fangdai"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -48,7 +48,7 @@
               android:textColor="@color/black"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="总价"
+              android:text="@string/calc_zongjia"
               />
           <TextView
               android:id="@+id/danjia"
@@ -57,7 +57,7 @@
               android:textColor="@color/black"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="万"
+              android:text="@string/calc_wan"
               />
           <EditText
               android:textSize="16sp"
@@ -82,7 +82,7 @@
                    android:layout_below="@+id/xian"
                    android:layout_marginTop="30dp"
                    android:layout_marginBottom="20dp"
-                   android:text="首付选择"
+                   android:text="@string/cala_shoufu"
                    android:textColor="@color/black"
                    android:textSize="16sp"
                    />
@@ -113,7 +113,7 @@
               android:id="@+id/wan"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="万"
+              android:text="@string/calc_wan"
               android:layout_toRightOf="@+id/xian3"
               android:layout_alignBottom="@+id/shoufu"
               android:textSize="16sp"
@@ -171,7 +171,7 @@
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="商业贷款"
+        android:text="@string/calc_shangye"
         />
     <TextView
 
@@ -181,7 +181,7 @@
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="万"
+        android:text="@string/calc_wan"
         />
     <EditText
         android:id="@+id/ed_wan"
@@ -252,7 +252,7 @@
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="贷款利率"
+            android:text="@string/calc_daikuan"
             />
         <TextView
 
@@ -262,7 +262,7 @@
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="万"
+            android:text="@string/calc_wan"
             />
         <EditText
             android:id="@+id/ed_wan1"
@@ -314,7 +314,7 @@
          android:layout_marginTop="30dp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="开始计算"
+         android:text="@string/calc_kaishi"
          android:background="@drawable/shape_jisuan"
          android:textColor="@color/white"
          android:textSize="16sp"

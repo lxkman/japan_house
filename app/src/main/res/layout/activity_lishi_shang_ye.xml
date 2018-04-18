@@ -129,7 +129,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="价格："
+                            android:text="@string/gaoerfu_price"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -149,7 +149,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="面积："
+                            android:text="@string/gaoerfu_mianji"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -174,7 +174,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="是否街角："
+                            android:text="@string/tudi_shifoujiejiao"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -194,7 +194,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="能否高建筑："
+                            android:text="@string/tudi_nengfou"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -226,7 +226,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="周围采光："
+                            android:text="@string/tudi_zhouwei"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -242,12 +242,15 @@
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
                         android:layout_height="35dip">
+
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="周围风景："
+                            android:text="@string/tudi_fengjing"
                             android:layout_width="70dip"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:id="@+id/textView4" />
+
                         <TextView
                             android:textColor="#000"
                             android:textSize="14sp"
@@ -264,7 +267,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="车站距离："
+                            android:text="@string/tudi_chezhanjuli"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -283,7 +286,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="临街距离："
+                            android:text="@string/tudi_linjie"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -302,7 +305,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="具体位置："
+                            android:text="@string/jutiweizhi"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -361,7 +364,7 @@
                     android:layout_width="0dip"
                     android:layout_height="2dip"></View>
                 <TextView
-                    android:text="猜你喜欢"
+                    android:text="@string/cainixihuan"
                     android:gravity="center"
                     android:textSize="16sp"
                     android:textColor="#333"
@@ -383,7 +386,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:paddingBottom="50dip"
                 android:background="#fff"
                 android:id="@+id/love_Recycler"
                 android:layout_width="match_parent"
@@ -434,7 +436,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -449,7 +451,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

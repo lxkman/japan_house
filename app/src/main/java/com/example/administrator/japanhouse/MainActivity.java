@@ -20,13 +20,15 @@ import com.example.administrator.japanhouse.fragment.mine.MineFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.administrator.japanhouse.R.id.rb_chat;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.fl_content)
+    @BindView(R.id.frag_content)
     FrameLayout flContent;
     @BindView(R.id.rb_home)
     RadioButton rbHome;
-    @BindView(R.id.rb_chat)
+    @BindView(rb_chat)
     RadioButton rbChat;
     @BindView(R.id.rb_comment)
     RadioButton rbComment;
@@ -43,6 +45,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MineFragment mineFragment;
     private long preTime;
 
+    private FragmentManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +62,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void addFragments(BaseFragment f) {
         // 第一步：得到fragment管理类
-        FragmentManager manager = getSupportFragmentManager();
+        manager = getSupportFragmentManager();
         // 第二步：开启一个事务
         FragmentTransaction transaction = manager.beginTransaction();
 
@@ -69,12 +73,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //isAdded:判断当前的fragment对象是否被加载过
         if (!f.isAdded()) {
             // 第三步：调用添加fragment的方法 第一个参数：容器的id 第二个参数：要放置的fragment的一个实例对象
-            transaction.add(R.id.fl_content, f);
+            transaction.add(R.id.frag_content, f);
         }
+        transaction.commit();
         //显示当前的fragment
         transaction.show(f);
         // 第四步：提交
-        transaction.commit();
+
         baseFragment = f;
     }
 
@@ -96,7 +101,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 addFragments(homeFragment);
                 break;
-            case R.id.rb_chat:
+            case rb_chat:
                 if (chatFragment == null) {
                     chatFragment = new ChatFragment();
                 }

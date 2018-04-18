@@ -98,7 +98,7 @@
                     android:gravity="center_vertical"
                     android:textSize="15sp"
                     android:textColor="#333"
-                    android:text="泰和·金府大厦"
+                    android:text="@string/gaoerfu_name"
                     android:layout_weight="1"
                     android:layout_width="0dip"
                     android:layout_height="match_parent" />
@@ -123,7 +123,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="价格："
+                            android:text="@string/gaoerfu_price"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -143,7 +143,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="面积："
+                            android:text="@string/gaoerfu_mianji"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -168,7 +168,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="水源充足："
+                            android:text="@string/water_more"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -200,7 +200,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="地形："
+                            android:text="@string/dixing"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -219,7 +219,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="土壤："
+                            android:text="@string/turang"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -238,7 +238,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="环境："
+                            android:text="@string/huanjing"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -257,7 +257,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="交通："
+                            android:text="@string/jiaotong"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -276,7 +276,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="具体位置："
+                            android:text="@string/jutiweizhi"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -335,7 +335,7 @@
                     android:layout_width="0dip"
                     android:layout_height="2dip"></View>
                 <TextView
-                    android:text="猜你喜欢"
+                    android:text="@string/cainixihuan"
                     android:gravity="center"
                     android:textSize="16sp"
                     android:textColor="#333"
@@ -407,7 +407,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -422,7 +422,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

@@ -21,7 +21,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="联系人"
+            android:text="@string/people"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="#fff"
-            android:text="添加"
+            android:text="@string/people_add"
             android:layout_width="50dip"
             android:layout_height="50dip" />
     </LinearLayout>

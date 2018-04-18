@@ -21,7 +21,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="卖房管理"
+            android:text="@string/sell_house"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -55,7 +55,7 @@
                 android:padding="3dp"
                 android:textStyle="bold"
                 android:layout_margin="5dp"
-                android:text="出售"
+                android:text="@string/sell_house_mine"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -91,7 +91,7 @@
                 android:padding="3dp"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
-                android:text="出租"
+                android:text="@string/zu_house_mine"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

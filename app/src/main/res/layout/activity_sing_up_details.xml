@@ -30,7 +30,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="报名详情"
+            android:text="@string/singup_details"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"></View>
             <Button
                 android:textColor="#fff"
-                android:text="立即报名"
+                android:text="@string/now_singup"
                 android:layout_marginRight="15dip"
                 android:background="@drawable/round_chengse"
                 android:layout_width="87dip"
@@ -174,7 +174,7 @@
         <TextView
             android:textSize="15sp"
             android:gravity="center_vertical"
-            android:text="活动详情:"
+            android:text="@string/singup_huodongxiangqing"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
@@ -195,7 +195,7 @@
         <TextView
             android:textSize="15sp"
             android:gravity="center_vertical"
-            android:text="适用范围:"
+            android:text="@string/singup_fanwei"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
@@ -246,7 +246,7 @@
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#333"
-                android:text="最新开盘·户型以及优惠信息，免费致电售楼处"
+                android:text="@string/new_house_show"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -262,7 +262,7 @@
             android:gravity="center_vertical"
             android:textColor="#333"
             android:textSize="16sp"
-            android:text="楼盘详情"
+            android:text="@string/singup_sell_details"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -282,7 +282,7 @@
         <TextView
             android:textSize="15sp"
             android:gravity="center_vertical"
-            android:text="住宅大小:"
+            android:text="@string/singup_daxiao"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
@@ -303,7 +303,7 @@
         <TextView
             android:textSize="15sp"
             android:gravity="center_vertical"
-            android:text="开盘日期:"
+            android:text="@string/singup_kaipan"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
@@ -324,7 +324,7 @@
                 <TextView
                     android:textSize="15sp"
                     android:gravity="center_vertical"
-                    android:text="地址:"
+                    android:text="@string/singup_address"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
@@ -381,7 +381,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -396,7 +396,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

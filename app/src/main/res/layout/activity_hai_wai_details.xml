@@ -119,7 +119,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="价格："
+                        android:text="@string/haiwai_price"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -139,7 +139,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="面积："
+                        android:text="@string/haiwai_mianji"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -164,7 +164,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="朝向："
+                        android:text="@string/haiwai_chaoxiang"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -184,7 +184,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="年代："
+                        android:text="@string/haiwai_niandai"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -209,7 +209,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="电梯："
+                        android:text="@string/haiwai_dianti"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -229,7 +229,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="装修："
+                        android:text="@string/haiwai_zhuangxiu"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -254,7 +254,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="楼型："
+                        android:text="@string/haiwai_louxing"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <TextView
@@ -286,7 +286,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="小区："
+                        android:text="@string/haiwai_xiaoqu"
                         android:layout_width="70dip"
                         android:layout_height="match_parent" />
                     <TextView
@@ -305,7 +305,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:text="具体位置："
+                        android:text="@string/haiwai_jutiweizhi"
                         android:layout_width="70dip"
                         android:layout_height="match_parent" />
                     <TextView
@@ -351,7 +351,7 @@
                 android:background="#fff"
                 android:paddingLeft="15dip"
                 android:gravity="center_vertical"
-                android:text="户型图"
+                android:text="@string/huxingtu"
                 android:layout_width="match_parent"
                 android:layout_height="45dip" />
 
@@ -456,7 +456,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -471,7 +471,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

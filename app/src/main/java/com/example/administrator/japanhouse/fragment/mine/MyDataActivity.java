@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -69,7 +70,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.ll_name)
     LinearLayout llName;
     private List<String> cameraList;
-    private List<LocalMedia> selectList = new ArrayList<>();
+    private List<LocalMedia> selectList;
     private String cutPath;
     private BaseSelectPopupWindow popWiw;// 昵称 编辑框
     private TimePickerView pvCustomLunar;
@@ -220,6 +221,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     // 图片选择结果回调
                     selectList = PictureSelector.obtainMultipleResult(data);
                     cutPath = selectList.get(0).getCutPath();
+                    Log.d("MyDataActivity", "selectList.get(0):" + selectList.get(0));
                     //                    cutPath = selectList.get(0).getPath();
                     //                    Glide.with(this).load(cutPath).into(faceIv);
                     File file = new File(cutPath);

@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="设置"
+            android:text="@string/setting"
             android:textColor="#fff"
             android:textSize="18sp"/>
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="50dip"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:text="保存"
+            android:text="@string/setting_save"
             android:textColor="#fff"
             android:textSize="16sp"/>
     </LinearLayout>
@@ -50,7 +50,7 @@
             android:clickable="false"
             android:gravity="center_vertical"
             android:paddingLeft="15dip"
-            android:text="简体中文"
+            android:text="@string/setting_china"
             android:textColor="#333"
             android:textSize="15sp"/>
         <ImageView
@@ -75,16 +75,7 @@
         android:layout_height="45dip"
         android:background="#fff"
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="false"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dip"
-            android:text="日文"
-            android:textColor="#333"
-            android:textSize="15sp"/>
+
         <ImageView
             android:id="@+id/img_check_riwen"
             android:layout_width="15dip"
@@ -95,5 +86,17 @@
             android:clickable="false"
             android:src="@drawable/check"
             android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dip"
+            android:text="@string/setting_japan"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:id="@+id/textView5" />
     </LinearLayout>
 </LinearLayout>

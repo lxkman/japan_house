@@ -25,7 +25,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:text="二手房"
+                android:text="@string/old_house"
                 />
             <RadioButton
                 android:id="@+id/rb_zufang"
@@ -35,7 +35,7 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:text="租房"
+                android:text="@string/zu_house"
                 />
             <RadioButton
                 android:id="@+id/rb_xinfang"
@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:text="新房"
+                android:text="@string/new_house"
                 />
             <RadioButton
                 android:id="@+id/rb_tudi"
@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:text="土地"
+                android:text="@string/tudi"
                 />
         </RadioGroup>
         <LinearLayout

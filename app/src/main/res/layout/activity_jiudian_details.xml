@@ -123,7 +123,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="价格："
+                            android:text="@string/jiudian_price"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -143,7 +143,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="面积："
+                            android:text="@string/jiudian_mianji"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -168,7 +168,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="回报率："
+                            android:text="@string/jiudian_huibaolv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -188,7 +188,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="水源充足："
+                            android:text="@string/jiudian_shuiyuan"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -213,7 +213,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="楼层："
+                            android:text="@string/jiudian_louceng"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -233,7 +233,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="建筑年份："
+                            android:text="@string/jiudian_nianfen"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -258,7 +258,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="建筑构造："
+                            android:text="@string/jiudian_gouzao"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -278,7 +278,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="土壤："
+                            android:text="@string/jiudian_turang"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -310,7 +310,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="设备："
+                            android:text="@string/jiudian_shebei"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -329,7 +329,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="内观："
+                            android:text="@string/jiudian_neiguan"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -348,7 +348,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="外观："
+                            android:text="@string/jiudian_waiguan"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -367,7 +367,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="车站距离："
+                            android:text="@string/jiudian_chezhanjuli"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -386,7 +386,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="景点交通："
+                            android:text="@string/jiudian_jiaotongjingdian"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -405,7 +405,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="商业街距离："
+                            android:text="@string/jiudian_shangyejie"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -424,7 +424,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="具体位置："
+                            android:text="@string/jiudian_jutiweizhi"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -483,7 +483,7 @@
                     android:layout_width="0dip"
                     android:layout_height="2dip"></View>
                 <TextView
-                    android:text="猜你喜欢"
+                    android:text="@string/cainixihuan"
                     android:gravity="center"
                     android:textSize="16sp"
                     android:textColor="#333"
@@ -505,7 +505,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:paddingBottom="50dip"
                 android:background="#fff"
                 android:id="@+id/love_Recycler"
                 android:layout_width="match_parent"
@@ -556,7 +555,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -571,7 +570,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

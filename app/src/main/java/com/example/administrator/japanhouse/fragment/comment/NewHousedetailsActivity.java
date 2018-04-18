@@ -103,6 +103,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                    public void onFinish() {
                        super.onFinish();
                    }
+
                });
     }
 

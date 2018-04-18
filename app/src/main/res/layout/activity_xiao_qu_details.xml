@@ -128,7 +128,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="参考均价："
+                            android:text="@string/xiaoqu_cankao"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -148,7 +148,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="停车位："
+                            android:text="@string/xiaoqu_stop_car"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -173,7 +173,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="建筑年代："
+                            android:text="@string/xiaoqu_niandai"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -193,7 +193,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="竣工时间："
+                            android:text="@string/xiaoqu_jungong"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -225,7 +225,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="开发企业："
+                            android:text="@string/xiaoqu_kaifa"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -244,7 +244,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="物业公司："
+                            android:text="@string/xiaoqu_wuye"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -263,7 +263,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="周边配套："
+                            android:text="@string/xiaoqu_zhoubian"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -282,7 +282,7 @@
                         <TextView
                             android:textSize="14sp"
                             android:gravity="center_vertical"
-                            android:text="具体位置："
+                            android:text="@string/jutiweizhi"
                             android:layout_width="70dip"
                             android:layout_height="match_parent" />
                         <TextView
@@ -341,7 +341,7 @@
                     android:layout_width="0dip"
                     android:layout_height="2dip"></View>
                 <TextView
-                    android:text="猜你喜欢"
+                    android:text="@string/cainixihuan"
                     android:gravity="center"
                     android:textSize="16sp"
                     android:textColor="#333"
@@ -363,7 +363,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:paddingBottom="50dip"
                 android:background="#fff"
                 android:id="@+id/love_Recycler"
                 android:layout_width="match_parent"
@@ -414,7 +413,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="微聊"
+                android:text="@string/weiliao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -429,7 +428,7 @@
                 android:textColor="#fff"
                 android:textSize="14dip"
                 android:paddingLeft="10dip"
-                android:text="电话"
+                android:text="@string/dianhua"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

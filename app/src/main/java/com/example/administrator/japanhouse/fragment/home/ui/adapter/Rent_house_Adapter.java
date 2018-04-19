@@ -41,7 +41,7 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
             @Override
             public void onClick(View view) {
                 //跳转
-                RentalDetailsActivity.invoke(context,new RentalDetailsBean(context.getString(R.string.rent_details),0,null,null,null,holder.weizhi.getText().toString(),holder.juli.getText().toString(),null,holder.mianji.getText().toString(),null,null,holder.chaoxiang.getText().toString(),null,null,null));
+                RentalDetailsActivity.invoke(context,new RentalDetailsBean(context.getString(R.string.rent_details),2,null,null,null,holder.weizhi.getText().toString(),holder.juli.getText().toString(),null,holder.mianji.getText().toString(),null,null,holder.chaoxiang.getText().toString(),null,null,null));
             }
         });
     }

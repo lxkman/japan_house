@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.example.administrator.japanhouse.R;
 
+import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
 /**
@@ -33,14 +34,33 @@ public class FullScreenActivity extends Activity {
 
         String path = getIntent().getStringExtra("path");
         videoPlayer = (JZVideoPlayerStandard) findViewById(R.id.act_rental_details_videoPlayer);
-        videoPlayer.setUp(path, JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "");
+        videoPlayer.setUp(path, JZVideoPlayerStandard.SCREEN_WINDOW_FULLSCREEN, " ");
         videoPlayer.fullscreenButton.setVisibility(View.INVISIBLE);
         videoPlayer.startButton.performClick();
+        videoPlayer.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public static void invoke(Context context, String path){
         Intent intent = new Intent(context, FullScreenActivity.class);
         intent.putExtra("path", path);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        videoPlayer.onStatePause();
+        JZVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        videoPlayer.onStatePause();
     }
 }

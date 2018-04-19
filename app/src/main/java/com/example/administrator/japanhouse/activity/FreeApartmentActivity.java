@@ -60,7 +60,8 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 break;
 
             case R.id.act_apartment_msg:
-                //跳转到微聊
+                setResult(2);
+                finish();
                 break;
         }
     }

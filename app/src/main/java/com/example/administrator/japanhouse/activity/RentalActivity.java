@@ -2,11 +2,15 @@ package com.example.administrator.japanhouse.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -15,6 +19,7 @@ import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -411,9 +416,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                             imgPathList.remove(9 + i);
                         }
                     }
-                    adapter = new PicRentalAdapter(this, imgPathList);
-                    adapter.setOnItemClickListener(this);
-                    picRecyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                     break;
 
                 case PictureConfig.REQUEST_CAMERA:

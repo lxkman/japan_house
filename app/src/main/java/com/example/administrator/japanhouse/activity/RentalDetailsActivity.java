@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

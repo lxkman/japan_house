@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -130,6 +131,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else {
             super.onBackPressed();//相当于finish()
             removeAllActivitys();//删除所有引用
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 2) {
+            rbChat.setChecked(true);
+            if (chatFragment == null) {
+                chatFragment = new ChatFragment();
+            }
+            addFragments(chatFragment);
         }
     }
 }

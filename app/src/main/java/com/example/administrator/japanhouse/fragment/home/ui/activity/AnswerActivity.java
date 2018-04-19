@@ -33,6 +33,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         ed_wen_content = (EditText) findViewById(R.id.ed_wen_content);
         tijiao = (Button) findViewById(R.id.tijiao);
         tijiao.setOnClickListener(this);
+        img_beak.setOnClickListener(this);
     }
 
     @Override

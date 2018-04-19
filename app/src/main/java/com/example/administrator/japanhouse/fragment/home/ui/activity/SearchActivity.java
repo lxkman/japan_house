@@ -12,12 +12,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.utils.flow;
+import com.example.administrator.japanhouse.utils.TUtils;
+import com.example.administrator.japanhouse.view.FluidLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends BaseActivity implements View.OnClickListener {
     private String mNames[] = {
             "房价", "群租房", "买房",
             "卖房", "北京房", "南京房"
@@ -29,6 +32,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView shanchu;
     private ListView lv;
     List<String>list=new ArrayList<>();
+    private FluidLayout fff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +42,28 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initView() {
-        initChildViews();
+
+        fff = (FluidLayout) findViewById(R.id.search_recycler);
+        fff.removeAllViews();
+        for (int i = 0; i < mNames.length; i++) {
+            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
+            tv.setText(mNames[i]);
+            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            fff.addView(tv, params);
+            final int finalI = i;
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TUtils.showShort(mContext, "点击了---" + mNames[finalI]);
+                }
+            });
+        }
+
+        //initChildViews();
         sou = (EditText) findViewById(R.id.sou);
         beak = (TextView) findViewById(R.id.beak);
         lishi = (TextView) findViewById(R.id.lishi);
@@ -62,27 +88,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
               lv.setAdapter(new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1,list));
               break;
       }
-    }
-
-   /*
-   * 流式布局
-   * */
-    private void initChildViews() {
-        flowLayout = (flow) findViewById(R.id.ffff);
-        ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.leftMargin = 20;
-        lp.rightMargin = 20;
-        lp.bottomMargin = 10;
-        for(int i = 0; i < mNames.length; i ++){
-            TextView view = new TextView(this);
-            view.setText(mNames[i]);
-            view.setTextColor(Color.BLACK);
-            view.setBackgroundDrawable(getResources().getDrawable(R.drawable.textview_bg));
-
-            flowLayout.addView(view,lp);
-        }
-
     }
 
 

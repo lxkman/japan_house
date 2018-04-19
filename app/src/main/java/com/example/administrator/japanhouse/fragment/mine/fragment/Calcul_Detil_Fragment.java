@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * Created by Mr赵 on 2018/4/17.
  */
-public class Calcul_Detil_Fragment extends BaseFragment {
+public class Calcul_Detil_Fragment extends BaseFragment implements View.OnClickListener {
     private Button js_cxjs;
     private TextView js_sf;
     private TextView js_dkze;
@@ -53,6 +53,10 @@ public class Calcul_Detil_Fragment extends BaseFragment {
         js_sf.setText(shoufu+"");
         js_dkze.setText(daikuan+"");
         js_lxzj.setText(lixi+"");
+        js_cxjs.setOnClickListener(this);
+
+
+
     }
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void fangfa(FragEventBug eveen){
@@ -68,5 +72,15 @@ public class Calcul_Detil_Fragment extends BaseFragment {
         //注销
         EventBus.getDefault().unregister(this);
         EventBus.getDefault().removeAllStickyEvents();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.js_cxjs:
+                getActivity().finish();
+                break;
+        }
+
     }
 }

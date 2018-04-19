@@ -488,7 +488,6 @@ public class HomeFragment extends BaseFragment {
     @OnClick({R.id.location_tv, R.id.search_tv, R.id.map_tv, R.id.jrdk_tv, R.id.gfbk_tv,
             R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011,R.id.tjxf_more_tv, R.id.tjesf_more_tv,
             R.id.tjyxjjr_more_tv, R.id.tjzf_more_tv, R.id.tjtd_more_tv})
-            R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.location_tv:

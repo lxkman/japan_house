@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
+public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.title_back_iv)
     ImageView titleBackIv;
@@ -38,14 +37,14 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
-    private String[] itemName = {"澳大利亚", "美国", "加拿大", "英国", "泰国", "新西兰"};
-    private int[] itemPic = {R.drawable.aodaliya_iv, R.drawable.meiguo_iv, R.drawable.jianada_iv,
-            R.drawable.yingguo_iv, R.drawable.taiguo_iv, R.drawable.xinxilan_iv};
+    private String[] itemName = {"北京", "上海", "广州", "深圳", "杭州", "重庆","其他"};
+    private int[] itemPic = {R.drawable.beijing_iv, R.drawable.shanghai_iv, R.drawable.guangzhou_iv,
+            R.drawable.shenzhen_iv, R.drawable.hangzhou_iv, R.drawable.chongqing_iv,R.drawable.qita_iv};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hai_wai);
+        setContentView(R.layout.activity_chinese_fangyuan);
         ButterKnife.bind(this);
         initview();
     }
@@ -57,15 +56,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
         }
         fenleiRecycler.setNestedScrollingEnabled(false);
         fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
-        FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList);
-        fenleiRecycler.setAdapter(fenleiAdapter);
-        fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext,HaiwaiListActivity.class));
-            }
-        });
-
+        fenleiRecycler.setAdapter(new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList));
 
         List<String> likeList = new ArrayList<>();
         likeList.add("");

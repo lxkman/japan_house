@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,6 +17,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.utils.TUtils;
+import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,6 +41,9 @@ public class HomeSearchActivity extends BaseActivity {
     FluidLayout fluidlayout;
     @BindView(R.id.history_recycler)
     RecyclerView historyRecycler;
+    @BindView(R.id.view_rl)
+    RelativeLayout view_rl;
+    private CommonPopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +93,83 @@ public class HomeSearchActivity extends BaseActivity {
         historyRecycler.setAdapter(historyAdapter);
     }
 
-    @OnClick(R.id.cancle_tv)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.cancle_tv,R.id.location_tv})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.cancle_tv:
+                finish();
+                break;
+            case R.id.location_tv:
+                showDownPop(locationTv);
+                break;
+        }
+    }
+
+    //向下弹出
+    public void showDownPop(View view) {
+        if (popupWindow != null && popupWindow.isShowing()) {
+            return;
+        }
+        popupWindow = new CommonPopupWindow.Builder(HomeSearchActivity.this)
+                .setView(R.layout.popup_home_search)
+                .setWidthAndHeight(150, ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setAnimationStyle(R.style.AnimDown)
+                .setViewOnclickListener(new CommonPopupWindow.ViewInterface() {
+                    @Override
+                    public void getChildView(View view, int layoutResId) {
+                        TextView ershoufangTv = (TextView) view.findViewById(R.id.ershoufang_tv);
+                        ershoufangTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                                locationTv.setText("二手房");
+                            }
+                        });
+                        TextView xinfangTv = (TextView) view.findViewById(R.id.xinfang_tv);
+                        xinfangTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                                locationTv.setText("新房");
+                            }
+                        });
+                        TextView zufangTv = (TextView) view.findViewById(R.id.zufang_tv);
+                        zufangTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                                locationTv.setText("租房");
+                            }
+                        });
+                        TextView maishangpuTv = (TextView) view.findViewById(R.id.maishangpu_tv);
+                        maishangpuTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                                locationTv.setText("买商铺");
+                            }
+                        });
+                        TextView maixiezilouTv = (TextView) view.findViewById(R.id.maixiezilou_tv);
+                        maixiezilouTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                                locationTv.setText("买写字楼");
+                            }
+                        });
+                        TextView zuxiezilouTv = (TextView) view.findViewById(R.id.zuxiezilou_tv);
+                        zuxiezilouTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                                locationTv.setText("租写字楼");
+                            }
+                        });
+                    }
+                })
+                .setOutsideTouchable(true)
+                .create();
+        popupWindow.showAsDropDown(view);
     }
 
     private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

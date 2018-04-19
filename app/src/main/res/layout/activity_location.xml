@@ -26,12 +26,14 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="30dp"
             android:text="请输入城市名"
+            android:paddingLeft="10dp"
             android:textColor="@color/text_gray"
             android:drawableLeft="@drawable/home_search_icon_iv"
             android:layout_toRightOf="@+id/location_tv"
             android:drawablePadding="10dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/bg_search"/>
+            android:background="@drawable/bg_search"
+            android:paddingBottom="8dp"/>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"

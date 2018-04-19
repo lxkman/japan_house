@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,14 +26,17 @@ import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
-import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Buyhouse_Baike_Activity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Daikuan_Activity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.QuestionActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.ZhinengActivity;
 import com.example.administrator.japanhouse.utils.BannerUtils;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -102,6 +104,7 @@ public class HomeFragment extends BaseFragment {
     LinearLayout view011;
     @BindView(R.id.srcollview)
     NestedScrollView scrollView;
+    Unbinder unbinder2;
     private int totalPage; //总的页数
     private int mPageSize = 10; //每页显示的最大的数量
     private ImageView[] ivPoints;//小圆点图片的集合
@@ -148,7 +151,7 @@ public class HomeFragment extends BaseFragment {
                         switch (position) {
                             case 0:
                                 if (finalI == 0) {
-
+//                                    startActivity(new Intent(mContext, ErshoufangActiviy.class));
                                 } else {//海外地产
                                     startActivity(new Intent(mContext, HaiWaiActivity.class));
                                 }
@@ -165,6 +168,7 @@ public class HomeFragment extends BaseFragment {
                                 startActivity(new Intent(mContext, BusinessDichanActivity.class));
                                 break;
                             case 5:
+//                                startActivity(new Intent(mContext, ChineseFangyuanActivity.class));
                                 break;
                             case 6:
                                 break;
@@ -176,8 +180,6 @@ public class HomeFragment extends BaseFragment {
                                 break;
                             case 9:
                                 FreeApartmentActivity.invoke(getActivity());
-                                break;
-                            case 10://海外地产
                                 break;
                         }
                     }
@@ -231,7 +233,8 @@ public class HomeFragment extends BaseFragment {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                TUtils.showShort(mContext, "点击了Banner" + position);
+//                TUtils.showShort(mContext, "点击了Banner" + position);
+                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
             }
         });
         //-----banner-----
@@ -249,6 +252,12 @@ public class HomeFragment extends BaseFragment {
         tjxfRecycler.setNestedScrollingEnabled(false);
         TjxfAdapter adapter = new TjxfAdapter(R.layout.item_home_tjxf, tjxfList);
         tjxfRecycler.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+            }
+        });
         //-----推荐新房-----
 
         //-----推荐二手房-----
@@ -262,6 +271,12 @@ public class HomeFragment extends BaseFragment {
         tjesfRecycler.setLayoutManager(linearLayoutManager);
         TjesfAdapter tjesfAdapter = new TjesfAdapter(R.layout.item_tjesf_layout, tjesfList);
         tjesfRecycler.setAdapter(tjesfAdapter);
+        tjesfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, OldHousedetailsActivity.class));
+            }
+        });
         //-----推荐二手房-----
 
         //-----推荐优秀经纪人-----
@@ -277,6 +292,12 @@ public class HomeFragment extends BaseFragment {
         tjyxjjrRecycler.setLayoutManager(linearLayoutManager1);
         TjyxjjrAdapter tjyxjjrAdapter = new TjyxjjrAdapter(R.layout.item_tjyxjjr_layout, tjyxjjrList);
         tjyxjjrRecycler.setAdapter(tjyxjjrAdapter);
+        tjyxjjrAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, ManagerActivity.class));
+            }
+        });
         //-----推荐优秀经纪人-----
 
         //-----推荐租房-----
@@ -286,6 +307,12 @@ public class HomeFragment extends BaseFragment {
         tjzfRecycler.setLayoutManager(linearLayoutManager2);
         TjzfAdapter tjzfAdapter = new TjzfAdapter(R.layout.item_tjzf_layout, tjesfList);
         tjzfRecycler.setAdapter(tjzfAdapter);
+        tjzfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+            }
+        });
         //-----推荐租房-----
 
         //-----推荐土地-----
@@ -295,6 +322,12 @@ public class HomeFragment extends BaseFragment {
         tjtdRecycler.setLayoutManager(linearLayoutManager3);
         TjtdAdapter tjtdAdapter = new TjtdAdapter(R.layout.item_tjtd_layout, tjesfList);
         tjtdRecycler.setAdapter(tjtdAdapter);
+        tjtdAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, TudidetailsActivity.class));
+            }
+        });
         //-----推荐土地-----
 
         //-----猜你喜欢-----
@@ -302,6 +335,12 @@ public class HomeFragment extends BaseFragment {
         cnxhRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         CnxhAdapter cnxhAdapter = new CnxhAdapter(R.layout.item_cnxh_layout, tjyxjjrList);
         cnxhRecycler.setAdapter(cnxhAdapter);
+        cnxhAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+            }
+        });
         //-----猜你喜欢-----
     }
 
@@ -314,6 +353,14 @@ public class HomeFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder2 = ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     private class TjxfAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
@@ -331,6 +378,12 @@ public class HomeFragment extends BaseFragment {
             itemTjxfRecycler.setLayoutManager(linearLayoutManager);
             ItemTjxfAdapter itemTjxfAdapter = new ItemTjxfAdapter(R.layout.item_tjxf_item_layout, itemTjxfList);
             itemTjxfRecycler.setAdapter(itemTjxfAdapter);
+            itemTjxfAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    startActivity(new Intent(mContext,NewHousedetailsActivity.class));
+                }
+            });
         }
     }
 
@@ -427,7 +480,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     @OnClick({R.id.location_tv, R.id.search_tv, R.id.map_tv, R.id.jrdk_tv, R.id.gfbk_tv,
-            R.id.fcwd_tv, R.id.znmf_tv,R.id.view_011})
+            R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011,R.id.tjxf_more_tv, R.id.tjesf_more_tv,
+            R.id.tjyxjjr_more_tv, R.id.tjzf_more_tv, R.id.tjtd_more_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.location_tv:
@@ -452,6 +506,21 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.view_011:
                 startActivity(new Intent(mContext, ToutiaoActivity.class));
+            case R.id.tjxf_more_tv:
+                startActivity(new Intent(mContext,NewHouseActivity.class));
+                break;
+            case R.id.tjesf_more_tv:
+                startActivity(new Intent(mContext,ErshoufangActiviy.class));
+                break;
+            case R.id.tjyxjjr_more_tv:
+                startActivity(new Intent(mContext,JjrLiebiaoActivity.class));
+                break;
+            case R.id.tjzf_more_tv:
+                startActivity(new Intent(mContext,ZufangActivity.class));
+                break;
+            case R.id.tjtd_more_tv:
+                startActivity(new Intent(mContext,TudiActivity.class));
+                break;
         }
     }
 }

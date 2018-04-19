@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:src="@drawable/back"
+            android:padding="15dp"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <LinearLayout
+            android:background="@drawable/round_white"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="35dip">
+            <ImageView
+                android:layout_marginLeft="15dip"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/sousuo"
+                android:layout_width="20dip"
+                android:layout_height="20dip" />
+            <TextView
+                android:id="@+id/search_tv"
+                android:background="@null"
+                android:paddingLeft="10dip"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textSize="13sp"
+                android:hint="请输入查询内容"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_dingwei"
+            android:src="@drawable/dituzhaofang"
+            android:padding="15dp"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <ImageView
+            android:id="@+id/img_message"
+            android:src="@drawable/message"
+            android:padding="15dp"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+    <com.yyydjk.library.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:dddividerColor="#00000000"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/white"
+        app:ddmenuSelectedIcon="@mipmap/top"
+        app:ddmenuTextSize="14sp"
+        app:ddmenuUnselectedIcon="@mipmap/buttom"
+        app:ddtextSelectedColor="@color/shihuangse"
+        app:ddtextUnselectedColor="@color/drop_down_unselected"
+        app:ddunderlineColor="#dbdcdc"
+
+        />
+</LinearLayout>

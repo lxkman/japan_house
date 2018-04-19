@@ -88,6 +88,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
 
     <application
         android:name=".MyApplication"
@@ -103,6 +104,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--百度地图开始-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="naHsvnvB7DGQXUKTn3SOtlIBrEjm9wzg" />
+        <!--百度地图结束-->
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.ForgetPswActivity" />
@@ -188,8 +194,9 @@
         <activity android:name=".activity.OwnerDetailsActivity" />
         <activity android:name=".activity.FreeApartmentActivity" />
         <activity android:name=".activity.RentalDetailsActivity" />
-        <activity android:name=".activity.RentalActivity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".activity.RentalActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".fragment.mine.CalculatorActivity" />
         <activity android:name=".fragment.mine.Calculator_DetilsActivity" />
         <activity android:name=".fragment.mine.FeedbackActivity" />
@@ -197,7 +204,8 @@
         <activity android:name=".activity.FullScreenActivity" />
         <activity android:name=".fragment.home.JjrLiebiaoActivity" />
         <activity android:name=".fragment.home.ZufangActivity" />
-        <activity android:name=".fragment.home.HaiwaiListActivity"></activity>
+        <activity android:name=".fragment.home.HaiwaiListActivity" />
+        <activity android:name=".fragment.home.HomeMapActivity"></activity>
     </application>
 
 </manifest>

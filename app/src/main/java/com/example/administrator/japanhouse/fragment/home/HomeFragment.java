@@ -113,8 +113,7 @@ public class HomeFragment extends BaseFragment {
     private ImageView[] ivPoints;//小圆点图片的集合
     private List<HomeItemBean> homeItemBeanList;//总的数据源
     private List<View> viewPagerList;//GridView作为一个View对象添加到ViewPager集合中
-    private String[] itemName = {"二手房", "新房", "土地", "租房", "商业地产", "中国房源",
-            "房价地图", "找小区", "我是业主", "免费看房", "海外地产"};
+
     private int[] itemPic = {R.drawable.home_ershoufang_iv, R.drawable.home_xinfang_iv, R.drawable.home_tudi_iv,
             R.drawable.home_zufang_iv, R.drawable.home_shangyedichan_iv, R.drawable.home_zhongguofangyuan_iv,
             R.drawable.home_fangjiaditu_iv, R.drawable.home_zhaoxiaoqu_iv, R.drawable.home_woshiyezhu_iv,
@@ -130,6 +129,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initViewData(View view) {
+        String[] itemName = {mActivity.getResources().getString(R.string.old_house), mActivity.getResources().getString(R.string.new_house),
+                mActivity.getResources().getString(R.string.tudi), mActivity.getResources().getString(R.string.zu_house),
+                mActivity.getResources().getString(R.string.shangyedichan), mActivity.getResources().getString(R.string.zhongguofangyuan), mActivity.getResources().getString(R.string.fangjiaditu),
+                mActivity.getResources().getString(R.string.zhaoxiaoqu), mActivity.getResources().getString(R.string.woshiyezhu), mActivity.getResources().getString(R.string.mianfeikanfang),
+                mActivity.getResources().getString(R.string.haiwaidichan)};
         //-----item导航栏-----
         homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
@@ -497,6 +501,7 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext, HomeSearchActivity.class));
                 break;
             case R.id.map_tv:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             case R.id.jrdk_tv:
                 startActivity(new Intent(mContext, Daikuan_Activity.class));
@@ -512,6 +517,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.view_011:
                 startActivity(new Intent(mContext, ToutiaoActivity.class));
+                break;
             case R.id.tjxf_more_tv:
                 startActivity(new Intent(mContext,NewHouseActivity.class));
                 break;

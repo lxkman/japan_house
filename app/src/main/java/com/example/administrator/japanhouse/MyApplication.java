@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -33,6 +34,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        //百度地图
+        SDKInitializer.initialize(getApplicationContext());
         setLogger();
         setOkGo();//OkGo----第三方网络框架
     }

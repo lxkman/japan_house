@@ -112,7 +112,7 @@ public class HomeSearchActivity extends BaseActivity {
         }
         popupWindow = new CommonPopupWindow.Builder(HomeSearchActivity.this)
                 .setView(R.layout.popup_home_search)
-                .setWidthAndHeight(150, ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setWidthAndHeight(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 .setAnimationStyle(R.style.AnimDown)
                 .setViewOnclickListener(new CommonPopupWindow.ViewInterface() {
                     @Override

@@ -1,9 +1,13 @@
 package com.example.administrator.japanhouse.login;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 import com.example.administrator.japanhouse.R;
@@ -11,6 +15,8 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import org.zackratos.ultimatebar.UltimateBar;
+
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/8/24.
@@ -27,6 +33,18 @@ public class LancherActivity extends BaseActivity {
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_launcher);
+
+        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+
+        if (!TextUtils.isEmpty(location)) {
+            Resources resources = getResources();
+            DisplayMetrics dm = resources.getDisplayMetrics();
+            Configuration config = resources.getConfiguration();
+            Locale myLocale = new Locale(location);
+            config.locale = myLocale;
+            resources.updateConfiguration(config, dm);
+        }
+
         iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
         mHandler.postDelayed(new Runnable() {
             @Override

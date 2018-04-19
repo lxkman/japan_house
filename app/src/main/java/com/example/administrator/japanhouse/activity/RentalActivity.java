@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -193,7 +194,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                     }
 
                     RentalDetailsBean bean = new RentalDetailsBean(strRentSell,
-                            0,
+                            1,
                             null,
                             etCall.getText().toString(),
                             etContact.getText().toString(),
@@ -356,7 +357,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .compress(true)// 是否压缩
                 .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
-                .glideOverride(200, 200)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
+//                .glideOverride(200, 200)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
                 //                .withAspectRatio(aspect_ratio_x, aspect_ratio_y)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
                 .hideBottomControls(true)// 是否显示uCrop工具栏，默认不显示
                 .isGif(false)// 是否显示gif图片
@@ -376,7 +377,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 //.rotateEnabled() // 裁剪是否可旋转图片
                 .scaleEnabled(false)// 裁剪是否可放大缩小图片
                 //.videoQuality()// 视频录制质量 0 or 1
-                //.videoSecond()//显示多少秒以内的视频or音频也可适用
+                .videoSecond(60)//显示多少秒以内的视频or音频也可适用
                 //.recordVideoSecond()//录制视频秒数 默认60s
                 .forResult(PictureConfig.REQUEST_CAMERA);//结果回调onActivityResult code
     }
@@ -407,7 +408,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 case PictureConfig.CHOOSE_REQUEST:
 
                     // 图片选择结果回调
-                   List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     for (int i = 0; i < selectList.size(); i++) {
                         imgPathList.add(selectList.get(i).getPath());
                     }

@@ -56,7 +56,6 @@
                     android:id="@+id/act_rental_details_rentalState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="审核中"
                     android:textColor="@color/green"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -81,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="价格太高了"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -104,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="姜先生"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -127,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="12345678901"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -150,6 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="北海道"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -173,6 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="10公里内"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -195,6 +199,7 @@
                     android:id="@+id/act_rental_details_floor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="12层"
                     android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -218,6 +223,7 @@
                     android:id="@+id/act_rental_details_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="150㎡-175㎡"
                     android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -242,6 +248,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="3室1厅"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -265,6 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="是"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -288,6 +296,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="南向"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -311,6 +320,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#2A2A2A"
+                    android:text="咖啡厅、台球场、篮球场"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -335,6 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
                     android:horizontalSpacing="8dp"
+                    android:layout_marginTop="10dp"
                     android:numColumns="3"
                     android:verticalSpacing="8dp" />
             </LinearLayout>

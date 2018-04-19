@@ -277,6 +277,13 @@
     <string name="singup_daxiao">住宅大小:</string>
     <string name="singup_kaipan">开盘日期:</string>
     <string name="singup_address">地址:</string>
+    <string name="dialog_checkRoom_tel">请输入您手机号</string>
+    <string name="tongyi">我同意</string>
+    <string name="xieyi">《用户协议》</string>
+    <string name="tijiao">提交</string>
+    <string name="daikuanshenqing">贷款申请</string>
+    <string name="activity_rental_details_audit">审核中</string>
+    <string name="activity_rental_details_refused">已拒绝</string>
     <string name="shangyedichan">商业地产</string>
     <string name="zhongguofangyuan">中国房源</string>
     <string name="fangjiaditu">房价地图</string>

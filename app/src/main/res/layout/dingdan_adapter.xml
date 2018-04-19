@@ -6,6 +6,6 @@
           android:layout_margin="5dp"
           android:id="@+id/img_dingdan"
           android:src="@drawable/fangwu_3x"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
+          android:layout_width="150dp"
+          android:layout_height="100dp"/>
 </LinearLayout>

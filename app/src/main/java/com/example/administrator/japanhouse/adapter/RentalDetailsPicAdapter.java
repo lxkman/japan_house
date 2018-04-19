@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,7 +74,6 @@ public class RentalDetailsPicAdapter extends BaseAdapter {
         Glide.with(activity)
                 .load(list.get(position))
                 .into(vh.img);
-
 
         return convertView;
     }

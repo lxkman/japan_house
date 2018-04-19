@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,7 +21,9 @@ import com.example.administrator.japanhouse.adapter.RentalDetailsPicAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,10 +130,12 @@ public class RentalDetailsActivity extends BaseActivity {
     private void init(RentalDetailsBean detailsBean) {
         switch (detailsBean.getRoomState()) {
             case 1:
-
+                tvRentalState.setText(getString(R.string.activity_rental_details_audit));
+                tvRentalState.setTextColor(Color.GREEN);
                 break;
             case 2:
-
+                tvRentalState.setText(getString(R.string.activity_rental_details_refused));
+                tvRentalState.setTextColor(Color.RED);
                 break;
             case 3:
 
@@ -202,12 +207,18 @@ public class RentalDetailsActivity extends BaseActivity {
 //            ltToward.setVisibility(View.GONE);
         }
 
-        if (detailsBean.getPicList() != null && detailsBean.getPicList().size() > 0) {
-            picAdapter = new RentalDetailsPicAdapter(this, detailsBean.getPicList());
+//        if (detailsBean.getPicList() != null && detailsBean.getPicList().size() > 0) {
+            List<String> list = new ArrayList<>();
+            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
+            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
+            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
+            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
+            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
+            picAdapter = new RentalDetailsPicAdapter(this, list);
             roomPic.setAdapter(picAdapter);
-        } else {
+//        } else {
 //            ltRoomPic.setVisibility(View.GONE);
-        }
+//        }
 
         if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
             path = detailsBean.getVideoList();

@@ -51,11 +51,14 @@ public class PicRentalAdapter extends RecyclerView.Adapter {
                 Glide.with(activity)
                         .load(list.get(i))
                         .into(picViewHolder.ivImg);
+                picViewHolder.ivDel.setVisibility(View.VISIBLE);
                 picViewHolder.ivImg.setOnClickListener(null);
                 picViewHolder.ivDel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        clickListener.onClickDel(i);
+                        list.remove(i);
+                        notifyDataSetChanged();
+//                        clickListener.onClickDel(i);
                     }
                 });
             } else {
@@ -79,16 +82,6 @@ public class PicRentalAdapter extends RecyclerView.Adapter {
         }
         return list.size() + 1;
     }
-
-    public void addAll(List<String> data) {
-        list.clear();
-        if (data != null) {
-
-            list.addAll(data);
-        }
-        notifyDataSetChanged();
-    }
-
 
     class PicViewHolder extends RecyclerView.ViewHolder {
         ImageView ivImg;

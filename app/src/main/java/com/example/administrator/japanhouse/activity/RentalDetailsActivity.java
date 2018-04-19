@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -139,80 +140,80 @@ public class RentalDetailsActivity extends BaseActivity {
         if (!TextUtils.isEmpty(detailsBean.getRefuseReason())) {
             tvRefuseReason.setText(detailsBean.getRefuseReason());
         } else {
-            ltRefuseReason.setVisibility(View.GONE);
+//            ltRefuseReason.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getArea())) {
             tvArea.setText(detailsBean.getArea());
         } else {
-            ltArea.setVisibility(View.GONE);
+//            ltArea.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getBathroom())) {
             tvBathroom.setText(detailsBean.getBathroom());
         } else {
-            ltBathroom.setVisibility(View.GONE);
+//            ltBathroom.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getDistance())) {
             tvDistance.setText(detailsBean.getDistance());
         } else {
-            ltDistance.setVisibility(View.GONE);
+//            ltDistance.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getEquipment())) {
             tvEquipment.setText(detailsBean.getEquipment());
         } else {
-            ltEquipment.setVisibility(View.GONE);
+//            ltEquipment.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(detailsBean.getFloor())) {
             tvFloor.setText(detailsBean.getFloor());
         } else {
-            ltFloor.setVisibility(View.GONE);
+//            ltFloor.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getLessorName())) {
             tvLessorName.setText(detailsBean.getLessorName());
         } else {
-            ltLessorName.setVisibility(View.GONE);
+//            ltLessorName.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getLessorPhone())) {
             tvLessorPhone.setText(detailsBean.getLessorPhone());
         } else {
-            ltLessorPhone.setVisibility(View.GONE);
+//            ltLessorPhone.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getPattern())) {
             tvPattern.setText(detailsBean.getPattern());
         } else {
-            ltPattern.setVisibility(View.GONE);
+//            ltPattern.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getLocation())) {
             tvLocation.setText(detailsBean.getLocation());
         } else {
-            ltLoction.setVisibility(View.GONE);
+//            ltLoction.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getToward())) {
             tvToward.setText(detailsBean.getToward());
         } else {
-            ltToward.setVisibility(View.GONE);
+//            ltToward.setVisibility(View.GONE);
         }
 
         if (detailsBean.getPicList() != null && detailsBean.getPicList().size() > 0) {
             picAdapter = new RentalDetailsPicAdapter(this, detailsBean.getPicList());
             roomPic.setAdapter(picAdapter);
         } else {
-            ltRoomPic.setVisibility(View.GONE);
+//            ltRoomPic.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
             path = detailsBean.getVideoList();
             roomVideo.setImageBitmap(getLocalVideoBitmap(path));
         } else {
-            ltRoomVideo.setVisibility(View.GONE);
+//            ltRoomVideo.setVisibility(View.GONE);
         }
     }
 

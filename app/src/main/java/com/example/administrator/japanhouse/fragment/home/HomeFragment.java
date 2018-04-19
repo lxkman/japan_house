@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,10 +16,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
 import com.example.administrator.japanhouse.activity.OwnerActivity;
@@ -176,10 +179,13 @@ public class HomeFragment extends BaseFragment {
                                 startActivity(new Intent(mContext, ZhaoxiaoquActivity.class));
                                 break;
                             case 8:
-                                OwnerActivity.invoke(getActivity());
+//                                OwnerActivity.invoke(getActivity());
+                                Intent intent = new Intent(getActivity(), OwnerActivity.class);
+                                getActivity().startActivityForResult(intent, 1);
                                 break;
                             case 9:
-                                FreeApartmentActivity.invoke(getActivity());
+                                Intent intent1 = new Intent(getActivity(), FreeApartmentActivity.class);
+                                getActivity().startActivityForResult(intent1, 1);
                                 break;
                         }
                     }
@@ -482,6 +488,7 @@ public class HomeFragment extends BaseFragment {
     @OnClick({R.id.location_tv, R.id.search_tv, R.id.map_tv, R.id.jrdk_tv, R.id.gfbk_tv,
             R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011,R.id.tjxf_more_tv, R.id.tjesf_more_tv,
             R.id.tjyxjjr_more_tv, R.id.tjzf_more_tv, R.id.tjtd_more_tv})
+            R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.location_tv:

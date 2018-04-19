@@ -6,13 +6,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/act_rental_details_back"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:padding="15dp"
             android:src="@drawable/back" />
 
@@ -329,12 +329,11 @@
                     android:textColor="#999999"
                     android:textSize="14sp" />
 
-                <GridView
+                <com.example.administrator.japanhouse.view.HeightGridView
                     android:id="@+id/act_rental_details_roomPic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginRight="7dp"
+                    android:layout_marginRight="15dp"
                     android:horizontalSpacing="8dp"
                     android:numColumns="3"
                     android:verticalSpacing="8dp" />
@@ -367,6 +366,7 @@
                         android:id="@+id/act_rental_details_img"
                         android:layout_width="110dp"
                         android:layout_height="75dp"
+                        android:background="@color/black"
                          />
 
                     <ImageView

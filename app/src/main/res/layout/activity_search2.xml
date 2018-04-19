@@ -51,12 +51,12 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-          <com.example.administrator.japanhouse.fragment.home.ui.utils.flow
-              android:id="@+id/ffff"
-              android:layout_width="match_parent"
-              android:layout_margin="10dp"
-              android:layout_height="100dp">
-          </com.example.administrator.japanhouse.fragment.home.ui.utils.flow>
+    <com.example.administrator.japanhouse.view.FluidLayout
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

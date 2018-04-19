@@ -189,6 +189,14 @@
         <activity android:name=".activity.RentalActivity" />
         <activity android:name=".activity.FreeApartmentActivity" />
         <activity android:name=".activity.RentalDetailsActivity" />
+        <activity android:name=".fragment.home.SydcLiebiaoActivity"></activity>
+        <activity android:name=".activity.OwnerActivity"/>
+        <activity android:name=".activity.OwnerWikipediaActivity"/>
+        <activity android:name=".activity.OwnerDetailsActivity"/>
+        <activity android:name=".activity.RentalActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.FreeApartmentActivity"/>
+        <activity android:name=".activity.RentalDetailsActivity"/>
         <activity android:name=".fragment.mine.CalculatorActivity" />
         <activity android:name=".fragment.mine.Calculator_DetilsActivity" />
         <activity android:name=".fragment.mine.FeedbackActivity" />

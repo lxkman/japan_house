@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/4/16.
  */
 
-public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickItemListener{
+public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickItemListener {
 
     @BindView(R.id.act_owner_back)
     ImageView back;
@@ -65,7 +65,8 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
                 break;
 
             case R.id.act_owner_message:
-                //跳转到微聊
+                setResult(2);
+                finish();
                 break;
 
             case R.id.act_owner_rental:
@@ -83,7 +84,7 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
         }
     }
 
-    public static void invoke(Context context){
+    public static void invoke(Context context) {
         Intent intent = new Intent(context, OwnerActivity.class);
         context.startActivity(intent);
     }

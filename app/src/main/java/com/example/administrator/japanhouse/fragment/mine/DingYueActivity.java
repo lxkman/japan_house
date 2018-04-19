@@ -5,12 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.view.BaseDialog;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -59,10 +64,10 @@ public class DingYueActivity extends BaseActivity {
         mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
             @Override
             public void onItemClick(SwipeMenuBridge menuBridge) {
-                mList.remove( menuBridge.getAdapterPosition());
                 menuBridge.closeMenu();
-                liebiaoAdapter.notifyDataSetChanged();
 
+
+                shumaDialog(Gravity.CENTER,R.style.Alpah_aniamtion, menuBridge.getAdapterPosition());
             }
         });
         mrecycler.setAdapter(liebiaoAdapter);
@@ -103,5 +108,45 @@ public class DingYueActivity extends BaseActivity {
     @OnClick(R.id.back_img)
     public void onClick() {
         finish();
+    }
+
+
+
+    private void shumaDialog(int grary, int animationStyle, final int postion) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(DingYueActivity.this);
+        final BaseDialog dialog = builder.setViewId(R.layout.dingyue_layout)
+                //设置dialogpadding
+                .setPaddingdp(0, 10, 0, 10)
+                //设置显示位置
+                .setGravity(grary)
+                //设置动画
+                .setAnimation(animationStyle)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(false)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+
+        TextView text_pause = dialog.getView(R.id.text_pause);
+        //知道了
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mList.remove( postion);
+                liebiaoAdapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+        });
+        //取消
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

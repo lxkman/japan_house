@@ -1,16 +1,19 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -97,6 +100,12 @@ public class LiShiJiLuActivity extends BaseActivity {
 
         @Override
         protected void convert(BaseViewHolder helper,String item) {
+            helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LiShiJiLuActivity.this, NewHousedetailsActivity.class));
+                }
+            });
         }
     }
 

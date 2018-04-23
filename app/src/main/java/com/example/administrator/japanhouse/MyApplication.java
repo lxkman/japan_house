@@ -35,7 +35,7 @@ public class MyApplication extends Application {
         super.onCreate();
         application = this;
         //百度地图
-        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.initialize(this);
         setLogger();
         setOkGo();//OkGo----第三方网络框架
     }

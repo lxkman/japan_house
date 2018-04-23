@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
@@ -99,6 +100,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         }
         FootAdapter footAdapter = new FootAdapter(R.layout.item_myfoot, list);
         recyclerFoot.setAdapter(footAdapter);
+        footAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+            }
+        });
     }
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,

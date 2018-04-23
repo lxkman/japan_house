@@ -22,24 +22,6 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/cancle_tv"
             android:background="@drawable/bg_search">
-            <TextView
-                android:id="@+id/location_tv"
-                android:layout_width="78dp"
-                android:layout_height="wrap_content"
-                android:text="二手房"
-                android:paddingLeft="10dp"
-                android:paddingBottom="8dp"
-                android:gravity="center"
-                android:textColor="@color/text_black"
-                android:drawableRight="@drawable/home_selector_icon_iv"
-                android:drawablePadding="5dp"/>
-            <View
-                android:layout_width="1dp"
-                android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
-                android:layout_toRightOf="@+id/location_tv"
-                android:background="@color/gray1"/>
             <EditText
                 android:id="@+id/search_et"
                 android:layout_width="match_parent"
@@ -47,11 +29,12 @@
                 android:hint="请输入小区名或地址"
                 android:textSize="14sp"
                 android:background="@null"
+                android:layout_marginBottom="8dp"
+                android:paddingLeft="10dp"
                 android:textColor="@color/text_gray"
                 android:drawableLeft="@drawable/home_search_icon_iv"
                 android:layout_toRightOf="@+id/location_tv"
-                android:drawablePadding="10dp"
-                android:layout_marginLeft="25dp"/>
+                android:drawablePadding="10dp" />
         </RelativeLayout>
         <TextView
             android:id="@+id/cancle_tv"
@@ -75,34 +58,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="热门搜索"
-                    android:textSize="16sp"
-                    android:padding="10dp"
-                    android:textColor="@color/text_black"/>
-                <ImageView
-                    android:id="@+id/hot_refrash_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/search_refresh_iv"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="10dp"
-                    android:layout_marginRight="10dp"/>
-            </RelativeLayout>
-            <com.example.administrator.japanhouse.view.FluidLayout
-                android:id="@+id/hotsearch_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="5dp">
                 <TextView
@@ -113,7 +68,6 @@
                     android:padding="10dp"
                     android:textColor="@color/text_black"/>
                 <ImageView
-                    android:id="@+id/history_clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/search_del_iv"

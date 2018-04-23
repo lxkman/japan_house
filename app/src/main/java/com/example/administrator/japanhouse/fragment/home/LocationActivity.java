@@ -74,6 +74,12 @@ public class LocationActivity extends BaseActivity {
         cityRecycler = (RecyclerView) findViewById(R.id.city_recycler);
         cityRecycler.setLayoutManager(mManager = new LinearLayoutManager(mContext));
         cityAdapter = new CityAdapter(this,cityList);
+        cityAdapter.setOnItemClickListener(new CityAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                finish();
+            }
+        });
         mHeaderAdapter = new HeaderRecyclerAndFooterWrapperAdapter(cityAdapter) {
             @Override
             protected void onBindHeaderHolder(ViewHolder holder, int headerPos, int layoutId, Object o) {
@@ -85,7 +91,8 @@ public class LocationActivity extends BaseActivity {
                 hotcityAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        TUtils.showShort(mContext,"北海道");
+//                        TUtils.showShort(mContext,"北海道");
+                        finish();
                     }
                 });
             }

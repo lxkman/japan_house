@@ -1,6 +1,5 @@
 package com.example.administrator.japanhouse.fragment.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,12 +15,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +40,13 @@ public class HomeSearchActivity extends BaseActivity {
     RecyclerView historyRecycler;
     @BindView(R.id.view_rl)
     RelativeLayout view_rl;
+    @BindView(R.id.hot_refrash_iv)
+    ImageView hotRefrashIv;
+    @BindView(R.id.history_clear)
+    ImageView historyClear;
     private CommonPopupWindow popupWindow;
+    private List<String> historyList;
+    private HistoryAdapter historyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +57,30 @@ public class HomeSearchActivity extends BaseActivity {
     }
 
     private void initView() {
-        fluidlayout.removeAllViews();
-        final List<String> hotNameList = new ArrayList<>();
+        List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
         hotNameList.add("青森县");
         hotNameList.add("采光");
         hotNameList.add("南向");
         hotNameList.add("秋田县");
         hotNameList.add("山形县");
+        initHot(hotNameList);
+
+        historyList = new ArrayList<>();
+        historyList.add("东京");
+        historyList.add("澳大利亚");
+        historyList.add("中国");
+        historyList.add("美国");
+        historyList.add("缅甸");
+        historyList.add("阿富汗");
+        historyRecycler.setNestedScrollingEnabled(false);
+        historyRecycler.setLayoutManager(new LinearLayoutManager(this));
+        historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
+        historyRecycler.setAdapter(historyAdapter);
+    }
+
+    private void initHot(final List<String> hotNameList) {
+        fluidlayout.removeAllViews();
         for (int i = 0; i < hotNameList.size(); i++) {
             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
             tv.setText(hotNameList.get(i));
@@ -79,28 +98,30 @@ public class HomeSearchActivity extends BaseActivity {
                 }
             });
         }
-
-        List<String> historyList = new ArrayList<>();
-        historyList.add("东京");
-        historyList.add("澳大利亚");
-        historyList.add("中国");
-        historyList.add("美国");
-        historyList.add("缅甸");
-        historyList.add("阿富汗");
-        historyRecycler.setNestedScrollingEnabled(false);
-        historyRecycler.setLayoutManager(new LinearLayoutManager(this));
-        HistoryAdapter historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
-        historyRecycler.setAdapter(historyAdapter);
     }
 
-    @OnClick({R.id.cancle_tv,R.id.location_tv})
+    @OnClick({R.id.cancle_tv, R.id.location_tv, R.id.hot_refrash_iv, R.id.history_clear})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.cancle_tv:
                 finish();
                 break;
             case R.id.location_tv:
                 showDownPop(locationTv);
+                break;
+            case R.id.hot_refrash_iv:
+                List<String> hotNameList = new ArrayList<>();
+                hotNameList.add("朝阳q");
+                hotNameList.add("青森县1");
+                hotNameList.add("采光2");
+                hotNameList.add("南向3");
+                hotNameList.add("秋田县g");
+                hotNameList.add("山形县sfs");
+                initHot(hotNameList);
+                break;
+            case R.id.history_clear:
+                historyList.clear();
+                historyAdapter.notifyDataSetChanged();
                 break;
         }
     }

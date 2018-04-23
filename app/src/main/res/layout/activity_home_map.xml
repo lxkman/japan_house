@@ -1,16 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.HomeMapActivity">
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </com.baidu.mapapi.map.MapView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/title_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_back_iv"
+            android:layout_centerVertical="true"
+            android:padding="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/title_back_iv"
+            android:layout_toLeftOf="@+id/title_search_iv">
+            <RadioGroup
+                android:id="@+id/rg_look"
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/all_ershoufang"
+                    style="@style/buy_comm_style"
+                    android:layout_width="0dip"
+                    android:layout_height="30dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/old_house" />
+
+                <RadioButton
+                    android:id="@+id/rb_zufang"
+                    style="@style/buy_comm_style"
+                    android:layout_width="0dip"
+                    android:layout_height="30dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/zu_house" />
+
+                <RadioButton
+                    android:id="@+id/rb_xinfang"
+                    style="@style/buy_comm_style"
+                    android:layout_width="0dip"
+                    android:layout_height="30dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/new_house" />
+            </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dip">
+                <View
+                    android:id="@+id/view_ershoufang"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="15dip"
+                    android:background="@color/white"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="2dip"/>
+                <View
+                    android:visibility="invisible"
+                    android:id="@+id/view_zufang"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:background="@color/white"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="2dip"/>
+                <View
+                    android:visibility="invisible"
+                    android:id="@+id/view_xinfang"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:background="@color/white"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="2dip"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/title_search_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_white_iv"
+            android:layout_toLeftOf="@+id/title_message_iv"
+            android:layout_centerVertical="true"
+            android:padding="10dp"/>
+        <ImageView
+            android:id="@+id/title_message_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/message_iv"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <com.example.administrator.japanhouse.view.NoScrollViewPager
+        android:id="@+id/vp_look"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

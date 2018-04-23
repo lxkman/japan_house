@@ -501,7 +501,8 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext, HomeSearchActivity.class));
                 break;
             case R.id.map_tv:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                Intent intent = new Intent(mContext,HomeMapActivity.class);
+                getActivity().startActivityForResult(intent,1);
                 break;
             case R.id.jrdk_tv:
                 startActivity(new Intent(mContext, Daikuan_Activity.class));

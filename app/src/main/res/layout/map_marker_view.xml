@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/item_content_tv"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="1122\n0.2万套"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/marker_view_iv"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/item_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1122"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/item_count_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_title_tv"
+        android:text="0,2万套"
+        android:textSize="13sp"
+        android:layout_gravity="center"
+        android:textColor="@color/white" />
+</LinearLayout>

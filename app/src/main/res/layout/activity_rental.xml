@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -117,7 +119,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#20CCCCCC"
+                android:background="#F5F5F5"
                 />
 
             <LinearLayout
@@ -131,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_call"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -142,7 +144,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -168,7 +171,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -182,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_contact"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -193,7 +196,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -217,7 +221,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#20CCCCCC"
+                android:background="#F5F5F5"
                 />
 
             <LinearLayout
@@ -242,7 +246,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -257,7 +262,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -271,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_distance"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -282,7 +287,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -296,7 +302,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="m"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="5dp"
@@ -308,7 +314,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -322,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_floor"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -333,7 +339,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -347,7 +354,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/floor"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="5dp"
@@ -359,7 +366,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -373,7 +380,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_area"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -384,7 +391,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -399,7 +407,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="m2"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="5dp"
@@ -411,7 +419,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -425,7 +433,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_pattern"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -436,7 +444,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -451,7 +460,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -466,7 +475,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_bathroom"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:layout_marginLeft="15dp"
                     />
@@ -484,8 +493,11 @@
                         android:text="@string/yes"
                         android:gravity="center_vertical"
                         android:textSize="14sp"
-                        android:textColor="#444444"
+                        android:textColor="#333333"
                         android:checked="true"
+                        android:button="@null"
+                        android:drawablePadding="15dp"
+                        android:drawableLeft="@drawable/radiobutton_selector"
                         />
 
                     <RadioButton
@@ -495,9 +507,12 @@
                         android:text="@string/no"
                         android:gravity="center_vertical"
                         android:textSize="14sp"
-                        android:textColor="#444444"
-                        android:layout_marginLeft="10dp"
+                        android:textColor="#333333"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginRight="15dp"
+                        android:drawablePadding="15dp"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/radiobutton_selector"
                         />
                 </RadioGroup>
             </LinearLayout>
@@ -507,7 +522,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -521,7 +536,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_toward"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -532,7 +547,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -547,7 +563,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -561,7 +577,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_equipment"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -572,7 +588,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:background="@null"
@@ -587,7 +604,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -601,7 +618,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_upPic"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
@@ -610,8 +627,8 @@
                     android:id="@+id/act_rental_picRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="11dp"
                     android:layout_marginBottom="15dp"
                     />
             </LinearLayout>
@@ -621,7 +638,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#20CCCCCC"
+                android:background="#ECECEC"
                 />
 
             <LinearLayout
@@ -635,25 +652,27 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_upVideo"
-                    android:textColor="#444444"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"
                     />
 
                 <RelativeLayout
                     android:id="@+id/act_rental_relativelt"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:visibility="gone"
                     >
 
-                    <ImageView
+                    <com.example.administrator.japanhouse.view.RoundedImageView
                         android:id="@+id/act_rental_videoImg"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:scaleType="centerCrop"
+                        app:corner_radius="3dp"
                         />
 
                     <ImageView
@@ -666,9 +685,9 @@
 
                 <ImageView
                     android:id="@+id/act_rental_addVideo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:src="@drawable/add_pic"
@@ -678,10 +697,10 @@
             <TextView
                 android:id="@+id/act_rental_entrust"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:textColor="@color/white"
                 android:text="@string/activity_rental_entrust"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:gravity="center"
                 android:background="@color/colorPrimary"
                 />

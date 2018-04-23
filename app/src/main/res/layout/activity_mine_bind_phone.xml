@@ -73,10 +73,10 @@
             android:layout_height="50dip"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="25dip"
-                android:layout_height="25dip"
+                android:layout_width="20dip"
+                android:layout_height="20dip"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dip"
+                android:layout_marginLeft="18dip"
                 android:src="@drawable/icon_yanzhengma"/>
             <EditText
                 android:id="@+id/edt_code"

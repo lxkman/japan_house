@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         >
 
@@ -15,8 +15,8 @@
             android:id="@+id/act_rental_back"
             android:padding="15dp"
             android:src="@drawable/back"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             />
 
         <TextView

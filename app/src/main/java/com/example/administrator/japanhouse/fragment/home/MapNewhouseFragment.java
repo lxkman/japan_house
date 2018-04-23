@@ -5,15 +5,20 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.yyydjk.library.DropDownMenu;
 
@@ -36,6 +41,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     private List<View> popupViews;
     private List<OneCheckBean> list;
     private MapView mBaiduMap;
+    private BaiduMap baiduMap;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -118,14 +124,41 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         mBaiduMap = (MapView) fifthView.findViewById(R.id.mapview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
 
-        BaiduMap baiduMap = mBaiduMap.getMap();
+        baiduMap = mBaiduMap.getMap();
         LatLng center = new LatLng(35.68, 139.75); // 默认 东京
-        float zoom = 11.0f; // 默认 11级
+        float zoom = 13.0f; // 默认 11级
         MapStatus mMapStatus = new MapStatus.Builder().target(
                 center).zoom(zoom).build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory
                 .newMapStatus(mMapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
+        initOverlay();
+    }
+
+    private void initOverlay() {
+        List<MarkerBean> markerBeanList = new ArrayList<>();
+        markerBeanList.add(new MarkerBean(139.738954,35.707239));
+        markerBeanList.add(new MarkerBean(139.83439,35.678863));
+        markerBeanList.add(new MarkerBean(139.741541,35.643203));
+        markerBeanList.add(new MarkerBean(139.690661,35.638979));
+        markerBeanList.add(new MarkerBean(139.758788,35.684492));
+        markerBeanList.add(new MarkerBean(139.758788,35.728807));
+
+        List<OverlayOptions> overlayOptionsList = new ArrayList<>();
+        for (int i = 0; i < markerBeanList.size(); i++) {
+            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view,null);
+            TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
+            TextView count = (TextView) markView.findViewById(R.id.item_count_tv);
+            TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
+            content.setText("地名"+i);
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromView(markView))
+                    .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                    .zIndex(13)
+                    .draggable(true);
+            overlayOptionsList.add(markerOptions);
+        }
+        baiduMap.addOverlays(overlayOptionsList);
     }
 
     @Override

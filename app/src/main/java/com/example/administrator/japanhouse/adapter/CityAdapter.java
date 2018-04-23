@@ -53,10 +53,23 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         holder.content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, cityBean.getCity(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, cityBean.getCity(), Toast.LENGTH_SHORT).show();
+                int position = holder.getLayoutPosition();
+                mOnItemClickListener.onItemClick(holder.itemView, position);
             }
         });
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;//声明接口
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
 
     @Override
     public int getItemCount() {

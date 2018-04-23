@@ -14,7 +14,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -62,17 +61,17 @@ public class LancherActivity extends BaseActivity {
             @Override
             public void run() {
                 boolean guide = SharedPreferencesUtils.getInstace(LancherActivity.this).getBooleanPreference("guide", false);
-                if (!guide) {
+//                if (!guide) {
                     Intent intent = new Intent(LancherActivity.this, GuidePageActivity.class);
                     startActivity(intent);
                     finish();
 
-                } else {
-                    Intent intent = new Intent(LancherActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                }
+//                } else {
+//                    Intent intent = new Intent(LancherActivity.this, LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//
+//                }
             }
         }, 1500);
     }

@@ -196,25 +196,25 @@
             android:src="@drawable/weixin"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
         <ImageView
             android:id="@+id/img_weibo"
             android:src="@drawable/weibo"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
         <ImageView
             android:id="@+id/img_qq"
             android:src="@drawable/qqa"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
         <ImageView
             android:id="@+id/img_line"
             android:src="@drawable/linea"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
 
     </LinearLayout>
 </LinearLayout>

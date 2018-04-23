@@ -107,7 +107,20 @@ public class LoginActivity extends BaseActivity {
          getWindow().setAttributes(lp);
 
         popupView = View.inflate(mContext,R.layout.layout_check_popupwindow, null);
-
+        popupView.findViewById(R.id.tv_saoyisao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvShowPop.setText("+86");
+                basePopupWindow.dismiss();
+            }
+        });
+        popupView.findViewById(R.id.tv_weiliao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvShowPop.setText("+81");
+                basePopupWindow.dismiss();
+            }
+        });
         basePopupWindow = (PopupWindow) new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         basePopupWindow.setTouchable(true);
         basePopupWindow.setOutsideTouchable(true);

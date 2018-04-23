@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +77,7 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
             case R.id.tv_get_code:
+                SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                 break;
             case R.id.btn_login:
                 startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));

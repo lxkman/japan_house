@@ -36,10 +36,15 @@
             android:layout_height="50dip" />
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="10dip"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
         android:paddingLeft="15dip"
         android:orientation="horizontal"
         android:background="#fff"
-        android:layout_marginTop="10dip"
         android:layout_width="match_parent"
         android:layout_height="50dip">
             <TextView
@@ -60,9 +65,10 @@
                 android:layout_width="1dip"
                 android:layout_height="match_parent"></View>
             <EditText
+                android:maxLength="11"
+                android:inputType="number"
                 android:id="@+id/edt_phone"
                 android:background="@null"
-                android:textColor="#fff"
                 android:textSize="15sp"
                 android:hint="@string/phonenumber"
                 android:layout_width="match_parent"
@@ -92,7 +98,6 @@
         <EditText
             android:id="@+id/edt_yanzheng_code"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/yanzhengma"
             android:layout_width="0dip"
@@ -131,7 +136,6 @@
             android:inputType="textPassword"
             android:id="@+id/edt_pass"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/pass"
             android:layout_width="0dip"
@@ -162,16 +166,17 @@
             android:inputType="textPassword"
             android:id="@+id/edt_pass_sure"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/surepass"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
     </LinearLayout>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_login"
-        android:text="@string/denglu"
+        android:text="@string/zhuce"
         android:textColor="#fff"
         android:layout_marginTop="50dip"
         android:layout_marginLeft="20dip"
@@ -179,18 +184,21 @@
         android:background="@drawable/round_shihuangse"
         android:layout_width="match_parent"
         android:layout_height="45dip" />
+
     <LinearLayout
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="10dip"
+        android:layout_marginTop="5dip"
         android:layout_width="match_parent"
         android:layout_height="30dip">
         <TextView
+            android:textSize="12sp"
             android:gravity="center_vertical"
             android:text="@string/zhucejibiaoshitongyi"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
+            android:textSize="12sp"
             android:id="@+id/people_xieyi"
             android:textColor="@color/shihuangse"
             android:gravity="center_vertical"
@@ -198,11 +206,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
+            android:textSize="12sp"
             android:gravity="center_vertical"
             android:text="@string/yu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
+            android:textSize="12sp"
             android:id="@+id/private_xieyi"
             android:textColor="@color/shihuangse"
             android:gravity="center_vertical"

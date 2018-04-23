@@ -61,7 +61,6 @@
         <EditText
             android:id="@+id/edt_phone"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/phonenumber"
             android:layout_width="match_parent"
@@ -91,7 +90,6 @@
         <EditText
             android:id="@+id/edt_yanzheng_code"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/yanzhengma"
             android:layout_width="0dip"
@@ -130,7 +128,6 @@
             android:inputType="textPassword"
             android:id="@+id/edt_pass"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/pass"
             android:layout_width="0dip"
@@ -161,7 +158,6 @@
             android:inputType="textPassword"
             android:id="@+id/edt_pass_sure"
             android:background="@null"
-            android:textColor="#fff"
             android:textSize="15sp"
             android:hint="@string/surepass"
             android:layout_width="0dip"

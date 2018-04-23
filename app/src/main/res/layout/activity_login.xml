@@ -76,6 +76,8 @@
                 android:layout_width="1dip"
                 android:layout_height="match_parent"></View>
             <EditText
+                android:maxLength="11"
+                android:inputType="number"
                 android:id="@+id/edt_phone"
                 android:background="@null"
                 android:textColorHint="#fff"

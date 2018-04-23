@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +57,7 @@ public class BindPhoneActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_get_code:
+                SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                 break;
             case R.id.btn_find_pass:
 

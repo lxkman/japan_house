@@ -64,6 +64,7 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
                 break;
             //注册

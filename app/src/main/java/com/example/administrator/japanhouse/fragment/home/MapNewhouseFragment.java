@@ -150,7 +150,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
             TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
             TextView count = (TextView) markView.findViewById(R.id.item_count_tv);
             TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
-            content.setText("地名"+i);
+            content.setText("地名"+i+"\n"+"0.2万套");
             MarkerOptions markerOptions = new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromView(markView))
                     .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))

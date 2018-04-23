@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,22 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.fragment.comment.CommentFragment;
-import com.example.administrator.japanhouse.fragment.comment.NewhouseFragment;
-import com.example.administrator.japanhouse.fragment.comment.OldhouseFragment;
-import com.example.administrator.japanhouse.fragment.comment.TudiFragment;
-import com.example.administrator.japanhouse.fragment.comment.ZuhouseFragment;
-import com.example.administrator.japanhouse.view.CustomViewPager;
-import com.example.administrator.japanhouse.view.NoCacheViewPager;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.view.NoScrollViewPager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,8 +170,11 @@ public class HomeMapActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.title_search_iv:
+                startActivity(new Intent(mContext,MapSearchActivity.class));
                 break;
             case R.id.title_message_iv:
+                setResult(2);
+                finish();
                 break;
         }
     }

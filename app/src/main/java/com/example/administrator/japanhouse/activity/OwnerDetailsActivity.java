@@ -34,9 +34,9 @@ public class OwnerDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if (state != 0) {
-                    OwnerWikipediaActivity.invoke(OwnerDetailsActivity.this);
-                }
+//                if (state != 0) {
+//                    OwnerWikipediaActivity.invoke(OwnerDetailsActivity.this);
+//                }
 
                 finish();
             }

@@ -136,14 +136,14 @@ public class RentalDetailsActivity extends BaseActivity {
         findViewById(R.id.act_rental_details_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(detailsBean.getIsCreate() != 0){
-                    Intent intent = new Intent(RentalDetailsActivity.this, SellHouseActivity.class);
-                    startActivity(intent);
-                    setResult(102);
+//                if(detailsBean.getIsCreate() != 0){
+//                    Intent intent = new Intent(RentalDetailsActivity.this, SellHouseActivity.class);
+//                    startActivity(intent);
+//                    setResult(102);
+//                    finish();
+//                }else{
                     finish();
-                }else{
-                    finish();
-                }
+//                }
 
             }
         });

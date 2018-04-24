@@ -70,7 +70,6 @@ public class RentalDetailsPicAdapter extends BaseAdapter {
         LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) vh.img.getLayoutParams();
         linearParams.height = (mWidth - 46) / 3 * 22 / 15;
         vh.img.setLayoutParams(linearParams);
-
         Glide.with(activity)
                 .load(list.get(position))
                 .into(vh.img);

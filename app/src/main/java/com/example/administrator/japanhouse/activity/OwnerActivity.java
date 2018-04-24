@@ -70,7 +70,8 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
                 break;
 
             case R.id.act_owner_rental:
-                RentalActivity.invoke(this);
+                Intent intent = new Intent(this, RentalActivity.class);
+                startActivityForResult(intent, 10);
                 break;
 
             case R.id.act_owner_prices:
@@ -92,5 +93,14 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
     @Override
     public void onItemClick() {
         OwnerDetailsActivity.invoke(this, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == 3) {
+            setResult(4);
+            finish();
+        }
     }
 }

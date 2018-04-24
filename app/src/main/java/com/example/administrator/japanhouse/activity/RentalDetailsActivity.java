@@ -1,5 +1,7 @@
 package com.example.administrator.japanhouse.activity;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,17 +11,22 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.RentalDetailsPicAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
+import com.example.administrator.japanhouse.fragment.mine.SellHouseActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,17 +112,39 @@ public class RentalDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_rental_details);
         ButterKnife.bind(this);
 
-        RentalDetailsBean detailsBean = getIntent().getParcelableExtra("detailsBean");
+        final RentalDetailsBean detailsBean = getIntent().getParcelableExtra("detailsBean");
 
-        tvTitle.setText(detailsBean.getTitle());
+        if (!TextUtils.isEmpty(detailsBean.getTitle())) {
+            tvTitle.setText(detailsBean.getTitle());
+        }
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.act_rental_details_relative);
+
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        float density = dm.density;
+        int mWidth = (int) (width/density);
+        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
+        linearParams.height = (mWidth - 46) / 3 * 22 / 15;
+        linearParams.width = (width - 52) / 3;
+        relativeLayout.setLayoutParams(linearParams);
 
         init(detailsBean);
 
         findViewById(R.id.act_rental_details_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(detailsBean.getIsCreate() != 0){
+                    Intent intent = new Intent(RentalDetailsActivity.this, SellHouseActivity.class);
+                    startActivity(intent);
+                    setResult(102);
+                    finish();
+                }else{
+                    finish();
+                }
+
             }
         });
 

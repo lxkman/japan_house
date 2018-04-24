@@ -254,6 +254,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_location_hint"
+                    android:layout_marginRight="58dp"
                     />
             </LinearLayout>
 
@@ -295,6 +296,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_distance_hint"
+                    android:layout_marginRight="26dp"
                     />
 
                 <TextView
@@ -347,6 +349,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_floor_hint"
+                    android:layout_marginRight="24dp"
                     />
 
                 <TextView
@@ -399,6 +402,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_area_hint"
+                    android:layout_marginRight="18dp"
                     />
 
                 <TextView
@@ -452,6 +456,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_pattern_hint"
+                    android:layout_marginRight="58dp"
                     />
             </LinearLayout>
 
@@ -555,6 +560,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_toward_hint"
+                    android:layout_marginRight="58dp"
                     />
             </LinearLayout>
 
@@ -596,6 +602,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="@string/activity_rental_equipment_hint"
+                    android:layout_marginRight="58dp"
                     />
             </LinearLayout>
 

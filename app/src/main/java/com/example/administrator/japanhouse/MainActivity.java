@@ -151,5 +151,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
             addFragments(chatFragment);
         }
+
+        if (requestCode == 1 && resultCode == 4) {
+            rbMine.setChecked(true);
+            if (mineFragment == null) {
+                mineFragment = new MineFragment();
+            }
+            addFragments(mineFragment);
+        }
     }
 }

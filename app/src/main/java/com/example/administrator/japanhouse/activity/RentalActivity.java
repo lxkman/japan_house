@@ -19,10 +19,13 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -177,7 +180,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 isBathroom = false;
                 break;
             case R.id.act_rental_entrust:
-                if (!TextUtils.isEmpty(etCall.getText().toString()) && !TextUtils.isEmpty(etContact.getText().toString())) {
+//                if (!TextUtils.isEmpty(etCall.getText().toString()) && !TextUtils.isEmpty(etContact.getText().toString())) {
 
                     String isbathRoom;
                     String strRentSell;
@@ -207,10 +210,13 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                             etToward.getText().toString(),
                             etEquipment.getText().toString(),
                             imgPathList,
-                            videoPath);
+                            videoPath,
+                            1);
 
-                    RentalDetailsActivity.invoke(this, bean);
-                }
+                        Intent intent = new Intent(this, RentalDetailsActivity.class);
+                        intent.putExtra("detailsBean", bean);
+                        startActivityForResult(intent, 101);
+//                }
 
                 break;
         }
@@ -403,6 +409,12 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 && resultCode == 102) {
+            setResult(3);
+            finish();
+        }
+
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:

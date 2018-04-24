@@ -45,6 +45,8 @@ public class RentalDetailsBean implements Parcelable {
     private List<String> picList;
     private String videoList;
 
+    private int isCreate;
+
     protected RentalDetailsBean(Parcel in) {
         title = in.readString();
         roomState = in.readInt();
@@ -61,6 +63,7 @@ public class RentalDetailsBean implements Parcelable {
         equipment = in.readString();
         picList = in.createStringArrayList();
         videoList = in.readString();
+        isCreate = in.readInt();
     }
 
     @Override
@@ -80,6 +83,7 @@ public class RentalDetailsBean implements Parcelable {
         dest.writeString(equipment);
         dest.writeStringList(picList);
         dest.writeString(videoList);
+        dest.writeInt(isCreate);
     }
 
     @Override
@@ -219,7 +223,15 @@ public class RentalDetailsBean implements Parcelable {
         this.videoList = videoList;
     }
 
-    public RentalDetailsBean(String title, int roomState, String refuseReason, String lessorName, String lessorPhone, String location, String distance, String floor, String area, String pattern, String bathroom, String toward, String equipment, List<String> picList, String videoList) {
+    public int getIsCreate() {
+        return isCreate;
+    }
+
+    public void setIsCreate(int isCreate) {
+        this.isCreate = isCreate;
+    }
+
+    public RentalDetailsBean(String title, int roomState, String refuseReason, String lessorName, String lessorPhone, String location, String distance, String floor, String area, String pattern, String bathroom, String toward, String equipment, List<String> picList, String videoList, int isCreate) {
 
         this.title = title;
         this.roomState = roomState;
@@ -236,5 +248,6 @@ public class RentalDetailsBean implements Parcelable {
         this.equipment = equipment;
         this.picList = picList;
         this.videoList = videoList;
+        this.isCreate = isCreate;
     }
 }

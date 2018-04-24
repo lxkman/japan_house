@@ -1,7 +1,7 @@
 package com.example.administrator.japanhouse.fragment.home;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
 import com.example.administrator.japanhouse.activity.OwnerActivity;
@@ -51,6 +50,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static com.example.administrator.japanhouse.R.id.re_top_bg;
 
 /**
  * Created by Administrator on 2018/4/8.
@@ -108,6 +109,9 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.srcollview)
     NestedScrollView scrollView;
     Unbinder unbinder2;
+    @BindView(re_top_bg)
+    RelativeLayout reTopBg;
+    private int mDistanceY;
     private int totalPage; //总的页数
     private int mPageSize = 10; //每页显示的最大的数量
     private ImageView[] ivPoints;//小圆点图片的集合
@@ -125,6 +129,7 @@ public class HomeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_home, null);
         unbinder = ButterKnife.bind(this, view);
         initViewData(view);
+        initScroll();
         return view;
     }
 
@@ -359,6 +364,29 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    private void initScroll() {
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                //滑动的距离
+                mDistanceY += scrollY - oldScrollY;
+                //toolbar的高度
+                int toolbarHeight = 300;//我写死的高度
+
+                //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
+                if (mDistanceY <= toolbarHeight) {
+                    float scale = (float) mDistanceY / toolbarHeight;
+                    float alpha = scale * 255;
+                    reTopBg.setBackgroundColor(Color.argb((int) alpha, 199, 151, 127));
+                } else {
+                    //上述虽然判断了滑动距离与toolbar高度相等的情况，但是实际测试时发现，标题栏的背景色
+                    //很少能达到完全不透明的情况，所以这里又判断了滑动距离大于toolbar高度的情况，
+                    //将标题栏的颜色设置为完全不透明状态
+                    reTopBg.setBackgroundResource(R.color.shihuangse);
+                }
+            }
+        });
+    }
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -391,7 +419,7 @@ public class HomeFragment extends BaseFragment {
             itemTjxfAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    startActivity(new Intent(mContext,NewHousedetailsActivity.class));
+                    startActivity(new Intent(mContext, NewHousedetailsActivity.class));
                 }
             });
         }
@@ -490,7 +518,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @OnClick({R.id.location_tv, R.id.search_tv, R.id.map_tv, R.id.jrdk_tv, R.id.gfbk_tv,
-            R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011,R.id.tjxf_more_tv, R.id.tjesf_more_tv,
+            R.id.fcwd_tv, R.id.znmf_tv, R.id.view_011, R.id.tjxf_more_tv, R.id.tjesf_more_tv,
             R.id.tjyxjjr_more_tv, R.id.tjzf_more_tv, R.id.tjtd_more_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -501,8 +529,8 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext, HomeSearchActivity.class));
                 break;
             case R.id.map_tv:
-                Intent intent = new Intent(mContext,HomeMapActivity.class);
-                getActivity().startActivityForResult(intent,1);
+                Intent intent = new Intent(mContext, HomeMapActivity.class);
+                getActivity().startActivityForResult(intent, 1);
                 break;
             case R.id.jrdk_tv:
                 startActivity(new Intent(mContext, Daikuan_Activity.class));
@@ -520,19 +548,19 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext, ToutiaoActivity.class));
                 break;
             case R.id.tjxf_more_tv:
-                startActivity(new Intent(mContext,NewHouseActivity.class));
+                startActivity(new Intent(mContext, NewHouseActivity.class));
                 break;
             case R.id.tjesf_more_tv:
-                startActivity(new Intent(mContext,ErshoufangActiviy.class));
+                startActivity(new Intent(mContext, ErshoufangActiviy.class));
                 break;
             case R.id.tjyxjjr_more_tv:
-                startActivity(new Intent(mContext,JjrLiebiaoActivity.class));
+                startActivity(new Intent(mContext, JjrLiebiaoActivity.class));
                 break;
             case R.id.tjzf_more_tv:
-                startActivity(new Intent(mContext,ZufangActivity.class));
+                startActivity(new Intent(mContext, ZufangActivity.class));
                 break;
             case R.id.tjtd_more_tv:
-                startActivity(new Intent(mContext,TudiActivity.class));
+                startActivity(new Intent(mContext, TudiActivity.class));
                 break;
         }
     }

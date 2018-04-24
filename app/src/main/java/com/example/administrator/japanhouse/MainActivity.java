@@ -11,19 +11,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.fragment.chat.ChatFragment;
 import com.example.administrator.japanhouse.fragment.comment.CommentFragment;
 import com.example.administrator.japanhouse.fragment.home.HomeFragment;
 import com.example.administrator.japanhouse.fragment.mine.MineFragment;
-import com.example.administrator.japanhouse.utils.SpUtils;
-import com.example.administrator.japanhouse.utils.TUtils;
-import com.orhanobut.logger.Logger;
+
+import org.zackratos.ultimatebar.UltimateBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,6 +53,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //拉伸图片覆盖标题栏
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();

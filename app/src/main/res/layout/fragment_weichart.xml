@@ -6,7 +6,8 @@
         android:background="@color/shihuangse"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dip">
+        android:layout_height="75dip"
+        android:paddingTop="25dp">
         <ImageView
             android:id="@+id/img_search"
             android:src="@drawable/sousuo_white"

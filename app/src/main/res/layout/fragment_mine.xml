@@ -49,7 +49,6 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
                     android:src="@drawable/manager_bg"
                     app:border_color="@color/white"
                     app:border_width="2dp"/>

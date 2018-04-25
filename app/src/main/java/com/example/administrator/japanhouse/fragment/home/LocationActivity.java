@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -157,6 +158,7 @@ public class LocationActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.search_tv:
+                startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
         }
     }

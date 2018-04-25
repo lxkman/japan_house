@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,12 @@ public class ToutiaoAdapter extends RecyclerView.Adapter<ToutiaoAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+            holder.zan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ToastUtils.getToast(context,"点赞");
+                }
+            });
     }
 
     @Override

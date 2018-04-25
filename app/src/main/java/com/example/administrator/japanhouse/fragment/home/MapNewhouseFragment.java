@@ -77,10 +77,10 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
         list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "1"));
-        list1.add(new OneCheckBean(false, "2"));
-        list1.add(new OneCheckBean(false, "3"));
-        list1.add(new OneCheckBean(false, "4"));
+        list1.add(new OneCheckBean(false, "一层"));
+        list1.add(new OneCheckBean(false, "二层"));
+        list1.add(new OneCheckBean(false, "三层"));
+        list1.add(new OneCheckBean(false, "四层"));
         SecView secView = new SecView(mContext);
         popupViews.add(secView.secView());
         secView.setListener(this);
@@ -123,6 +123,9 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mBaiduMap = (MapView) fifthView.findViewById(R.id.mapview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+        mBaiduMap.removeViewAt(1);//隐藏logo
+        mBaiduMap.removeViewAt(2);//隐藏比例尺
+        mBaiduMap.showZoomControls(false);// 隐藏缩放控件
 
         baiduMap = mBaiduMap.getMap();
         LatLng center = new LatLng(35.68, 139.75); // 默认 东京

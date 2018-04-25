@@ -6,22 +6,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/colorPrimary"
         >
 
         <ImageView
             android:id="@+id/act_owner_back"
-            android:padding="15dp"
+            android:padding="10dp"
             android:src="@drawable/back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_centerInParent="true"
             android:textColor="@color/white"
             android:text="@string/activity_owner_title"

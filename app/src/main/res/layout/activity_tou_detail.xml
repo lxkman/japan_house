@@ -82,7 +82,7 @@
                    android:id="@+id/neirong"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="奥术大师大所多所奥术大师大所多奥术大师大所大所多阿三大叔大叔大叔大奥术大师大所大所大所多奥术大师大所大所大所大所大所大所奥术大师大所大所大所大分公司的发送到发送到的说法是发送到发送到"
+                   android:text="北京搜狐焦点网为购房者提供北京房产信息、家居装修资讯，北京房产楼盘详情、买房流程、业主论坛、家居装修等全面内容信息，北京搜狐焦点网互联网的购房平台"
                    />
 
            </LinearLayout>
@@ -92,16 +92,27 @@
                android:layout_height="10dp"
                android:background="@color/gray1"/>
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:gravity="center|left"
-               android:drawablePadding="10dp"
-               android:drawableLeft="@drawable/tab_chat_click"
-               android:text="全部回复"
-               android:textSize="16sp"
-               android:layout_margin="10dp"
-               />
+
+           <LinearLayout
+               android:padding="10dp"
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/tab_chat_click"
+                   />
+               <TextView
+                   android:layout_marginLeft="10dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="全部回复"
+                   android:textSize="16sp"
+                   />
+           </LinearLayout>
+
+
            <View
                android:layout_width="match_parent"
                android:layout_height="2dp"
@@ -151,6 +162,8 @@
           android:layout_margin="10dp"
           />
       <LinearLayout
+          android:focusable="true"
+          android:focusableInTouchMode="true"
           android:background="@drawable/ed_shape"
          android:layout_marginLeft="10dp"
           android:layout_toLeftOf="@+id/biaoqing"

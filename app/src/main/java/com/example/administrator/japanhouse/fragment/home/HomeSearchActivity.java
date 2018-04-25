@@ -135,6 +135,7 @@ public class HomeSearchActivity extends BaseActivity {
                 .setView(R.layout.popup_home_search)
                 .setWidthAndHeight(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 .setAnimationStyle(R.style.AnimDown)
+                .setBackGroundLevel(0.5f)
                 .setViewOnclickListener(new CommonPopupWindow.ViewInterface() {
                     @Override
                     public void getChildView(View view, int layoutResId) {

@@ -28,14 +28,7 @@
                    android:layout_height="wrap_content"
                    android:text="简小姐"
                    />
-             <TextView
-                 android:id="@+id/time"
-                 android:layout_marginLeft="10dp"
-                 android:textSize="16sp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="2018.01.11"
-                 />
+
          </LinearLayout>
           <TextView
               android:id="@+id/pinglun"
@@ -49,6 +42,14 @@
                android:layout_marginTop="10dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
+               <TextView
+                   android:layout_marginTop="10dp"
+                   android:id="@+id/time"
+                   android:layout_marginLeft="15dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="2018.01.11"
+                   />
 
                <ImageView
                    android:layout_width="20dp"

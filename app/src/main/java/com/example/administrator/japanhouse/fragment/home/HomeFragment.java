@@ -164,16 +164,19 @@ public class HomeFragment extends BaseFragment {
                         switch (position) {
                             case 0:
                                 if (finalI == 0) {//二手房
-                                    startActivity(new Intent(mContext, ErshoufangActiviy.class));
+                                    intent = new Intent(getActivity(), ErshoufangActiviy.class);
+                                    getActivity().startActivityForResult(intent, 1);
                                 } else {//海外地产
                                     startActivity(new Intent(mContext, HaiWaiActivity.class));
                                 }
                                 break;
                             case 1://新房
-                                startActivity(new Intent(mContext, NewHouseActivity.class));
+                                intent = new Intent(getActivity(), NewHouseActivity.class);
+                                getActivity().startActivityForResult(intent, 1);
                                 break;
                             case 2://土地
-                                startActivity(new Intent(mContext, TudiActivity.class));
+                                intent = new Intent(getActivity(), TudiActivity.class);
+                                getActivity().startActivityForResult(intent, 1);
                                 break;
                             case 3://租房
                                 intent = new Intent(getActivity(), ZufangActivity.class);
@@ -189,7 +192,8 @@ public class HomeFragment extends BaseFragment {
                                 startActivity(new Intent(mContext, FangjiadituActivity.class));
                                 break;
                             case 7://找小区
-                                startActivity(new Intent(mContext, ZhaoxiaoquActivity.class));
+                                intent = new Intent(getActivity(), ZhaoxiaoquActivity.class);
+                                getActivity().startActivityForResult(intent, 1);
                                 break;
                             case 8://我是业主
 //                                OwnerActivity.invoke(getActivity());

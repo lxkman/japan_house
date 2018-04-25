@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.TudiActivity">
+    tools:context="com.example.administrator.japanhouse.fragment.home.ChineseLiebiaoActivity">
     <LinearLayout
         android:background="@color/shihuangse"
         android:orientation="horizontal"
@@ -68,7 +68,5 @@
         app:ddmenuUnselectedIcon="@mipmap/buttom"
         app:ddtextSelectedColor="@color/shihuangse"
         app:ddtextUnselectedColor="@color/drop_down_unselected"
-        app:ddunderlineColor="#F8F9F8"
-
-        />
+        app:ddunderlineColor="#F8F9F8" />
 </LinearLayout>

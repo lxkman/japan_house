@@ -212,7 +212,8 @@
         <activity android:name=".fragment.home.ShendengFirstStepActivity" />
         <activity android:name=".fragment.home.ShendengSecondStepActivity" />
         <activity android:name=".fragment.home.ShendengListActivity" />
-        <activity android:name=".fragment.home.YanjiuDetailActivity"></activity>
+        <activity android:name=".fragment.home.YanjiuDetailActivity" />
+        <activity android:name=".fragment.home.ChineseLiebiaoActivity"></activity>
     </application>
 
 </manifest>

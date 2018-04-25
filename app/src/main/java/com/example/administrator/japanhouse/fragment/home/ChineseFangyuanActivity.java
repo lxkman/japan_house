@@ -56,7 +56,16 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
         }
         fenleiRecycler.setNestedScrollingEnabled(false);
         fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
-        fenleiRecycler.setAdapter(new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList));
+        FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList);
+        fenleiRecycler.setAdapter(fenleiAdapter);
+        fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(mContext, ChineseLiebiaoActivity.class);
+                intent.putExtra("type",position+"");
+                startActivity(intent);
+            }
+        });
 
         List<String> likeList = new ArrayList<>();
         likeList.add("");

@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="provinces">
+
         <item>广东</item>
         <item>北京</item>
         <item>福建</item>

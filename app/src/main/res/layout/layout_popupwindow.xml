@@ -8,53 +8,83 @@
     android:layout_weight="1"
     android:layout_height="1dip"></View>
     <LinearLayout
+
+        android:gravity="center|left"
         android:paddingTop="15dip"
-        android:gravity="center"
-        android:layout_width="130dip"
+        android:paddingLeft="15dip"
+        android:layout_width="120dip"
         android:layout_height="150dip"
         android:background="@drawable/pop_bg"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/tv_saoyisao"
-            android:drawableLeft="@mipmap/saoyisao"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/saoyisao"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:drawablePadding="10dip"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/saoyisao"
+                android:layout_width="17dip"
+                android:layout_height="17dip" />
+            <TextView
+                android:layout_marginLeft="10dip"
+                android:id="@+id/tv_saoyisao"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/saoyisao"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:background="#eee"></View>
-        <TextView
-            android:id="@+id/tv_weiliao"
-            android:layout_gravity="center"
-            android:drawableLeft="@mipmap/faqiweiliao"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/faqiweiliao"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:drawablePadding="10dip"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/faqiweiliao"
+                android:layout_width="17dip"
+                android:layout_height="17dip" />
+            <TextView
+                android:layout_marginLeft="10dip"
+                android:id="@+id/tv_weiliao"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/faqiweiliao"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:background="#eee"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/yonghuchazhao"
+                android:layout_width="17dip"
+                android:layout_height="17dip" />
         <TextView
+            android:layout_marginLeft="10dip"
             android:id="@+id/tv_search_manager"
-            android:layout_gravity="center"
-            android:drawableLeft="@mipmap/yonghuchazhao"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:text="@string/zhaojingjiren"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:drawablePadding="10dip"/>
+            />
+
     </LinearLayout>
+        </LinearLayout>
 
 </LinearLayout>

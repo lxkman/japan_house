@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:id="@+id/activity_login"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +8,11 @@
     android:orientation="vertical"
     android:background="@drawable/login_bg"
     tools:context="com.example.administrator.japanhouse.login.LoginActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <LinearLayout
         android:layout_marginTop="20dip"
         android:orientation="horizontal"
@@ -144,8 +149,11 @@
         android:background="@drawable/round_shihuangse"
         android:layout_width="match_parent"
         android:layout_height="45dip" />
+
+    </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="28dip"
+        android:layout_marginBottom="100dip"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dip">
@@ -185,6 +193,8 @@
             android:layout_height="match_parent" />
     </LinearLayout>
     <LinearLayout
+        android:layout_marginBottom="40dip"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="18dip"
         android:paddingRight="20dip"
         android:paddingLeft="20dip"
@@ -217,4 +227,4 @@
             android:layout_height="45dip" />
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

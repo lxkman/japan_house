@@ -36,7 +36,7 @@
                         android:layout_marginLeft="15dip"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/sousuo"
-                        android:layout_width="20dip"
+                        android:layout_width="15dip"
                         android:layout_height="20dip" />
                     <TextView
                         android:id="@+id/search_tv"
@@ -45,7 +45,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:textSize="13sp"
-                        android:hint="请输入查询内容"
+                        android:hint="挑好房，上F.L.C"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>

@@ -94,6 +94,13 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 dialog.dismiss();
             }
         });
+        dialog.getView(R.id.tv_singup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                finish();
+            }
+        });
         dialog.show();
 
     }

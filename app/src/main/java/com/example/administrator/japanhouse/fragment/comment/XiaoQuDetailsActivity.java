@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -51,6 +53,13 @@ public class XiaoQuDetailsActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.tv_suiyi)
     TextView tvSuiyi;
+    @BindView(R.id.mScrollView)
+    NestedScrollView mScrollView;
+    @BindView(R.id.re_top_bg)
+    RelativeLayout re_top_bg;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
@@ -69,9 +78,34 @@ public class XiaoQuDetailsActivity extends BaseActivity {
         initViewPager();
         //猜你喜欢
         initLoveRecycler();
+        initScroll();
 
     }
+    private void initScroll() {
+        mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                //滑动的距离
+                mDistanceY += scrollY - oldScrollY;
+                //toolbar的高度
+                int toolbarHeight = 300;//我写死的高度
 
+                //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
+                if (mDistanceY <= toolbarHeight) {
+                    float scale = (float) mDistanceY / toolbarHeight;
+                    float alpha = scale * 255;
+                    re_top_bg.setBackgroundColor(Color.argb((int) alpha, 199, 151, 127));
+                    tv_title.setVisibility(View.GONE);
+                } else {
+                    //上述虽然判断了滑动距离与toolbar高度相等的情况，但是实际测试时发现，标题栏的背景色
+                    //很少能达到完全不透明的情况，所以这里又判断了滑动距离大于toolbar高度的情况，
+                    //将标题栏的颜色设置为完全不透明状态
+                    re_top_bg.setBackgroundResource(R.color.shihuangse);
+                    tv_title.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
 //            mBaseFragmentList.add(new VidioFragment());

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:id="@+id/activity_register"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.login.RegisterActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <LinearLayout
         android:background="@color/shihuangse"
         android:orientation="horizontal"
@@ -220,8 +224,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
+</LinearLayout>
     <LinearLayout
-        android:layout_marginTop="40dip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dip"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dip">
@@ -261,7 +267,8 @@
             android:layout_height="match_parent" />
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="10dip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dip"
         android:paddingRight="20dip"
         android:paddingLeft="20dip"
         android:orientation="horizontal"
@@ -272,25 +279,25 @@
             android:src="@drawable/weixin"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
         <ImageView
             android:id="@+id/img_weibo"
             android:src="@drawable/weibo"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
         <ImageView
             android:id="@+id/img_qq"
             android:src="@drawable/qqa"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
         <ImageView
             android:id="@+id/img_line"
             android:src="@drawable/linea"
             android:layout_weight="1"
             android:layout_width="0dip"
-            android:layout_height="50dip" />
+            android:layout_height="45dip" />
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

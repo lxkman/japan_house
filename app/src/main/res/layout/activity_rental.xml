@@ -129,7 +129,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_call"
@@ -181,7 +181,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_contact"
@@ -231,7 +231,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_location"
@@ -273,7 +273,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_distance"
@@ -326,7 +326,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_floor"
@@ -379,7 +379,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_area"
@@ -433,7 +433,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_pattern"
@@ -537,7 +537,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_toward"
@@ -579,7 +579,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_equipment"
@@ -621,7 +621,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_upPic"
@@ -655,7 +655,7 @@
                 >
 
                 <TextView
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/activity_rental_upVideo"

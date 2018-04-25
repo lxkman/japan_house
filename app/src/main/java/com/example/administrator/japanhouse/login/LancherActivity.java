@@ -61,17 +61,17 @@ public class LancherActivity extends BaseActivity {
             @Override
             public void run() {
                 boolean guide = SharedPreferencesUtils.getInstace(LancherActivity.this).getBooleanPreference("guide", false);
-//                if (!guide) {
+                if (!guide) {
                     Intent intent = new Intent(LancherActivity.this, GuidePageActivity.class);
                     startActivity(intent);
                     finish();
 
-//                } else {
-//                    Intent intent = new Intent(LancherActivity.this, LoginActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//
-//                }
+                } else {
+                    Intent intent = new Intent(LancherActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
             }
         }, 1500);
     }

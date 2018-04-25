@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
@@ -53,7 +53,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.private_xieyi)
     TextView privateXieyi;
     @BindView(R.id.activity_register)
-    LinearLayout activityRegister;
+    RelativeLayout activityRegister;
     @BindView(R.id.check_quyu)
     TextView checkQuyu;
     private View popupView;

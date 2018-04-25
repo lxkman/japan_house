@@ -99,20 +99,20 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
                <ImageView
+                   android:layout_marginTop="3dp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:src="@drawable/tab_chat_click"
+                   android:src="@drawable/huifu_3xxx"
                    />
+
                <TextView
-                   android:layout_marginLeft="10dp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="10dp"
                    android:text="全部回复"
-                   android:textSize="16sp"
-                   />
+                   android:textColor="@color/black"
+                   android:textSize="16sp" />
            </LinearLayout>
-
-
            <View
                android:layout_width="match_parent"
                android:layout_height="2dp"

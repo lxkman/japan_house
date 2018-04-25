@@ -108,12 +108,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:layout_marginTop="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                      android:src="@drawable/tab_chat_click"
+                      android:src="@drawable/huifu_3xxx"
                     />
                 <TextView
                     android:id="@+id/huida"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="共10个回答"

@@ -34,7 +34,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         tijiao.setOnClickListener(this);
         img_beak.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

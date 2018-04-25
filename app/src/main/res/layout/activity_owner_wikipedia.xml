@@ -5,16 +5,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:background="@color/colorPrimary"
         >
 
         <ImageView
             android:id="@+id/act_owner_wikipedia_back"
-            android:padding="15dp"
+            android:padding="10dp"
             android:src="@drawable/back"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             />
 
         <TextView

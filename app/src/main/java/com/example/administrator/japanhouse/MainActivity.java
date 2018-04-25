@@ -47,7 +47,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private CommentFragment commentFragment;
     private MineFragment mineFragment;
     private long preTime;
-
     private FragmentManager manager;
 
     @Override

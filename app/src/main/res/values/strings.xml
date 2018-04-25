@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FLC用户端</string>
+    <string name="app_name">FLC</string>
     <string name="shouye">首页</string>
     <string name="weiliao">微聊</string>
     <string name="tuijian">推荐</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FLC用户端</string>
+    <string name="app_name">FLC</string>
     <string name="shouye">首页</string>
     <string name="weiliao">微聊</string>
     <string name="tuijian">推荐</string>
@@ -291,5 +291,5 @@
     <string name="woshiyezhu">我是业主</string>
     <string name="mianfeikanfang">免费看房</string>
     <string name="haiwaidichan">海外地产</string>
-
+    <string name="forgetpassword">忘记密码</string>
 </resources>

@@ -101,7 +101,7 @@ public class Calculator_DetilsActivity extends AppCompatActivity implements View
                 break;
 
             case R.id.liner1:
-                text_benxi.setTextColor(getColor(R.color.colorAccent));
+                text_benxi.setTextColor(getColor(R.color.colorPrimaryDark));
                 text_benjin.setTextColor(getColor(R.color.black));
                 xian1.setVisibility(View.VISIBLE);
                 xian2.setVisibility(View.INVISIBLE);
@@ -112,7 +112,7 @@ public class Calculator_DetilsActivity extends AppCompatActivity implements View
                 EventBus.getDefault().postSticky(new FragEventBug(shoufu,daikuan,lixi));
                 break;
             case R.id.liner2:
-                text_benjin.setTextColor(getColor(R.color.colorAccent));
+                text_benjin.setTextColor(getColor(R.color.colorPrimaryDark));
                 text_benxi.setTextColor(getColor(R.color.black));
                 xian2.setVisibility(View.VISIBLE);
                 xian1.setVisibility(View.INVISIBLE);

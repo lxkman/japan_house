@@ -37,6 +37,8 @@ class MoreView {
     private List<OneCheckBean> mItemList3;
     private List<OneCheckBean> mItemList4;
     private List<OneCheckBean> mItemList5;
+    private List<OneCheckBean> mItemList6;
+    private List<OneCheckBean> mItemList7;
 
     MoreView(Context context) {
         this.context = context;
@@ -85,6 +87,14 @@ class MoreView {
         mItemList5.add(new OneCheckBean(false,"电视"));
         mItemList5.add(new OneCheckBean(false,"空调"));
         mItemList5.add(new OneCheckBean(false,"冰箱"));
+        mItemList6 = new ArrayList<>();
+        mItemList6.add(new OneCheckBean(false,"3室1厅"));
+        mItemList6.add(new OneCheckBean(false,"2室1厅"));
+        mItemList6.add(new OneCheckBean(false,"1室1厅"));
+        mItemList6.add(new OneCheckBean(false,"公寓"));
+        mItemList7 = new ArrayList<>();
+        mItemList7.add(new OneCheckBean(false,"地板"));
+        mItemList7.add(new OneCheckBean(false,"榻榻米"));
         initData();
     }
 
@@ -125,6 +135,12 @@ class MoreView {
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,mItemList3));
             }else if (item.getName().equals("面积（平米）")){
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,mItemList4));
+            }else if (item.getName().equals("格局")){
+                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,mItemList6));
+            }else if (item.getName().equals("洋室")){
+                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,mItemList7));
+            }else if (item.getName().equals("和室")){
+                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,mItemList7));
             }else {
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item,mItemList5));
             }

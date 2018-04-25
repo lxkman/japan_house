@@ -257,7 +257,6 @@
                 android:layout_height="1dip"></View>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:background="#fff"

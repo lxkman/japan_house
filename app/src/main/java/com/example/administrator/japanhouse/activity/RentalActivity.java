@@ -103,6 +103,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
     PicRentalAdapter adapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

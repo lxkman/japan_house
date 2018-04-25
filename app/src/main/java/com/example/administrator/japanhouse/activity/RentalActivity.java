@@ -1,31 +1,21 @@
 package com.example.administrator.japanhouse.activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -106,6 +96,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
     //相册，拍照
     private List<String> cameraList;
+    private List<String> cameraListvideo;
     private List<String> imgPathList = new ArrayList<>();
 
     private String videoPath;
@@ -124,6 +115,9 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
         cameraList = new ArrayList<>();
         cameraList.add("从相册中选择");
         cameraList.add("拍照");
+        cameraListvideo = new ArrayList<>();
+        cameraListvideo.add("从相册中选择");
+        cameraListvideo.add("拍摄视频");
 
         //显示平方米
         SpannableString m2 = new SpannableString("m2");
@@ -339,7 +333,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 })
                 .setCanceledOnTouchOutside(true)  //设置是否可点击其他地方取消dialog
                 .build()
-                .setDatas(cameraList)
+                .setDatas(cameraListvideo)
                 .show();
     }
 

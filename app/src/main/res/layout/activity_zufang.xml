@@ -37,7 +37,7 @@
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/sousuo"
                         android:layout_width="15dip"
-                        android:layout_height="20dip" />
+                        android:layout_height="15dip" />
                     <TextView
                         android:id="@+id/search_tv"
                         android:background="@null"

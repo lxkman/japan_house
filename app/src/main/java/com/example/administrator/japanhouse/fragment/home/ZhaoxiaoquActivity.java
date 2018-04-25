@@ -149,9 +149,12 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                 break;
             //地图
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
+                setResult(2);
+                finish();
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

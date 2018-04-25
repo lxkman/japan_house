@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -38,7 +39,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
-    EditText searchTv;
+    TextView searchTv;
 
     private String headers[] = {"价格", "面积", "车站距离"};
     private List<View> popupViews = new ArrayList<>();
@@ -148,8 +149,11 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 finish();
                 break;
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             case R.id.img_message:
+                setResult(2);
+                finish();
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

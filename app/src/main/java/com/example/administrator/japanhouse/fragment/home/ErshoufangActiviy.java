@@ -75,10 +75,10 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
         list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "1"));
-        list1.add(new OneCheckBean(false, "2"));
-        list1.add(new OneCheckBean(false, "3"));
-        list1.add(new OneCheckBean(false, "4"));
+        list1.add(new OneCheckBean(false, "一层"));
+        list1.add(new OneCheckBean(false, "二层"));
+        list1.add(new OneCheckBean(false, "三层"));
+        list1.add(new OneCheckBean(false, "四层"));
         SecView secView = new SecView(ErshoufangActiviy.this);
         popupViews.add(secView.secView());
         secView.setListener(this);
@@ -165,9 +165,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 break;
             //地图
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
+                setResult(2);
+                finish();
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

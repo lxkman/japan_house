@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
         ed_pinglun = (EditText) findViewById(R.id.ed_pinglun);
         img_beak.setOnClickListener(this);
         send.setOnClickListener(this);
+        biaoqing.setOnClickListener(this);
        //加载适配器
         detail_recy.setLayoutManager(new LinearLayoutManager(this));
         detail_recy.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
@@ -67,7 +69,11 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
             case R.id.send:
                 //获取输入框信息
                 String pinglun = ed_pinglun.getText().toString();
-                Toast.makeText(this,pinglun,Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(pinglun)){
+                    Toast.makeText(this,pinglun,Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"评论为空",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.biaoqing:
                 Toast.makeText(this,"表情",Toast.LENGTH_SHORT).show();

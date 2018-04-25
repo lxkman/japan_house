@@ -14,6 +14,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -67,7 +68,7 @@ public class LancherActivity extends BaseActivity {
                     finish();
 
                 } else {
-                    Intent intent = new Intent(LancherActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
 

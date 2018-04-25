@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.login;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
@@ -60,7 +62,7 @@ public class BindPhoneActivity extends BaseActivity {
                 SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                 break;
             case R.id.btn_find_pass:
-
+                startActivity(new Intent(BindPhoneActivity.this, MainActivity.class));
                 break;
             case R.id.check_quyu:
                 initPop();

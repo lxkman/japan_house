@@ -1,9 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.japanhouse.fragment.home.FangjiadituActivity">
-
-</android.support.constraint.ConstraintLayout>
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="@string/activity_fangjia"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:visibility="invisible"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:text="@string/denglu"
+            android:gravity="center"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"/>
+    <Button
+        android:id="@+id/btn_location"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/map_location_iv"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="15dp" />
+    <LinearLayout
+        android:id="@+id/layout_pop"
+        android:layout_marginLeft="20dip"
+        android:layout_marginBottom="25dip"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btn_location"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:background="@drawable/map_bg_kuang">
+        <TextView
+            android:clickable="false"
+            android:paddingLeft="15dip"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:textColor="#333"
+            android:text="北京"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:clickable="false"
+            android:paddingRight="5dip"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/shihuangse"
+            android:text="17500元/㎡"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:clickable="false"
+            android:layout_marginRight="15dip"
+            android:src="@drawable/to_buttom_chengse"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
@@ -190,9 +191,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 break;
             //地图
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
+                startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

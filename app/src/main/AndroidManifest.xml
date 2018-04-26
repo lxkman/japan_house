@@ -143,7 +143,9 @@
         <activity android:name=".fragment.mine.DingDanActivity" />
         <activity android:name=".fragment.mine.DingYueActivity" />
         <activity android:name=".fragment.mine.ShouCangActivity" />
-        <activity android:name=".fragment.home.LocationActivity" />
+        <activity
+            android:name=".fragment.home.LocationActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".login.PeopleXieyiActivity" />
         <activity android:name=".login.PrivateActivity" />
         <activity android:name=".fragment.chat.MyZxingActivity" />
@@ -215,7 +217,10 @@
         <activity android:name=".fragment.home.YanjiuDetailActivity" />
         <activity android:name=".fragment.home.ChineseLiebiaoActivity" />
         <activity android:name=".fragment.home.ZufangListActivity" />
-        <activity android:name=".fragment.comment.ZhongguoDetailsActivity"></activity>
+        <activity android:name=".fragment.comment.ZhongguoDetailsActivity" />
+        <activity android:name=".fragment.home.TongqinActivity" />
+        <activity android:name=".fragment.home.TongqinSearchActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
     </application>
 
 </manifest>

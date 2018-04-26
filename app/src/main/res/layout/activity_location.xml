@@ -19,13 +19,14 @@
             android:src="@drawable/home_back_iv"
             android:layout_gravity="center_vertical"
             android:padding="10dp"/>
-        <TextView
+        <EditText
             android:id="@+id/search_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="30dp"
-            android:text="请输入城市名"
+            android:hint="请输入城市名"
+            android:textSize="14sp"
             android:paddingLeft="10dp"
             android:textColor="@color/text_gray"
             android:drawableLeft="@drawable/home_search_icon_iv"

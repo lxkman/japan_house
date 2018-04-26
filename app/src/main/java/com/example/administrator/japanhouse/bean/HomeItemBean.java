@@ -9,6 +9,15 @@ import java.io.Serializable;
 public class HomeItemBean implements Serializable {
     private String title;
     private int img;
+    private boolean isChecked;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public String getTitle() {
         return title;
@@ -29,5 +38,11 @@ public class HomeItemBean implements Serializable {
     public HomeItemBean(String title, int img) {
         this.title = title;
         this.img = img;
+    }
+
+    public HomeItemBean(boolean isChecked, int img, String title) {
+        this.isChecked = isChecked;
+        this.img = img;
+        this.title = title;
     }
 }

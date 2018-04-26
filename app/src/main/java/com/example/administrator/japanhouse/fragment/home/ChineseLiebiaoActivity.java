@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
@@ -138,15 +139,15 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_china_like, mList);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setAdapter(liebiaoAdapter);
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
-//                startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
+//                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+                startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
                 /*switch (type){
                     case "0":
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
@@ -192,9 +193,11 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 break;
             //地图
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
+                startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

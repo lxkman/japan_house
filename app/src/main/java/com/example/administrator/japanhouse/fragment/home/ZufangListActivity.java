@@ -14,10 +14,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.mine.LiShiJiLuActivity;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -117,8 +120,28 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
          * */
         View fifthView = LayoutInflater.from(ZufangListActivity.this).inflate(R.layout.activity_zufang_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
+        TextView shipinTv = (TextView) fifthView.findViewById(R.id.shipin_tv);
+        TextView tongqinTv = (TextView) fifthView.findViewById(R.id.tongqin_tv);
+        TextView jiluTv = (TextView) fifthView.findViewById(R.id.jilu_tv);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
-
+        shipinTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TUtils.showShort(mContext,"视频房源");
+            }
+        });
+        tongqinTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext,TongqinActivity.class));
+            }
+        });
+        jiluTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, LiShiJiLuActivity.class));
+            }
+        });
         initData();
     }
 
@@ -185,9 +208,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 break;
             //地图
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
+                startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

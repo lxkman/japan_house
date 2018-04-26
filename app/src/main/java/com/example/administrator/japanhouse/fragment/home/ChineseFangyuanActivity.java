@@ -17,6 +17,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
         likeList.add("");
         likeRecycler.setNestedScrollingEnabled(false);
         likeRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, likeList);
+        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_china_like, likeList);
         likeRecycler.setAdapter(likeAdapter);
         likeAdapter.setOnItemClickListener(this);
     }
@@ -94,7 +95,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext, HaiWaiDetailsActivity.class));
+        startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {

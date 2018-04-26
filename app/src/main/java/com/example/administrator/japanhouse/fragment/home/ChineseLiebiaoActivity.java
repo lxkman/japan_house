@@ -21,6 +21,7 @@ import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActiv
 import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.yyydjk.library.DropDownMenu;
 
@@ -145,6 +146,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+//                startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
                 /*switch (type){
                     case "0":
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));

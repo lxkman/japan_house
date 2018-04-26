@@ -118,7 +118,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_tudi, mList);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setAdapter(liebiaoAdapter);

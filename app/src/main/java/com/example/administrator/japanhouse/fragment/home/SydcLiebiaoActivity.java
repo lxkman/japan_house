@@ -44,7 +44,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"价格", "车站距离", "面积", "地段"};
+    private String headers[] = {"售价", "面积", "车站距离", "地段"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -78,11 +78,12 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "100米以内"));
-        list1.add(new OneCheckBean(false, "200米以内"));
-        list1.add(new OneCheckBean(false, "500米以内"));
-        list1.add(new OneCheckBean(false, "1000米以内"));
-        list1.add(new OneCheckBean(false, "2000米以内"));
+        list1.add(new OneCheckBean(false, "20平方米以下"));
+        list1.add(new OneCheckBean(false, "20-40平方米"));
+        list1.add(new OneCheckBean(false, "40-80平方米"));
+        list1.add(new OneCheckBean(false, "80-100平方米"));
+        list1.add(new OneCheckBean(false, "100平方米以上"));
+
         SecView secView = new SecView(SydcLiebiaoActivity.this);
         popupViews.add(secView.secView());
         secView.setListener(this);
@@ -93,11 +94,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "20平方米以下"));
-        list2.add(new OneCheckBean(false, "20-40平方米"));
-        list2.add(new OneCheckBean(false, "40-80平方米"));
-        list2.add(new OneCheckBean(false, "80-100平方米"));
-        list2.add(new OneCheckBean(false, "100平方米以上"));
+        list2.add(new OneCheckBean(false, "100米以内"));
+        list2.add(new OneCheckBean(false, "200米以内"));
+        list2.add(new OneCheckBean(false, "500米以内"));
+        list2.add(new OneCheckBean(false, "1000米以内"));
+        list2.add(new OneCheckBean(false, "2000米以内"));
         SecView threeView = new SecView(SydcLiebiaoActivity.this);
         popupViews.add(threeView.secView());
         threeView.insertData(list2, dropDownMenu);
@@ -137,7 +138,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_sydc, mList);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setAdapter(liebiaoAdapter);

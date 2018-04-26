@@ -18,6 +18,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -132,14 +133,14 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mList);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setAdapter(liebiaoAdapter);
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(ErshoufangActiviy.this, NewHousedetailsActivity.class));
+                startActivity(new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class));
             }
         });
 

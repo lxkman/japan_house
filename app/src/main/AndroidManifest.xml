@@ -214,7 +214,8 @@
         <activity android:name=".fragment.home.ShendengListActivity" />
         <activity android:name=".fragment.home.YanjiuDetailActivity" />
         <activity android:name=".fragment.home.ChineseLiebiaoActivity" />
-        <activity android:name=".fragment.home.ZufangListActivity"></activity>
+        <activity android:name=".fragment.home.ZufangListActivity" />
+        <activity android:name=".fragment.comment.ZhongguoDetailsActivity"></activity>
     </application>
 
 </manifest>

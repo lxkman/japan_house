@@ -15,13 +15,13 @@
             android:focusable="true">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="340dp"
                 android:orientation="vertical"
                 android:background="@drawable/home_bg">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="65dp">
+                    android:layout_marginTop="85dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:layout_height="150dp"
                 android:orientation="vertical"
                 android:background="@drawable/home_item_bg"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="260dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp">
                 <android.support.v4.view.ViewPager
@@ -135,13 +135,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:ellipsize="marquee"
+                        android:ellipsize="end"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:text="最新活动地址：北京市海淀区中关村软件园"
+                        android:text="最新活动地址：北京市海淀区中关村软件园就是这"
                         android:textColor="@color/text_black"
                         android:paddingLeft="5dp"/>
                 </LinearLayout>
@@ -433,7 +433,7 @@
         android:id="@+id/re_top_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="25dp"
+        android:paddingTop="32dp"
         android:paddingBottom="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -471,7 +471,7 @@
                 android:layout_marginLeft="25dp"/>
         </RelativeLayout>
         <TextView
-            android:paddingTop="15dp"
+            android:paddingTop="19dp"
             android:id="@+id/map_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -481,6 +481,6 @@
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/home_map_iv"
-            android:drawablePadding="10dp"/>
+            android:drawablePadding="6dp"/>
     </RelativeLayout>
 </RelativeLayout>

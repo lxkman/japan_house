@@ -114,7 +114,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         likeList.add("");
         tuijianRecycler.setNestedScrollingEnabled(false);
         tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, likeList);
+        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_zufang_tuijian, likeList);
         tuijianRecycler.setAdapter(likeAdapter);
         likeAdapter.setOnItemClickListener(this);
 

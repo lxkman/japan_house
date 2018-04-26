@@ -244,7 +244,7 @@ public class HomeFragment extends BaseFragment {
         //-----item导航栏-----
 
         //-----城市探探-----
-        tantanTv.requestFocus();
+//        tantanTv.requestFocus();
         //-----城市探探-----
 
         //-----banner-----
@@ -395,10 +395,11 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
+//        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
     }
 
     @Override

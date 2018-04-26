@@ -116,7 +116,6 @@
         <activity android:name=".login.BindPhoneActivity" />
         <!-- <activity android:name=".login.LauncherActivity"/> -->
         <activity android:name=".login.GuidePageActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".fragment.chat.SearchActivity" />
         <activity android:name=".fragment.chat.StartWechatActivity" />
         <activity android:name=".fragment.chat.SearchManagerActivity" />
@@ -221,6 +220,9 @@
         <activity android:name=".fragment.home.TongqinActivity" />
         <activity android:name=".fragment.home.TongqinSearchActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".fragment.comment.ZhongguoDetailsActivity"></activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".activity.AgentListActivity"/>
     </application>
 
 </manifest>

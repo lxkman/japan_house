@@ -293,4 +293,6 @@
     <string name="haiwaidichan">海外不動産</string>
     <string name="forgetpassword">海外不動産</string>
     <string name="activity_fangjia">価格地図</string>
+    <string name="act_chat_title">顾问姓名</string>
+    <string name="activity_agentlist_title">经纪人列表</string>
 </resources>

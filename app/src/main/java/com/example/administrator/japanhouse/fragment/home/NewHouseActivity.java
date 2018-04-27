@@ -137,7 +137,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivityForResult(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class), 1);
+                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
             }
         });
 
@@ -180,12 +180,5 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == 4) {
-            setResult(2);
-            finish();
-        }
-    }
+
 }

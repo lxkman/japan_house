@@ -18,11 +18,6 @@ import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
-import java.util.HashMap;
-
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
-
 
 /**
  * Created by lxk on 2017/6/30.
@@ -64,6 +59,7 @@ public class GuidePageActivity extends BaseActivity {
                 public void onClick(View v) {
                     SharedPreferencesUtils.getInstace(GuidePageActivity.this).setBooleanPreference( "guide", true);
                     Intent intent = new Intent(GuidePageActivity.this, MainActivity.class);
+                    intent.putExtra("CheckCharTag","CheckHome");
                     startActivity(intent);
 //                    HashMap<String, Boolean> hashMap = new HashMap<>();
 //                    //会话类型 以及是否聚合显示

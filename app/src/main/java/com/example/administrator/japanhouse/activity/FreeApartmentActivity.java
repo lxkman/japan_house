@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.FreeApartmentAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -60,8 +61,10 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 break;
 
             case R.id.act_apartment_msg:
-                setResult(2);
-                finish();
+                removeAllActivitys();
+                Intent intent=new Intent(FreeApartmentActivity.this, MainActivity.class);
+                intent.putExtra("CheckCharTag","CheckChar");
+                startActivity(intent);
                 break;
         }
     }

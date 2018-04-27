@@ -1,6 +1,5 @@
 package com.example.administrator.japanhouse;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -48,6 +47,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MineFragment mineFragment;
     private long preTime;
     private FragmentManager manager;
+    private String checkCharTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_main);
+        checkCharTag = getIntent().getStringExtra("CheckCharTag");
         ButterKnife.bind(this);
         initView();
     }
@@ -95,6 +96,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rbChat.setOnClickListener(this);
         rbComment.setOnClickListener(this);
         rbMine.setOnClickListener(this);
+        if (checkCharTag.equals("CheckChar")){
+            rbChat.setChecked(true);
+            if (chatFragment == null) {
+                chatFragment = new ChatFragment();
+            }
+            addFragments(chatFragment);
+        }else if (checkCharTag.equals("CheckHome")){
+            rbHome.setChecked(true);
+            if (homeFragment == null) {
+                homeFragment = new HomeFragment();
+            }
+            addFragments(homeFragment);
+        }
     }
 
     @Override
@@ -138,23 +152,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == 2) {
-            rbChat.setChecked(true);
-            if (chatFragment == null) {
-                chatFragment = new ChatFragment();
-            }
-            addFragments(chatFragment);
-        }
 
-        if (requestCode == 1 && resultCode == 4) {
-            rbMine.setChecked(true);
-            if (mineFragment == null) {
-                mineFragment = new MineFragment();
-            }
-            addFragments(mineFragment);
-        }
-    }
 }

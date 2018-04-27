@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,6 +37,7 @@ import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.utils.OpenClientUtil;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 
@@ -403,8 +405,10 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                 finish();
                 break;
             case R.id.message_char:
-                setResult(5);
-                finish();
+                removeAllActivitys();
+                Intent intent=new Intent(MapActivity.this, MainActivity.class);
+                intent.putExtra("CheckCharTag","CheckChar");
+                startActivity(intent);
                 break;
         }
     }

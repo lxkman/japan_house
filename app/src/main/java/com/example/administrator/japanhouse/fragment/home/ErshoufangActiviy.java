@@ -138,21 +138,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
             }
         });
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == 4) {
-            setResult(2);
-            finish();
-        }
-
-    }
 
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.OwnerAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -62,13 +63,15 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
                 break;
 
             case R.id.act_owner_message:
-                setResult(2);
-                finish();
+                removeAllActivitys();
+                Intent intent=new Intent(OwnerActivity.this, MainActivity.class);
+                intent.putExtra("CheckCharTag","CheckChar");
+                startActivity(intent);
                 break;
 
             case R.id.act_owner_rental:
-                Intent intent = new Intent(this, RentalActivity.class);
-                startActivityForResult(intent, 10);
+                Intent intent1 = new Intent(this, RentalActivity.class);
+                startActivityForResult(intent1, 10);
                 break;
 
             case R.id.act_owner_prices:

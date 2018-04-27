@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 
@@ -48,7 +49,7 @@ public class NewhouseFragment extends BaseFragment {
         if (mLiebiaoAdapter == null) {
             mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,mList);
         }
-        mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+        mrecycler.setLayoutManager(new LinearLayoutManager((MainActivity)mContext, LinearLayoutManager.VERTICAL,false));
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setAdapter(mLiebiaoAdapter);
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

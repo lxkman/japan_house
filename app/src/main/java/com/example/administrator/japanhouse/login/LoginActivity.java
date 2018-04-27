@@ -20,13 +20,9 @@ import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 
 public class LoginActivity extends BaseActivity {
 
@@ -90,8 +86,9 @@ public class LoginActivity extends BaseActivity {
             case R.id.btn_login:
                 finish();
                 SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid", "1");
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                HashMap<String, Boolean> hm = new HashMap<>();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("CheckCharTag","CheckHome");
+                startActivity(intent);//                HashMap<String, Boolean> hm = new HashMap<>();
 //                //会话类型 以及是否聚合显示
 //                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
 ////        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);

@@ -24,11 +24,7 @@ import com.orhanobut.logger.Logger;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
-import java.util.HashMap;
 import java.util.Locale;
-
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 
 /**
  * Created by Administrator on 2017/8/24.
@@ -73,6 +69,7 @@ public class LancherActivity extends BaseActivity {
 
                 } else {
                     Intent intent = new Intent(LancherActivity.this, MainActivity.class);
+                    intent.putExtra("CheckCharTag","CheckHome");
                     startActivity(intent);
 //                    HashMap<String, Boolean> hashMap = new HashMap<>();
 //                    //会话类型 以及是否聚合显示

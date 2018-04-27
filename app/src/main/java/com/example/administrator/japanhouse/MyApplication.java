@@ -2,6 +2,9 @@ package com.example.administrator.japanhouse;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.lzy.okgo.OkGo;
@@ -21,6 +24,8 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import okhttp3.OkHttpClient;
 
 /**
@@ -30,6 +35,8 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
     private static MyApplication application;
 
+    public static final String token1 = "yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,12 +45,44 @@ public class MyApplication extends Application {
         SDKInitializer.initialize(this);
         setLogger();
         setOkGo();//OkGo----第三方网络框架
+
+        initRc();
+    }
+
+    private void initRc() {
+        RongIM.init(this);
+
+        /**
+         * f2+AlWV8zuooyGsXatiiuZtacAbWKJAKs7xt/96ZapGfFyCIuQAUQ6GvccmqXXIgyZaVJawFDNQXfFYeg33Oyw==111111
+         * zZpOAITWWL4fpEnEryMT6W7tnvnoFRHtvRSk65MeRaWjhNUpICiAMeAsdWqpv9eZkCcfaLVPfU4emRfjS8IkRA==123456
+         * yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==12345
+         */
+
+
+        RongIM.connect(token1, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Log.e("MainActivity", "——onSuccess—-" +
+                        s.toString());
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                Log.e("MainActivity", "——onError—-" +
+                        errorCode);
+            }
+
+            @Override
+            public void onTokenIncorrect() {
+                //Connect Token 失效的状态处理，需要重新获取 Token
+            }
+        });
     }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-//        MultiDex.install(this);
+        MultiDex.install(this);
     }
 
 

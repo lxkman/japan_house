@@ -129,7 +129,7 @@
                                 android:layout_width="70dip"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="17500万"
+                                android:text="17500万/㎡"
                                 android:textColor="@color/shihuangse"
                                 android:textSize="14sp" />
                         </LinearLayout>

@@ -85,7 +85,9 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                Intent intent = new Intent(mContext, ZufangListActivity.class);
+                intent.putExtra("type",position+"");
+                startActivity(intent);
             }
         });
 
@@ -112,7 +114,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         likeList.add("");
         tuijianRecycler.setNestedScrollingEnabled(false);
         tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, likeList);
+        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_zufang_tuijian, likeList);
         tuijianRecycler.setAdapter(likeAdapter);
         likeAdapter.setOnItemClickListener(this);
 

@@ -17,6 +17,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,16 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
         }
         fenleiRecycler.setNestedScrollingEnabled(false);
         fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
-        fenleiRecycler.setAdapter(new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList));
+        FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList);
+        fenleiRecycler.setAdapter(fenleiAdapter);
+        fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(mContext, ChineseLiebiaoActivity.class);
+                intent.putExtra("type",position+"");
+                startActivity(intent);
+            }
+        });
 
         List<String> likeList = new ArrayList<>();
         likeList.add("");
@@ -66,7 +76,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
         likeList.add("");
         likeRecycler.setNestedScrollingEnabled(false);
         likeRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, likeList);
+        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_china_like, likeList);
         likeRecycler.setAdapter(likeAdapter);
         likeAdapter.setOnItemClickListener(this);
     }
@@ -85,7 +95,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext, HaiWaiDetailsActivity.class));
+        startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {

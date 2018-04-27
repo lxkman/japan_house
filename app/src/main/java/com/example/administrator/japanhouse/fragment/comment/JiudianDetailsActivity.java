@@ -165,7 +165,7 @@ public class JiudianDetailsActivity extends BaseActivity {
 
     private void initLoveRecycler() {
         if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+            loveAdapter = new LoveAdapter(R.layout.item_sydc_like, mList);
         }
         loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         loveRecycler.setNestedScrollingEnabled(false);

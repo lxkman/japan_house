@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.AgentListActivity;
 import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
 import com.example.administrator.japanhouse.activity.OwnerActivity;
 import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
@@ -244,7 +245,7 @@ public class HomeFragment extends BaseFragment {
         //-----item导航栏-----
 
         //-----城市探探-----
-        tantanTv.requestFocus();
+//        tantanTv.requestFocus();
         //-----城市探探-----
 
         //-----banner-----
@@ -395,10 +396,11 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
+//        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
     }
 
     @Override
@@ -562,7 +564,7 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(mContext, ErshoufangActiviy.class));
                 break;
             case R.id.tjyxjjr_more_tv:
-                startActivity(new Intent(mContext, JjrLiebiaoActivity.class));
+                startActivity(new Intent(mContext, AgentListActivity.class));
                 break;
             case R.id.tjzf_more_tv:
                 startActivity(new Intent(mContext, ZufangActivity.class));

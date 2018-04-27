@@ -166,7 +166,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
 
     private void initLoveRecycler() {
         if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+            loveAdapter = new LoveAdapter(R.layout.item_sydc_like, mList);
         }
         loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         loveRecycler.setNestedScrollingEnabled(false);
@@ -174,7 +174,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
         loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(XiezilouDetailsActivity.this, NewHouseActivity.class);
+                Intent intent = new Intent(mContext, XiezilouDetailsActivity.class);
                 startActivity(intent);
             }
         });

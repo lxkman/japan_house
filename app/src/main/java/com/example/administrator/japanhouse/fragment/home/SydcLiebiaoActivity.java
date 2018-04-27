@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
@@ -44,7 +45,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"价格", "车站距离", "面积", "地段"};
+    private String headers[] = {"售价", "面积", "车站距离", "地段"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -78,11 +79,12 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "100米以内"));
-        list1.add(new OneCheckBean(false, "200米以内"));
-        list1.add(new OneCheckBean(false, "500米以内"));
-        list1.add(new OneCheckBean(false, "1000米以内"));
-        list1.add(new OneCheckBean(false, "2000米以内"));
+        list1.add(new OneCheckBean(false, "20平方米以下"));
+        list1.add(new OneCheckBean(false, "20-40平方米"));
+        list1.add(new OneCheckBean(false, "40-80平方米"));
+        list1.add(new OneCheckBean(false, "80-100平方米"));
+        list1.add(new OneCheckBean(false, "100平方米以上"));
+
         SecView secView = new SecView(SydcLiebiaoActivity.this);
         popupViews.add(secView.secView());
         secView.setListener(this);
@@ -93,11 +95,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "20平方米以下"));
-        list2.add(new OneCheckBean(false, "20-40平方米"));
-        list2.add(new OneCheckBean(false, "40-80平方米"));
-        list2.add(new OneCheckBean(false, "80-100平方米"));
-        list2.add(new OneCheckBean(false, "100平方米以上"));
+        list2.add(new OneCheckBean(false, "100米以内"));
+        list2.add(new OneCheckBean(false, "200米以内"));
+        list2.add(new OneCheckBean(false, "500米以内"));
+        list2.add(new OneCheckBean(false, "1000米以内"));
+        list2.add(new OneCheckBean(false, "2000米以内"));
         SecView threeView = new SecView(SydcLiebiaoActivity.this);
         popupViews.add(threeView.secView());
         threeView.insertData(list2, dropDownMenu);
@@ -137,7 +139,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_sydc, mList);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setAdapter(liebiaoAdapter);
@@ -189,9 +191,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 break;
             //地图
             case R.id.img_dingwei:
+                startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
+                startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

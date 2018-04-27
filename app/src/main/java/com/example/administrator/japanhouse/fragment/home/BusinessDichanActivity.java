@@ -95,7 +95,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        startActivity(new Intent(mContext,ShangpuDetailsActivity.class));
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.japanhouse.fragment.home.ChineseLiebiaoActivity">
+    <LinearLayout
+        android:background="@color/shihuangse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:src="@drawable/back"
+            android:padding="10dp"
+            android:layout_width="40dip"
+            android:layout_height="40dip" />
+        <LinearLayout
+            android:background="@drawable/round_white"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="30dip">
+            <ImageView
+                android:layout_marginLeft="15dip"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/home_search_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/search_tv"
+                android:background="@null"
+                android:paddingLeft="10dip"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:hint="请输入查询内容"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_dingwei"
+            android:src="@drawable/dituzhaofang"
+            android:padding="10dp"
+            android:layout_width="40dip"
+            android:layout_height="40dip" />
+        <ImageView
+            android:id="@+id/img_message"
+            android:src="@drawable/message"
+            android:padding="10dp"
+            android:layout_width="40dip"
+            android:layout_height="40dip" />
+    </LinearLayout>
+    <com.yyydjk.library.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:dddividerColor="#00000000"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/white"
+        app:ddmenuSelectedIcon="@mipmap/top"
+        app:ddmenuTextSize="14sp"
+        app:ddmenuUnselectedIcon="@mipmap/buttom"
+        app:ddtextSelectedColor="@color/shihuangse"
+        app:ddtextUnselectedColor="@color/drop_down_unselected"
+        app:ddunderlineColor="#F8F9F8" />
+</LinearLayout>

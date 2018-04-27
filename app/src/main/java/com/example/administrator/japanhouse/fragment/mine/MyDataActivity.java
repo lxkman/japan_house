@@ -23,6 +23,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.BaseSelectPopupWindow;
 import com.example.administrator.japanhouse.view.CircleImageView;
 import com.luck.picture.lib.PictureSelector;
@@ -105,7 +106,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.tv_phone:
-                startActivity(new Intent(this, MineBindPhoneActivity.class));
+                showChangePhoneDialog();
                 break;
             case R.id.iv_head:
                 cameraList = new ArrayList<>();
@@ -120,6 +121,37 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 pvCustomLunar.show();
                 break;
         }
+    }
+
+    private void showChangePhoneDialog() {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_ischangephone)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(Gravity.CENTER)
+                //设置动画
+                .setAnimation(R.style.Alpah_aniamtion)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        dialog.getView(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyDataActivity.this, MineBindPhoneActivity.class));
+                dialog.dismiss();
+            }
+        });
+        dialog.getView(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void showCamera() {

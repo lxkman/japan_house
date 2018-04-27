@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/frame"
-            android:text="泰和丶金福大厦"
+            android:text="泰和·金府大厦"
             android:layout_marginTop="20dp"
             android:textColor="@color/text_black"/>
         <TextView
@@ -53,9 +53,10 @@
             android:layout_toRightOf="@+id/frame"
             android:layout_marginTop="10dp"/>
         <TextView
+            android:id="@+id/item_ting_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="150㎡ - 175㎡"
+            android:text="2室一厅"
             android:textColor="@color/gray"
             android:layout_below="@+id/item_address_tv"
             android:layout_toRightOf="@+id/frame"
@@ -63,9 +64,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="17500万"
+            android:text="175㎡"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/item_address_tv"
+            android:layout_toRightOf="@+id/item_ting_tv"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="17500元/㎡"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

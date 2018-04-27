@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class LocationActivity extends BaseActivity {
     @BindView(R.id.item_title_back)
     ImageView itemTitleBack;
     @BindView(R.id.search_tv)
-    TextView searchTv;
+    EditText searchTv;
     private LinearLayoutManager mManager;
     private HeaderRecyclerAndFooterWrapperAdapter mHeaderAdapter;
     private SuspensionDecoration mDecoration;
@@ -158,7 +159,7 @@ public class LocationActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+//                startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
         }
     }

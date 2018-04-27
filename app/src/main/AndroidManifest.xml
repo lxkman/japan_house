@@ -116,7 +116,6 @@
         <activity android:name=".login.BindPhoneActivity" />
         <!-- <activity android:name=".login.LauncherActivity"/> -->
         <activity android:name=".login.GuidePageActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".fragment.chat.SearchActivity" />
         <activity android:name=".fragment.chat.StartWechatActivity" />
         <activity android:name=".fragment.chat.SearchManagerActivity" />
@@ -143,7 +142,9 @@
         <activity android:name=".fragment.mine.DingDanActivity" />
         <activity android:name=".fragment.mine.DingYueActivity" />
         <activity android:name=".fragment.mine.ShouCangActivity" />
-        <activity android:name=".fragment.home.LocationActivity" />
+        <activity
+            android:name=".fragment.home.LocationActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".login.PeopleXieyiActivity" />
         <activity android:name=".login.PrivateActivity" />
         <activity android:name=".fragment.chat.MyZxingActivity" />
@@ -212,6 +213,64 @@
         <activity android:name=".fragment.home.ShendengFirstStepActivity" />
         <activity android:name=".fragment.home.ShendengSecondStepActivity" />
         <activity android:name=".fragment.home.ShendengListActivity" />
+        <activity android:name=".fragment.home.YanjiuDetailActivity" />
+        <activity android:name=".fragment.home.ChineseLiebiaoActivity" />
+        <activity android:name=".fragment.home.ZufangListActivity" />
+        <activity android:name=".fragment.comment.ZhongguoDetailsActivity" />
+        <activity android:name=".fragment.home.TongqinActivity" />
+        <activity android:name=".fragment.home.TongqinSearchActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".activity.AgentListActivity"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.administrator.japanhouse"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+
+        <!--会话界面-->
+        <!--添加配置信息-->
+
+        <activity
+            android:name=".im.RongChatActivity"
+            >
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW"/>
+
+                <category
+                    android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="com.example.administrator.japanhouse"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong"/>
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:exported="true"
+            android:name=".im.RcNotificationReceiver">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".fragment.home.YanjiuDetailActivity"></activity>
         <activity android:name=".map.MapActivity"></activity>
     </application>

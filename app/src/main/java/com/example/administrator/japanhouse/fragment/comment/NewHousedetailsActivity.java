@@ -375,6 +375,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.yiyuan_layout:
+
                 Tag="4";
                 intent.putExtra("TAG",Tag);
                 startActivity(intent);

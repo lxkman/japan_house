@@ -203,6 +203,7 @@
           android:background="@color/gray1"/>
 
     <TextView
+        android:textColor="@color/black"
         android:id="@+id/lc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -321,6 +322,7 @@
          android:layout_below="@+id/liner4"/>
     <TextView
         android:id="@+id/tiaojian"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/xian5"
@@ -400,12 +402,12 @@
         <Button
             android:id="@+id/shenqing"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:text="立即申请"
             android:textColor="@color/white"
             android:background="@color/colorAccent"
-            android:textSize="14sp"
+            android:textSize="16sp"
             />
     <ImageView
         android:id="@+id/kefu"

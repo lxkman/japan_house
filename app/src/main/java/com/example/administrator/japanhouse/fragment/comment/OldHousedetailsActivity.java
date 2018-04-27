@@ -178,7 +178,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                 intent.putExtra("lat","35.68");
                 intent.putExtra("log","139.75");
                 intent.putExtra("TAG","1");
-                startActivity(intent);
+                startActivityForResult(intent, 1);
 
             }
 
@@ -409,6 +409,16 @@ public class OldHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 5) {
+            setResult(4);
+            finish();
+        }
+    }
+
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {

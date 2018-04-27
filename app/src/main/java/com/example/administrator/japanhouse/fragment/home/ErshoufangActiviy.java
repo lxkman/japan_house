@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ErshoufangActiviy extends BaseActivity implements MyItemClickListener{
+public class ErshoufangActiviy extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -137,9 +137,20 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class));
+                Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 4) {
+            setResult(2);
+            finish();
+        }
 
     }
 
@@ -163,7 +174,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
@@ -171,7 +182,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext, HomeSearchActivity.class));
         }
     }
 

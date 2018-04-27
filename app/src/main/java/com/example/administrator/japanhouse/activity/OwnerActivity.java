@@ -13,10 +13,7 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.OwnerAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.EventBean;
-
-
-import org.greenrobot.eventbus.EventBus;
+import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,7 +73,7 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
 
             case R.id.act_owner_prices:
                 //跳转房价地图
-
+                startActivity(new Intent(this, FangjiadituActivity.class));
                 break;
 
             case R.id.act_owner_wikipedia:

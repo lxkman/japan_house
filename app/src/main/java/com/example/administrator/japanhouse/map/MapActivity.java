@@ -403,6 +403,8 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                 finish();
                 break;
             case R.id.message_char:
+                setResult(5);
+                finish();
                 break;
         }
     }

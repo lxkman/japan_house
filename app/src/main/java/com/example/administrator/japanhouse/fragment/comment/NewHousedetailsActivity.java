@@ -183,7 +183,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                 intent.putExtra("lat","35.68");
                 intent.putExtra("log","139.75");
                 intent.putExtra("TAG","1");
-                startActivity(intent);
+                startActivityForResult(intent, 1);
 
             }
 
@@ -362,23 +362,23 @@ public class NewHousedetailsActivity extends BaseActivity {
             case R.id.shop_layout:
                 Tag="1";
                 intent.putExtra("TAG",Tag);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.school_layout:
                 Tag="2";
                 intent.putExtra("TAG",Tag);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.youeryuan_layout:
                 Tag="3";
                 intent.putExtra("TAG",Tag);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.yiyuan_layout:
 
                 Tag="4";
                 intent.putExtra("TAG",Tag);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
         }
     }
@@ -441,6 +441,15 @@ public class NewHousedetailsActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 5) {
+            setResult(4);
+            finish();
+        }
     }
 
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

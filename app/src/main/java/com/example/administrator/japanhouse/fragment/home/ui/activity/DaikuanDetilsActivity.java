@@ -58,7 +58,6 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
             case R.id.kefu:
                 Toast.makeText(this,"客服",Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
 

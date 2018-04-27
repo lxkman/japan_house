@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +17,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
-import com.example.administrator.japanhouse.bean.OneCheckBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,11 +137,11 @@ public class TongqinActivity extends BaseActivity {
                         });
                     }
                 })
-                .setSelectOptions(2)//默认选中项
+                .setSelectOptions(3)//默认选中项
                 .setContentTextSize(20)//设置滚轮文字大小
                 .setBgColor(getResources().getColor(R.color.white))
                 .setTextColorOut(getResources().getColor(R.color.text_black))
-                .setDividerColor(getResources().getColor(R.color.text_black))
+                .setDividerColor(getResources().getColor(R.color.tab_text_normal_color))
                 .setTextColorCenter(getResources().getColor(R.color.text_black)) //设置选中项文字颜色
                 .build();
         pvCustomOptions.setPicker(data);//添加数据

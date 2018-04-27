@@ -103,7 +103,6 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "区域"));
         list3.add(new OneCheckBean(false, "构造"));
         list3.add(new OneCheckBean(false, "地段"));
         list3.add(new OneCheckBean(false, "朝向"));

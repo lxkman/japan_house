@@ -1,10 +1,9 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
 import com.yyydjk.library.DropDownMenu;
 
@@ -105,7 +103,6 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "区域"));
         list3.add(new OneCheckBean(false, "构造"));
         list3.add(new OneCheckBean(false, "地段"));
         list3.add(new OneCheckBean(false, "朝向"));

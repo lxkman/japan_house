@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -126,8 +125,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         shendengRecycler.setNestedScrollingEnabled(false);
         shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
         ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout,likeList);
-        View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_shendeng_footer,shendengRecycler,false);
-        shendengAdapter.setFooterView(footerView);
+//        View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_shendeng_footer,shendengRecycler,false);
+//        shendengAdapter.setFooterView(footerView);
         shendengRecycler.setAdapter(shendengAdapter);
         shendengAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -197,7 +196,15 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-
+            if (helper.getAdapterPosition()==4){
+                helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
+                helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(mContext, ShendengListActivity.class));
+                    }
+                });
+            }
         }
     }
 

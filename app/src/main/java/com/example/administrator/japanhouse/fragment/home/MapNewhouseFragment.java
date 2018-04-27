@@ -114,7 +114,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         list3.add(new OneCheckBean(false, "室内设施"));
         MoreView fourView = new MoreView(mContext);
         popupViews.add(fourView.secView());
-        fourView.insertData(list3, dropDownMenu);
+        fourView.insertData2(list3, dropDownMenu);
         fourView.setListener(this);
         /**
          * Dropdownmenu下面的主体部分

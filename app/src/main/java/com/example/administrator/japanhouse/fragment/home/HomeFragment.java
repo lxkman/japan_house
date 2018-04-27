@@ -482,6 +482,15 @@ public class HomeFragment extends BaseFragment {
                     Log.e("tag", String.valueOf(childView instanceof ImageView) + "," + position);
                 }
             });
+            if (helper.getAdapterPosition()==4){
+                helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
+                helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(mContext, AgentListActivity.class));
+                    }
+                });
+            }
         }
     }
 

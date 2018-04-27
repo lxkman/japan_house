@@ -12,7 +12,6 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by   admin on 2018/4/26.

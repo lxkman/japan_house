@@ -295,4 +295,5 @@
     <string name="activity_fangjia">房价地图</string>
     <string name="act_chat_title">顾问姓名</string>
     <string name="activity_agentlist_title">经纪人列表</string>
+    <string name="fangyuanmingcheng">房源名称</string>
 </resources>

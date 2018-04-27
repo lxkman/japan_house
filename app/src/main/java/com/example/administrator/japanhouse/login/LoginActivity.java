@@ -20,9 +20,13 @@ import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 public class LoginActivity extends BaseActivity {
 
@@ -50,6 +54,7 @@ public class LoginActivity extends BaseActivity {
     TextView tvShowPop;
     private View popupView;
     private PopupWindow basePopupWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +65,17 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.back_img, R.id.tv_register, R.id.tv_forget_pass, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq, R.id.img_line,R.id.tv_show_pop})
+    @OnClick({R.id.back_img, R.id.tv_register, R.id.tv_forget_pass, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq, R.id.img_line, R.id.tv_show_pop})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                HashMap<String, Boolean> hashMap = new HashMap<>();
+                //会话类型 以及是否聚合显示
+                hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                RongIM.getInstance().startConversationList(this, hashMap);
                 finish();
                 break;
             //注册
@@ -78,8 +89,14 @@ public class LoginActivity extends BaseActivity {
             //登录
             case R.id.btn_login:
                 finish();
-                SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid","1");
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid", "1");
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                HashMap<String, Boolean> hm = new HashMap<>();
+                //会话类型 以及是否聚合显示
+                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                RongIM.getInstance().startConversationList(this, hm);
                 break;
             case R.id.img_weixin:
                 startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
@@ -99,14 +116,15 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
     }
+
     private void initPop() {
         //屏幕变暗
-        WindowManager.LayoutParams lp =  getWindow().getAttributes();
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = 0.7f;
-         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-         getWindow().setAttributes(lp);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(lp);
 
-        popupView = View.inflate(mContext,R.layout.layout_check_popupwindow, null);
+        popupView = View.inflate(mContext, R.layout.layout_check_popupwindow, null);
         popupView.findViewById(R.id.tv_saoyisao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,12 +148,12 @@ public class LoginActivity extends BaseActivity {
         basePopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                WindowManager.LayoutParams lp =  getWindow().getAttributes();
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
                 lp.alpha = 1.0f;
-                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                 getWindow().setAttributes(lp);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                getWindow().setAttributes(lp);
             }
         });
     }
-  
+
 }

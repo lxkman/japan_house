@@ -24,7 +24,11 @@ import com.orhanobut.logger.Logger;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
+import java.util.HashMap;
 import java.util.Locale;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by Administrator on 2017/8/24.
@@ -68,8 +72,14 @@ public class LancherActivity extends BaseActivity {
                     finish();
 
                 } else {
-                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
+//                    startActivity(intent);
+                    HashMap<String, Boolean> hashMap = new HashMap<>();
+                    //会话类型 以及是否聚合显示
+                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                    RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
                     finish();
 
                 }
@@ -99,22 +109,22 @@ public class LancherActivity extends BaseActivity {
 
     public class MyLocationListener implements BDLocationListener {
         @Override
-        public void onReceiveLocation(BDLocation location){
+        public void onReceiveLocation(BDLocation location) {
             int errorCode = location.getLocType();//获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
-            Logger.e(errorCode+"");
+            Logger.e(errorCode + "");
             double latitude = location.getLatitude();    //获取纬度信息
             double longitude = location.getLongitude();    //获取经度信息
             float radius = location.getRadius();    //获取定位精度，默认值为0.0f
             String coorType = location.getCoorType();//获取经纬度坐标类型，以LocationClientOption中设置过的坐标类型为准
             String city = location.getCity();
             mLocationClient.stop();
-            if (errorCode == 61 || errorCode == 66 || errorCode == 161){
-                SpUtils.putString("latitude",String.valueOf(latitude));
-                SpUtils.putString("longitude",String.valueOf(longitude));
-                SpUtils.putString("city",city);
-                Logger.e("纬度："+latitude+"\n经度："+longitude+"\n定位城市："+city);
-            }else {
-                TUtils.showShort(getApplicationContext(),"百度地图定位失败，请检查网络操作后重试。");
+            if (errorCode == 61 || errorCode == 66 || errorCode == 161) {
+                SpUtils.putString("latitude", String.valueOf(latitude));
+                SpUtils.putString("longitude", String.valueOf(longitude));
+                SpUtils.putString("city", city);
+                Logger.e("纬度：" + latitude + "\n经度：" + longitude + "\n定位城市：" + city);
+            } else {
+                TUtils.showShort(getApplicationContext(), "百度地图定位失败，请检查网络操作后重试。");
             }
         }
     }

@@ -220,8 +220,57 @@
         <activity android:name=".fragment.home.TongqinActivity" />
         <activity android:name=".fragment.home.TongqinSearchActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".MainActivity"/>
         <activity android:name=".activity.AgentListActivity"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.administrator.japanhouse"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+
+        <!--会话界面-->
+        <!--添加配置信息-->
+
+        <activity
+            android:name=".im.RongChatActivity"
+            >
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW"/>
+
+                <category
+                    android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="com.example.administrator.japanhouse"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong"/>
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:exported="true"
+            android:name=".im.RcNotificationReceiver">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

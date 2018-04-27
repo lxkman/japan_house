@@ -96,14 +96,14 @@ public class LanguageActivity extends BaseActivity {
 
     public void recrete() {
         removeAllActivitys();
-        HashMap<String, Boolean> hashMap = new HashMap<>();
-        //会话类型 以及是否聚合显示
-        hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
-//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-        RongIM.getInstance().startConversationList(this, hashMap);
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
+//        HashMap<String, Boolean> hashMap = new HashMap<>();
+//        //会话类型 以及是否聚合显示
+//        hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+////        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+////        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+//        RongIM.getInstance().startConversationList(this, hashMap);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

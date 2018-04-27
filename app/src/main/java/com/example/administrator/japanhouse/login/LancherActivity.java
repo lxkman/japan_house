@@ -72,14 +72,14 @@ public class LancherActivity extends BaseActivity {
                     finish();
 
                 } else {
-//                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
-//                    startActivity(intent);
-                    HashMap<String, Boolean> hashMap = new HashMap<>();
-                    //会话类型 以及是否聚合显示
-                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
-//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                    RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
+                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
+                    startActivity(intent);
+//                    HashMap<String, Boolean> hashMap = new HashMap<>();
+//                    //会话类型 以及是否聚合显示
+//                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+////        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+////        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+//                    RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
                     finish();
 
                 }

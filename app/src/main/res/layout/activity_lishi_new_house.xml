@@ -312,10 +312,14 @@
                     android:textSize="16sp" />
 
                 <LinearLayout
+                    android:background="@drawable/bg_map"
                     android:layout_width="match_parent"
-                    android:layout_height="120dip"
-                    android:background="@drawable/bg_map">
-
+                    android:layout_height="120dip">
+                    <com.baidu.mapapi.map.MapView
+                        android:id="@+id/bmapView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:clickable="true" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -324,6 +328,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/shop_layout"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -345,6 +350,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/school_layout"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -366,6 +372,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/youeryuan_layout"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -387,6 +394,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/yiyuan_layout"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

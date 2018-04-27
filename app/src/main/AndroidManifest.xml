@@ -213,6 +213,7 @@
         <activity android:name=".fragment.home.ShendengSecondStepActivity" />
         <activity android:name=".fragment.home.ShendengListActivity" />
         <activity android:name=".fragment.home.YanjiuDetailActivity"></activity>
+        <activity android:name=".map.MapActivity"></activity>
     </application>
 
 </manifest>

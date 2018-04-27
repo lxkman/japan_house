@@ -48,7 +48,7 @@ public class FangjiadituActivity extends BaseActivity {
         ButterKnife.bind(this);
         initMap();
     }
-    @OnClick({R.id.btn_location, R.id.layout_pop})
+    @OnClick({R.id.btn_location, R.id.layout_pop,R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_location:

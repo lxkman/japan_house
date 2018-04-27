@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -9,16 +10,20 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.NoCacheViewPager;
 import com.example.administrator.japanhouse.view.RatingBarView;
 
@@ -155,8 +160,8 @@ public class ManagerActivity extends BaseActivity {
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                Intent intent=new Intent(mContext,LishiNewHouseActivity.class);
-//                startActivity(intent);
+                Intent intent=new Intent(mContext,NewHousedetailsActivity.class);
+                startActivity(intent);
 //                Toast.makeText(mContext, "点击了第" + position+"条", Toast.LENGTH_SHORT).show();
             }
         });
@@ -190,15 +195,77 @@ public class ManagerActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.back_img, R.id.bg_layout})
+    @OnClick({R.id.back_img, R.id.bg_layout,R.id.img_share})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
                 finish();
                 break;
+            case R.id.img_share:
+                showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                break;
+
         }
     }
+    private void showDialog(int grary, int animationStyle) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        //设置触摸dialog外围是否关闭
+        //设置监听事件
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(grary)
+                //设置动画
+                .setAnimation(animationStyle)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        LinearLayout weiliao_layout = (LinearLayout) dialog.findViewById(R.id.weiliao_layout);
+        LinearLayout weixin_layout = (LinearLayout) dialog.findViewById(R.id.weixin_layout);
+        LinearLayout pengyouquan_layout = (LinearLayout) dialog.findViewById(R.id.pengyouquan_layout);
+        LinearLayout weibo_layout = (LinearLayout) dialog.findViewById(R.id.weibo_layout);
+        TextView tv_dismiss = (TextView) dialog.findViewById(R.id.tv_dismiss);
+        //微聊分享
+        weiliao_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        //微信分享
+        weixin_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //朋友圈分享
+        pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //微博分享
+        weibo_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //取消
+        tv_dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
     @OnClick(R.id.Mrecycler)
     public void onClick() {
     }

@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +55,8 @@ public class ShoufangFragment extends BaseFragment {
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                Intent intent=new Intent(mContext,LishiNewHouseActivity.class);
-//                startActivity(intent);
+                Intent intent=new Intent(mContext,NewHousedetailsActivity.class);
+                startActivity(intent);
             }
         });
     }

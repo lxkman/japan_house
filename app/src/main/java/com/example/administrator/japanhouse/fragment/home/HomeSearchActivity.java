@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
@@ -55,6 +56,7 @@ public class HomeSearchActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
     }
+
 
     private void initView() {
         List<String> hotNameList = new ArrayList<>();
@@ -104,6 +106,7 @@ public class HomeSearchActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cancle_tv:
+                SoftKeyboardTool.closeKeyboard(this);
                 finish();
                 break;
             case R.id.location_tv:

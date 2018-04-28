@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -17,7 +18,6 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.map.Stroke;
-import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
@@ -45,7 +45,7 @@ import butterknife.Unbinder;
  * Created by power on 2018/4/20.
  */
 
-public class MapOldhouseFragment extends BaseFragment implements MyItemClickListener {
+public class MapOldhouseFragment extends BaseFragment implements MyItemClickListener, View.OnClickListener {
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
     Unbinder unbinder;
@@ -54,7 +54,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     private MapView mBaiduMap;
     private BaiduMap baiduMap;
     MyDrawCircleView mydrawcircleview;
-    private UiSettings mUiSettings;
+    private LinearLayout ll_clear;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,18 +72,18 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void myEvent(EventBean eventBean) {
-        if (eventBean.getMsg().equals("drawcirclefindhouse")) {
-            mydrawcircleview.clearAll();
+        if (eventBean.getMsg().equals("drawcirclefindhouse_old")) {
+            mydrawcircleview.clearAll("old");
             mydrawcircleview.setVisibility(View.VISIBLE);
             baiduMap.clear();
-            initOverlay();
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void myEvent(DrawMapBean mapBean) {
-        if (mapBean.getMsg().equals("drawcirclemapover")) {
+        if (mapBean.getMsg().equals("drawcirclemapover_old")) {
             mydrawcircleview.setVisibility(View.GONE);
+            ll_clear.setVisibility(View.VISIBLE);
             List<android.graphics.Point> pointList = mapBean.getPointList();
             List<LatLng> latLngList = new ArrayList<>();
             if (pointList != null && pointList.size() > 0) {
@@ -96,11 +96,12 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
             //构建用户绘制多边形的Option对象
             OverlayOptions polygonOption = new PolygonOptions()
                     .points(latLngList)
-                    .stroke(new Stroke(10, getResources().getColor(R.color.green)))
-                    .fillColor(getResources().getColor(R.color.green2));
+                    .stroke(new Stroke(2, getResources().getColor(R.color.mapcirclestroke)))
+                    .fillColor(getResources().getColor(R.color.mapcirclesfill));
 
             //在地图上添加多边形Option，用于显示
             baiduMap.addOverlay(polygonOption);
+            initOverlay();
         }
     }
 
@@ -168,7 +169,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         list3.add(new OneCheckBean(false, "室内设施"));
         MoreView fourView = new MoreView(mContext);
         popupViews.add(fourView.secView());
-        fourView.insertData2(list3, dropDownMenu);
+        fourView.insertData2("oldhouse",list3, dropDownMenu);
         fourView.setListener(this);
         /**
          * Dropdownmenu下面的主体部分
@@ -176,13 +177,14 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         String headers[] = {"售价", "楼层", "建筑年份", "更多"};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mBaiduMap = (MapView) fifthView.findViewById(R.id.mapview);
+        ll_clear = (LinearLayout) fifthView.findViewById(R.id.ll_clear);
+        ll_clear.setOnClickListener(this);
         mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
         mBaiduMap.removeViewAt(1);//隐藏logo
         mBaiduMap.removeViewAt(2);//隐藏比例尺
         mBaiduMap.showZoomControls(false);// 隐藏缩放控件
         baiduMap = mBaiduMap.getMap();
-        mUiSettings = baiduMap.getUiSettings();
         LatLng center = new LatLng(35.68, 139.75); // 默认 东京
         float zoom = 13.0f; // 默认 11级
         MapStatus mMapStatus = new MapStatus.Builder().target(
@@ -267,5 +269,15 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         super.onDestroyView();
         mBaiduMap.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_clear:
+                baiduMap.clear();
+                initOverlay();
+                break;
+        }
     }
 }

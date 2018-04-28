@@ -1,8 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -14,6 +12,7 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.utils.flow;
+import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
 
@@ -81,6 +80,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View view) {
       switch(view.getId()){
           case R.id.beak:
+              SoftKeyboardTool.closeKeyboard(this);
               finish();
               break;
           case R.id.shanchu:

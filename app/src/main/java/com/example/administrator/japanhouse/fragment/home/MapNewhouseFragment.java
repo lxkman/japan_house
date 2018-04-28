@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -15,12 +16,21 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.PolygonOptions;
+import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.DrawMapBean;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.view.MyDrawCircleView;
 import com.yyydjk.library.DropDownMenu;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +44,7 @@ import butterknife.Unbinder;
  * Created by power on 2018/4/20.
  */
 
-public class MapNewhouseFragment extends BaseFragment implements MyItemClickListener {
+public class MapNewhouseFragment extends BaseFragment implements MyItemClickListener, View.OnClickListener {
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
     Unbinder unbinder;
@@ -42,18 +52,62 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     private List<OneCheckBean> list;
     private MapView mBaiduMap;
     private BaiduMap baiduMap;
+    MyDrawCircleView mydrawcircleview;
+    private LinearLayout ll_clear;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_old, null, false);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void myEvent(EventBean eventBean) {
+        if (eventBean.getMsg().equals("drawcirclefindhouse_new")) {
+            mydrawcircleview.clearAll("new");
+            mydrawcircleview.setVisibility(View.VISIBLE);
+            baiduMap.clear();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void myEvent(DrawMapBean mapBean) {
+        if (mapBean.getMsg().equals("drawcirclemapover_new")) {
+            mydrawcircleview.setVisibility(View.GONE);
+            ll_clear.setVisibility(View.VISIBLE);
+            List<android.graphics.Point> pointList = mapBean.getPointList();
+            List<LatLng> latLngList = new ArrayList<>();
+            if (pointList != null && pointList.size() > 0) {
+                for (int i = 0; i < pointList.size(); i++) {
+                    android.graphics.Point point = pointList.get(i);
+                    LatLng latlng1 = baiduMap.getProjection().fromScreenLocation(point);
+                    latLngList.add(latlng1);
+                }
+            }
+            //构建用户绘制多边形的Option对象
+            OverlayOptions polygonOption = new PolygonOptions()
+                    .points(latLngList)
+                    .stroke(new Stroke(2, getResources().getColor(R.color.mapcirclestroke)))
+                    .fillColor(getResources().getColor(R.color.mapcirclesfill));
+
+            //在地图上添加多边形Option，用于显示
+            baiduMap.addOverlay(polygonOption);
+            initOverlay();
+        }
     }
 
     private void initData() {
@@ -114,7 +168,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         list3.add(new OneCheckBean(false, "室内设施"));
         MoreView fourView = new MoreView(mContext);
         popupViews.add(fourView.secView());
-        fourView.insertData2(list3, dropDownMenu);
+        fourView.insertData2("newhouse",list3, dropDownMenu);
         fourView.setListener(this);
         /**
          * Dropdownmenu下面的主体部分
@@ -122,6 +176,9 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         String headers[] = {"售价", "楼层", "年份", "更多"};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mBaiduMap = (MapView) fifthView.findViewById(R.id.mapview);
+        mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);
+        ll_clear = (LinearLayout) fifthView.findViewById(R.id.ll_clear);
+        ll_clear.setOnClickListener(this);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
         mBaiduMap.removeViewAt(1);//隐藏logo
         mBaiduMap.removeViewAt(2);//隐藏比例尺
@@ -140,20 +197,20 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
 
     private void initOverlay() {
         List<MarkerBean> markerBeanList = new ArrayList<>();
-        markerBeanList.add(new MarkerBean(139.738954,35.707239));
-        markerBeanList.add(new MarkerBean(139.83439,35.678863));
-        markerBeanList.add(new MarkerBean(139.741541,35.643203));
-        markerBeanList.add(new MarkerBean(139.690661,35.638979));
-        markerBeanList.add(new MarkerBean(139.758788,35.684492));
-        markerBeanList.add(new MarkerBean(139.758788,35.728807));
+        markerBeanList.add(new MarkerBean(139.738954, 35.707239));
+        markerBeanList.add(new MarkerBean(139.83439, 35.678863));
+        markerBeanList.add(new MarkerBean(139.741541, 35.643203));
+        markerBeanList.add(new MarkerBean(139.690661, 35.638979));
+        markerBeanList.add(new MarkerBean(139.758788, 35.684492));
+        markerBeanList.add(new MarkerBean(139.758788, 35.728807));
 
         List<OverlayOptions> overlayOptionsList = new ArrayList<>();
         for (int i = 0; i < markerBeanList.size(); i++) {
-            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view,null);
+            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
             TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
             TextView count = (TextView) markView.findViewById(R.id.item_count_tv);
             TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
-            content.setText("地名"+i+"\n"+"0.2万套");
+            content.setText("地名" + i + "\n" + "0.2万套");
             MarkerOptions markerOptions = new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromView(markView))
                     .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
@@ -191,5 +248,15 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         super.onDestroyView();
         mBaiduMap.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_clear:
+                baiduMap.clear();
+                initOverlay();
+                break;
+        }
     }
 }

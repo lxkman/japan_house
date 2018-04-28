@@ -83,7 +83,7 @@
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_lookmore"
-        android:layout_width="35dp"
+        android:layout_width="45dp"
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
         android:background="@drawable/shendeng_more_bg"

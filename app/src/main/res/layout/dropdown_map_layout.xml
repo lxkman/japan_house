@@ -15,11 +15,36 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
+        android:visibility="gone"
         android:background="@drawable/map_location_iv"/>
+    <LinearLayout
+        android:id="@+id/ll_clear"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="15dp"
+        android:padding="10dp"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/drawmap_clear"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="清除"
+            android:textColor="@color/shihuangse"/>
+    </LinearLayout>
     <com.example.administrator.japanhouse.view.MyDrawCircleView
         android:id="@+id/mydrawcircleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_green_map"
+        android:background="@drawable/bg_yellow_map"
         android:visibility="gone"/>
 </RelativeLayout>

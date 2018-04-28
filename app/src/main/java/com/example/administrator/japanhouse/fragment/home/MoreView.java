@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,7 @@ class MoreView {
     private Button btn_sure;
     private Button btn_reset;
     private DropDownMenu dropDownMenu;
+    private String mtype;
     private List<OneCheckBean> mItemList1;
     private List<OneCheckBean> mItemList2;
     private List<OneCheckBean> mItemList3;
@@ -98,8 +100,9 @@ class MoreView {
         initData();
     }
 
-    void insertData2(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
+    void insertData2(String type, List<OneCheckBean> list, DropDownMenu dropDownMenu) {
         mList = list;
+        mtype = type;
         this.dropDownMenu = dropDownMenu;
         mItemList0 = new ArrayList<>();
         mItemList0.add(new OneCheckBean(false, "画圈找房"));
@@ -203,7 +206,15 @@ class MoreView {
                 public void onClick(View view) {
                     if (item.getName().equals("画圈找房")) {
                         dropDownMenu.closeMenu();
-                        EventBus.getDefault().postSticky(new EventBean("drawcirclefindhouse"));
+                        if (!TextUtils.isEmpty(mtype)) {
+                            if (mtype.equals("newhouse")) {
+                                EventBus.getDefault().postSticky(new EventBean("drawcirclefindhouse_new"));
+                            } else if (mtype.equals("oldhouse")) {
+                                EventBus.getDefault().postSticky(new EventBean("drawcirclefindhouse_old"));
+                            } else if (mtype.equals("zuhouse")) {
+                                EventBus.getDefault().postSticky(new EventBean("drawcirclefindhouse_zu"));
+                            }
+                        }
                     }
                     textView.setBackground(mContext.getResources().getDrawable(R.drawable.round_drakyellow));
                     textView.setTextColor(mContext.getResources().getColor(R.color.white));

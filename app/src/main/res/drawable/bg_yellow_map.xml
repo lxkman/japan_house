@@ -4,6 +4,6 @@
     android:shape="rectangle">
     <!-- 填充的颜色 -->
     <solid android:color="@color/transparent"/>
-    <stroke android:color="@color/green" android:width="2dp"></stroke>
+    <stroke android:color="@color/mapcirclestroke" android:width="2dp"></stroke>
 
 </shape>

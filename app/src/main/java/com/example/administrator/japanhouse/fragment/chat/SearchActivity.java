@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class SearchActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_search:
+                SoftKeyboardTool.closeKeyboard(this);
                finish();
                 break;
         }

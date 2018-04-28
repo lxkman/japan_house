@@ -1,6 +1,5 @@
 package com.example.administrator.japanhouse.fragment.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,7 +19,7 @@ import com.example.administrator.japanhouse.adapter.ViewHolder;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.CityBean;
 import com.example.administrator.japanhouse.utils.DividerItemDecoration;
-import com.example.administrator.japanhouse.utils.TUtils;
+import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.mcxtzhang.indexlib.IndexBar.widget.IndexBar;
 import com.mcxtzhang.indexlib.suspension.SuspensionDecoration;
 
@@ -156,6 +155,7 @@ public class LocationActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.item_title_back:
+                SoftKeyboardTool.closeKeyboard(this);
                 finish();
                 break;
             case R.id.search_tv:

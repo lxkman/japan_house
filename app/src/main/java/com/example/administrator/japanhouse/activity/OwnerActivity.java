@@ -40,7 +40,6 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
     TextView tvWikipedia;
     @BindView(R.id.act_owner_recyclerView)
     RecyclerView recyclerview;
-
     private OwnerAdapter ownerAdapter;
 
     @Override

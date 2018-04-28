@@ -35,7 +35,6 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     ImageView imgMessage;
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
-    private String headers[] = {"城市", "价格", "建筑构造", "房型"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -51,6 +50,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
+        String headers[] = {getString(R.string.lxk_chengshi),
+                getString(R.string.shoujia),
+                getString(R.string.lxk_jianzhugouzao), getString(R.string.lxk_fangxing)};
         /**
          * 第一个界面
          * */

@@ -12,7 +12,7 @@
             android:id="@+id/ershoufang_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="二手房"
+            android:text="@string/old_house"
             android:layout_gravity="center"
             android:textColor="@color/text_black"
             android:padding="10dp"/>
@@ -24,7 +24,7 @@
             android:id="@+id/xinfang_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="新房"
+            android:text="@string/new_house"
             android:layout_gravity="center"
             android:textColor="@color/text_black"
             android:padding="10dp"/>
@@ -36,7 +36,7 @@
             android:id="@+id/zufang_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="租房"
+            android:text="@string/zu_house"
             android:layout_gravity="center"
             android:textColor="@color/text_black"
             android:padding="10dp"/>
@@ -48,7 +48,7 @@
             android:id="@+id/maishangpu_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="买商铺"
+            android:text="@string/maishagnpu"
             android:layout_gravity="center"
             android:textColor="@color/text_black"
             android:padding="10dp"/>

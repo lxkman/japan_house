@@ -1,10 +1,9 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,7 +42,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"售价", "楼层", "车站距离", "更多"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -59,6 +57,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
+        String headers[] = {getResources().getString(R.string.shoujia),
+                getResources().getString(R.string.louceng),
+                getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */

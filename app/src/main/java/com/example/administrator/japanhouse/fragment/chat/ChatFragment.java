@@ -27,7 +27,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.utils.Constant;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -146,7 +145,12 @@ public class ChatFragment extends BaseFragment {
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getActivity().getWindow().setAttributes(lp);
 
-        popupView = View.inflate(mContext,R.layout.layout_popupwindow, null);
+        String city = SharedPreferencesUtils.getInstace(mContext).getStringPreference("city", "");
+        if (city.equals("ja")){
+            popupView = View.inflate(mContext,R.layout.layout_popupwindow_japan, null);
+        }else {
+            popupView = View.inflate(mContext,R.layout.layout_popupwindow, null);
+        }
 
         //pop控件监听
         initListener(popupView);

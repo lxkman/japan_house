@@ -1,7 +1,5 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -71,8 +69,8 @@ public class SellHouseActivity extends BaseActivity implements View.OnClickListe
              case R.id.liner1:
                  xian1.setVisibility(View.VISIBLE);
                  xian2.setVisibility(View.INVISIBLE);
-                 text_sell.setTextColor(getColor(R.color.colorAccent));
-                 text_rent.setTextColor(getColor(R.color.black));
+                 text_sell.setTextColor(getResources().getColor(R.color.colorAccent));
+                 text_rent.setTextColor(getResources().getColor(R.color.black));
                  if(sell_house_fragment==null){
                      sell_house_fragment = new Sell_house_Fragment();
                  }
@@ -81,8 +79,8 @@ public class SellHouseActivity extends BaseActivity implements View.OnClickListe
             case R.id.liner2:
                 xian1.setVisibility(View.INVISIBLE);
                 xian2.setVisibility(View.VISIBLE);
-                text_rent.setTextColor(getColor(R.color.colorAccent));
-                text_sell.setTextColor(getColor(R.color.black));
+                text_rent.setTextColor(getResources().getColor(R.color.colorAccent));
+                text_sell.setTextColor(getResources().getColor(R.color.black));
                 if(rent_house_fragment==null){
                     rent_house_fragment = new Rent_house_Fragment();
                 }

@@ -10,12 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.NoScrollViewPager;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,8 +172,9 @@ public class HomeMapActivity extends BaseActivity {
                 startActivity(new Intent(mContext,MapSearchActivity.class));
                 break;
             case R.id.title_message_iv:
-                setResult(2);
                 finish();
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
         }
     }

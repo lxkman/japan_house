@@ -41,7 +41,6 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     @BindView(R.id.search_tv)
     TextView searchTv;
 
-    private String headers[] = {"价格", "面积", "车站距离"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -57,6 +56,8 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     }
 
     private void initView() {
+        String headers[] = {getResources().getString(R.string.shoujia),
+                getResources().getString(R.string.lxkmianji), getResources().getString(R.string.lxkchezhanjuli)};
         /**
          * 第一个界面
          * */
@@ -142,7 +143,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         }
     }
 
-    @OnClick({R.id.back_img, R.id.img_dingwei, R.id.img_message})
+    @OnClick({R.id.back_img, R.id.img_dingwei, R.id.img_message,R.id.search_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_img:
@@ -157,6 +158,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));
+                break;
         }
     }
 

@@ -44,6 +44,7 @@ public class LancherActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_launcher);
 
+        iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
         String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
 
         if (!TextUtils.isEmpty(location)) {
@@ -58,7 +59,6 @@ public class LancherActivity extends BaseActivity {
             }
         }
 
-        iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
         initLocation();//百度地图定位
         mLocationClient.start();
         mHandler.postDelayed(new Runnable() {

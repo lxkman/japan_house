@@ -40,7 +40,6 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"售价", "楼层", "建筑年份", "更多"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -56,6 +55,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     }
 
     private void initView() {
+        String headers[] = {getString(R.string.shoujia),
+                getString(R.string.louceng),
+                getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */

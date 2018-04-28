@@ -38,12 +38,6 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
-    private String[] itemName = {getString(R.string.hw_adly),
-            getString(R.string.hw_mg),
-            getString(R.string.hw_jnd),
-            getString(R.string.hw_yg),
-            getString(R.string.hw_tg),
-            getString(R.string.hw_xxl)};
     private int[] itemPic = {R.drawable.aodaliya_iv, R.drawable.meiguo_iv, R.drawable.jianada_iv,
             R.drawable.yingguo_iv, R.drawable.taiguo_iv, R.drawable.xinxilan_iv};
 
@@ -56,6 +50,12 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
     }
 
     private void initview() {
+        String[] itemName = {getString(R.string.hw_adly),
+                getString(R.string.hw_mg),
+                getString(R.string.hw_jnd),
+                getString(R.string.hw_yg),
+                getString(R.string.hw_tg),
+                getString(R.string.hw_xxl)};
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));

@@ -38,13 +38,6 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
-    private String[] itemName = {getString(R.string.bj),
-            getString(R.string.sh),
-            getString(R.string.gz),
-            getString(R.string.sz),
-            getString(R.string.hz),
-            getString(R.string.cq),
-            getString(R.string.qt)};
     private int[] itemPic = {R.drawable.beijing_iv, R.drawable.shanghai_iv, R.drawable.guangzhou_iv,
             R.drawable.shenzhen_iv, R.drawable.hangzhou_iv, R.drawable.chongqing_iv,R.drawable.qita_iv};
 
@@ -57,6 +50,13 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
     }
 
     private void initview() {
+        String[] itemName = {getString(R.string.bj),
+                getString(R.string.sh),
+                getString(R.string.gz),
+                getString(R.string.sz),
+                getString(R.string.hz),
+                getString(R.string.cq),
+                getString(R.string.qt)};
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));

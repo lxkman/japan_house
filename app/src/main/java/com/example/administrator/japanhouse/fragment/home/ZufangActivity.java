@@ -58,14 +58,6 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     RecyclerView shendengRecycler;
     @BindView(R.id.already_shendeng_ll)
     LinearLayout alreadyShendengLl;
-    private String[] itemName = {getString(R.string.zufang_dsgy),
-            getString(R.string.zufang_xsgy) ,
-            getString(R.string.zufang_ffzf),
-            getString(R.string.zufang_djtzf),
-            getString(R.string.zufang_sp),
-            getString(R.string.zufang_bgs),
-            getString(R.string.zufang_ysd),
-            getString(R.string.zufang_jdcb)};
     private int[] itemPic = {R.drawable.danshengongyu_iv, R.drawable.xueshenggongyu_iv, R.drawable.fufuzhufang_iv,
             R.drawable.dajiating_iv, R.drawable.shangpu_iv, R.drawable.bangongshi_iv, R.drawable.yinshidian_iv,
             R.drawable.jiudianchengbao_iv};
@@ -81,6 +73,14 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     }
 
     private void initView() {
+        String[] itemName = {getString(R.string.zufang_dsgy),
+                getString(R.string.zufang_xsgy) ,
+                getString(R.string.zufang_ffzf),
+                getString(R.string.zufang_djtzf),
+                getString(R.string.zufang_sp),
+                getString(R.string.zufang_bgs),
+                getString(R.string.zufang_ysd),
+                getString(R.string.zufang_jdcb)};
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));

@@ -296,4 +296,17 @@
     <string name="act_chat_title">顾问姓名</string>
     <string name="activity_agentlist_title">经纪人列表</string>
     <string name="fangyuanmingcheng">房源名称</string>
+    <string name="home_jrdk">金融\n贷款</string>
+    <string name="home_gfbk">购房\n百科</string>
+    <string name="home_fcwd">房产\n问答</string>
+    <string name="home_znmf">智能\n买房</string>
+    <string name="home_tiaohf">挑好房，上F.L.C</string>
+    <string name="home_map">地图</string>
+    <string name="home_tjxf">推荐新房</string>
+    <string name="home_ckgd">查看更多</string>
+    <string name="home_tjesf">推荐二手房</string>
+    <string name="home_tjjjr">推荐优秀经纪人</string>
+    <string name="home_tjzf">推荐租房</string>
+    <string name="home_tjtd">推荐土地</string>
+    <string name="home_cnxh">猜你喜欢</string>
 </resources>

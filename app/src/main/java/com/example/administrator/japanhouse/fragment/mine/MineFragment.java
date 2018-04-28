@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
+import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
 
@@ -32,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.rong.imkit.RongIM;
 
 import static com.example.administrator.japanhouse.R.id.re_top_bg;
 
@@ -196,7 +200,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(mContext, CalculatorActivity.class));
                 break;
             case R.id.tv_feedback:
-                startActivity(new Intent(mContext, FeedbackActivity.class));
+//                startActivity(new Intent(mContext, FeedbackActivity.class));
+                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constant.CHAT, Constant.CHAT_FEEDBACK);
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.mine_userfeedback));
+                }
                 break;
         }
     }

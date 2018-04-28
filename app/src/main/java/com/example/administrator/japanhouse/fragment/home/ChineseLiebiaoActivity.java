@@ -1,10 +1,9 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,16 +13,11 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
-import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -197,7 +191,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 break;
             //消息
             case R.id.img_message:
-                startActivity(new Intent(mContext, MainActivity.class));
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

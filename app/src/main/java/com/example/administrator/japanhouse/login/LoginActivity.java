@@ -87,7 +87,6 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid", "1");
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("CheckCharTag","CheckHome");
                 startActivity(intent);//                HashMap<String, Boolean> hm = new HashMap<>();
 //                //会话类型 以及是否聚合显示
 //                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);

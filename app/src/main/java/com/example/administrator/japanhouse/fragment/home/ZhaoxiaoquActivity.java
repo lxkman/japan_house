@@ -16,8 +16,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -153,8 +153,8 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                 break;
             //消息
             case R.id.img_message:
-                setResult(2);
-                finish();
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

@@ -15,6 +15,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.japanhouse.MainActivity;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.math.BigInteger;
@@ -71,7 +73,11 @@ public class MyUtils {
             return str;
         }
     }
-
+    public static void startMain(Context context){
+        Intent intent=new Intent(context, MainActivity.class);
+        intent.putExtra("CheckCharTag","CheckChar");
+        context.startActivity(intent);
+    }
     /*将日期转为时间戳*/
     public static long getStringToDate(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");

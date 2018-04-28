@@ -96,13 +96,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rbChat.setOnClickListener(this);
         rbComment.setOnClickListener(this);
         rbMine.setOnClickListener(this);
-        if (checkCharTag.equals("CheckChar")){
+        if (checkCharTag!=null&&checkCharTag.equals("CheckChar")){
             rbChat.setChecked(true);
             if (chatFragment == null) {
                 chatFragment = new ChatFragment();
             }
             addFragments(chatFragment);
-        }else if (checkCharTag.equals("CheckHome")){
+        }else {
             rbHome.setChecked(true);
             if (homeFragment == null) {
                 homeFragment = new HomeFragment();

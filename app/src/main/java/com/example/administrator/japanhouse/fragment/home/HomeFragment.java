@@ -166,7 +166,7 @@ public class HomeFragment extends BaseFragment {
                             case 0:
                                 if (finalI == 0) {//二手房
                                     intent = new Intent(getActivity(), ErshoufangActiviy.class);
-                                    getActivity().startActivityForResult(intent, 1);
+                                   startActivity(intent);
                                 } else {//海外地产
                                     startActivity(new Intent(mContext, HaiWaiActivity.class));
                                 }

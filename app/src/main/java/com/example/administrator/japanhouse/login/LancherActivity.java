@@ -69,7 +69,6 @@ public class LancherActivity extends BaseActivity {
 
                 } else {
                     Intent intent = new Intent(LancherActivity.this, MainActivity.class);
-                    intent.putExtra("CheckCharTag","CheckHome");
                     startActivity(intent);
 //                    HashMap<String, Boolean> hashMap = new HashMap<>();
 //                    //会话类型 以及是否聚合显示

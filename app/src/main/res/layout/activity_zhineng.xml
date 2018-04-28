@@ -57,29 +57,29 @@
                       android:textColor="@color/colorAccent"
                       android:background="@drawable/textview_zhineng"
                       />
-                  <TextView
-                      android:layout_marginLeft="10dp"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="@string/zbmf"
-                      android:textColor="@color/colorAccent"
-                      android:background="@drawable/textview_zhineng"
-                      />
-                  <TextView
-                      android:layout_marginLeft="10dp"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="@string/daikuan"
-                      android:textColor="@color/colorAccent"
-                      android:background="@drawable/textview_zhineng"
-                      />
-                  <TextView
-                      android:layout_marginLeft="10dp"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="@string/baike"
-                      android:textColor="@color/colorAccent"
-                      android:background="@drawable/textview_zhineng"
-                      />
+                  <!--<TextView-->
+                      <!--android:layout_marginLeft="10dp"-->
+                      <!--android:layout_width="wrap_content"-->
+                      <!--android:layout_height="wrap_content"-->
+                      <!--android:text="@string/zbmf"-->
+                      <!--android:textColor="@color/colorAccent"-->
+                      <!--android:background="@drawable/textview_zhineng"-->
+                      <!--/>-->
+                  <!--<TextView-->
+                      <!--android:layout_marginLeft="10dp"-->
+                      <!--android:layout_width="wrap_content"-->
+                      <!--android:layout_height="wrap_content"-->
+                      <!--android:text="@string/daikuan"-->
+                      <!--android:textColor="@color/colorAccent"-->
+                      <!--android:background="@drawable/textview_zhineng"-->
+                      <!--/>-->
+                  <!--<TextView-->
+                      <!--android:layout_marginLeft="10dp"-->
+                      <!--android:layout_width="wrap_content"-->
+                      <!--android:layout_height="wrap_content"-->
+                      <!--android:text="@string/baike"-->
+                      <!--android:textColor="@color/colorAccent"-->
+                      <!--android:background="@drawable/textview_zhineng"-->
+                      <!--/>-->
               </LinearLayout>
 </RelativeLayout>

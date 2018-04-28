@@ -7,8 +7,8 @@
         android:id="@+id/dai_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="贷款名称"
-        android:textSize="18sp"
+        android:text="@string/daikuanmingc"
+        android:textSize="16sp"
         android:layout_margin="10dp"
         />
     <View
@@ -27,9 +27,9 @@
                 android:id="@+id/yuexi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="月息0.59%"
+                android:text="@string/yuexi"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 />
             <TextView
@@ -38,8 +38,8 @@
                 android:layout_below="@+id/yuexi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="贷款利率"
-                android:textSize="16sp"
+                android:text="@string/daikuanlilv"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 />
         </RelativeLayout>
@@ -57,8 +57,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="额度范围："
-                    android:textSize="16sp"
+                    android:text="@string/edufanwei"
+                    android:textSize="14sp"
                     />
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="最高五万"
                     android:textColor="#000"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     />
             </LinearLayout>
 
@@ -80,8 +80,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="贷款周期："
-                    android:textSize="16sp"
+                    android:text="@string/daikuanzhouqi"
+                    android:textSize="14sp"
                     />
 
                 <TextView
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="1-36个月"
                     android:textColor="#000"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     />
             </LinearLayout>
 

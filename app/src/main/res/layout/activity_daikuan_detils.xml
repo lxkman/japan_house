@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="贷款详情"
+            android:text="@string/daikuanxiangqing"
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -38,7 +38,7 @@
         android:id="@+id/dai_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="贷款名称"
+        android:text="@string/daikuanmingc"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_margin="10dp"
@@ -63,7 +63,7 @@
                 android:id="@+id/yuexi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="月息0.59%"
+                android:text="@string/yuexi"
                 android:textSize="14sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
@@ -73,7 +73,7 @@
                 android:layout_below="@+id/yuexi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="贷款利率"
+                android:text="@string/daikuanlilv"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -104,7 +104,7 @@
                 android:layout_below="@+id/zuigao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="范围额度"
+                android:text="@string/fanweiedu"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -135,7 +135,7 @@
                 android:layout_below="@+id/nianxian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="最高年限"
+                android:text="@string/zuigaonianxian"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -161,7 +161,7 @@
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="放款方式："
+            android:text="@string/fangkuanfangshi"
             />
         <TextView
             android:textSize="14sp"
@@ -183,7 +183,7 @@
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="还款时间："
+            android:text="@string/haikuanshijian"
             />
         <TextView
             android:id="@+id/hk_time"
@@ -210,7 +210,7 @@
          android:layout_below="@+id/xian4"
         android:layout_margin="10dp"
         android:textSize="15sp"
-        android:text="办理流程" />
+        android:text="@string/banliliuchhengg" />
 
     <LinearLayout
         android:id="@+id/liner4"
@@ -328,7 +328,7 @@
         android:layout_below="@+id/xian5"
         android:layout_margin="10dp"
         android:textSize="15sp"
-        android:text="申请条件" />
+        android:text="@string/shenqingtiaojian" />
     <LinearLayout
         android:layout_below="@+id/tiaojian"
         android:id="@+id/liner6"
@@ -340,7 +340,7 @@
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="年龄要求："
+            android:text="@string/nainliangyaoqiu"
             />
         <TextView
             android:id="@+id/nl_yaoyiu"
@@ -363,7 +363,7 @@
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="户籍要求："
+            android:text="@string/hujiyaoqiu"
             />
         <TextView
             android:id="@+id/hj_yaoqiu"
@@ -388,7 +388,7 @@
         android:layout_below="@+id/xian6"
         android:layout_margin="10dp"
         android:textSize="15sp"
-        android:text="所需材料" />
+        android:text="@string/suoxuecailiao" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -404,7 +404,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:text="立即申请"
+            android:text="@string/lijishenqing"
             android:textColor="@color/white"
             android:background="@color/colorAccent"
             android:textSize="16sp"

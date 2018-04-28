@@ -12,6 +12,12 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.Constant;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
+import java.util.List;
+
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
+
 
 /**
  * Created by   admin on 2018/4/25.
@@ -65,5 +71,24 @@ public class RongChatActivity extends BaseActivity {
 //                RongCallClient.getInstance().startCall(Conversation.ConversationType.PRIVATE, targetId, null, RongCallCommon.CallMediaType.AUDIO, "");
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new TalkExtensionModule());
+            }
+        }
+        super.finish();
     }
 }

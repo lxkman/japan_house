@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.example.administrator.japanhouse.im.TalkExtensionModule;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -21,9 +22,13 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import okhttp3.OkHttpClient;
@@ -77,6 +82,8 @@ public class MyApplication extends Application {
                 //Connect Token 失效的状态处理，需要重新获取 Token
             }
         });
+
+        setMyExtensionModule();
     }
 
     @Override
@@ -85,6 +92,22 @@ public class MyApplication extends Application {
         MultiDex.install(this);
     }
 
+    public void setMyExtensionModule() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new TalkExtensionModule());
+            }
+        }
+    }
 
     public static Context getGloableContext() {
         return application.getApplicationContext();

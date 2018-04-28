@@ -23,6 +23,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
+import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
 import com.example.administrator.japanhouse.utils.Constant;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
@@ -35,6 +36,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 
 import static com.example.administrator.japanhouse.R.id.re_top_bg;
@@ -202,6 +206,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.tv_feedback:
 //                startActivity(new Intent(mContext, FeedbackActivity.class));
                 SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constant.CHAT, Constant.CHAT_FEEDBACK);
+                setMyExtensionModule();
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");
                     RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.mine_userfeedback));
@@ -210,7 +215,22 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-
+    public void setMyExtensionModule() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new FeedBackExtensionModule());
+            }
+        }
+    }
 
     private class FootAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 

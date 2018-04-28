@@ -69,16 +69,10 @@
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"></View>
-            <TextView
-                android:drawablePadding="5dip"
-                android:layout_marginRight="15dip"
-                android:drawableLeft="@drawable/singupnum"
-                android:textSize="12sp"
-                android:text="283人已报名"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         </LinearLayout>
         <LinearLayout
+            android:gravity="center_vertical"
             android:paddingLeft="15dip"
             android:layout_marginTop="10dip"
             android:orientation="horizontal"
@@ -132,15 +126,38 @@
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"></View>
-            <Button
-                android:textColor="#fff"
-                android:text="@string/now_singup"
-                android:layout_marginRight="15dip"
-                android:background="@drawable/round_chengse"
-                android:layout_width="87dip"
-                android:layout_height="30dip" />
+
         </LinearLayout>
+
     </LinearLayout>
+            <View
+                android:background="#f8f8f8"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:paddingTop="5dip"
+                android:paddingBottom="5dip"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:paddingLeft="15dip"
+                    android:drawablePadding="5dip"
+                    android:layout_marginRight="15dip"
+                    android:textSize="12sp"
+                    android:text="283人已报名"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:textColor="#fff"
+                    android:text="@string/now_singup"
+                    android:layout_marginRight="15dip"
+                    android:background="@drawable/round_chengse"
+                    android:layout_width="87dip"
+                    android:layout_height="30dip" />
+            </LinearLayout>
     <View
         android:background="#f8f8f8"
         android:layout_width="match_parent"

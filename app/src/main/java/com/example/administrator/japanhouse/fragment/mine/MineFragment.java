@@ -26,6 +26,7 @@ import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemA
 import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
 import com.example.administrator.japanhouse.utils.Constant;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
 
@@ -41,7 +42,8 @@ import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 
-import static com.example.administrator.japanhouse.R.id.re_top_bg;
+import static com.example.administrator.japanhouse.R.id.tv_qustion;
+import static com.example.administrator.japanhouse.R.id.tv_wenjuan;
 
 /**
  * Created by Administrator on 2018/4/8.
@@ -84,16 +86,31 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RecyclerView recyclerFoot;
     @BindView(R.id.tv_qustion)
     TextView tvQustion;
-    Unbinder unbinder;
     @BindView(R.id.rel_lianxiren_layout)
     RelativeLayout relLianxirenLayout;
     @BindView(R.id.rel_lishi_layout)
     LinearLayout relLishiLayout;
     @BindView(R.id.nestScroll)
     NestedScrollView nestScroll;
-    @BindView(re_top_bg)
+    @BindView(R.id.ll_zh)
+    LinearLayout llZh;
+    @BindView(R.id.tv_wenjuan)
+    TextView tvWenjuan;
+    @BindView(R.id.ll_ja)
+    LinearLayout llJa;
+    @BindView(R.id.re_top_bg)
     RelativeLayout reTopBg;
-    private  int mDistanceY;
+    @BindView(R.id.tv_calculator1)
+    TextView tvCalculator1;
+    @BindView(R.id.tv_myhouse_price1)
+    TextView tvMyhousePrice1;
+    @BindView(R.id.tv_myask1)
+    TextView tvMyask1;
+    @BindView(R.id.tv_feedback1)
+    TextView tvFeedback1;
+    Unbinder unbinder;
+    private int mDistanceY;
+    private String city;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +119,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         initScroll();
         return rootView;
     }
+
     private void initScroll() {
         nestScroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -125,6 +143,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+
     @Override
     protected void initLazyData() {
 
@@ -133,6 +152,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        city = SpUtils.getString("city", "");
+        if (city.equals("ja")) {
+            llZh.setVisibility(View.GONE);
+            llJa.setVisibility(View.VISIBLE);
+            tvQustion.setVisibility(View.GONE);
+            tvWenjuan.setVisibility(View.VISIBLE);
+        } else {
+            llZh.setVisibility(View.VISIBLE);
+            llJa.setVisibility(View.GONE);
+            tvQustion.setVisibility(View.VISIBLE);
+            tvWenjuan.setVisibility(View.GONE);
+        }
         recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -149,8 +180,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,
-            R.id.rel_lishi_layout, R.id.tv_qustion, R.id.tv_collect_count, R.id.tv_subscription_count, R.id.tv_myorder,
-            R.id.tv_myask, R.id.tv_mysignup, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback})
+            R.id.rel_lishi_layout, tv_qustion, R.id.tv_collect_count, R.id.tv_subscription_count, R.id.tv_myorder,
+            R.id.tv_myask, R.id.tv_mysignup, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
+            R.id.tv_myhouse_price1, R.id.tv_calculator1, R.id.tv_feedback1,R.id.tv_myask1,R.id.tv_wenjuan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
@@ -162,7 +194,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.iv_msg:
                 startActivity(new Intent(mContext, MineMsgActivity.class));
                 break;
-            case R.id.tv_qustion:
+            case tv_qustion:
+            case tv_wenjuan:
                 startActivity(new Intent(mContext, WenJuanActivity.class));
                 break;
             //联系人
@@ -187,6 +220,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //我的问答
             case R.id.tv_myask:
+            case R.id.tv_myask1:
                 startActivity(new Intent(mContext, WendaItemActivity.class));
                 break;
             case R.id.tv_mysignup:
@@ -198,13 +232,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //我的房价
             case R.id.tv_myhouse_price:
+            case R.id.tv_myhouse_price1:
                 ToastUtils.getToast(getActivity(), "地图");
                 break;
             case R.id.tv_calculator:
+            case R.id.tv_calculator1:
                 startActivity(new Intent(mContext, CalculatorActivity.class));
                 break;
             case R.id.tv_feedback:
-//                startActivity(new Intent(mContext, FeedbackActivity.class));
+            case R.id.tv_feedback1:
+                //                startActivity(new Intent(mContext, FeedbackActivity.class));
                 SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constant.CHAT, Constant.CHAT_FEEDBACK);
                 setMyExtensionModule();
                 if (RongIM.getInstance() != null) {

@@ -15,6 +15,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
@@ -22,9 +23,12 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.ChartView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,13 +45,46 @@ public class FangjiadituActivity extends BaseActivity {
     @BindView(R.id.back_img)
     ImageView back_img;
     private BaiduMap baiduMap;
+    //x轴坐标对应的数据
+    private List<String> xValue = new ArrayList<>();
+    //y轴坐标对应的数据
+    private List<Float> yValue = new ArrayList<>();
+    //折线对应的数据
+    private Map<String, Float> value = new HashMap<>();
+    //第二条折线
+    private Map<String, Float> value1 = new HashMap<>();
+    //第一条折线对应的折点
+    List<Float> mlist=new ArrayList<>();
+    //第二条折线对应的折点
+    List<Float> mlist1=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fangjiaditu);
         ButterKnife.bind(this);
         initMap();
+        initChartList();
     }
+
+    private void initChartList() {
+        for (int i = 10; i > 0; i--) {
+            xValue.add("11-1"+i);
+            mlist.add((float) (Math.random()*3.5+0.5));
+            mlist1.add((float) (Math.random()*3.5+0.5));
+        }
+        for (int i = mlist.size(); i >0 ; i--) {
+            value.put("11-1"+i, mlist.get(i-1));
+            value1.put("11-1"+i, mlist1.get(i-1));
+        }
+
+        yValue.add((float) 0.55);
+        yValue.add((float) 1.55);
+        yValue.add((float) 2.55);
+        yValue.add((float) 3.55);
+        yValue.add((float) 4.55);
+    }
+
+
     @OnClick({R.id.btn_location, R.id.layout_pop,R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -80,7 +117,16 @@ public class FangjiadituActivity extends BaseActivity {
                 //设置监听事件
                 .builder();
         dialog.show();
+        //绘制折线图
+        initLineChart(dialog);
     }
+
+
+    private void initLineChart(BaseDialog dialog) {
+        ChartView chartview = (ChartView) dialog.findViewById(R.id.chartview);
+        chartview.setValue(value,value1, xValue, yValue);
+    }
+
     private void initMap() {
         mapview.removeViewAt(1);//隐藏logo
         mapview.removeViewAt(2);//隐藏比例尺
@@ -107,6 +153,8 @@ public class FangjiadituActivity extends BaseActivity {
         markerBeanList.add(new MarkerBean(139.758788,35.684492));
         markerBeanList.add(new MarkerBean(139.758788,35.728807));
 
+
+
         List<OverlayOptions> overlayOptionsList = new ArrayList<>();
         for (int i = 0; i < markerBeanList.size(); i++) {
             View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view,null);
@@ -121,6 +169,13 @@ public class FangjiadituActivity extends BaseActivity {
                     .draggable(true);
             overlayOptionsList.add(markerOptions);
         }
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                showMPChart(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                return false;
+            }
+        });
         baiduMap.addOverlays(overlayOptionsList);
     }
 

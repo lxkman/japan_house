@@ -1,10 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="#fff"
     android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="250dip"></LinearLayout>
+        android:layout_height="300dip">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="80dip">
+            <LinearLayout
+                android:paddingTop="15dip"
+                android:paddingBottom="15dip"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="最新均价"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:textColor="#fe982b"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:text="73461元/平"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <View
+                android:layout_gravity="center_vertical"
+                android:layout_width="1dip"
+                android:background="#eee"
+                android:layout_height="40dip"></View>
+            <LinearLayout
+                android:paddingTop="15dip"
+                android:paddingBottom="15dip"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="比上月"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:drawableLeft="@drawable/shangjiantou"
+                    android:textColor="#555"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="1.58%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <View
+                android:layout_gravity="center_vertical"
+                android:layout_width="1dip"
+                android:background="#eee"
+                android:layout_height="40dip"></View>
+            <LinearLayout
+                android:paddingTop="15dip"
+                android:paddingBottom="15dip"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="比去年"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:drawablePadding="10dip"
+                    android:drawableLeft="@drawable/xiajiantou"
+                    android:textColor="#555"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="2%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <com.example.administrator.japanhouse.view.ChartView
+            android:id="@+id/chartview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            app:bgcolor="#ffffff"
+            app:interval="65dp"
+            app:isScroll="false"
+            app:linecolor="#C79880"
+            app:xylinecolor="#e2e2e2"
+            app:xylinewidth="1dp"
+            app:xytextcolor="#7e7e7e"
+            app:xytextsize="12sp" />
+    </LinearLayout>
 </LinearLayout>

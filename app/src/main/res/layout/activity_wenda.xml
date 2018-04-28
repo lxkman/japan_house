@@ -34,7 +34,7 @@
                       android:id="@+id/me_tiwen"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="我的提问"
+                      android:text="@string/mine_wdtw"
                       android:textSize="16sp"
                       android:textColor="@color/white"
                       />
@@ -57,7 +57,7 @@
                 android:id="@+id/me_huida"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的回答"
+                android:text="@string/mine_wohd"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 />

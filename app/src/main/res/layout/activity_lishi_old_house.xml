@@ -441,6 +441,7 @@
                 android:background="#c79880">
 
                 <TextView
+                    android:id="@+id/lishi_old_wl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"

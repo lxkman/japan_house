@@ -44,7 +44,7 @@
                 android:id="@+id/search_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入小区名或地址"
+                android:hint="@string/home_search_hint"
                 android:textSize="14sp"
                 android:background="@null"
                 android:singleLine="true"

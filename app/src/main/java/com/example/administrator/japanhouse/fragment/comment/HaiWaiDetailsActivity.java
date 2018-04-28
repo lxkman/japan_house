@@ -12,6 +12,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
 import org.zackratos.ultimatebar.UltimateBar;
@@ -35,6 +39,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
 
 public class HaiWaiDetailsActivity extends BaseActivity {
 
@@ -80,6 +88,35 @@ public class HaiWaiDetailsActivity extends BaseActivity {
         //猜你喜欢
         initLoveRecycler();
         initScroll();
+        findViewById(R.id.haiwai_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(HaiWaiDetailsActivity.this).setStringPreference(Constant.CHAT, Constant.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(HaiWaiDetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
+
+    }
+
+    public void setMyExtensionModule() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
+            }
+        }
     }
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {

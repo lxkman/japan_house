@@ -20,7 +20,7 @@
             android:layout_height="40dip" />
         <TextView
             android:id="@+id/title_content_tv"
-            android:text="中国房源"
+            android:text="@string/zhongguofangyuan"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:layout_centerVertical="true"
@@ -58,7 +58,7 @@
                     android:gravity="start"
                     android:textSize="14sp"
                     android:layout_centerHorizontal="true"
-                    android:hint="请输入国家地区或房源名称"
+                    android:hint="@string/qsrguojiahuo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -83,7 +83,7 @@
                     android:id="@+id/view_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="猜你喜欢"
+                    android:text="@string/cainixihuan"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textColor="@color/text_black"

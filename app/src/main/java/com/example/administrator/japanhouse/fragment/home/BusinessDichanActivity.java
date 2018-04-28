@@ -37,7 +37,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
-    private String[] itemName = {"商铺买卖", "商铺出租", "写字楼买卖", "写字楼出租", "高尔夫球场", "酒店",};
+    private String[] itemName = {getString(R.string.business_symm), getString(R.string.business_spcz), getString(R.string.business_mmxzl), getString(R.string.business_xzlcz), getString(R.string.business_gefqc), getString(R.string.business_jd)};
     private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.shangpuchuzu_iv, R.drawable.xzlmaimai_iv,
             R.drawable.xzlchuzu_iv, R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
 

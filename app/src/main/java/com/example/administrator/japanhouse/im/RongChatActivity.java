@@ -27,6 +27,7 @@ public class RongChatActivity extends BaseActivity {
     private TextView title;
     private ImageView back;
     private ImageView phone;
+    private ImageView star;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class RongChatActivity extends BaseActivity {
         title = (TextView) findViewById(R.id.activity_chat_title);
         back = (ImageView) findViewById(R.id.activity_chat_back);
         phone = (ImageView) findViewById(R.id.activity_chat_phone);
+        star = (ImageView) findViewById(R.id.activity_chat_star);
 
         //会话界面 对方id
         final String targetId = getIntent().getData().getQueryParameter("targetId");
@@ -45,15 +47,21 @@ public class RongChatActivity extends BaseActivity {
         String chat = SharedPreferencesUtils.getInstace(this).getStringPreference(Constant.CHAT, "");
         if (!TextUtils.isEmpty(chat)) {
             if (chat.equals(Constant.CHAT_DETAILS)){
-
+                if (!TextUtils.isEmpty(title)){
+                    this.title.setText(title);
+                }
+                phone.setVisibility(View.GONE);
+                star.setVisibility(View.VISIBLE);
             } else if (chat.equals(Constant.CHAT_FEEDBACK)) {
                 this.title.setText(getString(R.string.mine_userfeedback));
                 phone.setVisibility(View.GONE);
-            } else if (chat.equals(Constant.CHAT_TALK)) {
+                star.setVisibility(View.GONE);
+            } else {
                 if (!TextUtils.isEmpty(title)){
                     this.title.setText(title);
                 }
                 phone.setVisibility(View.VISIBLE);
+                star.setVisibility(View.GONE);
             }
         }
 
@@ -75,6 +83,7 @@ public class RongChatActivity extends BaseActivity {
 
     @Override
     public void finish() {
+        SharedPreferencesUtils.getInstace(this).setStringPreference(Constant.CHAT, "abc");
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
         IExtensionModule defaultModule = null;
         if (moduleList != null) {

@@ -14,6 +14,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,8 +39,11 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.home.NewHouseActivity;
+import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
+import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -53,6 +57,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
 
 public class NewHousedetailsActivity extends BaseActivity {
 
@@ -127,6 +135,35 @@ public class NewHousedetailsActivity extends BaseActivity {
         intent = new Intent(NewHousedetailsActivity.this,MapActivity.class);
         intent.putExtra("lat","35.68");
         intent.putExtra("log","139.75");
+        findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(NewHousedetailsActivity.this).setStringPreference(Constant.CHAT, Constant.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(NewHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
+
+    }
+
+    public void setMyExtensionModule() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
+            }
+        }
     }
     private void initLocation() {
         mLocClient = new LocationClient(this);

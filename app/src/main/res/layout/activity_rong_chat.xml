@@ -33,6 +33,15 @@
             android:padding="15dp"
             android:src="@drawable/chat_phone"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/activity_chat_star"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:src="@drawable/star_border_hide"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <fragment

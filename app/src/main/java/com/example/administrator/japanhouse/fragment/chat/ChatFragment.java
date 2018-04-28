@@ -98,7 +98,6 @@ public class ChatFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                startActivity(new Intent(mContext,ManagerActivity.class));
-                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constant.CHAT, Constant.CHAT_TALK);
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");
                     RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.act_chat_title));

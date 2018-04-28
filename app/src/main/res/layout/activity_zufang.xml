@@ -47,7 +47,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:textSize="14sp"
-                        android:hint="请输入查询内容"
+                        android:hint="@string/qingshuruchaxun"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
@@ -83,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="租房研究所"
+                    android:text="@string/zfyjs"
                     android:textColor="@color/text_black"
                     android:padding="15dp"/>
                 <TextView
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/home_more_iv"
-                    android:text="查看更多"
+                    android:text="@string/home_ckgd"
                     android:drawablePadding="5dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -115,7 +115,7 @@
                     android:id="@+id/shendeng_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="神灯找房，请填写您的找房需求"
+                    android:text="@string/sdzf_zf"
                     android:textColor="@color/colorPrimary"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
@@ -140,7 +140,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="神灯找房"
+                        android:text="@string/sdzf"
                         android:textColor="@color/text_black"
                         android:padding="15dp"/>
                     <TextView
@@ -148,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/home_more_iv"
-                        android:text="查看更多"
+                        android:text="@string/home_ckgd"
                         android:drawablePadding="5dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -170,7 +170,7 @@
                     android:id="@+id/view_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="今日推荐"
+                    android:text="@string/jrtj"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textColor="@color/text_black"

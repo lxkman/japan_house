@@ -50,7 +50,7 @@ public class LancherActivity extends BaseActivity {
             Resources resources = getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();
             Configuration config = resources.getConfiguration();
-            Locale myLocale = new Locale(location);
+            Locale myLocale = new Locale("ja");
             config.locale = myLocale;
             resources.updateConfiguration(config, dm);
         }

@@ -38,7 +38,12 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
-    private String[] itemName = {"澳大利亚", "美国", "加拿大", "英国", "泰国", "新西兰"};
+    private String[] itemName = {getString(R.string.hw_adly),
+            getString(R.string.hw_mg),
+            getString(R.string.hw_jnd),
+            getString(R.string.hw_yg),
+            getString(R.string.hw_tg),
+            getString(R.string.hw_xxl)};
     private int[] itemPic = {R.drawable.aodaliya_iv, R.drawable.meiguo_iv, R.drawable.jianada_iv,
             R.drawable.yingguo_iv, R.drawable.taiguo_iv, R.drawable.xinxilan_iv};
 

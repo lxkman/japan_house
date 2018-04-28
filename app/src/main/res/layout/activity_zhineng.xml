@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="智能买房"
+            android:text="@string/znmf"
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -47,13 +47,13 @@
                   <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="猜你想问"
+                      android:text="@string/cainixiangwen"
                       />
                   <TextView
                       android:layout_marginLeft="10dp"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="准备买房"
+                      android:text="@string/zbmf"
                       android:textColor="@color/colorAccent"
                       android:background="@drawable/textview_zhineng"
                       />
@@ -61,7 +61,7 @@
                       android:layout_marginLeft="10dp"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="准备买房"
+                      android:text="@string/zbmf"
                       android:textColor="@color/colorAccent"
                       android:background="@drawable/textview_zhineng"
                       />
@@ -69,7 +69,7 @@
                       android:layout_marginLeft="10dp"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="贷款"
+                      android:text="@string/daikuan"
                       android:textColor="@color/colorAccent"
                       android:background="@drawable/textview_zhineng"
                       />
@@ -77,7 +77,7 @@
                       android:layout_marginLeft="10dp"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="百科"
+                      android:text="@string/baike"
                       android:textColor="@color/colorAccent"
                       android:background="@drawable/textview_zhineng"
                       />

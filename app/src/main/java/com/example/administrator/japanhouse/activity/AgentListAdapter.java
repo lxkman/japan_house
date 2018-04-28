@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
+import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import io.rong.imkit.RongIM;
 
@@ -39,6 +41,7 @@ public class AgentListAdapter extends RecyclerView.Adapter {
         viewHolder.wChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(activity).setStringPreference(Constant.CHAT, Constant.CHAT_TALK);
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");
                     RongIM.getInstance().startPrivateChat(activity, "123456", activity.getString(R.string.act_chat_title));

@@ -27,6 +27,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
@@ -96,6 +98,7 @@ public class ChatFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                startActivity(new Intent(mContext,ManagerActivity.class));
+                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constant.CHAT, Constant.CHAT_TALK);
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");
                     RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.act_chat_title));

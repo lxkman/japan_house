@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 
 /**
@@ -33,8 +35,20 @@ public class RongChatActivity extends BaseActivity {
         final String targetId = getIntent().getData().getQueryParameter("targetId");
         //对方 昵称
         String title = getIntent().getData().getQueryParameter("title");
-        if (!TextUtils.isEmpty(title)){
-            this.title.setText(title);
+
+        String chat = SharedPreferencesUtils.getInstace(this).getStringPreference(Constant.CHAT, "");
+        if (!TextUtils.isEmpty(chat)) {
+            if (chat.equals(Constant.CHAT_DETAILS)){
+
+            } else if (chat.equals(Constant.CHAT_FEEDBACK)) {
+                this.title.setText(getString(R.string.mine_userfeedback));
+                phone.setVisibility(View.GONE);
+            } else if (chat.equals(Constant.CHAT_TALK)) {
+                if (!TextUtils.isEmpty(title)){
+                    this.title.setText(title);
+                }
+                phone.setVisibility(View.VISIBLE);
+            }
         }
 
         back.setOnClickListener(new View.OnClickListener() {

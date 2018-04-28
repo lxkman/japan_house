@@ -293,7 +293,20 @@
     <string name="haiwaidichan">海外不動産</string>
     <string name="forgetpassword">海外不動産</string>
     <string name="activity_fangjia">価格地図</string>
-    <string name="act_chat_title">顾问姓名</string>
-    <string name="activity_agentlist_title">经纪人列表</string>
-    <string name="fangyuanmingcheng">房源名称</string>
+    <string name="act_chat_title">顧問の名前</string>
+    <string name="activity_agentlist_title">マネジャーリスト</string>
+    <string name="fangyuanmingcheng">住宅資源名称</string>
+    <string name="home_jrdk">金融\nロ-ン</string>
+    <string name="home_gfbk">購入\n百科</string>
+    <string name="home_fcwd">物件\n対応</string>
+    <string name="home_znmf">知能\n購入</string>
+    <string name="home_tiaohf">良い物件を選ぶ，上F.L.C</string>
+    <string name="home_map">地図</string>
+    <string name="home_tjxf">新築物件をおすすめ</string>
+    <string name="home_ckgd">もっと見る</string>
+    <string name="home_tjesf">中古物件をおすすめ</string>
+    <string name="home_tjjjr">優秀なマネージャーをおすすめ</string>
+    <string name="home_tjzf">賃貸物件をおすすめ</string>
+    <string name="home_tjtd">土地をおすすめ</string>
+    <string name="home_cnxh">まだ好み</string>
 </resources>

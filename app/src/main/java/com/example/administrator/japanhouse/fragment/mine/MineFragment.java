@@ -83,7 +83,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.recycler_foot)
     RecyclerView recyclerFoot;
     @BindView(R.id.tv_qustion)
-    ImageView tvQustion;
+    TextView tvQustion;
     Unbinder unbinder;
     @BindView(R.id.rel_lianxiren_layout)
     RelativeLayout relLianxirenLayout;

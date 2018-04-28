@@ -49,7 +49,7 @@ public class MyDrawCircleView extends View {
     void paint() {
         mpaint = new Paint();
         mpaint.setStyle(Paint.Style.STROKE);
-        mpaint.setStrokeWidth(10f);
+        mpaint.setStrokeWidth(7f);
         mpaint.setColor(getResources().getColor(R.color.mapcirclestroke));
         mpaint.setAntiAlias(true);
         mpaint.setDither(true);//设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰

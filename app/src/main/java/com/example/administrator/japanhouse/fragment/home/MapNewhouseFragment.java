@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolygonOptions;
@@ -50,7 +52,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     Unbinder unbinder;
     private List<View> popupViews;
     private List<OneCheckBean> list;
-    private MapView mBaiduMap;
+    private MapView mapView;
     private BaiduMap baiduMap;
     MyDrawCircleView mydrawcircleview;
     private LinearLayout ll_clear;
@@ -101,7 +103,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
             //构建用户绘制多边形的Option对象
             OverlayOptions polygonOption = new PolygonOptions()
                     .points(latLngList)
-                    .stroke(new Stroke(2, getResources().getColor(R.color.mapcirclestroke)))
+                    .stroke(new Stroke(5, getResources().getColor(R.color.mapcirclestroke)))
                     .fillColor(getResources().getColor(R.color.mapcirclesfill));
 
             //在地图上添加多边形Option，用于显示
@@ -175,16 +177,16 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
          * */
         String headers[] = {"售价", "楼层", "年份", "更多"};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
-        mBaiduMap = (MapView) fifthView.findViewById(R.id.mapview);
+        mapView = (MapView) fifthView.findViewById(R.id.mapview);
         mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);
         ll_clear = (LinearLayout) fifthView.findViewById(R.id.ll_clear);
         ll_clear.setOnClickListener(this);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
-        mBaiduMap.removeViewAt(1);//隐藏logo
-        mBaiduMap.removeViewAt(2);//隐藏比例尺
-        mBaiduMap.showZoomControls(false);// 隐藏缩放控件
+        mapView.removeViewAt(1);//隐藏logo
+        mapView.removeViewAt(2);//隐藏比例尺
+        mapView.showZoomControls(false);// 隐藏缩放控件
 
-        baiduMap = mBaiduMap.getMap();
+        baiduMap = mapView.getMap();
         LatLng center = new LatLng(35.68, 139.75); // 默认 东京
         float zoom = 13.0f; // 默认 11级
         MapStatus mMapStatus = new MapStatus.Builder().target(
@@ -193,6 +195,17 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                 .newMapStatus(mMapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
         initOverlay();
+        initListener();
+    }
+
+    private void initListener() {
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                startActivity(new Intent(mContext,NewHouseActivity.class));
+                return false;
+            }
+        });
     }
 
     private void initOverlay() {
@@ -234,19 +247,19 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     @Override
     public void onResume() {
         super.onResume();
-        mBaiduMap.onResume();
+        mapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mBaiduMap.onPause();
+        mapView.onPause();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mBaiduMap.onDestroy();
+        mapView.onDestroy();
         unbinder.unbind();
     }
 

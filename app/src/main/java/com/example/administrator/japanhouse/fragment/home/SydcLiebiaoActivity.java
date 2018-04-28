@@ -43,7 +43,6 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"售价", "面积", "车站距离", "地段"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -59,6 +58,9 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     }
 
     private void initView() {
+        String headers[] = {getResources().getString(R.string.shoujia),
+                getResources().getString(R.string.lxkmianji),
+                getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */

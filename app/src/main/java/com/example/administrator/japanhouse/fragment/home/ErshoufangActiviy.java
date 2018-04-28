@@ -40,7 +40,6 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"售价", "楼层", "建筑年份", "更多"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -52,10 +51,13 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ershoufang_activiy);
         ButterKnife.bind(this);
+
         initView();
     }
 
     private void initView() {
+        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
+                getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */

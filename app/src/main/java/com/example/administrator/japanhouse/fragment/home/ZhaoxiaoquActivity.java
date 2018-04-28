@@ -40,7 +40,6 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-    private String headers[] = {"价格", "房龄", "房型"};
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private List<String> mList = new ArrayList();
@@ -56,6 +55,8 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
+        String headers[] = {getResources().getString(R.string.shoujia),
+                getResources().getString(R.string.lxk_fangling), getResources().getString(R.string.lxk_fangxing)};
         /**
          * 第一个界面
          * */

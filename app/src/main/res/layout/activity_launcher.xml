@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <ImageView
-        android:src="@drawable/qidongye"
+        android:background="@drawable/qidongye"
         android:id="@+id/iv_launcher"
         android:scaleType="fitXY"
         android:layout_width="match_parent"

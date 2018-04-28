@@ -50,9 +50,12 @@ public class LancherActivity extends BaseActivity {
             Resources resources = getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();
             Configuration config = resources.getConfiguration();
-            Locale myLocale = new Locale("ja");
+            Locale myLocale = new Locale(location);
             config.locale = myLocale;
             resources.updateConfiguration(config, dm);
+            if (location.equals("ja")) {
+                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+            }
         }
 
         iv_launcher = (ImageView) findViewById(R.id.iv_launcher);

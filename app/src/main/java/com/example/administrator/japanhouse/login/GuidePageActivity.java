@@ -59,7 +59,6 @@ public class GuidePageActivity extends BaseActivity {
                 public void onClick(View v) {
                     SharedPreferencesUtils.getInstace(GuidePageActivity.this).setBooleanPreference( "guide", true);
                     Intent intent = new Intent(GuidePageActivity.this, MainActivity.class);
-                    intent.putExtra("CheckCharTag","CheckHome");
                     startActivity(intent);
 //                    HashMap<String, Boolean> hashMap = new HashMap<>();
 //                    //会话类型 以及是否聚合显示

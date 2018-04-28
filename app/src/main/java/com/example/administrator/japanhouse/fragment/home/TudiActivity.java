@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +17,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -152,8 +152,8 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 startActivity(new Intent(mContext,HomeMapActivity.class));
                 break;
             case R.id.img_message:
-                setResult(2);
-                finish();
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

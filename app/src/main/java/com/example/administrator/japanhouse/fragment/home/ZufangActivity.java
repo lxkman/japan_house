@@ -18,6 +18,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 
 import java.util.ArrayList;
@@ -222,8 +223,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             case R.id.img_message:
-                setResult(2);
-                finish();
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
             case R.id.look_more_tv:
                 startActivity(new Intent(mContext, YanjiuListActivity.class));

@@ -1,16 +1,14 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -18,7 +16,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -183,6 +181,8 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                 break;
             //消息
             case R.id.img_message:
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
         }
     }

@@ -175,6 +175,7 @@ public class HomeFragment extends BaseFragment {
                                 intent = new Intent(getActivity(), NewHouseActivity.class);
                                 getActivity().startActivityForResult(intent, 1);
                                 break;
+
                             case 2://土地
                                 intent = new Intent(getActivity(), TudiActivity.class);
                                 getActivity().startActivityForResult(intent, 1);

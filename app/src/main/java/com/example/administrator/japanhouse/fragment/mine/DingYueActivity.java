@@ -75,6 +75,7 @@ public class DingYueActivity extends BaseActivity {
 
     }
 
+
     // 创建菜单:
     SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
         @Override

@@ -173,7 +173,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         /**
          * Dropdownmenu下面的主体部分
          * */
-        String headers[] = {"售价", "楼层", "车站距离", "更多"};
+        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
+                getString(R.string.lxkchezhanjuli), getString(R.string.gengduo)};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (MapView) fifthView.findViewById(R.id.mapview);
         mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);

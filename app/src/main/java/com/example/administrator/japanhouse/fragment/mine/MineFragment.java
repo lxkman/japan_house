@@ -22,12 +22,12 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
 import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
 import com.example.administrator.japanhouse.utils.Constant;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
-import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -233,7 +233,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             //我的房价
             case R.id.tv_myhouse_price:
             case R.id.tv_myhouse_price1:
-                ToastUtils.getToast(getActivity(), "地图");
+                startActivity(new Intent(mContext, FangjiadituActivity.class));
                 break;
             case R.id.tv_calculator:
             case R.id.tv_calculator1:

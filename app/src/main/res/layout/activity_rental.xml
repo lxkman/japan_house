@@ -106,7 +106,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
         android:background="@color/white"
         >
 
@@ -705,16 +706,17 @@
                     />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/act_rental_entrust"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:textColor="@color/white"
-                android:text="@string/activity_rental_entrust"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:background="@color/colorPrimary"
-                />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/act_rental_entrust"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textColor="@color/white"
+        android:text="@string/activity_rental_entrust"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+    />
 </LinearLayout>

@@ -157,7 +157,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 MyUtils.startMain(this);
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext,SydcSearchActivity.class));
                 break;
         }
     }

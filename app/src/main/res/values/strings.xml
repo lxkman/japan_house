@@ -402,5 +402,11 @@
     <string name="qingshruunigndewenti">请输入您的问题</string>
     <string name="huida">回答</string>
     <string name="qingshruunigndeneirong">请输入回答内容</string>
+    <string name="shengyu">剩余</string>
+    <string name="tian">天</string>
+    <string name="xiaoshi">小时</string>
+    <string name="fen">分</string>
+    <string name="huodongshuoming">活动说明</string>
+    <string name="renyibaoming">283人已报名</string>
 
 </resources>

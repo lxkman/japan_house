@@ -16,20 +16,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnClickListener {
 
+    @BindView(R.id.btn_call)
+    Button btnCall;
     private ImageView img_beak;
     private TextView dai_name;
     private TextView hk_time;
     private Button shenqing;
     private ImageView kefu;
     private boolean flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daikuan_detils);
+        ButterKnife.bind(this);
         initView();
 
 
@@ -44,19 +52,29 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
         img_beak.setOnClickListener(this);
         shenqing.setOnClickListener(this);
         kefu.setOnClickListener(this);
+        btnCall.setOnClickListener(this);
+        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+        if (city.equals("zh")) {
+            kefu.setVisibility(View.VISIBLE);
+            btnCall.setVisibility(View.GONE);
+        } else {
+            kefu.setVisibility(View.GONE);
+            btnCall.setVisibility(View.VISIBLE);
+
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.shenqing:
-                shumaDialog(Gravity.CENTER,R.style.Alpah_aniamtion);
+                shumaDialog(Gravity.CENTER, R.style.Alpah_aniamtion);
                 break;
             case R.id.img_beak:
                 finish();
                 break;
             case R.id.kefu:
-                Toast.makeText(this,"客服",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "客服", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -91,11 +109,11 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
                 dialog.dismiss();
             }
         });
-         //CheckBox事件监听
+        //CheckBox事件监听
         box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                flag=b;
+                flag = b;
             }
         });
         //点击提交
@@ -104,16 +122,16 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
             public void onClick(View view) {
                 String name = uname.getText().toString();
                 String tel = utel.getText().toString();
-                if(TextUtils.isEmpty(name)||TextUtils.isEmpty(tel)){
-                    Toast.makeText(DaikuanDetilsActivity.this,"输入框为空",Toast.LENGTH_SHORT).show();
-                }else{
-                    if(flag){
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(tel)) {
+                    Toast.makeText(DaikuanDetilsActivity.this, "输入框为空", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (flag) {
                         uname.setText("");
                         utel.setText("");
-                        Toast.makeText(DaikuanDetilsActivity.this,"已提交",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DaikuanDetilsActivity.this, "已提交", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                    }else{
-                        Toast.makeText(DaikuanDetilsActivity.this,"请阅读用户协议",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DaikuanDetilsActivity.this, "请阅读用户协议", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -123,7 +141,7 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
         xieyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DaikuanDetilsActivity.this,DealActivity.class));
+                startActivity(new Intent(DaikuanDetilsActivity.this, DealActivity.class));
             }
         });
         dialog.show();

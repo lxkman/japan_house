@@ -175,7 +175,8 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         /**
          * Dropdownmenu下面的主体部分
          * */
-        String headers[] = {"售价", "楼层", "年份", "更多"};
+        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
+                getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (MapView) fifthView.findViewById(R.id.mapview);
         mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);

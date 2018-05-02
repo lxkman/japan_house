@@ -158,7 +158,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                 MyUtils.startMain(this);
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext,SydcSearchActivity.class));
                 break;
         }
     }

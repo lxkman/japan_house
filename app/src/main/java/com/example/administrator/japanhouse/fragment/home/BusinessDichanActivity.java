@@ -16,7 +16,6 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

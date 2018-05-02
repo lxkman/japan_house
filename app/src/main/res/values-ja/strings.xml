@@ -401,4 +401,10 @@
     <string name="qingshruunigndewenti">質問を記入してください</string>
     <string name="huida">答え</string>
     <string name="qingshruunigndeneirong">答えを記入してください</string>
+    <string name="shengyu">残り</string>
+    <string name="tian">日</string>
+    <string name="xiaoshi">時</string>
+    <string name="fen">分間</string>
+    <string name="huodongshuoming">イベント説明</string>
+    <string name="renyibaoming">283人申し込みしました</string>
 </resources>

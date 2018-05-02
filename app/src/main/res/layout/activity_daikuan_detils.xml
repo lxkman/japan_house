@@ -399,23 +399,44 @@
             android:textColor="#000"
             android:textSize="14sp"
             />
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+                  android:layout_height="50dip"
+                  android:orientation="horizontal"
+    >
         <Button
-            android:id="@+id/shenqing"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_call"
+            android:layout_width="0dip"
+            android:layout_weight="1"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:text="@string/lijishenqing"
+            android:text="カスタマーサービス"
             android:textColor="@color/white"
             android:background="@color/colorAccent"
             android:textSize="16sp"
-            />
+        />
+        <Button
+        android:id="@+id/shenqing"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/lijishenqing"
+        android:textColor="@color/white"
+        android:background="#d79369"
+        android:textSize="16sp"
+    />
+    </LinearLayout>
+
     <ImageView
+        android:layout_marginRight="15dip"
         android:id="@+id/kefu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/kefu"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/shenqing"
-        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dip"
         />
 </RelativeLayout>

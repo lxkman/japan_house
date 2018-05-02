@@ -59,6 +59,9 @@ public class ChatFragment extends BaseFragment {
     int REQUEST_CODE = 1;
 
     //试试能不能提上去
+
+
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_weichart, null);

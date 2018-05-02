@@ -18,6 +18,7 @@
             android:layout_height="50dip" />
         <TextView
             android:gravity="center"
+
             android:textSize="18sp"
             android:textColor="#fff"
             android:text="@string/mine_dingyue"

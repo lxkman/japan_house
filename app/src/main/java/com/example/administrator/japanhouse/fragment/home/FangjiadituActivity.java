@@ -76,7 +76,6 @@ public class FangjiadituActivity extends BaseActivity {
             value.put("11-1"+i, mlist.get(i));
             value1.put("11-1"+i, mlist1.get(i));
         }
-
         yValue.add((float) 0.55);
         yValue.add((float) 1.55);
         yValue.add((float) 2.55);

@@ -256,6 +256,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(mContext, FangjiadituActivity.class));
                 break;
             case R.id.tv_calculator:
+
             case R.id.tv_calculator1:
                 startActivity(new Intent(mContext, CalculatorActivity.class));
                 break;

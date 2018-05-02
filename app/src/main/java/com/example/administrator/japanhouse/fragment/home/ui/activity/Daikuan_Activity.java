@@ -1,7 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Daikuan_Adapter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -19,7 +19,7 @@ import com.example.administrator.japanhouse.utils.Constants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Daikuan_Activity extends AppCompatActivity implements View.OnClickListener {
+public class Daikuan_Activity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.tv_call)
     TextView tvCall;
@@ -54,7 +54,7 @@ public class Daikuan_Activity extends AppCompatActivity implements View.OnClickL
         toutiao_recycler.setAdapter(daikuan_adapter);
 //        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
         String city = CacheUtils.get(Constants.COUNTRY);
-        if (city.equals("ja")) {
+        if (city!=null&&city.equals("ja")) {
             tvCall.setVisibility(View.VISIBLE);
             kefu.setVisibility(View.GONE);
         } else {
@@ -73,6 +73,9 @@ public class Daikuan_Activity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "跳转", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_call:
+
+                break;
+            case R.id.kefu:
 
                 break;
         }

@@ -4,17 +4,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.fragment.Huida_Itme_Fragment;
 import com.example.administrator.japanhouse.fragment.home.ui.fragment.Tiwen_Itme_Fragment;
 
-public class WendaItemActivity extends AppCompatActivity implements View.OnClickListener {
+public class WendaItemActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView img_beak;
     private TextView me_tiwen;

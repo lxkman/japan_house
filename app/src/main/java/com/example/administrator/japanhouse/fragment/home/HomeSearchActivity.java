@@ -57,7 +57,6 @@ public class HomeSearchActivity extends BaseActivity {
         initView();
     }
 
-
     private void initView() {
         List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
@@ -208,4 +207,5 @@ public class HomeSearchActivity extends BaseActivity {
             helper.setText(R.id.item_name_tv, item);
         }
     }
+
 }

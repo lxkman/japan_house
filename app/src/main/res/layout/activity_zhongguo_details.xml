@@ -176,121 +176,158 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="40dip">
-                    <TextView
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:text="@string/haiwai_chaoxiang"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="南北"
-                        android:textSize="14sp"
+                    <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:id="@+id/tv_See_More"
-                        android:layout_marginRight="5dip"
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:textSize="15sp"
-                        android:textColor="#888"
-                        android:text="建筑年份："
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="2010.11.10"
-                        android:textSize="14sp"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:paddingLeft="15dip"
+                            android:gravity="center_vertical"
+                            android:text="@string/haiwai_chaoxiang"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="南北"
+                            android:textSize="14sp"
+                            android:layout_width="0dip"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/tv_See_More"
+                            android:layout_marginRight="5dip"
+                            android:gravity="center_vertical"
+                            android:textSize="15sp"
+                            android:textColor="#888"
+                            android:text="建筑年份："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="2010.11.10"
+                            android:textSize="14sp"
+                            android:layout_width="0dip"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
                 <LinearLayout
                     android:background="#fff"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="40dip">
-                    <TextView
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:text="@string/haiwai_dianti"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="有"
-                        android:textSize="14sp"
+                    <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:layout_marginRight="5dip"
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:textSize="15sp"
-                        android:textColor="#888"
-                        android:text="装修材质："
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="材质"
-                        android:textSize="14sp"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:paddingLeft="15dip"
+                            android:gravity="center_vertical"
+                            android:text="@string/haiwai_dianti"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="有"
+                            android:textSize="14sp"
+                            android:layout_width="0dip"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_marginRight="5dip"
+                            android:gravity="center_vertical"
+                            android:textSize="15sp"
+                            android:textColor="#888"
+                            android:text="装修材质："
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="材质"
+                            android:textSize="14sp"
+                            android:layout_width="0dip"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
                 <LinearLayout
                     android:background="#fff"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="40dip">
-                    <TextView
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:text="@string/jiudian_louceng"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="12层"
-                        android:textSize="14sp"
+                    <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:layout_marginRight="5dip"
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:textSize="15sp"
-                        android:textColor="#888"
-                        android:text="@string/haiwai_louxing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="小区"
-                        android:textSize="14sp"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:paddingLeft="15dip"
+                            android:gravity="center_vertical"
+                            android:text="@string/jiudian_louceng"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="12层"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_marginRight="5dip"
+                            android:gravity="center_vertical"
+                            android:textSize="15sp"
+                            android:textColor="#888"
+                            android:text="@string/haiwai_louxing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="小区"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
                 <LinearLayout
                     android:background="#fff"

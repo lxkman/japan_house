@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -108,7 +109,23 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     TextView tvMyask1;
     @BindView(R.id.tv_feedback1)
     TextView tvFeedback1;
+    @BindView(R.id.fl_lxk)
+    FrameLayout fl_lxk;
+    @BindView(R.id.fl_lxk2)
+    FrameLayout fl_lxk2;
     Unbinder unbinder;
+    @BindView(R.id.ll_collect)
+    LinearLayout llCollect;
+    @BindView(R.id.ll_dingyue)
+    LinearLayout llDingyue;
+    @BindView(R.id.tv_collect_count2)
+    TextView tvCollectCount2;
+    @BindView(R.id.ll_collect2)
+    LinearLayout llCollect2;
+    @BindView(R.id.tv_subscription_count2)
+    TextView tvSubscriptionCount2;
+    @BindView(R.id.ll_dingyue2)
+    LinearLayout llDingyue2;
     private int mDistanceY;
 
     @Override
@@ -152,11 +169,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String city = CacheUtils.get(Constants.COUNTRY);
-        if (city.equals("ja")) {
+        if (city != null && city.equals("ja")) {
             llZh.setVisibility(View.GONE);
             llJa.setVisibility(View.VISIBLE);
             tvQustion.setVisibility(View.GONE);
             tvWenjuan.setVisibility(View.VISIBLE);
+            fl_lxk2.setVisibility(View.VISIBLE);
+            fl_lxk.setVisibility(View.GONE);
         } else {
             llZh.setVisibility(View.VISIBLE);
             llJa.setVisibility(View.GONE);
@@ -179,9 +198,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,
-            R.id.rel_lishi_layout, tv_qustion, R.id.tv_collect_count, R.id.tv_subscription_count, R.id.tv_myorder,
+            R.id.rel_lishi_layout, tv_qustion, R.id.ll_collect, R.id.ll_dingyue, R.id.ll_collect2, R.id.ll_dingyue2, R.id.tv_myorder,
             R.id.tv_myask, R.id.tv_mysignup, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
-            R.id.tv_myhouse_price1, R.id.tv_calculator1, R.id.tv_feedback1,R.id.tv_myask1,R.id.tv_wenjuan})
+            R.id.tv_myhouse_price1, R.id.tv_calculator1, R.id.tv_feedback1, R.id.tv_myask1, R.id.tv_wenjuan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
@@ -206,11 +225,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(mContext, LiShiJiLuActivity.class));
                 break;
             //收藏
-            case R.id.tv_collect_count:
+            case R.id.ll_collect:
+            case R.id.ll_collect2:
                 startActivity(new Intent(mContext, ShouCangActivity.class));
                 break;
             //订阅
-            case R.id.tv_subscription_count:
+            case R.id.ll_dingyue:
+            case R.id.ll_dingyue2:
                 startActivity(new Intent(mContext, DingYueActivity.class));
                 break;
             //订单

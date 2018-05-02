@@ -57,7 +57,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
-        String headers[] = {getResources().getString(R.string.shoujia),
+        String headers[] = {getResources().getString(R.string.zujin),
                 getResources().getString(R.string.louceng),
                 getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
         /**
@@ -110,7 +110,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         list3.add(new OneCheckBean(false, "洋室"));
         list3.add(new OneCheckBean(false, "和室"));
         list3.add(new OneCheckBean(false, "朝向"));
-        list3.add(new OneCheckBean(false, "面积（平米）"));
+        list3.add(new OneCheckBean(false, "面积(平米)"));
         MoreView fourView = new MoreView(ZufangListActivity.this);
         popupViews.add(fourView.secView());
         fourView.insertData(list3, dropDownMenu);

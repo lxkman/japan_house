@@ -177,7 +177,7 @@ class MoreView {
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList2));
             } else if (item.getName().equals("朝向")) {
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList3));
-            } else if (item.getName().equals("面积（平米）")) {
+            } else if (item.getName().equals("面积(平米)")) {
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList4));
             } else if (item.getName().equals("格局")) {
                 recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList6));

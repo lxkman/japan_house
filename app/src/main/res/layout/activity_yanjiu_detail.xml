@@ -20,7 +20,7 @@
             android:layout_height="50dip" />
         <TextView
             android:id="@+id/title_content_tv"
-            android:text="详情"
+            android:text="@string/xiangqing"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:layout_centerVertical="true"

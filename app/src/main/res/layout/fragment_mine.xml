@@ -9,8 +9,6 @@
         android:id="@+id/nestScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,11 +74,13 @@
 
                 </LinearLayout>
                 <FrameLayout
+                    android:id="@+id/fl_lxk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|bottom"
                     android:background="@drawable/bg_white_wanjiao">
                     <LinearLayout
+                        android:id="@+id/ll_collect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -103,6 +103,7 @@
                             android:textColor="@color/text_gray"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/ll_dingyue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
@@ -124,9 +125,62 @@
                             android:textSize="13sp"
                             android:text="22"
                             android:textColor="@color/text_gray"/>
-
                     </LinearLayout>
-
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_lxk2"
+                    android:visibility="gone"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:background="@drawable/bg_white_wanjiao">
+                    <LinearLayout
+                        android:id="@+id/ll_collect2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:text="@string/mine_shoucang_shoucang"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_gray"/>
+                        <TextView
+                            android:id="@+id/tv_collect_count2"
+                            android:textSize="13sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:text="22"
+                            android:textColor="@color/text_gray"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_dingyue2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="50dp"
+                        android:orientation="horizontal"
+                    >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:text="@string/mine_dingyue_dingyue"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_gray"/>
+                        <TextView
+                            android:id="@+id/tv_subscription_count2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:textSize="13sp"
+                            android:text="22"
+                            android:textColor="@color/text_gray"/>
+                    </LinearLayout>
                 </FrameLayout>
             </FrameLayout>
             <TextView

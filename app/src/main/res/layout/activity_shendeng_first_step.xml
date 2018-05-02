@@ -20,7 +20,7 @@
             android:layout_height="50dip" />
         <TextView
             android:id="@+id/title_content_tv"
-            android:text="神灯找房"
+            android:text="@string/shendengzhaofnag"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:layout_centerVertical="true"
@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="心里预算有多少？"
+                    android:text="@string/xinliyusuanyouduoshao"
                     android:textSize="15sp"
                     android:padding="15dp"
                     android:textColor="@color/text_black"/>
@@ -67,13 +67,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="喜欢什么户型?"
+                        android:text="@string/xihuanshenemhuxing"
                         android:textSize="15sp"
                         android:textColor="@color/text_black"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="（可多选）"
+                        android:text="@string/keduoxuan"
                         android:textSize="15sp"
                         android:textColor="@color/gray"
                         android:layout_marginLeft="10dp"/>
@@ -92,7 +92,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="心仪位置在哪里？"
+                    android:text="@string/xinyiweizhizaina"
                     android:padding="15dp"
                     android:textColor="@color/text_black"/>
                 <android.support.v7.widget.RecyclerView
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="60dp"
-                android:text="下一步"
+                android:text="@string/next"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="15dp"

@@ -20,6 +20,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="写字楼出租"
+            android:textSize="12sp"
             android:gravity="center"
             android:textColor="@color/text_black"
             android:layout_marginTop="10dp"

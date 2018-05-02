@@ -110,8 +110,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.iv_head:
                 cameraList = new ArrayList<>();
-                cameraList.add("从相册中选择");
                 cameraList.add("拍照");
+                cameraList.add("从相册中选择");
                 showCamera();
                 break;
             case R.id.tv_name:

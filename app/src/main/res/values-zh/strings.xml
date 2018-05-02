@@ -407,5 +407,18 @@
     <string name="fen">分</string>
     <string name="huodongshuoming">活动说明</string>
     <string name="renyibaoming">283人已报名</string>
+    <string name="shipinfangyuan">视频房源</string>
+    <string name="tongqinzhaofnag">通勤找房</string>
+    <string name="xiangqing">详情</string>
+    <string name="shendengzhaofnag">神灯找房</string>
+    <string name="nindechazhaoxinxi">您的查找信息如下:</string>
+    <string name="xinliyusuanyouduoshao">心里预算有多少？</string>
+    <string name="xihuanshenemhuxing">喜欢什么户型?</string>
+    <string name="keduoxuan">（可多选）</string>
+    <string name="xinyiweizhizaina">心仪位置在哪里？</string>
+    <string name="zujin">租金</string>
+    <string name="qingshurufangwumingchenghuodizhi">请输入房屋名称或地址</string>
+    <string name="wancheng">完成</string>
+    <string name="qingshurunichegn">请输入昵称</string>
     <string name="dialog_checkRoom_phone">请输入您的手机号</string>
 </resources>

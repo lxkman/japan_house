@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickListener{
+public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -48,6 +48,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +59,17 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     }
 
     private void initView() {
-        String headers[] = {getResources().getString(R.string.shoujia),
-                getResources().getString(R.string.lxkmianji),
-                getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
+        type = getIntent().getStringExtra("type");
+        String headers[];
+        if (type.equals("1") || type.equals("3")) {
+            headers = new String[]{getResources().getString(R.string.zujin),
+                    getResources().getString(R.string.lxkmianji),
+                    getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
+        } else {
+            headers = new String[]{getResources().getString(R.string.zujin),
+                    getResources().getString(R.string.lxkmianji),
+                    getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
+        }
         /**
          * 第一个界面
          * */
@@ -130,8 +139,6 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     }
 
     private void initData() {
-        final String type = getIntent().getStringExtra("type");
-
         if (mList.size() <= 0) {
             mList.add("");
             mList.add("");
@@ -146,7 +153,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (type){
+                switch (type) {
                     case "0":
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
                         break;
@@ -191,7 +198,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
@@ -199,7 +206,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 MyUtils.startMain(this);
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext, HomeSearchActivity.class));
         }
     }
 

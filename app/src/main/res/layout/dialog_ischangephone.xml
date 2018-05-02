@@ -67,7 +67,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="更换"
-            android:textColor="@color/text_black"
+            android:textColor="@color/shihuangse"
             android:textSize="15sp"/>
     </LinearLayout>
 </LinearLayout>

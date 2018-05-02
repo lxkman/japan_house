@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/userxiyi"
+            android:text="@string/aboutus"
             android:textColor="#fff"
             android:textSize="18sp"/>
         <ImageView

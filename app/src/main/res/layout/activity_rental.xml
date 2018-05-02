@@ -1,106 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/act_rental_back"
-            android:padding="15dp"
-            android:src="@drawable/back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            />
+            android:padding="15dp"
+            android:src="@drawable/back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"
             android:text="@string/activity_owner_rental"
-            />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:orientation="horizontal"
         android:background="@color/white"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/act_rental_rent_lt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/act_rental_rent"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/act_rental_rent"
-                android:textSize="16sp"
-                android:textColor="@color/colorPrimary"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                />
+                android:text="@string/act_rental_rent"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/act_rental_rentView"
                 android:layout_width="100dp"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimary"
                 android:layout_gravity="bottom|center_horizontal"
-                />
+                android:background="@color/colorPrimary" />
         </LinearLayout>
 
 
         <View
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="#ccc"
-            />
+            android:layout_marginTop="5dp"
+            android:background="#ccc" />
 
         <LinearLayout
             android:id="@+id/act_rental_sell_lt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/act_rental_sell"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/act_rental_sell"
-                android:textSize="16sp"
-                android:textColor="@color/text_black"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                />
+                android:text="@string/act_rental_sell"
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/act_rental_sellView"
                 android:layout_width="100dp"
                 android:layout_height="2dp"
-                android:background="@color/white"
                 android:layout_gravity="bottom|center_horizontal"
-                />
+                android:background="@color/white" />
         </LinearLayout>
     </LinearLayout>
 
@@ -108,63 +97,56 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#F5F5F5"
-                />
+                android:background="#F5F5F5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_call"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_call"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_call_hint"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
                     android:text="@string/activity_rental_mandatory"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="5dp"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -172,91 +154,82 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_contact"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_contact"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_contact_hint"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
                     android:text="@string/activity_rental_mandatory"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="5dp"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#F5F5F5"
-                />
+                android:background="#F5F5F5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_location"
                     android:textColor="#444444"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_location"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="58dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_location_hint"
-                    android:layout_marginRight="58dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -264,52 +237,47 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_distance"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_distance"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="26dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_distance_hint"
-                    android:layout_marginRight="26dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
                     android:text="m"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="5dp"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -317,52 +285,47 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_floor"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_floor"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_floor_hint"
-                    android:layout_marginRight="24dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
                     android:text="@string/floor"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="5dp"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -370,53 +333,48 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_area"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_area"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_area_hint"
-                    android:layout_marginRight="18dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/act_rental_areaSpan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
                     android:text="m2"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="5dp"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -424,41 +382,37 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_pattern"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_pattern"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="58dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_pattern_hint"
-                    android:layout_marginRight="58dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -466,60 +420,54 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
                     android:text="@string/activity_rental_bathroom"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/act_rental_check"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/yes"
-                        android:gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:textColor="#333333"
-                        android:checked="true"
                         android:button="@null"
-                        android:drawablePadding="15dp"
+                        android:checked="true"
                         android:drawableLeft="@drawable/radiobutton_selector"
-                        />
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/yes"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/act_rental_checked"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/no"
-                        android:gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:textColor="#333333"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="15dp"
-                        android:drawablePadding="15dp"
                         android:button="@null"
                         android:drawableLeft="@drawable/radiobutton_selector"
-                        />
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/no"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -528,41 +476,37 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_toward"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_toward"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="58dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_toward_hint"
-                    android:layout_marginRight="58dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -570,41 +514,37 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_equipment"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_rental_equipment"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="58dp"
+                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:hint="@string/activity_rental_equipment_hint"
-                    android:layout_marginRight="58dp"
-                    />
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -612,35 +552,35 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_upPic"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
-                <android.support.v7.widget.RecyclerView
+                <com.example.administrator.japanhouse.view.HeightGridView
                     android:id="@+id/act_rental_picRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="11dp"
                     android:layout_marginBottom="15dp"
-                    />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="11dp"
+                    android:horizontalSpacing="11dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="10dp" />
             </LinearLayout>
 
             <View
@@ -648,75 +588,48 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="#ECECEC"
-                />
+                android:background="#ECECEC" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="10dip"
+                    android:paddingLeft="15dp"
                     android:text="@string/activity_rental_upVideo"
                     android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    />
+                    android:textSize="14sp" />
 
-                <RelativeLayout
-                    android:id="@+id/act_rental_relativelt"
-                    android:layout_width="wrap_content"
+                <com.example.administrator.japanhouse.view.HeightGridView
+                    android:id="@+id/act_rental_videoImg"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
-                    android:visibility="gone"
-                    >
-
-                    <com.example.administrator.japanhouse.view.RoundedImageView
-                        android:id="@+id/act_rental_videoImg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        app:corner_radius="3dp"
-                        />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/start_video"
-                        android:layout_centerInParent="true"
-                        />
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/act_rental_addVideo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:src="@drawable/add_pic"
-                    />
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="11dp"
+                    android:horizontalSpacing="11dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="10dp" />
             </LinearLayout>
 
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
     <TextView
         android:id="@+id/act_rental_entrust"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:textColor="@color/white"
-        android:text="@string/activity_rental_entrust"
-        android:textSize="15sp"
-        android:gravity="center"
         android:background="@color/colorPrimary"
-    />
+        android:gravity="center"
+        android:text="@string/activity_rental_entrust"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 </LinearLayout>

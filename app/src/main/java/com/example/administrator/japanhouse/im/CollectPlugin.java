@@ -23,7 +23,8 @@ public class CollectPlugin implements IPluginModule {
 
     @Override
     public String obtainTitle(Context context) {
-        return context.getString(R.string.plugin_collect);
+//        return context.getString(R.string.plugin_collect);
+        return "收藏";
     }
 
     @Override

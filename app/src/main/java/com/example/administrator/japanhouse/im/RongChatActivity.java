@@ -75,7 +75,6 @@ public class RongChatActivity extends BaseActivity {
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.sendImgAndText(targetId);
 //                RongCallClient.getInstance().startCall(Conversation.ConversationType.PRIVATE, targetId, null, RongCallCommon.CallMediaType.AUDIO, "");
             }
         });

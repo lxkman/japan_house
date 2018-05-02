@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -14,7 +15,9 @@ import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -81,14 +84,11 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     @BindView(R.id.act_rental_equipment)
     EditText etEquipment;
     @BindView(R.id.act_rental_picRecyclerView)
-    RecyclerView picRecyclerView;
+    GridView picRecyclerView;
     @BindView(R.id.act_rental_videoImg)
-    ImageView imgVideo;
+    GridView imgVideo;
     @BindView(R.id.act_rental_entrust)
     TextView tvEntrust;
-
-    private RelativeLayout relativeLayout;
-    private ImageView imgAddVideo;
 
     private boolean isBathroom = true;
 
@@ -98,10 +98,12 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     private List<String> cameraList;
     private List<String> cameraListvideo;
     private List<String> imgPathList = new ArrayList<>();
+    private List<String> videoPathList = new ArrayList<>();
 
     private String videoPath;
 
-    PicRentalAdapter adapter;
+    GridViewAddImgesAdpter adapter;
+    GridViewAddVideoAdapter videoAdapter;
 
 
     @Override
@@ -109,9 +111,6 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rental);
         ButterKnife.bind(this);
-
-        relativeLayout = (RelativeLayout) findViewById(R.id.act_rental_relativelt);
-        imgAddVideo = (ImageView) findViewById(R.id.act_rental_addVideo);
 
         cameraList = new ArrayList<>();
         cameraList.add("从相册中选择");
@@ -126,25 +125,38 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
         m2.setSpan(new SuperscriptSpan(), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvAreaSpan.setText(m2);
 
-        imgAddVideo.setOnClickListener(new View.OnClickListener() {
+
+        videoAdapter = new GridViewAddVideoAdapter(videoPathList, this);
+        imgVideo.setAdapter(videoAdapter);
+        imgVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                showVideo();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (videoPathList != null && videoPathList.size() == position) {
+                    showVideo();
+                } else if (videoPathList != null && videoPathList.size() == 0 && position == 0) {
+                    showVideo();
+                } else {
+                    FullScreenActivity.invoke(RentalActivity.this, videoPath);
+                }
             }
         });
 
-        imgVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FullScreenActivity.invoke(RentalActivity.this, videoPath);
-            }
-        });
-
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        picRecyclerView.setLayoutManager(manager);
-        adapter = new PicRentalAdapter(this, imgPathList);
-        adapter.setOnItemClickListener(this);
+//        GridLayoutManager manager = new GridLayoutManager(this, 3);
+//        picRecyclerView.setLayoutManager(manager);
+        adapter = new GridViewAddImgesAdpter(imgPathList, this);
+//        adapter.setOnItemClickListener(this);
         picRecyclerView.setAdapter(adapter);
+
+        picRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (imgPathList != null && imgPathList.size() == position) {
+                    showImage();
+                } else if (imgPathList != null && imgPathList.size() == 0 && position == 0) {
+                    showImage();
+                }
+            }
+        });
 
     }
 
@@ -430,27 +442,13 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 case PictureConfig.REQUEST_CAMERA:
                     List<LocalMedia> list = PictureSelector.obtainMultipleResult(data);
                     videoPath = list.get(0).getPath();
-                    relativeLayout.setVisibility(View.VISIBLE);
-                    imgVideo.setImageBitmap(getLocalVideoBitmap(videoPath));
+                    videoPathList.clear();
+                    videoPathList.add(videoPath);
+                    videoAdapter = new GridViewAddVideoAdapter(videoPathList, this);
+                    imgVideo.setAdapter(videoAdapter);
                     break;
             }
         }
-    }
-
-    public static Bitmap getLocalVideoBitmap(String localPath) {
-        Bitmap bitmap = null;
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        try {
-            //根据文件路径获取缩略图
-            retriever.setDataSource(localPath);
-            //获得第一帧图片
-            bitmap = retriever.getFrameAtTime();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } finally {
-            retriever.release();
-        }
-        return bitmap;
     }
 
     public static void invoke(Context context) {
@@ -466,6 +464,5 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     @Override
     public void onClickDel(int position) {
         imgPathList.remove(position);
-        adapter.notifyItemRemoved(position);
     }
 }

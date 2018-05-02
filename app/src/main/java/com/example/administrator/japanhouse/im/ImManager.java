@@ -191,9 +191,9 @@ public class ImManager {
         return uri;
     }
 
-    public static void sendImgAndText(String userId) {
-        RichContentMessage richContentMessage = RichContentMessage.obtain("微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享微聊分享", "这是微聊分享的内容这是微聊分享的内容这是微聊分享的内容这是微聊分享的内容这是微聊分享的内容这是微聊分享的内容这是微聊分享的内容这是微聊分享的内容", "http://f9.topitme.com/9/37/30/11224703137bb30379o.jpg");
-        richContentMessage.setUrl("https://map.baidu.com/");
+    public static void sendImgAndText(String userId, String title, String content, String imgUrl, String jumpUrl) {
+        RichContentMessage richContentMessage = RichContentMessage.obtain(title, content, imgUrl);
+        richContentMessage.setUrl(jumpUrl);
 
         //"9517" 为目标 Id。根据不同的 conversationType，可能是用户 Id、讨论组 Id、群组 Id 或聊天室 Id。
         //Conversation.ConversationType.PRIVATE 为会话类型。
@@ -220,15 +220,76 @@ public class ImManager {
             @Override
             public void onSuccess(Message message) {
                 //消息通过网络发送成功的回调
-                Log.e("MainActivity", "——onSuccess—-IT");
             }
 
             @Override
             public void onError(Message message, RongIMClient.ErrorCode errorCode) {
                 //消息发送失败的回调
-                Log.e("MainActivity", "——onError—-IT" +
-                        errorCode);
             }
         });
+    }
+
+    /**
+     * 将某个用户加到黑名单中。
+     * <p>当把对方加入黑名单后，对方再发消息时，就会提示“您的消息已经发出, 但被对方拒收”。但您仍然可以给对方发送消息。</p>
+     *
+     * @param userId   用户 Id。
+     */
+    public static void addToBlack(String userId){
+        RongIM.getInstance().addToBlacklist(userId, new RongIMClient.OperationCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
+    }
+
+    /**
+     * 获取某用户是否在黑名单中。
+     *
+     * @param userId   用户 Id。
+     */
+    public static boolean getBlacklist(String userId){
+        final boolean[] isInBlack = new boolean[1];
+        isInBlack[0] = false;
+        RongIM.getInstance().getBlacklistStatus(userId, new RongIMClient.ResultCallback<RongIMClient.BlacklistStatus>() {
+            @Override
+            public void onSuccess(RongIMClient.BlacklistStatus blacklistStatus) {
+                if (blacklistStatus == RongIMClient.BlacklistStatus.IN_BLACK_LIST) {
+                    isInBlack[0] = true;
+                }
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
+        return isInBlack[0];
+    }
+
+    /**
+     * 将个某用户从黑名单中移出。
+     *
+     * @param userId   用户 Id。
+     */
+    public static void removeFromBlack(String userId){
+        RongIM.getInstance().removeFromBlacklist(userId, new RongIMClient.OperationCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
+
     }
 }

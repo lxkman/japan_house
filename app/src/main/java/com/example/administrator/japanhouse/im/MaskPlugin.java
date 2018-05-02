@@ -9,7 +9,9 @@ import android.support.v4.content.ContextCompat;
 import com.example.administrator.japanhouse.R;
 
 import io.rong.imkit.RongExtension;
+import io.rong.imkit.RongIM;
 import io.rong.imkit.plugin.IPluginModule;
+import io.rong.imlib.RongIMClient;
 
 /**
  * Created by   admin on 2018/4/28.

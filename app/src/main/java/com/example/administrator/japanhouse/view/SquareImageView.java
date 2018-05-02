@@ -9,7 +9,7 @@ import android.widget.ImageView;
  * Created by   admin on 2018/4/17.
  */
 
-public class SquareImageView extends ImageView {
+public class SquareImageView extends RoundedImageView {
     public SquareImageView(Context context) {
         super(context);
     }

@@ -1,145 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/act_owner_back"
-            android:padding="10dp"
-            android:src="@drawable/back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            />
+            android:padding="10dp"
+            android:src="@drawable/back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"
             android:text="@string/activity_owner_title"
-            />
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/act_owner_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/icon_msg_white"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            />
+            android:src="@drawable/icon_msg_white" />
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
-                >
+                android:orientation="horizontal">
 
-                <TextView
+                <RelativeLayout
                     android:id="@+id/act_owner_rental"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:text="@string/activity_owner_rental"
-                    android:gravity="center_horizontal"
-                    android:drawableTop="@drawable/act_owner_prices"
-                    android:drawablePadding="11dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="27dp"
+                        android:drawablePadding="11dp"
+                        android:drawableTop="@drawable/act_owner_prices"
+                        android:gravity="center_horizontal"
+                        android:text="@string/activity_owner_rental"
+                        android:textColor="#666666"
+                        android:maxLines="1"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-
-                <TextView
+                <RelativeLayout
                     android:id="@+id/act_owner_wikipedia"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:text="@string/activity_owner_wikipedia"
-                    android:gravity="center_horizontal"
-                    android:drawableTop="@drawable/act_owner_wikipedia"
-                    android:drawablePadding="11dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="15dp"
+                        android:drawablePadding="11dp"
+                        android:drawableTop="@drawable/act_owner_wikipedia"
+                        android:gravity="center_horizontal"
+                        android:text="@string/activity_owner_wikipedia"
+                        android:textColor="#666666"
+                        android:maxLines="1"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/act_owner_prices"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:text="@string/activity_owner_prices"
-                    android:gravity="center_horizontal"
-                    android:drawableTop="@drawable/act_owner_rental"
-                    android:drawablePadding="11dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="15dp"
+                        android:drawablePadding="11dp"
+                        android:drawableTop="@drawable/act_owner_rental"
+                        android:gravity="center_horizontal"
+                        android:text="@string/activity_owner_prices"
+                        android:textColor="#666666"
+                        android:maxLines="1"
+                        android:textSize="14sp" />
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white"
                 android:layout_marginTop="10dp"
-                >
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <View
                         android:layout_width="2dp"
                         android:layout_height="12dp"
-                        android:background="@color/colorPrimary"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        />
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#444444"
-                        android:textSize="15sp"
-                        android:text="@string/activity_owner_wikipedia"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="6dp"
-                        />
+                        android:text="@string/activity_owner_wikipedia"
+                        android:textColor="#444444"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/act_owner_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"
-                    />
+                    android:nestedScrollingEnabled="false" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

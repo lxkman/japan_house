@@ -407,4 +407,5 @@
     <string name="fen">分間</string>
     <string name="huodongshuoming">イベント説明</string>
     <string name="renyibaoming">283人申し込みしました</string>
+    <string name="dialog_checkRoom_phone">请输入您的手机号</string>
 </resources>

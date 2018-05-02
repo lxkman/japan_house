@@ -407,4 +407,5 @@
     <string name="fen">分</string>
     <string name="huodongshuoming">活动说明</string>
     <string name="renyibaoming">283人已报名</string>
+    <string name="dialog_checkRoom_phone">请输入您的手机号</string>
 </resources>

@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
@@ -28,16 +28,17 @@ import butterknife.OnClick;
 
 public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickItemListener {
 
+
     @BindView(R.id.act_owner_back)
     ImageView back;
     @BindView(R.id.act_owner_message)
     ImageView ivMessage;
     @BindView(R.id.act_owner_rental)
-    TextView tvRental;
-    @BindView(R.id.act_owner_prices)
-    TextView tvPrices;
+    RelativeLayout tvRental;
     @BindView(R.id.act_owner_wikipedia)
-    TextView tvWikipedia;
+    RelativeLayout tvWikipedia;
+    @BindView(R.id.act_owner_prices)
+    RelativeLayout tvPrices;
     @BindView(R.id.act_owner_recyclerView)
     RecyclerView recyclerview;
     private OwnerAdapter ownerAdapter;
@@ -54,7 +55,27 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
         recyclerview.setAdapter(ownerAdapter);
     }
 
-    @OnClick({R.id.act_owner_back, R.id.act_owner_message, R.id.act_owner_rental, R.id.act_owner_prices, R.id.act_owner_wikipedia})
+
+    public static void invoke(Context context) {
+        Intent intent = new Intent(context, OwnerActivity.class);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick() {
+        OwnerDetailsActivity.invoke(this, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == 3) {
+            setResult(4);
+            finish();
+        }
+    }
+
+    @OnClick({R.id.act_owner_back, R.id.act_owner_message, R.id.act_owner_rental, R.id.act_owner_wikipedia, R.id.act_owner_prices})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.act_owner_back:
@@ -81,25 +102,6 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
             case R.id.act_owner_wikipedia:
                 OwnerWikipediaActivity.invoke(this);
                 break;
-        }
-    }
-
-    public static void invoke(Context context) {
-        Intent intent = new Intent(context, OwnerActivity.class);
-        context.startActivity(intent);
-    }
-
-    @Override
-    public void onItemClick() {
-        OwnerDetailsActivity.invoke(this, 1);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == 3) {
-            setResult(4);
-            finish();
         }
     }
 }

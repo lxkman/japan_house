@@ -22,8 +22,9 @@
                 android:textSize="16sp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="您确定要取消订阅此房源通知吗？取消订阅后您将不再收到此订阅信息"
+                android:text="您确定要取消订阅此房源通知吗？取消订阅后，您将不再收到此订阅信息"
                 android:layout_width="wrap_content"
+                android:textColor="@color/text_black"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <View
@@ -33,15 +34,15 @@
             android:layout_height="1dp"></View>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="40dp">
             <TextView
                 android:id="@+id/text_pause"
                 android:gravity="center"
                 android:layout_weight="2"
                 android:layout_gravity="center"
                 android:layout_centerVertical="true"
-                android:textSize="17sp"
-                android:text="取消"
+                android:textSize="16sp"
+                android:text="@string/quxiao"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <View
@@ -55,8 +56,8 @@
                 android:layout_weight="2"
                 android:layout_gravity="center"
                 android:layout_centerVertical="true"
-                android:textSize="17sp"
-                android:text="知道了"
+                android:textSize="16sp"
+                android:text="@string/queding"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
         </LinearLayout>

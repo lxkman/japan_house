@@ -35,7 +35,7 @@
             android:id="@+id/person"
             android:gravity="center|left"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/weiliao"
+            android:drawableLeft="@drawable/huifuwenti"
             android:layout_toLeftOf="@+id/te1"
             android:text="1000"
             android:layout_width="wrap_content"

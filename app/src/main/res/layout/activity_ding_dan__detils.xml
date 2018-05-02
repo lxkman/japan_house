@@ -1,246 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/gray1"
-    tools:context="com.example.administrator.japanhouse.fragment.mine.DingDan_DetilsActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/gray1"
+              android:orientation="vertical"
+              tools:context="com.example.administrator.japanhouse.fragment.mine.DingDan_DetilsActivity">
     <LinearLayout
-        android:background="@color/shihuangse"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dip">
+        android:layout_height="50dip"
+        android:background="@color/shihuangse"
+        android:orientation="horizontal">
         <ImageView
             android:id="@+id/back_img"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
             android:padding="15dp"
-            android:src="@drawable/back"
-            android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:src="@drawable/back"/>
         <TextView
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:text="订单详情"
             android:layout_width="0dip"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:gravity="center"
+            android:text="订单详情"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
         <ImageView
-            android:padding="13dp"
             android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:layout_height="50dip"
+            android:padding="13dp"/>
     </LinearLayout>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:padding="10dp"
-            android:orientation="vertical"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:orientation="horizontal"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="@string/dengdan_money"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="￥100,000,00"
+                    android:textColor="@color/shihuangse"
                     android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:text="100,000,00"
-                    />
-            </LinearLayout>
+                />
+            </RelativeLayout>
             <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_time"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:text="2018.01.01"
-                    />
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                />
             </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_fangyuan"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:text="新房"
-                    />
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                />
             </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_mingcheng"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:text="泰禾.金府大院"
-                    />
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                />
             </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_dizhi"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:text="日本东京"
-                    />
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                />
             </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_geju"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_geju"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:text="三室两厅"
-                    />
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                />
             </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_daxiao"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
                 <TextView
                     android:id="@+id/dd_smll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:text="120平方米"
-                    />
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                />
             </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray1"/>
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_tupian"
+                    android:textColor="@color/text_black"
                     android:textSize="16sp"
-                    />
+                />
             </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
-                    android:id="@+id/dd_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/dd_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
-
-
 
 
 </LinearLayout>

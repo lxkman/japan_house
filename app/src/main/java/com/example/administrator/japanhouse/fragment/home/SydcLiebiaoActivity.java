@@ -66,7 +66,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                     getResources().getString(R.string.lxkmianji),
                     getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
         } else {
-            headers = new String[]{getResources().getString(R.string.zujin),
+            headers = new String[]{getResources().getString(R.string.shoujia),
                     getResources().getString(R.string.lxkmianji),
                     getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
         }

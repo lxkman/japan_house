@@ -69,7 +69,6 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 startActivity(intent);
             }
         });
-
         List<String> likeList = new ArrayList<>();
         likeList.add("");
         likeList.add("");

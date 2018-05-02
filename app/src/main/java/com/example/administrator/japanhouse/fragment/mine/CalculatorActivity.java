@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +51,11 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     private String age_itm;
     private EditText ed_wan;
     private EditText ed_wan1;
+    private int index1;
+    private int index2;
+    private int index21;
+    private int index3;
+    private int index4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +128,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 showFXDialog1(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.cal_xe_nx1:
-                showFXDialog2(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+              //  showFXDialog2(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
              case R.id.cal_jisuan:
                  Intent intent = new Intent(CalculatorActivity.this, Calculator_DetilsActivity.class);
@@ -150,7 +156,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 //设置dialog的宽高
                 .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 //设置触摸dialog外围是否关闭
-                .isOnTouchCanceled(true)
+                .isOnTouchCanceled(false)
                 //设置监听事件
                 .builder();
         dialog.show();
@@ -160,6 +166,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         quxiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                index1=0;
                 dialog.dismiss();
             }
         });
@@ -167,8 +174,14 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         queding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(index1<0||index1==0){
+                    list_itme = list.get(0);
+                }else{
+                    list_itme = list.get(index1);
+                }
                 lu.setText(list_itme);
                 dialog.dismiss();
+                index1=0;
             }
         });
         wheelView.setCyclic(false);
@@ -176,7 +189,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         wheelView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                list_itme = list.get(index);
+                index1 = index;
             }
         });
 
@@ -198,7 +211,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 //设置dialog的宽高
                 .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 //设置触摸dialog外围是否关闭
-                .isOnTouchCanceled(true)
+                .isOnTouchCanceled(false)
                 //设置监听事件
                 .builder();
         dialog.show();
@@ -209,6 +222,8 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         quxiao1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                index21=0;
+                index2=0;
                 dialog.dismiss();
             }
         });
@@ -216,9 +231,40 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         queding1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nianxian.setText(age_itm);
-                ed_wan.setText(qian);
-                dialog.dismiss();
+                if(index2<0||index2==0&&index21<0||index21==0){
+                    qian = money.get(0);
+                    age_itm = nian.get(0);
+                    ed_wan.setText(qian);
+                    nianxian.setText(age_itm);
+                    dialog.dismiss();
+                    index21=0;
+                    index2=0;
+                }else if(index2<0||index2==0&&index21!=0){
+                    qian = money.get(0);
+                    age_itm = nian.get(index21);
+                    ed_wan.setText(qian);
+                    nianxian.setText(age_itm);
+                    dialog.dismiss();
+                    index21=0;
+                    index2=0;
+                }else if(index21<0||index21==0&&index2!=0){
+                    qian = money.get(index2);
+                    age_itm = nian.get(0);
+                    ed_wan.setText(qian);
+                    nianxian.setText(age_itm);
+                    dialog.dismiss();
+                    index21=0;
+                    index2=0;
+                }else{
+                    qian = money.get(index2);
+                    age_itm = nian.get(index21);
+                    ed_wan.setText(qian);
+                    nianxian.setText(age_itm);
+                    dialog.dismiss();
+                    index21=0;
+                    index2=0;
+                }
+
             }
         });
         price.setCyclic(false);
@@ -226,25 +272,22 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         price.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                qian = money.get(index);
+                index2 = index;
             }
         });
         age.setCyclic(false);
         age.setAdapter(new ArrayWheelAdapter(nian));
         age.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-
-
             @Override
             public void onItemSelected(int index) {
-                age_itm = nian.get(index);
+                index21 = index;
             }
         });
 
     }
-    /*
-       * 二级
-       * */
+  /*  *//*
+    * 二级
+    * *//*
     private void showFXDialog2(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(CalculatorActivity.this);
         //设置触摸dialog外围是否关闭
@@ -259,7 +302,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 //设置dialog的宽高
                 .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 //设置触摸dialog外围是否关闭
-                .isOnTouchCanceled(true)
+                .isOnTouchCanceled(false)
                 //设置监听事件
                 .builder();
         dialog.show();
@@ -270,6 +313,8 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         quxiao1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                index4=0;
+                index3=0;
                 dialog.dismiss();
             }
         });
@@ -277,9 +322,24 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         queding1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nianxian1.setText(age_itm);
-                ed_wan1.setText(qian);
+                if(index3<0||index3==0&&index4<0||index4==0){
+                    qian = money.get(0);
+                    age_itm = nian.get(0);
+                }else if(index3<0||index3==0){
+                    qian = money.get(0);
+                    age_itm = nian.get(index4);
+                }else if(index4<0||index4==0){
+                    qian = money.get(index3);
+                    age_itm = nian.get(0);
+                }else{
+                    qian = money.get(index3);
+                    age_itm = nian.get(index4);
+                }
+                ed_wan.setText(qian);
+                nianxian.setText(age_itm);
                 dialog.dismiss();
+                index4=0;
+                index3=0;
             }
         });
         price.setCyclic(false);
@@ -287,21 +347,18 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         price.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                qian = money.get(index);
+                index3 = index;
             }
         });
         age.setCyclic(false);
         age.setAdapter(new ArrayWheelAdapter(nian));
         age.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-
-
             @Override
             public void onItemSelected(int index) {
-                age_itm = nian.get(index);
+                index4 = index;
             }
         });
 
-    }
+    }*/
 
 }

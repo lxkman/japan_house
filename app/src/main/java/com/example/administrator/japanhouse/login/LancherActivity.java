@@ -17,6 +17,8 @@ import com.baidu.location.LocationClientOption;
 import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -45,8 +47,9 @@ public class LancherActivity extends BaseActivity {
         setContentView(R.layout.activity_launcher);
 
         iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
-        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+//        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
 
+        String location = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(location)) {
             Resources resources = getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();

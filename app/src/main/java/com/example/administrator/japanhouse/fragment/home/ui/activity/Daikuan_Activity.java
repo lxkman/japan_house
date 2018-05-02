@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Daikuan_Adapter;
-import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +52,8 @@ public class Daikuan_Activity extends AppCompatActivity implements View.OnClickL
 
         Daikuan_Adapter daikuan_adapter = new Daikuan_Adapter(this);
         toutiao_recycler.setAdapter(daikuan_adapter);
-        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+//        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+        String city = CacheUtils.get(Constants.COUNTRY);
         if (city.equals("ja")) {
             tvCall.setVisibility(View.VISIBLE);
             kefu.setVisibility(View.GONE);

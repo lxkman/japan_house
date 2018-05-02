@@ -27,7 +27,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.NewHouseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
-import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
@@ -93,7 +93,7 @@ public class GaoerfuDetailsActivity extends BaseActivity {
         findViewById(R.id.gaoerfu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(GaoerfuDetailsActivity.this).setStringPreference(Constant.CHAT, Constant.CHAT_DETAILS);
+                SharedPreferencesUtils.getInstace(GaoerfuDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
                 setMyExtensionModule();
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");

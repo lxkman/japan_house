@@ -14,16 +14,14 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 
 public class LanguageActivity extends BaseActivity {
 
@@ -55,9 +53,9 @@ public class LanguageActivity extends BaseActivity {
         dm = resources.getDisplayMetrics();
         config = resources.getConfiguration();
 
-        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+//        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+        String location = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(location)) {
-
             if (TextUtils.equals(location, "zh")) {
                 imgCheckZhongwen.setVisibility(View.VISIBLE);
                 imgCheckRiwen.setVisibility(View.GONE);
@@ -78,7 +76,8 @@ public class LanguageActivity extends BaseActivity {
                 Locale jaLocale = new Locale(city);
                 config.locale = jaLocale;
                 resources.updateConfiguration(config, dm);
-                SharedPreferencesUtils.getInstace(this).setStringPreference("city", city);
+//                SharedPreferencesUtils.getInstace(this).setStringPreference("city", city);
+                CacheUtils.put(Constants.COUNTRY, city);
                 recrete();
                 break;
             case R.id.language_layout:

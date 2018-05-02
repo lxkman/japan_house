@@ -57,7 +57,6 @@ public class HomeSearchActivity extends BaseActivity {
         initView();
     }
 
-
     private void initView() {
         List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
@@ -147,7 +146,7 @@ public class HomeSearchActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText("二手房");
+                                locationTv.setText(getResources().getString(R.string.old_house));
                             }
                         });
                         TextView xinfangTv = (TextView) view.findViewById(R.id.xinfang_tv);
@@ -155,7 +154,7 @@ public class HomeSearchActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText("新房");
+                                locationTv.setText(getResources().getString(R.string.new_house));
                             }
                         });
                         TextView zufangTv = (TextView) view.findViewById(R.id.zufang_tv);
@@ -163,7 +162,7 @@ public class HomeSearchActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText("租房");
+                                locationTv.setText(getResources().getString(R.string.zu_house));
                             }
                         });
                         TextView maishangpuTv = (TextView) view.findViewById(R.id.maishangpu_tv);
@@ -171,7 +170,7 @@ public class HomeSearchActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText("买商铺");
+                                locationTv.setText(getResources().getString(R.string.maishagnpu));
                             }
                         });
                         TextView maixiezilouTv = (TextView) view.findViewById(R.id.maixiezilou_tv);
@@ -179,7 +178,7 @@ public class HomeSearchActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText("买写字楼");
+                                locationTv.setText(getResources().getString(R.string.maixiezilou));
                             }
                         });
                         TextView zuxiezilouTv = (TextView) view.findViewById(R.id.zuxiezilou_tv);
@@ -187,7 +186,7 @@ public class HomeSearchActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText("租写字楼");
+                                locationTv.setText(getResources().getString(R.string.zuxiezilou));
                             }
                         });
                     }
@@ -208,4 +207,5 @@ public class HomeSearchActivity extends BaseActivity {
             helper.setText(R.id.item_name_tv, item);
         }
     }
+
 }

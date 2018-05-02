@@ -125,7 +125,7 @@
     <string name="sell_details">販売情報</string>
     <string name="mine_jiaru">あなたはプラットフォームに参加しました</string>
     <string name="mine_tian">日~</string>
-    <string name="mine_shoucang_shoucang">ション</string>
+    <string name="mine_shoucang_shoucang">コレクション</string>
     <string name="mine_dingyue_dingyue">購読</string>
     <string name="calcul_shoufu">頭金：</string>
     <string name="calcul_wan">万</string>
@@ -407,5 +407,18 @@
     <string name="fen">分間</string>
     <string name="huodongshuoming">イベント説明</string>
     <string name="renyibaoming">283人申し込みしました</string>
+    <string name="shipinfangyuan">住宅資源ビデオ</string>
+    <string name="tongqinzhaofnag">通勤検索</string>
+    <string name="xiangqing">状況</string>
+    <string name="shendengzhaofnag">神燈検索</string>
+    <string name="nindechazhaoxinxi">あなたの検索情報は以下の通りです:</string>
+    <string name="xinliyusuanyouduoshao">ご予算はいくらですか？</string>
+    <string name="xihuanshenemhuxing">お好きな間取り?</string>
+    <string name="keduoxuan">　（多選）</string>
+    <string name="xinyiweizhizaina">お好きな場所はどこですか？</string>
+    <string name="zujin">賃貸</string>
+    <string name="qingshurufangwumingchenghuodizhi">物件名称また住所を記入してください</string>
+    <string name="wancheng">完成</string>
+    <string name="qingshurunichegn">ニックネームを入力してください</string>
     <string name="dialog_checkRoom_phone">请输入您的手机号</string>
 </resources>

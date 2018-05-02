@@ -68,13 +68,13 @@ public class FangjiadituActivity extends BaseActivity {
 
     private void initChartList() {
         for (int i = 10; i > 0; i--) {
-            xValue.add("11-1"+i);
             mlist.add((float) (Math.random()*3.5+0.5));
             mlist1.add((float) (Math.random()*3.5+0.5));
         }
-        for (int i = mlist.size(); i >0 ; i--) {
-            value.put("11-1"+i, mlist.get(i-1));
-            value1.put("11-1"+i, mlist1.get(i-1));
+        for (int i =0; i <10 ; i++) {
+            xValue.add("11-1"+i);
+            value.put("11-1"+i, mlist.get(i));
+            value1.put("11-1"+i, mlist1.get(i));
         }
 
         yValue.add((float) 0.55);

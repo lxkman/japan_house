@@ -74,7 +74,7 @@ public class LocationActivity extends BaseActivity {
         hotList.add("");
         cityRecycler = (RecyclerView) findViewById(R.id.city_recycler);
         cityRecycler.setLayoutManager(mManager = new LinearLayoutManager(mContext));
-        cityAdapter = new CityAdapter(this,cityList);
+        cityAdapter = new CityAdapter(this, cityList);
         cityAdapter.setOnItemClickListener(new CityAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -86,13 +86,13 @@ public class LocationActivity extends BaseActivity {
             protected void onBindHeaderHolder(ViewHolder holder, int headerPos, int layoutId, Object o) {
                 RecyclerView hotRecycler = holder.getView(R.id.hot_recycler);
                 hotRecycler.setNestedScrollingEnabled(false);
-                hotRecycler.setLayoutManager(new GridLayoutManager(mContext,3));
+                hotRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
                 HotcityAdapter hotcityAdapter = new HotcityAdapter(R.layout.item_hotcity_layout, hotList);
                 hotRecycler.setAdapter(hotcityAdapter);
                 hotcityAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                        TUtils.showShort(mContext,"北海道");
+                        //                        TUtils.showShort(mContext,"北海道");
                         finish();
                     }
                 });
@@ -118,6 +118,7 @@ public class LocationActivity extends BaseActivity {
 
     /**
      * 组织数据源
+     *
      * @param data
      * @return
      */
@@ -138,7 +139,7 @@ public class LocationActivity extends BaseActivity {
         mDecoration.setmDatas(cityList);
     }
 
-    private class HotcityAdapter extends BaseQuickAdapter<String, BaseViewHolder>{
+    private class HotcityAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public HotcityAdapter(int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
@@ -159,7 +160,7 @@ public class LocationActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.search_tv:
-//                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                //                startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
         }
     }

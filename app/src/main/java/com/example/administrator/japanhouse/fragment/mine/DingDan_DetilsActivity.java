@@ -22,6 +22,7 @@ public class DingDan_DetilsActivity extends AppCompatActivity implements View.On
     private TextView dd_geju;
     private TextView dd_smll;
     private RecyclerView dd_recycler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +40,8 @@ public class DingDan_DetilsActivity extends AppCompatActivity implements View.On
         dd_geju = (TextView) findViewById(R.id.dd_geju);
         dd_smll = (TextView) findViewById(R.id.dd_smll);
         dd_recycler = (RecyclerView) findViewById(R.id.dd_recycler);
-            back_img.setOnClickListener(this);
-        dd_recycler.setLayoutManager(new GridLayoutManager(this,3));
+        back_img.setOnClickListener(this);
+        dd_recycler.setLayoutManager(new GridLayoutManager(this, 3));
         dd_recycler.setNestedScrollingEnabled(false);
         DingDan_Adapter dingDan_adapter = new DingDan_Adapter(this);
         dd_recycler.setAdapter(dingDan_adapter);
@@ -48,7 +49,7 @@ public class DingDan_DetilsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.back_img:
                 finish();
                 break;

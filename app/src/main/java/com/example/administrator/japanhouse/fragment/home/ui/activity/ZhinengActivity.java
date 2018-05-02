@@ -1,14 +1,14 @@
 package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.base.BaseActivity;
 
-public class ZhinengActivity extends AppCompatActivity implements View.OnClickListener {
+public class ZhinengActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView img_beak;
     private ImageView xinxi;

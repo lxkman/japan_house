@@ -150,7 +150,7 @@ public class ChatFragment extends BaseFragment {
 
 //        String city = SharedPreferencesUtils.getInstace(mContext).getStringPreference("city", "");
         String city = CacheUtils.get(Constants.COUNTRY);
-        if (city.equals("ja")){
+        if (city!=null&&city.equals("ja")){
             popupView = View.inflate(mContext,R.layout.layout_popupwindow_japan, null);
         }else {
             popupView = View.inflate(mContext,R.layout.layout_popupwindow, null);

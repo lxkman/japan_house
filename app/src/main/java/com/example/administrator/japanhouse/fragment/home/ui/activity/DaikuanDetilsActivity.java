@@ -56,12 +56,12 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
         btnCall.setOnClickListener(this);
 //        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
         String city = CacheUtils.get(Constants.COUNTRY);
-        if (city!=null&&city.equals("zh")) {
-            kefu.setVisibility(View.VISIBLE);
-            btnCall.setVisibility(View.GONE);
-        } else {
+        if (city!=null&&city.equals("ja")) {
             kefu.setVisibility(View.GONE);
             btnCall.setVisibility(View.VISIBLE);
+        } else {
+            kefu.setVisibility(View.VISIBLE);
+            btnCall.setVisibility(View.GONE);
 
         }
     }

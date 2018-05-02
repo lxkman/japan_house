@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
@@ -81,8 +82,8 @@ public class DingYueActivity extends BaseActivity {
 //            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
 //            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
             SwipeMenuItem deleteItem = new SwipeMenuItem(DingYueActivity.this); // 各种文字和图标属性设置。
-            deleteItem.setWeight(200);
-            deleteItem.setHeight(450);
+            deleteItem.setWeight(MyUtils.dip2px(DingYueActivity.this,50));
+            deleteItem.setHeight(MyUtils.dip2px(DingYueActivity.this,150));
             deleteItem.setText("   取消订阅   ");
             deleteItem.setTextSize(14);
             deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));

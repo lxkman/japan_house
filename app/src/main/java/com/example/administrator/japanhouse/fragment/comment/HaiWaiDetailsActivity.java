@@ -26,7 +26,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
-import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
@@ -91,7 +91,7 @@ public class HaiWaiDetailsActivity extends BaseActivity {
         findViewById(R.id.haiwai_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(HaiWaiDetailsActivity.this).setStringPreference(Constant.CHAT, Constant.CHAT_DETAILS);
+                SharedPreferencesUtils.getInstace(HaiWaiDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
                 setMyExtensionModule();
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");

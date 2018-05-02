@@ -25,9 +25,9 @@ import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActi
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
 import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
-import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
-import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -110,7 +110,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     TextView tvFeedback1;
     Unbinder unbinder;
     private int mDistanceY;
-    private String city;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -152,7 +151,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        city = SpUtils.getString("city", "");
+        String city = CacheUtils.get(Constants.COUNTRY);
         if (city.equals("ja")) {
             llZh.setVisibility(View.GONE);
             llJa.setVisibility(View.VISIBLE);
@@ -242,7 +241,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.tv_feedback:
             case R.id.tv_feedback1:
                 //                startActivity(new Intent(mContext, FeedbackActivity.class));
-                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constant.CHAT, Constant.CHAT_FEEDBACK);
+                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constants.CHAT, Constants.CHAT_FEEDBACK);
                 setMyExtensionModule();
                 if (RongIM.getInstance() != null) {
                     Log.e("MainActivity", "创建单聊");

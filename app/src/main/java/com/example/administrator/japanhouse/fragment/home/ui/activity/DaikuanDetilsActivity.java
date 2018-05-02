@@ -16,7 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
 import butterknife.BindView;
@@ -53,7 +54,8 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
         shenqing.setOnClickListener(this);
         kefu.setOnClickListener(this);
         btnCall.setOnClickListener(this);
-        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+//        String city = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
+        String city = CacheUtils.get(Constants.COUNTRY);
         if (city.equals("zh")) {
             kefu.setVisibility(View.VISIBLE);
             btnCall.setVisibility(View.GONE);

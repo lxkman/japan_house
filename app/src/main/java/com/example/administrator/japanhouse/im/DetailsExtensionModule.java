@@ -22,8 +22,8 @@ public class DetailsExtensionModule extends DefaultExtensionModule {
         pluginModules.add(new ImagePlugin());
         pluginModules.add(new LocationPlugin());
         pluginModules.add(new CollectPlugin());
-//        pluginModules.add(new HousePlugin());
-//        pluginModules.add(new MaskPlugin());
+        pluginModules.add(new HousePlugin());
+        pluginModules.add(new MaskPlugin());
         return pluginModules;
     }
 }

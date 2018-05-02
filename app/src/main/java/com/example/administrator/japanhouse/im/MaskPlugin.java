@@ -18,12 +18,12 @@ import io.rong.imkit.plugin.IPluginModule;
 public class MaskPlugin implements IPluginModule {
     @Override
     public Drawable obtainDrawable(Context context) {
-        return ContextCompat.getDrawable(context, R.drawable.video_phone);
+        return ContextCompat.getDrawable(context, R.drawable.shield_plugin);
     }
 
     @Override
     public String obtainTitle(Context context) {
-        return "视频通话";
+        return "屏蔽拉黑";
     }
 
     @Override

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.utils.Constant;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import java.util.List;
@@ -44,15 +44,15 @@ public class RongChatActivity extends BaseActivity {
         //对方 昵称
         String title = getIntent().getData().getQueryParameter("title");
 
-        String chat = SharedPreferencesUtils.getInstace(this).getStringPreference(Constant.CHAT, "");
+        String chat = SharedPreferencesUtils.getInstace(this).getStringPreference(Constants.CHAT, "");
         if (!TextUtils.isEmpty(chat)) {
-            if (chat.equals(Constant.CHAT_DETAILS)){
+            if (chat.equals(Constants.CHAT_DETAILS)){
                 if (!TextUtils.isEmpty(title)){
                     this.title.setText(title);
                 }
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.VISIBLE);
-            } else if (chat.equals(Constant.CHAT_FEEDBACK)) {
+            } else if (chat.equals(Constants.CHAT_FEEDBACK)) {
                 this.title.setText(getString(R.string.mine_userfeedback));
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.GONE);
@@ -83,7 +83,7 @@ public class RongChatActivity extends BaseActivity {
 
     @Override
     public void finish() {
-        SharedPreferencesUtils.getInstace(this).setStringPreference(Constant.CHAT, "abc");
+        SharedPreferencesUtils.getInstace(this).setStringPreference(Constants.CHAT, "abc");
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
         IExtensionModule defaultModule = null;
         if (moduleList != null) {

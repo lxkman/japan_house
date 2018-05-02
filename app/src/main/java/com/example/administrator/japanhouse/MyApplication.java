@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -46,6 +47,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        CacheUtils.init(this);
         //百度地图
         SDKInitializer.initialize(this);
         setLogger();

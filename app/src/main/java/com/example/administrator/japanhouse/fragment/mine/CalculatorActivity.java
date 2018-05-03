@@ -236,6 +236,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                     age_itm = nian.get(0);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
+                    Log.i("==================","1");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
@@ -244,14 +245,19 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                     age_itm = nian.get(index21);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
+                    Log.i("==================","2");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
+
                 }else if(index21<0||index21==0&&index2!=0){
                     qian = money.get(index2);
                     age_itm = nian.get(0);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
+                    Log.i("==================","3");
+                    Log.i("============index2",index2+"");
+                    Log.i("============index21",index21+"");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
@@ -260,6 +266,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                     age_itm = nian.get(index21);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
+                    Log.i("==================","4");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
@@ -273,6 +280,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onItemSelected(int index) {
                 index2 = index;
+                Log.i("===============",index2+"");
             }
         });
         age.setCyclic(false);

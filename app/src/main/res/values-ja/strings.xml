@@ -430,4 +430,6 @@
     <string name="fuwurenshu">対応人数</string>
     <string name="zaishoufang">販売中物件</string>
     <string name="zaizufang">賃貸中物件</string>
+    <string name="qianyuenianxian">契約年数：</string>
+    <string name="chezhanxinxi">駅の情報：</string>
 </resources>

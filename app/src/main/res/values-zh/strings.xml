@@ -430,4 +430,6 @@
     <string name="fuwurenshu">服务人数</string>
     <string name="zaishoufang">在售房</string>
     <string name="zaizufang">在租房</string>
+    <string name="qianyuenianxian">签约年限：</string>
+    <string name="chezhanxinxi">车站信息：</string>
 </resources>

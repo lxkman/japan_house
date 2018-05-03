@@ -270,7 +270,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_See_More:
-                Intent intent = new Intent(ZuHousedetailsActivity.this, SeeMoreActivity.class);
+                Intent intent = new Intent(ZuHousedetailsActivity.this, SeeMoreZuHouseActivity.class);
                 startActivity(intent);
                 break;
             case R.id.back_img:

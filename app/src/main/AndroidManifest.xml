@@ -122,6 +122,8 @@
         <activity android:name=".fragment.chat.ManagerActivity" />
         <activity android:name=".fragment.comment.NewHousedetailsActivity" />
         <activity android:name=".fragment.comment.SeeMoreActivity" />
+        <activity android:name=".fragment.comment.SeeMoreNewHouseActivity" />
+        <activity android:name=".fragment.comment.SeeMoreZuHouseActivity" />
         <activity android:name=".fragment.comment.ZuHousedetailsActivity" />
         <activity android:name=".fragment.comment.OldHousedetailsActivity" />
         <activity android:name=".fragment.comment.TudidetailsActivity" />

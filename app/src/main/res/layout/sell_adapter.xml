@@ -33,7 +33,7 @@
            <TextView
                android:id="@+id/person"
                android:gravity="center|left"
-               android:drawablePadding="10dp"
+               android:drawablePadding="5dp"
                android:drawableLeft="@drawable/wentihuifu"
                android:layout_toLeftOf="@+id/te1"
                android:text="1000"

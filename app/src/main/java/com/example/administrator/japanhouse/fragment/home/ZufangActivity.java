@@ -181,6 +181,15 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         protected void convert(BaseViewHolder helper, HomeItemBean item) {
             ImageView imageView = helper.getView(R.id.item_pic_iv);
             Glide.with(mContext).load(item.getImg()).into(imageView);
+            TextView tv_content=helper.getView(R.id.tv_content);
+            int position = helper.getAdapterPosition();
+            if (position==1){
+                tv_content.setText("一居室大阳台");
+            }else if (position==2){
+                tv_content.setText("朝南阳光房");
+            }else if (position==4){
+                tv_content.setText("优品豪装");
+            }
         }
     }
 

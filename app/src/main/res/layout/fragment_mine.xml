@@ -71,7 +71,6 @@
                             android:textSize="13sp"
                         />
                     </LinearLayout>
-
                 </LinearLayout>
                 <FrameLayout
                     android:id="@+id/fl_lxk"
@@ -504,14 +503,15 @@
                     android:textColor="@color/text_gray"
                     android:textSize="13sp"/>
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/huise"></View>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/huise"></View>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -552,6 +552,7 @@
                     android:id="@+id/tv_qustion"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:layout_marginRight="15dp"
                     android:layout_gravity="right"
                     android:background="@drawable/beijing"
                     android:ems="2"

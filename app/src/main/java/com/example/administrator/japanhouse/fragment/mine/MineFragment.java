@@ -1,7 +1,6 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -142,25 +141,30 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         nestScroll.scrollTo(0,0);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        nestScroll.scrollTo(0,0);
+    }
+
     private void initScroll() {
         nestScroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 //滑动的距离
                 mDistanceY += scrollY - oldScrollY;
-                //toolbar的高度
-                int toolbarHeight = 300;//我写死的高度
-
                 //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
-                if (mDistanceY <= toolbarHeight) {
-                    float scale = (float) mDistanceY / toolbarHeight;
-                    float alpha = scale * 255;
-                    reTopBg.setBackgroundColor(Color.argb((int) alpha, 199, 151, 127));
+                if (mDistanceY ==0) {
+                    reTopBg.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    ivSetting.setVisibility(View.VISIBLE);
+                    ivMsg.setVisibility(View.VISIBLE);
                 } else {
                     //上述虽然判断了滑动距离与toolbar高度相等的情况，但是实际测试时发现，标题栏的背景色
                     //很少能达到完全不透明的情况，所以这里又判断了滑动距离大于toolbar高度的情况，
                     //将标题栏的颜色设置为完全不透明状态
                     reTopBg.setBackgroundResource(R.color.shihuangse);
+                    ivSetting.setVisibility(View.INVISIBLE);
+                    ivMsg.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -205,11 +209,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,
             R.id.rel_lishi_layout, tv_qustion, R.id.ll_collect, R.id.ll_dingyue, R.id.ll_collect2, R.id.ll_dingyue2, R.id.tv_myorder,
-            R.id.tv_myask, R.id.tv_mysignup, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
+            R.id.tv_myask, R.id.tv_mysignup,R.id.tv_name, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
             R.id.tv_myhouse_price1, R.id.tv_calculator1, R.id.tv_feedback1, R.id.tv_myask1, R.id.tv_wenjuan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
+            case R.id.tv_name:
                 startActivity(new Intent(mContext, MyDataActivity.class));
                 break;
             case R.id.iv_setting:

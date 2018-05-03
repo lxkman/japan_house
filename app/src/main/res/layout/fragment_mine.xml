@@ -28,9 +28,10 @@
                         android:layout_height="60dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="65dip"
-                        android:src="@drawable/manager_bg"
+                        android:src="@drawable/touxiang2"
                         app:border_color="@color/white"
-                        app:border_width="2dp"/>
+                        app:border_width="2dp"
+                        />
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
@@ -566,6 +567,7 @@
     </android.support.v4.widget.NestedScrollView>
     <RelativeLayout
         android:id="@+id/re_top_bg"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp">

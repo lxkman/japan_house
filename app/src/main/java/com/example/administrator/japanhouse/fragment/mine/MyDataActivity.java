@@ -1,28 +1,25 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.BaseSelectPopupWindow;
 import com.example.administrator.japanhouse.view.CircleImageView;
@@ -52,8 +49,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     CircleImageView ivHead;
     @BindView(R.id.iv_select_photo)
     ImageView ivSelectPhoto;
-    @BindView(R.id.tv_name)
-    TextView tvName;
+    @BindView(R.id.et_name)
+    EditText et_name;
     @BindView(R.id.cb_man)
     CheckBox cbMan;
     @BindView(R.id.ll_man)
@@ -86,9 +83,39 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         backImg.setOnClickListener(this);
         tvPhone.setOnClickListener(this);
         ivHead.setOnClickListener(this);
-        tvName.setOnClickListener(this);
         tvBirthday.setOnClickListener(this);
         initLunarPicker();//初始化时间选择器
+        initListener();
+    }
+
+    private void initListener() {
+        et_name.setOnTouchListener(new View.OnTouchListener() {
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (MotionEvent.ACTION_DOWN == event.getAction()) {
+                    et_name.setCursorVisible(true);// 再次点击显示光标
+                }
+                return false;
+            }
+        });
+        et_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                et_name.setCursorVisible(false);// 再次点击显示光标
+            }
+        });
     }
 
     @Override
@@ -103,6 +130,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 cbWoman.setChecked(false);
                 break;
             case R.id.back_img:
+                SoftKeyboardTool.closeKeyboard(this);
                 finish();
                 break;
             case R.id.tv_phone:
@@ -113,9 +141,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 cameraList.add("拍照");
                 cameraList.add("从相册中选择");
                 showCamera();
-                break;
-            case R.id.tv_name:
-                showNickName();
                 break;
             case R.id.tv_birthday:
                 pvCustomLunar.show();
@@ -142,7 +167,9 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         dialog.getView(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyDataActivity.this, MineBindPhoneActivity.class));
+                Intent intent = new Intent(MyDataActivity.this, MineBindPhoneActivity.class);
+                intent.putExtra("phone",tvPhone.getText().toString());
+                startActivity(intent);
                 dialog.dismiss();
             }
         });
@@ -261,75 +288,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     break;
             }
         }
-    }
-
-    private void showNickName() {
-        if (popWiw == null) {
-            popWiw = new BaseSelectPopupWindow(this, R.layout.edit_name_data);
-            // popWiw.setOpenKeyboard(true);
-            popWiw.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-
-            popWiw.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            popWiw.setShowTitle(false);
-        }
-        popWiw.setFocusable(true);
-        InputMethodManager im = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-        im.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
-        final ImageView send = (ImageView) popWiw.getContentView().findViewById(R.id.query_iv);
-        final EditText edt = (EditText) popWiw.getContentView().findViewById(R.id.edt_content);
-        final ImageView close = (ImageView) popWiw.getContentView().findViewById(R.id.cancle_iv);
-
-        edt.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-        //        edt.setImeOptions(EditorInfo.IME_ACTION_SEND);
-        edt.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                if (TextUtils.isEmpty(edt.getText())) {
-                    send.setEnabled(false);
-                } else {
-                    send.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        });
-
-        send.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(edt.getText().toString().trim())) {
-                    // 昵称
-                    String content = edt.getText().toString().trim();
-                    tvName.setText(content);
-                    //                    requestEditInfo(NAME, content);
-                    popWiw.dismiss();
-                }
-            }
-        });
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popWiw.dismiss();
-            }
-        });
-
-        popWiw.showAtLocation(llName, Gravity.BOTTOM
-                | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     /**

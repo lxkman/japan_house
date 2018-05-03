@@ -13,6 +13,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -61,6 +62,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
     ImageView imgStart;
     @BindView(R.id.tv_See_More)
     TextView tvSeeMore;
+    @BindView(R.id.tv_price)
+    TextView tv_price;
     @BindView(R.id.love_Recycler)
     RecyclerView loveRecycler;
     @BindView(R.id.back_img)
@@ -87,6 +90,10 @@ public class ZuHousedetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_lishi_zu_house);
         ButterKnife.bind(this);
+        String iszu = getIntent().getStringExtra("iszu");
+        if (!TextUtils.isEmpty(iszu) && iszu.equals("iszu")) {
+            tv_price.setText("1750元/月");
+        }
         initData();
         initViewPager();
         //猜你喜欢
@@ -122,6 +129,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -147,6 +155,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initLoveRecycler() {
         if (loveAdapter == null) {
             loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
@@ -163,7 +172,6 @@ public class ZuHousedetailsActivity extends BaseActivity {
     }
 
 
-
     class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
@@ -177,7 +185,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
-//            mBaseFragmentList.add(new VidioFragment());
+            //            mBaseFragmentList.add(new VidioFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
@@ -260,7 +268,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More,R.id.back_img})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -278,11 +286,12 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 break;
         }
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置
@@ -337,6 +346,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {

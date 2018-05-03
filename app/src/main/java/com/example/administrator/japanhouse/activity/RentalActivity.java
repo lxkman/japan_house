@@ -2,14 +2,9 @@ package com.example.administrator.japanhouse.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -20,7 +15,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
@@ -113,11 +107,11 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
         ButterKnife.bind(this);
 
         cameraList = new ArrayList<>();
-        cameraList.add("从相册中选择");
         cameraList.add("拍照");
+        cameraList.add("从相册中选择");
         cameraListvideo = new ArrayList<>();
-        cameraListvideo.add("从相册中选择");
         cameraListvideo.add("拍摄视频");
+        cameraListvideo.add("从相册中选择");
 
         //显示平方米
         SpannableString m2 = new SpannableString("m2");

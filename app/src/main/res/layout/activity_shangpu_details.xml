@@ -139,6 +139,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tv_price"
                                 android:layout_width="70dip"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"

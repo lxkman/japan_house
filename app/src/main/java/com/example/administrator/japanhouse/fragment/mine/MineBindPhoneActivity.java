@@ -39,6 +39,8 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
         backImg.setOnClickListener(this);
         tvGetcode.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+        String phone = getIntent().getStringExtra("phone");
+        edtPhone.setText(phone);
     }
 
     @Override

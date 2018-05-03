@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -68,6 +69,8 @@ public class ShangpuDetailsActivity extends BaseActivity {
     RelativeLayout re_top_bg;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_price)
+    TextView tv_price;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
@@ -83,6 +86,10 @@ public class ShangpuDetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_shangpu_details);
         ButterKnife.bind(this);
+        String iszu = getIntent().getStringExtra("iszu");
+        if (!TextUtils.isEmpty(iszu) && iszu.equals("iszu")) {
+            tv_price.setText("1750元/月");
+        }
         //banner
         initViewPager();
         //户型图

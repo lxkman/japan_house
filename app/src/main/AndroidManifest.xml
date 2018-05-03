@@ -130,7 +130,8 @@
         <activity
             android:name=".fragment.home.NewHouseActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.mine.MyDataActivity" />
+        <activity android:name=".fragment.mine.MyDataActivity"
+                  android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".fragment.mine.SettingActivity" />
         <activity android:name=".fragment.mine.MineMsgActivity" />
         <activity android:name=".fragment.mine.WenJuanActivity" />

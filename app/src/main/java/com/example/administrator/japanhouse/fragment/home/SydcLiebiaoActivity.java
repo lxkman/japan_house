@@ -75,9 +75,15 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         list = new ArrayList<>();
         list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
+        if (type.equals("1") || type.equals("3")) {
+            list.add(new OneCheckBean(false, "1000-2000元/月"));
+            list.add(new OneCheckBean(false, "2000-3000元/月"));
+            list.add(new OneCheckBean(false, "3000-4000元/月"));
+        }else {
+            list.add(new OneCheckBean(false, "3-10万"));
+            list.add(new OneCheckBean(false, "6-15万"));
+            list.add(new OneCheckBean(false, "10万以上"));
+        }
         FirstView firstView = new FirstView(SydcLiebiaoActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
@@ -158,13 +164,17 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
                         break;
                     case "1":
-                        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
+                        Intent intent = new Intent(mContext, ShangpuDetailsActivity.class);
+                        intent.putExtra("iszu", "iszu");
+                        startActivity(intent);
                         break;
                     case "2":
                         startActivity(new Intent(mContext, XiezilouDetailsActivity.class));
                         break;
                     case "3":
-                        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
+                        Intent intent1 = new Intent(mContext, ShangpuDetailsActivity.class);
+                        intent1.putExtra("iszu", "iszu");
+                        startActivity(intent1);
                         break;
                     case "4":
                         startActivity(new Intent(mContext, GaoerfuDetailsActivity.class));
@@ -186,7 +196,10 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-
+            TextView tv_price = helper.getView(R.id.tv_price);
+            if (type.equals("1") || type.equals("3")) {
+                tv_price.setText("1750元/月");
+            }
         }
     }
 

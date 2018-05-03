@@ -78,12 +78,15 @@
             android:text="@string/nicheng"
             android:textColor="#444"
             android:textSize="16sp"/>
-        <TextView
-            android:id="@+id/tv_name"
+        <EditText
+            android:id="@+id/et_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="10dip"
-            android:gravity="center"
+            android:gravity="right|center_vertical"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:minWidth="100dp"
             android:text="sense"
             android:textSize="15dip"/>
     </LinearLayout>

@@ -136,6 +136,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         return rootView;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        nestScroll.scrollTo(0,0);
+    }
+
     private void initScroll() {
         nestScroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override

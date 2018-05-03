@@ -86,7 +86,6 @@ public class HomeFragment extends BaseFragment {
     TextView tjxfMoreTv;
     @BindView(R.id.tjxf_recycler)
     RecyclerView tjxfRecycler;
-    Unbinder unbinder1;
     @BindView(R.id.tjesf_more_tv)
     TextView tjesfMoreTv;
     @BindView(R.id.tjesf_recycler)

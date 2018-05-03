@@ -3,10 +3,10 @@ package com.example.administrator.japanhouse.fragment.home.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 public class ZhinengActivity extends BaseActivity implements View.OnClickListener {
 
@@ -35,7 +35,9 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.xinxi:
-                Toast.makeText(ZhinengActivity.this,"跳转",Toast.LENGTH_SHORT).show();
+                finish();
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
         }
     }

@@ -65,9 +65,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
          * */
         list = new ArrayList<>();
         list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
+        list.add(new OneCheckBean(false, "1000-2000元/月"));
+        list.add(new OneCheckBean(false, "2000-3000元/月"));
+        list.add(new OneCheckBean(false, "3000-4000元/月"));
         FirstView firstView = new FirstView(ZufangListActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
@@ -163,7 +163,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+                Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
+                intent.putExtra("iszu","iszu");
+                startActivity(intent);
                 /*switch (type){
                     case "0":
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
@@ -197,7 +199,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-
+            TextView tv_price=helper.getView(R.id.tv_price);
+            tv_price.setText("1750元/月");
         }
     }
 

@@ -201,7 +201,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-
+            TextView tv_price=helper.getView(R.id.tv_price);
+            tv_price.setText("1750元/月");
         }
     }
 

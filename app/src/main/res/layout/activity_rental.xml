@@ -46,7 +46,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/act_rental_rent"
+                android:text="@string/act_rental_sell"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
@@ -80,7 +80,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/act_rental_sell"
+                android:text="@string/act_rental_rent"
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
 

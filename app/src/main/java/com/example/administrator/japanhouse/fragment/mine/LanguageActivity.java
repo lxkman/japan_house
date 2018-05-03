@@ -76,7 +76,6 @@ public class LanguageActivity extends BaseActivity {
                 Locale jaLocale = new Locale(city);
                 config.locale = jaLocale;
                 resources.updateConfiguration(config, dm);
-//                SharedPreferencesUtils.getInstace(this).setStringPreference("city", city);
                 CacheUtils.put(Constants.COUNTRY, city);
                 recrete();
                 break;

@@ -24,6 +24,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.ChartView;
+import com.example.administrator.japanhouse.view.ChartViewOneLine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +91,8 @@ public class FangjiadituActivity extends BaseActivity {
             case R.id.btn_location:
                 break;
             case R.id.layout_pop:
-                showMPChart(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                //一条折线
+                showMPChartOneLine(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.back_img:
                 finish();
@@ -119,11 +121,34 @@ public class FangjiadituActivity extends BaseActivity {
         //绘制折线图
         initLineChart(dialog);
     }
-
-
+    private void showMPChartOneLine(int grary, int animationStyle) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        //设置触摸dialog外围是否关闭
+        //设置监听事件
+        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_mp_chart_oneline)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(grary)
+                //设置动画
+                .setAnimation(animationStyle)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        //绘制折线图
+        initLineChartOneLine(dialog);
+    }
     private void initLineChart(BaseDialog dialog) {
         ChartView chartview = (ChartView) dialog.findViewById(R.id.chartview);
-        chartview.setValue(value,value1, xValue, yValue);
+        chartview.setValueTwoLine(value,value1, xValue, yValue);
+    }
+    private void initLineChartOneLine(BaseDialog dialog) {
+        ChartViewOneLine chartview = (ChartViewOneLine) dialog.findViewById(R.id.chartview);
+        chartview.setValueOneLine(value1, xValue, yValue);
     }
 
     private void initMap() {

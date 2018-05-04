@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/dengdan_money"
-                    android:textColor="@color/text_black"
+                    android:textColor="#111"
                     android:textSize="16sp"
                 />
                 <TextView
@@ -63,7 +63,7 @@
                     android:layout_centerVertical="true"
                     android:text="￥100,000,00"
                     android:textColor="@color/shihuangse"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                 />
             </RelativeLayout>
             <View
@@ -76,149 +76,156 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_time"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
                 <TextView
+                    android:paddingLeft="10dip"
                     android:id="@+id/dd_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2018.01.01"
-                    android:textColor="@color/text_gray"
-                    android:textSize="16sp"
+                    android:textColor="#666"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_fangyuan"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
                 <TextView
+                    android:paddingLeft="10dip"
                     android:id="@+id/dd_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="新房"
-                    android:textColor="@color/text_gray"
-                    android:textSize="16sp"
+                    android:textColor="#666"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_mingcheng"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
                 <TextView
+                    android:paddingLeft="10dip"
                     android:id="@+id/dd_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="泰禾.金府大院"
-                    android:textColor="@color/text_gray"
-                    android:textSize="16sp"
+                    android:textColor="#666"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_dizhi"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
                 <TextView
+                    android:paddingLeft="10dip"
                     android:id="@+id/dd_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="日本东京"
-                    android:textColor="@color/text_gray"
-                    android:textSize="16sp"
+                    android:textColor="#666"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_geju"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
                 <TextView
+                    android:paddingLeft="10dip"
                     android:id="@+id/dd_geju"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="三室两厅"
-                    android:textColor="@color/text_gray"
-                    android:textSize="16sp"
+                    android:textColor="#666"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_daxiao"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
                 <TextView
+                    android:paddingLeft="10dip"
                     android:id="@+id/dd_smll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="120平方米"
-                    android:textColor="@color/text_gray"
-                    android:textSize="16sp"
+                    android:textColor="#666"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dingdan_tupian"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:textSize="15sp"
                 />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="5dip"
                 android:id="@+id/dd_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

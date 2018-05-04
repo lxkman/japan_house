@@ -103,49 +103,37 @@
             </LinearLayout>
         </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="40dip">
-        <View
-            android:layout_weight="1"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"></View>
-        <View
-            android:layout_gravity="center_vertical"
-            android:background="#C79880"
-            android:layout_width="15dip"
-            android:layout_height="2dip"></View>
-        <TextView
-            android:layout_marginLeft="5dip"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:text="朝阳均价"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <View
-            android:layout_marginLeft="15dip"
-            android:layout_gravity="center_vertical"
-            android:background="#fe982b"
-            android:layout_width="15dip"
-            android:layout_height="2dip"></View>
-        <TextView
-            android:layout_marginLeft="5dip"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:text="北京均价"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <TextView
-            android:layout_marginRight="15dip"
-            android:layout_marginLeft="5dip"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:text="(万/平)"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-        <com.example.administrator.japanhouse.view.ChartView
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dip">
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"></View>
+            <View
+                android:layout_marginLeft="15dip"
+                android:layout_gravity="center_vertical"
+                android:background="#fe982b"
+                android:layout_width="15dip"
+                android:layout_height="2dip"></View>
+            <TextView
+                android:layout_marginLeft="5dip"
+                android:textSize="12sp"
+                android:gravity="center_vertical"
+                android:text="北京均价"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginRight="15dip"
+                android:layout_marginLeft="5dip"
+                android:textSize="12sp"
+                android:gravity="center_vertical"
+                android:text="(万/平)"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <com.example.administrator.japanhouse.view.ChartViewOneLine
             android:id="@+id/chartview"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -153,7 +141,7 @@
             app:bgcolor="#ffffff"
             app:interval="65dp"
             app:isScroll="false"
-            app:linecolor="#C79880"
+            app:linecolor="#fe982b"
             app:xylinecolor="#e2e2e2"
             app:xylinewidth="1dp"
             app:xytextcolor="#7e7e7e"

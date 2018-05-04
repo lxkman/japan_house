@@ -247,7 +247,7 @@
     <string name="calc_shangye">商业贷款</string>
     <string name="calc_daikuan">贷款利率</string>
     <string name="calc_kaishi">开始计算</string>
-    <string name="dengdan_money">订单金额：</string>
+    <string name="dengdan_money">订单金额</string>
     <string name="dingdan_time">交易时间：</string>
     <string name="dingdan_fangyuan">房源类型：</string>
     <string name="dingdan_mingcheng">房源名称：</string>
@@ -433,5 +433,6 @@
     <string name="zaizufang">在租房</string>
     <string name="qianyuenianxian">签约年限：</string>
     <string name="chezhanxinxi">车站信息：</string>
+    <string name="hujiao">呼叫</string>
 
 </resources>

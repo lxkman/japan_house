@@ -13,17 +13,17 @@
         android:layout_height="wrap_content">
 
 
-
         <RelativeLayout
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tv_content"
                 android:padding="8dp"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="您确定要取消订阅此房源通知吗？"
+                android:text="17600000000"
                 android:layout_width="wrap_content"
                 android:textColor="@color/text_black"
                 android:layout_height="wrap_content" />
@@ -44,21 +44,23 @@
                 android:layout_centerVertical="true"
                 android:textSize="16sp"
                 android:text="@string/quxiao"
+                android:textColor="#2667cf"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <View
-                android:layout_weight="0.01"
+                android:layout_weight="0.02"
                 android:background="@color/gray1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"></View>
             <TextView
+                android:textColor="#2667cf"
                 android:id="@+id/text_sure"
                 android:gravity="center"
                 android:layout_weight="2"
                 android:layout_gravity="center"
                 android:layout_centerVertical="true"
                 android:textSize="16sp"
-                android:text="@string/queding"
+                android:text="@string/hujiao"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
         </LinearLayout>

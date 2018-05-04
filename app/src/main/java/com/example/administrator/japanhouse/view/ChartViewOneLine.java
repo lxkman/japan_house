@@ -30,7 +30,7 @@ import java.util.Map;
  * 自定义折线图
  * Created by xiaoyunfei on 16/11/29.
  */
-public class ChartView extends HorizontalScrollView {
+public class ChartViewOneLine extends HorizontalScrollView {
     //xy坐标轴颜色
     private int xylinecolor = 0xffe2e2e2;
     //xy坐标轴宽度
@@ -89,15 +89,15 @@ public class ChartView extends HorizontalScrollView {
         this.scrollToView = scrollToView;
     }
 
-    public ChartView(Context context) {
+    public ChartViewOneLine(Context context) {
         this(context, null);
     }
 
-    public ChartView(Context context, AttributeSet attrs) {
+    public ChartViewOneLine(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ChartView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ChartViewOneLine(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
         initPaint();
@@ -341,20 +341,20 @@ public class ChartView extends HorizontalScrollView {
         }
         canvas.drawPath(path, linePaint);
 
-        //折线2
-        linePaint2.setStyle(Paint.Style.STROKE);
-        linePaint2.setColor(Color.parseColor("#FFFEA03C"));
-        //绘制折线
-        Path path1 = new Path();
-        float x1 = xInit + interval * 0;
-        float y1 = yOri - yOri * (1 - 0.1f) * value1.get(xValue.get(0)) / yValue.get(yValue.size() - 1);
-        path1.moveTo(x1, y1);
-        for (int i = 1; i < xValue.size(); i++) {
-            x1 = xInit + interval * i;
-            y1 = yOri - yOri * (1 - 0.1f) * value1.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
-            path1.lineTo(x1, y1);
-        }
-        canvas.drawPath(path1, linePaint2);
+//        //折线2
+//        linePaint2.setStyle(Paint.Style.STROKE);
+//        linePaint2.setColor(Color.parseColor("#FFFEA03C"));
+//        //绘制折线
+//        Path path1 = new Path();
+//        float x1 = xInit + interval * 0;
+//        float y1 = yOri - yOri * (1 - 0.1f) * value1.get(xValue.get(0)) / yValue.get(yValue.size() - 1);
+//        path1.moveTo(x1, y1);
+//        for (int i = 1; i < xValue.size(); i++) {
+//            x1 = xInit + interval * i;
+//            y1 = yOri - yOri * (1 - 0.1f) * value1.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+//            path1.lineTo(x1, y1);
+//        }
+//        canvas.drawPath(path1, linePaint2);
     }
 
     /**

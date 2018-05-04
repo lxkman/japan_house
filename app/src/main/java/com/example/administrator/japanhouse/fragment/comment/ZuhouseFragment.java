@@ -55,6 +55,7 @@ public class ZuhouseFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(mContext,ZuHousedetailsActivity.class);
+                intent.putExtra("iszu","iszu");
                 startActivity(intent);
             }
         });
@@ -75,6 +76,7 @@ public class ZuhouseFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
+            helper.setText(R.id.tv_price,"1750元/月");
         }
     }
     @Override

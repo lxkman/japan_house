@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <TextView
+                android:textStyle="bold"
                 android:id="@+id/text_pause"
                 android:gravity="center"
                 android:layout_weight="2"
@@ -44,7 +45,7 @@
                 android:layout_centerVertical="true"
                 android:textSize="16sp"
                 android:text="@string/quxiao"
-                android:textColor="#2667cf"
+                android:textColor="#FF5C85DE"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <View
@@ -53,6 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"></View>
             <TextView
+                android:textStyle="bold"
                 android:textColor="#2667cf"
                 android:id="@+id/text_sure"
                 android:gravity="center"

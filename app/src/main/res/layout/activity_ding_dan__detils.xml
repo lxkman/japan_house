@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/dengdan_money"
-                    android:textColor="#111"
+                    android:textColor="#333"
                     android:textSize="16sp"
                 />
                 <TextView
@@ -86,12 +86,11 @@
                     android:textSize="15sp"
                 />
                 <TextView
-                    android:paddingLeft="10dip"
                     android:id="@+id/dd_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2018.01.01"
-                    android:textColor="#999"
+                    android:textColor="#666"
                     android:textSize="15sp"
                 />
             </LinearLayout>
@@ -109,12 +108,11 @@
                     android:textSize="15sp"
                 />
                 <TextView
-                    android:paddingLeft="10dip"
                     android:id="@+id/dd_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="新房"
-                    android:textColor="#999"
+                    android:textColor="#666"
                     android:textSize="15sp"
                 />
             </LinearLayout>
@@ -132,12 +130,11 @@
                     android:textSize="15sp"
                 />
                 <TextView
-                    android:paddingLeft="10dip"
                     android:id="@+id/dd_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="泰禾.金府大院"
-                    android:textColor="#999"
+                    android:textColor="#666"
                     android:textSize="15sp"
                 />
             </LinearLayout>
@@ -155,12 +152,11 @@
                     android:textSize="15sp"
                 />
                 <TextView
-                    android:paddingLeft="10dip"
                     android:id="@+id/dd_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="日本东京"
-                    android:textColor="#999"
+                    android:textColor="#666"
                     android:textSize="15sp"
                 />
             </LinearLayout>
@@ -178,12 +174,11 @@
                     android:textSize="15sp"
                 />
                 <TextView
-                    android:paddingLeft="10dip"
                     android:id="@+id/dd_geju"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="三室两厅"
-                    android:textColor="#999"
+                    android:textColor="#666"
                     android:textSize="15sp"
                 />
             </LinearLayout>
@@ -201,12 +196,11 @@
                     android:textSize="15sp"
                 />
                 <TextView
-                    android:paddingLeft="10dip"
                     android:id="@+id/dd_smll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="120平方米"
-                    android:textColor="#999"
+                    android:textColor="#666"
                     android:textSize="15sp"
                 />
             </LinearLayout>
@@ -224,8 +218,8 @@
                     android:textSize="15sp"
                 />
             </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="5dip"
                 android:id="@+id/dd_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

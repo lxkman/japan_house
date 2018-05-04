@@ -7,8 +7,6 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,7 +30,7 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
     private TextView hk_time;
     private Button shenqing;
     private ImageView kefu;
-    private boolean flag;
+    private boolean flag=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +99,7 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
         ImageView cha = dialog.getView(R.id.cha);
         final EditText uname = dialog.getView(R.id.user_name);
         final EditText utel = dialog.getView(R.id.user_tel);
-        CheckBox box = dialog.getView(R.id.check_box);
+        final ImageView iv_check = dialog.getView(R.id.iv_check);
         TextView xieyi = dialog.getView(R.id.xieyi);
         Button tijiao = dialog.getView(R.id.tijiao);
         //点差
@@ -111,11 +109,15 @@ public class DaikuanDetilsActivity extends AppCompatActivity implements View.OnC
                 dialog.dismiss();
             }
         });
-        //CheckBox事件监听
-        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        iv_check.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                flag = b;
+            public void onClick(View v) {
+                if (flag){
+                    iv_check.setImageResource(R.drawable.cbuncheck);
+                }else {
+                    iv_check.setImageResource(R.drawable.cbcheck);
+                }
+                flag = !flag;
             }
         });
         //点击提交

@@ -18,10 +18,13 @@ import com.example.administrator.japanhouse.adapter.HeaderRecyclerAndFooterWrapp
 import com.example.administrator.japanhouse.adapter.ViewHolder;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.CityBean;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.utils.DividerItemDecoration;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.mcxtzhang.indexlib.IndexBar.widget.IndexBar;
 import com.mcxtzhang.indexlib.suspension.SuspensionDecoration;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +81,7 @@ public class LocationActivity extends BaseActivity {
         cityAdapter.setOnItemClickListener(new CityAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                EventBus.getDefault().postSticky(new EventBean("changecity", cityList.get(position-1).getCity()));
                 finish();
             }
         });
@@ -93,6 +97,7 @@ public class LocationActivity extends BaseActivity {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         //                        TUtils.showShort(mContext,"北海道");
+                        EventBus.getDefault().postSticky(new EventBean("changecity", "北海道"));
                         finish();
                     }
                 });

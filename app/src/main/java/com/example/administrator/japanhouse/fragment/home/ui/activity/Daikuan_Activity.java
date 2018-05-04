@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Daikuan_Adapter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,7 +70,9 @@ public class Daikuan_Activity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.xinxi:
-                Toast.makeText(this, "跳转", Toast.LENGTH_SHORT).show();
+                finish();
+                removeAllActivitys();
+                MyUtils.startMain(this);
                 break;
             case R.id.tv_call:
 

@@ -28,6 +28,7 @@ import com.example.administrator.japanhouse.activity.OwnerActivity;
 import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
@@ -43,6 +44,10 @@ import com.example.administrator.japanhouse.utils.BannerUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,10 +133,25 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null);
+        EventBus.getDefault().register(this);
         unbinder = ButterKnife.bind(this, view);
         initViewData(view);
         initScroll();
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void myEvent(EventBean eventBean){
+        if (eventBean.getMsg().equals("changecity")){
+            String city = eventBean.getMsg2();
+            locationTv.setText(city);
+        }
     }
 
     private void initViewData(View view) {
@@ -174,7 +194,6 @@ public class HomeFragment extends BaseFragment {
                                 intent = new Intent(getActivity(), NewHouseActivity.class);
                                 getActivity().startActivityForResult(intent, 1);
                                 break;
-
                             case 2://土地
                                 intent = new Intent(getActivity(), TudiActivity.class);
                                 getActivity().startActivityForResult(intent, 1);

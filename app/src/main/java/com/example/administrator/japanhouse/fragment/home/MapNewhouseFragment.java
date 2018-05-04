@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -222,9 +223,8 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         for (int i = 0; i < markerBeanList.size(); i++) {
             View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
             TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
-            TextView count = (TextView) markView.findViewById(R.id.item_count_tv);
+            ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
             TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
-            content.setText("地名" + i + "\n" + "0.2万套");
             MarkerOptions markerOptions = new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromView(markView))
                     .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))

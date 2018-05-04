@@ -5,7 +5,7 @@
       <ImageView
           android:layout_margin="5dp"
           android:id="@+id/img_dingdan"
-          android:src="@drawable/fangwu_3x"
+          android:src="@drawable/dingdan_details"
           android:layout_width="150dp"
           android:layout_height="100dp"/>
 </LinearLayout>

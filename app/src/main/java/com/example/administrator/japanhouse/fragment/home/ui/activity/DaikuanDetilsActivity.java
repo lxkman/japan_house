@@ -32,7 +32,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     private Button shenqing;
     private ImageView kefu;
     private boolean flag=true;
-
+    String tel="17600000000";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +109,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
             public void onClick(View view) {
                 dialog.dismiss();
                 Intent dialIntent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:" + tv_content.getText().toString()));//跳转到拨号界面，同时传递电话号码
+                        Uri.parse("tel:" + tel));//跳转到拨号界面，同时传递电话号码
                 startActivity(dialIntent);
             }
         });

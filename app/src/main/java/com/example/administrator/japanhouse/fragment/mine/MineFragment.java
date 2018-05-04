@@ -21,7 +21,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
@@ -30,10 +29,6 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,11 +126,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.ll_dingyue2)
     LinearLayout llDingyue2;
     private int mDistanceY;
-    private boolean isClickHome;
+//    private boolean isClickHome;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, rootView);
         initScroll();
@@ -145,33 +140,33 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void myEvent(EventBean eventBean) {
-        if (eventBean.getMsg().equals("clickhomekey")) {
-            isClickHome = true;
-        }
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void myEvent(EventBean eventBean) {
+//        if (eventBean.getMsg().equals("clickhomekey")) {
+//            isClickHome = true;
+//        }
+//    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!isClickHome) {
+//        if (!isClickHome) {
             nestScroll.scrollTo(0, 0);
-        }
-        isClickHome = false;
+//        }
+//        isClickHome = false;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (!isClickHome) {
-            nestScroll.scrollTo(0, 0);
-        }
-        isClickHome = false;
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (!isClickHome) {
+//            nestScroll.scrollTo(0, 0);
+//        }
+//        isClickHome = false;
+//    }
 
     private void initScroll() {
         nestScroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {

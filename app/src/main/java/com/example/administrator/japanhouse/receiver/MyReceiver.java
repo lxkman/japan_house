@@ -4,10 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.administrator.japanhouse.bean.EventBean;
-
-import org.greenrobot.eventbus.EventBus;
-
 
 /**
  * Created by Administrator on 2018/4/23.
@@ -31,7 +27,7 @@ public class MyReceiver extends BroadcastReceiver {
             // Home键
             if (reason.equals(SYSTEM_DIALOG_REASON_HOME_KEY)) {
 //                Toast.makeText(MyApplication.getGloableContext(), "按了Home键", Toast.LENGTH_SHORT).show();
-                EventBus.getDefault().postSticky(new EventBean("clickhomekey"));
+//                EventBus.getDefault().postSticky(new EventBean("clickhomekey"));
             }
 
             // 最近任务列表键

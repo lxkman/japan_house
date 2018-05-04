@@ -223,6 +223,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
             ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
             TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
+            title.setText("5.6万套");
+            iv.setVisibility(View.GONE);
             MarkerOptions markerOptions = new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromView(markView))
                     .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))

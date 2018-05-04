@@ -147,10 +147,14 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void myEvent(EventBean eventBean){
-        if (eventBean.getMsg().equals("changecity")){
+    public void myEvent(EventBean eventBean) {
+        if (eventBean.getMsg().equals("changecity")) {
             String city = eventBean.getMsg2();
-            locationTv.setText(city);
+            if (city != null && city.length() <= 3) {
+                locationTv.setText(city);
+            }else if (city!=null && city.length()>3){
+                locationTv.setText(city.substring(0,2)+"...");
+            }
         }
     }
 
@@ -185,7 +189,7 @@ public class HomeFragment extends BaseFragment {
                             case 0:
                                 if (finalI == 0) {//二手房
                                     intent = new Intent(getActivity(), ErshoufangActiviy.class);
-                                   startActivity(intent);
+                                    startActivity(intent);
                                 } else {//海外地产
                                     startActivity(new Intent(mContext, HaiWaiActivity.class));
                                 }
@@ -216,7 +220,7 @@ public class HomeFragment extends BaseFragment {
                                 getActivity().startActivityForResult(intent, 1);
                                 break;
                             case 8://我是业主
-//                                OwnerActivity.invoke(getActivity());
+                                //                                OwnerActivity.invoke(getActivity());
                                 Intent intent = new Intent(getActivity(), OwnerActivity.class);
                                 getActivity().startActivityForResult(intent, 1);
                                 break;
@@ -264,7 +268,7 @@ public class HomeFragment extends BaseFragment {
         //-----item导航栏-----
 
         //-----城市探探-----
-//        tantanTv.requestFocus();
+        //        tantanTv.requestFocus();
         //-----城市探探-----
 
         //-----banner-----
@@ -276,7 +280,7 @@ public class HomeFragment extends BaseFragment {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-//                TUtils.showShort(mContext, "点击了Banner" + position);
+                //                TUtils.showShort(mContext, "点击了Banner" + position);
                 startActivity(new Intent(mContext, NewHousedetailsActivity.class));
             }
         });
@@ -419,7 +423,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-//        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
+        //        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
     }
 
     @Override
@@ -501,7 +505,7 @@ public class HomeFragment extends BaseFragment {
                     Log.e("tag", String.valueOf(childView instanceof ImageView) + "," + position);
                 }
             });
-            if (helper.getAdapterPosition()==4){
+            if (helper.getAdapterPosition() == 4) {
                 helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
                     @Override

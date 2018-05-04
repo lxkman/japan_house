@@ -21,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
@@ -29,6 +30,10 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,9 +131,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.ll_dingyue2)
     LinearLayout llDingyue2;
     private int mDistanceY;
+    private boolean isClickHome;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, rootView);
         initScroll();
@@ -136,15 +143,34 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void myEvent(EventBean eventBean) {
+        if (eventBean.getMsg().equals("clickhomekey")) {
+            isClickHome = true;
+        }
+    }
+
+    @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        nestScroll.scrollTo(0,0);
+        if (!isClickHome) {
+            nestScroll.scrollTo(0, 0);
+        }
+        isClickHome = false;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        nestScroll.scrollTo(0,0);
+        if (!isClickHome) {
+            nestScroll.scrollTo(0, 0);
+        }
+        isClickHome = false;
     }
 
     private void initScroll() {
@@ -154,7 +180,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 //滑动的距离
                 mDistanceY += scrollY - oldScrollY;
                 //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
-                if (mDistanceY ==0) {
+                if (mDistanceY == 0) {
                     reTopBg.setBackgroundColor(getResources().getColor(R.color.transparent));
                     ivSetting.setVisibility(View.VISIBLE);
                     ivMsg.setVisibility(View.VISIBLE);
@@ -209,7 +235,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,
             R.id.rel_lishi_layout, tv_qustion, R.id.ll_collect, R.id.ll_dingyue, R.id.ll_collect2, R.id.ll_dingyue2, R.id.tv_myorder,
-            R.id.tv_myask, R.id.tv_mysignup,R.id.tv_name, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
+            R.id.tv_myask, R.id.tv_mysignup, R.id.tv_name, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
             R.id.tv_myhouse_price1, R.id.tv_calculator1, R.id.tv_feedback1, R.id.tv_myask1, R.id.tv_wenjuan})
     public void onClick(View view) {
         switch (view.getId()) {

@@ -1,5 +1,7 @@
 package com.example.administrator.japanhouse;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +18,7 @@ import com.example.administrator.japanhouse.fragment.chat.ChatFragment;
 import com.example.administrator.japanhouse.fragment.comment.CommentFragment;
 import com.example.administrator.japanhouse.fragment.home.HomeFragment;
 import com.example.administrator.japanhouse.fragment.mine.MineFragment;
+import com.example.administrator.japanhouse.receiver.MyReceiver;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -48,10 +51,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private long preTime;
     private FragmentManager manager;
     private String checkCharTag;
+    private MyReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //动态注册广播，来监听任务键的点击
+        receiver = new MyReceiver();
+        IntentFilter homeFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        registerReceiver(receiver, homeFilter);
         //拉伸图片覆盖标题栏
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
@@ -59,6 +67,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         checkCharTag = getIntent().getStringExtra("CheckCharTag");
         ButterKnife.bind(this);
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 
     @Override

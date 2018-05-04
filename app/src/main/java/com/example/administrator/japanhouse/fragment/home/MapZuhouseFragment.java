@@ -119,9 +119,9 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
          * */
         list = new ArrayList<>();
         list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
+        list.add(new OneCheckBean(false, "1000-2000元/月"));
+        list.add(new OneCheckBean(false, "2000-3000元/月"));
+        list.add(new OneCheckBean(false, "3000-4000元/月"));
         FirstView firstView = new FirstView(mContext);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
@@ -173,7 +173,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         /**
          * Dropdownmenu下面的主体部分
          * */
-        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
+        String[] headers={getString(R.string.zujin), getString(R.string.louceng),
                 getString(R.string.lxkchezhanjuli), getString(R.string.gengduo)};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (MapView) fifthView.findViewById(R.id.mapview);

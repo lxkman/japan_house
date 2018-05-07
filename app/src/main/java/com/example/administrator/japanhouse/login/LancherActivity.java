@@ -41,6 +41,11 @@ public class LancherActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!isTaskRoot()) {
+            //部分机型（OPPOA37、mi2）第一次安装时，点击Home键后，在打开应用，应用会重新启动
+            finish();
+            return;
+        }
         //拉伸图片覆盖标题栏
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);

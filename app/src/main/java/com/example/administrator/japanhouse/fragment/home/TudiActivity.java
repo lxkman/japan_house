@@ -18,6 +18,9 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
 import com.example.administrator.japanhouse.utils.MyUtils;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -46,6 +49,9 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
+    private SpringView springview;
+    private boolean isLoadMore;
+    private int page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,31 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         setContentView(R.layout.activity_tudi);
         ButterKnife.bind(this);
         initView();
+        initData();
+        initListener();
+    }
+
+    private void initListener() {
+        //        mSpringview.setType(SpringView.Type.FOLLOW);
+        springview.setHeader(new DefaultHeader(this));
+        springview.setFooter(new DefaultFooter(this));
+        springview.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                isLoadMore = false;
+                page = 1;
+                initData();
+                springview.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                isLoadMore = true;
+                page++;
+                initData();
+                springview.onFinishFreshAndLoad();
+            }
+        });
     }
 
     private void initView() {
@@ -106,9 +137,8 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
          * */
         View fifthView = LayoutInflater.from(TudiActivity.this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
+        springview = (SpringView) fifthView.findViewById(R.id.springview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
-
-        initData();
     }
 
     private void initData() {

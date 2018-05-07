@@ -48,15 +48,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private long preTime;
     private FragmentManager manager;
     private String checkCharTag;
-//    private MyReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //动态注册广播，来监听任务键的点击
-//        receiver = new MyReceiver();
-//        IntentFilter homeFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-//        registerReceiver(receiver, homeFilter);
         //拉伸图片覆盖标题栏
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
@@ -69,7 +64,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        unregisterReceiver(receiver);
     }
 
     @Override

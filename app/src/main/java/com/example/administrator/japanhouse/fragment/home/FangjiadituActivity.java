@@ -177,14 +177,21 @@ public class FangjiadituActivity extends BaseActivity {
         markerBeanList.add(new MarkerBean(139.758788,35.684492));
         markerBeanList.add(new MarkerBean(139.758788,35.728807));
 
-
-
         List<OverlayOptions> overlayOptionsList = new ArrayList<>();
         for (int i = 0; i < markerBeanList.size(); i++) {
             View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
             TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
             ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
             TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
+            if (i==0){
+                iv.setImageResource(R.drawable.arrowtop);
+            }
+            if (i==2){
+                iv.setImageResource(R.drawable.arrowtop);
+            }
+            if (i==4){
+                iv.setImageResource(R.drawable.arrowtop);
+            }
             MarkerOptions markerOptions = new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromView(markView))
                     .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))

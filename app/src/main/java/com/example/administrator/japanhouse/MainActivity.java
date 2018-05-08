@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
+        //        super.onSaveInstanceState(outState);
     }
 
     private void addFragments(BaseFragment f) {
@@ -101,13 +101,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rbChat.setOnClickListener(this);
         rbComment.setOnClickListener(this);
         rbMine.setOnClickListener(this);
-        if (checkCharTag!=null&&checkCharTag.equals("CheckChar")){
+        if (checkCharTag != null && checkCharTag.equals("CheckChar")) {
             rbChat.setChecked(true);
             if (chatFragment == null) {
                 chatFragment = new ChatFragment();
             }
             addFragments(chatFragment);
-        }else {
+        } else {
             rbHome.setChecked(true);
             if (homeFragment == null) {
                 homeFragment = new HomeFragment();

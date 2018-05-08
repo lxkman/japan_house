@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.fragment.mine.ShouCangActivity;
 
 import io.rong.imkit.RongExtension;
 import io.rong.imkit.plugin.IPluginModule;
@@ -29,7 +30,8 @@ public class CollectPlugin implements IPluginModule {
 
     @Override
     public void onClick(Fragment fragment, RongExtension rongExtension) {
-
+        Intent intent = new Intent(fragment.getActivity(), ShouCangActivity.class);
+        rongExtension.startActivityForPluginResult(intent, 23, this);
     }
 
     @Override

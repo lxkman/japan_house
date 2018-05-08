@@ -87,6 +87,6 @@ dependencies {
     compile 'com.contrarywind:wheelview:4.0.5'
     compile files('libs/BaiduLBS_Android.jar')
     compile 'com.android.support:multidex:1.0.1'
-    compile project(':CallLib')
-    compile project(':IMKit')
+    compile project(':CallKit')
+    compile 'com.orhanobut:hawk:2.0.1'
 }

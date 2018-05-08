@@ -40,7 +40,7 @@
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:padding="15dp"
-            android:src="@drawable/star_border_hide"
+            android:src="@drawable/chat_collect_flase"
             android:visibility="gone" />
     </RelativeLayout>
 

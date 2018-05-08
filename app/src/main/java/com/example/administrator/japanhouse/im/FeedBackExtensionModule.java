@@ -18,7 +18,7 @@ public class FeedBackExtensionModule extends DefaultExtensionModule {
     public List<IPluginModule> getPluginModules(Conversation.ConversationType conversationType) {
         List<IPluginModule> pluginModules =  new ArrayList<>();
         pluginModules.add(new ImagePlugin());
-        pluginModules.add(new LocationPlugin());
+        pluginModules.add(new BaiduLocationPlugin());
         pluginModules.add(new CollectPlugin());
         return pluginModules;
     }

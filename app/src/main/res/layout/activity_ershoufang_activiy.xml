@@ -66,6 +66,5 @@
         app:ddtextSelectedColor="@color/shihuangse"
         app:ddtextUnselectedColor="@color/drop_down_unselected"
         app:ddunderlineColor="#F8F9F8"
-
         />
 </LinearLayout>

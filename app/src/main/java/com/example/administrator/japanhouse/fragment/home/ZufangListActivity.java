@@ -20,6 +20,9 @@ import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.mine.LiShiJiLuActivity;
 import com.example.administrator.japanhouse.utils.TUtils;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -47,6 +50,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
+    private SpringView springview;
+    private boolean isLoadMore;
+    private int page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,31 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         setContentView(R.layout.activity_zufang_list);
         ButterKnife.bind(this);
         initView();
+        initData();
+        initListener();
+    }
+
+    private void initListener() {
+        //        mSpringview.setType(SpringView.Type.FOLLOW);
+        springview.setHeader(new DefaultHeader(this));
+        springview.setFooter(new DefaultFooter(this));
+        springview.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                isLoadMore = false;
+                page = 1;
+                initData();
+                springview.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                isLoadMore = true;
+                page++;
+                initData();
+                springview.onFinishFreshAndLoad();
+            }
+        });
     }
 
     private void initView() {
@@ -124,6 +155,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         TextView shipinTv = (TextView) fifthView.findViewById(R.id.shipin_tv);
         TextView tongqinTv = (TextView) fifthView.findViewById(R.id.tongqin_tv);
         TextView jiluTv = (TextView) fifthView.findViewById(R.id.jilu_tv);
+        springview = (SpringView) fifthView.findViewById(R.id.springview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
         shipinTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +175,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 startActivity(new Intent(mContext, LiShiJiLuActivity.class));
             }
         });
-        initData();
     }
 
     private void initData() {

@@ -93,6 +93,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         baseFragment = f;
     }
+
     private void initView() {
         rgp.check(R.id.rb_home);
         addFragments(new HomeFragment());

@@ -21,8 +21,8 @@ import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActiv
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 import com.example.administrator.japanhouse.utils.MyUtils;
-import com.liaoinstan.springview.container.DefaultFooter;
-import com.liaoinstan.springview.container.DefaultHeader;
+import com.example.administrator.japanhouse.view.MyFooter;
+import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.yyydjk.library.DropDownMenu;
 
@@ -68,8 +68,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
 
     private void initListener() {
         //        mSpringview.setType(SpringView.Type.FOLLOW);
-        springview.setHeader(new DefaultHeader(this));
-        springview.setFooter(new DefaultFooter(this));
+        springview.setHeader(new MyHeader(this));
+        springview.setFooter(new MyFooter(this));
         springview.setListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {

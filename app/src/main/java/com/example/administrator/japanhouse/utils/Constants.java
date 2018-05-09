@@ -10,5 +10,8 @@ public class Constants {
     public static final String CHAT_DETAILS = "CHAT_DETAILS";
     public static final String CHAT_TALK = "CHAT_TALK";
     public static final String COUNTRY = "COUNTRY";
+    public static final String MAINACTIVY = "CheckCharTag";
 
+    //event
+    public static final String EVENT_CHAT = "EVENT_CHAT";
 }

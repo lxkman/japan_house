@@ -15,13 +15,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.yyydjk.library.DropDownMenu;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -184,8 +188,8 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                 break;
             //消息
             case R.id.img_message:
-                removeAllActivitys();
-                MyUtils.startMain(this);
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                finish();
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,SydcSearchActivity.class));

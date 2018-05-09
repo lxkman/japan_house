@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2018/5/9.
  */
 
-public class OldHouseListBean {
+public class OldHouseListbean {
 
     /**
      * msg : 请求成功

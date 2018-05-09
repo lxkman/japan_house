@@ -14,7 +14,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -26,7 +25,11 @@ import com.orhanobut.logger.Logger;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
+import java.util.HashMap;
 import java.util.Locale;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by Administrator on 2017/8/24.
@@ -79,14 +82,14 @@ public class LancherActivity extends BaseActivity {
                     finish();
 
                 } else {
-                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
-                    startActivity(intent);
-//                    HashMap<String, Boolean> hashMap = new HashMap<>();
-//                    //会话类型 以及是否聚合显示
-//                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
-////        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-////        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-//                    RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
+//                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
+//                    startActivity(intent);
+                    HashMap<String, Boolean> hashMap = new HashMap<>();
+                    //会话类型 以及是否聚合显示
+                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                    RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
                     finish();
 
                 }

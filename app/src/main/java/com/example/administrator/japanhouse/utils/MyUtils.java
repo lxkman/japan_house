@@ -24,9 +24,13 @@ import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 public class MyUtils {
     private static int mScreenWidth, mScreenHeight;
@@ -73,11 +77,7 @@ public class MyUtils {
             return str;
         }
     }
-    public static void startMain(Context context){
-        Intent intent=new Intent(context, MainActivity.class);
-        intent.putExtra("CheckCharTag","CheckChar");
-        context.startActivity(intent);
-    }
+
     /*将日期转为时间戳*/
     public static long getStringToDate(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");

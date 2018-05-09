@@ -27,13 +27,16 @@ import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
-public class ZufangListActivity extends BaseActivity implements MyItemClickListener{
+public class ZufangListActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -160,13 +163,13 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         shipinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TUtils.showShort(mContext,"视频房源");
+                TUtils.showShort(mContext, "视频房源");
             }
         });
         tongqinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext,TongqinActivity.class));
+                startActivity(new Intent(mContext, TongqinActivity.class));
             }
         });
         jiluTv.setOnClickListener(new View.OnClickListener() {
@@ -195,7 +198,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
-                intent.putExtra("iszu","iszu");
+                intent.putExtra("iszu", "iszu");
                 startActivity(intent);
                 /*switch (type){
                     case "0":
@@ -230,7 +233,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-            TextView tv_price=helper.getView(R.id.tv_price);
+            TextView tv_price = helper.getView(R.id.tv_price);
             tv_price.setText("1750元/月");
         }
     }
@@ -243,14 +246,21 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
-                startActivity(new Intent(mContext, MainActivity.class));
+//                startActivity(new Intent(mContext, MainActivity.class));
+
+                //会话类型 以及是否聚合显示
+                HashMap<String, Boolean> hm = new HashMap<>();
+                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                RongIM.getInstance().startConversationList(this, hm);
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext, HomeSearchActivity.class));
         }
     }
 

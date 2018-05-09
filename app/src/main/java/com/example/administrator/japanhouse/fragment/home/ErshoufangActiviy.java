@@ -17,7 +17,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.OldHouseListBean;
+import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.bean.OldHouseListbean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
@@ -32,6 +33,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.yyydjk.library.DropDownMenu;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -185,15 +188,15 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             isJa = false;
         }
         params.put("status", 0);
-        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+        OkGo.<OldHouseListbean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<OldHouseListBean>(ErshoufangActiviy.this, OldHouseListBean.class) {
+                .execute(new DialogCallback<OldHouseListbean>(ErshoufangActiviy.this, OldHouseListbean.class) {
                     @Override
-                    public void onSuccess(Response<OldHouseListBean> response) {
+                    public void onSuccess(Response<OldHouseListbean> response) {
                         int code = response.code();
-                        OldHouseListBean oldHouseListBean = response.body();
-                        List<OldHouseListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        OldHouseListbean oldHouseListBean = response.body();
+                        List<OldHouseListbean.DatasEntity> datas = oldHouseListBean.getDatas();
                         liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, datas);
                         mrecycler.setAdapter(liebiaoAdapter);
                         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -219,14 +222,14 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
 
-    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListbean.DatasEntity, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListbean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
+        protected void convert(BaseViewHolder helper, OldHouseListbean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getPlotNameJpn() : item.getPlotNameCn())
@@ -248,8 +251,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 break;
             //消息
             case R.id.img_message:
-                removeAllActivitys();
-                MyUtils.startMain(this);
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                finish();
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext, HomeSearchActivity.class));

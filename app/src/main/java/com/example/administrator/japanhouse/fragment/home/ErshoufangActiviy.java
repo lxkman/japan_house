@@ -11,16 +11,26 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -51,6 +61,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private SpringView springview;
     private boolean isLoadMore;
     private int page;
+    private boolean isJa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +97,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
     private void initView() {
-        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
+        String[] headers = {getString(R.string.shoujia), getString(R.string.louceng),
                 getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
         /**
          * 第一个界面
@@ -152,7 +163,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
-
+        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mrecycler.setNestedScrollingEnabled(false);
     }
 
     private void initData() {
@@ -163,29 +175,64 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mList);
-        mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mrecycler.setAdapter(liebiaoAdapter);
-        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
-                startActivity(intent);
-            }
-        });
+        String city = CacheUtils.get(Constants.COUNTRY);
+        HttpParams params = new HttpParams();
+        if (city != null && city.equals("ja")) {
+            params.put("languageType", 1);
+            isJa = true;
+        } else {
+            params.put("languageType", 0);
+            isJa = false;
+        }
+        params.put("status", 0);
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(ErshoufangActiviy.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        OldHouseListBean oldHouseListBean = response.body();
+                        List<OldHouseListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, datas);
+                        mrecycler.setAdapter(liebiaoAdapter);
+                        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
+        //        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mList);
+        //        mrecycler.setNestedScrollingEnabled(false);
+        //        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        //        mrecycler.setAdapter(liebiaoAdapter);
+        //        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        //            @Override
+        //            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        //                Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
+        //                startActivity(intent);
+        //            }
+        //        });
     }
 
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getPlotNameJpn() : item.getPlotNameCn())
+                    .setText(R.id.tv_area, isJa ? item.getAddressJpn() : item.getAddressCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 

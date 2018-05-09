@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,14 +19,13 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
-import com.example.administrator.japanhouse.bean.OldHouseListbean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -63,8 +63,9 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
-    private int page;
+    private int page = 1;
     private boolean isJa;
+    private List<OldHouseListBean.DatasEntity> mDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,17 +189,40 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             isJa = false;
         }
         params.put("status", 0);
-        OkGo.<OldHouseListbean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+        params.put("pageNo", page);
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<OldHouseListbean>(ErshoufangActiviy.this, OldHouseListbean.class) {
+                .execute(new DialogCallback<OldHouseListBean>(ErshoufangActiviy.this, OldHouseListBean.class) {
                     @Override
-                    public void onSuccess(Response<OldHouseListbean> response) {
+                    public void onSuccess(Response<OldHouseListBean> response) {
                         int code = response.code();
-                        OldHouseListbean oldHouseListBean = response.body();
-                        List<OldHouseListbean.DatasEntity> datas = oldHouseListBean.getDatas();
-                        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, datas);
-                        mrecycler.setAdapter(liebiaoAdapter);
+                        OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        if (mDatas == null || mDatas.size() == 0) {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(ErshoufangActiviy.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            mDatas = datas;
+                            liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mDatas);
+                            mrecycler.setAdapter(liebiaoAdapter);
+                        } else {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(ErshoufangActiviy.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (!isLoadMore) {
+                                mDatas = datas;
+                                Toast.makeText(ErshoufangActiviy.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                            } else {
+                                mDatas.addAll(datas);
+                            }
+                            liebiaoAdapter.notifyDataSetChanged();
+                        }
                         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -222,14 +246,14 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
 
-    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListbean.DatasEntity, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListbean.DatasEntity> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OldHouseListbean.DatasEntity item) {
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getPlotNameJpn() : item.getPlotNameCn())

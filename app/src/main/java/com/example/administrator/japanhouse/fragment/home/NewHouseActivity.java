@@ -10,19 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.yyydjk.library.DropDownMenu;
 
 import org.greenrobot.eventbus.EventBus;
@@ -54,7 +63,9 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
-    private int page;
+    private int page=1;
+    private boolean isJa;
+    private List<OldHouseListBean.DatasEntity> mDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +168,8 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+        mrecycler.setNestedScrollingEnabled(false);
+        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     private void initData() {
@@ -167,28 +180,85 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
             mList.add("");
             mList.add("");
         }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
-        mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mrecycler.setAdapter(liebiaoAdapter);
-        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
-            }
-        });
+
+        String city = CacheUtils.get(Constants.COUNTRY);
+        HttpParams params = new HttpParams();
+        if (city != null && city.equals("ja")) {
+            params.put("languageType", 1);
+            isJa = true;
+        } else {
+            params.put("languageType", 0);
+            isJa = false;
+        }
+        params.put("status", 1);
+        params.put("pageNo", page);
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(NewHouseActivity.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        if (mDatas == null || mDatas.size() == 0) {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(NewHouseActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            mDatas = datas;
+                            liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mDatas);
+                            mrecycler.setAdapter(liebiaoAdapter);
+                        } else {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(NewHouseActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (!isLoadMore) {
+                                mDatas = datas;
+                                Toast.makeText(NewHouseActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                            } else {
+                                mDatas.addAll(datas);
+                            }
+                            liebiaoAdapter.notifyDataSetChanged();
+                        }
+                        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(NewHouseActivity.this, OldHousedetailsActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
+//        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+//        mrecycler.setAdapter(liebiaoAdapter);
+//        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
+//            }
+//        });
 
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getPlotNameJpn() : item.getPlotNameCn())
+                    .setText(R.id.tv_area, isJa ? item.getAddressJpn() : item.getAddressCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 

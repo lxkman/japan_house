@@ -128,7 +128,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 showFXDialog1(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.cal_xe_nx1:
-              //  showFXDialog2(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                showFXDialog2(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
              case R.id.cal_jisuan:
                  Intent intent = new Intent(CalculatorActivity.this, Calculator_DetilsActivity.class);
@@ -231,33 +231,27 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         queding1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(index2<0||index2==0&&index21<0||index21==0){
+                if((index2<0||index2==0)&&(index21<0||index21==0)){
                     qian = money.get(0);
                     age_itm = nian.get(0);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
-                    Log.i("==================","1");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
-                }else if(index2<0||index2==0&&index21!=0){
+                }else if((index2<0||index2==0)&&index21!=0){
                     qian = money.get(0);
                     age_itm = nian.get(index21);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
-                    Log.i("==================","2");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
-
-                }else if(index21<0||index21==0&&index2!=0){
+                }else if((index21<0||index21==0)&&index2!=0){
                     qian = money.get(index2);
                     age_itm = nian.get(0);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
-                    Log.i("==================","3");
-                    Log.i("============index2",index2+"");
-                    Log.i("============index21",index21+"");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
@@ -266,7 +260,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                     age_itm = nian.get(index21);
                     ed_wan.setText(qian);
                     nianxian.setText(age_itm);
-                    Log.i("==================","4");
                     dialog.dismiss();
                     index21=0;
                     index2=0;
@@ -280,7 +273,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onItemSelected(int index) {
                 index2 = index;
-                Log.i("===============",index2+"");
             }
         });
         age.setCyclic(false);
@@ -293,9 +285,9 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         });
 
     }
-  /*  *//*
+    /*
     * 二级
-    * *//*
+    * */
     private void showFXDialog2(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(CalculatorActivity.this);
         //设置触摸dialog外围是否关闭
@@ -330,13 +322,13 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         queding1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(index3<0||index3==0&&index4<0||index4==0){
+                if((index3<0||index3==0)&&(index4<0||index4==0)){
                     qian = money.get(0);
                     age_itm = nian.get(0);
-                }else if(index3<0||index3==0){
+                }else if((index3<0||index3==0)&&index4!=0){
                     qian = money.get(0);
                     age_itm = nian.get(index4);
-                }else if(index4<0||index4==0){
+                }else if((index4<0||index4==0)&&index3!=0){
                     qian = money.get(index3);
                     age_itm = nian.get(0);
                 }else{
@@ -367,6 +359,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-    }*/
+    }
 
 }

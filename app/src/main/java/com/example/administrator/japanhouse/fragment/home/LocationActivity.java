@@ -165,7 +165,7 @@ public class LocationActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.search_tv:
-                //                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                //startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
         }
     }

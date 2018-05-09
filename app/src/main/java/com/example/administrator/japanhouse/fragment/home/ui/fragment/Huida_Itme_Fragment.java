@@ -29,13 +29,11 @@ public class Huida_Itme_Fragment extends BaseFragment {
 
     @Override
     protected void initLazyData() {
-
     }
 
     @Override
     protected void lazyLoad() {
         buy_recyclwe.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-
         Huida_Adapter tiwen_adapter = new Huida_Adapter(getActivity());
         buy_recyclwe.setAdapter(tiwen_adapter);
 

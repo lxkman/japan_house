@@ -12,13 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
-        <ImageView
-            android:id="@+id/item_title_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/home_back_iv"
-            android:layout_gravity="center_vertical"
-            android:padding="10dp"/>
+
         <EditText
             android:id="@+id/search_tv"
             android:layout_width="match_parent"
@@ -64,6 +58,14 @@
             android:textSize="48sp"
             android:visibility="gone"
             android:text="A" />
+
+        <ImageView
+            android:id="@+id/item_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/home_back_iv" />
     </FrameLayout>
 
 </LinearLayout>

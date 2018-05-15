@@ -75,7 +75,7 @@ public class BaiDuLocationActivity extends BaseActivity {
             public void onClick(View v) {
                 Uri uri = Uri.parse("http://api.map.baidu.com/staticimage?width=300&height=200&center="+ longitude + "," + latitude + "&zoom=17&markers=" + longitude + "," + latitude + "&markerStyles=m,A");
                 Intent intent = new Intent();
-                intent.putExtra("latitude", latitude);
+                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
                 intent.putExtra("address",address);
                 intent.putExtra("locuri",uri.toString());

@@ -49,8 +49,8 @@ public class ChatFragment extends BaseFragment {
     ImageView imgSearch;
     @BindView(R.id.img_dialog)
     ImageView imgDialog;
-//    @BindView(R.id.mrecycler)
-//    RecyclerView mrecycler;
+    @BindView(R.id.mrecycler)
+    RecyclerView mrecycler;
     Unbinder unbinder;
     private List<String> mList=new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
@@ -92,20 +92,20 @@ public class ChatFragment extends BaseFragment {
             mList.add("");
             mList.add("");
         }
-//        mrecycler.setNestedScrollingEnabled(false);
-//        mrecycler.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
-//        liebiaoAdapter = new LiebiaoAdapter(R.layout.weiliao_item,mList);
-//        mrecycler.setAdapter(liebiaoAdapter);
-//        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-////                startActivity(new Intent(mContext,ManagerActivity.class));
-//                if (RongIM.getInstance() != null) {
-//                    Log.e("MainActivity", "创建单聊");
-//                    RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.act_chat_title));
-//                }
-//            }
-//        });
+        mrecycler.setNestedScrollingEnabled(false);
+        mrecycler.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.weiliao_item,mList);
+        mrecycler.setAdapter(liebiaoAdapter);
+        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                startActivity(new Intent(mContext,ManagerActivity.class));
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
     }
 
 

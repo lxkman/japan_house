@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-class MoreView {
+class MoreView implements View.OnClickListener {
 
     private Context context;
     private MyItemClickListener listener;
@@ -58,6 +58,8 @@ class MoreView {
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
         btn_reset = (Button) view.findViewById(R.id.btn_reset);
+        btn_reset.setOnClickListener(this);
+        btn_sure.setOnClickListener(this);
         return view;
     }
 
@@ -143,18 +145,24 @@ class MoreView {
     }
 
     private void initData() {
-        btn_sure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dropDownMenu.closeMenu();
-            }
-        });
         if (mLiebiaoAdapter == null) {
             mLiebiaoAdapter = new LiebiaoAdapter(R.layout.more_item, mList);
         }
         mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setAdapter(mLiebiaoAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_reset:
+
+                break;
+            case R.id.btn_sure:
+                dropDownMenu.closeMenu();
+                break;
+        }
     }
 
     class LiebiaoAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
@@ -201,6 +209,13 @@ class MoreView {
         protected void convert(final BaseViewHolder helper, final OneCheckBean item) {
             helper.setText(R.id.rb_title, item.getName());
             final TextView textView = helper.getView(R.id.rb_title);
+            if (item.isChecked()){
+                textView.setBackground(mContext.getResources().getDrawable(R.drawable.round_drakyellow));
+                textView.setTextColor(mContext.getResources().getColor(R.color.white));
+            }else {
+                textView.setBackground(mContext.getResources().getDrawable(R.drawable.round_gray));
+                textView.setTextColor(mContext.getResources().getColor(R.color.moreuncheck));
+            }
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -216,9 +231,8 @@ class MoreView {
                             }
                         }
                     }
-                    textView.setBackground(mContext.getResources().getDrawable(R.drawable.round_drakyellow));
-                    textView.setTextColor(mContext.getResources().getColor(R.color.white));
-                    item.setChecked(true);
+                    item.setChecked(!item.isChecked());
+                    mLiebiaoAdapter.notifyDataSetChanged();
                 }
             });
         }

@@ -19,13 +19,13 @@ import com.yyydjk.library.DropDownMenu;
 import java.util.ArrayList;
 import java.util.List;
 
-class FirstView {
+class FirstView implements View.OnClickListener {
 
     private Context context;
     private MyItemClickListener listener;
     private RecyclerView mrecycler;
     private LiebiaoAdapter mLiebiaoAdapter;
-    private List<OneCheckBean> mList=new ArrayList();
+    private List<OneCheckBean> mList = new ArrayList();
     private Button btn_sure;
     private DropDownMenu dropDownMenu;
 
@@ -41,6 +41,7 @@ class FirstView {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_first, null);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(this);
         return view;
     }
 
@@ -51,16 +52,10 @@ class FirstView {
     }
 
     private void initData() {
-        btn_sure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dropDownMenu.closeMenu();
-            }
-        });
         if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.leixing_item,mList);
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.leixing_item, mList);
         }
-        mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false));
+        mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setAdapter(mLiebiaoAdapter);
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -70,17 +65,30 @@ class FirstView {
             }
         });
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_sure:
+                if (!getCheckeditemText().equals("")) {
+                    dropDownMenu.setTabText(getCheckeditemText());
+                }
+                dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
+                break;
+        }
+    }
+
     class LiebiaoAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OneCheckBean> data) {
-            super(layoutResId,data);
+            super(layoutResId, data);
         }
 
         @Override
         protected void convert(final BaseViewHolder helper, OneCheckBean item) {
-            helper.setText(R.id.rb_title,item.getName());
+            helper.setText(R.id.rb_title, item.getName());
             helper.setChecked(R.id.rb_title, item.isChecked());
-            helper.setVisible(R.id.img_isCheck,item.isChecked());
+            helper.setVisible(R.id.img_isCheck, item.isChecked());
             helper.getView(R.id.rb_title).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,9 +104,18 @@ class FirstView {
                 }
 
             });
-
         }
     }
+
+    private String getCheckeditemText() {
+        for (int i = 0; i < mList.size(); i++) {
+            if (mList.get(i).isChecked()) {
+                return mList.get(i).getName();
+            }
+        }
+        return "";
+    }
+
     private class mClick implements View.OnClickListener {
 
         String string;

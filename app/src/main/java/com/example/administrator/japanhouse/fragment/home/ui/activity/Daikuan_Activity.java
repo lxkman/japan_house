@@ -7,19 +7,17 @@ import android.os.Handler;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.LoansBean;
-import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Daikuan_Adapter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -27,13 +25,14 @@ import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,9 +173,8 @@ public class Daikuan_Activity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.xinxi:
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
                 finish();
-                removeAllActivitys();
-                MyUtils.startMain(this);
                 break;
             case R.id.tv_call:
                 ShowCallDialog(Gravity.CENTER,R.style.Alpah_aniamtion);

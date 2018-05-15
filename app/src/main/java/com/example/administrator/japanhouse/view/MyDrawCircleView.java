@@ -128,4 +128,5 @@ public class MyDrawCircleView extends View {
         //        mpaint2.setColor(getResources().getColor(R.color.transparent));
         pointList.clear();
     }
+
 }

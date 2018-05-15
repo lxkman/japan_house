@@ -232,18 +232,31 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                         });
                     }
                 });
-        //        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mList);
-        //        mrecycler.setNestedScrollingEnabled(false);
-        //        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        //        mrecycler.setAdapter(liebiaoAdapter);
-        //        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-        //            @Override
-        //            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        //                Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
-        //                startActivity(intent);
-        //            }
-        //        });
+//                liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mList);
+//                mrecycler.setNestedScrollingEnabled(false);
+//                mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//                mrecycler.setAdapter(liebiaoAdapter);
+//                liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                        Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
+//                        startActivity(intent);
+//                    }
+//                });
     }
+
+
+//    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+//
+//        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+//            super(layoutResId, data);
+//        }
+//
+//        @Override
+//        protected void convert(BaseViewHolder helper, String item) {
+//
+//        }
+//    }
 
     class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
 
@@ -261,6 +274,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                     .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
+
 
     @OnClick({R.id.back_img, R.id.img_dingwei, R.id.img_message, R.id.search_tv})
     public void onClick(View view) {

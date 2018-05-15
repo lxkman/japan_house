@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
-
         <EditText
             android:id="@+id/search_tv"
             android:layout_width="match_parent"
@@ -28,7 +27,9 @@
             android:drawablePadding="10dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/bg_search"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="5dp"
+        />
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"

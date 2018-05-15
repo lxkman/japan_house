@@ -63,7 +63,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
-    private int page=1;
+    private int page = 1;
     private boolean isJa;
     private List<OldHouseListBean.DatasEntity> mDatas;
 
@@ -234,16 +234,27 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                         });
                     }
                 });
-//        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
-//        mrecycler.setAdapter(liebiaoAdapter);
-//        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
-//            }
-//        });
+        //        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        //        mrecycler.setAdapter(liebiaoAdapter);
+        //        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        //            @Override
+        //            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        //                startActivity(new Intent(NewHouseActivity.this, NewHousedetailsActivity.class));
+        //            }
+        //        });
 
     }
+
+    //    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    //
+    //        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+    //            super(layoutResId, data);
+    //        }
+    //
+    //        @Override
+    //        protected void convert(BaseViewHolder helper, String item) {
+    //        }
+    //    }
 
     class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
 
@@ -262,6 +273,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         }
     }
 
+
     @OnClick({R.id.back_img, R.id.img_dingwei, R.id.img_message, R.id.search_tv})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -270,7 +282,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
@@ -278,7 +290,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                startActivity(new Intent(mContext, HomeSearchActivity.class));
         }
     }
 

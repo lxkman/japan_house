@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
@@ -22,13 +26,23 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.DrawMapBean;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.bean.MapHouseBean;
+import com.example.administrator.japanhouse.bean.MapHouseDetailBean;
 import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.MyDrawCircleView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.orhanobut.logger.Logger;
 import com.yyydjk.library.DropDownMenu;
 
@@ -58,6 +72,8 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     private BaiduMap baiduMap;
     MyDrawCircleView mydrawcircleview;
     private LinearLayout ll_clear;
+    private boolean isJa;
+    private LocationClient mLocClient;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -172,12 +188,12 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         list3.add(new OneCheckBean(false, "室内设施"));
         MoreView fourView = new MoreView(mContext);
         popupViews.add(fourView.secView());
-        fourView.insertData2("oldhouse",list3, dropDownMenu);
+        fourView.insertData2("oldhouse", list3, dropDownMenu);
         fourView.setListener(this);
         /**
          * Dropdownmenu下面的主体部分
          * */
-        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
+        String[] headers = {getString(R.string.shoujia), getString(R.string.louceng),
                 getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (MapView) fifthView.findViewById(R.id.mapview);
@@ -189,13 +205,106 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         mapView.removeViewAt(2);//隐藏比例尺
         mapView.showZoomControls(false);// 隐藏缩放控件
         baiduMap = mapView.getMap();
-        LatLng center = new LatLng(35.68, 139.75); // 默认 东京
-        float zoom = 13.0f; // 默认 11级
+        initLocation();
+        //        initOverlay();
+        initListener();
+    }
+
+    private void initMap(double weidu, double jingdu) {
+        LatLng center = new LatLng(weidu, jingdu);
+        //        LatLng center = new LatLng(35.68, 139.75); // 默认 东京
+        float zoom = 11.0f; // 默认 11级
         MapStatus mMapStatus = new MapStatus.Builder().target(
                 center).zoom(zoom).build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory
                 .newMapStatus(mMapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
+    }
+
+    private void initLocation() {
+        mLocClient = new LocationClient(mContext.getApplicationContext());
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                double longitude = bdLocation.getLongitude();
+                double latitude = bdLocation.getLatitude();
+                String city = bdLocation.getCity();
+                initMap(latitude, longitude);
+                initOverlay2(city);
+            }
+        });
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式
+        option.setNeedDeviceDirect(true);// 设置返回结果包含手机的方向
+        option.setOpenGps(true);
+        option.setAddrType("all");// 返回的定位结果包含地址信息
+        option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+        option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
+        option.setIsNeedLocationPoiList(true);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+    }
+
+    private void initOverlay2(String city) {
+        baiduMap.clear();
+        String country = CacheUtils.get(Constants.COUNTRY);
+        HttpParams params = new HttpParams();
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        params.put("cityName", city);
+        OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<MapHouseBean>(MapHouseBean.class) {
+                    @Override
+                    public void onSuccess(Response<MapHouseBean> response) {
+                        int code = response.code();
+                        MapHouseBean body = response.body();
+                        List<MapHouseBean.DatasEntity> datas = body.getDatas();
+                        if (datas != null && datas.size() > 0) {
+                            List<MarkerBean> markerBeanList = new ArrayList<>();
+                            List<OverlayOptions> overlayOptionsList = new ArrayList<>();
+                            for (int i = 0; i < datas.size(); i++) {
+                                MapHouseBean.DatasEntity datasEntity = datas.get(i);
+                                markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatitude()));
+                                View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
+                                TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
+                                ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
+                                TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
+                                content.setText(isJa ? datasEntity.getAdministrationNameJpn() : datasEntity.getAdministrationNameCn());
+                                title.setText(datasEntity.getHouseNum() + "万套");
+                                iv.setVisibility(View.GONE);
+                                MarkerOptions markerOptions = new MarkerOptions()
+                                        .icon(BitmapDescriptorFactory.fromView(markView))
+                                        .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                                        .zIndex(11)
+                                        .draggable(true);
+                                overlayOptionsList.add(markerOptions);
+                            }
+                            baiduMap.addOverlays(overlayOptionsList);
+                        }
+                    }
+                });
+    }
+
+    private void initListener() {
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.getZIndex() == 11) {
+                    baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(13).build()));
+                    MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(marker.getPosition());
+                    baiduMap.animateMapStatus(u);
+//                    loadAllXiaoQu(northeast, southwest);
+                } else {
+                    startActivity(new Intent(mContext, ErshoufangActiviy.class));
+                }
+                return false;
+            }
+        });
         baiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
@@ -215,20 +324,64 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 Logger.e("xxxx", "百度地图状态改变结束");
+                if (mapStatus.zoom < 12) {
+                    initLocation();
+                } else if (mapStatus.zoom >= 12) {
+                    //                    LatLng target = mapStatus.target;
+//                    allupdate(target.latitude + "", target.longitude + "");
+                    LatLngBounds bound = mapStatus.bound;
+                    LatLng northeast = bound.northeast;
+                    LatLng southwest = bound.southwest;
+                    loadAllXiaoQu(northeast,southwest);
+                }
             }
         });
-        initOverlay();
-        initListener();
     }
 
-    private void initListener() {
-        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                startActivity(new Intent(mContext,ErshoufangActiviy.class));
-                return false;
-            }
-        });
+    private void loadAllXiaoQu(LatLng northeast, LatLng southwest) {
+        baiduMap.clear();
+        String country = CacheUtils.get(Constants.COUNTRY);
+        HttpParams params = new HttpParams();
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        params.put("starJd", northeast.longitude);
+        params.put("endJd", southwest.longitude);
+        params.put("starWd", northeast.latitude);
+        params.put("endWd", southwest.latitude);
+        params.put("hType", 0);
+        OkGo.<MapHouseDetailBean>post(MyUrls.BASEURL + "/app/community/selectbyjwd")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<MapHouseDetailBean>(MapHouseDetailBean.class) {
+                    @Override
+                    public void onSuccess(Response<MapHouseDetailBean> response) {
+                        int code = response.code();
+                        MapHouseDetailBean body = response.body();
+                        List<MapHouseDetailBean.DatasEntity> datas = body.getDatas();
+                        if (datas != null && datas.size() > 0) {
+                            List<MarkerBean> markerBeanList = new ArrayList<>();
+                            List<OverlayOptions> overlayOptionsList = new ArrayList<>();
+                            for (int i = 0; i < datas.size(); i++) {
+                                MapHouseDetailBean.DatasEntity datasEntity = datas.get(i);
+                                markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
+                                View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
+                                TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
+                                content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
+                                        : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                MarkerOptions markerOptions = new MarkerOptions()
+                                        .icon(BitmapDescriptorFactory.fromView(markView))
+                                        .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                                        .zIndex(12)
+                                        .draggable(true);
+                                overlayOptionsList.add(markerOptions);
+                            }
+                            baiduMap.addOverlays(overlayOptionsList);
+                        }
+                    }
+                });
     }
 
     private void initOverlay() {
@@ -242,7 +395,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
         List<OverlayOptions> overlayOptionsList = new ArrayList<>();
         for (int i = 0; i < markerBeanList.size(); i++) {
-            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view,null);
+            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
             TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
             ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
             TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
@@ -289,7 +442,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_clear:
                 baiduMap.clear();
                 initOverlay();

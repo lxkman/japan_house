@@ -19,7 +19,6 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -139,7 +138,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "区域"));
+//        list3.add(new OneCheckBean(false, "区域"));
         list3.add(new OneCheckBean(false, "构造"));
         list3.add(new OneCheckBean(false, "地段"));
         list3.add(new OneCheckBean(false, "朝向"));

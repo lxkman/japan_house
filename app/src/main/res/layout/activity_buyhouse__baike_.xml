@@ -27,10 +27,15 @@
             android:textColor="@color/white"
             />
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/baike_recycler"
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/sp_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/baike_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </com.liaoinstan.springview.widget.SpringView>
 
 
 </LinearLayout>

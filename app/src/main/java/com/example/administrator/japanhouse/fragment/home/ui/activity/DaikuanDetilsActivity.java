@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 
 public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickListener {
 
+
     @BindView(R.id.btn_call)
     Button btnCall;
     private ImageView img_beak;
@@ -33,6 +34,13 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     private ImageView kefu;
     private boolean flag=true;
     String tel="17600000000";
+    private TextView yuexi;
+    private TextView price;
+    private TextView nianxian;
+    private TextView fk_fangshi;
+    private TextView hj_yaoqiu;
+    private TextView sx_cailiao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +52,28 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView() {
+        //获取跳转的所有数据
+        int id = getIntent().getIntExtra("id", 0);
+        String name = getIntent().getStringExtra("name");
+        String accrual = getIntent().getStringExtra("lixi");
+        double i = Integer.parseInt(accrual)*1.0d;
+        String fanwei = getIntent().getStringExtra("fanwei");
+        String zhouqi = getIntent().getStringExtra("zhouqi");
+        String fangshi = getIntent().getStringExtra("fangshi");
+        String shijian = getIntent().getStringExtra("shijian");
+        String huji = getIntent().getStringExtra("huji");
+        String cailiao = getIntent().getStringExtra("cailiao");
+
+
         img_beak = (ImageView) findViewById(R.id.img_beak);
         dai_name = (TextView) findViewById(R.id.dai_name);
+        yuexi = (TextView) findViewById(R.id.yuexi);
+        nianxian = (TextView) findViewById(R.id.nianxian);
+        fk_fangshi = (TextView) findViewById(R.id.fk_fangshi);
+        sx_cailiao = (TextView) findViewById(R.id.sx_cailiao);
+        price = (TextView) findViewById(R.id.price);
         hk_time = (TextView) findViewById(R.id.hk_time);
+        hj_yaoqiu = (TextView) findViewById(R.id.hj_yaoqiu);
         shenqing = (Button) findViewById(R.id.shenqing);
         kefu = (ImageView) findViewById(R.id.kefu);
         img_beak.setOnClickListener(this);
@@ -61,8 +88,16 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
         } else {
             kefu.setVisibility(View.VISIBLE);
             btnCall.setVisibility(View.GONE);
-
         }
+        //赋值
+        dai_name.setText(name);
+        yuexi.setText("月息"+i+"%");
+        price.setText("最高"+fanwei+"万");
+        nianxian.setText(zhouqi+"年");
+        fk_fangshi.setText(fangshi);
+        hk_time.setText(shijian);
+        hj_yaoqiu.setText(huji);
+        sx_cailiao.setText(cailiao);
     }
 
     @Override

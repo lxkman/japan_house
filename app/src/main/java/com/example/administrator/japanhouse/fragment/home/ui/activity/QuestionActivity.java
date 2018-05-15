@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private Fragment currfit;
     private Buyhouse_Fragment buyhouse_fragment;
     private Sellhouse_Fragment sellhouse_fragment;
+    private int type=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                          buyhouse_fragment = new Buyhouse_Fragment();
                      }
                      AddFragment(buyhouse_fragment);
+                  type=1;
+
                   //转换页面
                   break;
               case R.id.liner2:
@@ -105,10 +109,12 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                       sellhouse_fragment = new Sellhouse_Fragment();
                   }
                   AddFragment(sellhouse_fragment);
+                  type=2;
                   //转换页面
                   break;
               case R.id.liner3:
                   Intent intent = new Intent(QuestionActivity.this, QuizActivity.class);
+                  intent.putExtra("type",type);
                   startActivity(intent);
                   break;
               case R.id.liner4:

@@ -20,7 +20,6 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
 
     public JsonCallback() {
     }
-
     public JsonCallback(Type type) {
         this.type = type;
     }
@@ -51,7 +50,6 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
     public T convertResponse(Response response) throws Throwable {
         ResponseBody body = response.body();
         if (body == null) return null;
-
         T data = null;
         Gson gson = new Gson();
         JsonReader jsonReader = new JsonReader(body.charStream());

@@ -245,7 +245,6 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         //        });
     }
 
-
     class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {

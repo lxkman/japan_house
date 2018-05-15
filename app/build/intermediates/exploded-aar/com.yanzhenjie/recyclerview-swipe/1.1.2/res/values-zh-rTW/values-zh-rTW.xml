@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recycler_swipe_click_load_more">點擊加載更多</string>
+    <string name="recycler_swipe_data_empty">暫時沒有數據</string>
+    <string name="recycler_swipe_load_error">加載出錯啦，請稍後重試</string>
+    <string name="recycler_swipe_load_more_message">正在加載更多數據，請稍後</string>
+    <string name="recycler_swipe_more_not">沒有更多數據啦</string>
+</resources>

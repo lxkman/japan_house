@@ -1,0 +1,6 @@
+int id loading_tv_message 0x7f050001
+int id loading_view 0x7f050000
+int layout loading_wait_dialog 0x7f020000
+int string loading_default_messsage 0x7f030000
+int style loadingDialog 0x7f040000
+int style loadingDialog_Loading 0x7f040001

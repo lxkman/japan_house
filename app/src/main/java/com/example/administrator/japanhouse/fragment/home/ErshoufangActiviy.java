@@ -67,6 +67,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private boolean isJa;
     private List<OldHouseListBean.DatasEntity> mDatas;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,6 +172,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
     }
+
+
 
     private void initData() {
         if (mList.size() <= 0) {

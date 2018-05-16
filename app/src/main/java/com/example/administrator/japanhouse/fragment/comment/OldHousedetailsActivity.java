@@ -33,16 +33,25 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -96,6 +105,18 @@ public class OldHousedetailsActivity extends BaseActivity {
     LinearLayout youeryuanLayout;
     @BindView(R.id.yiyuan_layout)
     LinearLayout yiyuanLayout;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_details_price)
+    TextView tvDetailsPrice;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
@@ -108,8 +129,8 @@ public class OldHousedetailsActivity extends BaseActivity {
     private MyLocationListenner myListener = new MyLocationListenner();
     private LocationManager locationManager;
     private Intent intent;
-    private String Tag="1";
-
+    private String Tag = "1";
+    private boolean isJa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,12 +145,16 @@ public class OldHousedetailsActivity extends BaseActivity {
         initData();
         //猜你喜欢
         initLoveRecycler();
+        //渐变
         initScroll();
+        //地图
         initMap();
         initLocation();
-        intent = new Intent(OldHousedetailsActivity.this,MapActivity.class);
-        intent.putExtra("lat","35.68");
-        intent.putExtra("log","139.75");
+        //请求接口
+        initDetailsNet();
+        intent = new Intent(OldHousedetailsActivity.this, MapActivity.class);
+        intent.putExtra("lat", "35.68");
+        intent.putExtra("log", "139.75");
         findViewById(R.id.lishi_old_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +168,36 @@ public class OldHousedetailsActivity extends BaseActivity {
         });
 
     }
+
+    private void initDetailsNet() {
+        String city = CacheUtils.get(Constants.COUNTRY);
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        HttpParams params = new HttpParams();
+        params.put("hId", 18);
+        OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<HouseDetailsBean>(this, HouseDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<HouseDetailsBean> response) {
+                        int code = response.code();
+                        HouseDetailsBean oldHouseListBean = response.body();
+                        HouseDetailsBean.DatasBean datas = oldHouseListBean.getDatas();
+                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        tvDetailsName.setText(isJa ? datas.getPlotNameJpn() : datas.getPlotNameCn());
+                        tvDetailsPrice.setText(isJa ? datas.getPriceJpn() : datas.getPriceCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsLocation.setText(isJa ? datas.getAddressJpn() : datas.getAddressCn());
+                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(OldHousedetailsActivity.this).load(hwdcBroker.getPic()+"").into(tvDetailsManagerHead);
+                    }
+                });
+    }
+
 
     public void setMyExtensionModule() {
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
@@ -160,6 +215,7 @@ public class OldHousedetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initLocation() {
         mLocClient = new LocationClient(this);
         mLocClient.registerLocationListener(myListener);
@@ -190,7 +246,7 @@ public class OldHousedetailsActivity extends BaseActivity {
 //        uiSettings. setZoomGesturesEnabled(false);//禁用缩放手势
 //        uiSettings. setOverlookingGesturesEnabled(false);//禁用俯视（3D）功能
 //        uiSettings .setRotateGesturesEnabled(false);//禁用地图旋转功能
-        uiSettings .setAllGesturesEnabled(false);//禁止所有手势
+        uiSettings.setAllGesturesEnabled(false);//禁止所有手势
 
         myListener = new MyLocationListenner();
         // 开启定位图层
@@ -212,9 +268,9 @@ public class OldHousedetailsActivity extends BaseActivity {
             @Override
             public void onMapClick(LatLng latLng) {
                 Intent intent = new Intent(OldHousedetailsActivity.this, MapActivity.class);
-                intent.putExtra("lat","35.68");
-                intent.putExtra("log","139.75");
-                intent.putExtra("TAG","1");
+                intent.putExtra("lat", "35.68");
+                intent.putExtra("log", "139.75");
+                intent.putExtra("TAG", "1");
                 startActivity(intent);
 
             }
@@ -225,6 +281,7 @@ public class OldHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -250,6 +307,7 @@ public class OldHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
 //            mBaseFragmentList.add(new VidioFragment());
@@ -349,7 +407,7 @@ public class OldHousedetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More,R.id.back_img,R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -366,32 +424,33 @@ public class OldHousedetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.shop_layout:
-                Tag="1";
-                intent.putExtra("TAG",Tag);
+                Tag = "1";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
             case R.id.school_layout:
-                Tag="2";
-                intent.putExtra("TAG",Tag);
+                Tag = "2";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
             case R.id.youeryuan_layout:
-                Tag="3";
-                intent.putExtra("TAG",Tag);
+                Tag = "3";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
             case R.id.yiyuan_layout:
-                Tag="4";
-                intent.putExtra("TAG",Tag);
+                Tag = "4";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
         }
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置

@@ -89,6 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_name"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -109,6 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_chaoxiang"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -134,6 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_nianfen"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -154,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_guanlifei"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -179,6 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_gouzao"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -199,6 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_dianfei"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -224,6 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_shuifei"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -244,6 +251,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_louceng"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -269,6 +277,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_yangshi"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -289,6 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_heshi"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -315,6 +325,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_muyu"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:gravity="center_vertical"
@@ -348,6 +359,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_shehui"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="会社信息"
@@ -367,6 +379,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_weizhi"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="具体位置信息展示，精确到都、道、府、县"
@@ -386,6 +399,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_shebei"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="冰箱，空调，洗衣机"
@@ -405,6 +419,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_wasi"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="*************公司"
@@ -424,6 +439,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_caizhi"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="*************公司"
@@ -443,9 +459,10 @@
                     android:text="@string/see_more_czjl"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/textView" />
+                    />
 
                 <TextView
+                    android:id="@+id/tv_more_juli"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="距离********车站1000米"
@@ -465,6 +482,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_fengjing"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="风景相关描述"
@@ -484,6 +502,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_waiguan"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="*********************************外观相关信息"
@@ -503,6 +522,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_more_neiguan"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:text="********************************外观相关信息    "

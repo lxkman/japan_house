@@ -16,10 +16,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -240,8 +244,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             case R.id.img_message:
-                removeAllActivitys();
-                MyUtils.startMain(this);
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                finish();
                 break;
             case R.id.look_more_tv:
                 startActivity(new Intent(mContext, YanjiuListActivity.class));

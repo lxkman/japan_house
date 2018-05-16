@@ -12,9 +12,13 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,9 +106,8 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.xinxi:
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
                 finish();
-                removeAllActivitys();
-                MyUtils.startMain(this);
                 break;
         }
     }

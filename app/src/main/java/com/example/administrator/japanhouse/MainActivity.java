@@ -1,23 +1,35 @@
 package com.example.administrator.japanhouse;
 
+import android.app.ActivityManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.administrator.japanhouse.activity.FragPagerAdapter;
+import com.example.administrator.japanhouse.activity.NoScrollViewPager;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.chat.ChatFragment;
 import com.example.administrator.japanhouse.fragment.comment.CommentFragment;
 import com.example.administrator.japanhouse.fragment.home.HomeFragment;
 import com.example.administrator.japanhouse.fragment.mine.MineFragment;
+import com.example.administrator.japanhouse.utils.Constants;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.zackratos.ultimatebar.UltimateBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,9 +37,6 @@ import butterknife.ButterKnife;
 import static com.example.administrator.japanhouse.R.id.rb_chat;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-
-    @BindView(R.id.frag_content)
-    FrameLayout flContent;
     @BindView(R.id.rb_home)
     RadioButton rbHome;
     @BindView(rb_chat)
@@ -40,14 +49,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     RadioGroup rgp;
     @BindView(R.id.activity_main)
     LinearLayout activityMain;
-    private BaseFragment baseFragment;
-    private HomeFragment homeFragment;
-    private ChatFragment chatFragment;
-    private CommentFragment commentFragment;
-    private MineFragment mineFragment;
     private long preTime;
-    private FragmentManager manager;
-    private String checkCharTag;
+
+    private NoScrollViewPager mViewPager;
+    private FragPagerAdapter pagerAdapter;
+    private List<Fragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +62,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_main);
-        checkCharTag = getIntent().getStringExtra("CheckCharTag");
+        EventBus.getDefault().register(this);
         ButterKnife.bind(this);
+        mViewPager = (NoScrollViewPager) findViewById(R.id.act_main_vp);
+        mViewPager.setNoScroll(true);
         initView();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -71,77 +80,66 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //        super.onSaveInstanceState(outState);
     }
 
-    private void addFragments(BaseFragment f) {
-        // 第一步：得到fragment管理类
-        manager = getSupportFragmentManager();
-        // 第二步：开启一个事务
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        if (baseFragment != null) {
-            //每次把前一个fragment给隐藏了
-            transaction.hide(baseFragment);
-        }
-        //isAdded:判断当前的fragment对象是否被加载过
-        if (!f.isAdded()) {
-            // 第三步：调用添加fragment的方法 第一个参数：容器的id 第二个参数：要放置的fragment的一个实例对象
-            transaction.add(R.id.frag_content, f);
-        }
-        transaction.commit();
-        //显示当前的fragment
-        transaction.show(f);
-        // 第四步：提交
-
-        baseFragment = f;
-    }
-
     private void initView() {
+        fragments = new ArrayList<>();
+        fragments.add(new HomeFragment());
+        fragments.add(new ChatFragment());
+        fragments.add(new CommentFragment());
+        fragments.add(new MineFragment());
+        pagerAdapter = new FragPagerAdapter(getSupportFragmentManager(), fragments);
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOffscreenPageLimit(fragments.size());
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                switch (position) {
+                    case 0:
+                        rbHome.setChecked(true);
+                        break;
+                    case 1:
+                        rbChat.setChecked(true);
+                        break;
+                    case 2:
+                        rbComment.setChecked(true);
+                        break;
+                    case 3:
+                        rbMine.setChecked(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         rgp.check(R.id.rb_home);
-        addFragments(new HomeFragment());
         rbHome.setOnClickListener(this);
         rbChat.setOnClickListener(this);
         rbComment.setOnClickListener(this);
         rbMine.setOnClickListener(this);
-        if (checkCharTag != null && checkCharTag.equals("CheckChar")) {
-            rbChat.setChecked(true);
-            if (chatFragment == null) {
-                chatFragment = new ChatFragment();
-            }
-            addFragments(chatFragment);
-        } else {
-            rbHome.setChecked(true);
-            if (homeFragment == null) {
-                homeFragment = new HomeFragment();
-            }
-            addFragments(homeFragment);
-        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rb_home:
-                if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
-                }
-                addFragments(homeFragment);
+                mViewPager.setCurrentItem(0);
                 break;
             case rb_chat:
-                if (chatFragment == null) {
-                    chatFragment = new ChatFragment();
-                }
-                addFragments(chatFragment);
+                mViewPager.setCurrentItem(1);
                 break;
             case R.id.rb_comment:
-                if (commentFragment == null) {
-                    commentFragment = new CommentFragment();
-                }
-                addFragments(commentFragment);
+                mViewPager.setCurrentItem(2);
                 break;
             case R.id.rb_mine:
-                if (mineFragment == null) {
-                    mineFragment = new MineFragment();
-                }
-                addFragments(mineFragment);
+                mViewPager.setCurrentItem(3);
                 break;
         }
     }
@@ -157,5 +155,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void msgEvent(EventBean eventBean) {
+        if (TextUtils.equals(Constants.EVENT_CHAT, eventBean.getMsg())) {
+            mViewPager.setCurrentItem(1);
+        }
+    }
 
 }

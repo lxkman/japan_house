@@ -13,23 +13,24 @@ android {
         multiDexEnabled true
     }
 
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    dexOptions{
-        javaMaxHeapSize "4g"
-    }
-
     signingConfigs {
         release {
             keyAlias 'China'
             keyPassword 'fujuwang'
             storePassword 'fujuwang'
-            storeFile file('D:/xiangmu/japan_house/keystore.jks')
+            storeFile file('D:/japanhouse.jks')
         }
     }
     buildTypes {
@@ -44,9 +45,8 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    sourceSets{
-        main{
+    sourceSets {
+        main {
             jniLibs.srcDir 'libs'
             //说明so的路径为该libs路径，关联所有地图SDK的so文件
         }
@@ -62,6 +62,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.jakewharton:butterknife:8.8.1'
+
     //不加下面这个butter会报空指针
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

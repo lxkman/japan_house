@@ -40,6 +40,10 @@ import com.baidu.mapapi.utils.OpenClientUtil;
 import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.utils.Constants;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -405,10 +409,8 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                 finish();
                 break;
             case R.id.message_char:
-                removeAllActivitys();
-                Intent intent=new Intent(MapActivity.this, MainActivity.class);
-                intent.putExtra("CheckCharTag","CheckChar");
-                startActivity(intent);
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                finish();
                 break;
         }
     }

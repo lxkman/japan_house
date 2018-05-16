@@ -15,7 +15,11 @@ import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.FreeApartmentAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.view.BaseDialog;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,10 +65,8 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 break;
 
             case R.id.act_apartment_msg:
-                removeAllActivitys();
-                Intent intent=new Intent(FreeApartmentActivity.this, MainActivity.class);
-                intent.putExtra("CheckCharTag","CheckChar");
-                startActivity(intent);
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                finish();
                 break;
         }
     }

@@ -18,6 +18,11 @@ import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
+import java.util.HashMap;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
+
 
 /**
  * Created by lxk on 2017/6/30.
@@ -58,14 +63,14 @@ public class GuidePageActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     SharedPreferencesUtils.getInstace(GuidePageActivity.this).setBooleanPreference( "guide", true);
-                    Intent intent = new Intent(GuidePageActivity.this, MainActivity.class);
-                    startActivity(intent);
-//                    HashMap<String, Boolean> hashMap = new HashMap<>();
-//                    //会话类型 以及是否聚合显示
-//                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
-////        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-////        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-//                    RongIM.getInstance().startConversationList(GuidePageActivity.this, hashMap);
+//                    Intent intent = new Intent(GuidePageActivity.this, MainActivity.class);
+//                    startActivity(intent);
+                    HashMap<String, Boolean> hashMap = new HashMap<>();
+                    //会话类型 以及是否聚合显示
+                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                    RongIM.getInstance().startConversationList(GuidePageActivity.this, hashMap);
                     finish();
                 }
             });

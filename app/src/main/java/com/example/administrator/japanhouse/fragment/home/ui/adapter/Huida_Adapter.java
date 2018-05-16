@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.bean.HuiFu_Bean;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WenDa_Detils_Activity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,17 +23,13 @@ import java.util.List;
 
 public class Huida_Adapter extends RecyclerView.Adapter<Huida_Adapter.ViewHolder> {
     private Context context;
-    private List<String> list=new ArrayList<>();
-    public Huida_Adapter(Context context) {
+    List<HuiFu_Bean.DatasBean> list=new ArrayList<>();
+
+    public Huida_Adapter(Context context, List<HuiFu_Bean.DatasBean> list) {
         this.context = context;
-        data();
+        this.list = list;
     }
 
-    private void data() {
-        for (int i=0;i<10;i++){
-            list.add("");
-        }
-    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.huida_adapter, parent, false);
@@ -39,14 +38,23 @@ public class Huida_Adapter extends RecyclerView.Adapter<Huida_Adapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context, WenDa_Detils_Activity.class);
+                intent.putExtra("askid",list.get(position).getId());
+                intent.putExtra("title",list.get(position).getDescription());
                 context.startActivity(intent);
             }
         });
+        HuiFu_Bean.DatasBean datasBean = list.get(position);
+        long updateTime = datasBean.getUpdateTime();
+        String dateToString = getDateToString(String.valueOf(updateTime / 1000));
+        holder.text_time.setText(dateToString);
+        holder.text_title.setText(datasBean.getDescription());
+        holder.text_neirong.setText(datasBean.getContent());
+        holder.person.setText(datasBean.getAnswerNum()+"");
     }
 
     @Override
@@ -70,5 +78,13 @@ public class Huida_Adapter extends RecyclerView.Adapter<Huida_Adapter.ViewHolder
             person = (TextView) itemView.findViewById(R.id.person);
 
         }
+    }
+
+    //  时间戳转为日期  /年/月/日
+    public static String getDateToString(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long lcc_time = Long.valueOf(time);
+        String format = sdf.format(new Date(lcc_time * 1000L));
+        return format;
     }
 }

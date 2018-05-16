@@ -287,7 +287,7 @@
     <string name="shangyedichan">商业地产</string>
     <string name="zhongguofangyuan">中国房源</string>
     <string name="fangjiaditu">房价地图</string>
-    <string name="zhaoxiaoqu">找小区</string>
+    <string name="zhaoxiaoqu">找团地</string>
     <string name="woshiyezhu">我是业主</string>
     <string name="mianfeikanfang">免费看房</string>
     <string name="haiwaidichan">海外地产</string>
@@ -369,7 +369,7 @@
     <string name="mf">买房</string>
     <string name="maifang">卖房</string>
     <string name="woyaotiwen">我要提问</string>
-    <string name="wolaihuida">我来回答</string>
+    <string name="wolaihuida">我的回答</string>
     <string name="goufangbaike">购房百科</string>
     <string name="jinrongdaikuan">金融贷款</string>
     <string name="maishagnpu">买商铺</string>

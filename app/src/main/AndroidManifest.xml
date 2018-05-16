@@ -110,7 +110,8 @@
             android:value="naHsvnvB7DGQXUKTn3SOtlIBrEjm9wzg" />
         <!-- 百度地图结束 -->
         <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".login.ForgetPswActivity" />
         <activity android:name=".login.UserAgreementActivity" />
         <activity android:name=".login.BindPhoneActivity" />
@@ -285,6 +286,36 @@
                 android:resource="@xml/rc_file_path"/>
         </provider>
         <activity android:name=".im.BaiDuLocationActivity"/>
+
+        <!-- LINE SDK Settings -->
+        <activity
+            android:name="jp.line.android.sdk.activity.LineAuthCompleteActivity"
+            android:configChanges="keyboard|orientation"
+            android:exported="true"
+            android:screenOrientation="sensor" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="line.1580206547" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="jp.line.android.sdk.activity.WebLoginActivity"
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="sensor" />
+
+        <meta-data
+            android:name="jp.line.sdk.ChannelId"
+            android:value="@string/line_channel_id" />
+
+        <meta-data
+            android:name="jp.line.sdk.AuthScheme"
+            android:value="@string/line_channel_id" />
     </application>
 
 </manifest>

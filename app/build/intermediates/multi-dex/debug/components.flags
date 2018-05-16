@@ -1,0 +1,52 @@
+-injars 'D:\japan_house\app\build\intermediates\transforms\jarMerging\debug\jars\1\1f\combined.jar'
+-outjars 'D:\japan_house\app\build\intermediates\multi-dex\debug\componentClasses.jar'
+
+-libraryjars 'D:\sdk\build-tools\27.0.1\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **
+-dontwarn **
+-printconfiguration 'D:\japan_house\app\build\intermediates\multi-dex\debug\components.flags'
+
+
+# view AndroidManifest.xml #generated:109
+-keep class com.example.administrator.japanhouse.MyApplication {
+    <init>(...);
+}
+
+# view AndroidManifest.xml #generated:462
+-keep class io.rong.push.PushReceiver {
+    <init>(...);
+}
+
+# view AndroidManifest.xml #generated:457
+-keep class io.rong.push.PushService {
+    <init>(...);
+}
+
+-keep public class * extends android.app.Instrumentation {
+    <init>();
+}
+
+-keep public class * extends android.app.Application {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.fd.** {
+    <fields>;
+    <methods>;
+}

@@ -42,12 +42,19 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/gray1"/>
-    <android.support.v7.widget.RecyclerView
-        android:paddingBottom="50dip"
-        android:layout_below="@+id/view_09"
-        android:id="@+id/toutiao_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+   <com.liaoinstan.springview.widget.SpringView
+       android:id="@+id/sp_view"
+       android:layout_below="@+id/view_09"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <android.support.v7.widget.RecyclerView
+           android:paddingBottom="50dip"
+           android:id="@+id/toutiao_recycler"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+   </com.liaoinstan.springview.widget.SpringView>
+
 
     <TextView
         android:id="@+id/tv_call"
@@ -70,4 +77,6 @@
         android:layout_marginBottom="50dip"
         android:clickable="true"
     />
+
+
 </RelativeLayout>

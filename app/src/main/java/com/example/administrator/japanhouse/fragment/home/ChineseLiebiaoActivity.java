@@ -15,13 +15,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
-import com.example.administrator.japanhouse.utils.MyUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.yyydjk.library.DropDownMenu;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,7 +138,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "区域"));
+//        list3.add(new OneCheckBean(false, "区域"));
         list3.add(new OneCheckBean(false, "构造"));
         list3.add(new OneCheckBean(false, "地段"));
         list3.add(new OneCheckBean(false, "朝向"));
@@ -223,8 +226,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 break;
             //消息
             case R.id.img_message:
-                removeAllActivitys();
-                MyUtils.startMain(this);
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                finish();
                 break;
             case R.id.search_tv:
                 startActivity(new Intent(mContext,HomeSearchActivity.class));

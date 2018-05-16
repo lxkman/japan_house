@@ -33,112 +33,119 @@
       android:layout_height="10dp"
       android:layout_below="@+id/liner"
       android:background="@color/gray1"/>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nor"
-        android:layout_above="@+id/di"
-        android:layout_below="@+id/xian"
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/sp_view"
         android:layout_width="match_parent"
+        android:layout_below="@+id/xian"
+        android:layout_above="@+id/di"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical"
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nor"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_margin="10dp"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:id="@+id/title"
-                android:text="动态标题内容，标题，标题"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RelativeLayout
-                android:orientation="horizontal"
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="match_parent">
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:layout_margin="10dp"
+                    android:textColor="#000"
                     android:textSize="16sp"
-                    android:text="2018.01.11"
+                    android:id="@+id/title"
+                    android:text="动态标题内容，标题，标题"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/time"
-                    />
-                <TextView
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16sp"
+                        android:text="2018.01.11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/time"
+                        />
+                    <TextView
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textSize="16sp"
+                        android:text="李小姐"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ti_name"
+                        />
+                    <TextView
+                        android:layout_toLeftOf="@+id/ti_name"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16sp"
+                        android:text="提问人："
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/neirong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="北京搜狐焦点网为购房者提供北京房产信息、家居装修资讯，北京房产楼盘详情、买房流程、业主论坛、家居装修等全面内容信息，北京搜狐焦点网互联网的购房平台"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/gray1"/>
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/huifu_3xxx"
+                        />
+                    <TextView
+                        android:id="@+id/huida"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gongjigehjugid"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_alignParentRight="true"
-                    android:textSize="16sp"
-                    android:text="李小姐"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ti_name"
-                    />
-                <TextView
-                    android:layout_toLeftOf="@+id/ti_name"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="16sp"
-                    android:text="提问人："
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-            </RelativeLayout>
+                    android:background="@color/gray1"/>
 
-            <LinearLayout
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/neirong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="北京搜狐焦点网为购房者提供北京房产信息、家居装修资讯，北京房产楼盘详情、买房流程、业主论坛、家居装修等全面内容信息，北京搜狐焦点网互联网的购房平台"
-                    />
+                <android.support.v7.widget.RecyclerView
+                    android:descendantFocusability="afterDescendants"
+                    android:id="@+id/wenda_recy"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.liaoinstan.springview.widget.SpringView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/gray1"/>
 
-            <LinearLayout
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginTop="3dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                      android:src="@drawable/huifu_3xxx"
-                    />
-                <TextView
-                    android:id="@+id/huida"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gongjigehjugid"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="10dp"
-                    />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/gray1"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:descendantFocusability="afterDescendants"
-                android:id="@+id/wenda_recy"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/di"

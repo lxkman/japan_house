@@ -63,6 +63,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private int page;
     private boolean isJa;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

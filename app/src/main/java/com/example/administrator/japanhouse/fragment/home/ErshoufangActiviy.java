@@ -68,7 +68,6 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private List<OldHouseListBean.DatasEntity> mDatas;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

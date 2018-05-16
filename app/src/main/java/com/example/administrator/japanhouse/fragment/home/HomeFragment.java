@@ -135,9 +135,9 @@ public class HomeFragment extends BaseFragment {
             R.drawable.home_woshiyezhu_iv,
             R.drawable.home_mianfeikanfang_iv,
             R.drawable.home_zhongguofangyuan_iv,
-            R.drawable.home_haiwaidichan_iv};
+            R.drawable.home_haiwaidichan_iv
+    };
     private List<String> itemTjxfList;
-    private Intent intent;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -206,27 +206,23 @@ public class HomeFragment extends BaseFragment {
                         switch (position) {
                             case 0:
                                 if (finalI == 0) {
-                                    intent = new Intent(getActivity(), NewHouseActivity.class);
-                                    startActivity(intent);
+                                    startActivity(new Intent(mContext, NewHouseActivity.class));
                                 } else {
                                     startActivity(new Intent(mContext, ChineseFangyuanActivity.class));
                                 }
                                 break;
                             case 1:
-                                if (finalI == 1) {
-                                    startActivity(new Intent(mContext, HaiWaiActivity.class));
+                                if (finalI == 0) {
+//                                    getActivity().startActivity(new Intent(getActivity(), BieShuActivity.class));
                                 } else {
-                                    intent = new Intent(getActivity(), BieShuActivity.class);
-                                    getActivity().startActivity(intent);
+                                    startActivity(new Intent(mContext, HaiWaiActivity.class));
                                 }
                                 break;
                             case 2://土地
-                                intent = new Intent(getActivity(), TudiActivity.class);
-                                getActivity().startActivity(intent);
+                                startActivity(new Intent(mContext, TudiActivity.class));
                                 break;
                             case 3://二手房
-                                intent = new Intent(getActivity(), ErshoufangActiviy.class);
-                                getActivity().startActivity(intent);
+                                startActivity(new Intent(mContext, ErshoufangActiviy.class));
                                 break;
                             case 4://商业地产
                                 startActivity(new Intent(mContext, BusinessDichanActivity.class));
@@ -238,16 +234,13 @@ public class HomeFragment extends BaseFragment {
                                 startActivity(new Intent(mContext, ZhaoxiaoquActivity.class));
                                 break;
                             case 7://房价地图
-                                intent = new Intent(getActivity(), FangjiadituActivity.class);
-                                getActivity().startActivity(intent);
+                                startActivity(new Intent(mContext, FangjiadituActivity.class));
                                 break;
                             case 8://我是业主
-                                Intent intent = new Intent(getActivity(), OwnerActivity.class);
-                                getActivity().startActivity(intent);
+                                startActivity(new Intent(mContext, OwnerActivity.class));
                                 break;
                             case 9://免费看房
-                                Intent intent1 = new Intent(getActivity(), FreeApartmentActivity.class);
-                                getActivity().startActivity(intent1);
+                                startActivity(new Intent(mContext, FreeApartmentActivity.class));
                                 break;
                         }
                     }

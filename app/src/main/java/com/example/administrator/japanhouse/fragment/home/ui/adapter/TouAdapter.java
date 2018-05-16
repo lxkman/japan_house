@@ -10,7 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.bean.TouTiaoListBean;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.TouDetailActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,31 +25,42 @@ import java.util.List;
 
 public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
     private Context context;
-    List<String>list=new ArrayList<>();
-    public TouAdapter(Context context) {
+    List<TouTiaoListBean.DatasBean>list=new ArrayList<>();
+    private boolean isJa;
+
+    public TouAdapter(Context context, List<TouTiaoListBean.DatasBean>list) {
         this.context = context;
-        data();
+        this.list = list;
     }
 
-    private void data() {
-        for (int i=0;i<10;i++){
-            list.add("");
-        }
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(context).inflate(R.layout.touadapter, parent, false);
+        String city = CacheUtils.get(Constants.COUNTRY);
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.neirong.setText(isJa ? list.get(viewType).getTitleJpn() : list.get(viewType).getTitleCn());
+        viewHolder.time.setText(MyUtils.getDateToStringH(list.get(viewType).getCreateTime()+""));
+        viewHolder.person.setText(list.get(viewType).getReadNum()+"人查看");
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
      holder.view.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
              Intent intent = new Intent(context, TouDetailActivity.class);
+             intent.putExtra("title",isJa ? list.get(position).getTitleJpn() : list.get(position).getTitleCn());
+             intent.putExtra("time",MyUtils.getDateToStringH(""+list.get(position).getCreateTime()));
+             intent.putExtra("content",isJa ? list.get(position).getContentJpn() : list.get(position).getContentCn());
+             intent.putExtra("Tid",list.get(position).getId()+"");
               context.startActivity(intent);
          }
      });

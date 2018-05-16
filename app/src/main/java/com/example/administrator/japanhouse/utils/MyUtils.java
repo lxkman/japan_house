@@ -90,6 +90,20 @@ public class MyUtils {
         return date.getTime();
     }
 
+    /**
+     * 将毫秒转化成固定格式的时间
+     * 时间格式: yyyy-MM-dd HH:mm:ss
+     *
+     * @param millisecond
+     * @return
+     */
+    public static String getDateTimeFromMillisecond(Long millisecond){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(millisecond);
+        String dateStr = simpleDateFormat.format(date);
+        return dateStr;
+    }
+
     public static String stampToDate(String s) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -125,6 +139,13 @@ public class MyUtils {
     //  时间戳转为日期  /年/月/日/时/分
     public static String getDateToStringTime(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        long lcc_time = Long.valueOf(time);
+        String format = sdf.format(new Date(lcc_time * 1000L));
+        return format;
+    }
+    //  时间戳转为日期  /年/月/日/时/分
+    public static String getDateToStringH(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         long lcc_time = Long.valueOf(time);
         String format = sdf.format(new Date(lcc_time * 1000L));
         return format;

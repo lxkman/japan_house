@@ -123,10 +123,19 @@ public class HomeFragment extends BaseFragment {
     private List<HomeItemBean> homeItemBeanList;//总的数据源
     private List<View> viewPagerList;//GridView作为一个View对象添加到ViewPager集合中
 
-    private int[] itemPic = {R.drawable.home_ershoufang_iv, R.drawable.home_xinfang_iv, R.drawable.home_tudi_iv,
-            R.drawable.home_zufang_iv, R.drawable.home_shangyedichan_iv, R.drawable.home_zhongguofangyuan_iv,
-            R.drawable.home_fangjiaditu_iv, R.drawable.home_zhaoxiaoqu_iv, R.drawable.home_woshiyezhu_iv,
-            R.drawable.home_mianfeikanfang_iv, R.drawable.home_haiwaidichan_iv};
+    private int[] itemPic = {
+            R.drawable.home_xinfang_iv,
+            R.drawable.home_bieshu_iv,
+            R.drawable.home_tudi_iv,
+            R.drawable.home_ershoufang_iv,
+            R.drawable.home_shangyedichan_iv,
+            R.drawable.home_zufang_iv,
+            R.drawable.home_zhaoxiaoqu_iv,
+            R.drawable.home_fangjiaditu_iv,
+            R.drawable.home_woshiyezhu_iv,
+            R.drawable.home_mianfeikanfang_iv,
+            R.drawable.home_zhongguofangyuan_iv,
+            R.drawable.home_haiwaidichan_iv};
     private List<String> itemTjxfList;
     private Intent intent;
 
@@ -152,18 +161,27 @@ public class HomeFragment extends BaseFragment {
             String city = eventBean.getMsg2();
             if (city != null && city.length() <= 3) {
                 locationTv.setText(city);
-            }else if (city!=null && city.length()>3){
-                locationTv.setText(city.substring(0,2)+"...");
+            } else if (city != null && city.length() > 3) {
+                locationTv.setText(city.substring(0, 2) + "...");
             }
         }
     }
 
     private void initViewData(View view) {
-        String[] itemName = {mActivity.getResources().getString(R.string.old_house), mActivity.getResources().getString(R.string.new_house),
-                mActivity.getResources().getString(R.string.tudi), mActivity.getResources().getString(R.string.zu_house),
-                mActivity.getResources().getString(R.string.shangyedichan), mActivity.getResources().getString(R.string.zhongguofangyuan), mActivity.getResources().getString(R.string.fangjiaditu),
-                mActivity.getResources().getString(R.string.zhaoxiaoqu), mActivity.getResources().getString(R.string.woshiyezhu), mActivity.getResources().getString(R.string.mianfeikanfang),
-                mActivity.getResources().getString(R.string.haiwaidichan)};
+        String[] itemName = {
+                mActivity.getResources().getString(R.string.new_house),
+                mActivity.getResources().getString(R.string.bieshu),
+                mActivity.getResources().getString(R.string.tudi),
+                mActivity.getResources().getString(R.string.old_house),
+                mActivity.getResources().getString(R.string.shangyedichan),
+                mActivity.getResources().getString(R.string.zu_house),
+                mActivity.getResources().getString(R.string.zhaoxiaoqu),
+                mActivity.getResources().getString(R.string.fangjiaditu),
+                mActivity.getResources().getString(R.string.woshiyezhu),
+                mActivity.getResources().getString(R.string.mianfeikanfang),
+                mActivity.getResources().getString(R.string.zhongguofangyuan),
+                mActivity.getResources().getString(R.string.haiwaidichan)
+        };
         //-----item导航栏-----
         homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
@@ -187,46 +205,49 @@ public class HomeFragment extends BaseFragment {
                     if (obj != null && obj instanceof HomeItemBean) {
                         switch (position) {
                             case 0:
-                                if (finalI == 0) {//二手房
-                                    intent = new Intent(getActivity(), ErshoufangActiviy.class);
+                                if (finalI == 0) {
+                                    intent = new Intent(getActivity(), NewHouseActivity.class);
                                     startActivity(intent);
-                                } else {//海外地产
-                                    startActivity(new Intent(mContext, HaiWaiActivity.class));
+                                } else {
+                                    startActivity(new Intent(mContext, ChineseFangyuanActivity.class));
                                 }
                                 break;
-                            case 1://新房
-                                intent = new Intent(getActivity(), NewHouseActivity.class);
-                                getActivity().startActivityForResult(intent, 1);
+                            case 1:
+                                if (finalI == 1) {
+                                    startActivity(new Intent(mContext, HaiWaiActivity.class));
+                                } else {
+                                    intent = new Intent(getActivity(), BieShuActivity.class);
+                                    getActivity().startActivity(intent);
+                                }
                                 break;
                             case 2://土地
                                 intent = new Intent(getActivity(), TudiActivity.class);
-                                getActivity().startActivityForResult(intent, 1);
+                                getActivity().startActivity(intent);
                                 break;
-                            case 3://租房
-                                intent = new Intent(getActivity(), ZufangActivity.class);
-                                getActivity().startActivityForResult(intent, 1);
+                            case 3://二手房
+                                intent = new Intent(getActivity(), ErshoufangActiviy.class);
+                                getActivity().startActivity(intent);
                                 break;
                             case 4://商业地产
                                 startActivity(new Intent(mContext, BusinessDichanActivity.class));
                                 break;
-                            case 5://中国房源
-                                startActivity(new Intent(mContext, ChineseFangyuanActivity.class));
+                            case 5://租房
+                                startActivity(new Intent(mContext, ZufangActivity.class));
                                 break;
-                            case 6://房价地图
-                                startActivity(new Intent(mContext, FangjiadituActivity.class));
+                            case 6://找小区
+                                startActivity(new Intent(mContext, ZhaoxiaoquActivity.class));
                                 break;
-                            case 7://找小区
-                                intent = new Intent(getActivity(), ZhaoxiaoquActivity.class);
-                                getActivity().startActivityForResult(intent, 1);
+                            case 7://房价地图
+                                intent = new Intent(getActivity(), FangjiadituActivity.class);
+                                getActivity().startActivity(intent);
                                 break;
                             case 8://我是业主
-                                //                                OwnerActivity.invoke(getActivity());
                                 Intent intent = new Intent(getActivity(), OwnerActivity.class);
-                                getActivity().startActivityForResult(intent, 1);
+                                getActivity().startActivity(intent);
                                 break;
                             case 9://免费看房
                                 Intent intent1 = new Intent(getActivity(), FreeApartmentActivity.class);
-                                getActivity().startActivityForResult(intent1, 1);
+                                getActivity().startActivity(intent1);
                                 break;
                         }
                     }

@@ -1,109 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/layout_all_height"
         android:layout_width="match_parent"
         android:layout_height="120dip"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dip"
-            android:orientation="horizontal">
-            <FrameLayout
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="132dip"
+                android:layout_height="90dip"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dip"
+                android:scaleType="fitXY"
+                android:src="@drawable/house"/>
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-                <ImageView
-                    android:layout_width="132dip"
-                    android:layout_height="90dip"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:layout_marginLeft="10dip"
-                    android:src="@drawable/house" />
-                <ImageView
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/home_vedio_icon_iv"/>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:layout_marginTop="20dip"
+                android:gravity="center_vertical"
+                android:text="泰和·金府大厦"
+                android:textColor="#333"
+                android:textSize="14sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/home_vedio_icon_iv"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dip"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dip"
-                    android:layout_marginTop="20dip"
-                    android:gravity="center_vertical"
-                    android:text="泰和·金府大厦"
-                    android:textColor="#333"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="20dip"
-                    android:layout_marginTop="10dip"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
-
                     <ImageView
                         android:layout_width="15dip"
                         android:layout_height="15dip"
-                        android:layout_marginRight="5dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/dingwei" />
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/dingwei"/>
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:id="@+id/tv_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="东京"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="20dip"
-                    android:layout_marginTop="10dip"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="175㎡"
-                        android:textSize="13sp" />
-                </LinearLayout>
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center"
+                    android:text="17万/㎡"
+                    android:textColor="@color/shihuangse"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
 
             <TextView
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dip"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="17万/㎡"
-                android:textStyle="bold"
-                android:textColor="@color/shihuangse"
-                android:textSize="16sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:text="175㎡"
+                android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#eee"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginRight="15dp"
+        android:background="#eee"/>
 </LinearLayout>

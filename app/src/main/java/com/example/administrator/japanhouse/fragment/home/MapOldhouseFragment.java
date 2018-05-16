@@ -222,17 +222,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     }
 
     private void initLocation() {
-        mLocClient = new LocationClient(mContext.getApplicationContext());
-        mLocClient.registerLocationListener(new BDLocationListener() {
-            @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                double longitude = bdLocation.getLongitude();
-                double latitude = bdLocation.getLatitude();
-                String city = bdLocation.getCity();
-                initMap(latitude, longitude);
-                initOverlay2(city);
-            }
-        });
+        mLocClient = new LocationClient(mContext);
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式
         option.setNeedDeviceDirect(true);// 设置返回结果包含手机的方向
@@ -243,6 +233,16 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         option.setIsNeedLocationPoiList(true);
         mLocClient.setLocOption(option);
         mLocClient.start();
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                double longitude = bdLocation.getLongitude();
+                double latitude = bdLocation.getLatitude();
+                String city = bdLocation.getCity();
+                initMap(latitude, longitude);
+                initOverlay2(city);
+            }
+        });
     }
 
     private void initOverlay2(String city) {
@@ -255,6 +255,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
             isJa = false;
         }
         params.put("cityName", city);
+        params.put("hType", 0);
         OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
                 .tag(this)
                 .params(params)
@@ -347,10 +348,10 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         } else {
             isJa = false;
         }
-        params.put("starJd", northeast.longitude);
-        params.put("endJd", southwest.longitude);
-        params.put("starWd", northeast.latitude);
-        params.put("endWd", southwest.latitude);
+        params.put("starJd", southwest.longitude);
+        params.put("endJd", northeast.longitude);
+        params.put("starWd", southwest.latitude);
+        params.put("endWd", northeast.latitude);
         params.put("hType", 0);
         OkGo.<MapHouseDetailBean>post(MyUrls.BASEURL + "/app/community/selectbyjwd")
                 .tag(this)

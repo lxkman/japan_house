@@ -167,6 +167,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         mrecycler.setNestedScrollingEnabled(false);
     }
 
+
+
     private void initData() {
         if (mList.size() <= 0) {
             mList.add("");

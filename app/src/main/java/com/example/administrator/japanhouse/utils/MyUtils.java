@@ -15,8 +15,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.administrator.japanhouse.MainActivity;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.math.BigInteger;
@@ -24,13 +22,9 @@ import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 
 public class MyUtils {
     private static int mScreenWidth, mScreenHeight;
@@ -90,18 +84,12 @@ public class MyUtils {
         return date.getTime();
     }
 
-    /**
-     * 将毫秒转化成固定格式的时间
-     * 时间格式: yyyy-MM-dd HH:mm:ss
-     *
-     * @param millisecond
-     * @return
-     */
-    public static String getDateTimeFromMillisecond(Long millisecond){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(millisecond);
-        String dateStr = simpleDateFormat.format(date);
-        return dateStr;
+    //  时间戳转为日期  /年/月/日/时/分
+    public static String getDateToStringH(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        long lcc_time = Long.valueOf(time);
+        String format = sdf.format(new Date(lcc_time * 1000L));
+        return format;
     }
 
     public static String stampToDate(String s) {
@@ -139,13 +127,6 @@ public class MyUtils {
     //  时间戳转为日期  /年/月/日/时/分
     public static String getDateToStringTime(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        long lcc_time = Long.valueOf(time);
-        String format = sdf.format(new Date(lcc_time * 1000L));
-        return format;
-    }
-    //  时间戳转为日期  /年/月/日/时/分
-    public static String getDateToStringH(String time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         long lcc_time = Long.valueOf(time);
         String format = sdf.format(new Date(lcc_time * 1000L));
         return format;

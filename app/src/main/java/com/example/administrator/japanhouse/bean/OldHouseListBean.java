@@ -8,6 +8,7 @@ import java.util.List;
 
 public class OldHouseListBean {
 
+
     /**
      * msg : 请求成功
      * code : 200

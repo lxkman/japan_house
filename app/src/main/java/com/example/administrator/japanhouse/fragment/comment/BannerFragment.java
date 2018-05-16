@@ -10,6 +10,8 @@ import com.example.administrator.japanhouse.base.YangBaseFragment;
  */
 public class BannerFragment extends YangBaseFragment {
 
+
+
     @Override
     protected View initView() {
         View view = View.inflate(mContext, R.layout.fragment_banner, null);

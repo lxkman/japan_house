@@ -571,6 +571,7 @@
                     android:textSize="14sp" />
 
                 <com.example.administrator.japanhouse.view.HeightGridView
+                    android:listSelector="@android:color/transparent"
                     android:id="@+id/act_rental_picRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -607,6 +608,7 @@
                     android:textSize="14sp" />
 
                 <com.example.administrator.japanhouse.view.HeightGridView
+                    android:listSelector="@android:color/transparent"
                     android:id="@+id/act_rental_videoImg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

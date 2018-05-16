@@ -298,7 +298,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                     baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(13).build()));
                     MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(marker.getPosition());
                     baiduMap.animateMapStatus(u);
-//                    loadAllXiaoQu(northeast, southwest);
+                    //                    loadAllXiaoQu(northeast, southwest);
                 } else {
                     startActivity(new Intent(mContext, ErshoufangActiviy.class));
                 }
@@ -328,11 +328,11 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                     initLocation();
                 } else if (mapStatus.zoom >= 12) {
                     //                    LatLng target = mapStatus.target;
-//                    allupdate(target.latitude + "", target.longitude + "");
+                    //                    allupdate(target.latitude + "", target.longitude + "");
                     LatLngBounds bound = mapStatus.bound;
                     LatLng northeast = bound.northeast;
                     LatLng southwest = bound.southwest;
-                    loadAllXiaoQu(northeast,southwest);
+                    loadAllXiaoQu(northeast, southwest);
                 }
             }
         });

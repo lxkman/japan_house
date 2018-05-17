@@ -1,12 +1,12 @@
 package com.example.administrator.japanhouse.fragment.home;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,9 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
-import com.example.administrator.japanhouse.view.FluidLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +47,22 @@ public class TongqinSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_tongqin_search);
         ButterKnife.bind(this);
         initView();
+        searchEt.setOnEditorActionListener(editorActionListener);
     }
+
+    TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                //                SoftKeyboardTool.closeKeyboard(mSearchEt);//关闭软键盘
+                searchEt.setFocusable(true);
+                searchEt.setFocusableInTouchMode(true);
+                return true;
+            }
+            return false;
+        }
+    };
 
     private void initView() {
 

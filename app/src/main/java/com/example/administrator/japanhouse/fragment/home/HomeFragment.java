@@ -213,7 +213,7 @@ public class HomeFragment extends BaseFragment {
                                 break;
                             case 1:
                                 if (finalI == 0) {
-//                                    getActivity().startActivity(new Intent(getActivity(), BieShuActivity.class));
+                                    //                                    startActivity(new Intent(mContext, BieShuActivity.class));
                                 } else {
                                     startActivity(new Intent(mContext, HaiWaiActivity.class));
                                 }

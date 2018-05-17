@@ -48,6 +48,8 @@
             android:hint="@string/manager_number"
             android:layout_width="0dip"
             android:layout_weight="1"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
             android:layout_height="match_parent" />
         <TextView
             android:textColor="@color/shihuangse"

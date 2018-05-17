@@ -20,6 +20,7 @@
             android:layout_marginRight="30dp"
             android:hint="@string/home_location_search"
             android:textSize="14sp"
+            android:imeOptions="actionSearch"
             android:paddingLeft="10dp"
             android:textColor="@color/text_gray"
             android:drawableLeft="@drawable/home_search_icon_iv"

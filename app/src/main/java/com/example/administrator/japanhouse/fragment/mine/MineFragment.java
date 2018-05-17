@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
@@ -29,6 +31,10 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,47 +132,39 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.ll_dingyue2)
     LinearLayout llDingyue2;
     private int mDistanceY;
-//    private boolean isClickHome;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        EventBus.getDefault().register(this);
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, rootView);
         initScroll();
+        EventBus.getDefault().register(this);
         return rootView;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void myEvent(EventBean eventBean) {
-//        if (eventBean.getMsg().equals("clickhomekey")) {
-//            isClickHome = true;
-//        }
-//    }
 
+    /*
+    * 由于MainActivity的布局换成了不能滑动的viewpager，没用FragmentTransaction管理，所以这个方法直接就失效了
+    * */
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-//        if (!isClickHome) {
-            nestScroll.scrollTo(0, 0);
-//        }
-//        isClickHome = false;
+        nestScroll.scrollTo(0, 0);
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (!isClickHome) {
-//            nestScroll.scrollTo(0, 0);
-//        }
-//        isClickHome = false;
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void scrollToTop(EventBean eventBean){
+        if (TextUtils.equals(eventBean.getMsg(),"minescrolltotop")){
+            nestScroll.scrollTo(0, 0);
+        }
+    }
+
 
     private void initScroll() {
         nestScroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {

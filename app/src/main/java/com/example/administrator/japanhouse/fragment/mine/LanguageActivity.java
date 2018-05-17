@@ -43,6 +43,7 @@ public class LanguageActivity extends BaseActivity {
     DisplayMetrics dm;
     Configuration config;
     String city = "";
+    String location = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +55,16 @@ public class LanguageActivity extends BaseActivity {
         dm = resources.getDisplayMetrics();
         config = resources.getConfiguration();
 
-//        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
-        String location = CacheUtils.get(Constants.COUNTRY);
+        location = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(location)) {
             if (TextUtils.equals(location, "zh")) {
                 imgCheckZhongwen.setVisibility(View.VISIBLE);
                 imgCheckRiwen.setVisibility(View.GONE);
+                city = "zh";
             } else if (TextUtils.equals(location, "ja")) {
                 imgCheckZhongwen.setVisibility(View.GONE);
                 imgCheckRiwen.setVisibility(View.VISIBLE);
+                city = "ja";
             }
         }
     }
@@ -74,12 +76,13 @@ public class LanguageActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_baocun:
-                Locale jaLocale = new Locale(city);
-                config.locale = jaLocale;
-                resources.updateConfiguration(config, dm);
-//                SharedPreferencesUtils.getInstace(this).setStringPreference("city", city);
-                CacheUtils.put(Constants.COUNTRY, city);
-                recrete();
+                if (!TextUtils.equals(location, city)) {
+                    Locale jaLocale = new Locale(city);
+                    config.locale = jaLocale;
+                    resources.updateConfiguration(config, dm);
+                    CacheUtils.put(Constants.COUNTRY, city);
+                    recrete();
+                }
                 break;
             case R.id.language_layout:
                 imgCheckZhongwen.setVisibility(View.VISIBLE);

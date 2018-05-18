@@ -149,6 +149,8 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
             super(layoutResId,data);
         }
 
+
+
         @Override
         protected void convert(BaseViewHolder helper, HouseListBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();

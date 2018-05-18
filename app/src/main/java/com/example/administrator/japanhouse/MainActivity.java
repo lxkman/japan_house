@@ -1,10 +1,7 @@
 package com.example.administrator.japanhouse;
 
-import android.app.ActivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
@@ -131,12 +128,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.rb_home:
                 mViewPager.setCurrentItem(0);
+                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case rb_chat:
                 mViewPager.setCurrentItem(1);
+                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case R.id.rb_comment:
                 mViewPager.setCurrentItem(2);
+                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case R.id.rb_mine:
                 mViewPager.setCurrentItem(3);

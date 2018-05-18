@@ -48,6 +48,7 @@
                 android:textSize="14sp"
                 android:background="@null"
                 android:singleLine="true"
+                android:imeOptions="actionSearch"
                 android:textColor="@color/text_gray"
                 android:drawableLeft="@drawable/home_search_icon_iv"
                 android:layout_toRightOf="@+id/location_tv"

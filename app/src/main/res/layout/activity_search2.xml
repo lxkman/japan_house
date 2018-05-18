@@ -29,6 +29,7 @@
           android:hint="请输入问题关键字"
           android:background="@null"
           android:singleLine="true"
+          android:imeOptions="actionSearch"
 
           />
 

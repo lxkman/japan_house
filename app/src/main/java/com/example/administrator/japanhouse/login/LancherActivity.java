@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.baidu.location.BDLocation;
@@ -66,6 +67,12 @@ public class LancherActivity extends BaseActivity {
             config.locale = myLocale;
             resources.updateConfiguration(config, dm);
             if (location.equals("ja")) {
+                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+            }
+        } else {
+            String locale = Locale.getDefault().getLanguage();
+            CacheUtils.put(Constants.COUNTRY, locale);
+            if (TextUtils.equals(locale, "ja")) {
                 iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
             }
         }

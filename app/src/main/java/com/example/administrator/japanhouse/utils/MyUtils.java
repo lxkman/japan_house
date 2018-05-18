@@ -71,6 +71,15 @@ public class MyUtils {
             return str;
         }
     }
+    public static boolean isJa(){
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /*将日期转为时间戳*/
     public static long getStringToDate(String time) {

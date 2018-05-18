@@ -71,6 +71,8 @@ public class ShangpuDetailsActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.tv_price)
     TextView tv_price;
+    @BindView(R.id.tv_See_More)
+    TextView tvSeeMore;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
@@ -127,6 +129,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -152,6 +155,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
 //            mBaseFragmentList.add(new VidioFragment());
@@ -240,7 +244,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img,R.id.tv_See_More})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -252,13 +256,17 @@ public class ShangpuDetailsActivity extends BaseActivity {
             case R.id.back_img:
                 finish();
                 break;
+            case R.id.tv_See_More:
+
+                break;
         }
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置

@@ -184,6 +184,56 @@
                         <TextView
                             android:paddingLeft="15dip"
                             android:gravity="center_vertical"
+                            android:text="@string/shangpu_diduan"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="住宅区"
+                            android:textSize="14sp"
+                            android:layout_width="0dip"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:gravity="center_vertical"
+                            android:text="@string/jiudian_louceng"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textColor="@color/text_black"
+                            android:paddingLeft="5dip"
+                            android:gravity="center_vertical"
+                            android:text="12层"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:background="#fff"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip">
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:paddingLeft="15dip"
+                            android:gravity="center_vertical"
                             android:text="@string/haiwai_chaoxiang"
                             android:textSize="14sp"
                             android:layout_width="wrap_content"
@@ -204,65 +254,11 @@
                         android:orientation="horizontal"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/tv_See_More"
                             android:layout_marginRight="5dip"
                             android:gravity="center_vertical"
                             android:textSize="15sp"
                             android:textColor="#888"
-                            android:text="建筑年份："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textColor="@color/text_black"
-                            android:paddingLeft="5dip"
-                            android:gravity="center_vertical"
-                            android:text="2010.11.10"
-                            android:textSize="14sp"
-                            android:layout_width="0dip"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:background="#fff"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dip">
-                    <LinearLayout
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:paddingLeft="15dip"
-                            android:gravity="center_vertical"
-                            android:text="@string/haiwai_dianti"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textColor="@color/text_black"
-                            android:paddingLeft="5dip"
-                            android:gravity="center_vertical"
-                            android:text="有"
-                            android:textSize="14sp"
-                            android:layout_width="0dip"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:layout_marginRight="5dip"
-                            android:gravity="center_vertical"
-                            android:textSize="15sp"
-                            android:textColor="#888"
-                            android:text="装修材质："
+                            android:text="物业："
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <TextView
@@ -273,57 +269,6 @@
                             android:textSize="14sp"
                             android:layout_width="0dip"
                             android:layout_weight="1"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:background="#fff"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dip">
-                    <LinearLayout
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:paddingLeft="15dip"
-                            android:gravity="center_vertical"
-                            android:text="@string/jiudian_louceng"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textColor="@color/text_black"
-                            android:paddingLeft="5dip"
-                            android:gravity="center_vertical"
-                            android:text="12层"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:layout_marginRight="5dip"
-                            android:gravity="center_vertical"
-                            android:textSize="15sp"
-                            android:textColor="#888"
-                            android:text="@string/haiwai_louxing"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textColor="@color/text_black"
-                            android:paddingLeft="5dip"
-                            android:gravity="center_vertical"
-                            android:text="小区"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                     </LinearLayout>
 
@@ -378,6 +323,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                 </LinearLayout>
+                <TextView
+                    android:layout_marginLeft="15dip"
+                    android:background="#fff6f2"
+                    android:id="@+id/tv_See_More"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:layout_marginRight="15dip"
+                    android:gravity="center"
+                    android:paddingLeft="15dip"
+                    android:text="@string/see_more"
+                    android:textColor="@color/shihuangse"
+                    android:textSize="15sp" />
                 <View
                     android:layout_marginRight="15dip"
                     android:layout_marginLeft="15dip"

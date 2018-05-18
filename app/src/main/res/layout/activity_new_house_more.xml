@@ -8,328 +8,958 @@
     tools:context=".fragment.comment.SeeMoreActivity">
 
     <LinearLayout
-        android:background="@color/shihuangse"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dip">
+        android:layout_height="50dip"
+        android:background="@color/shihuangse"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/back_img"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
             android:padding="15dp"
-            android:src="@drawable/back"
-            android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:src="@drawable/back" />
+
         <TextView
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:text="@string/see_more_fy"
             android:layout_width="0dip"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:gravity="center"
+            android:text="@string/see_more_fy"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
         <ImageView
-            android:padding="13dp"
             android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:layout_height="50dip"
+            android:padding="13dp" />
     </LinearLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:background="#fff"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="45dip">
+                    android:layout_height="45dip"
+                    android:background="#fff"
+                    android:orientation="horizontal">
+
                     <View
-                        android:layout_marginLeft="15dip"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/shihuangse"
                         android:layout_width="3dip"
-                        android:layout_height="13dip"></View>
+                        android:layout_height="13dip"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dip"
+                        android:background="@color/shihuangse"></View>
+
                     <TextView
-                        android:paddingLeft="6dip"
-                        android:gravity="center_vertical"
-                        android:text="基本信息"
-                        android:textSize="16sp"
-                        android:textColor="#444"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="6dip"
+                        android:text="基本信息"
+                        android:textColor="#444"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:background="#fff"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="物件名称："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_wujian_name"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="售        价："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_price"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="户        型："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_huxing"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="栋  层  数："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_dongceng_num"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="土地面积："
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_tudi_area"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="建筑面积："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="建筑面积："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_jianzhu_area"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="所  有  权："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_suoyouquan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="建筑年份："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_years"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="建筑以及设计公司："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_jianzhu_gongsi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="建筑构造："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_gouzao"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="朝        向："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_chaoxiang"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="建筑覆盖率："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_fugailv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="容  积  率："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_rongjilv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="入居日期："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_ruzhu_riqi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="现        状："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_xianzhuang"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="停  车  场："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_stop_car"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="公开情报日："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_gongkai"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:background="#fff"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="3dip"
+                        android:layout_height="13dip"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dip"
+                        android:background="@color/shihuangse"></View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="6dip"
+                        android:text="室外信息"
+                        android:textColor="#444"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="地        段："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_diduan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="具体位置："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_jutiweizhi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="主要车站："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_zhuyaochezhan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="车站距离："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_chezhanjuli"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="道路临街距离："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_linjiejuli"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="土        地："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_tudi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
+            <View
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="#eee"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:background="#fff"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="45dip">
+                    android:layout_height="45dip"
+                    android:background="#fff"
+                    android:orientation="horizontal">
+
                     <View
-                        android:layout_marginLeft="15dip"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/shihuangse"
                         android:layout_width="3dip"
-                        android:layout_height="13dip"></View>
+                        android:layout_height="13dip"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dip"
+                        android:background="@color/shihuangse"></View>
+
                     <TextView
-                        android:paddingLeft="6dip"
-                        android:gravity="center_vertical"
-                        android:text="基本信息"
-                        android:textSize="16sp"
-                        android:textColor="#444"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="6dip"
+                        android:text="室内信息"
+                        android:textColor="#444"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:background="#fff"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="物件名称："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="室内设备："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_shebei"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="售        价："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="厨        房："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_cook"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="户        型："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="卫  生  间："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_weishengjian"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="栋  层  数："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="浴        室："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_yushi"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:background="#fff"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="3dip"
+                        android:layout_height="13dip"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dip"
+                        android:background="@color/shihuangse"></View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="6dip"
+                        android:text="保障信息"
+                        android:textColor="#444"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="土地面积："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="性        能："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_xingneng"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="6dip"
                         android:layout_marginTop="6dip"
-                        android:paddingLeft="15dip"
-                        android:layout_width="match_parent"
                         android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="15dip">
+
                         <TextView
-                            android:textSize="14sp"
-                            android:text="建筑面积："
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="证  明  书："
+                            android:textSize="14sp" />
+
                         <TextView
-                            android:textColor="#222"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:id="@+id/tv_house_zhengmingshu"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="瑕疵保证："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_xiaci"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:background="#fff"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="3dip"
+                        android:layout_height="13dip"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dip"
+                        android:background="@color/shihuangse"></View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="6dip"
+                        android:text="备注"
+                        android:textColor="#444"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginTop="6dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="备        注："
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_house_beizhu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="#222"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

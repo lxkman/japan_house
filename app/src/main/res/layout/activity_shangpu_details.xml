@@ -188,7 +188,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/jiudian_louceng"
+                                android:text="售卖类型："
                                 android:textSize="14sp" />
 
                             <TextView
@@ -200,111 +200,10 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
 
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/shangpu_chengdong"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="是"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dip"
-                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/shangpu_stop_car"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="有"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/shangpu_daizhuangxiu"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="是"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dip"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/shangpu_bangong"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="有"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -430,7 +329,20 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
 
+
                     </LinearLayout>
+                    <TextView
+                        android:layout_marginLeft="15dip"
+                        android:background="#fff6f2"
+                        android:id="@+id/tv_See_More"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:layout_marginRight="15dip"
+                        android:gravity="center"
+                        android:paddingLeft="15dip"
+                        android:text="@string/see_more"
+                        android:textColor="@color/shihuangse"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <View

@@ -43,6 +43,7 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
+import com.example.administrator.japanhouse.more.OldHouseMoreActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -417,7 +418,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_See_More:
-                Intent intent1 = new Intent(OldHousedetailsActivity.this, SeeMoreActivity.class);
+                Intent intent1 = new Intent(OldHousedetailsActivity.this, OldHouseMoreActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.back_img:

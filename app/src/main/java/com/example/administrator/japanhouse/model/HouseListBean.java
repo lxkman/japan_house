@@ -14,6 +14,8 @@ public class HouseListBean {
      * datas : [{"id":18,"plotNameCn":"1","plotNameJpn":"1","addressCn":"河北省-保定市-蠡县","addressJpn":"hebeisheng-baodingshi-lixian","areaJpn":"1.00平方メートル","areaCn":"1.00平方米","priceCn":"1.00万元","priceJpn":"1.00万元","videoImgs":"","roomImgs":""}]
      */
 
+
+
     private String msg;
     private String code;
     private List<DatasBean> datas;

@@ -19,7 +19,6 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -101,7 +100,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
-        FirstView firstView = new FirstView(TudiActivity.this);
+        ThreeView firstView = new ThreeView(TudiActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -191,7 +190,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,SydcSearchActivity.class));
+                startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
         }
     }

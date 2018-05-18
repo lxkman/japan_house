@@ -123,7 +123,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         list.add(new OneCheckBean(false, "1000-2000元/月"));
         list.add(new OneCheckBean(false, "2000-3000元/月"));
         list.add(new OneCheckBean(false, "3000-4000元/月"));
-        FirstView firstView = new FirstView(mContext);
+        ThreeView firstView = new ThreeView(mContext);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);

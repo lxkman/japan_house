@@ -112,7 +112,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
-        FirstView firstView = new FirstView(NewHouseActivity.this);
+        ThreeView firstView = new ThreeView(NewHouseActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -234,7 +234,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                         });
                     }
                 });
-        //        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_xinfang, mList);
+        //        liebiaoAdapter = new OneAdapter(R.layout.item_home_xinfang, mList);
         //        mrecycler.setAdapter(liebiaoAdapter);
         //        liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
         //            @Override
@@ -245,9 +245,9 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
 
     }
 
-    //    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    //    class OneAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     //
-    //        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+    //        public OneAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
     //            super(layoutResId, data);
     //        }
     //

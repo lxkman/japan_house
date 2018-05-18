@@ -25,7 +25,7 @@
                 android:id="@+id/search_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/qsrdcmchqy"
+                android:hint="@string/qingshurulinjinchezhanming"
                 android:textSize="14sp"
                 android:background="@null"
                 android:imeOptions="actionSearch"

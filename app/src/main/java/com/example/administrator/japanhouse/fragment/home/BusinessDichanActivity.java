@@ -36,8 +36,8 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
-    private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.shangpuchuzu_iv, R.drawable.xzlmaimai_iv,
-            R.drawable.xzlchuzu_iv, R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
+    private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.xzlmaimai_iv,
+             R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
     private void initview() {
         String[] itemName = {getString(R.string.business_symm),
-                getString(R.string.business_spcz),
                 getString(R.string.business_mmxzl),
-                getString(R.string.business_xzlcz),
                 getString(R.string.business_gefqc), getString(R.string.business_jd)};
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
@@ -89,7 +87,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 finish();
                 break;
             case R.id.search_et:
-                startActivity(new Intent(mContext,SydcSearchActivity.class));
+                startActivity(new Intent(mContext,HomeSearchActivity.class));
                 break;
         }
     }

@@ -1,15 +1,13 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -92,7 +90,9 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 finish();
                 break;
             case R.id.search_et:
-                startActivity(new Intent(mContext,SydcSearchActivity.class));
+                Intent intent = new Intent(mContext, SydcSearchActivity.class);
+                intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
+                startActivity(intent);
                 break;
         }
     }

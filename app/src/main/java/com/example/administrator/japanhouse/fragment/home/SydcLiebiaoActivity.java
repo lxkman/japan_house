@@ -22,7 +22,6 @@ import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActiv
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -119,7 +118,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             list.add(new OneCheckBean(false, "6-15万"));
             list.add(new OneCheckBean(false, "10万以上"));
         }
-        FirstView firstView = new FirstView(SydcLiebiaoActivity.this);
+        ThreeView firstView = new ThreeView(SydcLiebiaoActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -198,22 +197,12 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
                         break;
                     case "1":
-                        Intent intent = new Intent(mContext, ShangpuDetailsActivity.class);
-                        intent.putExtra("iszu", "iszu");
-                        startActivity(intent);
-                        break;
-                    case "2":
                         startActivity(new Intent(mContext, XiezilouDetailsActivity.class));
                         break;
-                    case "3":
-                        Intent intent1 = new Intent(mContext, ShangpuDetailsActivity.class);
-                        intent1.putExtra("iszu", "iszu");
-                        startActivity(intent1);
-                        break;
-                    case "4":
+                    case "2":
                         startActivity(new Intent(mContext, GaoerfuDetailsActivity.class));
                         break;
-                    case "5":
+                    case "3":
                         startActivity(new Intent(mContext, JiudianDetailsActivity.class));
                         break;
                 }

@@ -123,7 +123,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
-        FirstView firstView = new FirstView(mContext);
+        ThreeView firstView = new ThreeView(mContext);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);

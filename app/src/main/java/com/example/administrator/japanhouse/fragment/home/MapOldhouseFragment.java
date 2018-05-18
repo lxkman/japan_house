@@ -74,6 +74,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     private LinearLayout ll_clear;
     private boolean isJa;
     private LocationClient mLocClient;
+    private String mCity;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -120,7 +121,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
             //在地图上添加多边形Option，用于显示
             baiduMap.addOverlay(polygonOption);
-            initOverlay();
+            initOverlay(mCity);
         }
     }
 
@@ -140,7 +141,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
-        FirstView firstView = new FirstView(mContext);
+        ThreeView firstView = new ThreeView(mContext);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -206,7 +207,6 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         mapView.showZoomControls(false);// 隐藏缩放控件
         baiduMap = mapView.getMap();
         initLocation();
-        //        initOverlay();
         initListener();
     }
 
@@ -238,14 +238,14 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
-                String city = bdLocation.getCity();
+                mCity = bdLocation.getCity();
                 initMap(latitude, longitude);
-                initOverlay2(city);
+                initOverlay(mCity);
             }
         });
     }
 
-    private void initOverlay2(String city) {
+    private void initOverlay(String city) {
         baiduMap.clear();
         String country = CacheUtils.get(Constants.COUNTRY);
         HttpParams params = new HttpParams();
@@ -385,32 +385,6 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                 });
     }
 
-    private void initOverlay() {
-        List<MarkerBean> markerBeanList = new ArrayList<>();
-        markerBeanList.add(new MarkerBean(139.738954, 35.707239));
-        markerBeanList.add(new MarkerBean(139.83439, 35.678863));
-        markerBeanList.add(new MarkerBean(139.741541, 35.643203));
-        markerBeanList.add(new MarkerBean(139.690661, 35.638979));
-        markerBeanList.add(new MarkerBean(139.758788, 35.684492));
-        markerBeanList.add(new MarkerBean(139.758788, 35.728807));
-
-        List<OverlayOptions> overlayOptionsList = new ArrayList<>();
-        for (int i = 0; i < markerBeanList.size(); i++) {
-            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
-            TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
-            ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
-            TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
-            title.setText("5.6万套");
-            iv.setVisibility(View.GONE);
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromView(markView))
-                    .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
-                    .zIndex(13)
-                    .draggable(true);
-            overlayOptionsList.add(markerOptions);
-        }
-        baiduMap.addOverlays(overlayOptionsList);
-    }
 
     @Override
     public void onItemClick(View view, int postion, String string) {
@@ -446,7 +420,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         switch (v.getId()) {
             case R.id.ll_clear:
                 baiduMap.clear();
-                initOverlay();
+                initOverlay(mCity);
                 break;
         }
     }

@@ -182,28 +182,28 @@ public class HomeSearchActivity extends BaseActivity {
                                 locationTv.setText(getResources().getString(R.string.zu_house));
                             }
                         });
-                        TextView maishangpuTv = (TextView) view.findViewById(R.id.maishangpu_tv);
+                        TextView maishangpuTv = (TextView) view.findViewById(R.id.bieshu_tv);
                         maishangpuTv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText(getResources().getString(R.string.maishagnpu));
+                                locationTv.setText(getResources().getString(R.string.bieshu));
                             }
                         });
-                        TextView maixiezilouTv = (TextView) view.findViewById(R.id.maixiezilou_tv);
+                        TextView maixiezilouTv = (TextView) view.findViewById(R.id.tudi_tv);
                         maixiezilouTv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText(getResources().getString(R.string.maixiezilou));
+                                locationTv.setText(getResources().getString(R.string.tudi));
                             }
                         });
-                        TextView zuxiezilouTv = (TextView) view.findViewById(R.id.zuxiezilou_tv);
+                        TextView zuxiezilouTv = (TextView) view.findViewById(R.id.sydc_tv);
                         zuxiezilouTv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                locationTv.setText(getResources().getString(R.string.zuxiezilou));
+                                locationTv.setText(getResources().getString(R.string.shangyedichan));
                             }
                         });
                     }

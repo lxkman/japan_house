@@ -20,7 +20,6 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -63,8 +62,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     @BindView(R.id.already_shendeng_ll)
     LinearLayout alreadyShendengLl;
     private int[] itemPic = {R.drawable.danshengongyu_iv, R.drawable.xueshenggongyu_iv, R.drawable.fufuzhufang_iv,
-            R.drawable.dajiating_iv, R.drawable.shangpu_iv, R.drawable.bangongshi_iv, R.drawable.yinshidian_iv,
-            R.drawable.jiudianchengbao_iv};
+            R.drawable.bieshu_iv_zu, R.drawable.shangpu_iv, R.drawable.bangongshi_iv};
     private int[] yanjiuitemPic = {R.drawable.test_jingzhuang_iv, R.drawable.test_dayangtai_iv,
             R.drawable.test_yangguangfang_iv, R.drawable.test_haohua_iv};
 
@@ -80,11 +78,10 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         String[] itemName = {getString(R.string.zufang_dsgy),
                 getString(R.string.zufang_xsgy) ,
                 getString(R.string.zufang_ffzf),
-                getString(R.string.zufang_djtzf),
+                getString(R.string.bieshu),
                 getString(R.string.zufang_sp),
                 getString(R.string.zufang_bgs),
-                getString(R.string.zufang_ysd),
-                getString(R.string.zufang_jdcb)};
+                };
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));
@@ -98,6 +95,12 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, ZufangListActivity.class);
                 intent.putExtra("type",position+"");
+                if (position==4){
+                    intent.putExtra("edt_hint",getResources().getString(R.string.xuandianpuflc));
+                }
+                if (position==5){
+                    intent.putExtra("edt_hint",getResources().getString(R.string.xuanbangongshiflc));
+                }
                 startActivity(intent);
             }
         });
@@ -238,7 +241,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext, SydcSearchActivity.class));
+                startActivity(new Intent(mContext, HomeSearchActivity.class));
                 break;
             case R.id.img_dingwei:
                 startActivity(new Intent(mContext, HomeMapActivity.class));

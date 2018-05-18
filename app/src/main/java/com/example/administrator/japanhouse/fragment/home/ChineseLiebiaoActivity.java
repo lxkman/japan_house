@@ -100,7 +100,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         list.add(new OneCheckBean(false, "3-10万"));
         list.add(new OneCheckBean(false, "6-15万"));
         list.add(new OneCheckBean(false, "10万以上"));
-        FirstView firstView = new FirstView(ChineseLiebiaoActivity.this);
+        ThreeView firstView = new ThreeView(ChineseLiebiaoActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -230,7 +230,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                Intent intent = new Intent(mContext, SydcSearchActivity.class);
+                intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
+                startActivity(intent);
         }
     }
 

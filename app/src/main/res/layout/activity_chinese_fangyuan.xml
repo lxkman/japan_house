@@ -58,7 +58,7 @@
                     android:gravity="start"
                     android:textSize="14sp"
                     android:layout_centerHorizontal="true"
-                    android:hint="@string/qsrguojiahuo"
+                    android:hint="@string/home_tiaohf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>

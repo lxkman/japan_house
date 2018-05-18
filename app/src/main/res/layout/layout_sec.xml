@@ -9,7 +9,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:background="#fff"
-        android:layout_marginTop="10dip"
         android:id="@+id/Mrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,7 +20,7 @@
         android:layout_marginBottom="10dip"
         android:textSize="15sp"
         android:textColor="#fff"
-        android:text="确定"
+        android:text="@string/quxiao"
         android:layout_marginRight="35dip"
         android:layout_marginLeft="35dip"
         android:background="@color/shihuangse"

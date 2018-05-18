@@ -102,16 +102,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
     private void initView() {
-        String[] headers = {getString(R.string.shoujia), getString(R.string.louceng),
-                getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
+        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+                getString(R.string.shoujia), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
         FirstView firstView = new FirstView(ErshoufangActiviy.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
@@ -122,11 +118,10 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "一层"));
-        list1.add(new OneCheckBean(false, "二层"));
-        list1.add(new OneCheckBean(false, "三层"));
-        list1.add(new OneCheckBean(false, "四层"));
+        list1.add(new OneCheckBean(false, "80以下"));
+        list1.add(new OneCheckBean(false, "80-100"));
+        list1.add(new OneCheckBean(false, "100-150"));
+        list1.add(new OneCheckBean(false, "300以上"));
         SecView secView = new SecView(ErshoufangActiviy.this);
         popupViews.add(secView.secView());
         secView.setListener(this);
@@ -137,15 +132,11 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        SecView threeView = new SecView(ErshoufangActiviy.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "3-10万"));
+        list2.add(new OneCheckBean(false, "6-15万"));
+        list2.add(new OneCheckBean(false, "10万以上"));
+        ThreeView threeView = new ThreeView(ErshoufangActiviy.this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**
@@ -235,7 +226,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                         });
                     }
                 });
-//                liebiaoAdapter = new LiebiaoAdapter(R.layout.item_home_ershoufang, mList);
+//                liebiaoAdapter = new OneAdapter(R.layout.item_home_ershoufang, mList);
 //                mrecycler.setNestedScrollingEnabled(false);
 //                mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 //                mrecycler.setAdapter(liebiaoAdapter);
@@ -249,9 +240,9 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
 
-//    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+//    class OneAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 //
-//        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+//        public OneAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
 //            super(layoutResId, data);
 //        }
 //

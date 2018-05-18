@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
@@ -102,7 +102,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         list.add(new OneCheckBean(false, "1000-2000元/月"));
         list.add(new OneCheckBean(false, "2000-3000元/月"));
         list.add(new OneCheckBean(false, "3000-4000元/月"));
-        FirstView firstView = new FirstView(ZufangListActivity.this);
+        ThreeView firstView = new ThreeView(ZufangListActivity.this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -181,8 +181,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initData() {
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("edt_hint"))) {
+            searchTv.setHint(getIntent().getStringExtra("edt_hint"));
+        }
         final String type = getIntent().getStringExtra("type");
-
         if (mList.size() <= 0) {
             mList.add("");
             mList.add("");

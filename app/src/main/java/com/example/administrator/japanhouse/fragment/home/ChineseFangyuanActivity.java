@@ -1,9 +1,8 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +15,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
-import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 
 import java.util.ArrayList;
@@ -94,7 +92,9 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
                 finish();
                 break;
             case R.id.search_et:
-                startActivity(new Intent(mContext,SydcSearchActivity.class));
+                Intent intent = new Intent(mContext, SydcSearchActivity.class);
+                intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
+                startActivity(intent);
                 break;
         }
     }

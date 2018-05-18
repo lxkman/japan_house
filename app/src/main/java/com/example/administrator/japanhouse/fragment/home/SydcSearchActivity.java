@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,9 @@ public class SydcSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_sydc_search);
         ButterKnife.bind(this);
         initView();
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("edt_hint"))) {
+            searchEt.setHint(getIntent().getStringExtra("edt_hint"));
+        }
         searchEt.setOnEditorActionListener(editorActionListener);
     }
 

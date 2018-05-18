@@ -434,4 +434,16 @@
     <string name="chezhanxinxi">駅の情報：</string>
     <string name="hujiao">呼び出しをする</string>
     <string name="bieshu">ヴィラ</string>
+    <string name="qingshurulinjinchezhanming">駅名または住所を記入してください</string>
+    <string name="maitudishangflc">良い土地を探す　F.L.C</string>
+    <string name="xuandianpuflc">良い店舗を探す　F.L.C</string>
+    <string name="xuanbangongshiflc">良い事務所を探す　F.L.C</string>
+    <string name="qingshurujingjirennamehuophone">マネジャーの名前または携帯番号</string>
+    <string name="qingshuruwenti">ご質問を記入してください</string>
+    <string name="quyu">地域</string>
+    <string name="zidingyi">カスタマイズ</string>
+    <string name="zuidijia">最低価格</string>
+    <string name="zuigaojia">最高価格</string>
+    <string name="chongzhi">リセット</string>
+    <string name="ditie">メトロ</string>
 </resources>

@@ -61,7 +61,7 @@
                     android:background="@null"
                     android:ellipsize="end"
                     android:gravity="start"
-                    android:hint="@string/qsrdcmchqy"
+                    android:hint="@string/home_tiaohf"
                     android:paddingLeft="10dip"
                     android:singleLine="true"
                     android:textSize="14sp"/>

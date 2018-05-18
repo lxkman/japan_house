@@ -5,32 +5,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.LocationActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:paddingBottom="5dp"
+        >
+        <ImageView
+            android:id="@+id/item_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/home_back_iv"/>
         <EditText
             android:id="@+id/search_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="30dp"
-            android:hint="@string/home_location_search"
-            android:textSize="14sp"
-            android:imeOptions="actionSearch"
-            android:paddingLeft="10dp"
-            android:textColor="@color/text_gray"
-            android:drawableLeft="@drawable/home_search_icon_iv"
-            android:layout_toRightOf="@+id/location_tv"
-            android:drawablePadding="10dp"
             android:layout_marginLeft="10dp"
-            android:singleLine="true"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/location_tv"
             android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/home_search_icon_iv"
+            android:drawablePadding="10dp"
+            android:hint="@string/home_location_search"
+            android:imeOptions="actionSearch"
             android:paddingBottom="8dp"
-            android:layout_marginBottom="5dp"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"
         />
     </LinearLayout>
     <FrameLayout
@@ -46,8 +54,8 @@
             android:layout_width="24dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
+            android:layout_marginTop="50dp"
             app:indexBarPressBackground="@color/partTranslucent"
             app:indexBarTextSize="14sp"/>
         <TextView
@@ -57,18 +65,12 @@
             android:layout_gravity="center"
             android:background="@drawable/shape_side_bar_bg"
             android:gravity="center"
+            android:text="A"
             android:textColor="@android:color/white"
             android:textSize="48sp"
-            android:visibility="gone"
-            android:text="A" />
+            android:visibility="gone"/>
 
-        <ImageView
-            android:id="@+id/item_title_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="10dp"
-            android:src="@drawable/home_back_iv" />
+
     </FrameLayout>
 
 </LinearLayout>

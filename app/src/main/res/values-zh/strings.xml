@@ -331,12 +331,12 @@
     <string name="business_xzlcz">写字楼出租</string>
     <string name="business_gefqc">高尔夫球场</string>
     <string name="business_jd">酒店</string>
-    <string name="zufang_dsgy">单身公寓</string>
+    <string name="zufang_dsgy">多层公寓</string>
     <string name="zufang_xsgy">学生公寓</string>
-    <string name="zufang_ffzf">夫妇住房</string>
+    <string name="zufang_ffzf">二层公寓</string>
     <string name="zufang_djtzf">大家庭住房</string>
-    <string name="zufang_sp">商铺</string>
-    <string name="zufang_bgs">办公室</string>
+    <string name="zufang_sp">商铺出租</string>
+    <string name="zufang_bgs">办公室出租</string>
     <string name="zufang_ysd">饮食店</string>
     <string name="zufang_jdcb">酒店承包</string>
     <string name="hw_adly">澳大利亚</string>
@@ -434,4 +434,16 @@
     <string name="chezhanxinxi">车站信息：</string>
     <string name="hujiao">呼叫</string>
     <string name="bieshu">别墅</string>
+    <string name="qingshurulinjinchezhanming">请输入临近车站名或地址</string>
+    <string name="maitudishangflc">买土地，上F.L.C</string>
+    <string name="xuandianpuflc">选店铺，上F.L.C</string>
+    <string name="xuanbangongshiflc">选办公室，上F.L.C</string>
+    <string name="qingshurujingjirennamehuophone">请输入经纪人姓名或手机号</string>
+    <string name="qingshuruwenti">请输入问题</string>
+    <string name="quyu">区域</string>
+    <string name="zidingyi">自定义</string>
+    <string name="zuidijia">最低价</string>
+    <string name="zuigaojia">最高价</string>
+    <string name="chongzhi">重置</string>
+    <string name="ditie">地铁</string>
 </resources>

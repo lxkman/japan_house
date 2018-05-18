@@ -20,9 +20,10 @@
             android:src="@drawable/back"/>
         <LinearLayout
             android:layout_width="0dip"
-            android:layout_height="35dip"
+            android:layout_height="30dip"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/round_white">
@@ -39,7 +40,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="@string/qingshurufangwumingchenghuodizhi"
+                android:hint="@string/home_tiaohf"
                 android:paddingLeft="10dip"
                 android:textSize="14sp"/>
         </LinearLayout>

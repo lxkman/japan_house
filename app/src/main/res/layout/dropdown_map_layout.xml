@@ -15,17 +15,17 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
-        android:visibility="gone"
-        android:background="@drawable/map_location_iv"/>
+        android:background="@drawable/map_location_iv"
+        android:visibility="gone"/>
     <LinearLayout
         android:id="@+id/ll_clear"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@color/white"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="15dp"
+        android:background="@color/white"
+        android:orientation="vertical"
         android:padding="10dp"
         android:visibility="gone">
         <ImageView

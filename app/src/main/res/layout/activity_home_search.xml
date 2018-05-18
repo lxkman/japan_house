@@ -5,17 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.HomeSearchActivity">
     <RelativeLayout
         android:id="@+id/view_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
-        <RelativeLayout
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -24,48 +24,47 @@
             android:background="@drawable/bg_search">
             <TextView
                 android:id="@+id/location_tv"
-                android:layout_width="78dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/old_house"
-                android:paddingLeft="10dp"
-                android:paddingBottom="8dp"
-                android:gravity="center"
-                android:textColor="@color/text_black"
+                android:drawablePadding="3dp"
                 android:drawableRight="@drawable/home_selector_icon_iv"
-                android:drawablePadding="5dp"/>
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingLeft="3dp"
+                android:text="@string/old_house"
+                android:textColor="@color/text_black"/>
             <View
                 android:layout_width="1dp"
                 android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
-                android:layout_toRightOf="@+id/location_tv"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="8dp"
                 android:background="@color/gray1"/>
             <EditText
                 android:id="@+id/search_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/home_search_hint"
-                android:textSize="14sp"
                 android:background="@null"
-                android:singleLine="true"
-                android:imeOptions="actionSearch"
-                android:textColor="@color/text_gray"
                 android:drawableLeft="@drawable/home_search_icon_iv"
-                android:layout_toRightOf="@+id/location_tv"
-                android:drawablePadding="10dp"
-                android:layout_marginLeft="25dp"/>
-        </RelativeLayout>
+                android:drawablePadding="5dp"
+                android:hint="@string/qingshurulinjinchezhanming"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"
+            />
+        </LinearLayout>
         <TextView
             android:id="@+id/cancle_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/quxiao"
-            android:textSize="16sp"
-            android:textColor="@color/white"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
-            android:drawablePadding="10dp"/>
+            android:layout_marginRight="15dp"
+            android:drawablePadding="10dp"
+            android:text="@string/quxiao"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
     </RelativeLayout>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -82,26 +81,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/remensousuo"
-                    android:textSize="16sp"
                     android:padding="10dp"
-                    android:textColor="@color/text_black"/>
+                    android:text="@string/remensousuo"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"/>
                 <ImageView
                     android:id="@+id/hot_refrash_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/search_refresh_iv"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
                     android:padding="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:src="@drawable/search_refresh_iv"/>
             </RelativeLayout>
             <com.example.administrator.japanhouse.view.FluidLayout
                 android:id="@+id/hotsearch_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,24 +109,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lishijilu"
-                    android:textSize="16sp"
                     android:padding="10dp"
-                    android:textColor="@color/text_black"/>
+                    android:text="@string/lishijilu"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"/>
                 <ImageView
                     android:id="@+id/history_clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/search_del_iv"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
                     android:padding="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:src="@drawable/search_del_iv"/>
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/history_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

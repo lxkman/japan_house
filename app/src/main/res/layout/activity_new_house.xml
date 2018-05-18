@@ -36,7 +36,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:textSize="14sp"
-                android:hint="@string/qingshuruchaxunneirong"
+                android:hint="@string/home_tiaohf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

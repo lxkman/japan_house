@@ -325,7 +325,14 @@
             android:value="@string/line_channel_id" />
 
         <activity android:name=".fragment.home.BieShuActivity" />
-        <activity android:name=".more.NewHouseMoreActivity"></activity>
+        <activity android:name=".more.NewHouseMoreActivity" />
+        <activity android:name=".more.OldHouseMoreActivity" />
+        <activity android:name=".more.ZuDuoCengMoreActivity" />
+        <activity android:name=".more.ZuXueShengMoreActivity" />
+        <activity android:name=".more.ZuErCengMoreActivity" />
+        <activity android:name=".more.ZuBieSuMoreActivity" />
+        <activity android:name=".more.ZuShangPuMoreActivity" />
+        <activity android:name=".more.ZuBanGongMoreActivity"></activity>
     </application>
 
 </manifest>

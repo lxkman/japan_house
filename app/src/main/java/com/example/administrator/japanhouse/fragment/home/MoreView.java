@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,6 +19,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,6 +38,7 @@ class MoreView implements View.OnClickListener {
     private Button btn_sure;
     private Button btn_reset;
     private DropDownMenu dropDownMenu;
+    private LinearLayout ll_root;
     private String mtype;
     private List<OneCheckBean> mItemList1;
     private List<OneCheckBean> mItemList2;
@@ -55,6 +58,10 @@ class MoreView implements View.OnClickListener {
 
     View secView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_more, null);
+        ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_root.getLayoutParams();
+        layoutParams.height= MyUtils.getScreenHeight(context)*3/4;
+        ll_root.setLayoutParams(layoutParams);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
         btn_reset = (Button) view.findViewById(R.id.btn_reset);

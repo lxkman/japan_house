@@ -114,16 +114,14 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     }
 
     private void initData() {
-        popupViews = new ArrayList<>();
+        popupViews=new ArrayList<>();
+        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+                getString(R.string.shoujia), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
-        ThreeView firstView = new ThreeView(mContext);
+        FirstView firstView = new FirstView(mContext);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -133,11 +131,10 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "一层"));
-        list1.add(new OneCheckBean(false, "二层"));
-        list1.add(new OneCheckBean(false, "三层"));
-        list1.add(new OneCheckBean(false, "四层"));
+        list1.add(new OneCheckBean(false, "80以下"));
+        list1.add(new OneCheckBean(false, "80-100"));
+        list1.add(new OneCheckBean(false, "100-150"));
+        list1.add(new OneCheckBean(false, "300以上"));
         SecView secView = new SecView(mContext);
         popupViews.add(secView.secView());
         secView.setListener(this);
@@ -148,22 +145,17 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1990"));
-        SecView threeView = new SecView(mContext);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "3-10万"));
+        list2.add(new OneCheckBean(false, "6-15万"));
+        list2.add(new OneCheckBean(false, "10万以上"));
+        ThreeView threeView = new ThreeView(mContext);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "区域"));
         list3.add(new OneCheckBean(false, "构造"));
         list3.add(new OneCheckBean(false, "地段"));
         list3.add(new OneCheckBean(false, "朝向"));
@@ -171,13 +163,8 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         list3.add(new OneCheckBean(false, "室内设施"));
         MoreView fourView = new MoreView(mContext);
         popupViews.add(fourView.secView());
-        fourView.insertData2("newhouse",list3, dropDownMenu);
+        fourView.insertData(list3, dropDownMenu);
         fourView.setListener(this);
-        /**
-         * Dropdownmenu下面的主体部分
-         * */
-        String[] headers={getString(R.string.shoujia), getString(R.string.louceng),
-                getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
         View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (MapView) fifthView.findViewById(R.id.mapview);
         mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);

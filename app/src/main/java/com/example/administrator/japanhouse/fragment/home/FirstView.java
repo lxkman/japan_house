@@ -8,11 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class FirstView implements View.OnClickListener {
     private Button btn_sure;
     private Button btn_reset;
     private DropDownMenu dropDownMenu;
+    private LinearLayout ll_root;
 
     FirstView(Context context) {
         this.context = context;
@@ -48,6 +52,10 @@ public class FirstView implements View.OnClickListener {
 
     View firstView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_first, null);
+        ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) ll_root.getLayoutParams();
+        layoutParams.height= MyUtils.getScreenHeight(context)/2;
+        ll_root.setLayoutParams(layoutParams);
         mrecycler1 = (RecyclerView) view.findViewById(R.id.Mrecycler1);
         mrecycler2 = (RecyclerView) view.findViewById(R.id.Mrecycler2);
         mrecycler3 = (RecyclerView) view.findViewById(R.id.Mrecycler3);
@@ -67,10 +75,17 @@ public class FirstView implements View.OnClickListener {
         mList2.add(new OneCheckBean(false, "朝阳"));
         mList2.add(new OneCheckBean(false, "海淀"));
         mList2.add(new OneCheckBean(false, "昌平"));
+        mList2.add(new OneCheckBean(false, "通州"));
+        mList2.add(new OneCheckBean(false, "房山"));
+        mList2.add(new OneCheckBean(false, "顺义"));
         mList3.add(new OneCheckBean(true, "不限"));
         mList3.add(new OneCheckBean(false, "测试1"));
         mList3.add(new OneCheckBean(false, "测试2"));
         mList3.add(new OneCheckBean(false, "测试3"));
+        mList3.add(new OneCheckBean(false, "测试4"));
+        mList3.add(new OneCheckBean(false, "测试5"));
+        mList3.add(new OneCheckBean(false, "测试6"));
+        mList3.add(new OneCheckBean(false, "测试7"));
         this.dropDownMenu = dropDownMenu;
         initData();
     }

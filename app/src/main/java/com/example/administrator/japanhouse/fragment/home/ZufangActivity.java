@@ -241,7 +241,9 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext, HomeSearchActivity.class));
+                Intent intent = new Intent(mContext, HomeSearchActivity.class);
+                intent.putExtra("popcontent",getResources().getString(R.string.zu_house));
+                startActivity(intent);
                 break;
             case R.id.img_dingwei:
                 startActivity(new Intent(mContext, HomeMapActivity.class));

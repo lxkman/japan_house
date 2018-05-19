@@ -137,7 +137,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         list3.add(new OneCheckBean(false, "和室"));
         list3.add(new OneCheckBean(false, "朝向"));
         list3.add(new OneCheckBean(false, "面积(平米)"));
-        MoreView fourView = new MoreView(ZufangListActivity.this);
+        MoreView fourView = new MoreView(this);
         popupViews.add(fourView.secView());
         fourView.insertData(list3, dropDownMenu);
         fourView.setListener(this);
@@ -254,7 +254,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 RongIM.getInstance().startConversationList(this, hm);
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext, HomeSearchActivity.class));
+                Intent intent = new Intent(mContext, HomeSearchActivity.class);
+                intent.putExtra("popcontent",getResources().getString(R.string.zu_house));
+                startActivity(intent);
         }
     }
 

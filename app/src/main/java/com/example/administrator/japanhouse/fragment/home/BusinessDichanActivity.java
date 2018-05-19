@@ -87,7 +87,9 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 finish();
                 break;
             case R.id.search_et:
-                startActivity(new Intent(mContext,HomeSearchActivity.class));
+                Intent intent = new Intent(mContext, HomeSearchActivity.class);
+                intent.putExtra("popcontent",getResources().getString(R.string.shangyedichan));
+                startActivity(intent);
                 break;
         }
     }

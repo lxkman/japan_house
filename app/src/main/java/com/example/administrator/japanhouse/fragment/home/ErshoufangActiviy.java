@@ -163,8 +163,6 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         mrecycler.setNestedScrollingEnabled(false);
     }
 
-
-
     private void initData() {
         if (mList.size() <= 0) {
             mList.add("");
@@ -286,7 +284,9 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext, HomeSearchActivity.class));
+                Intent intent = new Intent(mContext, HomeSearchActivity.class);
+                intent.putExtra("popcontent",getResources().getString(R.string.old_house));
+                startActivity(intent);
         }
     }
 

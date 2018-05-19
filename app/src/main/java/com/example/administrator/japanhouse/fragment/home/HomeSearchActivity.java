@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,9 @@ public class HomeSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_home_search);
         ButterKnife.bind(this);
         initView();
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("popcontent"))){
+            locationTv.setText(getIntent().getStringExtra("popcontent"));
+        }
         searchEt.setOnEditorActionListener(editorActionListener);
     }
 

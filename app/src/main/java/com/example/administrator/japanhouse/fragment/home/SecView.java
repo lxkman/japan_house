@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ class SecView implements View.OnClickListener {
     private List<OneCheckBean> mList = new ArrayList();
     private Button btn_sure;
     private DropDownMenu dropDownMenu;
+    private LinearLayout ll_root;
 
     SecView(Context context) {
         this.context = context;
@@ -39,6 +42,10 @@ class SecView implements View.OnClickListener {
 
     View secView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_sec, null);
+        ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_root.getLayoutParams();
+        layoutParams.height= MyUtils.getScreenHeight(context)/2;
+        ll_root.setLayoutParams(layoutParams);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(this);

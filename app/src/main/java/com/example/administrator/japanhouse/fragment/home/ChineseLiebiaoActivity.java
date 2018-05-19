@@ -130,7 +130,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-//        list3.add(new OneCheckBean(false, "区域"));
+        //        list3.add(new OneCheckBean(false, "区域"));
         list3.add(new OneCheckBean(false, "构造"));
         list3.add(new OneCheckBean(false, "地段"));
         list3.add(new OneCheckBean(false, "朝向"));
@@ -167,7 +167,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+                //                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
                 startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
                 /*switch (type){
                     case "0":
@@ -214,7 +214,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                startActivity(new Intent(mContext, HomeMapActivity.class));
                 break;
             //消息
             case R.id.img_message:
@@ -223,7 +223,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
-                intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
+                intent.putExtra("edt_hint", getResources().getString(R.string.qsrdcmchqy));
                 startActivity(intent);
         }
     }

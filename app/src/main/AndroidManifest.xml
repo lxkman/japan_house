@@ -334,13 +334,13 @@
         <activity android:name=".more.ZuShangPuMoreActivity"/>
         <activity android:name=".more.ZuBanGongMoreActivity"/>
         <activity android:name=".fragment.home.BieshudetailsActivity"/>
-        <activity android:name=".more.BieSuActivity"/>
-        <activity android:name=".more.GaoErFuActivity"/>
-        <activity android:name=".more.JiuDianActivity"/>
-        <activity android:name=".more.ShangPuActivity"/>
-        <activity android:name=".more.TuanDiActivity"/>
-        <activity android:name=".more.TudiActivity"/>
-        <activity android:name=".more.XieZiLouActivity"/>
+        <activity android:name=".more.BieSuMoreActivity"/>
+        <activity android:name=".more.GaoErFuMoreActivity"/>
+        <activity android:name=".more.JiuDianMoreActivity"/>
+        <activity android:name=".more.ShangPuMoreActivity"/>
+        <activity android:name=".more.TuanDiMoreActivity"/>
+        <activity android:name=".more.TudiMoreActivity"/>
+        <activity android:name=".more.XieZiLouMoreActivity"/>
     </application>
 
 </manifest>

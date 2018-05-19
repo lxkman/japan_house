@@ -68,6 +68,8 @@ public class HaiWaiDetailsActivity extends BaseActivity {
     RelativeLayout re_top_bg;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_See_More)
+    TextView tv_See_More;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList = new ArrayList();
@@ -256,7 +258,7 @@ public class HaiWaiDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img})
+    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img,R.id.tv_See_More})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:

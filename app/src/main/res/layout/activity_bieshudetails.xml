@@ -1,14 +1,418 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/activity_bieshudetails"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lishi_new_house"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity">
+    android:orientation="vertical"
+    android:background="#fff"
+    android:focusable="true"
+    tools:context=".fragment.comment.NewHousedetailsActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/mScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
 
+
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:background="@color/shihuangse"
+                    android:layout_width="match_parent"
+                    android:layout_height="255dip">
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_vidio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </android.support.v4.view.ViewPager>
+                    <RelativeLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dip">
+                        <ImageView
+                            android:src="@drawable/touming"
+                            android:layout_width="65dip"
+                            android:layout_height="50dip" />
+                        <TextView
+                            android:id="@+id/tv_to_num"
+                            android:textColor="#fff"
+                            android:layout_marginLeft="15dp"
+                            android:text="1"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_suiyi"
+                            android:layout_marginLeft="5dip"
+                            android:layout_toRightOf="@id/tv_to_num"
+                            android:textColor="#fff"
+                            android:text="/"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:layout_toRightOf="@id/tv_suiyi"
+                            android:id="@+id/tv_all_num"
+                            android:textColor="#fff"
+                            android:layout_marginLeft="5dp"
+                            android:text="10"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <LinearLayout
+                    android:background="#fff"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip">
+                    <TextView
+                        android:paddingLeft="15dip"
+                        android:gravity="center_vertical"
+                        android:textSize="15sp"
+                        android:textColor="#333"
+                        android:text="泰和·金府大厦"
+                        android:layout_weight="1"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dip">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dip"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dip">
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/gaoerfu_price"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_price"
+                                android:layout_width="70dip"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="17500万"
+                                android:textColor="@color/shihuangse"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dip">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/gaoerfu_mianji"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="175㎡"
+                                android:textColor="@color/shihuangse"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dip"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dip">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="售卖类型："
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="5层"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginBottom="10dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginRight="15dip"
+                        android:layout_marginTop="10dip"
+                        android:background="#eee"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dip"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dip">
+
+                            <TextView
+                                android:layout_width="70dip"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/jutiweizhi"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="具体位置信息展示、精确到都、道、府、县"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dip"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dip">
+
+                            <ImageView
+                                android:layout_width="15dip"
+                                android:layout_height="15dip"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/dingwei" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dip"
+                                android:gravity="center_vertical"
+                                android:text="花香满橙小区"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_marginLeft="15dip"
+                        android:background="#fff6f2"
+                        android:id="@+id/tv_See_More"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:layout_marginRight="15dip"
+                        android:gravity="center"
+                        android:paddingLeft="15dip"
+                        android:text="@string/see_more"
+                        android:textColor="@color/shihuangse"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <View
+                    android:background="#eee"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dip"></View>
+                <LinearLayout
+                    android:layout_marginTop="10dip"
+                    android:background="#fff"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip">
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/shihuangse"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                    <View
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/shihuangse"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dip"
+                        android:layout_height="2dip"></View>
+                    <TextView
+                        android:text="@string/cainixihuan"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="#333"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                    <View
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/shihuangse"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dip"
+                        android:layout_height="2dip"></View>
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/shihuangse"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:background="#fff"
+                    android:id="@+id/love_Recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v7.widget.RecyclerView>
+                <View
+                    android:layout_marginTop="10dip"
+                    android:background="#eee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"></View>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:background="#fff"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dip">
+            <LinearLayout
+                android:paddingLeft="10dip"
+                android:orientation="horizontal"
+                android:layout_weight="0.7"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:padding="5dip"
+                    android:src="@drawable/deful_touxiang"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textColor="#333"
+                    android:textSize="14dip"
+                    android:paddingLeft="10dip"
+                    android:text="杨金金"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="#c79880"
+                android:layout_weight="0.5"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/xiezilou_wl"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="14dip"
+                    android:paddingLeft="10dip"
+                    android:text="@string/weiliao"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="#d79369"
+                android:layout_weight="0.5"
+                android:layout_width="0dip"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="14dip"
+                    android:paddingLeft="10dip"
+                    android:text="@string/dianhua"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:paddingTop="20dip"
+        android:id="@+id/re_top_bg"
+        android:layout_width="match_parent"
+        android:layout_height="70dip">
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:padding="15dip"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/img_share"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_alignParentRight="true"
+            android:padding="14dip"
+            android:src="@drawable/share" />
+
+        <ImageView
+            android:id="@+id/img_start"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:padding="14dip"
+            android:src="@drawable/shoucang" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="房源详情"
+            android:paddingTop="18dip"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip" />
+    </RelativeLayout>
 </RelativeLayout>

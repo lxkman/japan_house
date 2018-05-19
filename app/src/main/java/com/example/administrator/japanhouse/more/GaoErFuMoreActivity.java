@@ -17,7 +17,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/5/18.
  */
 
-public class GaoErFuActivity extends BaseActivity {
+public class GaoErFuMoreActivity extends BaseActivity {
 
     @BindView(R.id.back)
     ImageView back;

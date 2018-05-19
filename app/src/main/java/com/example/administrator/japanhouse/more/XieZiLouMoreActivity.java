@@ -17,7 +17,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/5/18.
  */
 
-public class XieZiLouActivity extends BaseActivity {
+public class XieZiLouMoreActivity extends BaseActivity {
 
     @BindView(R.id.back)
     ImageView back;

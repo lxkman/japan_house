@@ -117,13 +117,15 @@
                             android:paddingLeft="15dip">
 
                             <TextView
+                                android:id="@+id/textView2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/jiudian_price"
+                                android:text="@string/gaoerfu_price"
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tv_price"
                                 android:layout_width="70dip"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
@@ -143,15 +145,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/jiudian_mianji"
+                                android:text="酒店楼层数："
                                 android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="175㎡"
-                                android:textColor="@color/shihuangse"
+                                android:text="20层"
+                                android:textColor="#333"
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -172,145 +174,22 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/jiudian_huibaolv"
+                                android:text="建筑年份："
                                 android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="20%"
+                                android:text="1990年"
                                 android:textColor="#000"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_shuiyuan"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="是"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dip"
-                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_louceng"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="5层"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_nianfen"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="2010.11.10"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dip"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_gouzao"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="住宅"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_turang"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="土壤肥沃"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -326,27 +205,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_shebei"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="所处交通便利赴京多处大型商场环境地段 "
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -358,117 +216,7 @@
                                 android:layout_width="70dip"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/jiudian_neiguan"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="所处交通便利赴京多处大型商场环境地段 "
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="70dip"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_waiguan"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="********************************外观相关信息    "
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_chezhanjuli"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="交通便利"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="70dip"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_jiaotongjingdian"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="具体位置信息展示、精确到都、道、府、县"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_shangyejie"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="具体位置信息展示、精确到都、道、府、县"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="70dip"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_jutiweizhi"
+                                android:text="@string/jutiweizhi"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -502,7 +250,20 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
 
+
                     </LinearLayout>
+                    <TextView
+                        android:layout_marginLeft="15dip"
+                        android:background="#fff6f2"
+                        android:id="@+id/tv_See_More"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:layout_marginRight="15dip"
+                        android:gravity="center"
+                        android:paddingLeft="15dip"
+                        android:text="@string/see_more"
+                        android:textColor="@color/shihuangse"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <View

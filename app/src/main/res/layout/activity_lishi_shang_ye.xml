@@ -291,27 +291,6 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="70dip"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/tudi_linjie"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="距啊手机客户吃饭商业街1000米"
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -358,6 +337,18 @@
                         </LinearLayout>
 
                     </LinearLayout>
+                    <TextView
+                        android:layout_marginLeft="15dip"
+                        android:background="#fff6f2"
+                        android:id="@+id/tv_See_More"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:layout_marginRight="15dip"
+                        android:gravity="center"
+                        android:paddingLeft="15dip"
+                        android:text="@string/see_more"
+                        android:textColor="@color/shihuangse"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <View

@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -25,6 +26,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.more.TuanDiMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
@@ -67,6 +69,8 @@ public class XiaoQuDetailsActivity extends BaseActivity {
     RelativeLayout re_top_bg;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_See_More)
+    TextView tv_See_More;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
@@ -240,7 +244,7 @@ public class XiaoQuDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img})
+    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img,R.id.tv_See_More})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -251,6 +255,10 @@ public class XiaoQuDetailsActivity extends BaseActivity {
                 break;
             case R.id.back_img:
                 finish();
+                break;
+            case R.id.tv_See_More:
+                Intent intent=new Intent(XiaoQuDetailsActivity.this, TuanDiMoreActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -11,7 +11,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
  * Created by   admin on 2018/5/18.
  */
 
-public class TuanDiActivity extends BaseActivity {
+public class TuanDiMoreActivity extends BaseActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {

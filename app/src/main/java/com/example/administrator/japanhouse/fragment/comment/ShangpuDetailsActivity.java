@@ -27,6 +27,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.more.ShangPuMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
@@ -257,7 +258,8 @@ public class ShangpuDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_See_More:
-
+            Intent intent=new Intent(ShangpuDetailsActivity.this, ShangPuMoreActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -97,19 +97,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dip"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:layout_marginTop="5dip"
-                    android:background="@drawable/round_pick_logo"
-                    android:gravity="center"
-                    android:paddingLeft="15dip"
-                    android:paddingRight="15dip"
-                    android:text="@string/shangpu_qingyinshi"
-                    android:textColor="#cfa690" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -219,71 +207,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/shangpu_diduan"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="所处交通便利赴京多处大型商场环境地段 "
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/shangpu_qingyinsh"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="所处交通便利赴京多处大型商场环境地段 "
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="35dip"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dip">
-
-                            <TextView
-                                android:layout_width="70dip"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/jiudian_chezhanjuli"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="所处交通便利赴京多处大型商场环境地段 "
-                                android:textColor="#000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"

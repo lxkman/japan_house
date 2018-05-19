@@ -108,7 +108,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
          * 第一个界面
          * */
         list = new ArrayList<>();
-        FirstView firstView = new FirstView(ErshoufangActiviy.this);
+        FirstView firstView = new FirstView(this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -122,7 +122,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         list1.add(new OneCheckBean(false, "80-100"));
         list1.add(new OneCheckBean(false, "100-150"));
         list1.add(new OneCheckBean(false, "300以上"));
-        SecView secView = new SecView(ErshoufangActiviy.this);
+        SecView secView = new SecView(this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -135,7 +135,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         list2.add(new OneCheckBean(false, "3-10万"));
         list2.add(new OneCheckBean(false, "6-15万"));
         list2.add(new OneCheckBean(false, "10万以上"));
-        ThreeView threeView = new ThreeView(ErshoufangActiviy.this);
+        ThreeView threeView = new ThreeView(this);
         popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
@@ -148,7 +148,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         list3.add(new OneCheckBean(false, "朝向"));
         list3.add(new OneCheckBean(false, "面积(平米)"));
         list3.add(new OneCheckBean(false, "室内设施"));
-        MoreView fourView = new MoreView(ErshoufangActiviy.this);
+        MoreView fourView = new MoreView(this);
         popupViews.add(fourView.secView());
         fourView.insertData(list3, dropDownMenu);
         fourView.setListener(this);

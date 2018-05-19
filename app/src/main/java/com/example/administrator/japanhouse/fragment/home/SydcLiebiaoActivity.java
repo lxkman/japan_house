@@ -94,31 +94,13 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
 
     private void initView() {
         type = getIntent().getStringExtra("type");
-        String headers[];
-        if (type.equals("1") || type.equals("3")) {
-            headers = new String[]{getResources().getString(R.string.zujin),
-                    getResources().getString(R.string.lxkmianji),
-                    getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
-        } else {
-            headers = new String[]{getResources().getString(R.string.shoujia),
-                    getResources().getString(R.string.lxkmianji),
-                    getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
-        }
+        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+                getString(R.string.shoujia), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        if (type.equals("1") || type.equals("3")) {
-            list.add(new OneCheckBean(false, "1000-2000元/月"));
-            list.add(new OneCheckBean(false, "2000-3000元/月"));
-            list.add(new OneCheckBean(false, "3000-4000元/月"));
-        }else {
-            list.add(new OneCheckBean(false, "3-10万"));
-            list.add(new OneCheckBean(false, "6-15万"));
-            list.add(new OneCheckBean(false, "10万以上"));
-        }
-        ThreeView firstView = new ThreeView(SydcLiebiaoActivity.this);
+        FirstView firstView = new FirstView(this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -128,13 +110,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "20平方米以下"));
-        list1.add(new OneCheckBean(false, "20-40平方米"));
-        list1.add(new OneCheckBean(false, "40-80平方米"));
-        list1.add(new OneCheckBean(false, "80-100平方米"));
-        list1.add(new OneCheckBean(false, "100平方米以上"));
-
-        SecView secView = new SecView(SydcLiebiaoActivity.this);
+        list1.add(new OneCheckBean(false, "80以下"));
+        list1.add(new OneCheckBean(false, "80-100"));
+        list1.add(new OneCheckBean(false, "100-150"));
+        list1.add(new OneCheckBean(false, "300以上"));
+        SecView secView = new SecView(this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -144,26 +124,23 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "100米以内"));
-        list2.add(new OneCheckBean(false, "200米以内"));
-        list2.add(new OneCheckBean(false, "500米以内"));
-        list2.add(new OneCheckBean(false, "1000米以内"));
-        list2.add(new OneCheckBean(false, "2000米以内"));
-        SecView threeView = new SecView(SydcLiebiaoActivity.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "3-10万"));
+        list2.add(new OneCheckBean(false, "6-15万"));
+        list2.add(new OneCheckBean(false, "10万以上"));
+        ThreeView threeView = new ThreeView(this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "不限"));
-        list3.add(new OneCheckBean(false, "商业街"));
-        list3.add(new OneCheckBean(false, "购物中心"));
-        list3.add(new OneCheckBean(false, "商业街"));
-        list3.add(new OneCheckBean(false, "购物中心"));
-        list3.add(new OneCheckBean(false, "商业街"));
-        SecView fourView = new SecView(SydcLiebiaoActivity.this);
+        list3.add(new OneCheckBean(false, "构造"));
+        list3.add(new OneCheckBean(false, "地段"));
+        list3.add(new OneCheckBean(false, "朝向"));
+        list3.add(new OneCheckBean(false, "面积(平米)"));
+        list3.add(new OneCheckBean(false, "室内设施"));
+        MoreView fourView = new MoreView(this);
         popupViews.add(fourView.secView());
         fourView.insertData(list3, dropDownMenu);
         fourView.setListener(this);

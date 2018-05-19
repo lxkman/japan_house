@@ -18,7 +18,6 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -87,9 +86,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     private void initView() {
         String headers[] = {getString(R.string.lxk_chengshi),
                 getString(R.string.shoujia),
-                getString(R.string.lxk_jianzhugouzao), getString(R.string.lxk_fangxing)};
+                getString(R.string.huxing), getString(R.string.gengduo)};
         /**
-         * 第一个界面
+   * 第一个界面
          * */
         list = new ArrayList<>();
         list.add(new OneCheckBean(false, "不限"));
@@ -121,29 +120,29 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "钢结构"));
-        list2.add(new OneCheckBean(false, "框架结构"));
-        list2.add(new OneCheckBean(false, "砖混结构"));
-        list2.add(new OneCheckBean(false, "木结构"));
-        list2.add(new OneCheckBean(false, "钢型-混凝土结构"));
-        SecView threeView = new SecView(HaiwaiListActivity.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "一室"));
+        list2.add(new OneCheckBean(false, "二室"));
+        list2.add(new OneCheckBean(false, "三室"));
+        list2.add(new OneCheckBean(false, "三室以上"));
+        ThreeView threeView = new ThreeView(this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**
          * 第四个界面
          * */
         List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "不限"));
-        list3.add(new OneCheckBean(false, "1室1厅"));
-        list3.add(new OneCheckBean(false, "2室1厅"));
-        list3.add(new OneCheckBean(false, "3室1厅"));
-        list3.add(new OneCheckBean(false, "4室1厅"));
-        list3.add(new OneCheckBean(false, "单间"));
-        SecView fourView = new SecView(HaiwaiListActivity.this);
+        //        list3.add(new OneCheckBean(false, "区域"));
+        list3.add(new OneCheckBean(false, "构造"));
+        list3.add(new OneCheckBean(false, "地段"));
+        list3.add(new OneCheckBean(false, "朝向"));
+        list3.add(new OneCheckBean(false, "面积(平米)"));
+        list3.add(new OneCheckBean(false, "室内设施"));
+        MoreView fourView = new MoreView(this);
         popupViews.add(fourView.secView());
         fourView.insertData(list3, dropDownMenu);
         fourView.setListener(this);
+
 
         /**
          * Dropdownmenu下面的主体部分

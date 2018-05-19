@@ -89,17 +89,13 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
-        String headers[] = {getResources().getString(R.string.shoujia),
-                getResources().getString(R.string.lxk_fangling), getResources().getString(R.string.lxk_fangxing)};
+        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+                getString(R.string.zujin), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
-        ThreeView firstView = new ThreeView(ZhaoxiaoquActivity.this);
+        FirstView firstView = new FirstView(this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -109,12 +105,11 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "10年"));
-        list1.add(new OneCheckBean(false, "20年"));
-        list1.add(new OneCheckBean(false, "30年"));
-        list1.add(new OneCheckBean(false, "40年"));
-        list1.add(new OneCheckBean(false, "50年"));
-        SecView secView = new SecView(ZhaoxiaoquActivity.this);
+        list1.add(new OneCheckBean(false, "80以下"));
+        list1.add(new OneCheckBean(false, "80-100"));
+        list1.add(new OneCheckBean(false, "100-150"));
+        list1.add(new OneCheckBean(false, "300以上"));
+        SecView secView = new SecView(this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -124,16 +119,26 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "一室一厅"));
-        list2.add(new OneCheckBean(false, "两室一厅"));
-        list2.add(new OneCheckBean(false, "三室一厅"));
-        list2.add(new OneCheckBean(false, "四室一厅"));
-        list2.add(new OneCheckBean(false, "单间"));
-        SecView threeView = new SecView(ZhaoxiaoquActivity.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "1000-2000元/月"));
+        list2.add(new OneCheckBean(false, "2000-3000元/月"));
+        list2.add(new OneCheckBean(false, "3000-4000元/月"));
+        ThreeView threeView = new ThreeView(this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
-
+        /**
+         * 第四个界面
+         * */
+        List<OneCheckBean> list3 = new ArrayList<>();
+        list3.add(new OneCheckBean(false, "构造"));
+        list3.add(new OneCheckBean(false, "地段"));
+        list3.add(new OneCheckBean(false, "朝向"));
+        list3.add(new OneCheckBean(false, "面积(平米)"));
+        list3.add(new OneCheckBean(false, "室内设施"));
+        MoreView fourView = new MoreView(this);
+        popupViews.add(fourView.secView());
+        fourView.insertData(list3, dropDownMenu);
+        fourView.setListener(this);
         /**
          * Dropdownmenu下面的主体部分
          * */

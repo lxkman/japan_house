@@ -90,17 +90,13 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     }
 
     private void initView() {
-        String headers[] = {getResources().getString(R.string.shoujia),
-                getResources().getString(R.string.lxkmianji), getResources().getString(R.string.lxkchezhanjuli)};
+        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+                getString(R.string.shoujia), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
-        ThreeView firstView = new ThreeView(TudiActivity.this);
+        FirstView firstView = new FirstView(this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -110,12 +106,11 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "20平方米以下"));
-        list1.add(new OneCheckBean(false, "20-40平方米"));
-        list1.add(new OneCheckBean(false, "40-80平方米"));
-        list1.add(new OneCheckBean(false, "80-100平方米"));
-        list1.add(new OneCheckBean(false, "100平方米以上"));
-        SecView secView = new SecView(TudiActivity.this);
+        list1.add(new OneCheckBean(false, "80以下"));
+        list1.add(new OneCheckBean(false, "80-100"));
+        list1.add(new OneCheckBean(false, "100-150"));
+        list1.add(new OneCheckBean(false, "300以上"));
+        SecView secView = new SecView(this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -125,15 +120,26 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "100m以内"));
-        list2.add(new OneCheckBean(false, "200m以内"));
-        list2.add(new OneCheckBean(false, "500m以内"));
-        list2.add(new OneCheckBean(false, "1000m以内"));
-        list2.add(new OneCheckBean(false, "2000m以内"));
-        SecView threeView = new SecView(TudiActivity.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "3-10万"));
+        list2.add(new OneCheckBean(false, "6-15万"));
+        list2.add(new OneCheckBean(false, "10万以上"));
+        ThreeView threeView = new ThreeView(this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
+        /**
+         * 第四个界面
+         * */
+        List<OneCheckBean> list3 = new ArrayList<>();
+        list3.add(new OneCheckBean(false, "构造"));
+        list3.add(new OneCheckBean(false, "地段"));
+        list3.add(new OneCheckBean(false, "朝向"));
+        list3.add(new OneCheckBean(false, "面积(平米)"));
+        list3.add(new OneCheckBean(false, "室内设施"));
+        MoreView fourView = new MoreView(this);
+        popupViews.add(fourView.secView());
+        fourView.insertData(list3, dropDownMenu);
+        fourView.setListener(this);
 
         /**
          * Dropdownmenu下面的主体部分

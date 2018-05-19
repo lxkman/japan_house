@@ -91,18 +91,13 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
-        String headers[] = {getResources().getString(R.string.zujin),
-                getResources().getString(R.string.louceng),
-                getResources().getString(R.string.lxkchezhanjuli), getResources().getString(R.string.gengduo)};
+        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+                getString(R.string.zujin), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "1000-2000元/月"));
-        list.add(new OneCheckBean(false, "2000-3000元/月"));
-        list.add(new OneCheckBean(false, "3000-4000元/月"));
-        ThreeView firstView = new ThreeView(ZufangListActivity.this);
+        FirstView firstView = new FirstView(this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -112,12 +107,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "一层"));
-        list1.add(new OneCheckBean(false, "二层"));
-        list1.add(new OneCheckBean(false, "三层"));
-        list1.add(new OneCheckBean(false, "四层"));
-        SecView secView = new SecView(ZufangListActivity.this);
+        list1.add(new OneCheckBean(false, "80以下"));
+        list1.add(new OneCheckBean(false, "80-100"));
+        list1.add(new OneCheckBean(false, "100-150"));
+        list1.add(new OneCheckBean(false, "300以上"));
+        SecView secView = new SecView(this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -127,13 +121,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "100米以内"));
-        list2.add(new OneCheckBean(false, "200米以内"));
-        list2.add(new OneCheckBean(false, "500米以内"));
-        list2.add(new OneCheckBean(false, "1000米以内"));
-        list2.add(new OneCheckBean(false, "2000米以内"));
-        SecView threeView = new SecView(ZufangListActivity.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "1000-2000元/月"));
+        list2.add(new OneCheckBean(false, "2000-3000元/月"));
+        list2.add(new OneCheckBean(false, "3000-4000元/月"));
+        ThreeView threeView = new ThreeView(this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**

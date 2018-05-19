@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.administrator.japanhouse">
+<manifest package="com.example.administrator.japanhouse"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <!-- 登录分享 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
 
     <!-- 这个权限用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 这个权限用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <!-- 用于读取手机当前的状态 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 访问网络，网络定位需要上网 -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- SD卡读取权限，用户写入离线定位数据 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <!-- 这个权限用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 这个权限用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <!-- 用于读取手机当前的状态 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 访问网络，网络定位需要上网 -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- SD卡读取权限，用户写入离线定位数据 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
 
     <application
         android:name=".MyApplication"
@@ -99,149 +99,149 @@
         android:theme="@style/AppTheme">
         <activity android:name=".login.LancherActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <!-- 百度地图开始 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="naHsvnvB7DGQXUKTn3SOtlIBrEjm9wzg" />
+            android:value="naHsvnvB7DGQXUKTn3SOtlIBrEjm9wzg"/>
         <!-- 百度地图结束 -->
-        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.RegisterActivity"/>
         <activity
             android:name=".login.LoginActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".login.ForgetPswActivity" />
-        <activity android:name=".login.UserAgreementActivity" />
-        <activity android:name=".login.BindPhoneActivity" />
+            android:launchMode="singleTask"/>
+        <activity android:name=".login.ForgetPswActivity"/>
+        <activity android:name=".login.UserAgreementActivity"/>
+        <activity android:name=".login.BindPhoneActivity"/>
         <!-- <activity android:name=".login.LauncherActivity"/> -->
-        <activity android:name=".login.GuidePageActivity" />
-        <activity android:name=".fragment.chat.SearchActivity" />
-        <activity android:name=".fragment.chat.StartWechatActivity" />
-        <activity android:name=".fragment.chat.SearchManagerActivity" />
-        <activity android:name=".fragment.chat.ManagerActivity" />
-        <activity android:name=".fragment.comment.NewHousedetailsActivity" />
-        <activity android:name=".fragment.comment.SeeMoreActivity" />
-        <activity android:name=".fragment.comment.SeeMoreNewHouseActivity" />
-        <activity android:name=".fragment.comment.SeeMoreZuHouseActivity" />
-        <activity android:name=".fragment.comment.ZuHousedetailsActivity" />
-        <activity android:name=".fragment.comment.OldHousedetailsActivity" />
-        <activity android:name=".fragment.comment.TudidetailsActivity" />
+        <activity android:name=".login.GuidePageActivity"/>
+        <activity android:name=".fragment.chat.SearchActivity"/>
+        <activity android:name=".fragment.chat.StartWechatActivity"/>
+        <activity android:name=".fragment.chat.SearchManagerActivity"/>
+        <activity android:name=".fragment.chat.ManagerActivity"/>
+        <activity android:name=".fragment.comment.NewHousedetailsActivity"/>
+        <activity android:name=".fragment.comment.SeeMoreActivity"/>
+        <activity android:name=".fragment.comment.SeeMoreNewHouseActivity"/>
+        <activity android:name=".fragment.comment.SeeMoreZuHouseActivity"/>
+        <activity android:name=".fragment.comment.ZuHousedetailsActivity"/>
+        <activity android:name=".fragment.comment.OldHousedetailsActivity"/>
+        <activity android:name=".fragment.comment.TudidetailsActivity"/>
         <activity
             android:name=".fragment.home.NewHouseActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".fragment.mine.MyDataActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.mine.SettingActivity" />
-        <activity android:name=".fragment.mine.MineMsgActivity" />
-        <activity android:name=".fragment.mine.WenJuanActivity" />
-        <activity android:name=".fragment.mine.MsgDetailActivity" />
-        <activity android:name=".fragment.mine.MineBindPhoneActivity" />
-        <activity android:name=".fragment.mine.ChangePhoneActivity" />
-        <activity android:name=".fragment.mine.LanguageActivity" />
-        <activity android:name=".fragment.mine.AboutUsActivity" />
-        <activity android:name=".fragment.mine.LianxirenActivity" />
-        <activity android:name=".fragment.mine.LiShiJiLuActivity" />
-        <activity android:name=".fragment.mine.DingDanActivity" />
-        <activity android:name=".fragment.mine.DingYueActivity" />
-        <activity android:name=".fragment.mine.ShouCangActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".fragment.mine.SettingActivity"/>
+        <activity android:name=".fragment.mine.MineMsgActivity"/>
+        <activity android:name=".fragment.mine.WenJuanActivity"/>
+        <activity android:name=".fragment.mine.MsgDetailActivity"/>
+        <activity android:name=".fragment.mine.MineBindPhoneActivity"/>
+        <activity android:name=".fragment.mine.ChangePhoneActivity"/>
+        <activity android:name=".fragment.mine.LanguageActivity"/>
+        <activity android:name=".fragment.mine.AboutUsActivity"/>
+        <activity android:name=".fragment.mine.LianxirenActivity"/>
+        <activity android:name=".fragment.mine.LiShiJiLuActivity"/>
+        <activity android:name=".fragment.mine.DingDanActivity"/>
+        <activity android:name=".fragment.mine.DingYueActivity"/>
+        <activity android:name=".fragment.mine.ShouCangActivity"/>
         <activity
             android:name=".fragment.home.LocationActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".login.PeopleXieyiActivity" />
-        <activity android:name=".login.PrivateActivity" />
-        <activity android:name=".fragment.chat.MyZxingActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".login.PeopleXieyiActivity"/>
+        <activity android:name=".login.PrivateActivity"/>
+        <activity android:name=".fragment.chat.MyZxingActivity"/>
         <activity
             android:name=".fragment.home.HomeSearchActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.home.ui.activity.QuestionActivity" />
-        <activity android:name=".fragment.home.ui.activity.QuizActivity" />
-        <activity android:name=".fragment.home.ui.activity.WendaItemActivity" />
-        <activity android:name=".fragment.home.ui.activity.SearchActivity" />
-        <activity android:name=".fragment.home.ui.activity.ZhinengActivity" />
-        <activity android:name=".fragment.home.ui.activity.ToutiaoActivity" />
-        <activity android:name=".fragment.home.ui.activity.TouDetailActivity" />
-        <activity android:name=".fragment.home.ui.activity.Buyhouse_Baike_Activity" />
-        <activity android:name=".fragment.home.ui.activity.Daikuan_Activity" />
-        <activity android:name=".fragment.home.ui.activity.DaikuanDetilsActivity" />
-        <activity android:name=".fragment.home.ui.activity.WenDa_Detils_Activity" />
-        <activity android:name=".fragment.home.ui.activity.AnswerActivity" />
-        <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity" />
-        <activity android:name=".fragment.home.ui.activity.DealActivity" />
-        <activity android:name=".fragment.mine.SingUpActivity" />
-        <activity android:name=".fragment.mine.SingUpDetailsActivity" />
-        <activity android:name=".fragment.mine.SellHouseActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".fragment.home.ui.activity.QuestionActivity"/>
+        <activity android:name=".fragment.home.ui.activity.QuizActivity"/>
+        <activity android:name=".fragment.home.ui.activity.WendaItemActivity"/>
+        <activity android:name=".fragment.home.ui.activity.SearchActivity"/>
+        <activity android:name=".fragment.home.ui.activity.ZhinengActivity"/>
+        <activity android:name=".fragment.home.ui.activity.ToutiaoActivity"/>
+        <activity android:name=".fragment.home.ui.activity.TouDetailActivity"/>
+        <activity android:name=".fragment.home.ui.activity.Buyhouse_Baike_Activity"/>
+        <activity android:name=".fragment.home.ui.activity.Daikuan_Activity"/>
+        <activity android:name=".fragment.home.ui.activity.DaikuanDetilsActivity"/>
+        <activity android:name=".fragment.home.ui.activity.WenDa_Detils_Activity"/>
+        <activity android:name=".fragment.home.ui.activity.AnswerActivity"/>
+        <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity"/>
+        <activity android:name=".fragment.home.ui.activity.DealActivity"/>
+        <activity android:name=".fragment.mine.SingUpActivity"/>
+        <activity android:name=".fragment.mine.SingUpDetailsActivity"/>
+        <activity android:name=".fragment.mine.SellHouseActivity"/>
         <activity
             android:name=".fragment.home.BusinessDichanActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.home.SydcSearchActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".fragment.home.SydcSearchActivity"/>
         <activity
             android:name=".fragment.home.TudiActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.home.HaiWaiActivity" />
-        <activity android:name=".fragment.home.ZhaoxiaoquActivity" />
-        <activity android:name=".fragment.comment.GaoerfuDetailsActivity" />
-        <activity android:name=".fragment.comment.JiudianDetailsActivity" />
-        <activity android:name=".fragment.comment.XiezilouDetailsActivity" />
-        <activity android:name=".fragment.comment.ShangpuDetailsActivity" />
-        <activity android:name=".fragment.mine.Myhouse_price_Activity" />
-        <activity android:name=".fragment.comment.HaiWaiDetailsActivity" />
-        <activity android:name=".fragment.comment.XiaoQuDetailsActivity" />
-        <activity android:name=".fragment.home.SydcLiebiaoActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".fragment.home.HaiWaiActivity"/>
+        <activity android:name=".fragment.home.ZhaoxiaoquActivity"/>
+        <activity android:name=".fragment.comment.GaoerfuDetailsActivity"/>
+        <activity android:name=".fragment.comment.JiudianDetailsActivity"/>
+        <activity android:name=".fragment.comment.XiezilouDetailsActivity"/>
+        <activity android:name=".fragment.comment.ShangpuDetailsActivity"/>
+        <activity android:name=".fragment.mine.Myhouse_price_Activity"/>
+        <activity android:name=".fragment.comment.HaiWaiDetailsActivity"/>
+        <activity android:name=".fragment.comment.XiaoQuDetailsActivity"/>
+        <activity android:name=".fragment.home.SydcLiebiaoActivity"/>
         <activity
             android:name=".fragment.home.ErshoufangActiviy"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.home.ChineseFangyuanActivity" />
-        <activity android:name=".fragment.home.WoshiyezhuActivity" />
-        <activity android:name=".activity.OwnerActivity" />
-        <activity android:name=".activity.OwnerWikipediaActivity" />
-        <activity android:name=".activity.OwnerDetailsActivity" />
-        <activity android:name=".activity.FreeApartmentActivity" />
-        <activity android:name=".activity.RentalDetailsActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".fragment.home.ChineseFangyuanActivity"/>
+        <activity android:name=".fragment.home.WoshiyezhuActivity"/>
+        <activity android:name=".activity.OwnerActivity"/>
+        <activity android:name=".activity.OwnerWikipediaActivity"/>
+        <activity android:name=".activity.OwnerDetailsActivity"/>
+        <activity android:name=".activity.FreeApartmentActivity"/>
+        <activity android:name=".activity.RentalDetailsActivity"/>
         <activity
             android:name=".activity.RentalActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".fragment.mine.CalculatorActivity" />
-        <activity android:name=".fragment.mine.Calculator_DetilsActivity" />
-        <activity android:name=".fragment.mine.FeedbackActivity" />
-        <activity android:name=".fragment.mine.DingDan_DetilsActivity" />
-        <activity android:name=".activity.FullScreenActivity" />
-        <activity android:name=".fragment.home.JjrLiebiaoActivity" />
-        <activity android:name=".fragment.home.ZufangActivity" />
-        <activity android:name=".fragment.home.HaiwaiListActivity" />
-        <activity android:name=".fragment.home.HomeMapActivity" />
-        <activity android:name=".fragment.home.MapSearchActivity" />
-        <activity android:name=".fragment.home.FangjiadituActivity" />
-        <activity android:name=".fragment.home.YanjiuListActivity" />
-        <activity android:name=".fragment.home.ShendengFirstStepActivity" />
-        <activity android:name=".fragment.home.ShendengSecondStepActivity" />
-        <activity android:name=".fragment.home.ShendengListActivity" />
-        <activity android:name=".fragment.home.YanjiuDetailActivity" />
-        <activity android:name=".fragment.home.ChineseLiebiaoActivity" />
-        <activity android:name=".fragment.home.ZufangListActivity" />
-        <activity android:name=".fragment.comment.ZhongguoDetailsActivity" />
-        <activity android:name=".fragment.home.TongqinActivity" />
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".fragment.mine.CalculatorActivity"/>
+        <activity android:name=".fragment.mine.Calculator_DetilsActivity"/>
+        <activity android:name=".fragment.mine.FeedbackActivity"/>
+        <activity android:name=".fragment.mine.DingDan_DetilsActivity"/>
+        <activity android:name=".activity.FullScreenActivity"/>
+        <activity android:name=".fragment.home.JjrLiebiaoActivity"/>
+        <activity android:name=".fragment.home.ZufangActivity"/>
+        <activity android:name=".fragment.home.HaiwaiListActivity"/>
+        <activity android:name=".fragment.home.HomeMapActivity"/>
+        <activity android:name=".fragment.home.MapSearchActivity"/>
+        <activity android:name=".fragment.home.FangjiadituActivity"/>
+        <activity android:name=".fragment.home.YanjiuListActivity"/>
+        <activity android:name=".fragment.home.ShendengFirstStepActivity"/>
+        <activity android:name=".fragment.home.ShendengSecondStepActivity"/>
+        <activity android:name=".fragment.home.ShendengListActivity"/>
+        <activity android:name=".fragment.home.YanjiuDetailActivity"/>
+        <activity android:name=".fragment.home.ChineseLiebiaoActivity"/>
+        <activity android:name=".fragment.home.ZufangListActivity"/>
+        <activity android:name=".fragment.comment.ZhongguoDetailsActivity"/>
+        <activity android:name=".fragment.home.TongqinActivity"/>
         <activity
             android:name=".fragment.home.TongqinSearchActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".activity.AgentListActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.AgentListActivity"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
                     android:host="com.example.administrator.japanhouse"
                     android:pathPrefix="/conversationlist"
-                    android:scheme="rong" />
+                    android:scheme="rong"/>
             </intent-filter>
         </activity>
 
@@ -250,14 +250,14 @@
 
         <activity android:name=".im.RongChatActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
                     android:host="com.example.administrator.japanhouse"
                     android:pathPrefix="/conversation/"
-                    android:scheme="rong" />
+                    android:scheme="rong"/>
             </intent-filter>
         </activity>
 
@@ -265,15 +265,15 @@
             android:name=".im.RcNotificationReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
-                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED"/>
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE"/>
             </intent-filter>
         </receiver>
 
-        <activity android:name=".map.MapActivity" />
+        <activity android:name=".map.MapActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -282,7 +282,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/rc_file_path" />
+                android:resource="@xml/rc_file_path"/>
         </provider>
         <provider
             android:name=".fileprovider.PicFileProvider"
@@ -291,10 +291,10 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/file_paths"/>
         </provider>
 
-        <activity android:name=".im.BaiDuLocationActivity" />
+        <activity android:name=".im.BaiDuLocationActivity"/>
 
         <!-- LINE SDK Settings -->
         <activity
@@ -303,36 +303,38 @@
             android:exported="true"
             android:screenOrientation="sensor">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="line.1580206547" />
+                <data android:scheme="line.1580206547"/>
             </intent-filter>
         </activity>
         <activity
             android:name="jp.line.android.sdk.activity.WebLoginActivity"
             android:configChanges="keyboard|orientation"
             android:exported="false"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="sensor"/>
 
         <meta-data
             android:name="jp.line.sdk.ChannelId"
-            android:value="@string/line_channel_id" />
+            android:value="@string/line_channel_id"/>
         <meta-data
             android:name="jp.line.sdk.AuthScheme"
-            android:value="@string/line_channel_id" />
+            android:value="@string/line_channel_id"/>
 
-        <activity android:name=".fragment.home.BieShuActivity" />
-        <activity android:name=".more.NewHouseMoreActivity" />
-        <activity android:name=".more.OldHouseMoreActivity" />
-        <activity android:name=".more.ZuDuoCengMoreActivity" />
-        <activity android:name=".more.ZuXueShengMoreActivity" />
-        <activity android:name=".more.ZuErCengMoreActivity" />
-        <activity android:name=".more.ZuBieSuMoreActivity" />
-        <activity android:name=".more.ZuShangPuMoreActivity" />
-        <activity android:name=".more.ZuBanGongMoreActivity"></activity>
+        <activity android:name=".fragment.home.BieShuActivity"/>
+        <activity android:name=".more.NewHouseMoreActivity"/>
+        <activity android:name=".more.OldHouseMoreActivity"/>
+        <activity android:name=".more.ZuDuoCengMoreActivity"/>
+        <activity android:name=".more.ZuXueShengMoreActivity"/>
+        <activity android:name=".more.ZuErCengMoreActivity"/>
+        <activity android:name=".more.ZuBieSuMoreActivity"/>
+        <activity android:name=".more.ZuShangPuMoreActivity"/>
+        <activity android:name=".more.ZuBanGongMoreActivity"/>
+        <activity android:name=".fragment.home.BieshudetailsActivity">
+        </activity>
     </application>
 
 </manifest>

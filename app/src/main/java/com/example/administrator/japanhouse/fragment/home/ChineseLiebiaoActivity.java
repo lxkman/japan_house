@@ -89,18 +89,13 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     }
 
     private void initView() {
-        String headers[] = {getString(R.string.shoujia),
-                getString(R.string.louceng),
-                getString(R.string.jianzhunianfen), getString(R.string.gengduo)};
+        String[] headers = {getString(R.string.quyu), getString(R.string.shoujia),
+                getString(R.string.huxing), getString(R.string.gengduo)};
         /**
          * 第一个界面
          * */
         list = new ArrayList<>();
-        list.add(new OneCheckBean(false, "不限"));
-        list.add(new OneCheckBean(false, "3-10万"));
-        list.add(new OneCheckBean(false, "6-15万"));
-        list.add(new OneCheckBean(false, "10万以上"));
-        ThreeView firstView = new ThreeView(ChineseLiebiaoActivity.this);
+        FirstView firstView = new FirstView(this);
         popupViews.add(firstView.firstView());
         firstView.insertData(list, dropDownMenu);
         firstView.setListener(this);
@@ -110,12 +105,10 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
          * */
         List<OneCheckBean> list1 = new ArrayList<>();
         list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "地下室"));
-        list1.add(new OneCheckBean(false, "一层"));
-        list1.add(new OneCheckBean(false, "二层"));
-        list1.add(new OneCheckBean(false, "三层"));
-        list1.add(new OneCheckBean(false, "四层"));
-        SecView secView = new SecView(ChineseLiebiaoActivity.this);
+        list1.add(new OneCheckBean(false, "3-10万"));
+        list1.add(new OneCheckBean(false, "6-15万"));
+        list1.add(new OneCheckBean(false, "10万以上"));
+        SecView secView = new SecView(this);
         popupViews.add(secView.secView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
@@ -125,13 +118,12 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
          * */
         List<OneCheckBean> list2 = new ArrayList<>();
         list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "1990"));
-        list2.add(new OneCheckBean(false, "1991"));
-        list2.add(new OneCheckBean(false, "1992"));
-        list2.add(new OneCheckBean(false, "1993"));
-        list2.add(new OneCheckBean(false, "1994"));
-        SecView threeView = new SecView(ChineseLiebiaoActivity.this);
-        popupViews.add(threeView.secView());
+        list2.add(new OneCheckBean(false, "一室"));
+        list2.add(new OneCheckBean(false, "二室"));
+        list2.add(new OneCheckBean(false, "三室"));
+        list2.add(new OneCheckBean(false, "三室以上"));
+        ThreeView threeView = new ThreeView(this);
+        popupViews.add(threeView.firstView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**

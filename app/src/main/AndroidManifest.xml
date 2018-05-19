@@ -325,7 +325,14 @@
             android:value="@string/line_channel_id" />
 
         <activity android:name=".fragment.home.BieShuActivity" />
-        <activity android:name=".more.NewHouseMoreActivity" />
+        <activity android:name=".more.NewHouseMoreActivity"/>
+        <activity android:name=".more.BieSuActivity"/>
+        <activity android:name=".more.GaoErFuActivity"/>
+        <activity android:name=".more.JiuDianActivity"/>
+        <activity android:name=".more.ShangPuActivity"/>
+        <activity android:name=".more.TuanDiActivity"/>
+        <activity android:name=".more.TudiActivity"/>
+        <activity android:name=".more.XieZiLouActivity"/>
         <activity android:name=".more.OldHouseMoreActivity" />
         <activity android:name=".more.ZuDuoCengMoreActivity" />
         <activity android:name=".more.ZuXueShengMoreActivity" />

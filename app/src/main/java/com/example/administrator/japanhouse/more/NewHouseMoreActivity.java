@@ -10,6 +10,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class NewHouseMoreActivity extends BaseActivity {
 
@@ -85,5 +86,9 @@ public class NewHouseMoreActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_house_more);
         ButterKnife.bind(this);
+    }
+    @OnClick(R.id.back)
+    public void onViewClicked() {
+        finish();
     }
 }

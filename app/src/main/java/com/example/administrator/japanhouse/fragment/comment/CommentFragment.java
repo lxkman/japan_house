@@ -1,6 +1,5 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.widget.RadioGroup;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.more.NewHouseMoreActivity;
 import com.example.administrator.japanhouse.view.NoCacheViewPager;
 
 import java.util.ArrayList;
@@ -123,7 +121,6 @@ public class CommentFragment extends BaseFragment {
                         vpLook.setCurrentItem(0);
                         break;
                     case R.id.rb_zufang:
-                        startActivity(new Intent(mContext, NewHouseMoreActivity.class));
                         vpLook.setCurrentItem(1);
                         break;
                     case R.id.rb_xinfang:

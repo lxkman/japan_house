@@ -1,8 +1,8 @@
 package com.example.administrator.japanhouse.more;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -85,15 +85,19 @@ public class BieSuMoreActivity extends BaseActivity {
     TextView actBiesuBeizhu;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_biesu_more);
         ButterKnife.bind(this);
 
     }
 
     @OnClick(R.id.back)
-    public void onViewClicked() {
-        finish();
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

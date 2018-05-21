@@ -177,6 +177,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             searchTv.setHint(getIntent().getStringExtra("edt_hint"));
         }
         final String type = getIntent().getStringExtra("type");
+         final String houseType = getIntent().getStringExtra("houseType");
         if (mList.size() <= 0) {
             mList.add("");
             mList.add("");
@@ -193,6 +194,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
                 intent.putExtra("iszu", "iszu");
+                intent.putExtra("houseType", houseType);
                 startActivity(intent);
                 /*switch (type){
                     case "0":

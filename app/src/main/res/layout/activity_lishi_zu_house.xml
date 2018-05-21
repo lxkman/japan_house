@@ -108,7 +108,7 @@
                 <TextView
                     android:paddingLeft="15dip"
                     android:gravity="center_vertical"
-                    android:text="@string/gaoerfu_price"
+                    android:text="@string/details_zujin"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />

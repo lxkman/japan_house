@@ -64,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/fenlei_recycler"
                 android:layout_width="match_parent"
@@ -73,6 +74,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
                 android:paddingTop="10dp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

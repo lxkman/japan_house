@@ -28,7 +28,12 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.more.BieSuMoreActivity;
+import com.example.administrator.japanhouse.more.ShangPuMoreActivity;
+import com.example.administrator.japanhouse.more.ZuBanGongMoreActivity;
 import com.example.administrator.japanhouse.more.ZuDuoCengMoreActivity;
+import com.example.administrator.japanhouse.more.ZuErCengMoreActivity;
+import com.example.administrator.japanhouse.more.ZuXueShengMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
@@ -82,6 +87,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
     private MyAdapter myAdapter;
+    private String houseType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +98,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_lishi_zu_house);
         ButterKnife.bind(this);
         String iszu = getIntent().getStringExtra("iszu");
+        houseType = getIntent().getStringExtra("houseType");
+        Toast.makeText(mContext, houseType, Toast.LENGTH_SHORT).show();
         if (!TextUtils.isEmpty(iszu) && iszu.equals("iszu")) {
             tv_price.setText("1750元/月");
         }
@@ -279,8 +287,28 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_See_More:
-                Intent intent = new Intent(ZuHousedetailsActivity.this, ZuDuoCengMoreActivity.class);
-                startActivity(intent);
+                if (!TextUtils.isEmpty(houseType)){
+                    switch (houseType){
+                        case "duoceng":
+                            startActivity(new Intent(mContext, ZuDuoCengMoreActivity.class));
+                            break;
+                        case "xuesheng":
+                            startActivity(new Intent(mContext, ZuXueShengMoreActivity.class));
+                            break;
+                        case "erceng":
+                            startActivity(new Intent(mContext, ZuErCengMoreActivity.class));
+                            break;
+                        case "bieshu":
+                            startActivity(new Intent(mContext, BieSuMoreActivity.class));
+                            break;
+                        case "shangpu":
+                            startActivity(new Intent(mContext, ShangPuMoreActivity.class));
+                            break;
+                        case "bangongshi":
+                            startActivity(new Intent(mContext, ZuBanGongMoreActivity.class));
+                            break;
+                    }
+                }
                 break;
             case R.id.back_img:
                 finish();

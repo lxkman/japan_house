@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.RadioGroup;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.view.NoCacheViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class CommentFragment extends BaseFragment {
     @BindView(R.id.view_tudi)
     View viewTudi;
     @BindView(R.id.vp_look)
-    NoCacheViewPager vpLook;
+    ViewPager vpLook;
     Unbinder unbinder;
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
@@ -56,6 +56,7 @@ public class CommentFragment extends BaseFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_comment, null);
         unbinder = ButterKnife.bind(this, view);
+        vpLook.setOffscreenPageLimit(4);
         return view;
     }
 
@@ -77,7 +78,7 @@ public class CommentFragment extends BaseFragment {
     }
 
     private void initListener() {
-        vpLook.setOnPageChangeListener(new NoCacheViewPager.OnPageChangeListener() {
+        vpLook.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }

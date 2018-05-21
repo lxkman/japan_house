@@ -10,6 +10,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class OldHouseMoreActivity extends BaseActivity {
 
@@ -91,5 +92,10 @@ public class OldHouseMoreActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_house_more);
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.back_img)
+    public void onViewClicked() {
+        finish();
     }
 }

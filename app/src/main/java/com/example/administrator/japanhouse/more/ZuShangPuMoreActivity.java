@@ -70,5 +70,6 @@ public class ZuShangPuMoreActivity extends BaseActivity {
 
     @OnClick(R.id.back_img)
     public void onViewClicked() {
+        finish();
     }
 }

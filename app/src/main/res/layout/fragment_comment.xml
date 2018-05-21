@@ -105,12 +105,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dip"></View>
 
-        <com.example.administrator.japanhouse.view.NoCacheViewPager
+        <com.example.administrator.japanhouse.activity.NoScrollViewPager
             android:id="@+id/vp_look"
             android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </com.example.administrator.japanhouse.view.NoCacheViewPager>
+        </com.example.administrator.japanhouse.activity.NoScrollViewPager>
 
     </LinearLayout>
 </LinearLayout>

@@ -207,7 +207,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="@string/string_jianzunianfen"
+                            android:text="@string/string_jianzhunianfen"
                             android:textSize="14sp" />
 
                         <TextView
@@ -230,7 +230,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="@string/string_jianzugouzao"
+                            android:text="@string/string_jianzhugongsi"
                             android:textSize="14sp" />
 
                         <TextView
@@ -734,7 +734,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="@string/string_rujutiaojianxinxi"
+                        android:text="@string/string_rujutiaojian"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -756,7 +756,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="@string/string_rujutiaojian"
+                            android:text="@string/string_rujutiaojianmaohao"
                             android:textSize="14sp" />
 
                         <TextView

@@ -111,6 +111,10 @@ class SecView implements View.OnClickListener {
                         }
                     }
                     mLiebiaoAdapter.notifyDataSetChanged();
+                    if (!getCheckeditemText().equals("")) {
+                        dropDownMenu.setTabText(getCheckeditemText());
+                    }
+                    dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                 }
 
             });

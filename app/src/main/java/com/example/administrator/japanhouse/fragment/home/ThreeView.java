@@ -65,12 +65,6 @@ class ThreeView implements View.OnClickListener {
         mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setAdapter(mLiebiaoAdapter);
-        mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-            }
-        });
     }
 
     @Override
@@ -108,6 +102,10 @@ class ThreeView implements View.OnClickListener {
                         }
                     }
                     mLiebiaoAdapter.notifyDataSetChanged();
+                    if (!getCheckeditemText().equals("")) {
+                        dropDownMenu.setTabText(getCheckeditemText());
+                    }
+                    dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                 }
 
             });

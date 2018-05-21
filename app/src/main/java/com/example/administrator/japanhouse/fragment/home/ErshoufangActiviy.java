@@ -182,6 +182,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         }
         params.put("status", 0);
         params.put("pageNo", page);
+        params.put("hType", 0);
         OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
                 .tag(this)
                 .params(params)
@@ -260,8 +261,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
-            helper.setText(R.id.tv_title, isJa ? item.getPlotNameJpn() : item.getPlotNameCn())
-                    .setText(R.id.tv_area, isJa ? item.getAddressJpn() : item.getAddressCn())
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }

@@ -63,7 +63,7 @@
         app:ddmenuUnselectedIcon="@mipmap/buttom"
         app:ddtextSelectedColor="@color/shihuangse"
         app:ddtextUnselectedColor="@color/drop_down_unselected"
-        app:ddunderlineColor="#dbdcdc"
+        app:ddunderlineColor="#F8F9F8"
 
         />
 </LinearLayout>

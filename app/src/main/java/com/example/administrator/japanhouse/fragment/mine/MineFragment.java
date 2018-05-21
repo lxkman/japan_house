@@ -159,12 +159,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void scrollToTop(EventBean eventBean){
-        if (TextUtils.equals(eventBean.getMsg(),"minescrolltotop")){
+    public void scrollToTop(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getMsg(), "minescrolltotop")) {
             nestScroll.scrollTo(0, 0);
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        nestScroll.scrollTo(0, 0);
+    }
 
     private void initScroll() {
         nestScroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {

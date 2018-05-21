@@ -280,7 +280,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/string_zhoubiansheshi"
+                    android:text="@string/string_zhoubianhuanjing"
                     android:textSize="14sp" />
 
                 <TextView
@@ -292,34 +292,34 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/gray1" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginRight="15dp"-->
+                <!--android:background="@color/gray1" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dip"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="45dip"-->
+                <!--android:orientation="horizontal">-->
 
-                <View
-                    android:layout_width="3dip"
-                    android:layout_height="13dip"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dip"
-                    android:background="@color/shihuangse"></View>
+                <!--<View-->
+                    <!--android:layout_width="3dip"-->
+                    <!--android:layout_height="13dip"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginLeft="15dip"-->
+                    <!--android:background="@color/shihuangse"></View>-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="6dip"
-                    android:text="@string/string_beizhuxinxi"
-                    android:textColor="#444"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingLeft="6dip"-->
+                    <!--android:text="@string/string_beizhuxinxi"-->
+                    <!--android:textColor="#444"-->
+                    <!--android:textSize="16sp" />-->
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

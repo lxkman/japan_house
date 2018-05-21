@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -36,6 +37,8 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
+    @BindView(R.id.rl_search)
+    RelativeLayout rl_search;
     private int[] itemPic = {R.drawable.aodaliya_iv, R.drawable.meiguo_iv, R.drawable.jianada_iv,
             R.drawable.yingguo_iv, R.drawable.taiguo_iv, R.drawable.xinxilan_iv};
 
@@ -89,7 +92,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
             case R.id.title_back_iv:
                 finish();
                 break;
-            case R.id.search_et:
+            case R.id.rl_search:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
                 intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
                 startActivity(intent);

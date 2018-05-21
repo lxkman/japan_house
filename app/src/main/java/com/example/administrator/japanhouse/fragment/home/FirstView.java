@@ -92,13 +92,13 @@ public class FirstView implements View.OnClickListener {
 
     private void initData() {
         if (oneAdapter == null) {
-            oneAdapter = new OneAdapter(R.layout.leixing_item, mList1);
+            oneAdapter = new OneAdapter(R.layout.leixing_item2, mList1);
         }
         if (twoAdapter == null) {
-            twoAdapter = new TwoAdapter(R.layout.leixing_item, mList2);
+            twoAdapter = new TwoAdapter(R.layout.leixing_item2, mList2);
         }
         if (threeAdapter == null) {
-            threeAdapter = new ThreeAdapter(R.layout.leixing_item, mList3);
+            threeAdapter = new ThreeAdapter(R.layout.leixing_item2, mList3);
         }
         mrecycler1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler1.setNestedScrollingEnabled(false);

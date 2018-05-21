@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -36,6 +37,8 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
     RecyclerView fenleiRecycler;
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
+    @BindView(R.id.rl_search)
+    RelativeLayout rl_search;
     private int[] itemPic = {R.drawable.beijing_iv, R.drawable.shanghai_iv, R.drawable.guangzhou_iv,
             R.drawable.shenzhen_iv, R.drawable.hangzhou_iv, R.drawable.chongqing_iv,R.drawable.qita_iv};
 
@@ -85,13 +88,13 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
         likeAdapter.setOnItemClickListener(this);
     }
 
-    @OnClick({R.id.title_back_iv, R.id.search_et})
+    @OnClick({R.id.title_back_iv, R.id.rl_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back_iv:
                 finish();
                 break;
-            case R.id.search_et:
+            case R.id.rl_search:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
                 intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
                 startActivity(intent);

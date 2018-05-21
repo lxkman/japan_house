@@ -253,8 +253,7 @@
                             android:paddingLeft="15dip">
 
                             <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="70dip"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
                                 android:text="@string/tudi_fengjing"
@@ -276,7 +275,7 @@
                             android:paddingLeft="15dip">
 
                             <TextView
-                                android:layout_width="70dip"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
                                 android:text="@string/tudi_chezhanjuli"
@@ -299,7 +298,7 @@
                             android:paddingLeft="15dip">
 
                             <TextView
-                                android:layout_width="70dip"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
                                 android:text="@string/jutiweizhi"

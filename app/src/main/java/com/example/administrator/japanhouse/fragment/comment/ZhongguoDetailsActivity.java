@@ -1,7 +1,7 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
-import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -259,7 +258,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More,R.id.back_img})
+    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -267,10 +266,6 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                 break;
             case R.id.img_start:
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_See_More:
-                Intent intent = new Intent(mContext, SeeMoreActivity.class);
-                startActivity(intent);
                 break;
             case R.id.back_img:
                 finish();

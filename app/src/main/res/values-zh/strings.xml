@@ -520,7 +520,7 @@
     <string name="string_nengfougaojianzu">能否高建筑：</string>
     <string name="string_zhouweifengjing">周围风景：</string>
     <string name="string_zhouweihuanjing">周围环境：</string>
-    <string name="string_jineng">机能：</string>
+    <string name="string_jineng">机&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;能：</string>
     <string name="details_shoujia">售价：</string>
     <string name="details_wuye">物业：</string>
     <string name="details_zujin">租金：</string>

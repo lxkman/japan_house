@@ -37,7 +37,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
     private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.xzlmaimai_iv,
-             R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
+            R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,16 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, SydcLiebiaoActivity.class);
-                intent.putExtra("type",position+"");
+                intent.putExtra("type", position + "");
+                if (position == 0) {
+                    intent.putExtra("houseType", "shangpu");
+                } else if (position == 1) {
+                    intent.putExtra("houseType", "xiezilou");
+                } else if (position == 2) {
+                    intent.putExtra("houseType", "gaoerfu");
+                } else if (position == 3) {
+                    intent.putExtra("houseType", "jiudian");
+                }
                 startActivity(intent);
             }
         });
@@ -88,7 +97,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 break;
             case R.id.search_et:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent",getResources().getString(R.string.shangyedichan));
+                intent.putExtra("popcontent", getResources().getString(R.string.shangyedichan));
                 startActivity(intent);
                 break;
         }
@@ -96,7 +105,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext,ShangpuDetailsActivity.class));
+        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {

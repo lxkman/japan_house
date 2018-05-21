@@ -27,7 +27,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.NewHouseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
-import com.example.administrator.japanhouse.more.XieZiLouMoreActivity;
+import com.example.administrator.japanhouse.more.GaoErFuMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
@@ -248,7 +248,7 @@ public class GaoerfuDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_See_More:
-                Intent intent=new Intent(GaoerfuDetailsActivity.this, XieZiLouMoreActivity.class);
+                Intent intent=new Intent(GaoerfuDetailsActivity.this, GaoErFuMoreActivity.class);
                 startActivity(intent);
                 break;
         }

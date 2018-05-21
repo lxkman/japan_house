@@ -54,7 +54,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
-    private String type;
+    private String type,houseType;
     private SpringView springview;
     private boolean isLoadMore;
     private int page;
@@ -94,6 +94,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
 
     private void initView() {
         type = getIntent().getStringExtra("type");
+        houseType = getIntent().getStringExtra("houseType");
         String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
         /**
@@ -169,17 +170,17 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (type) {
-                    case "0":
+                switch (houseType) {
+                    case "shangpu":
                         startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
                         break;
-                    case "1":
+                    case "xiezilou":
                         startActivity(new Intent(mContext, XiezilouDetailsActivity.class));
                         break;
-                    case "2":
+                    case "gaoerfu":
                         startActivity(new Intent(mContext, GaoerfuDetailsActivity.class));
                         break;
-                    case "3":
+                    case "jiudian":
                         startActivity(new Intent(mContext, JiudianDetailsActivity.class));
                         break;
                 }

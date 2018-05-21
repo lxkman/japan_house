@@ -28,11 +28,11 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
-import com.example.administrator.japanhouse.more.BieSuMoreActivity;
-import com.example.administrator.japanhouse.more.ShangPuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuBanGongMoreActivity;
+import com.example.administrator.japanhouse.more.ZuBieSuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuDuoCengMoreActivity;
 import com.example.administrator.japanhouse.more.ZuErCengMoreActivity;
+import com.example.administrator.japanhouse.more.ZuShangPuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuXueShengMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -299,10 +299,10 @@ public class ZuHousedetailsActivity extends BaseActivity {
                             startActivity(new Intent(mContext, ZuErCengMoreActivity.class));
                             break;
                         case "bieshu":
-                            startActivity(new Intent(mContext, BieSuMoreActivity.class));
+                            startActivity(new Intent(mContext, ZuBieSuMoreActivity.class));
                             break;
                         case "shangpu":
-                            startActivity(new Intent(mContext, ShangPuMoreActivity.class));
+                            startActivity(new Intent(mContext, ZuShangPuMoreActivity.class));
                             break;
                         case "bangongshi":
                             startActivity(new Intent(mContext, ZuBanGongMoreActivity.class));

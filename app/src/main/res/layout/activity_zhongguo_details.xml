@@ -175,7 +175,7 @@
                     android:background="#fff"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="40dip">
+                    android:layout_height="35dip">
                     <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
@@ -204,7 +204,7 @@
                     android:background="#fff"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="40dip">
+                    android:layout_height="35dip">
                     <LinearLayout
                         android:paddingLeft="15dip"
                         android:layout_width="0dip"
@@ -233,7 +233,7 @@
                     android:background="#fff"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="40dip">
+                    android:layout_height="35dip">
                     <LinearLayout
                         android:layout_width="0dip"
                         android:layout_weight="1"
@@ -262,7 +262,7 @@
                 android:background="#fff"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dip">
+                android:layout_height="35dip">
 
                 <LinearLayout
                     android:layout_width="0dip"

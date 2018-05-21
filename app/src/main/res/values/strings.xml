@@ -526,5 +526,11 @@
     <string name="details_wuye">物业：</string>
     <string name="details_zujin">租金：</string>
     <string name="details_huxing">户型：</string>
+    <string name="string_qita">其        他：</string>
+    <string name="string_meiqihedianli">煤气和电力：</string>
+    <string name="string_rujutiaojianxinxi">入居条件</string>
+    <string name="string_rujutiaojian">入居条件：</string>
+    <string name="string_feiyong">费        用：</string>
+    <string name="string_siyongbufen">私用部分：</string>
 
 </resources>

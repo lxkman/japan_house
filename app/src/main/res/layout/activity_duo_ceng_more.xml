@@ -69,7 +69,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="基本信息"
+                        android:text="@string/string_jibenxinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -91,7 +91,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="物件名称："
+                            android:text="@string/string_wujianmingcheng"
                             android:textSize="14sp" />
 
                         <TextView
@@ -114,7 +114,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="租        金："
+                            android:text="@string/string_zujin"
                             android:textSize="14sp" />
 
                         <TextView
@@ -137,7 +137,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="面        积："
+                            android:text="@string/string_mianji"
                             android:textSize="14sp" />
 
                         <TextView
@@ -160,7 +160,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="户        型："
+                            android:text="@string/string_huxing"
                             android:textSize="14sp" />
 
                         <TextView
@@ -182,7 +182,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="初期费用："
+                            android:text="@string/string_chuqifeiyong"
                             android:textSize="14sp" />
 
                         <TextView
@@ -204,7 +204,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="楼        层："
+                            android:text="@string/string_louceng"
                             android:textSize="14sp" />
 
                         <TextView
@@ -229,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="建筑年份："
+                            android:text="@string/string_jianzunianfen"
                             android:textSize="14sp" />
 
                         <TextView
@@ -252,7 +252,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="建筑构造："
+                            android:text="@string/string_jianzugouzao"
                             android:textSize="14sp" />
 
                         <TextView
@@ -277,7 +277,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="朝        向："
+                            android:text="@string/string_chaoxiang"
                             android:textSize="14sp" />
 
                         <TextView
@@ -301,7 +301,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="入居日期："
+                            android:text="@string/string_rujuriqi"
                             android:textSize="14sp" />
 
                         <TextView
@@ -325,7 +325,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="其        他："
+                            android:text="@string/string_qita"
                             android:textSize="14sp" />
 
                         <TextView
@@ -371,7 +371,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="管理信息"
+                        android:text="@string/string_guanlixinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -393,7 +393,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="管理会社："
+                            android:text="@string/string_guanlihuishe"
                             android:textSize="14sp" />
 
                         <TextView
@@ -416,7 +416,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="管  理  费："
+                            android:text="@string/string_guanlifei"
                             android:textSize="14sp" />
 
                         <TextView
@@ -440,7 +440,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="管        理："
+                            android:text="@string/string_guanli"
                             android:textSize="14sp" />
 
                         <TextView
@@ -462,7 +462,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="煤气和电力："
+                            android:text="@string/string_meiqihedianli"
                             android:textSize="14sp" />
 
                         <TextView
@@ -509,7 +509,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="室外信息"
+                        android:text="@string/string_shiwaixinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -531,7 +531,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="地        段："
+                            android:text="@string/string_diduan"
                             android:textSize="14sp" />
 
                         <TextView
@@ -554,7 +554,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="具体位置："
+                            android:text="@string/string_jutiweizhi"
                             android:textSize="14sp" />
 
                         <TextView
@@ -577,7 +577,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="主要车站："
+                            android:text="@string/string_zhuyaochezhan"
                             android:textSize="14sp" />
 
                         <TextView
@@ -600,7 +600,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="车站距离："
+                            android:text="@string/string_chezhanjuli"
                             android:textSize="14sp" />
 
                         <TextView
@@ -623,7 +623,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="窗外风景："
+                            android:text="@string/string_chuangwaifengjing"
                             android:textSize="14sp" />
 
                         <TextView
@@ -646,7 +646,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="共用部分："
+                            android:text="@string/string_gongyongbufen"
                             android:textSize="14sp" />
 
                         <TextView
@@ -669,7 +669,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="周边环境："
+                            android:text="@string/string_zhoubianhuanjing"
                             android:textSize="14sp" />
 
                         <TextView
@@ -692,7 +692,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="停  车  位："
+                            android:text="@string/string_tingchewei"
                             android:textSize="14sp" />
 
                         <TextView
@@ -736,7 +736,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="室内信息"
+                        android:text="@string/string_shineixinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -758,7 +758,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="室内设备："
+                            android:text="@string/string_shineishebei"
                             android:textSize="14sp" />
 
                         <TextView
@@ -781,7 +781,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="厨        房："
+                            android:text="@string/string_chufang"
                             android:textSize="14sp" />
 
                         <TextView
@@ -804,7 +804,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="卫  生  间："
+                            android:text="@string/string_weishengjian"
                             android:textSize="14sp" />
 
                         <TextView
@@ -827,7 +827,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="浴        室："
+                            android:text="@string/string_yushi"
                             android:textSize="14sp" />
 
                         <TextView
@@ -872,7 +872,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="入居条件"
+                        android:text="@string/string_rujutiaojianxinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -894,7 +894,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="入居条件："
+                            android:text="@string/string_rujutiaojian"
                             android:textSize="14sp" />
 
                         <TextView
@@ -939,7 +939,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="备注"
+                        android:text="@string/string_beizhuxinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -961,7 +961,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="备        注："
+                            android:text="@string/string_beizhu"
                             android:textSize="14sp" />
 
                         <TextView

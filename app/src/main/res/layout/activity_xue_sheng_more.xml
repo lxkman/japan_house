@@ -69,7 +69,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="6dip"
-                        android:text="基本信息"
+                        android:text="@string/string_jibenxinxi"
                         android:textColor="#444"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -91,7 +91,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="户        型："
+                            android:text="@string/string_huxing"
                             android:textSize="14sp" />
 
                         <TextView
@@ -114,7 +114,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="租        金："
+                            android:text="@string/string_zujin"
                             android:textSize="14sp" />
 
                         <TextView
@@ -136,7 +136,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="楼        层："
+                            android:text="@string/string_louceng"
                             android:textSize="14sp" />
 
                         <TextView
@@ -158,7 +158,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="朝        向："
+                            android:text="@string/string_chaoxiang"
                             android:textSize="14sp" />
 
                         <TextView
@@ -180,7 +180,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="面        积："
+                            android:text="@string/string_mianji"
                             android:textSize="14sp" />
 
                         <TextView
@@ -204,7 +204,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="主要车站："
+                            android:text="@string/string_zhuyaochezhan"
                             android:textSize="14sp" />
 
                         <TextView
@@ -229,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="车站距离："
+                            android:text="@string/string_chezhanjuli"
                             android:textSize="14sp" />
 
                         <TextView
@@ -252,7 +252,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="房间状况："
+                            android:text="@string/string_fangjianzhuangkuang"
                             android:textSize="14sp" />
 
                         <TextView
@@ -280,7 +280,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="签约年限："
+                            android:text="@string/string_qianyuenianxian"
                             android:textSize="14sp" />
 
                         <TextView
@@ -304,7 +304,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="费        用："
+                            android:text="@string/string_feiyong"
                             android:textSize="14sp" />
 
                         <TextView
@@ -326,7 +326,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="室内设备："
+                            android:text="@string/string_shineishebei"
                             android:textSize="14sp" />
 
                         <TextView
@@ -348,7 +348,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="备        注："
+                            android:text="@string/string_beizhu"
                             android:textSize="14sp" />
 
                         <TextView

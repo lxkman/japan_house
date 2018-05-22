@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.adapter.SearchListAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
@@ -50,8 +52,11 @@ public class HomeSearchActivity extends BaseActivity {
     ImageView hotRefrashIv;
     @BindView(R.id.history_clear)
     ImageView historyClear;
+    @BindView(R.id.search_list_recycler)
+    RecyclerView searchListRecycler;
     private CommonPopupWindow popupWindow;
     private List<String> historyList;
+    private List<String> SearchList=new ArrayList<>();
     private HistoryAdapter historyAdapter;
 
     @Override
@@ -60,7 +65,7 @@ public class HomeSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_home_search);
         ButterKnife.bind(this);
         initView();
-        if (!TextUtils.isEmpty(getIntent().getStringExtra("popcontent"))){
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("popcontent"))) {
             locationTv.setText(getIntent().getStringExtra("popcontent"));
         }
         searchEt.setOnEditorActionListener(editorActionListener);
@@ -83,6 +88,19 @@ public class HomeSearchActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        if (SearchList.size()<=0){
+            SearchList.add("北街家园");
+            SearchList.add("北街家园一区");
+            SearchList.add("北街家园二区");
+            SearchList.add("北街家园三区");
+        }
+        searchListRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        SearchListAdapter   SearchListAdapter = new SearchListAdapter(this,SearchList,MyUtils.isJa());
+        searchListRecycler.setAdapter(SearchListAdapter);
+
+
+
         List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
         hotNameList.add("青森县");

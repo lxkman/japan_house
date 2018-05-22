@@ -198,6 +198,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent",getResources().getString(R.string.tudi));
+                intent.putExtra("state", 3);
                 startActivity(intent);
                 break;
         }

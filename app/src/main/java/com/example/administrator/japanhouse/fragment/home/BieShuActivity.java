@@ -261,6 +261,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent",getResources().getString(R.string.bieshu));
+                intent.putExtra("state", 1);
                 startActivity(intent);
         }
     }

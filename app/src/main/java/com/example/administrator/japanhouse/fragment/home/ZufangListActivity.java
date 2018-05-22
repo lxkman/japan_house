@@ -257,7 +257,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent",getResources().getString(R.string.zu_house));
+                intent.putExtra("popcontent", getResources().getString(R.string.zu_house));
+                intent.putExtra("state", 4);
                 startActivity(intent);
         }
     }

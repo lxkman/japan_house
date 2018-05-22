@@ -1,7 +1,9 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -11,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,20 +24,31 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.SearchListAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.SearchBean;
+import com.example.administrator.japanhouse.model.SearchBusinessBean;
+import com.example.administrator.japanhouse.model.SearchHouseBean;
+import com.example.administrator.japanhouse.model.SearchLandBean;
+import com.example.administrator.japanhouse.model.SearchVillaBean;
+import com.example.administrator.japanhouse.model.TopSearchHintBean;
+import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeSearchActivity extends BaseActivity {
+public class HomeSearchActivity extends BaseActivity implements MainSearchPresenter.MainSearchCallBack {
 
     @BindView(R.id.location_tv)
     TextView locationTv;
@@ -56,8 +70,15 @@ public class HomeSearchActivity extends BaseActivity {
     RecyclerView searchListRecycler;
     private CommonPopupWindow popupWindow;
     private List<String> historyList;
-    private List<String> SearchList=new ArrayList<>();
+    private List<String> SearchList = new ArrayList<>();
     private HistoryAdapter historyAdapter;
+    private NestedScrollView scrollView;
+
+    private MainSearchPresenter searchPresenter;
+    private SearchListAdapter searchListAdapter;
+    private String country = "";
+    private int state;
+    private List<SearchBean> searchBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +86,23 @@ public class HomeSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_home_search);
         ButterKnife.bind(this);
         initView();
+
+        scrollView = (NestedScrollView) findViewById(R.id.act_homeSearch_scroll);
+
+        country = CacheUtils.get(Constants.COUNTRY);
+
+        searchPresenter = new MainSearchPresenter(this, this);
+
         if (!TextUtils.isEmpty(getIntent().getStringExtra("popcontent"))) {
             locationTv.setText(getIntent().getStringExtra("popcontent"));
         }
+
+        state = getIntent().getIntExtra("state", 0);
+
+        searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        searchListAdapter = new SearchListAdapter(this, SearchList, MyUtils.isJa());
+        searchListRecycler.setAdapter(searchListAdapter);
+
         searchEt.setOnEditorActionListener(editorActionListener);
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,7 +112,17 @@ public class HomeSearchActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
+                } else {
+                    scrollView.setVisibility(View.VISIBLE);
+                    searchListRecycler.setVisibility(View.GONE);
+                }
 
+                SearchList.clear();
+                searchListAdapter.notifyDataSetChanged();
+                searchPresenter.getSearchHint(state, searchEt.getText().toString());
             }
 
             @Override
@@ -85,22 +130,58 @@ public class HomeSearchActivity extends BaseActivity {
 
             }
         });
+
+        searchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    ((InputMethodManager) searchEt.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(
+                                    getCurrentFocus()
+                                            .getWindowToken(),
+                                    InputMethodManager.HIDE_NOT_ALWAYS);
+
+                    switch (state) {
+                        case 0: //新房
+                            searchPresenter.getSearchNewHouse(1, 0, searchEt.getText().toString());
+                            break;
+                        case 1: //别墅
+                            searchPresenter.getSearchVilla(1, searchEt.getText().toString());
+                            break;
+                        case 2: //二手房
+                            searchPresenter.getSearchNewHouse(1, 2, searchEt.getText().toString());
+                            break;
+                        case 3: //土地
+                            searchPresenter.getSearchLand(1, searchEt.getText().toString());
+                            break;
+                        case 4: //租房
+                            searchPresenter.getSearchNewHouse(1, 4, searchEt.getText().toString());
+                            break;
+                        case 5: //商业地产
+                            searchPresenter.getSearchBusiness(1, searchEt.getText().toString());
+                            break;
+                    }
+                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_HISTORY);
+                    if (list != null) {
+                        list.add(new SearchBean(state, searchEt.getText().toString()));
+                        CacheUtils.put(Constants.SEARCH_HISTORY, list);
+                    } else {
+                        List<SearchBean> arrayList = new ArrayList<>();
+                        arrayList.add(new SearchBean(state, searchEt.getText().toString()));
+                        CacheUtils.put(Constants.SEARCH_HISTORY, arrayList);
+                    }
+
+                    queryCacheHistory();
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     private void initView() {
-
-        if (SearchList.size()<=0){
-            SearchList.add("北街家园");
-            SearchList.add("北街家园一区");
-            SearchList.add("北街家园二区");
-            SearchList.add("北街家园三区");
-        }
-        searchListRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        SearchListAdapter   SearchListAdapter = new SearchListAdapter(this,SearchList,MyUtils.isJa());
-        searchListRecycler.setAdapter(SearchListAdapter);
-
-
-
         List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
         hotNameList.add("青森县");
@@ -111,16 +192,51 @@ public class HomeSearchActivity extends BaseActivity {
         initHot(hotNameList);
 
         historyList = new ArrayList<>();
-        historyList.add("东京");
-        historyList.add("澳大利亚");
-        historyList.add("中国");
-        historyList.add("美国");
-        historyList.add("缅甸");
-        historyList.add("阿富汗");
+
+
         historyRecycler.setNestedScrollingEnabled(false);
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
         historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
         historyRecycler.setAdapter(historyAdapter);
+        historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (searchBean.get(position).state) {
+                    case 0: //新房
+                        searchPresenter.getSearchNewHouse(1, 0, searchBean.get(position).content);
+                        break;
+                    case 1: //别墅
+                        searchPresenter.getSearchVilla(1, searchBean.get(position).content);
+                        break;
+                    case 2: //二手房
+                        searchPresenter.getSearchNewHouse(1, 2, searchBean.get(position).content);
+                        break;
+                    case 3: //土地
+                        searchPresenter.getSearchLand(1, searchBean.get(position).content);
+                        break;
+                    case 4: //租房
+                        searchPresenter.getSearchNewHouse(1, 4, searchBean.get(position).content);
+                        break;
+                    case 5: //商业地产
+                        searchPresenter.getSearchBusiness(1, searchBean.get(position).content);
+                        break;
+                }
+            }
+        });
+
+        queryCacheHistory();
+    }
+
+    private void queryCacheHistory(){
+        historyList.clear();
+        searchBean = CacheUtils.get(Constants.SEARCH_HISTORY);
+        if (searchBean != null && searchBean.size() > 0) {
+            Collections.reverse(searchBean);
+            for (int i = 0; i < searchBean.size(); i++) {
+                historyList.add(searchBean.get(i).content);
+            }
+            historyAdapter.notifyDataSetChanged();
+        }
     }
 
     private void initHot(final List<String> hotNameList) {
@@ -181,6 +297,7 @@ public class HomeSearchActivity extends BaseActivity {
             case R.id.history_clear:
                 historyList.clear();
                 historyAdapter.notifyDataSetChanged();
+                CacheUtils.remove(Constants.SEARCH_HISTORY);
                 break;
         }
     }
@@ -204,6 +321,7 @@ public class HomeSearchActivity extends BaseActivity {
                             public void onClick(View view) {
                                 popupWindow.dismiss();
                                 locationTv.setText(getResources().getString(R.string.old_house));
+                                state = 2;
                             }
                         });
                         TextView xinfangTv = (TextView) view.findViewById(R.id.xinfang_tv);
@@ -212,6 +330,7 @@ public class HomeSearchActivity extends BaseActivity {
                             public void onClick(View view) {
                                 popupWindow.dismiss();
                                 locationTv.setText(getResources().getString(R.string.new_house));
+                                state = 0;
                             }
                         });
                         TextView zufangTv = (TextView) view.findViewById(R.id.zufang_tv);
@@ -220,6 +339,7 @@ public class HomeSearchActivity extends BaseActivity {
                             public void onClick(View view) {
                                 popupWindow.dismiss();
                                 locationTv.setText(getResources().getString(R.string.zu_house));
+                                state = 4;
                             }
                         });
                         TextView maishangpuTv = (TextView) view.findViewById(R.id.bieshu_tv);
@@ -228,6 +348,7 @@ public class HomeSearchActivity extends BaseActivity {
                             public void onClick(View view) {
                                 popupWindow.dismiss();
                                 locationTv.setText(getResources().getString(R.string.bieshu));
+                                state = 1;
                             }
                         });
                         TextView maixiezilouTv = (TextView) view.findViewById(R.id.tudi_tv);
@@ -236,6 +357,7 @@ public class HomeSearchActivity extends BaseActivity {
                             public void onClick(View view) {
                                 popupWindow.dismiss();
                                 locationTv.setText(getResources().getString(R.string.tudi));
+                                state = 3;
                             }
                         });
                         TextView zuxiezilouTv = (TextView) view.findViewById(R.id.sydc_tv);
@@ -244,6 +366,7 @@ public class HomeSearchActivity extends BaseActivity {
                             public void onClick(View view) {
                                 popupWindow.dismiss();
                                 locationTv.setText(getResources().getString(R.string.shangyedichan));
+                                state = 5;
                             }
                         });
                     }
@@ -251,6 +374,40 @@ public class HomeSearchActivity extends BaseActivity {
                 .setOutsideTouchable(true)
                 .create();
         popupWindow.showAsDropDown(view);
+    }
+
+    @Override
+    public void getSearchHint(Response<TopSearchHintBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                for (int i = 0; i < response.body().getDatas().size(); i++) {
+                    SearchList.add(response.body().getDatas().get(i).getVal());
+                }
+
+                searchListAdapter.notifyDataSetChanged();
+                searchListAdapter.setSearchContent(searchEt.getText().toString());
+            }
+        }
+    }
+
+    @Override
+    public void getSearchNewHouse(Response<SearchHouseBean> response) {
+
+    }
+
+    @Override
+    public void getSearchVilla(Response<SearchVillaBean> response) {
+
+    }
+
+    @Override
+    public void getSearchLand(Response<SearchLandBean> response) {
+
+    }
+
+    @Override
+    public void getSearchBusiness(Response<SearchBusinessBean> response) {
+
     }
 
     private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

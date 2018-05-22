@@ -283,6 +283,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent",getResources().getString(R.string.new_house));
+                intent.putExtra("state", 0);
                 startActivity(intent);
         }
     }

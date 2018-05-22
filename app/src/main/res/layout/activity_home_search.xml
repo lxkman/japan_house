@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/act_homeSearch_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.HomeSearchActivity">
+
     <RelativeLayout
         android:id="@+id/view_rl"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         android:background="@color/colorPrimary"
         android:paddingBottom="5dp"
         android:paddingTop="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +24,7 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/cancle_tv"
             android:background="@drawable/bg_search">
+
             <TextView
                 android:id="@+id/location_tv"
                 android:layout_width="70dp"
@@ -32,14 +35,16 @@
                 android:paddingBottom="8dp"
                 android:paddingLeft="3dp"
                 android:text="@string/new_house"
-                android:textColor="@color/text_black"/>
+                android:textColor="@color/text_black" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
-                android:background="@color/gray1"/>
+                android:layout_marginTop="2dp"
+                android:background="@color/gray1" />
+
             <EditText
                 android:id="@+id/search_et"
                 android:layout_width="match_parent"
@@ -51,9 +56,9 @@
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:textColor="@color/text_gray"
-                android:textSize="14sp"
-            />
+                android:textSize="14sp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/cancle_tv"
             android:layout_width="wrap_content"
@@ -64,27 +69,33 @@
             android:drawablePadding="10dp"
             android:text="@string/quxiao"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </RelativeLayout>
+
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/act_homeSearch_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:paddingLeft="5dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="@string/remensousuo"
                     android:textColor="@color/text_black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
+
                 <ImageView
                     android:id="@+id/hot_refrash_iv"
                     android:layout_width="wrap_content"
@@ -93,26 +104,30 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:padding="10dp"
-                    android:src="@drawable/search_refresh_iv"/>
+                    android:src="@drawable/search_refresh_iv" />
             </RelativeLayout>
+
             <com.example.administrator.japanhouse.view.FluidLayout
                 android:id="@+id/hotsearch_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="5dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="@string/lishijilu"
                     android:textColor="@color/text_black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
+
                 <ImageView
                     android:id="@+id/history_clear"
                     android:layout_width="wrap_content"
@@ -121,17 +136,19 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:padding="10dp"
-                    android:src="@drawable/search_del_iv"/>
+                    android:src="@drawable/search_del_iv" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/history_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>

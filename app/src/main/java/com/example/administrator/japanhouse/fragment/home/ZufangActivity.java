@@ -76,12 +76,12 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     private void initView() {
         String[] itemName = {getString(R.string.zufang_dsgy),
-                getString(R.string.zufang_xsgy),
+                getString(R.string.zufang_xsgy) ,
                 getString(R.string.zufang_ffzf),
                 getString(R.string.bieshu),
                 getString(R.string.zufang_sp),
                 getString(R.string.zufang_bgs),
-        };
+                };
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));
@@ -125,7 +125,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         yanjiuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, YanjiuDetailActivity.class));
+                startActivity(new Intent(mContext,YanjiuDetailActivity.class));
             }
         });
 
@@ -141,14 +141,14 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         tuijianRecycler.setAdapter(likeAdapter);
         likeAdapter.setOnItemClickListener(this);
 
-        if (SpUtils.getBoolean("shendeng", false)) {
+        if (SpUtils.getBoolean("shendeng",false)){
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
         }
 
         shendengRecycler.setNestedScrollingEnabled(false);
-        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout, likeList);
+        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
+        ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout,likeList);
 //        View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_shendeng_footer,shendengRecycler,false);
 //        shendengAdapter.setFooterView(footerView);
         shendengRecycler.setAdapter(shendengAdapter);
@@ -157,7 +157,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (SpUtils.getBoolean("shendeng", false)) {
+        if (SpUtils.getBoolean("shendeng",false)){
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
         }
@@ -193,13 +193,13 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         protected void convert(BaseViewHolder helper, HomeItemBean item) {
             ImageView imageView = helper.getView(R.id.item_pic_iv);
             Glide.with(mContext).load(item.getImg()).into(imageView);
-            TextView tv_content = helper.getView(R.id.tv_content);
+            TextView tv_content=helper.getView(R.id.tv_content);
             int position = helper.getAdapterPosition();
-            if (position == 1) {
+            if (position==1){
                 tv_content.setText("一居室大阳台");
-            } else if (position == 2) {
+            }else if (position==2){
                 tv_content.setText("朝南阳光房");
-            } else if (position == 4) {
+            }else if (position==4){
                 tv_content.setText("优品豪装");
             }
         }
@@ -213,12 +213,12 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-            TextView tv_price = helper.getView(R.id.tv_price);
+            TextView tv_price=helper.getView(R.id.tv_price);
             tv_price.setText("1750元/月");
         }
     }
 
-    private class ShendengAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class ShendengAdapter extends BaseQuickAdapter<String, BaseViewHolder>{
 
         public ShendengAdapter(int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
@@ -226,7 +226,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-            if (helper.getAdapterPosition() == 4) {
+            if (helper.getAdapterPosition()==4){
                 helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -247,7 +247,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent", getResources().getString(R.string.zu_house));
+                intent.putExtra("popcontent",getResources().getString(R.string.zu_house));
+                intent.putExtra("state", 4);
                 startActivity(intent);
                 break;
             case R.id.img_dingwei:

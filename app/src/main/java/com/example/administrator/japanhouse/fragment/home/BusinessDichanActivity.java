@@ -37,7 +37,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
     private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.xzlmaimai_iv,
-            R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
+             R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +97,8 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 break;
             case R.id.search_et:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent", getResources().getString(R.string.shangyedichan));
+                intent.putExtra("popcontent",getResources().getString(R.string.shangyedichan));
+                intent.putExtra("state", 5);
                 startActivity(intent);
                 break;
         }
@@ -105,7 +106,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
+        startActivity(new Intent(mContext,ShangpuDetailsActivity.class));
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {

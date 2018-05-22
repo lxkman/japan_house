@@ -222,6 +222,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent",getResources().getString(R.string.shangyedichan));
+                intent.putExtra("state", 5);
                 startActivity(intent);
         }
     }

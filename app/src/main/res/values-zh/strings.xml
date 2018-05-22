@@ -480,7 +480,7 @@
     <string name="string_baozhangxinxi">保障信息</string>
     <string name="string_xingneng">性&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;能：</string>
     <string name="string_zhengmingshu">证&#160;&#160;明&#160;&#160;书：</string>
-    <string name="string_xiacibaozhang">瑕疵保障：</string>
+    <string name="string_xiacibaozhang">瑕疵保证：</string>
     <string name="string_beizhu">备&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;注：</string>
     <string name="string_beizhuxinxi">备注</string>
     <string name="string_mianji">面&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;积：</string>
@@ -532,6 +532,7 @@
     <string name="string_zonghushu">总&#160;&#160;户&#160;&#160;数：</string>
     <string name="string_qita">其&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;他：</string>
     <string name="string_siyongbufen">私用部分：</string>
+    <string name="activity_chat_appraise">评价</string>
     <string name="string_rujutiaojian">入居条件</string>
     <string name="string_rujutiaojianmaohao">入居条件：</string>
     <string name="string_jianzhugouzao">建筑构造：</string>

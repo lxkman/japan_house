@@ -287,6 +287,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent",getResources().getString(R.string.old_house));
+                intent.putExtra("state", 2);
                 startActivity(intent);
         }
     }

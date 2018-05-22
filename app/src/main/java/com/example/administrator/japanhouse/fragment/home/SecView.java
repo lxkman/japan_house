@@ -95,7 +95,7 @@ class SecView implements View.OnClickListener {
         }
 
         @Override
-        protected void convert(final BaseViewHolder helper, OneCheckBean item) {
+        protected void convert(final BaseViewHolder helper, final OneCheckBean item) {
             helper.setText(R.id.rb_title, item.getName());
             helper.setChecked(R.id.rb_title, item.isChecked());
             helper.setVisible(R.id.img_isCheck, item.isChecked());
@@ -110,29 +110,16 @@ class SecView implements View.OnClickListener {
                             mList.get(i).setChecked(false);
                         }
                     }
+                    int position=helper.getAdapterPosition();//notify之后再取这个值就变成-1了，不知为何
                     mLiebiaoAdapter.notifyDataSetChanged();
                     if (!getCheckeditemText().equals("")) {
                         dropDownMenu.setTabText(getCheckeditemText());
                     }
                     dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
+                    listener.onItemClick(v, 2, position);
                 }
 
             });
         }
     }
-
-    private class mClick implements View.OnClickListener {
-
-        String string;
-
-        private mClick(String string) {
-            this.string = string;
-        }
-
-        @Override
-        public void onClick(View v) {
-            listener.onItemClick(v, 2, string);
-        }
-    }
-
 }

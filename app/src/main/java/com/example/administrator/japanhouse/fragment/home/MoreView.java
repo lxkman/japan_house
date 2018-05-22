@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.yyydjk.library.DropDownMenu;
@@ -47,6 +48,9 @@ class MoreView implements View.OnClickListener {
     private List<OneCheckBean> mItemList5;
     private List<OneCheckBean> mItemList6;
     private List<OneCheckBean> mItemList7;
+    private List<MoreCheckBean> moreCheckBeanList = new ArrayList<>();
+    private boolean ruleData;
+    private LiebiaoAdapter2 liebiaoAdapter2;
 
     MoreView(Context context) {
         this.context = context;
@@ -58,9 +62,9 @@ class MoreView implements View.OnClickListener {
 
     View secView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_more, null);
-        ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
+        ll_root = (LinearLayout) view.findViewById(R.id.ll_root);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_root.getLayoutParams();
-        layoutParams.height= MyUtils.getScreenHeight(context)*3/4;
+        layoutParams.height = MyUtils.getScreenHeight(context) * 3 / 4;
         ll_root.setLayoutParams(layoutParams);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
@@ -68,6 +72,14 @@ class MoreView implements View.OnClickListener {
         btn_reset.setOnClickListener(this);
         btn_sure.setOnClickListener(this);
         return view;
+    }
+
+    void insertData3(List<MoreCheckBean> more, DropDownMenu dropDownMenu) {
+        this.dropDownMenu = dropDownMenu;
+        moreCheckBeanList.clear();
+        moreCheckBeanList = more;
+        ruleData = true;
+        initData();
     }
 
     void insertData(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
@@ -152,24 +164,68 @@ class MoreView implements View.OnClickListener {
     }
 
     private void initData() {
-        if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.more_item, mList);
-        }
         mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setAdapter(mLiebiaoAdapter);
+        if (!ruleData && mLiebiaoAdapter == null) {
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.more_item, mList);
+            mrecycler.setAdapter(mLiebiaoAdapter);
+        }
+        if (ruleData) {
+            liebiaoAdapter2 = new LiebiaoAdapter2(R.layout.more_item, moreCheckBeanList);
+            mrecycler.setAdapter(liebiaoAdapter2);
+        }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_reset:
-
+                chongzhi();
                 break;
             case R.id.btn_sure:
                 dropDownMenu.closeMenu();
+                listener.onMoreItemClick(v, getSelectedData());
                 break;
         }
+    }
+
+    private void chongzhi(){
+        if (moreCheckBeanList != null && moreCheckBeanList.size() > 0) {
+            for (int i = 0; i < moreCheckBeanList.size(); i++) {
+                MoreCheckBean moreCheckBean = moreCheckBeanList.get(i);
+                List<OneCheckBean> checkBeanList = moreCheckBean.getCheckBeanList();
+                if (checkBeanList!=null && checkBeanList.size()>0){
+                    for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
+                        checkBeanList.get(i1).setChecked(false);
+                    }
+                }
+            }
+            if (liebiaoAdapter2!=null){
+                liebiaoAdapter2.notifyDataSetChanged();
+                listener.onMoreItemClick(null, new ArrayList<List<String>>());
+            }
+        }
+    }
+
+    private List<List<String>> getSelectedData() {
+        List<List<String>> selectedBeen = new ArrayList<>();
+        if (moreCheckBeanList != null && moreCheckBeanList.size() > 0) {
+            for (int i = 0; i < moreCheckBeanList.size(); i++) {
+                List<String> selectedItemList = new ArrayList<>();
+                MoreCheckBean moreCheckBean = moreCheckBeanList.get(i);
+                List<OneCheckBean> checkBeanList = moreCheckBean.getCheckBeanList();
+                if (checkBeanList != null && checkBeanList.size() > 0) {
+                    for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
+                        OneCheckBean oneCheckBean = checkBeanList.get(i1);
+                        if (oneCheckBean.isChecked()) {
+                            selectedItemList.add(oneCheckBean.getId() + "");
+                        }
+                    }
+                    selectedBeen.add(selectedItemList);
+                }
+            }
+        }
+        return selectedBeen;
     }
 
     class LiebiaoAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
@@ -216,10 +272,10 @@ class MoreView implements View.OnClickListener {
         protected void convert(final BaseViewHolder helper, final OneCheckBean item) {
             helper.setText(R.id.rb_title, item.getName());
             final TextView textView = helper.getView(R.id.rb_title);
-            if (item.isChecked()){
+            if (item.isChecked()) {
                 textView.setBackground(mContext.getResources().getDrawable(R.drawable.round_drakyellow));
                 textView.setTextColor(mContext.getResources().getColor(R.color.white));
-            }else {
+            } else {
                 textView.setBackground(mContext.getResources().getDrawable(R.drawable.round_gray));
                 textView.setTextColor(mContext.getResources().getColor(R.color.moreuncheck));
             }
@@ -239,23 +295,29 @@ class MoreView implements View.OnClickListener {
                         }
                     }
                     item.setChecked(!item.isChecked());
-                    mLiebiaoAdapter.notifyDataSetChanged();
+                    if (!ruleData) {
+                        mLiebiaoAdapter.notifyDataSetChanged();
+                    } else {
+                        liebiaoAdapter2.notifyDataSetChanged();
+                    }
                 }
             });
         }
     }
 
-    private class mClick implements View.OnClickListener {
+    class LiebiaoAdapter2 extends BaseQuickAdapter<MoreCheckBean, BaseViewHolder> {
 
-        String string;
-
-        private mClick(String string) {
-            this.string = string;
+        public LiebiaoAdapter2(@LayoutRes int layoutResId, @Nullable List<MoreCheckBean> data) {
+            super(layoutResId, data);
         }
 
         @Override
-        public void onClick(View v) {
-            listener.onItemClick(v, 2, string);
+        protected void convert(final BaseViewHolder helper, MoreCheckBean item) {
+            helper.setText(R.id.rb_title, item.getName());
+            RecyclerView recycler_item = helper.getView(R.id.recycler_item);
+            recycler_item.setNestedScrollingEnabled(false);
+            recycler_item.setLayoutManager(new GridLayoutManager(mContext, 4));
+            recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, item.getCheckBeanList()));
         }
     }
 

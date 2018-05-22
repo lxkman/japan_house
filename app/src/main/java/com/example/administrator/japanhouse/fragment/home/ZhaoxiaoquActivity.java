@@ -168,6 +168,16 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
         });
     }
 
+    @Override
+    public void onItemClick(View view, int postion, int itemPosition) {
+
+    }
+
+    @Override
+    public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
+
+    }
+
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
@@ -201,8 +211,4 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
         }
     }
 
-    @Override
-    public void onItemClick(View view, int postion, String string) {
-
-    }
 }

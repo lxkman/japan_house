@@ -72,6 +72,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_house);
         ButterKnife.bind(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initView();
         initData();
         initListener();
@@ -171,16 +177,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
             mList.add("");
         }
 
-        String city = CacheUtils.get(Constants.COUNTRY);
         HttpParams params = new HttpParams();
-        if (city != null && city.equals("ja")) {
+        if (isJa) {
             params.put("languageType", 1);
-            isJa = true;
         } else {
             params.put("languageType", 0);
-            isJa = false;
         }
-        params.put("status", 1);
         params.put("pageNo", page);
         params.put("hType", 1);
         OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
@@ -236,6 +238,16 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
 
     }
 
+    @Override
+    public void onItemClick(View view, int postion, int itemPosition) {
+
+    }
+
+    @Override
+    public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
+
+    }
+
     //    class OneAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     //
     //        public OneAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
@@ -287,11 +299,5 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 startActivity(intent);
         }
     }
-
-    @Override
-    public void onItemClick(View view, int postion, String string) {
-
-    }
-
 
 }

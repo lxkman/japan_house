@@ -112,10 +112,12 @@ public class LancherActivity extends BaseActivity {
                         String locale = Locale.getDefault().getLanguage();
                         if (LancherBean != null) {
                             if (LancherBean.getCode().equals("200")) {
-                                if (TextUtils.equals(locale, "ja")) {
-                                    Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
-                                } else {
-                                    Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+                                if (LancherBean.getDatas()!=null && LancherBean.getDatas().size()>0){
+                                    if (TextUtils.equals(locale, "ja")) {
+                                        Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+                                    } else {
+                                        Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+                                    }
                                 }
                                 mHandler.postDelayed(new Runnable() {
                                     @Override

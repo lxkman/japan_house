@@ -7,11 +7,26 @@ package com.example.administrator.japanhouse.bean;
 public class OneCheckBean {
     private boolean isChecked;
     private String name;
+    private int id;
 
 
     public OneCheckBean(boolean isChecked, String name) {
         this.isChecked = isChecked;
         this.name = name;
+    }
+
+    public OneCheckBean(boolean isChecked, String name, int id) {
+        this.isChecked = isChecked;
+        this.name = name;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -53,7 +52,7 @@ public class FirstView implements View.OnClickListener {
     View firstView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_first, null);
         ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) ll_root.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_root.getLayoutParams();
         layoutParams.height= MyUtils.getScreenHeight(context)/2;
         ll_root.setLayoutParams(layoutParams);
         mrecycler1 = (RecyclerView) view.findViewById(R.id.Mrecycler1);
@@ -235,19 +234,5 @@ public class FirstView implements View.OnClickListener {
             }
         }
         return false;
-    }
-
-    private class mClick implements View.OnClickListener {
-
-        String string;
-
-        private mClick(String string) {
-            this.string = string;
-        }
-
-        @Override
-        public void onClick(View v) {
-            listener.onItemClick(v, 1, string);
-        }
     }
 }

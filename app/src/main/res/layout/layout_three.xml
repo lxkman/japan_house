@@ -18,65 +18,68 @@
             android:layout_weight="1"
             android:background="#fff">
         </android.support.v7.widget.RecyclerView>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:padding="10dp">
-            <TextView
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:text="@string/zidingyi"
-                android:textColor="@color/text_black"
-                android:textSize="15sp"/>
-            <EditText
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_huise_line"
-                android:gravity="center"
-                android:hint="@string/zuidijia"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="10dp"
-                android:singleLine="true"
-                android:textColorHint="@color/text_gray"
-                android:textSize="14sp"/>
-            <View
-                android:layout_width="15dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/huise"></View>
-            <EditText
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_huise_line"
-                android:gravity="center"
-                android:hint="@string/zuigaojia"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="10dp"
-                android:singleLine="true"
-                android:textColorHint="@color/text_gray"
-                android:textSize="14sp"/>
+                android:layout_height="55dp"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/zidingyi"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"/>
+                <EditText
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_huise_line"
+                    android:gravity="center"
+                    android:hint="@string/zuidijia"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/text_gray"
+                    android:textSize="13sp"/>
+                <View
+                    android:layout_width="15dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/huise"></View>
+                <EditText
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_huise_line"
+                    android:gravity="center"
+                    android:hint="@string/zuigaojia"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="8dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/text_gray"
+                    android:textSize="13sp"/>
+            </LinearLayout>
             <Button
                 android:id="@+id/btn_sure"
-                android:layout_width="wrap_content"
-                android:layout_height="40dip"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30dip"
+                android:layout_width="70dp"
+                android:layout_height="35dip"
+                android:layout_marginRight="10dip"
                 android:background="@color/shihuangse"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:text="@string/queding"
                 android:textColor="#fff"
-                android:textSize="15sp"/>
-        </LinearLayout>
+                android:textSize="14sp"/>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

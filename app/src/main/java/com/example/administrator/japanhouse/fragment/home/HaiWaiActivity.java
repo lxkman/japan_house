@@ -86,7 +86,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
         likeAdapter.setOnItemClickListener(this);
     }
 
-    @OnClick({R.id.title_back_iv, R.id.search_et})
+    @OnClick({R.id.title_back_iv, R.id.rl_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back_iv:

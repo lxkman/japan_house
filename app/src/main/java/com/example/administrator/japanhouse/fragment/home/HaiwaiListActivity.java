@@ -110,8 +110,8 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         list1.add(new OneCheckBean(false, "3-10万"));
         list1.add(new OneCheckBean(false, "6-15万"));
         list1.add(new OneCheckBean(false, "10万以上"));
-        SecView secView = new SecView(HaiwaiListActivity.this);
-        popupViews.add(secView.secView());
+        ThreeView secView = new ThreeView(HaiwaiListActivity.this);
+        popupViews.add(secView.firstView());
         secView.setListener(this);
         secView.insertData(list1, dropDownMenu);
 
@@ -124,8 +124,8 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         list2.add(new OneCheckBean(false, "二室"));
         list2.add(new OneCheckBean(false, "三室"));
         list2.add(new OneCheckBean(false, "三室以上"));
-        ThreeView threeView = new ThreeView(this);
-        popupViews.add(threeView.firstView());
+        SecView threeView = new SecView(this);
+        popupViews.add(threeView.secView());
         threeView.insertData(list2, dropDownMenu);
         threeView.setListener(this);
         /**
@@ -196,6 +196,16 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
 
     }
 
+    @Override
+    public void onItemClick(View view, int postion, int itemPosition) {
+
+    }
+
+    @Override
+    public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
+
+    }
+
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
@@ -222,8 +232,4 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         }
     }
 
-    @Override
-    public void onItemClick(View view, int postion, String string) {
-
-    }
 }

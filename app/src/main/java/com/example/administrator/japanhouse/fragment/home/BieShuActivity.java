@@ -18,8 +18,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.BieShuListBean;
 import com.example.administrator.japanhouse.bean.EventBean;
-import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -63,7 +63,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
     private boolean isLoadMore;
     private int page = 1;
     private boolean isJa;
-    private List<OldHouseListBean.DatasEntity> mDatas;
+    private List<BieShuListBean.DatasEntity> mDatas;
 
 
     @Override
@@ -71,6 +71,12 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ershoufang_activiy);
         ButterKnife.bind(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initView();
         initData();
         initListener();
@@ -169,29 +175,25 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
             mList.add("");
             mList.add("");
         }
-        String city = CacheUtils.get(Constants.COUNTRY);
         HttpParams params = new HttpParams();
-        if (city != null && city.equals("ja")) {
+        if (isJa) {
             params.put("languageType", 1);
-            isJa = true;
         } else {
             params.put("languageType", 0);
-            isJa = false;
         }
-        params.put("status", 0);
         params.put("pageNo", page);
-        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+        OkGo.<BieShuListBean>post(MyUrls.BASEURL + "/app/villadom/searchlist")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<OldHouseListBean>(BieShuActivity.this, OldHouseListBean.class) {
+                .execute(new DialogCallback<BieShuListBean>(BieShuActivity.this, BieShuListBean.class) {
                     @Override
-                    public void onSuccess(Response<OldHouseListBean> response) {
+                    public void onSuccess(Response<BieShuListBean> response) {
                         int code = response.code();
-                        OldHouseListBean oldHouseListBean = response.body();
-                        if (oldHouseListBean == null) {
+                        BieShuListBean bieShuListBean = response.body();
+                        if (bieShuListBean == null) {
                             return;
                         }
-                        List<OldHouseListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        List<BieShuListBean.DatasEntity> datas = bieShuListBean.getDatas();
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 Toast.makeText(BieShuActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
@@ -224,21 +226,31 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
                 });
     }
 
+    @Override
+    public void onItemClick(View view, int postion, int itemPosition) {
 
-    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
+    }
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {
+    @Override
+    public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
+
+    }
+
+
+    class LiebiaoAdapter extends BaseQuickAdapter<BieShuListBean.DatasEntity, BaseViewHolder> {
+
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<BieShuListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
+        protected void convert(BaseViewHolder helper, BieShuListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
-                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+                    .setText(R.id.tv_mianji, isJa ? item.getCoveredAreaJpn() : item.getCoveredAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
         }
     }
 
@@ -266,8 +278,4 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
         }
     }
 
-    @Override
-    public void onItemClick(View view, int postion, String string) {
-
-    }
 }

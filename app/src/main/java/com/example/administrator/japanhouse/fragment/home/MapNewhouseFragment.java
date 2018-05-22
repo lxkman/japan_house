@@ -224,10 +224,6 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         baiduMap.addOverlays(overlayOptionsList);
     }
 
-    @Override
-    public void onItemClick(View view, int postion, String string) {
-
-    }
 
     @Override
     protected void initLazyData() {
@@ -261,5 +257,15 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                 initOverlay();
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int postion, int itemPosition) {
+
+    }
+
+    @Override
+    public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
+
     }
 }

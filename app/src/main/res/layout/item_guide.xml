@@ -10,11 +10,11 @@
         android:scaleType="fitXY"
         />
     <TextView
+        android:background="@drawable/lijijinru"
         android:id="@+id/tv_jinru"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="60dp"
-        android:gravity="center"
         />
 </FrameLayout>

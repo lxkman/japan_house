@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -13,14 +14,24 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.administrator.japanhouse.R.id.edt_phone;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -28,7 +39,7 @@ public class RegisterActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.tv_login)
     TextView tvLogin;
-    @BindView(R.id.edt_phone)
+    @BindView(edt_phone)
     EditText edtPhone;
     @BindView(R.id.edt_yanzheng_code)
     EditText edtYanzhengCode;
@@ -63,6 +74,12 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+                boolean ja = MyUtils.isJa();
+        if (!ja){
+            checkQuyu.setText("+86");
+        }else {
+            checkQuyu.setText("+81");
+        }
     }
 
 
@@ -80,7 +97,7 @@ public class RegisterActivity extends BaseActivity {
                 SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                 break;
             case R.id.btn_login:
-                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
+                initNet();
                 break;
             case R.id.img_weixin:
                 startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
@@ -106,6 +123,70 @@ public class RegisterActivity extends BaseActivity {
                 break;
         }
     }
+    private void initNet() {
+        if (TextUtils.isEmpty(edtPhone.getText().toString())) {
+            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
+            Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())){
+            String phone = edtPhone.getText().toString();
+            String substring = phone.substring(0, 3);
+            if (substring.equals("050")||substring.equals("060")||substring.equals("070")||substring.equals("080")||substring.equals("090")){
+                if (checkQuyu.getText().equals("+86")){
+                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }else {
+                if (checkQuyu.getText().equals("+81")){
+                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            if(TextUtils.isEmpty(edtYanzhengCode.getText().toString())) {
+                Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                return;
+            }else if(TextUtils.isEmpty(edtPass.getText().toString())) {
+                Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+                return;
+            }else if (!MyUtils.isPswRuleNO(edtPass.getText().toString())){
+                Toast.makeText(this, "请输入6-16位数字和字母组成的密码", Toast.LENGTH_SHORT).show();
+            }else if(TextUtils.isEmpty(edtPassSure.getText().toString())) {
+                Toast.makeText(this, "请输入确认密码", Toast.LENGTH_SHORT).show();
+                return;
+            }else if(!edtPass.getText().toString().equals(edtPassSure.getText().toString())) {
+                Toast.makeText(this, "两次输入的密码不一致，请重新输入", Toast.LENGTH_SHORT).show();
+                return;
+            }else {
+                HttpParams params = new HttpParams();
+                params.put("tPhone", edtPhone.getText().toString());
+                params.put("code","1234");
+                params.put("passWord", edtPass.getText().toString());
+                OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/user/registered")
+                        .tag(this)
+                        .params(params)
+                        .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {
+                            @Override
+                            public void onSuccess(Response<SuccessBean> response) {
+                                int code = response.code();
+                                SuccessBean successBean = response.body();
+                                if (successBean.getCode().equals("200")){
+                                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                   startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                   finish();
+                                }else if (successBean.getCode().equals("-1")){
+                                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                }else if (successBean.getCode().equals("207")){
+                                    Toast.makeText(RegisterActivity.this, "此号码已被注册", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        }
+
+    }
+
     private void initPop() {
         //屏幕变暗
         WindowManager.LayoutParams lp =  getWindow().getAttributes();

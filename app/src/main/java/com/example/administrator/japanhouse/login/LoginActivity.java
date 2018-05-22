@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +15,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.LoginParmeter;
+import com.example.administrator.japanhouse.bean.LoginBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.linecorp.linesdk.LineCredential;
 import com.linecorp.linesdk.LineProfile;
 import com.linecorp.linesdk.auth.LineLoginApi;
 import com.linecorp.linesdk.auth.LineLoginResult;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -71,6 +79,12 @@ public class LoginActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        boolean ja = MyUtils.isJa();
+        if (!ja){
+            tvShowPop.setText("+86");
+        }else {
+            tvShowPop.setText("+81");
+        }
     }
 
     @OnClick({R.id.back_img, R.id.tv_register, R.id.tv_forget_pass, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq, R.id.img_line, R.id.tv_show_pop})
@@ -96,16 +110,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             //登录
             case R.id.btn_login:
-                finish();
-                SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid", "1");
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-                 HashMap<String, Boolean> hm = new HashMap<>();
-                //会话类型 以及是否聚合显示
-                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
-//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                RongIM.getInstance().startConversationList(this, hm);
+                initLoginNet();
                 break;
             case R.id.img_weixin:
                 startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
@@ -131,6 +136,69 @@ public class LoginActivity extends BaseActivity {
                 basePopupWindow.showAsDropDown(view);
                 break;
         }
+    }
+
+    private void initLoginNet() {
+        if (TextUtils.isEmpty(edtPhone.getText().toString())) {
+            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
+            Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())){
+            String phone = edtPhone.getText().toString();
+            String substring = phone.substring(0, 3);
+            if (substring.equals("050")||substring.equals("060")||substring.equals("070")||substring.equals("080")||substring.equals("090")){
+                if (tvShowPop.getText().equals("+86")){
+                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }else {
+                if (tvShowPop.getText().equals("+81")){
+                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+             if(TextUtils.isEmpty(edtPass.getText().toString())) {
+                Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+                return;
+            }else if (!MyUtils.isPswRuleNO(edtPass.getText().toString())){
+                Toast.makeText(this, "请输入6-16位数字和字母组成的密码", Toast.LENGTH_SHORT).show();
+            }else {
+                HttpParams params = new HttpParams();
+                params.put("tPhone", edtPhone.getText().toString());
+                params.put("passWord", edtPass.getText().toString());
+                OkGo.<LoginBean>post(MyUrls.BASEURL + "/app/user/login")
+                        .tag(this)
+                        .params(params)
+                        .execute(new DialogCallback<LoginBean>(this, LoginBean.class) {
+                            @Override
+                            public void onSuccess(Response<LoginBean> response) {
+                                int code = response.code();
+                                LoginBean LoginBean = response.body();
+//                                Log.d("LoginActivity", LoginBean.getCode()+"-------------");
+                                if (LoginBean.getCode().equals("200")){
+                                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid",LoginBean.getDatas().getUid()+"");
+                                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("token",LoginBean.getDatas().getToken()+"");
+                                    Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+
+                                    HashMap<String, Boolean> hm = new HashMap<>();
+                                    //会话类型 以及是否聚合显示
+                                    hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
+                            //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+                            //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                                    RongIM.getInstance().startConversationList(LoginActivity.this, hm);
+                                    finish();
+                                }else if (LoginBean.getCode().equals("-1")){
+                                    Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
+                                }else if (LoginBean.getCode().equals("206")){
+                                    Toast.makeText(LoginActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        }
+
     }
 
     private void initPop() {

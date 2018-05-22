@@ -230,14 +230,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="@string/string_jianzhugongsi"
+                            android:text="@string/string_jianzhugouzao"
                             android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_house_gouzao"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text=""
+                            android:text="管理员常驻、24小时有人管理/安全性、防范摄像头管理员常驻、24小时有人管理/安全性、防范摄像头"
                             android:textColor="#222"
                             android:textSize="14sp" />
                     </LinearLayout>

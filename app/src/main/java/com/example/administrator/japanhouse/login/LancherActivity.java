@@ -8,20 +8,26 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.LancherBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.orhanobut.logger.Logger;
 
 import org.zackratos.ultimatebar.UltimateBar;
@@ -41,6 +47,8 @@ public class LancherActivity extends BaseActivity {
     private ImageView iv_launcher;
     public LocationClient mLocationClient = null;
     private BDLocationListener myListener = new MyLocationListener();
+    private String location;
+    private int languageType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +66,7 @@ public class LancherActivity extends BaseActivity {
         iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
 //        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
 
-        String location = CacheUtils.get(Constants.COUNTRY);
+        location = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(location)) {
             Resources resources = getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();
@@ -67,41 +75,74 @@ public class LancherActivity extends BaseActivity {
             config.locale = myLocale;
             resources.updateConfiguration(config, dm);
             if (location.equals("ja")) {
-                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+//                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+                languageType=1;
+            }else {
+                languageType=0;
             }
         } else {
             String locale = Locale.getDefault().getLanguage();
             CacheUtils.put(Constants.COUNTRY, locale);
             if (TextUtils.equals(locale, "ja")) {
-                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+//                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+                languageType=1;
+            }else {
+                languageType=0;
             }
         }
 
         initLocation();//百度地图定位
         mLocationClient.start();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                boolean guide = SharedPreferencesUtils.getInstace(LancherActivity.this).getBooleanPreference("guide", false);
-                if (!guide) {
-                    Intent intent = new Intent(LancherActivity.this, GuidePageActivity.class);
-                    startActivity(intent);
-                    finish();
 
-                } else {
-//                    Intent intent = new Intent(LancherActivity.this, MainActivity.class);
-//                    startActivity(intent);
-                    HashMap<String, Boolean> hashMap = new HashMap<>();
-                    //会话类型 以及是否聚合显示
-                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+        initLancherNet();
+    }
+
+    private void initLancherNet() {
+        HttpParams params = new HttpParams();
+        params.put("imageType", "0");
+        params.put("languageType",languageType);
+        OkGo.<LancherBean>post(MyUrls.BASEURL + "/app/image/images")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<LancherBean>(this, LancherBean.class) {
+                    @Override
+                    public void onSuccess(Response<LancherBean> response) {
+                        int code = response.code();
+                        LancherBean LancherBean = response.body();
+                        String locale = Locale.getDefault().getLanguage();
+                        if (LancherBean != null) {
+                            if (LancherBean.getCode().equals("200")) {
+                                if (TextUtils.equals(locale, "ja")) {
+                                    Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+                                } else {
+                                    Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+                                }
+                                mHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        boolean guide = SharedPreferencesUtils.getInstace(LancherActivity.this).getBooleanPreference("guide", false);
+                                        if (!guide) {
+                                            Intent intent = new Intent(LancherActivity.this, GuidePageActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        } else {
+                                            HashMap<String, Boolean> hashMap = new HashMap<>();
+                                            //会话类型 以及是否聚合显示
+                                            hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
 //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
 //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                    RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
-                    finish();
+                                            RongIM.getInstance().startConversationList(LancherActivity.this, hashMap);
+                                            finish();
 
-                }
-            }
-        }, 1500);
+                                        }
+                                    }
+                                }, 2000);
+                            }
+                        }
+                    }
+                });
+
     }
 
     private void initLocation() {

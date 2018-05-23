@@ -28,10 +28,13 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.comment.BannerFragment;
 import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.more.BieSuMoreActivity;
+import com.example.administrator.japanhouse.presenter.VillaDetailsPresenter;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -47,7 +50,7 @@ import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 
-public class BieshudetailsActivity extends BaseActivity {
+public class BieshudetailsActivity extends BaseActivity implements VillaDetailsPresenter.VillaDetailsCallBack{
 
     @BindView(R.id.vp_vidio)
     ViewPager vpVidio;
@@ -80,6 +83,9 @@ public class BieshudetailsActivity extends BaseActivity {
     private FragmentManager fm;
     private MyAdapter myAdapter;
 
+    private VillaDetailsPresenter villaDetailsPresenter;
+    private VillaDetailsBean.DatasBean villaDetailsBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +94,10 @@ public class BieshudetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_bieshudetails);
         ButterKnife.bind(this);
+
+        villaDetailsPresenter = new VillaDetailsPresenter(this, this);
+        villaDetailsPresenter.getVillaDetails("1");
+
         //banner
         initViewPager();
         //户型图
@@ -221,6 +231,13 @@ public class BieshudetailsActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void getVillaDetails(Response<VillaDetailsBean> response) {
+        if (response != null && response.body() != null) {
+            villaDetailsBean = response.body().getDatas();
+        }
+    }
+
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -251,6 +268,7 @@ public class BieshudetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_See_More:
                 Intent intent=new Intent(BieshudetailsActivity.this, BieSuMoreActivity.class);
+                intent.putExtra("details", villaDetailsBean);
                 startActivity(intent);
                 break;
         }

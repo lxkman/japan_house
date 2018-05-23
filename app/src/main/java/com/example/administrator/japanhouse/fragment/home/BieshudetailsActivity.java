@@ -86,7 +86,7 @@ public class BieshudetailsActivity extends BaseActivity {
         //拉伸图片覆盖标题栏
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
-        setContentView(R.layout.activity_xiezilou_details);
+        setContentView(R.layout.activity_bieshudetails);
         ButterKnife.bind(this);
         //banner
         initViewPager();

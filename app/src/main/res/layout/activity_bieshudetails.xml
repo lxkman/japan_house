@@ -112,7 +112,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/gaoerfu_price"
+                                android:text="@string/details_shoujia"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -136,14 +136,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="@string/gaoerfu_mianji"
+                                android:text="@string/details_huxing"
                                 android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="175㎡"
+                                android:text="4LDK"
                                 android:textColor="@color/shihuangse"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -165,19 +165,41 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="售卖类型："
+                                android:text="@string/string_tudimianji"
                                 android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:text="5层"
+                                android:text="175㎡"
                                 android:textColor="#000"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="15dip"
+                            >
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/string_jianzhumianji"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="100㎡"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
 

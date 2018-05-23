@@ -108,11 +108,10 @@
                         android:paddingLeft="15dip">
 
                         <TextView
-                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="@string/gaoerfu_price"
+                            android:text="@string/details_shoujia"
                             android:textSize="14sp" />
 
                         <TextView

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -38,6 +39,8 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     RecyclerView likeRecycler;
     private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.xzlmaimai_iv,
              R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
+    @BindView(R.id.rl_search)
+    RelativeLayout rl_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +92,13 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
         likeAdapter.setOnItemClickListener(this);
     }
 
-    @OnClick({R.id.title_back_iv, R.id.search_et})
+    @OnClick({R.id.title_back_iv, R.id.rl_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back_iv:
                 finish();
                 break;
-            case R.id.search_et:
+            case R.id.rl_search:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent",getResources().getString(R.string.shangyedichan));
                 intent.putExtra("state", 5);

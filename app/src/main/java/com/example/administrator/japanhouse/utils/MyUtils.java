@@ -125,6 +125,13 @@ public class MyUtils {
         return retStrFormatNowDate;
     }
 
+    public static String longtoStringDate(Long millis){
+        Date nowTime = new Date(millis);
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+        String retStrFormatNowDate = sdFormatter.format(nowTime);
+        return retStrFormatNowDate;
+    }
+
     // 获取当前时间
     public static String getCurrentDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

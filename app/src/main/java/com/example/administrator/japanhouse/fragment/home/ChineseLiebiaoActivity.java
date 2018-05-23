@@ -34,6 +34,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.administrator.japanhouse.R.string.shoujia;
+
 public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
@@ -89,7 +91,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     }
 
     private void initView() {
-        String[] headers = {getString(R.string.quyu), getString(R.string.shoujia),
+        String[] headers = {getString(R.string.quyu), getString(shoujia),
                 getString(R.string.huxing), getString(R.string.gengduo)};
         /**
          * 第一个界面
@@ -196,6 +198,11 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
 
     @Override
     public void onItemClick(View view, int postion, int itemPosition) {
+
+    }
+
+    @Override
+    public void onItemClick(View view, int postion, List<String> priceRegin) {
 
     }
 

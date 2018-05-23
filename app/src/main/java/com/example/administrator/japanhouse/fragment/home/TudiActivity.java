@@ -176,6 +176,11 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     }
 
     @Override
+    public void onItemClick(View view, int postion, List<String> priceRegin) {
+
+    }
+
+    @Override
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
 
     }

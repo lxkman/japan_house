@@ -202,6 +202,11 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     }
 
     @Override
+    public void onItemClick(View view, int postion, List<String> priceRegin) {
+
+    }
+
+    @Override
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
 
     }

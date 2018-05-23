@@ -6,9 +6,11 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -31,6 +33,7 @@ class ThreeView implements View.OnClickListener {
     private Button btn_sure;
     private DropDownMenu dropDownMenu;
     private LinearLayout ll_root;
+    private EditText et_zuidijia,et_zuigaojia;
 
     ThreeView(Context context) {
         this.context = context;
@@ -49,6 +52,8 @@ class ThreeView implements View.OnClickListener {
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(this);
+        et_zuidijia= (EditText) view.findViewById(R.id.et_zuidijia);
+        et_zuigaojia= (EditText) view.findViewById(R.id.et_zuigaojia);
         return view;
     }
 
@@ -75,6 +80,14 @@ class ThreeView implements View.OnClickListener {
                     dropDownMenu.setTabText(getCheckeditemText());
                 }
                 dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
+                if (TextUtils.isEmpty(et_zuidijia.getText().toString())
+                        &&TextUtils.isEmpty(et_zuigaojia.getText().toString())){
+                    return;
+                }
+                List<String> price=new ArrayList<>();
+                price.add(et_zuidijia.getText().toString());
+                price.add(et_zuigaojia.getText().toString());
+                listener.onItemClick(v, 4, price);
                 break;
         }
     }

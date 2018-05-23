@@ -8,8 +8,9 @@
         android:layout_margin="10dp">
         <ImageView
             android:id="@+id/item_pic_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
             android:src="@drawable/test_cnxh_iv"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,6 +19,7 @@
             android:layout_toRightOf="@+id/item_pic_iv"
             android:layout_margin="10dp">
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="关于房价涨幅"
@@ -26,6 +28,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"/>
             <TextView
+                android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

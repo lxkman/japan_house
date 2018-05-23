@@ -215,6 +215,11 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
 
     private void initData() {
         HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        }else {
+            params.put("languageType", 0);
+        }
         params.put("hType", 0);
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积
@@ -290,6 +295,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             case 1:
                 break;
             case 2://面积
+                page=1;
                 if (itemPosition == 0) {//说明是点击的不限
                     mjId = "";
                 } else {
@@ -303,10 +309,11 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 initData();
                 break;
             case 3://售价
+                page=1;
                 if (itemPosition == 0) {
-
+                    sjidList.clear();
                 } else {
-                    getSjidList(itemPosition - 1);
+                    setSjidList(itemPosition - 1);
                 }
                 mDatas.clear();
                 initData();
@@ -315,7 +322,17 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
     @Override
+    public void onItemClick(View view, int postion, List<String> priceRegin) {
+        if (shoujia != null && shoujia.size() > 0) {
+            sjidList.clear();
+            mDatas.clear();
+            initData();
+        }
+    }
+
+    @Override
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
+        page=1;
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
         mDatas.clear();
@@ -364,13 +381,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         }
     }
 
-    private List<String> getSjidList(int position) {
+    private void setSjidList(int position) {
         if (shoujia != null && shoujia.size() > 0) {
             sjidList.clear();
             OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(position);
             sjidList.add(shoujiaEntity.getStarVal() + "");
             sjidList.add(shoujiaEntity.getEndVal() + "");
         }
-        return sjidList;
     }
 }

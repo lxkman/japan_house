@@ -94,7 +94,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, ZufangListActivity.class);
-                intent.putExtra("type", position + "");
+                intent.putExtra("type", position);
                 if (position == 0) {
                     intent.putExtra("houseType", "duoceng");
                 } else if (position == 1) {
@@ -125,7 +125,9 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         yanjiuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext,YanjiuDetailActivity.class));
+                Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
+                intent.putExtra("yjType",position+"");
+                startActivity(intent);
             }
         });
 

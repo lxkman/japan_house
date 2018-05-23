@@ -20,8 +20,11 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.BieShuListBean;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.bean.MoreCheckBean;
+import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -43,7 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BieShuActivity extends BaseActivity implements MyItemClickListener{
+public class BieShuActivity extends BaseActivity implements MyItemClickListener {
     @BindView(R.id.back_img)
     ImageView backImg;
     @BindView(R.id.img_dingwei)
@@ -64,7 +67,11 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
     private int page = 1;
     private boolean isJa;
     private List<BieShuListBean.DatasEntity> mDatas;
-
+    private String mjId;
+    private List<String> sjidList = new ArrayList<>();
+    private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
+    private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
+    private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,82 +113,134 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
     }
 
     private void initView() {
-        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+        final String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
-        /**
-         * 第一个界面
-         * */
-        list = new ArrayList<>();
-        FirstView firstView = new FirstView(this);
-        popupViews.add(firstView.firstView());
-        firstView.insertData(list, dropDownMenu);
-        firstView.setListener(this);
-
-        /**
-         * 第二个界面
-         * */
-        List<OneCheckBean> list1 = new ArrayList<>();
-        list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "80以下"));
-        list1.add(new OneCheckBean(false, "80-100"));
-        list1.add(new OneCheckBean(false, "100-150"));
-        list1.add(new OneCheckBean(false, "300以上"));
-        SecView secView = new SecView(this);
-        popupViews.add(secView.secView());
-        secView.setListener(this);
-        secView.insertData(list1, dropDownMenu);
-
-        /**
-         * 第三个界面
-         * */
-        List<OneCheckBean> list2 = new ArrayList<>();
-        list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "3-10万"));
-        list2.add(new OneCheckBean(false, "6-15万"));
-        list2.add(new OneCheckBean(false, "10万以上"));
-        ThreeView threeView = new ThreeView(this);
-        popupViews.add(threeView.firstView());
-        threeView.insertData(list2, dropDownMenu);
-        threeView.setListener(this);
-        /**
-         * 第四个界面
-         * */
-        List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "构造"));
-        list3.add(new OneCheckBean(false, "地段"));
-        list3.add(new OneCheckBean(false, "朝向"));
-        list3.add(new OneCheckBean(false, "面积(平米)"));
-        list3.add(new OneCheckBean(false, "室内设施"));
-        MoreView fourView = new MoreView(this);
-        popupViews.add(fourView.secView());
-        fourView.insertData(list3, dropDownMenu);
-        fourView.setListener(this);
-        /**
-         * Dropdownmenu下面的主体部分
-         * */
-        View fifthView = LayoutInflater.from(this).inflate(R.layout.activity_main_view, null);
+        final View fifthView = LayoutInflater.from(this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
-        springview = (SpringView) fifthView.findViewById(R.id.springview);
-        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
+        springview = (SpringView) fifthView.findViewById(R.id.springview);
+        HttpParams params = new HttpParams();
+        params.put("hType", 3);
+        OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<OldHouseShaiXuanBean>(OldHouseShaiXuanBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseShaiXuanBean> response) {
+                        int code = response.code();
+                        OldHouseShaiXuanBean shaiXuanBean = response.body();
+                        if (shaiXuanBean == null) {
+                            return;
+                        }
+                        OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+
+                        /**
+                         * 第一个界面
+                         * */
+                        list = new ArrayList<>();
+                        FirstView firstView = new FirstView(BieShuActivity.this);
+                        popupViews.add(firstView.firstView());
+                        firstView.insertData(list, dropDownMenu);
+                        firstView.setListener(BieShuActivity.this);
+
+                        /**
+                         * 第二个界面
+                         * */
+                        mianji = shaiXuanBeanDatas.getMianji();
+                        List<OneCheckBean> list1 = new ArrayList<>();
+                        list1.add(new OneCheckBean(false, "不限"));
+                        if (mianji != null && mianji.size() > 0) {
+                            for (int i = 0; i < mianji.size(); i++) {
+                                OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
+                                list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
+                            }
+                        }
+                        SecView secView = new SecView(BieShuActivity.this);
+                        popupViews.add(secView.secView());
+                        secView.setListener(BieShuActivity.this);
+                        secView.insertData(list1, dropDownMenu);
+
+                        /**
+                         * 第三个界面
+                         * */
+                        shoujia = shaiXuanBeanDatas.getShoujia();
+                        List<OneCheckBean> list2 = new ArrayList<>();
+                        list2.add(new OneCheckBean(false, "不限"));
+                        if (shoujia != null && shoujia.size() > 0) {
+                            for (int i = 0; i < shoujia.size(); i++) {
+                                OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
+                                list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
+                            }
+                        }
+                        ThreeView threeView = new ThreeView(BieShuActivity.this);
+                        popupViews.add(threeView.firstView());
+                        threeView.insertData(list2, dropDownMenu);
+                        threeView.setListener(BieShuActivity.this);
+                        /**
+                         * 第四个界面
+                         * */
+                        List<MoreCheckBean> moreCheckBeanList = new ArrayList<MoreCheckBean>();
+                        List<OldHouseShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();
+                        if (more != null && more.size() > 0) {
+                            for (int i = 0; i < more.size(); i++) {
+                                OldHouseShaiXuanBean.DatasEntity.MoreEntity moreEntity = more.get(i);
+                                List<OldHouseShaiXuanBean.DatasEntity.MoreEntity.DataEntity> data = moreEntity.getData();
+                                String nameCn = moreEntity.getNameCn();
+                                String nameJpn = moreEntity.getNameJpn();
+                                MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                moreCheckBean.setName(isJa ? nameJpn : nameCn);
+                                if (data != null && data.size() > 0) {
+                                    List<OneCheckBean> list3 = new ArrayList<>();
+                                    for (int i1 = 0; i1 < data.size(); i1++) {
+                                        list3.add(new OneCheckBean(false,
+                                                isJa ? data.get(i1).getScreeValJpn() : data.get(i1).getScreeValCn(), data.get(i1).getId()));
+                                    }
+                                    moreCheckBean.setCheckBeanList(list3);
+                                }
+                                moreCheckBeanList.add(moreCheckBean);
+                            }
+                        }
+                        MoreView fourView = new MoreView(BieShuActivity.this);
+                        popupViews.add(fourView.secView());
+                        fourView.insertData3(moreCheckBeanList, dropDownMenu);
+                        fourView.setListener(BieShuActivity.this);
+                        /**
+                         * Dropdownmenu下面的主体部分
+                         * */
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+                    }
+                });
     }
 
     private void initData() {
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
         HttpParams params = new HttpParams();
+        params.put("pageNo", page);
         if (isJa) {
             params.put("languageType", 1);
-        } else {
+        }else {
             params.put("languageType", 0);
         }
-        params.put("pageNo", page);
+        params.put("mjId", mjId);//面积
+        params.putUrlParams("sjId", sjidList);//售价
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("lxs", mMoreSelectedBeanList.get(0));//类型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("dcss", mMoreSelectedBeanList.get(1));//栋层数
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(2));//户型
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(3));//建筑年份
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("tds", mMoreSelectedBeanList.get(4));//土地
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("dds", mMoreSelectedBeanList.get(5));//地段
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(6));//车站距离
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
         OkGo.<BieShuListBean>post(MyUrls.BASEURL + "/app/villadom/searchlist")
                 .tag(this)
                 .params(params)
@@ -197,6 +256,9 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 Toast.makeText(BieShuActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                if (liebiaoAdapter != null) {
+                                    liebiaoAdapter.notifyDataSetChanged();
+                                }
                                 return;
                             }
                             mDatas = datas;
@@ -219,6 +281,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(BieShuActivity.this, BieshudetailsActivity.class);
+                                intent.putExtra("id", mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });
@@ -228,12 +291,52 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
 
     @Override
     public void onItemClick(View view, int postion, int itemPosition) {
+        switch (postion) {
+            case 1:
+                break;
+            case 2://面积
+                page = 1;
+                if (itemPosition == 0) {//说明是点击的不限
+                    mjId = "";
+                } else {
+                    if (mianji != null && mianji.size() > 0) {
+                        OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(itemPosition - 1);
+                        mjId = mianjiEntity.getId() + "";
+                    }
+                }
+                mDatas.clear();
+                //            Toast.makeText(this, " "+mjId, Toast.LENGTH_SHORT).show();
+                initData();
+                break;
+            case 3://售价
+                page = 1;
+                if (itemPosition == 0) {
+                    sjidList.clear();
+                } else {
+                    setSjidList(itemPosition - 1);
+                }
+                mDatas.clear();
+                initData();
+                break;
+        }
+    }
 
+    @Override
+    public void onItemClick(View view, int postion, List<String> priceRegin) {
+        if (shoujia != null && shoujia.size() > 0) {
+            sjidList.clear();
+            mDatas.clear();
+            initData();
+        }
     }
 
     @Override
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
-
+        page = 1;
+        mMoreSelectedBeanList.clear();
+        mMoreSelectedBeanList = moreSelectedBeanList;
+        mDatas.clear();
+        initData();
     }
 
 
@@ -272,9 +375,18 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener{
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent",getResources().getString(R.string.bieshu));
+                intent.putExtra("popcontent", getResources().getString(R.string.bieshu));
                 intent.putExtra("state", 1);
                 startActivity(intent);
+        }
+    }
+
+    private void setSjidList(int position) {
+        if (shoujia != null && shoujia.size() > 0) {
+            sjidList.clear();
+            OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(position);
+            sjidList.add(shoujiaEntity.getStarVal() + "");
+            sjidList.add(shoujiaEntity.getEndVal() + "");
         }
     }
 

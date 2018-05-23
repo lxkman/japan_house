@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +36,11 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -103,7 +102,6 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         searchListAdapter = new SearchListAdapter(this, SearchList, MyUtils.isJa());
         searchListRecycler.setAdapter(searchListAdapter);
 
-        searchEt.setOnEditorActionListener(editorActionListener);
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -164,11 +162,11 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                     }
                     List<SearchBean> list = CacheUtils.get(Constants.SEARCH_HISTORY);
                     if (list != null) {
-                        list.add(new SearchBean(state, searchEt.getText().toString()));
+                        list.add(0, new SearchBean(state, searchEt.getText().toString()));
                         CacheUtils.put(Constants.SEARCH_HISTORY, list);
                     } else {
                         List<SearchBean> arrayList = new ArrayList<>();
-                        arrayList.add(new SearchBean(state, searchEt.getText().toString()));
+                        arrayList.add(0, new SearchBean(state, searchEt.getText().toString()));
                         CacheUtils.put(Constants.SEARCH_HISTORY, arrayList);
                     }
 
@@ -221,6 +219,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                         searchPresenter.getSearchBusiness(1, searchBean.get(position).content);
                         break;
                 }
+
+                SearchBean sb = searchBean.get(position);
+                searchBean.remove(position);
+                searchBean.add(0, sb);
+                CacheUtils.put(Constants.SEARCH_HISTORY, searchBean);
+                queryCacheHistory();
             }
         });
 
@@ -231,7 +235,6 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         historyList.clear();
         searchBean = CacheUtils.get(Constants.SEARCH_HISTORY);
         if (searchBean != null && searchBean.size() > 0) {
-            Collections.reverse(searchBean);
             for (int i = 0; i < searchBean.size(); i++) {
                 historyList.add(searchBean.get(i).content);
             }
@@ -254,25 +257,21 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    TUtils.showShort(mContext, "点击了---" + hotNameList.get(finalI));
+                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_HISTORY);
+                    if (list != null) {
+                        list.add(0, new SearchBean(state, hotNameList.get(finalI)));
+                        CacheUtils.put(Constants.SEARCH_HISTORY, list);
+                    } else {
+                        List<SearchBean> arrayList = new ArrayList<>();
+                        arrayList.add(0, new SearchBean(state, hotNameList.get(finalI)));
+                        CacheUtils.put(Constants.SEARCH_HISTORY, arrayList);
+                    }
+
+                    queryCacheHistory();
                 }
             });
         }
     }
-
-    TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
-
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                //                SoftKeyboardTool.closeKeyboard(mSearchEt);//关闭软键盘
-                searchEt.setFocusable(true);
-                searchEt.setFocusableInTouchMode(true);
-                return true;
-            }
-            return false;
-        }
-    };
 
     @OnClick({R.id.cancle_tv, R.id.location_tv, R.id.hot_refrash_iv, R.id.history_clear})
     public void onViewClicked(View view) {
@@ -392,22 +391,22 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
     @Override
     public void getSearchNewHouse(Response<SearchHouseBean> response) {
-
+        Log.v("======>>", "搜索成功");
     }
 
     @Override
     public void getSearchVilla(Response<SearchVillaBean> response) {
-
+        Log.v("======>>", "搜索成功");
     }
 
     @Override
     public void getSearchLand(Response<SearchLandBean> response) {
-
+        Log.v("======>>", "搜索成功");
     }
 
     @Override
     public void getSearchBusiness(Response<SearchBusinessBean> response) {
-
+        Log.v("======>>", "搜索成功");
     }
 
     private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

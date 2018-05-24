@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -58,12 +59,19 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     private SpringView springview;
     private boolean isLoadMore;
     private int page;
+    private String searchText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sydc_liebiao);
         ButterKnife.bind(this);
+
+        searchText = getIntent().getStringExtra("searchText");
+        if (!TextUtils.isEmpty(searchText)) {
+            searchTv.setText(searchText);
+        }
+
         initView();
         initData();
         initListener();

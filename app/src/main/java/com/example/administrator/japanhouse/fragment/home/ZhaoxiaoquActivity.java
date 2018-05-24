@@ -124,7 +124,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
         list2.add(new OneCheckBean(false, "3000-4000元/月"));
         ThreeView threeView = new ThreeView(this);
         popupViews.add(threeView.firstView());
-        threeView.insertData(list2, dropDownMenu);
+        threeView.insertData2(list2, dropDownMenu,true);
         threeView.setListener(this);
         /**
          * 第四个界面

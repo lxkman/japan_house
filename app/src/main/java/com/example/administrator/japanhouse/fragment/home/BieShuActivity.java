@@ -67,8 +67,10 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     private int page = 1;
     private boolean isJa;
     private List<BieShuListBean.DatasEntity> mDatas;
-    private String mjId;
-    private List<String> sjidList = new ArrayList<>();
+    private String mjId = "-2";
+    private String sjId = "-2";
+    private List<String> zidingyiPriceList = new ArrayList<>();
+    private boolean isZiDingyiPrice;
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
@@ -222,7 +224,11 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
             params.put("languageType", 0);
         }
         params.put("mjId", mjId);//面积
-        params.putUrlParams("sjId", sjidList);//售价
+        params.put("sjId", sjId);//售价
+        if (isZiDingyiPrice) {
+            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+        }
         if (mMoreSelectedBeanList.size() > 0)
             params.putUrlParams("lxs", mMoreSelectedBeanList.get(0));//类型
         if (mMoreSelectedBeanList.size() > 1)
@@ -297,7 +303,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
             case 2://面积
                 page = 1;
                 if (itemPosition == 0) {//说明是点击的不限
-                    mjId = "";
+                    mjId = "-2";
                 } else {
                     if (mianji != null && mianji.size() > 0) {
                         OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(itemPosition - 1);
@@ -310,10 +316,14 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                 break;
             case 3://售价
                 page = 1;
+                isZiDingyiPrice = false;
+                zidingyiPriceList.clear();
                 if (itemPosition == 0) {
-                    sjidList.clear();
+                    sjId = "-2";
                 } else {
-                    setSjidList(itemPosition - 1);
+                    if (shoujia != null && shoujia.size() > 0) {
+                        sjId=shoujia.get(itemPosition-1).getId()+"";
+                    }
                 }
                 mDatas.clear();
                 initData();
@@ -324,7 +334,11 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
         if (shoujia != null && shoujia.size() > 0) {
-            sjidList.clear();
+            page = 1;
+            isZiDingyiPrice = true;
+            sjId = "-1";
+            zidingyiPriceList.clear();
+            zidingyiPriceList = priceRegin;
             mDatas.clear();
             initData();
         }
@@ -353,7 +367,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getCoveredAreaJpn() : item.getCoveredAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万/㎡" : item.getSellingPriceCn()+"万/㎡");
         }
     }
 
@@ -380,14 +394,4 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                 startActivity(intent);
         }
     }
-
-    private void setSjidList(int position) {
-        if (shoujia != null && shoujia.size() > 0) {
-            sjidList.clear();
-            OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(position);
-            sjidList.add(shoujiaEntity.getStarVal() + "");
-            sjidList.add(shoujiaEntity.getEndVal() + "");
-        }
-    }
-
 }

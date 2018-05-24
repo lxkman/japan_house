@@ -540,4 +540,14 @@
     <string name="string_feiyong">费&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;用：</string>
     <string name="string_jianzhugongsi">建筑公司：</string>
     <string name="string_rujutiaojianxinxi">入居条件</string>
+    <string name="nindeweizhi">（您的位置）</string>
+    <string name="shijianyaoqiu">时间要求</string>
+    <string name="qingxuanzeshijian">请选择时间</string>
+    <string name="fenzhongnei">分钟内</string>
+    <string name="kaishizhaofang">开始找房</string>
+    <string name="buxing">步行</string>
+    <string name="qixing">骑行</string>
+    <string name="gongjiao">公交</string>
+    <string name="zijia">自驾</string>
+    <string name="qingshurudizhi">请输入地址</string>
 </resources>

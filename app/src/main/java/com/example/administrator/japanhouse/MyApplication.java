@@ -3,13 +3,12 @@ package com.example.administrator.japanhouse;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.text.TextUtils;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
 import com.example.administrator.japanhouse.utils.CacheUtils;
-import com.example.administrator.japanhouse.utils.Constants;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -23,6 +22,11 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +59,43 @@ public class MyApplication extends Application {
         setOkGo();//OkGo----第三方网络框架
 
         initRc();
+        initUMShare();
+        initUMPush();
+    }
+
+    private void initUMPush() {
+
+//        Toast.makeText(getApplicationContext(), "Push", Toast.LENGTH_SHORT).show();
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+        //注册推送服务，每次调用register方法都会回调该接口
+        mPushAgent.register(new IUmengRegisterCallback() {
+
+            @Override
+            public void onSuccess(String deviceToken) {
+//                Toast.makeText(getContext(), "友盟推送注册成功", Toast.LENGTH_SHORT).show();
+
+                System.out.println("友盟推送注册成功" + deviceToken);
+                SpUtils.putString( "UMPUSHID", deviceToken);
+            }
+
+            @Override
+            public void onFailure(String s, String s1) {
+//                Toast.makeText(getContext(), "友盟推送注册失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+
+
+    private void initUMShare() {
+        Config.DEBUG = true;
+        UMShareAPI.get(this);
+
+        PlatformConfig.setWeixin("wxdbbb1928fdfa069d", "69ad4ae853a60921d709dd3125d75351");
+        PlatformConfig.setQQZone("1106733819", "ME4Of9bX0LUh8uz0");
+        PlatformConfig.setSinaWeibo("4004384953", "11a1e6053a816fb1636a739cb67ce667", "https://sns.whalecloud.com/sina2/callback");
     }
 
     private void initRc() {
@@ -184,15 +225,6 @@ public class MyApplication extends Application {
                 .addCommonHeaders(headers)                         //全局公共头
                 .addCommonParams(params);                          //全局公共参数
 
-    }
-
-    public static boolean isJapanese(){
-        String language = CacheUtils.get(Constants.COUNTRY);
-        if (!TextUtils.isEmpty(language) && TextUtils.equals(language, "ja")) {
-            return true;
-
-        }
-        return false;
     }
 }
 

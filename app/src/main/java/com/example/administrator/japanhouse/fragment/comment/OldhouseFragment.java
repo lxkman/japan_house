@@ -40,7 +40,6 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList=new ArrayList();
     private TJNewHousePresenter tjNewHousePresenter;
-    private List<HouseListBean.DatasBean> datas;
     private List<HouseListBean.DatasBean> mRefreshData;
     private SpringView springview;
     private boolean isLoadMore;
@@ -75,7 +74,7 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
             public void onRefresh() {
                 isLoadMore = false;
                 page = 1;
-                initData();
+                tjNewHousePresenter.getHouseList(page,"0");
                 String currentDate = MyUtils.getCurrentDate();
                 tv_refresh_time.setText(currentDate+"更新");
                 springview.onFinishFreshAndLoad();
@@ -85,7 +84,7 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
             public void onLoadmore() {
                 isLoadMore = true;
                 page++;
-                initData();
+                tjNewHousePresenter.getHouseList(page,"0");
                 springview.onFinishFreshAndLoad();
             }
         });
@@ -101,16 +100,7 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
     @Override
     public void getHouseList(Response<HouseListBean> response) {
         HouseListBean body = response.body();
-        datas = body.getDatas();
-        initData();
-    }
-
-    @Override
-    public void getLand(Response<LandBean> response) {
-
-    }
-
-    protected void initData() {
+         List<HouseListBean.DatasBean>  datas = body.getDatas();
         if (mRefreshData == null || mRefreshData.size() == 0) {
             if (datas == null || datas.size() == 0) {
                 Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
@@ -139,10 +129,17 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(mContext,OldHousedetailsActivity.class);
+                intent.putExtra("houseId",mRefreshData.get(position).getId());
                 startActivity(intent);
             }
         });
     }
+
+    @Override
+    public void getLand(Response<LandBean> response) {
+
+    }
+
     class LiebiaoAdapter extends BaseQuickAdapter<HouseListBean.DatasBean, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<HouseListBean.DatasBean> data) {
@@ -154,11 +151,12 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
         @Override
         protected void convert(BaseViewHolder helper, HouseListBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
-            Glide.with(mContext).load(item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
-            helper.setText(R.id.tv_house_name,isJa ? item.getPlotNameJpn() : item.getPlotNameCn());
-            helper.setText(R.id.tv_house_address,isJa ? item.getAddressJpn() : item.getAddressCn());
-//            helper.setText(R.id.tv_house_room,isJa ? item.getPlotNameJpn() : item.getPlotNameCn());
+            Glide.with(mContext).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+            helper.setText(R.id.tv_house_name,isJa ? item.getTitleJpn() : item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_room,isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area,isJa ? item.getAreaJpn() : item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa ? item.getPriceJpn() : item.getPriceCn());  
 
         }
     }

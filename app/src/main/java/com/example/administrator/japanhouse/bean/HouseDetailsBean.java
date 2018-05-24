@@ -1,20 +1,31 @@
 package com.example.administrator.japanhouse.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/5/9.
  */
 
-public class HouseDetailsBean {
+public class HouseDetailsBean implements Serializable{
+
 
     /**
-     * code : 200
-     * datas : {"addressCn":"河北省-保定市-蠡县","addressJpn":"hebeisheng-baodingshi-lixian","appearanceCn":"1","appearanceJpn":"1","architecturalConstructionCn":"1","architecturalConstructionJpn":"1","areaCn":"1.00平方米","areaJpn":"1.00平方メートル","areaSearchValue":1,"bathLavatoryOne":0,"brokerId":1,"createTime":1523842399000,"decorateMaterialCn":"1","decorateMaterialJpn":"1","electricityCn":"1","electricityJpn":"1","elevatorCn":"1","elevatorJpn":"1","equipmentCn":"1","equipmentJpn":"1","floorCn":"1层","floorJpn":"1层","floorSearchValue":1,"gasCn":"1","gasJpn":"1","houseType":"1","hwdcBroker":{"brokerName":"zhangsan","caeateTime":1525781849000,"counts":60,"id":18,"inYears":3,"isDeleted":0,"nickname":"昵称","password":"1232132","period":1,"phone":"12313123213","pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","sex":"0","shop":"所属门店","status":"0","telePhone":"123132","turnover":100,"updateTime":1523842399000},"id":18,"introspectionCn":"1","introspectionJpn":"1","isDeleted":0,"latitude":1,"locationLevel1Cn":"16","locationLevel1Jpn":"16","locationLevel2Cn":"14","locationLevel2Jpn":"14","locationLevel3Cn":"15","locationLevel3Jpn":"15","locationLevel4Cn":"","locationLevel4Jpn":"","longitude":1,"manageFeeCn":1,"manageFeeJpn":1,"manageSocietyCn":"1","manageSocietyJpn":"1","orientationCn":"1","orientationJpn":"1","plotNameCn":"1","plotNameJpn":"1","priceCn":"1.00万元","priceJpn":"1.00万元","priceSearchValue":1,"repairChargeCn":1,"repairChargeJpn":1,"roomImgs":"","roomcountSearchValue":2,"sceneryCn":"1","sceneryJpn":"1","signedYear":0,"stationDistanceCn":"1.00米","stationDistanceJpn":"1.00メートル","stationdistanceSearchValue":1,"status":"0","structureImg":"","tatamiRoomCn":"1间","tatamiRoomJpn":"1间","titleCn":"1","titleJpn":"1","updateTime":1523842399000,"videoImgs":"","videoUrls":"","waterCn":"1","waterJpn":"1","westernRoomCn":"1间","westernRoomJpn":"1间","yearBuiltCn":"1年","yearBuiltJpn":"1年"}
      * msg : 请求成功
+     * code : 200
+     * datas : {"id":8,"locationLevel1Cn":"","locationLevel2Cn":"","locationLevel3Cn":"15","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","createTime":1526627538000,"updateTime":1526627540000,"isDeleted":0,"status":"2","houseType":"4","tableFlag":"","communityId":1,"longitude":100,"latitude":100,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","returnRateCn":"回报率（中文）","returnRateJpn":"回报率","articleNameCn":"物件名称","articleNameJpn":"物件名称","constructionCompanyCn":"建筑公司","constructionCompanyJpn":"建筑公司","orientationCn":"朝向","orientationJpn":"朝向","buildingConstructionCn":"建筑构造","buildingConstructionJpn":"建筑构造","householdsCn":"总户数","householdsJpn":"总户数","restsCn":"100000","restsJpn":"100000","sellingPriceCn":"","sellingPriceJpn":"","doichoIrinoDateCn":"入居日期","doichoIrinoDateJpn":"入居日期","ownershipCn":"所有权","ownershipJpn":"所有权","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","yearBuiltCn":"建筑年份","yearBuiltJpn":"建筑年份","floorCn":"楼层","floorJpn":"楼层","managementSocietyCn":"管理会社","managementSocietyJpn":"管理会社","manageCn":"管理","manageJpn":"管理","repairChargeCn":"修缮费","repairChargeJpn":"修缮费","administrativeFeeCn":"管理费","administrativeFeeJpn":"管理费","districtCn":"地段","districtJpn":"地段","specificLocationCn":"1","specificLocationJpn":"1","trainStationCn":"1","trainStationJpn":"1","stationDistanceCn":"车站距离","stationDistanceJpn":"车站距离","parkingSpaceCn":"停车位","parkingSpaceJpn":"停车位","indoorEquipmentCn":"室内设备","indoorEquipmentJpn":"室内设备","kitchenCn":"厨房","kitchenJpn":"厨房","toiletCn":"卫生间","toiletJpn":"卫生间","showersCn":"浴室","showersJpn":"浴室","testimonialCn":"证明书","testimonialJpn":"证明书","performanceCn":"性能","performanceJpn":"性能","defectsEnsureCn":"瑕疵保证","defectsEnsureJpn":"瑕疵保证","sceneryCn":"窗外风景","sceneryJpn":"窗外风景","surroundingsCn":"周边环境","surroundingsJpn":"周边环境","commonPartsCn":"共用部分","commonPartsJpn":"共用部分","remarksCn":"备注","remarksJpn":"备注","leaseTypeCn":"出租类型","leaseTypeJpn":"出租类型","rentCn":"10100","rentJpn":"10000","shopSignsCn":"商铺招牌","shopSignsJpn":"商铺招牌","outdoorSettingCn":"室外设置","outdoorSettingJpn":"室外设置","raisingPlateCn":"举架高度","raisingPlateJpn":"举架高度","characteristicCn":"特征","characteristicJpn":"特征","conditionCn":"条件","conditionJpn":"条件","privateSectionCn":"私有部分","privateSectionJpn":"私有部分","doichoIrinoConditionCn":"入居条件","doichoIrinoConditionJpn":"入居条件","gasElectricCn":"煤气和电力","gasElectricJpn":"煤气和电力","signYearCn":"签约年限","signYearJpn":"签约年限","chargeCn":"是是是","chargeJpn":"是是是","roomStatusCn":"房间状况(中文)","roomStatusJpn":"房间状况","videoUrls":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","areaSearch":50,"sellingPriceSearch":100000,"yearBuiltSearch":1994,"rentSearch":0,"floorSearch":0,"stationDistanceSearch":0,"brokerId":0,"popularChoiceCn":"","popularChoiceJpn":"","conditionsCn":"","conditionsJpn":"","hwdcBroker":{"id":8,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","nickname":"昵称","sex":"0","wechatId":null,"caeateTime":1525781849000,"updateTime":1526627540000,"isDeleted":0,"status":"2"}}
      */
 
+    private String msg;
     private String code;
     private DatasBean datas;
-    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public String getCode() {
         return code;
@@ -32,388 +43,268 @@ public class HouseDetailsBean {
         this.datas = datas;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public static class DatasBean {
+    public static class DatasBean implements Serializable{
         /**
-         * addressCn : 河北省-保定市-蠡县
-         * addressJpn : hebeisheng-baodingshi-lixian
-         * appearanceCn : 1
-         * appearanceJpn : 1
-         * architecturalConstructionCn : 1
-         * architecturalConstructionJpn : 1
-         * areaCn : 1.00平方米
-         * areaJpn : 1.00平方メートル
-         * areaSearchValue : 1.0
-         * bathLavatoryOne : 0
-         * brokerId : 1
-         * createTime : 1523842399000
-         * decorateMaterialCn : 1
-         * decorateMaterialJpn : 1
-         * electricityCn : 1
-         * electricityJpn : 1
-         * elevatorCn : 1
-         * elevatorJpn : 1
-         * equipmentCn : 1
-         * equipmentJpn : 1
-         * floorCn : 1层
-         * floorJpn : 1层
-         * floorSearchValue : 1
-         * gasCn : 1
-         * gasJpn : 1
-         * houseType : 1
-         * hwdcBroker : {"brokerName":"zhangsan","caeateTime":1525781849000,"counts":60,"id":18,"inYears":3,"isDeleted":0,"nickname":"昵称","password":"1232132","period":1,"phone":"12313123213","pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","sex":"0","shop":"所属门店","status":"0","telePhone":"123132","turnover":100,"updateTime":1523842399000}
-         * id : 18
-         * introspectionCn : 1
-         * introspectionJpn : 1
-         * isDeleted : 0
-         * latitude : 1.0
-         * locationLevel1Cn : 16
-         * locationLevel1Jpn : 16
-         * locationLevel2Cn : 14
-         * locationLevel2Jpn : 14
+         * id : 8
+         * locationLevel1Cn :
+         * locationLevel2Cn :
          * locationLevel3Cn : 15
-         * locationLevel3Jpn : 15
          * locationLevel4Cn :
+         * locationLevel1Jpn :
+         * locationLevel2Jpn :
+         * locationLevel3Jpn :
          * locationLevel4Jpn :
-         * longitude : 1.0
-         * manageFeeCn : 1
-         * manageFeeJpn : 1
-         * manageSocietyCn : 1
-         * manageSocietyJpn : 1
-         * orientationCn : 1
-         * orientationJpn : 1
-         * plotNameCn : 1
-         * plotNameJpn : 1
-         * priceCn : 1.00万元
-         * priceJpn : 1.00万元
-         * priceSearchValue : 1.0
-         * repairChargeCn : 1
-         * repairChargeJpn : 1
-         * roomImgs :
-         * roomcountSearchValue : 2
-         * sceneryCn : 1
-         * sceneryJpn : 1
-         * signedYear : 0
-         * stationDistanceCn : 1.00米
-         * stationDistanceJpn : 1.00メートル
-         * stationdistanceSearchValue : 1.0
-         * status : 0
-         * structureImg :
-         * tatamiRoomCn : 1间
-         * tatamiRoomJpn : 1间
-         * titleCn : 1
-         * titleJpn : 1
-         * updateTime : 1523842399000
-         * videoImgs :
+         * createTime : 1526627538000
+         * updateTime : 1526627540000
+         * isDeleted : 0
+         * status : 2
+         * houseType : 4
+         * tableFlag :
+         * communityId : 1
+         * longitude : 100
+         * latitude : 100
+         * titleCn : 房屋标题中文（租房）
+         * titleJpn : 房屋标题日文（租房）
+         * returnRateCn : 回报率（中文）
+         * returnRateJpn : 回报率
+         * articleNameCn : 物件名称
+         * articleNameJpn : 物件名称
+         * constructionCompanyCn : 建筑公司
+         * constructionCompanyJpn : 建筑公司
+         * orientationCn : 朝向
+         * orientationJpn : 朝向
+         * buildingConstructionCn : 建筑构造
+         * buildingConstructionJpn : 建筑构造
+         * householdsCn : 总户数
+         * householdsJpn : 总户数
+         * restsCn : 100000：其他
+         * restsJpn : 100000：其他
+         * sellingPriceCn :
+         * sellingPriceJpn :
+         * doichoIrinoDateCn : 入居日期
+         * doichoIrinoDateJpn : 入居日期
+         * ownershipCn : 所有权
+         * ownershipJpn : 所有权
+         * doorModelCn : 户型
+         * doorModelJpn : 户型
+         * areaCn : 100
+         * areaJpn : 100
+         * yearBuiltCn : 建筑年份
+         * yearBuiltJpn : 建筑年份
+         * floorCn : 楼层
+         * floorJpn : 楼层
+         * managementSocietyCn : 管理会社
+         * managementSocietyJpn : 管理会社
+         * manageCn : 管理
+         * manageJpn : 管理
+         * repairChargeCn : 修缮费
+         * repairChargeJpn : 修缮费
+         * administrativeFeeCn : 管理费
+         * administrativeFeeJpn : 管理费
+         * districtCn : 地段
+         * districtJpn : 地段
+         * specificLocationCn : 1
+         * specificLocationJpn : 1
+         * trainStationCn : 1 主要车站
+         * trainStationJpn : 1 主要车站
+         * stationDistanceCn : 车站距离
+         * stationDistanceJpn : 车站距离
+         * parkingSpaceCn : 停车位
+         * parkingSpaceJpn : 停车位
+         * indoorEquipmentCn : 室内设备
+         * indoorEquipmentJpn : 室内设备
+         * kitchenCn : 厨房
+         * kitchenJpn : 厨房
+         * toiletCn : 卫生间
+         * toiletJpn : 卫生间
+         * showersCn : 浴室
+         * showersJpn : 浴室
+         * testimonialCn : 证明书
+         * testimonialJpn : 证明书
+         * performanceCn : 性能
+         * performanceJpn : 性能
+         * defectsEnsureCn : 瑕疵保证
+         * defectsEnsureJpn : 瑕疵保证
+         * sceneryCn : 窗外风景
+         * sceneryJpn : 窗外风景
+         * surroundingsCn : 周边环境
+         * surroundingsJpn : 周边环境
+         * commonPartsCn : 共用部分
+         * commonPartsJpn : 共用部分
+         * remarksCn : 备注
+         * remarksJpn : 备注
+         * leaseTypeCn : 出租类型
+         * leaseTypeJpn : 出租类型
+         * rentCn : 10100
+         * rentJpn : 10000
+         * shopSignsCn : 商铺招牌
+         * shopSignsJpn : 商铺招牌
+         * outdoorSettingCn : 室外设置
+         * outdoorSettingJpn : 室外设置
+         * raisingPlateCn : 举架高度
+         * raisingPlateJpn : 举架高度
+         * characteristicCn : 特征
+         * characteristicJpn : 特征
+         * conditionCn : 条件
+         * conditionJpn : 条件
+         * privateSectionCn : 私有部分
+         * privateSectionJpn : 私有部分
+         * doichoIrinoConditionCn : 入居条件
+         * doichoIrinoConditionJpn : 入居条件
+         * gasElectricCn : 煤气和电力
+         * gasElectricJpn : 煤气和电力
+         * signYearCn : 签约年限
+         * signYearJpn : 签约年限
+         * chargeCn : 是是是
+         * chargeJpn : 是是是
+         * roomStatusCn : 房间状况(中文)
+         * roomStatusJpn : 房间状况
          * videoUrls :
-         * waterCn : 1
-         * waterJpn : 1
-         * westernRoomCn : 1间
-         * westernRoomJpn : 1间
-         * yearBuiltCn : 1年
-         * yearBuiltJpn : 1年
+         * videoImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+         * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+         * areaSearch : 50
+         * sellingPriceSearch : 100000
+         * yearBuiltSearch : 1994
+         * rentSearch : 0
+         * floorSearch : 0
+         * stationDistanceSearch : 0
+         * brokerId : 0
+         * popularChoiceCn :
+         * popularChoiceJpn :
+         * conditionsCn :
+         * conditionsJpn :
+         * hwdcBroker : {"id":8,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","nickname":"昵称","sex":"0","wechatId":null,"caeateTime":1525781849000,"updateTime":1526627540000,"isDeleted":0,"status":"2"}
          */
 
-        private String addressCn;
-        private String addressJpn;
-        private String appearanceCn;
-        private String appearanceJpn;
-        private String architecturalConstructionCn;
-        private String architecturalConstructionJpn;
-        private String areaCn;
-        private String areaJpn;
-        private double areaSearchValue;
-        private int bathLavatoryOne;
-        private int brokerId;
-        private long createTime;
-        private String decorateMaterialCn;
-        private String decorateMaterialJpn;
-        private String electricityCn;
-        private String electricityJpn;
-        private String elevatorCn;
-        private String elevatorJpn;
-        private String equipmentCn;
-        private String equipmentJpn;
-        private String floorCn;
-        private String floorJpn;
-        private int floorSearchValue;
-        private String gasCn;
-        private String gasJpn;
-        private String houseType;
-        private HwdcBrokerBean hwdcBroker;
         private int id;
-        private String introspectionCn;
-        private String introspectionJpn;
-        private int isDeleted;
-        private double latitude;
         private String locationLevel1Cn;
-        private String locationLevel1Jpn;
         private String locationLevel2Cn;
-        private String locationLevel2Jpn;
         private String locationLevel3Cn;
-        private String locationLevel3Jpn;
         private String locationLevel4Cn;
+        private String locationLevel1Jpn;
+        private String locationLevel2Jpn;
+        private String locationLevel3Jpn;
         private String locationLevel4Jpn;
-        private double longitude;
-        private int manageFeeCn;
-        private int manageFeeJpn;
-        private String manageSocietyCn;
-        private String manageSocietyJpn;
-        private String orientationCn;
-        private String orientationJpn;
-        private String plotNameCn;
-        private String plotNameJpn;
-        private String priceCn;
-        private String priceJpn;
-        private double priceSearchValue;
-        private int repairChargeCn;
-        private int repairChargeJpn;
-        private String roomImgs;
-        private int roomcountSearchValue;
-        private String sceneryCn;
-        private String sceneryJpn;
-        private int signedYear;
-        private String stationDistanceCn;
-        private String stationDistanceJpn;
-        private double stationdistanceSearchValue;
+        private long createTime;
+        private long updateTime;
+        private int isDeleted;
         private String status;
-        private String structureImg;
-        private String tatamiRoomCn;
-        private String tatamiRoomJpn;
+        private String houseType;
+        private String tableFlag;
+        private int communityId;
+        private int longitude;
+        private int latitude;
         private String titleCn;
         private String titleJpn;
-        private long updateTime;
-        private String videoImgs;
-        private String videoUrls;
-        private String waterCn;
-        private String waterJpn;
-        private String westernRoomCn;
-        private String westernRoomJpn;
+        private String returnRateCn;
+        private String returnRateJpn;
+        private String articleNameCn;
+        private String articleNameJpn;
+        private String constructionCompanyCn;
+        private String constructionCompanyJpn;
+        private String orientationCn;
+        private String orientationJpn;
+        private String buildingConstructionCn;
+        private String buildingConstructionJpn;
+        private String householdsCn;
+        private String householdsJpn;
+        private String restsCn;
+        private String restsJpn;
+        private String sellingPriceCn;
+        private String sellingPriceJpn;
+        private String doichoIrinoDateCn;
+        private String doichoIrinoDateJpn;
+        private String ownershipCn;
+        private String ownershipJpn;
+        private String doorModelCn;
+        private String doorModelJpn;
+        private String areaCn;
+        private String areaJpn;
         private String yearBuiltCn;
         private String yearBuiltJpn;
-
-        public String getAddressCn() {
-            return addressCn;
-        }
-
-        public void setAddressCn(String addressCn) {
-            this.addressCn = addressCn;
-        }
-
-        public String getAddressJpn() {
-            return addressJpn;
-        }
-
-        public void setAddressJpn(String addressJpn) {
-            this.addressJpn = addressJpn;
-        }
-
-        public String getAppearanceCn() {
-            return appearanceCn;
-        }
-
-        public void setAppearanceCn(String appearanceCn) {
-            this.appearanceCn = appearanceCn;
-        }
-
-        public String getAppearanceJpn() {
-            return appearanceJpn;
-        }
-
-        public void setAppearanceJpn(String appearanceJpn) {
-            this.appearanceJpn = appearanceJpn;
-        }
-
-        public String getArchitecturalConstructionCn() {
-            return architecturalConstructionCn;
-        }
-
-        public void setArchitecturalConstructionCn(String architecturalConstructionCn) {
-            this.architecturalConstructionCn = architecturalConstructionCn;
-        }
-
-        public String getArchitecturalConstructionJpn() {
-            return architecturalConstructionJpn;
-        }
-
-        public void setArchitecturalConstructionJpn(String architecturalConstructionJpn) {
-            this.architecturalConstructionJpn = architecturalConstructionJpn;
-        }
-
-        public String getAreaCn() {
-            return areaCn;
-        }
-
-        public void setAreaCn(String areaCn) {
-            this.areaCn = areaCn;
-        }
-
-        public String getAreaJpn() {
-            return areaJpn;
-        }
-
-        public void setAreaJpn(String areaJpn) {
-            this.areaJpn = areaJpn;
-        }
-
-        public double getAreaSearchValue() {
-            return areaSearchValue;
-        }
-
-        public void setAreaSearchValue(double areaSearchValue) {
-            this.areaSearchValue = areaSearchValue;
-        }
-
-        public int getBathLavatoryOne() {
-            return bathLavatoryOne;
-        }
-
-        public void setBathLavatoryOne(int bathLavatoryOne) {
-            this.bathLavatoryOne = bathLavatoryOne;
-        }
-
-        public int getBrokerId() {
-            return brokerId;
-        }
-
-        public void setBrokerId(int brokerId) {
-            this.brokerId = brokerId;
-        }
-
-        public long getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(long createTime) {
-            this.createTime = createTime;
-        }
-
-        public String getDecorateMaterialCn() {
-            return decorateMaterialCn;
-        }
-
-        public void setDecorateMaterialCn(String decorateMaterialCn) {
-            this.decorateMaterialCn = decorateMaterialCn;
-        }
-
-        public String getDecorateMaterialJpn() {
-            return decorateMaterialJpn;
-        }
-
-        public void setDecorateMaterialJpn(String decorateMaterialJpn) {
-            this.decorateMaterialJpn = decorateMaterialJpn;
-        }
-
-        public String getElectricityCn() {
-            return electricityCn;
-        }
-
-        public void setElectricityCn(String electricityCn) {
-            this.electricityCn = electricityCn;
-        }
-
-        public String getElectricityJpn() {
-            return electricityJpn;
-        }
-
-        public void setElectricityJpn(String electricityJpn) {
-            this.electricityJpn = electricityJpn;
-        }
-
-        public String getElevatorCn() {
-            return elevatorCn;
-        }
-
-        public void setElevatorCn(String elevatorCn) {
-            this.elevatorCn = elevatorCn;
-        }
-
-        public String getElevatorJpn() {
-            return elevatorJpn;
-        }
-
-        public void setElevatorJpn(String elevatorJpn) {
-            this.elevatorJpn = elevatorJpn;
-        }
-
-        public String getEquipmentCn() {
-            return equipmentCn;
-        }
-
-        public void setEquipmentCn(String equipmentCn) {
-            this.equipmentCn = equipmentCn;
-        }
-
-        public String getEquipmentJpn() {
-            return equipmentJpn;
-        }
-
-        public void setEquipmentJpn(String equipmentJpn) {
-            this.equipmentJpn = equipmentJpn;
-        }
-
-        public String getFloorCn() {
-            return floorCn;
-        }
-
-        public void setFloorCn(String floorCn) {
-            this.floorCn = floorCn;
-        }
-
-        public String getFloorJpn() {
-            return floorJpn;
-        }
-
-        public void setFloorJpn(String floorJpn) {
-            this.floorJpn = floorJpn;
-        }
-
-        public int getFloorSearchValue() {
-            return floorSearchValue;
-        }
-
-        public void setFloorSearchValue(int floorSearchValue) {
-            this.floorSearchValue = floorSearchValue;
-        }
-
-        public String getGasCn() {
-            return gasCn;
-        }
-
-        public void setGasCn(String gasCn) {
-            this.gasCn = gasCn;
-        }
-
-        public String getGasJpn() {
-            return gasJpn;
-        }
-
-        public void setGasJpn(String gasJpn) {
-            this.gasJpn = gasJpn;
-        }
-
-        public String getHouseType() {
-            return houseType;
-        }
-
-        public void setHouseType(String houseType) {
-            this.houseType = houseType;
-        }
-
-        public HwdcBrokerBean getHwdcBroker() {
-            return hwdcBroker;
-        }
-
-        public void setHwdcBroker(HwdcBrokerBean hwdcBroker) {
-            this.hwdcBroker = hwdcBroker;
-        }
+        private String floorCn;
+        private String floorJpn;
+        private String managementSocietyCn;
+        private String managementSocietyJpn;
+        private String manageCn;
+        private String manageJpn;
+        private String repairChargeCn;
+        private String repairChargeJpn;
+        private String administrativeFeeCn;
+        private String administrativeFeeJpn;
+        private String districtCn;
+        private String districtJpn;
+        private String specificLocationCn;
+        private String specificLocationJpn;
+        private String trainStationCn;
+        private String trainStationJpn;
+        private String stationDistanceCn;
+        private String stationDistanceJpn;
+        private String parkingSpaceCn;
+        private String parkingSpaceJpn;
+        private String indoorEquipmentCn;
+        private String indoorEquipmentJpn;
+        private String kitchenCn;
+        private String kitchenJpn;
+        private String toiletCn;
+        private String toiletJpn;
+        private String showersCn;
+        private String showersJpn;
+        private String testimonialCn;
+        private String testimonialJpn;
+        private String performanceCn;
+        private String performanceJpn;
+        private String defectsEnsureCn;
+        private String defectsEnsureJpn;
+        private String sceneryCn;
+        private String sceneryJpn;
+        private String surroundingsCn;
+        private String surroundingsJpn;
+        private String commonPartsCn;
+        private String commonPartsJpn;
+        private String remarksCn;
+        private String remarksJpn;
+        private String leaseTypeCn;
+        private String leaseTypeJpn;
+        private String rentCn;
+        private String rentJpn;
+        private String shopSignsCn;
+        private String shopSignsJpn;
+        private String outdoorSettingCn;
+        private String outdoorSettingJpn;
+        private String raisingPlateCn;
+        private String raisingPlateJpn;
+        private String characteristicCn;
+        private String characteristicJpn;
+        private String conditionCn;
+        private String conditionJpn;
+        private String privateSectionCn;
+        private String privateSectionJpn;
+        private String doichoIrinoConditionCn;
+        private String doichoIrinoConditionJpn;
+        private String gasElectricCn;
+        private String gasElectricJpn;
+        private String signYearCn;
+        private String signYearJpn;
+        private String chargeCn;
+        private String chargeJpn;
+        private String roomStatusCn;
+        private String roomStatusJpn;
+        private String videoUrls;
+        private String videoImgs;
+        private String roomImgs;
+        private int areaSearch;
+        private int sellingPriceSearch;
+        private int yearBuiltSearch;
+        private int rentSearch;
+        private int floorSearch;
+        private int stationDistanceSearch;
+        private int brokerId;
+        private String popularChoiceCn;
+        private String popularChoiceJpn;
+        private String conditionsCn;
+        private String conditionsJpn;
+        private HwdcBrokerBean hwdcBroker;
 
         public int getId() {
             return id;
@@ -421,38 +312,6 @@ public class HouseDetailsBean {
 
         public void setId(int id) {
             this.id = id;
-        }
-
-        public String getIntrospectionCn() {
-            return introspectionCn;
-        }
-
-        public void setIntrospectionCn(String introspectionCn) {
-            this.introspectionCn = introspectionCn;
-        }
-
-        public String getIntrospectionJpn() {
-            return introspectionJpn;
-        }
-
-        public void setIntrospectionJpn(String introspectionJpn) {
-            this.introspectionJpn = introspectionJpn;
-        }
-
-        public int getIsDeleted() {
-            return isDeleted;
-        }
-
-        public void setIsDeleted(int isDeleted) {
-            this.isDeleted = isDeleted;
-        }
-
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
         }
 
         public String getLocationLevel1Cn() {
@@ -463,28 +322,12 @@ public class HouseDetailsBean {
             this.locationLevel1Cn = locationLevel1Cn;
         }
 
-        public String getLocationLevel1Jpn() {
-            return locationLevel1Jpn;
-        }
-
-        public void setLocationLevel1Jpn(String locationLevel1Jpn) {
-            this.locationLevel1Jpn = locationLevel1Jpn;
-        }
-
         public String getLocationLevel2Cn() {
             return locationLevel2Cn;
         }
 
         public void setLocationLevel2Cn(String locationLevel2Cn) {
             this.locationLevel2Cn = locationLevel2Cn;
-        }
-
-        public String getLocationLevel2Jpn() {
-            return locationLevel2Jpn;
-        }
-
-        public void setLocationLevel2Jpn(String locationLevel2Jpn) {
-            this.locationLevel2Jpn = locationLevel2Jpn;
         }
 
         public String getLocationLevel3Cn() {
@@ -495,20 +338,36 @@ public class HouseDetailsBean {
             this.locationLevel3Cn = locationLevel3Cn;
         }
 
-        public String getLocationLevel3Jpn() {
-            return locationLevel3Jpn;
-        }
-
-        public void setLocationLevel3Jpn(String locationLevel3Jpn) {
-            this.locationLevel3Jpn = locationLevel3Jpn;
-        }
-
         public String getLocationLevel4Cn() {
             return locationLevel4Cn;
         }
 
         public void setLocationLevel4Cn(String locationLevel4Cn) {
             this.locationLevel4Cn = locationLevel4Cn;
+        }
+
+        public String getLocationLevel1Jpn() {
+            return locationLevel1Jpn;
+        }
+
+        public void setLocationLevel1Jpn(String locationLevel1Jpn) {
+            this.locationLevel1Jpn = locationLevel1Jpn;
+        }
+
+        public String getLocationLevel2Jpn() {
+            return locationLevel2Jpn;
+        }
+
+        public void setLocationLevel2Jpn(String locationLevel2Jpn) {
+            this.locationLevel2Jpn = locationLevel2Jpn;
+        }
+
+        public String getLocationLevel3Jpn() {
+            return locationLevel3Jpn;
+        }
+
+        public void setLocationLevel3Jpn(String locationLevel3Jpn) {
+            this.locationLevel3Jpn = locationLevel3Jpn;
         }
 
         public String getLocationLevel4Jpn() {
@@ -519,180 +378,28 @@ public class HouseDetailsBean {
             this.locationLevel4Jpn = locationLevel4Jpn;
         }
 
-        public double getLongitude() {
-            return longitude;
+        public long getCreateTime() {
+            return createTime;
         }
 
-        public void setLongitude(double longitude) {
-            this.longitude = longitude;
+        public void setCreateTime(long createTime) {
+            this.createTime = createTime;
         }
 
-        public int getManageFeeCn() {
-            return manageFeeCn;
+        public long getUpdateTime() {
+            return updateTime;
         }
 
-        public void setManageFeeCn(int manageFeeCn) {
-            this.manageFeeCn = manageFeeCn;
+        public void setUpdateTime(long updateTime) {
+            this.updateTime = updateTime;
         }
 
-        public int getManageFeeJpn() {
-            return manageFeeJpn;
+        public int getIsDeleted() {
+            return isDeleted;
         }
 
-        public void setManageFeeJpn(int manageFeeJpn) {
-            this.manageFeeJpn = manageFeeJpn;
-        }
-
-        public String getManageSocietyCn() {
-            return manageSocietyCn;
-        }
-
-        public void setManageSocietyCn(String manageSocietyCn) {
-            this.manageSocietyCn = manageSocietyCn;
-        }
-
-        public String getManageSocietyJpn() {
-            return manageSocietyJpn;
-        }
-
-        public void setManageSocietyJpn(String manageSocietyJpn) {
-            this.manageSocietyJpn = manageSocietyJpn;
-        }
-
-        public String getOrientationCn() {
-            return orientationCn;
-        }
-
-        public void setOrientationCn(String orientationCn) {
-            this.orientationCn = orientationCn;
-        }
-
-        public String getOrientationJpn() {
-            return orientationJpn;
-        }
-
-        public void setOrientationJpn(String orientationJpn) {
-            this.orientationJpn = orientationJpn;
-        }
-
-        public String getPlotNameCn() {
-            return plotNameCn;
-        }
-
-        public void setPlotNameCn(String plotNameCn) {
-            this.plotNameCn = plotNameCn;
-        }
-
-        public String getPlotNameJpn() {
-            return plotNameJpn;
-        }
-
-        public void setPlotNameJpn(String plotNameJpn) {
-            this.plotNameJpn = plotNameJpn;
-        }
-
-        public String getPriceCn() {
-            return priceCn;
-        }
-
-        public void setPriceCn(String priceCn) {
-            this.priceCn = priceCn;
-        }
-
-        public String getPriceJpn() {
-            return priceJpn;
-        }
-
-        public void setPriceJpn(String priceJpn) {
-            this.priceJpn = priceJpn;
-        }
-
-        public double getPriceSearchValue() {
-            return priceSearchValue;
-        }
-
-        public void setPriceSearchValue(double priceSearchValue) {
-            this.priceSearchValue = priceSearchValue;
-        }
-
-        public int getRepairChargeCn() {
-            return repairChargeCn;
-        }
-
-        public void setRepairChargeCn(int repairChargeCn) {
-            this.repairChargeCn = repairChargeCn;
-        }
-
-        public int getRepairChargeJpn() {
-            return repairChargeJpn;
-        }
-
-        public void setRepairChargeJpn(int repairChargeJpn) {
-            this.repairChargeJpn = repairChargeJpn;
-        }
-
-        public String getRoomImgs() {
-            return roomImgs;
-        }
-
-        public void setRoomImgs(String roomImgs) {
-            this.roomImgs = roomImgs;
-        }
-
-        public int getRoomcountSearchValue() {
-            return roomcountSearchValue;
-        }
-
-        public void setRoomcountSearchValue(int roomcountSearchValue) {
-            this.roomcountSearchValue = roomcountSearchValue;
-        }
-
-        public String getSceneryCn() {
-            return sceneryCn;
-        }
-
-        public void setSceneryCn(String sceneryCn) {
-            this.sceneryCn = sceneryCn;
-        }
-
-        public String getSceneryJpn() {
-            return sceneryJpn;
-        }
-
-        public void setSceneryJpn(String sceneryJpn) {
-            this.sceneryJpn = sceneryJpn;
-        }
-
-        public int getSignedYear() {
-            return signedYear;
-        }
-
-        public void setSignedYear(int signedYear) {
-            this.signedYear = signedYear;
-        }
-
-        public String getStationDistanceCn() {
-            return stationDistanceCn;
-        }
-
-        public void setStationDistanceCn(String stationDistanceCn) {
-            this.stationDistanceCn = stationDistanceCn;
-        }
-
-        public String getStationDistanceJpn() {
-            return stationDistanceJpn;
-        }
-
-        public void setStationDistanceJpn(String stationDistanceJpn) {
-            this.stationDistanceJpn = stationDistanceJpn;
-        }
-
-        public double getStationdistanceSearchValue() {
-            return stationdistanceSearchValue;
-        }
-
-        public void setStationdistanceSearchValue(double stationdistanceSearchValue) {
-            this.stationdistanceSearchValue = stationdistanceSearchValue;
+        public void setIsDeleted(int isDeleted) {
+            this.isDeleted = isDeleted;
         }
 
         public String getStatus() {
@@ -703,28 +410,44 @@ public class HouseDetailsBean {
             this.status = status;
         }
 
-        public String getStructureImg() {
-            return structureImg;
+        public String getHouseType() {
+            return houseType;
         }
 
-        public void setStructureImg(String structureImg) {
-            this.structureImg = structureImg;
+        public void setHouseType(String houseType) {
+            this.houseType = houseType;
         }
 
-        public String getTatamiRoomCn() {
-            return tatamiRoomCn;
+        public String getTableFlag() {
+            return tableFlag;
         }
 
-        public void setTatamiRoomCn(String tatamiRoomCn) {
-            this.tatamiRoomCn = tatamiRoomCn;
+        public void setTableFlag(String tableFlag) {
+            this.tableFlag = tableFlag;
         }
 
-        public String getTatamiRoomJpn() {
-            return tatamiRoomJpn;
+        public int getCommunityId() {
+            return communityId;
         }
 
-        public void setTatamiRoomJpn(String tatamiRoomJpn) {
-            this.tatamiRoomJpn = tatamiRoomJpn;
+        public void setCommunityId(int communityId) {
+            this.communityId = communityId;
+        }
+
+        public int getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(int longitude) {
+            this.longitude = longitude;
+        }
+
+        public int getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(int latitude) {
+            this.latitude = latitude;
         }
 
         public String getTitleCn() {
@@ -743,60 +466,196 @@ public class HouseDetailsBean {
             this.titleJpn = titleJpn;
         }
 
-        public long getUpdateTime() {
-            return updateTime;
+        public String getReturnRateCn() {
+            return returnRateCn;
         }
 
-        public void setUpdateTime(long updateTime) {
-            this.updateTime = updateTime;
+        public void setReturnRateCn(String returnRateCn) {
+            this.returnRateCn = returnRateCn;
         }
 
-        public String getVideoImgs() {
-            return videoImgs;
+        public String getReturnRateJpn() {
+            return returnRateJpn;
         }
 
-        public void setVideoImgs(String videoImgs) {
-            this.videoImgs = videoImgs;
+        public void setReturnRateJpn(String returnRateJpn) {
+            this.returnRateJpn = returnRateJpn;
         }
 
-        public String getVideoUrls() {
-            return videoUrls;
+        public String getArticleNameCn() {
+            return articleNameCn;
         }
 
-        public void setVideoUrls(String videoUrls) {
-            this.videoUrls = videoUrls;
+        public void setArticleNameCn(String articleNameCn) {
+            this.articleNameCn = articleNameCn;
         }
 
-        public String getWaterCn() {
-            return waterCn;
+        public String getArticleNameJpn() {
+            return articleNameJpn;
         }
 
-        public void setWaterCn(String waterCn) {
-            this.waterCn = waterCn;
+        public void setArticleNameJpn(String articleNameJpn) {
+            this.articleNameJpn = articleNameJpn;
         }
 
-        public String getWaterJpn() {
-            return waterJpn;
+        public String getConstructionCompanyCn() {
+            return constructionCompanyCn;
         }
 
-        public void setWaterJpn(String waterJpn) {
-            this.waterJpn = waterJpn;
+        public void setConstructionCompanyCn(String constructionCompanyCn) {
+            this.constructionCompanyCn = constructionCompanyCn;
         }
 
-        public String getWesternRoomCn() {
-            return westernRoomCn;
+        public String getConstructionCompanyJpn() {
+            return constructionCompanyJpn;
         }
 
-        public void setWesternRoomCn(String westernRoomCn) {
-            this.westernRoomCn = westernRoomCn;
+        public void setConstructionCompanyJpn(String constructionCompanyJpn) {
+            this.constructionCompanyJpn = constructionCompanyJpn;
         }
 
-        public String getWesternRoomJpn() {
-            return westernRoomJpn;
+        public String getOrientationCn() {
+            return orientationCn;
         }
 
-        public void setWesternRoomJpn(String westernRoomJpn) {
-            this.westernRoomJpn = westernRoomJpn;
+        public void setOrientationCn(String orientationCn) {
+            this.orientationCn = orientationCn;
+        }
+
+        public String getOrientationJpn() {
+            return orientationJpn;
+        }
+
+        public void setOrientationJpn(String orientationJpn) {
+            this.orientationJpn = orientationJpn;
+        }
+
+        public String getBuildingConstructionCn() {
+            return buildingConstructionCn;
+        }
+
+        public void setBuildingConstructionCn(String buildingConstructionCn) {
+            this.buildingConstructionCn = buildingConstructionCn;
+        }
+
+        public String getBuildingConstructionJpn() {
+            return buildingConstructionJpn;
+        }
+
+        public void setBuildingConstructionJpn(String buildingConstructionJpn) {
+            this.buildingConstructionJpn = buildingConstructionJpn;
+        }
+
+        public String getHouseholdsCn() {
+            return householdsCn;
+        }
+
+        public void setHouseholdsCn(String householdsCn) {
+            this.householdsCn = householdsCn;
+        }
+
+        public String getHouseholdsJpn() {
+            return householdsJpn;
+        }
+
+        public void setHouseholdsJpn(String householdsJpn) {
+            this.householdsJpn = householdsJpn;
+        }
+
+        public String getRestsCn() {
+            return restsCn;
+        }
+
+        public void setRestsCn(String restsCn) {
+            this.restsCn = restsCn;
+        }
+
+        public String getRestsJpn() {
+            return restsJpn;
+        }
+
+        public void setRestsJpn(String restsJpn) {
+            this.restsJpn = restsJpn;
+        }
+
+        public String getSellingPriceCn() {
+            return sellingPriceCn;
+        }
+
+        public void setSellingPriceCn(String sellingPriceCn) {
+            this.sellingPriceCn = sellingPriceCn;
+        }
+
+        public String getSellingPriceJpn() {
+            return sellingPriceJpn;
+        }
+
+        public void setSellingPriceJpn(String sellingPriceJpn) {
+            this.sellingPriceJpn = sellingPriceJpn;
+        }
+
+        public String getDoichoIrinoDateCn() {
+            return doichoIrinoDateCn;
+        }
+
+        public void setDoichoIrinoDateCn(String doichoIrinoDateCn) {
+            this.doichoIrinoDateCn = doichoIrinoDateCn;
+        }
+
+        public String getDoichoIrinoDateJpn() {
+            return doichoIrinoDateJpn;
+        }
+
+        public void setDoichoIrinoDateJpn(String doichoIrinoDateJpn) {
+            this.doichoIrinoDateJpn = doichoIrinoDateJpn;
+        }
+
+        public String getOwnershipCn() {
+            return ownershipCn;
+        }
+
+        public void setOwnershipCn(String ownershipCn) {
+            this.ownershipCn = ownershipCn;
+        }
+
+        public String getOwnershipJpn() {
+            return ownershipJpn;
+        }
+
+        public void setOwnershipJpn(String ownershipJpn) {
+            this.ownershipJpn = ownershipJpn;
+        }
+
+        public String getDoorModelCn() {
+            return doorModelCn;
+        }
+
+        public void setDoorModelCn(String doorModelCn) {
+            this.doorModelCn = doorModelCn;
+        }
+
+        public String getDoorModelJpn() {
+            return doorModelJpn;
+        }
+
+        public void setDoorModelJpn(String doorModelJpn) {
+            this.doorModelJpn = doorModelJpn;
+        }
+
+        public String getAreaCn() {
+            return areaCn;
+        }
+
+        public void setAreaCn(String areaCn) {
+            this.areaCn = areaCn;
+        }
+
+        public String getAreaJpn() {
+            return areaJpn;
+        }
+
+        public void setAreaJpn(String areaJpn) {
+            this.areaJpn = areaJpn;
         }
 
         public String getYearBuiltCn() {
@@ -815,68 +674,710 @@ public class HouseDetailsBean {
             this.yearBuiltJpn = yearBuiltJpn;
         }
 
-        public static class HwdcBrokerBean {
+        public String getFloorCn() {
+            return floorCn;
+        }
+
+        public void setFloorCn(String floorCn) {
+            this.floorCn = floorCn;
+        }
+
+        public String getFloorJpn() {
+            return floorJpn;
+        }
+
+        public void setFloorJpn(String floorJpn) {
+            this.floorJpn = floorJpn;
+        }
+
+        public String getManagementSocietyCn() {
+            return managementSocietyCn;
+        }
+
+        public void setManagementSocietyCn(String managementSocietyCn) {
+            this.managementSocietyCn = managementSocietyCn;
+        }
+
+        public String getManagementSocietyJpn() {
+            return managementSocietyJpn;
+        }
+
+        public void setManagementSocietyJpn(String managementSocietyJpn) {
+            this.managementSocietyJpn = managementSocietyJpn;
+        }
+
+        public String getManageCn() {
+            return manageCn;
+        }
+
+        public void setManageCn(String manageCn) {
+            this.manageCn = manageCn;
+        }
+
+        public String getManageJpn() {
+            return manageJpn;
+        }
+
+        public void setManageJpn(String manageJpn) {
+            this.manageJpn = manageJpn;
+        }
+
+        public String getRepairChargeCn() {
+            return repairChargeCn;
+        }
+
+        public void setRepairChargeCn(String repairChargeCn) {
+            this.repairChargeCn = repairChargeCn;
+        }
+
+        public String getRepairChargeJpn() {
+            return repairChargeJpn;
+        }
+
+        public void setRepairChargeJpn(String repairChargeJpn) {
+            this.repairChargeJpn = repairChargeJpn;
+        }
+
+        public String getAdministrativeFeeCn() {
+            return administrativeFeeCn;
+        }
+
+        public void setAdministrativeFeeCn(String administrativeFeeCn) {
+            this.administrativeFeeCn = administrativeFeeCn;
+        }
+
+        public String getAdministrativeFeeJpn() {
+            return administrativeFeeJpn;
+        }
+
+        public void setAdministrativeFeeJpn(String administrativeFeeJpn) {
+            this.administrativeFeeJpn = administrativeFeeJpn;
+        }
+
+        public String getDistrictCn() {
+            return districtCn;
+        }
+
+        public void setDistrictCn(String districtCn) {
+            this.districtCn = districtCn;
+        }
+
+        public String getDistrictJpn() {
+            return districtJpn;
+        }
+
+        public void setDistrictJpn(String districtJpn) {
+            this.districtJpn = districtJpn;
+        }
+
+        public String getSpecificLocationCn() {
+            return specificLocationCn;
+        }
+
+        public void setSpecificLocationCn(String specificLocationCn) {
+            this.specificLocationCn = specificLocationCn;
+        }
+
+        public String getSpecificLocationJpn() {
+            return specificLocationJpn;
+        }
+
+        public void setSpecificLocationJpn(String specificLocationJpn) {
+            this.specificLocationJpn = specificLocationJpn;
+        }
+
+        public String getTrainStationCn() {
+            return trainStationCn;
+        }
+
+        public void setTrainStationCn(String trainStationCn) {
+            this.trainStationCn = trainStationCn;
+        }
+
+        public String getTrainStationJpn() {
+            return trainStationJpn;
+        }
+
+        public void setTrainStationJpn(String trainStationJpn) {
+            this.trainStationJpn = trainStationJpn;
+        }
+
+        public String getStationDistanceCn() {
+            return stationDistanceCn;
+        }
+
+        public void setStationDistanceCn(String stationDistanceCn) {
+            this.stationDistanceCn = stationDistanceCn;
+        }
+
+        public String getStationDistanceJpn() {
+            return stationDistanceJpn;
+        }
+
+        public void setStationDistanceJpn(String stationDistanceJpn) {
+            this.stationDistanceJpn = stationDistanceJpn;
+        }
+
+        public String getParkingSpaceCn() {
+            return parkingSpaceCn;
+        }
+
+        public void setParkingSpaceCn(String parkingSpaceCn) {
+            this.parkingSpaceCn = parkingSpaceCn;
+        }
+
+        public String getParkingSpaceJpn() {
+            return parkingSpaceJpn;
+        }
+
+        public void setParkingSpaceJpn(String parkingSpaceJpn) {
+            this.parkingSpaceJpn = parkingSpaceJpn;
+        }
+
+        public String getIndoorEquipmentCn() {
+            return indoorEquipmentCn;
+        }
+
+        public void setIndoorEquipmentCn(String indoorEquipmentCn) {
+            this.indoorEquipmentCn = indoorEquipmentCn;
+        }
+
+        public String getIndoorEquipmentJpn() {
+            return indoorEquipmentJpn;
+        }
+
+        public void setIndoorEquipmentJpn(String indoorEquipmentJpn) {
+            this.indoorEquipmentJpn = indoorEquipmentJpn;
+        }
+
+        public String getKitchenCn() {
+            return kitchenCn;
+        }
+
+        public void setKitchenCn(String kitchenCn) {
+            this.kitchenCn = kitchenCn;
+        }
+
+        public String getKitchenJpn() {
+            return kitchenJpn;
+        }
+
+        public void setKitchenJpn(String kitchenJpn) {
+            this.kitchenJpn = kitchenJpn;
+        }
+
+        public String getToiletCn() {
+            return toiletCn;
+        }
+
+        public void setToiletCn(String toiletCn) {
+            this.toiletCn = toiletCn;
+        }
+
+        public String getToiletJpn() {
+            return toiletJpn;
+        }
+
+        public void setToiletJpn(String toiletJpn) {
+            this.toiletJpn = toiletJpn;
+        }
+
+        public String getShowersCn() {
+            return showersCn;
+        }
+
+        public void setShowersCn(String showersCn) {
+            this.showersCn = showersCn;
+        }
+
+        public String getShowersJpn() {
+            return showersJpn;
+        }
+
+        public void setShowersJpn(String showersJpn) {
+            this.showersJpn = showersJpn;
+        }
+
+        public String getTestimonialCn() {
+            return testimonialCn;
+        }
+
+        public void setTestimonialCn(String testimonialCn) {
+            this.testimonialCn = testimonialCn;
+        }
+
+        public String getTestimonialJpn() {
+            return testimonialJpn;
+        }
+
+        public void setTestimonialJpn(String testimonialJpn) {
+            this.testimonialJpn = testimonialJpn;
+        }
+
+        public String getPerformanceCn() {
+            return performanceCn;
+        }
+
+        public void setPerformanceCn(String performanceCn) {
+            this.performanceCn = performanceCn;
+        }
+
+        public String getPerformanceJpn() {
+            return performanceJpn;
+        }
+
+        public void setPerformanceJpn(String performanceJpn) {
+            this.performanceJpn = performanceJpn;
+        }
+
+        public String getDefectsEnsureCn() {
+            return defectsEnsureCn;
+        }
+
+        public void setDefectsEnsureCn(String defectsEnsureCn) {
+            this.defectsEnsureCn = defectsEnsureCn;
+        }
+
+        public String getDefectsEnsureJpn() {
+            return defectsEnsureJpn;
+        }
+
+        public void setDefectsEnsureJpn(String defectsEnsureJpn) {
+            this.defectsEnsureJpn = defectsEnsureJpn;
+        }
+
+        public String getSceneryCn() {
+            return sceneryCn;
+        }
+
+        public void setSceneryCn(String sceneryCn) {
+            this.sceneryCn = sceneryCn;
+        }
+
+        public String getSceneryJpn() {
+            return sceneryJpn;
+        }
+
+        public void setSceneryJpn(String sceneryJpn) {
+            this.sceneryJpn = sceneryJpn;
+        }
+
+        public String getSurroundingsCn() {
+            return surroundingsCn;
+        }
+
+        public void setSurroundingsCn(String surroundingsCn) {
+            this.surroundingsCn = surroundingsCn;
+        }
+
+        public String getSurroundingsJpn() {
+            return surroundingsJpn;
+        }
+
+        public void setSurroundingsJpn(String surroundingsJpn) {
+            this.surroundingsJpn = surroundingsJpn;
+        }
+
+        public String getCommonPartsCn() {
+            return commonPartsCn;
+        }
+
+        public void setCommonPartsCn(String commonPartsCn) {
+            this.commonPartsCn = commonPartsCn;
+        }
+
+        public String getCommonPartsJpn() {
+            return commonPartsJpn;
+        }
+
+        public void setCommonPartsJpn(String commonPartsJpn) {
+            this.commonPartsJpn = commonPartsJpn;
+        }
+
+        public String getRemarksCn() {
+            return remarksCn;
+        }
+
+        public void setRemarksCn(String remarksCn) {
+            this.remarksCn = remarksCn;
+        }
+
+        public String getRemarksJpn() {
+            return remarksJpn;
+        }
+
+        public void setRemarksJpn(String remarksJpn) {
+            this.remarksJpn = remarksJpn;
+        }
+
+        public String getLeaseTypeCn() {
+            return leaseTypeCn;
+        }
+
+        public void setLeaseTypeCn(String leaseTypeCn) {
+            this.leaseTypeCn = leaseTypeCn;
+        }
+
+        public String getLeaseTypeJpn() {
+            return leaseTypeJpn;
+        }
+
+        public void setLeaseTypeJpn(String leaseTypeJpn) {
+            this.leaseTypeJpn = leaseTypeJpn;
+        }
+
+        public String getRentCn() {
+            return rentCn;
+        }
+
+        public void setRentCn(String rentCn) {
+            this.rentCn = rentCn;
+        }
+
+        public String getRentJpn() {
+            return rentJpn;
+        }
+
+        public void setRentJpn(String rentJpn) {
+            this.rentJpn = rentJpn;
+        }
+
+        public String getShopSignsCn() {
+            return shopSignsCn;
+        }
+
+        public void setShopSignsCn(String shopSignsCn) {
+            this.shopSignsCn = shopSignsCn;
+        }
+
+        public String getShopSignsJpn() {
+            return shopSignsJpn;
+        }
+
+        public void setShopSignsJpn(String shopSignsJpn) {
+            this.shopSignsJpn = shopSignsJpn;
+        }
+
+        public String getOutdoorSettingCn() {
+            return outdoorSettingCn;
+        }
+
+        public void setOutdoorSettingCn(String outdoorSettingCn) {
+            this.outdoorSettingCn = outdoorSettingCn;
+        }
+
+        public String getOutdoorSettingJpn() {
+            return outdoorSettingJpn;
+        }
+
+        public void setOutdoorSettingJpn(String outdoorSettingJpn) {
+            this.outdoorSettingJpn = outdoorSettingJpn;
+        }
+
+        public String getRaisingPlateCn() {
+            return raisingPlateCn;
+        }
+
+        public void setRaisingPlateCn(String raisingPlateCn) {
+            this.raisingPlateCn = raisingPlateCn;
+        }
+
+        public String getRaisingPlateJpn() {
+            return raisingPlateJpn;
+        }
+
+        public void setRaisingPlateJpn(String raisingPlateJpn) {
+            this.raisingPlateJpn = raisingPlateJpn;
+        }
+
+        public String getCharacteristicCn() {
+            return characteristicCn;
+        }
+
+        public void setCharacteristicCn(String characteristicCn) {
+            this.characteristicCn = characteristicCn;
+        }
+
+        public String getCharacteristicJpn() {
+            return characteristicJpn;
+        }
+
+        public void setCharacteristicJpn(String characteristicJpn) {
+            this.characteristicJpn = characteristicJpn;
+        }
+
+        public String getConditionCn() {
+            return conditionCn;
+        }
+
+        public void setConditionCn(String conditionCn) {
+            this.conditionCn = conditionCn;
+        }
+
+        public String getConditionJpn() {
+            return conditionJpn;
+        }
+
+        public void setConditionJpn(String conditionJpn) {
+            this.conditionJpn = conditionJpn;
+        }
+
+        public String getPrivateSectionCn() {
+            return privateSectionCn;
+        }
+
+        public void setPrivateSectionCn(String privateSectionCn) {
+            this.privateSectionCn = privateSectionCn;
+        }
+
+        public String getPrivateSectionJpn() {
+            return privateSectionJpn;
+        }
+
+        public void setPrivateSectionJpn(String privateSectionJpn) {
+            this.privateSectionJpn = privateSectionJpn;
+        }
+
+        public String getDoichoIrinoConditionCn() {
+            return doichoIrinoConditionCn;
+        }
+
+        public void setDoichoIrinoConditionCn(String doichoIrinoConditionCn) {
+            this.doichoIrinoConditionCn = doichoIrinoConditionCn;
+        }
+
+        public String getDoichoIrinoConditionJpn() {
+            return doichoIrinoConditionJpn;
+        }
+
+        public void setDoichoIrinoConditionJpn(String doichoIrinoConditionJpn) {
+            this.doichoIrinoConditionJpn = doichoIrinoConditionJpn;
+        }
+
+        public String getGasElectricCn() {
+            return gasElectricCn;
+        }
+
+        public void setGasElectricCn(String gasElectricCn) {
+            this.gasElectricCn = gasElectricCn;
+        }
+
+        public String getGasElectricJpn() {
+            return gasElectricJpn;
+        }
+
+        public void setGasElectricJpn(String gasElectricJpn) {
+            this.gasElectricJpn = gasElectricJpn;
+        }
+
+        public String getSignYearCn() {
+            return signYearCn;
+        }
+
+        public void setSignYearCn(String signYearCn) {
+            this.signYearCn = signYearCn;
+        }
+
+        public String getSignYearJpn() {
+            return signYearJpn;
+        }
+
+        public void setSignYearJpn(String signYearJpn) {
+            this.signYearJpn = signYearJpn;
+        }
+
+        public String getChargeCn() {
+            return chargeCn;
+        }
+
+        public void setChargeCn(String chargeCn) {
+            this.chargeCn = chargeCn;
+        }
+
+        public String getChargeJpn() {
+            return chargeJpn;
+        }
+
+        public void setChargeJpn(String chargeJpn) {
+            this.chargeJpn = chargeJpn;
+        }
+
+        public String getRoomStatusCn() {
+            return roomStatusCn;
+        }
+
+        public void setRoomStatusCn(String roomStatusCn) {
+            this.roomStatusCn = roomStatusCn;
+        }
+
+        public String getRoomStatusJpn() {
+            return roomStatusJpn;
+        }
+
+        public void setRoomStatusJpn(String roomStatusJpn) {
+            this.roomStatusJpn = roomStatusJpn;
+        }
+
+        public String getVideoUrls() {
+            return videoUrls;
+        }
+
+        public void setVideoUrls(String videoUrls) {
+            this.videoUrls = videoUrls;
+        }
+
+        public String getVideoImgs() {
+            return videoImgs;
+        }
+
+        public void setVideoImgs(String videoImgs) {
+            this.videoImgs = videoImgs;
+        }
+
+        public String getRoomImgs() {
+            return roomImgs;
+        }
+
+        public void setRoomImgs(String roomImgs) {
+            this.roomImgs = roomImgs;
+        }
+
+        public int getAreaSearch() {
+            return areaSearch;
+        }
+
+        public void setAreaSearch(int areaSearch) {
+            this.areaSearch = areaSearch;
+        }
+
+        public int getSellingPriceSearch() {
+            return sellingPriceSearch;
+        }
+
+        public void setSellingPriceSearch(int sellingPriceSearch) {
+            this.sellingPriceSearch = sellingPriceSearch;
+        }
+
+        public int getYearBuiltSearch() {
+            return yearBuiltSearch;
+        }
+
+        public void setYearBuiltSearch(int yearBuiltSearch) {
+            this.yearBuiltSearch = yearBuiltSearch;
+        }
+
+        public int getRentSearch() {
+            return rentSearch;
+        }
+
+        public void setRentSearch(int rentSearch) {
+            this.rentSearch = rentSearch;
+        }
+
+        public int getFloorSearch() {
+            return floorSearch;
+        }
+
+        public void setFloorSearch(int floorSearch) {
+            this.floorSearch = floorSearch;
+        }
+
+        public int getStationDistanceSearch() {
+            return stationDistanceSearch;
+        }
+
+        public void setStationDistanceSearch(int stationDistanceSearch) {
+            this.stationDistanceSearch = stationDistanceSearch;
+        }
+
+        public int getBrokerId() {
+            return brokerId;
+        }
+
+        public void setBrokerId(int brokerId) {
+            this.brokerId = brokerId;
+        }
+
+        public String getPopularChoiceCn() {
+            return popularChoiceCn;
+        }
+
+        public void setPopularChoiceCn(String popularChoiceCn) {
+            this.popularChoiceCn = popularChoiceCn;
+        }
+
+        public String getPopularChoiceJpn() {
+            return popularChoiceJpn;
+        }
+
+        public void setPopularChoiceJpn(String popularChoiceJpn) {
+            this.popularChoiceJpn = popularChoiceJpn;
+        }
+
+        public String getConditionsCn() {
+            return conditionsCn;
+        }
+
+        public void setConditionsCn(String conditionsCn) {
+            this.conditionsCn = conditionsCn;
+        }
+
+        public String getConditionsJpn() {
+            return conditionsJpn;
+        }
+
+        public void setConditionsJpn(String conditionsJpn) {
+            this.conditionsJpn = conditionsJpn;
+        }
+
+        public HwdcBrokerBean getHwdcBroker() {
+            return hwdcBroker;
+        }
+
+        public void setHwdcBroker(HwdcBrokerBean hwdcBroker) {
+            this.hwdcBroker = hwdcBroker;
+        }
+
+        public static class HwdcBrokerBean implements Serializable{
             /**
-             * brokerName : zhangsan
-             * caeateTime : 1525781849000
-             * counts : 60
-             * id : 18
-             * inYears : 3
-             * isDeleted : 0
-             * nickname : 昵称
+             * id : 8
+             * brokerName : 姓名
+             * phone : 1234
              * password : 1232132
-             * period : 1
-             * phone : 12313123213
-             * pic : http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg
-             * sex : 0
-             * shop : 所属门店
-             * status : 0
              * telePhone : 123132
+             * shop : 所属门店
              * turnover : 100
-             * updateTime : 1523842399000
+             * inYears : 3
+             * period : 1
+             * counts : 60
+             * pic : http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg
+             * nickname : 昵称
+             * sex : 0
+             * wechatId : null
+             * caeateTime : 1525781849000
+             * updateTime : 1526627540000
+             * isDeleted : 0
+             * status : 2
              */
 
-            private String brokerName;
-            private long caeateTime;
-            private int counts;
             private int id;
-            private int inYears;
-            private int isDeleted;
-            private String nickname;
-            private String password;
-            private int period;
+            private String brokerName;
             private String phone;
-            private String pic;
-            private String sex;
-            private String shop;
-            private String status;
+            private String password;
             private String telePhone;
+            private String shop;
             private int turnover;
+            private int inYears;
+            private int period;
+            private int counts;
+            private String pic;
+            private String nickname;
+            private String sex;
+            private Object wechatId;
+            private long caeateTime;
             private long updateTime;
-
-            public String getBrokerName() {
-                return brokerName;
-            }
-
-            public void setBrokerName(String brokerName) {
-                this.brokerName = brokerName;
-            }
-
-            public long getCaeateTime() {
-                return caeateTime;
-            }
-
-            public void setCaeateTime(long caeateTime) {
-                this.caeateTime = caeateTime;
-            }
-
-            public int getCounts() {
-                return counts;
-            }
-
-            public void setCounts(int counts) {
-                this.counts = counts;
-            }
+            private int isDeleted;
+            private String status;
 
             public int getId() {
                 return id;
@@ -886,44 +1387,12 @@ public class HouseDetailsBean {
                 this.id = id;
             }
 
-            public int getInYears() {
-                return inYears;
+            public String getBrokerName() {
+                return brokerName;
             }
 
-            public void setInYears(int inYears) {
-                this.inYears = inYears;
-            }
-
-            public int getIsDeleted() {
-                return isDeleted;
-            }
-
-            public void setIsDeleted(int isDeleted) {
-                this.isDeleted = isDeleted;
-            }
-
-            public String getNickname() {
-                return nickname;
-            }
-
-            public void setNickname(String nickname) {
-                this.nickname = nickname;
-            }
-
-            public String getPassword() {
-                return password;
-            }
-
-            public void setPassword(String password) {
-                this.password = password;
-            }
-
-            public int getPeriod() {
-                return period;
-            }
-
-            public void setPeriod(int period) {
-                this.period = period;
+            public void setBrokerName(String brokerName) {
+                this.brokerName = brokerName;
             }
 
             public String getPhone() {
@@ -934,36 +1403,12 @@ public class HouseDetailsBean {
                 this.phone = phone;
             }
 
-            public String getPic() {
-                return pic;
+            public String getPassword() {
+                return password;
             }
 
-            public void setPic(String pic) {
-                this.pic = pic;
-            }
-
-            public String getSex() {
-                return sex;
-            }
-
-            public void setSex(String sex) {
-                this.sex = sex;
-            }
-
-            public String getShop() {
-                return shop;
-            }
-
-            public void setShop(String shop) {
-                this.shop = shop;
-            }
-
-            public String getStatus() {
-                return status;
-            }
-
-            public void setStatus(String status) {
-                this.status = status;
+            public void setPassword(String password) {
+                this.password = password;
             }
 
             public String getTelePhone() {
@@ -974,6 +1419,14 @@ public class HouseDetailsBean {
                 this.telePhone = telePhone;
             }
 
+            public String getShop() {
+                return shop;
+            }
+
+            public void setShop(String shop) {
+                this.shop = shop;
+            }
+
             public int getTurnover() {
                 return turnover;
             }
@@ -982,12 +1435,92 @@ public class HouseDetailsBean {
                 this.turnover = turnover;
             }
 
+            public int getInYears() {
+                return inYears;
+            }
+
+            public void setInYears(int inYears) {
+                this.inYears = inYears;
+            }
+
+            public int getPeriod() {
+                return period;
+            }
+
+            public void setPeriod(int period) {
+                this.period = period;
+            }
+
+            public int getCounts() {
+                return counts;
+            }
+
+            public void setCounts(int counts) {
+                this.counts = counts;
+            }
+
+            public String getPic() {
+                return pic;
+            }
+
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
+
+            public String getNickname() {
+                return nickname;
+            }
+
+            public void setNickname(String nickname) {
+                this.nickname = nickname;
+            }
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
+
+            public Object getWechatId() {
+                return wechatId;
+            }
+
+            public void setWechatId(Object wechatId) {
+                this.wechatId = wechatId;
+            }
+
+            public long getCaeateTime() {
+                return caeateTime;
+            }
+
+            public void setCaeateTime(long caeateTime) {
+                this.caeateTime = caeateTime;
+            }
+
             public long getUpdateTime() {
                 return updateTime;
             }
 
             public void setUpdateTime(long updateTime) {
                 this.updateTime = updateTime;
+            }
+
+            public int getIsDeleted() {
+                return isDeleted;
+            }
+
+            public void setIsDeleted(int isDeleted) {
+                this.isDeleted = isDeleted;
+            }
+
+            public String getStatus() {
+                return status;
+            }
+
+            public void setStatus(String status) {
+                this.status = status;
             }
         }
     }

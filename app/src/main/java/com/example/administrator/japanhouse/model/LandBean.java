@@ -8,10 +8,11 @@ import java.util.List;
 
 public class LandBean {
 
+
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":1,"titleCn":"房屋标题中文","titleJpn":"房屋标题日文","priceCn":"100","priceJpn":"100","areaJpn":"500平米","areaCn":"500平米","addressCn":"","addressJpn":"","videoImgs":"","landImages":""}]
+     * datas : [{"id":1,"titleCn":"","titleJpn":"","sellingPriceCn":"","sellingPriceJpn":"","areaJpn":"","areaCn":"","specificLocationCn":"1","specificLocationJpn":"1","videoImgs":"","landImages":""}]
      */
 
     private String msg;
@@ -45,14 +46,14 @@ public class LandBean {
     public static class DatasBean {
         /**
          * id : 1
-         * titleCn : 房屋标题中文
-         * titleJpn : 房屋标题日文
-         * priceCn : 100
-         * priceJpn : 100
-         * areaJpn : 500平米
-         * areaCn : 500平米
-         * addressCn :
-         * addressJpn :
+         * titleCn :
+         * titleJpn :
+         * sellingPriceCn :
+         * sellingPriceJpn :
+         * areaJpn :
+         * areaCn :
+         * specificLocationCn : 1
+         * specificLocationJpn : 1
          * videoImgs :
          * landImages :
          */
@@ -60,12 +61,12 @@ public class LandBean {
         private int id;
         private String titleCn;
         private String titleJpn;
-        private String priceCn;
-        private String priceJpn;
+        private String sellingPriceCn;
+        private String sellingPriceJpn;
         private String areaJpn;
         private String areaCn;
-        private String addressCn;
-        private String addressJpn;
+        private String specificLocationCn;
+        private String specificLocationJpn;
         private String videoImgs;
         private String landImages;
 
@@ -93,20 +94,20 @@ public class LandBean {
             this.titleJpn = titleJpn;
         }
 
-        public String getPriceCn() {
-            return priceCn;
+        public String getSellingPriceCn() {
+            return sellingPriceCn;
         }
 
-        public void setPriceCn(String priceCn) {
-            this.priceCn = priceCn;
+        public void setSellingPriceCn(String sellingPriceCn) {
+            this.sellingPriceCn = sellingPriceCn;
         }
 
-        public String getPriceJpn() {
-            return priceJpn;
+        public String getSellingPriceJpn() {
+            return sellingPriceJpn;
         }
 
-        public void setPriceJpn(String priceJpn) {
-            this.priceJpn = priceJpn;
+        public void setSellingPriceJpn(String sellingPriceJpn) {
+            this.sellingPriceJpn = sellingPriceJpn;
         }
 
         public String getAreaJpn() {
@@ -125,20 +126,20 @@ public class LandBean {
             this.areaCn = areaCn;
         }
 
-        public String getAddressCn() {
-            return addressCn;
+        public String getSpecificLocationCn() {
+            return specificLocationCn;
         }
 
-        public void setAddressCn(String addressCn) {
-            this.addressCn = addressCn;
+        public void setSpecificLocationCn(String specificLocationCn) {
+            this.specificLocationCn = specificLocationCn;
         }
 
-        public String getAddressJpn() {
-            return addressJpn;
+        public String getSpecificLocationJpn() {
+            return specificLocationJpn;
         }
 
-        public void setAddressJpn(String addressJpn) {
-            this.addressJpn = addressJpn;
+        public void setSpecificLocationJpn(String specificLocationJpn) {
+            this.specificLocationJpn = specificLocationJpn;
         }
 
         public String getVideoImgs() {

@@ -543,4 +543,14 @@
     <string name="string_meiqihedianli">ガスと電力：</string>
     <string name="string_feiyong">費&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;用：</string>
     <string name="string_jianzhugongsi">建設会社：</string>
+    <string name="nindeweizhi">（あなたの位置）</string>
+    <string name="shijianyaoqiu">所要時間</string>
+    <string name="qingxuanzeshijian">時間を選択してください</string>
+    <string name="fenzhongnei">分以内</string>
+    <string name="kaishizhaofang">家を探し始める</string>
+    <string name="buxing">徒歩</string>
+    <string name="qixing">自転車</string>
+    <string name="gongjiao">バス</string>
+    <string name="zijia">自動車</string>
+    <string name="qingshurudizhi">住所を記入してください</string>
 </resources>

@@ -2,10 +2,10 @@
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"><!--根布局加上scrollView是为了点击edittext的时候软键盘能顶上去-->
+    android:layout_height="wrap_content"><!--根布局加上scrollView是为了点击edittext的时候软键盘能顶上去-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/white"
         android:orientation="vertical">
@@ -45,6 +45,7 @@
                         android:gravity="center"
                         android:hint="@string/zuidijia"
                         android:paddingBottom="8dp"
+                        android:inputType="number"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="8dp"
@@ -64,6 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/bg_huise_line"
+                        android:inputType="number"
                         android:gravity="center"
                         android:hint="@string/zuigaojia"
                         android:paddingBottom="8dp"
@@ -73,6 +75,15 @@
                         android:singleLine="true"
                         android:textColorHint="@color/text_gray"
                         android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/tv_wanoryuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/calc_wan"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
                 </LinearLayout>
                 <Button
                     android:id="@+id/btn_sure"

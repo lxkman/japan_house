@@ -59,13 +59,15 @@ public class YanjiuListActivity extends BaseActivity {
                     public void onSuccess(Response<YanJiuListBean> response) {
                         int code = response.code();
                         YanJiuListBean yanJiuListBean = response.body();
-                        List<YanJiuListBean.DatasEntity> datas = yanJiuListBean.getDatas();
+                        final List<YanJiuListBean.DatasEntity> datas = yanJiuListBean.getDatas();
                         ListAdapter adapter = new ListAdapter(R.layout.item_yanjiu_list, datas);
                         recyclerView.setAdapter(adapter);
                         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, YanjiuDetailActivity.class));
+                                Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
+                                intent.putExtra("yjType",datas.get(position).getId()+"");
+                                startActivity(intent);
                             }
                         });
                     }

@@ -48,6 +48,9 @@ public class YanjiuDetailActivity extends BaseActivity {
                         int code = response.code();
                         YanJiuDetailBean yanJiuDetailBean = response.body();
                         YanJiuDetailBean.DatasEntity datas = yanJiuDetailBean.getDatas();
+                        if (datas==null){
+                            return;
+                        }
                         titleTv.setText(datas.getYjTitle());
                         contentTv.setText(datas.getYjContent());
                         long createTime = datas.getCreateTime();

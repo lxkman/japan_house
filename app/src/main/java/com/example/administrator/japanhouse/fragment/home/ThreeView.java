@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,6 +24,7 @@ import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 class ThreeView implements View.OnClickListener {
 
@@ -33,7 +36,9 @@ class ThreeView implements View.OnClickListener {
     private Button btn_sure;
     private DropDownMenu dropDownMenu;
     private LinearLayout ll_root;
-    private EditText et_zuidijia,et_zuigaojia;
+    private EditText et_zuidijia, et_zuigaojia;
+    private TextView tv_wanoryuan;
+    private boolean isYuan;
 
     ThreeView(Context context) {
         this.context = context;
@@ -45,19 +50,28 @@ class ThreeView implements View.OnClickListener {
 
     View firstView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_three, null);
-        ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
+        ll_root = (LinearLayout) view.findViewById(R.id.ll_root);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_root.getLayoutParams();
-        layoutParams.height= MyUtils.getScreenHeight(context)/2;
+        layoutParams.height = MyUtils.getScreenHeight(context) / 2;
         ll_root.setLayoutParams(layoutParams);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(this);
-        et_zuidijia= (EditText) view.findViewById(R.id.et_zuidijia);
-        et_zuigaojia= (EditText) view.findViewById(R.id.et_zuigaojia);
+        et_zuidijia = (EditText) view.findViewById(R.id.et_zuidijia);
+        et_zuigaojia = (EditText) view.findViewById(R.id.et_zuigaojia);
+        tv_wanoryuan = (TextView) view.findViewById(R.id.tv_wanoryuan);
         return view;
     }
 
     void insertData(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
+        mList = list;
+        this.dropDownMenu = dropDownMenu;
+        initData();
+    }
+
+    void insertData2(List<OneCheckBean> list, DropDownMenu dropDownMenu, boolean isyuan) {
+        isYuan = isyuan;
+        tv_wanoryuan.setText(isYuan ? "元" : "万");
         mList = list;
         this.dropDownMenu = dropDownMenu;
         initData();
@@ -79,14 +93,26 @@ class ThreeView implements View.OnClickListener {
                 if (!getCheckeditemText().equals("")) {
                     dropDownMenu.setTabText(getCheckeditemText());
                 }
-                dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                 if (TextUtils.isEmpty(et_zuidijia.getText().toString())
-                        &&TextUtils.isEmpty(et_zuigaojia.getText().toString())){
+                        && TextUtils.isEmpty(et_zuigaojia.getText().toString())) {
                     return;
                 }
-                List<String> price=new ArrayList<>();
-                price.add(et_zuidijia.getText().toString());
-                price.add(et_zuigaojia.getText().toString());
+                List<String> price = new ArrayList<>();
+                String zuidijia = et_zuidijia.getText().toString();
+                String zuigaojia = et_zuigaojia.getText().toString();
+                if (isYuan) {
+                    price.add(zuidijia);
+                    price.add(zuigaojia);
+                } else {
+                    try {
+                        price.add(Integer.parseInt(zuidijia) * 10000 + "");
+                        price.add(Integer.parseInt(zuigaojia) * 10000 + "");
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(context, "请输入数字~", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                 listener.onItemClick(v, 4, price);
                 break;
         }
@@ -114,13 +140,15 @@ class ThreeView implements View.OnClickListener {
                             mList.get(i).setChecked(false);
                         }
                     }
-                    int position=helper.getAdapterPosition();//notify之后再取这个值就变成-1了，不知为何
+                    int position = helper.getAdapterPosition();//notify之后再取这个值就变成-1了，不知为何
                     mLiebiaoAdapter.notifyDataSetChanged();
                     if (!getCheckeditemText().equals("")) {
                         dropDownMenu.setTabText(getCheckeditemText());
                     }
                     dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                     listener.onItemClick(v, 3, position);
+                    et_zuidijia.setText("");
+                    et_zuigaojia.setText("");
                 }
 
             });

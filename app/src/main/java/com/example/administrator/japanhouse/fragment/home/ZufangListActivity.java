@@ -64,17 +64,19 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     TextView searchTv;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
-    private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
-    private int page;
+    private int page = 1;
     private boolean isJa;
     private int mType;
+    private int mType2;
     private List<OldHouseListBean.DatasEntity> mDatas;
-    private String mjId;
-    private List<String> zujinIdsList = new ArrayList<>();
+    private String mjId = "-2";
+    private String zjId = "-2";
+    private List<String> zidingyiPriceList = new ArrayList<>();
+    private boolean isZiDingyiPrice;
     private List<ZuHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<ZuHouseShaiXuanBean.DatasEntity.ZujinEntity> zujin;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
@@ -89,6 +91,20 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             isJa = true;
         } else {
             isJa = false;
+        }
+        mType = getIntent().getIntExtra("type", 0);
+        if (mType == 0) {
+            mType2 = 5;
+        } else if (mType == 1) {
+            mType2 = 4;
+        } else if (mType == 2) {
+            mType2 = 3;
+        } else if (mType == 3) {
+            mType2 = 2;
+        } else if (mType == 4) {
+            mType2 = 1;
+        } else if (mType == 5) {
+            mType2 = 0;
         }
         initView();
         initData();
@@ -138,7 +154,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         tongqinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, TongqinActivity.class));
+                Intent intent = new Intent(mContext, TongqinActivity.class);
+                intent.putExtra("type", mType2);
+                startActivity(intent);
             }
         });
         jiluTv.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +167,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         });
         final String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.zujin), getString(R.string.gengduo)};
-        mType = getIntent().getIntExtra("type", 0);
         HttpParams params = new HttpParams();
         params.put("hType", 0);
         params.put("shType", mType);
@@ -206,7 +223,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         }
                         ThreeView threeView = new ThreeView(ZufangListActivity.this);
                         popupViews.add(threeView.firstView());
-                        threeView.insertData(list2, dropDownMenu);
+                        threeView.insertData2(list2, dropDownMenu, true);
                         threeView.setListener(ZufangListActivity.this);
                         /**
                          * 第四个界面
@@ -252,12 +269,17 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         HttpParams params = new HttpParams();
         if (isJa) {
             params.put("languageType", 1);
-        }else {
+        } else {
             params.put("languageType", 0);
         }
         params.put("pageNo", page);
+        params.put("hType", mType2);
         params.put("mjId", mjId);//面积
-        params.putUrlParams("zjId", zujinIdsList);//租金
+        params.put("zjId", zjId);//租金
+        if (isZiDingyiPrice) {
+            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+        }
         initMoreParams(params);
         OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
                 .tag(this)
@@ -396,7 +418,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             case 2://面积
                 page = 1;
                 if (itemPosition == 0) {//说明是点击的不限
-                    mjId = "";
+                    mjId = "-2";
                 } else {
                     if (mianji != null && mianji.size() > 0) {
                         ZuHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(itemPosition - 1);
@@ -409,10 +431,14 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 break;
             case 3://租金
                 page = 1;
+                isZiDingyiPrice = false;
+                zidingyiPriceList.clear();
                 if (itemPosition == 0) {
-                    zujinIdsList.clear();
+                    zjId = "-2";
                 } else {
-                    setZujinIdsList(itemPosition - 1);
+                    if (zujin != null && zujin.size() > 0) {
+                        zjId = zujin.get(itemPosition - 1).getId() + "";
+                    }
                 }
                 mDatas.clear();
                 initData();
@@ -423,7 +449,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
         if (zujin != null && zujin.size() > 0) {
-            zujinIdsList.clear();
+            page = 1;
+            isZiDingyiPrice = true;
+            zjId = "-1";
+            zidingyiPriceList.clear();
+            zidingyiPriceList = priceRegin;
             mDatas.clear();
             initData();
         }
@@ -484,12 +514,4 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         }
     }
 
-    private void setZujinIdsList(int position) {
-        if (zujin != null && zujin.size() > 0) {
-            zujinIdsList.clear();
-            ZuHouseShaiXuanBean.DatasEntity.ZujinEntity zujinEntity = zujin.get(position);
-            zujinIdsList.add(zujinEntity.getStarVal() + "");
-            zujinIdsList.add(zujinEntity.getEndVal() + "");
-        }
-    }
 }

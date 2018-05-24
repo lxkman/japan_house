@@ -11,12 +11,21 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.bean.ChinaCityItemBean;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,42 +48,48 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
     RecyclerView likeRecycler;
     @BindView(R.id.rl_search)
     RelativeLayout rl_search;
-    private int[] itemPic = {R.drawable.beijing_iv, R.drawable.shanghai_iv, R.drawable.guangzhou_iv,
-            R.drawable.shenzhen_iv, R.drawable.hangzhou_iv, R.drawable.chongqing_iv,R.drawable.qita_iv};
+    private boolean isJa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinese_fangyuan);
         ButterKnife.bind(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initview();
     }
 
     private void initview() {
-        String[] itemName = {getString(R.string.bj),
-                getString(R.string.sh),
-                getString(R.string.gz),
-                getString(R.string.sz),
-                getString(R.string.hz),
-                getString(R.string.cq),
-                getString(R.string.qt)};
-        List<HomeItemBean> homeItemBeanList = new ArrayList<>();
-        for (int i = 0; i < itemName.length; i++) {
-            homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));
-        }
         fenleiRecycler.setNestedScrollingEnabled(false);
         fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
-        FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList);
-        fenleiRecycler.setAdapter(fenleiAdapter);
-        fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(mContext, ChineseLiebiaoActivity.class);
-                intent.putExtra("type",position+"");
-                startActivity(intent);
-            }
-        });
-
+        HttpParams params = new HttpParams();
+        params.put("hType", 4);
+        OkGo.<ChinaCityItemBean>post(MyUrls.BASEURL + "/app/oiverseas/selectcityscree")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<ChinaCityItemBean>(ChinaCityItemBean.class) {
+                    @Override
+                    public void onSuccess(Response<ChinaCityItemBean> response) {
+                        int code = response.code();
+                        ChinaCityItemBean body = response.body();
+                        List<ChinaCityItemBean.DatasEntity> datas = body.getDatas();
+                        FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_chinese_city, datas);
+                        fenleiRecycler.setAdapter(fenleiAdapter);
+                        fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(mContext, ChineseLiebiaoActivity.class);
+                                intent.putExtra("type", position + "");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
         List<String> likeList = new ArrayList<>();
         likeList.add("");
         likeList.add("");
@@ -96,7 +111,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
                 break;
             case R.id.rl_search:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
-                intent.putExtra("edt_hint",getResources().getString(R.string.qsrdcmchqy));
+                intent.putExtra("edt_hint", getResources().getString(R.string.qsrdcmchqy));
                 startActivity(intent);
                 break;
         }
@@ -107,16 +122,17 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
         startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
     }
 
-    private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {
+    private class FenleiAdapter extends BaseQuickAdapter<ChinaCityItemBean.DatasEntity, BaseViewHolder> {
 
-        public FenleiAdapter(int layoutResId, @Nullable List<HomeItemBean> data) {
+        public FenleiAdapter(int layoutResId, @Nullable List<ChinaCityItemBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, HomeItemBean item) {
-            helper.setText(R.id.item_name_tv, item.getTitle());
-            helper.setImageResource(R.id.item_pic_iv, item.getImg());
+        protected void convert(BaseViewHolder helper, ChinaCityItemBean.DatasEntity item) {
+            helper.setText(R.id.item_name_tv, isJa?item.getScreeValJpn():item.getScreeValCn());
+            Glide.with(MyApplication.getGloableContext()).load(item.getLogoUrl())
+            .into((ImageView) helper.getView(R.id.item_pic_iv));
         }
     }
 

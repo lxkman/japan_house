@@ -2,11 +2,11 @@ package com.example.administrator.japanhouse.more;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.model.VillaDetailsBean;
@@ -100,83 +100,44 @@ public class BieSuMoreActivity extends BaseActivity {
 
         String country = CacheUtils.get(Constants.COUNTRY);
 
-        if (!TextUtils.isEmpty(country) && TextUtils.equals(country, "ja")) {
-            showJa();
-        } else {
-            showZh();
-        }
+
+        show();
+
     }
 
-    private void showZh() {
+    private void show() {
         if (datasBean != null) {
-            tvWujianmingcheng.setText(datasBean.getArticleNameCn());
-            tvShoujia.setText(datasBean.getSellingPriceCn());
-            tvHuxing.setText(datasBean.getVillaTypeCn());
-            tvDongcengshu.setText(datasBean.getHomesLayerCn());
-            tvTudimianji.setText(datasBean.getAreaCn());
-            tvJianzumianji.setText(datasBean.getCoveredAreaCn());
-            tvSuoyouquan.setText(datasBean.getOwnershipCn());
-            tvJianzhunianfen.setText(datasBean.getYearBuiltCn());
-            tvJianzhushejigongsi.setText(datasBean.getArchitecturalCn());
-            tvJianzhugouzao.setText(datasBean.getBuildingConstructionCn());
-            tvChaoxiang.setText(datasBean.getOrientationCn());
+            tvWujianmingcheng.setText(MyApplication.isJapanese() ? datasBean.getArticleNameJpn() : datasBean.getArticleNameCn());
+            tvShoujia.setText(MyApplication.isJapanese() ? datasBean.getSellingPriceJpn() : datasBean.getSellingPriceCn());
+            tvHuxing.setText(MyApplication.isJapanese() ? datasBean.getVillaTypeJpn() : datasBean.getVillaTypeCn());
+            tvDongcengshu.setText(MyApplication.isJapanese() ? datasBean.getHomesLayerJpn() : datasBean.getHomesLayerCn());
+            tvTudimianji.setText(MyApplication.isJapanese() ? datasBean.getAreaJpn() : datasBean.getAreaCn());
+            tvJianzumianji.setText(MyApplication.isJapanese() ? datasBean.getCoveredAreaJpn() : datasBean.getCoveredAreaCn());
+            tvSuoyouquan.setText(MyApplication.isJapanese() ? datasBean.getOwnershipJpn() : datasBean.getOwnershipCn());
+            tvJianzhunianfen.setText(MyApplication.isJapanese() ? datasBean.getYearBuiltJpn() : datasBean.getYearBuiltCn());
+            tvJianzhushejigongsi.setText(MyApplication.isJapanese() ? datasBean.getArchitecturalJpn() : datasBean.getArchitecturalCn());
+            tvJianzhugouzao.setText(MyApplication.isJapanese() ? datasBean.getBuildingConstructionJpn() : datasBean.getBuildingConstructionCn());
+            tvChaoxiang.setText(MyApplication.isJapanese() ? datasBean.getOrientationJpn() : datasBean.getOrientationCn());
             tvJianzhufugai.setText(datasBean.getBuildingWrap());
             tvRongjilv.setText(datasBean.getPlotRatio());
-            tvRujuriqi.setText(datasBean.getDoichoIrinoDateCn());
-            tvXianzhuang.setText(datasBean.getCurrentSituationCn());
-            tvTingchechang.setText(datasBean.getParkCn());
-            tvGongkaiqingbaori.setText(datasBean.getPublicInformationDayCn());
-            tvDiduan.setText(datasBean.getDistrictCn());
-            tvJutiweizhi.setText(datasBean.getSpecificLocationCn());
-            tvZhuyaochezhan.setText(datasBean.getTrainStationCn());
-            tvChezhanjuli.setText(datasBean.getStationDistanceCn());
-            tvDaolulinjiejuli.setText(datasBean.getStreetDistanceCn());
-            tvTudi.setText(datasBean.getLandCn());
-            tvShineishebei.setText(datasBean.getIndoorFacilityCn());
-            tvChufang.setText(datasBean.getKitchenCn());
-            tvWeishengjian.setText(datasBean.getToiletCn());
-            tvYushi.setText(datasBean.getShowerRoomCn());
-            tvXingneng.setText(datasBean.getPerformanceCn());
-            tvZhengmingshu.setText(datasBean.getTestimonialCn());
-            tvXiacibaozhang.setText(datasBean.getDefectsEnsureCn());
-            tvBeizhu.setText(datasBean.getRemarkCn());
-        }
-    }
-
-    private void showJa() {
-        if (datasBean != null) {
-            tvWujianmingcheng.setText(datasBean.getArticleNameJpn());
-            tvShoujia.setText(datasBean.getSellingPriceJpn());
-            tvHuxing.setText(datasBean.getVillaTypeJpn());
-            tvDongcengshu.setText(datasBean.getHomesLayerJpn());
-            tvTudimianji.setText(datasBean.getAreaJpn());
-            tvJianzumianji.setText(datasBean.getCoveredAreaJpn());
-            tvSuoyouquan.setText(datasBean.getOwnershipJpn());
-            tvJianzhunianfen.setText(datasBean.getYearBuiltJpn());
-            tvJianzhushejigongsi.setText(datasBean.getArchitecturalJpn());
-            tvJianzhugouzao.setText(datasBean.getBuildingConstructionJpn());
-            tvChaoxiang.setText(datasBean.getOrientationJpn());
-            tvJianzhufugai.setText(datasBean.getBuildingWrap());
-            tvRongjilv.setText(datasBean.getPlotRatio());
-            tvRujuriqi.setText(datasBean.getDoichoIrinoDateJpn());
-            tvXianzhuang.setText(datasBean.getCurrentSituationJpn());
-            tvTingchechang.setText(datasBean.getParkJpn());
-            tvGongkaiqingbaori.setText(datasBean.getPublicInformationDayJpn());
-            tvDiduan.setText(datasBean.getDistrictJpn());
-            tvJutiweizhi.setText(datasBean.getSpecificLocationJpn());
-            tvZhuyaochezhan.setText(datasBean.getTrainStationJpn());
-            tvChezhanjuli.setText(datasBean.getStationDistanceJpn());
-            tvDaolulinjiejuli.setText(datasBean.getStreetDistanceJpn());
-            tvTudi.setText(datasBean.getLandJpn());
-            tvShineishebei.setText(datasBean.getIndoorFacilityJpn());
-            tvChufang.setText(datasBean.getKitchenJpn());
-            tvWeishengjian.setText(datasBean.getToiletJpn());
-            tvYushi.setText(datasBean.getShowerRoomJpn());
-            tvXingneng.setText(datasBean.getPerformanceJpn());
-            tvZhengmingshu.setText(datasBean.getTestimonialJpn());
-            tvXiacibaozhang.setText(datasBean.getDefectsEnsureJpn());
-            tvBeizhu.setText(datasBean.getRemarkJpn());
-
+            tvRujuriqi.setText(MyApplication.isJapanese() ? datasBean.getDoichoIrinoDateJpn() : datasBean.getDoichoIrinoDateCn());
+            tvXianzhuang.setText(MyApplication.isJapanese() ? datasBean.getCurrentSituationJpn() : datasBean.getCurrentSituationCn());
+            tvTingchechang.setText(MyApplication.isJapanese() ? datasBean.getParkJpn() : datasBean.getParkCn());
+            tvGongkaiqingbaori.setText(MyApplication.isJapanese() ? datasBean.getPublicInformationDayJpn() : datasBean.getPublicInformationDayCn());
+            tvDiduan.setText(MyApplication.isJapanese() ? datasBean.getDistrictJpn() : datasBean.getDistrictCn());
+            tvJutiweizhi.setText(MyApplication.isJapanese() ? datasBean.getSpecificLocationJpn() : datasBean.getSpecificLocationCn());
+            tvZhuyaochezhan.setText(MyApplication.isJapanese() ? datasBean.getTrainStationJpn() : datasBean.getTrainStationCn());
+            tvChezhanjuli.setText(MyApplication.isJapanese() ? datasBean.getStationDistanceJpn() : datasBean.getStationDistanceCn());
+            tvDaolulinjiejuli.setText(MyApplication.isJapanese() ? datasBean.getStreetDistanceJpn() : datasBean.getStreetDistanceCn());
+            tvTudi.setText(MyApplication.isJapanese() ? datasBean.getLandJpn() : datasBean.getLandCn());
+            tvShineishebei.setText(MyApplication.isJapanese() ? datasBean.getIndoorFacilityJpn() : datasBean.getIndoorFacilityCn());
+            tvChufang.setText(MyApplication.isJapanese() ? datasBean.getKitchenJpn() : datasBean.getKitchenCn());
+            tvWeishengjian.setText(MyApplication.isJapanese() ? datasBean.getToiletJpn() : datasBean.getToiletCn());
+            tvYushi.setText(MyApplication.isJapanese() ? datasBean.getShowerRoomJpn() : datasBean.getShowerRoomCn());
+            tvXingneng.setText(MyApplication.isJapanese() ? datasBean.getPerformanceJpn() : datasBean.getPerformanceCn());
+            tvZhengmingshu.setText(MyApplication.isJapanese() ? datasBean.getTestimonialJpn() :datasBean.getTestimonialCn());
+            tvXiacibaozhang.setText(MyApplication.isJapanese() ? datasBean.getDefectsEnsureJpn() : datasBean.getDefectsEnsureCn());
+            tvBeizhu.setText(MyApplication.isJapanese() ? datasBean.getRemarkJpn() : datasBean.getRemarkCn());
         }
     }
 

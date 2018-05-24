@@ -82,11 +82,12 @@ public class LancherActivity extends BaseActivity {
             }
         } else {
             String locale = Locale.getDefault().getLanguage();
-            CacheUtils.put(Constants.COUNTRY, locale);
             if (TextUtils.equals(locale, "ja")) {
 //                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
+                CacheUtils.put(Constants.COUNTRY, locale);
                 languageType=1;
             }else {
+                CacheUtils.put(Constants.COUNTRY, "zh");
                 languageType=0;
             }
         }

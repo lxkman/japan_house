@@ -29,8 +29,8 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.bumptech.glide.Glide;
@@ -97,7 +97,7 @@ public class OldHousedetailsActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.bmapView)
-    MapView mapView;
+    TextureMapView mapView;
     @BindView(R.id.shop_layout)
     LinearLayout shopLayout;
     @BindView(R.id.school_layout)
@@ -132,6 +132,9 @@ public class OldHousedetailsActivity extends BaseActivity {
     private Intent intent;
     private String Tag = "1";
     private boolean isJa;
+    private String houseId;
+    private HouseDetailsBean.DatasBean datas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +174,7 @@ public class OldHousedetailsActivity extends BaseActivity {
     }
 
     private void initDetailsNet() {
+        houseId = getIntent().getStringExtra("houseId");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -178,7 +182,8 @@ public class OldHousedetailsActivity extends BaseActivity {
             isJa = false;
         }
         HttpParams params = new HttpParams();
-        params.put("hId", 18);
+//        if (houseId!=null&&!houseId.equals("")){
+            params.put("hId", "8");
         OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
                 .tag(this)
                 .params(params)
@@ -187,17 +192,57 @@ public class OldHousedetailsActivity extends BaseActivity {
                     public void onSuccess(Response<HouseDetailsBean> response) {
                         int code = response.code();
                         HouseDetailsBean oldHouseListBean = response.body();
-                        HouseDetailsBean.DatasBean datas = oldHouseListBean.getDatas();
+                        datas = oldHouseListBean.getDatas();
                         HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
-                        tvDetailsName.setText(isJa ? datas.getPlotNameJpn() : datas.getPlotNameCn());
-                        tvDetailsPrice.setText(isJa ? datas.getPriceJpn() : datas.getPriceCn());
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
-                        tvDetailsLocation.setText(isJa ? datas.getAddressJpn() : datas.getAddressCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(OldHousedetailsActivity.this).load(hwdcBroker.getPic()+"").into(tvDetailsManagerHead);
                     }
                 });
+        }
+//    }
+@OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
+public void onClick(View view) {
+    switch (view.getId()) {
+        case R.id.img_share:
+            showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+            break;
+        case R.id.img_start:
+            Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+            break;
+        case R.id.tv_See_More:
+            Intent intent1 = new Intent(OldHousedetailsActivity.this, OldHouseMoreActivity.class);
+            intent1.putExtra("datas",datas);
+            startActivity(intent1);
+            break;
+        case R.id.back_img:
+            finish();
+            break;
+        case R.id.shop_layout:
+            Tag = "1";
+            intent.putExtra("TAG", Tag);
+            startActivity(intent);
+            break;
+        case R.id.school_layout:
+            Tag = "2";
+            intent.putExtra("TAG", Tag);
+            startActivity(intent);
+            break;
+        case R.id.youeryuan_layout:
+            Tag = "3";
+            intent.putExtra("TAG", Tag);
+            startActivity(intent);
+            break;
+        case R.id.yiyuan_layout:
+            Tag = "4";
+            intent.putExtra("TAG", Tag);
+            startActivity(intent);
+            break;
     }
+}
 
 
     public void setMyExtensionModule() {
@@ -408,44 +453,6 @@ public class OldHousedetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.img_share:
-                showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
-                break;
-            case R.id.img_start:
-                Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_See_More:
-                Intent intent1 = new Intent(OldHousedetailsActivity.this, OldHouseMoreActivity.class);
-                startActivity(intent1);
-                break;
-            case R.id.back_img:
-                finish();
-                break;
-            case R.id.shop_layout:
-                Tag = "1";
-                intent.putExtra("TAG", Tag);
-                startActivity(intent);
-                break;
-            case R.id.school_layout:
-                Tag = "2";
-                intent.putExtra("TAG", Tag);
-                startActivity(intent);
-                break;
-            case R.id.youeryuan_layout:
-                Tag = "3";
-                intent.putExtra("TAG", Tag);
-                startActivity(intent);
-                break;
-            case R.id.yiyuan_layout:
-                Tag = "4";
-                intent.putExtra("TAG", Tag);
-                startActivity(intent);
-                break;
-        }
-    }
 
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);

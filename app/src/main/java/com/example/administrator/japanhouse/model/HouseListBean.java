@@ -11,10 +11,8 @@ public class HouseListBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":18,"plotNameCn":"1","plotNameJpn":"1","addressCn":"河北省-保定市-蠡县","addressJpn":"hebeisheng-baodingshi-lixian","areaJpn":"1.00平方メートル","areaCn":"1.00平方米","priceCn":"1.00万元","priceJpn":"1.00万元","videoImgs":"","roomImgs":""}]
+     * datas : [{"id":1,"titleCn":"房屋标题中文（二手房）","titleJpn":"房屋标题日文（二手房）","specificLocationCn":"1","specificLocationJpn":"1","areaJpn":"","areaCn":"","priceCn":"","priceJpn":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","doorModelCn":"1R","doorModelJpn":"1R"}]
      */
-
-
 
     private String msg;
     private String code;
@@ -46,30 +44,34 @@ public class HouseListBean {
 
     public static class DatasBean {
         /**
-         "id": 18,
-         "plotNameCn": "1", //小区名称
-         "plotNameJpn": "1",
-         "addressCn": "河北省-保定市-蠡县",  //地址
-         "addressJpn": "hebeisheng-baodingshi-lixian",
-         "areaJpn": "1.00平方メートル",  //面积
-         "areaCn": "1.00平方米",
-         "priceCn": "1.00万元",   //价格
-         "priceJpn": "1.00万元",
-         "videoImgs": "",  //视频封面图
-         "roomImgs": ""
+         * id : 1
+         * titleCn : 房屋标题中文（二手房）
+         * titleJpn : 房屋标题日文（二手房）
+         * specificLocationCn : 1
+         * specificLocationJpn : 1
+         * areaJpn :
+         * areaCn :
+         * priceCn :
+         * priceJpn :
+         * videoImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+         * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+         * doorModelCn : 1R
+         * doorModelJpn : 1R
          */
 
         private int id;
-        private String plotNameCn;
-        private String plotNameJpn;
-        private String addressCn;
-        private String addressJpn;
+        private String titleCn;
+        private String titleJpn;
+        private String specificLocationCn;
+        private String specificLocationJpn;
         private String areaJpn;
         private String areaCn;
         private String priceCn;
         private String priceJpn;
         private String videoImgs;
         private String roomImgs;
+        private String doorModelCn;
+        private String doorModelJpn;
 
         public int getId() {
             return id;
@@ -79,36 +81,36 @@ public class HouseListBean {
             this.id = id;
         }
 
-        public String getPlotNameCn() {
-            return plotNameCn;
+        public String getTitleCn() {
+            return titleCn;
         }
 
-        public void setPlotNameCn(String plotNameCn) {
-            this.plotNameCn = plotNameCn;
+        public void setTitleCn(String titleCn) {
+            this.titleCn = titleCn;
         }
 
-        public String getPlotNameJpn() {
-            return plotNameJpn;
+        public String getTitleJpn() {
+            return titleJpn;
         }
 
-        public void setPlotNameJpn(String plotNameJpn) {
-            this.plotNameJpn = plotNameJpn;
+        public void setTitleJpn(String titleJpn) {
+            this.titleJpn = titleJpn;
         }
 
-        public String getAddressCn() {
-            return addressCn;
+        public String getSpecificLocationCn() {
+            return specificLocationCn;
         }
 
-        public void setAddressCn(String addressCn) {
-            this.addressCn = addressCn;
+        public void setSpecificLocationCn(String specificLocationCn) {
+            this.specificLocationCn = specificLocationCn;
         }
 
-        public String getAddressJpn() {
-            return addressJpn;
+        public String getSpecificLocationJpn() {
+            return specificLocationJpn;
         }
 
-        public void setAddressJpn(String addressJpn) {
-            this.addressJpn = addressJpn;
+        public void setSpecificLocationJpn(String specificLocationJpn) {
+            this.specificLocationJpn = specificLocationJpn;
         }
 
         public String getAreaJpn() {
@@ -157,6 +159,22 @@ public class HouseListBean {
 
         public void setRoomImgs(String roomImgs) {
             this.roomImgs = roomImgs;
+        }
+
+        public String getDoorModelCn() {
+            return doorModelCn;
+        }
+
+        public void setDoorModelCn(String doorModelCn) {
+            this.doorModelCn = doorModelCn;
+        }
+
+        public String getDoorModelJpn() {
+            return doorModelJpn;
+        }
+
+        public void setDoorModelJpn(String doorModelJpn) {
+            this.doorModelJpn = doorModelJpn;
         }
     }
 }

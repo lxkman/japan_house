@@ -33,27 +33,29 @@ import java.util.List;
 /**
  * Created by Administrator on 2018/1/18.
  */
-public class NewhouseFragment extends BaseFragment implements TJNewHousePresenter.HouseCallBack{
+public class NewhouseFragment extends BaseFragment implements TJNewHousePresenter.HouseCallBack {
 
     private RecyclerView mrecycler;
     private TextView tv_refresh_time;
     private LiebiaoAdapter mLiebiaoAdapter;
-    private List<String> mList=new ArrayList();
+    private List<String> mList = new ArrayList();
     private TJNewHousePresenter tjNewHousePresenter;
-    private List<HouseListBean.DatasBean> datas;
+
     private List<HouseListBean.DatasBean> mRefreshData;
     private SpringView springview;
     private boolean isLoadMore;
     private int page = 1;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_shoufang, null);
-        mrecycler= (RecyclerView) view.findViewById(R.id.Mrecycler);
-        springview= (SpringView) view.findViewById(R.id.springview);
-        tv_refresh_time= (TextView) view.findViewById(R.id.tv_refresh_time);
-        tjNewHousePresenter=new TJNewHousePresenter(mActivity,this);
+        mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
+        springview = (SpringView) view.findViewById(R.id.springview);
+        tv_refresh_time = (TextView) view.findViewById(R.id.tv_refresh_time);
+        tjNewHousePresenter = new TJNewHousePresenter(mActivity, this);
         return view;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -63,9 +65,10 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
 
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
-        tv_refresh_time.setText(currentDate+"更新");
-        tjNewHousePresenter.getHouseList(page,"0");
+        tv_refresh_time.setText(currentDate + "更新");
+        tjNewHousePresenter.getHouseList(page, "2");
     }
+
     private void initListener() {
         //        mSpringview.setType(SpringView.Type.FOLLOW);
         springview.setHeader(new MyHeader(mContext));
@@ -75,9 +78,9 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             public void onRefresh() {
                 isLoadMore = false;
                 page = 1;
-                initData();
+                tjNewHousePresenter.getHouseList(page, "2");
                 String currentDate = MyUtils.getCurrentDate();
-                tv_refresh_time.setText(currentDate+"更新");
+                tv_refresh_time.setText(currentDate + "更新");
                 springview.onFinishFreshAndLoad();
             }
 
@@ -85,12 +88,11 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             public void onLoadmore() {
                 isLoadMore = true;
                 page++;
-                initData();
+                tjNewHousePresenter.getHouseList(page, "2");
                 springview.onFinishFreshAndLoad();
             }
         });
     }
-
 
 
     @Override
@@ -101,24 +103,15 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
     @Override
     public void getHouseList(Response<HouseListBean> response) {
         HouseListBean body = response.body();
-        datas = body.getDatas();
-        initData();
-    }
-
-    @Override
-    public void getLand(Response<LandBean> response) {
-
-    }
-
-    protected void initData() {
+         List<HouseListBean.DatasBean>  datas = body.getDatas();
         if (mRefreshData == null || mRefreshData.size() == 0) {
             if (datas == null || datas.size() == 0) {
                 Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
                 return;
             }
             mRefreshData = datas;
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,mRefreshData);
-            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, mRefreshData);
+            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             mrecycler.setNestedScrollingEnabled(false);
             mrecycler.setAdapter(mLiebiaoAdapter);
         } else {
@@ -138,30 +131,40 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(mContext,OldHousedetailsActivity.class);
+                Intent intent = new Intent(mContext, OldHousedetailsActivity.class);
                 startActivity(intent);
             }
         });
     }
+
+    @Override
+    public void getLand(Response<LandBean> response) {
+
+    }
+
+
     class LiebiaoAdapter extends BaseQuickAdapter<HouseListBean.DatasBean, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<HouseListBean.DatasBean> data) {
-            super(layoutResId,data);
+            super(layoutResId, data);
         }
-
 
 
         @Override
         protected void convert(BaseViewHolder helper, HouseListBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
             Glide.with(mContext).load(item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
-            helper.setText(R.id.tv_house_name,isJa ? item.getPlotNameJpn() : item.getPlotNameCn());
-            helper.setText(R.id.tv_house_address,isJa ? item.getAddressJpn() : item.getAddressCn());
-//            helper.setText(R.id.tv_house_room,isJa ? item.getPlotNameJpn() : item.getPlotNameCn());
-            helper.setText(R.id.tv_house_area,isJa ? item.getAreaJpn() : item.getAreaCn());
+            helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
+            helper.setText(R.id.tv_house_address, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
+//            helper.setText(R.id.tv_house_room,isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
+            helper.setVisible(R.id.tv_house_room, false);
+            helper.setVisible(R.id.img_video_logo, true);
+            helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
+            helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
 
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

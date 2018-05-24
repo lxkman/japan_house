@@ -109,7 +109,6 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.act_zn_clickBg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                more.setVisibility(View.VISIBLE);
                 flowLineLayout.setVisibility(View.VISIBLE);
                 fluidLayout.setVisibility(View.GONE);
                 init(issueList);
@@ -177,6 +176,7 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
             width += tv.getMeasuredWidth();
 
             if (width > windowWidth - tvLeft.width - tvRight.width - tvLeft.leftMargin - tvRight.rightMargin) {
+                more.setVisibility(View.VISIBLE);
                 tv.setVisibility(View.GONE);
                 break;
             }
@@ -214,13 +214,12 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
             issueList.add(data.get(i).getTheKeyword());
             answerList.add(data.get(i).getAnswer());
         }
-        more.setVisibility(View.VISIBLE);
+
         init(issueList);
     }
 
     @Override
     public void onClickListener() {
-        more.setVisibility(View.VISIBLE);
         flowLineLayout.setVisibility(View.VISIBLE);
         fluidLayout.setVisibility(View.GONE);
         init(issueList);

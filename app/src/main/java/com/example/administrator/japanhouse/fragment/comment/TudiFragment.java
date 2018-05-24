@@ -40,7 +40,6 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList=new ArrayList();
     private TJNewHousePresenter tjNewHousePresenter;
-    private List<LandBean.DatasBean> datas;
     private List<LandBean.DatasBean> mRefreshData;
     private SpringView springview;
     private boolean isLoadMore;
@@ -75,7 +74,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             public void onRefresh() {
                 isLoadMore = false;
                 page = 1;
-                initData();
+                tjNewHousePresenter.getLand(page);
                 String currentDate = MyUtils.getCurrentDate();
                 tv_refresh_time.setText(currentDate+"更新");
                 springview.onFinishFreshAndLoad();
@@ -85,7 +84,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             public void onLoadmore() {
                 isLoadMore = true;
                 page++;
-                initData();
+                tjNewHousePresenter.getLand(page);
                 springview.onFinishFreshAndLoad();
             }
         });
@@ -106,11 +105,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
     @Override
     public void getLand(Response<LandBean> response) {
         LandBean body = response.body();
-        datas = body.getDatas();
-        initData();
-    }
-
-    protected void initData() {
+         List<LandBean.DatasBean>  datas = body.getDatas();
         if (mRefreshData == null || mRefreshData.size() == 0) {
             if (datas == null || datas.size() == 0) {
                 Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
@@ -143,6 +138,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             }
         });
     }
+
     class LiebiaoAdapter extends BaseQuickAdapter<LandBean.DatasBean, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<LandBean.DatasBean> data) {
@@ -156,10 +152,11 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             boolean isJa = MyUtils.isJa();
             Glide.with(mContext).load(item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
             helper.setText(R.id.tv_house_name,isJa ? item.getTitleJpn() : item.getTitleCn());
-            helper.setText(R.id.tv_house_address,isJa ? item.getAddressJpn() : item.getAddressCn());
-//            helper.setText(R.id.tv_house_room,isJa ? item.getPlotNameJpn() : item.getPlotNameCn());
+            helper.setText(R.id.tv_house_address,isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
+            helper.setVisible(R.id.tv_house_room,false);
+            helper.setVisible(R.id.img_video_logo,true);
             helper.setText(R.id.tv_house_area,isJa ? item.getAreaJpn() : item.getAreaCn());
-            helper.setText(R.id.tv_price,isJa ? item.getPriceJpn() : item.getPriceJpn());
+            helper.setText(R.id.tv_price,isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
 
         }
     }

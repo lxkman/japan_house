@@ -6,14 +6,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.HouseDetailsBean;
-import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUrls;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.model.HttpParams;
-import com.lzy.okgo.model.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,40 +75,40 @@ public class SeeMoreActivity extends BaseActivity {
         } else {
             isJa = false;
         }
-        HttpParams params = new HttpParams();
-        params.put("hId", 18);
-        OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
-                .tag(this)
-                .params(params)
-                .execute(new DialogCallback<HouseDetailsBean>(this, HouseDetailsBean.class) {
-                    @Override
-                    public void onSuccess(Response<HouseDetailsBean> response) {
-                        int code = response.code();
-                        HouseDetailsBean oldHouseListBean = response.body();
-                        HouseDetailsBean.DatasBean datas = oldHouseListBean.getDatas();
-                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
-                        tvMoreName.setText(isJa ? datas.getPlotNameJpn() : datas.getPlotNameCn());
-                        tvMoreChaoxiang.setText(isJa ? datas.getOrientationJpn() : datas.getOrientationCn());
-                        tvMoreNianfen.setText(isJa ? datas.getYearBuiltJpn() : datas.getYearBuiltCn());
-                        tvMoreGuanlifei.setText(isJa ? datas.getRepairChargeJpn()+"" : datas.getRepairChargeCn()+"");
-                        tvMoreGouzao.setText(isJa ? datas.getArchitecturalConstructionJpn() : datas.getArchitecturalConstructionCn());
-                        tvMoreDianfei.setText(isJa ? datas.getElectricityJpn() : datas.getElectricityCn());
-                        tvMoreShuifei.setText(isJa ? datas.getWaterJpn() : datas.getWaterCn());
-                        tvMoreLouceng.setText(isJa ? datas.getFloorJpn() : datas.getFloorCn());
-                        tvMoreYangshi.setText(isJa ? datas.getWesternRoomJpn() : datas.getWesternRoomCn());
-                        tvMoreHeshi.setText(isJa ? datas.getTatamiRoomJpn() : datas.getTatamiRoomCn());
-//                        tvMoreMuyu.setText(isJa ? datas.() : datas.getTatamiRoomCn());
-                        tvMoreShehui.setText(isJa ? datas.getManageSocietyJpn() : datas.getManageSocietyCn());
-                        tvMoreWeizhi.setText(isJa ? datas.getLocationLevel1Jpn() : datas.getLocationLevel1Cn());
-                        tvMoreShebei.setText(isJa ? datas.getEquipmentJpn() : datas.getEquipmentCn());
-                        tvMoreWasi.setText(isJa ? datas.getGasJpn() : datas.getGasCn());
-                        tvMoreCaizhi.setText(isJa ? datas.getDecorateMaterialJpn() : datas.getDecorateMaterialCn());
-                        tvMoreJuli.setText(isJa ? datas.getStationDistanceJpn() : datas.getStationDistanceCn());
-                        tvMoreFengjing.setText(isJa ? datas.getSceneryJpn() : datas.getSceneryCn());
-                        tvMoreWaiguan.setText(isJa ? datas.getAppearanceJpn() : datas.getAppearanceCn());
-                        tvMoreNeiguan.setText(isJa ? datas.getIntrospectionJpn() : datas.getIntrospectionCn());
-                    }
-                });
+//        HttpParams params = new HttpParams();
+//        params.put("hId", 18);
+//        OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
+//                .tag(this)
+//                .params(params)
+//                .execute(new DialogCallback<HouseDetailsBean>(this, HouseDetailsBean.class) {
+//                    @Override
+//                    public void onSuccess(Response<HouseDetailsBean> response) {
+//                        int code = response.code();
+//                        HouseDetailsBean oldHouseListBean = response.body();
+//                        HouseDetailsBean.DatasBean datas = oldHouseListBean.getDatas();
+//                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+//                        tvMoreName.setText(isJa ? datas.getPlotNameJpn() : datas.getPlotNameCn());
+//                        tvMoreChaoxiang.setText(isJa ? datas.getOrientationJpn() : datas.getOrientationCn());
+//                        tvMoreNianfen.setText(isJa ? datas.getYearBuiltJpn() : datas.getYearBuiltCn());
+//                        tvMoreGuanlifei.setText(isJa ? datas.getRepairChargeJpn()+"" : datas.getRepairChargeCn()+"");
+//                        tvMoreGouzao.setText(isJa ? datas.getArchitecturalConstructionJpn() : datas.getArchitecturalConstructionCn());
+//                        tvMoreDianfei.setText(isJa ? datas.getElectricityJpn() : datas.getElectricityCn());
+//                        tvMoreShuifei.setText(isJa ? datas.getWaterJpn() : datas.getWaterCn());
+//                        tvMoreLouceng.setText(isJa ? datas.getFloorJpn() : datas.getFloorCn());
+//                        tvMoreYangshi.setText(isJa ? datas.getWesternRoomJpn() : datas.getWesternRoomCn());
+//                        tvMoreHeshi.setText(isJa ? datas.getTatamiRoomJpn() : datas.getTatamiRoomCn());
+////                        tvMoreMuyu.setText(isJa ? datas.() : datas.getTatamiRoomCn());
+//                        tvMoreShehui.setText(isJa ? datas.getManageSocietyJpn() : datas.getManageSocietyCn());
+//                        tvMoreWeizhi.setText(isJa ? datas.getLocationLevel1Jpn() : datas.getLocationLevel1Cn());
+//                        tvMoreShebei.setText(isJa ? datas.getEquipmentJpn() : datas.getEquipmentCn());
+//                        tvMoreWasi.setText(isJa ? datas.getGasJpn() : datas.getGasCn());
+//                        tvMoreCaizhi.setText(isJa ? datas.getDecorateMaterialJpn() : datas.getDecorateMaterialCn());
+//                        tvMoreJuli.setText(isJa ? datas.getStationDistanceJpn() : datas.getStationDistanceCn());
+//                        tvMoreFengjing.setText(isJa ? datas.getSceneryJpn() : datas.getSceneryCn());
+//                        tvMoreWaiguan.setText(isJa ? datas.getAppearanceJpn() : datas.getAppearanceCn());
+//                        tvMoreNeiguan.setText(isJa ? datas.getIntrospectionJpn() : datas.getIntrospectionCn());
+//                    }
+//                });
     }
 
     @OnClick(R.id.back_img)

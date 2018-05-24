@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -11,12 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
@@ -54,6 +59,7 @@ public class TongqinSearchActivity extends BaseActivity {
     private List<String> historyList;
     private HistoryAdapter historyAdapter;
     private LocationClient mLocClient;
+    private GeoCoder geoCoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +68,28 @@ public class TongqinSearchActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
         searchEt.setOnEditorActionListener(editorActionListener);
-        GeoCoder geoCoder = GeoCoder.newInstance();
+        geoCoder = GeoCoder.newInstance();
         geoCoder.setOnGetGeoCodeResultListener(geoCoderResultListener);
         initLocation();
+        searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(searchEt.getText().toString())) {
+                    geoCoder.geocode(new GeoCodeOption()
+                            .address(searchEt.getText().toString()));
+                }
+            }
+        });
     }
 
     private void initLocation() {
@@ -91,19 +116,21 @@ public class TongqinSearchActivity extends BaseActivity {
     }
 
     OnGetGeoCoderResultListener geoCoderResultListener = new OnGetGeoCoderResultListener() {
-
+        //地址转坐标
         public void onGetGeoCodeResult(GeoCodeResult result) {
 
             if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                 //没有检索到结果
+                Toast.makeText(mContext, "没有检索到地址", Toast.LENGTH_SHORT).show();
+                return;
             }
             //获取地理编码结果
+            String address = result.getAddress();
         }
 
+        //坐标转地址---逆地理编码
         @Override
-
         public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
-
             if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                 //没有找到检索结果
             }

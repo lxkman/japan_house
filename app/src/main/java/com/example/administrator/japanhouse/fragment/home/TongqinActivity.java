@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,15 +50,17 @@ public class TongqinActivity extends BaseActivity {
             R.drawable.ditie_iv, R.drawable.zijia_iv};
     private OptionsPickerView pvCustomOptions;
     private List<String> timeList;
-    private int type;
+    //    private int type;
     private LocationClient mLocClient;
+    private double mylongitude;
+    private double mylatitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tongqin);
         ButterKnife.bind(this);
-        type = getIntent().getIntExtra("type", 0);
+        //        type = getIntent().getIntExtra("type", 0);
         initView();
         initLocation();
     }
@@ -77,8 +80,8 @@ public class TongqinActivity extends BaseActivity {
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                double longitude = bdLocation.getLongitude();
-                double latitude = bdLocation.getLatitude();
+                mylongitude = bdLocation.getLongitude();
+                mylatitude = bdLocation.getLatitude();
                 String addrStr = bdLocation.getAddrStr();
                 locationTv.setText(addrStr);
             }
@@ -199,7 +202,7 @@ public class TongqinActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.location_rl:
-                startActivity(new Intent(mContext, TongqinSearchActivity.class));
+                startActivityForResult(new Intent(mContext, TongqinSearchActivity.class), 0);
                 break;
             case R.id.time_tv:
                 initCustomOptionPicker(timeList);
@@ -208,6 +211,22 @@ public class TongqinActivity extends BaseActivity {
             case R.id.start_find_tv:
                 go();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1) {
+            String address = data.getStringExtra("address");
+            if (TextUtils.isEmpty(address)) {
+                //点击的是我的位置
+
+            } else {
+                mylatitude = data.getDoubleExtra("latitude", mylatitude);
+                mylongitude = data.getDoubleExtra("longitude", mylongitude);
+                locationTv.setText(address);
+            }
         }
     }
 }

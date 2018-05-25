@@ -163,7 +163,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, TongqinActivity.class);
-                intent.putExtra("type", mType2);
+//                intent.putExtra("type", mType2);
                 startActivity(intent);
             }
         });

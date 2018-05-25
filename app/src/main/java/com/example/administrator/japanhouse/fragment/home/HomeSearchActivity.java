@@ -92,6 +92,10 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             locationTv.setText(getIntent().getStringExtra("popcontent"));
         }
 
+        if (TextUtils.isEmpty(getIntent().getStringExtra("home"))) {
+            locationTv.setClickable(false);
+        }
+
         state = getIntent().getIntExtra("state", 0);
 
         searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -251,7 +255,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         queryCacheHistory();
     }
 
-    private void queryCacheHistory(){
+    private void queryCacheHistory() {
         historyList.clear();
         searchBean = CacheUtils.get(Constants.SEARCH_HISTORY);
         if (searchBean != null && searchBean.size() > 0) {

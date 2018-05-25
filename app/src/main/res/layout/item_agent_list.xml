@@ -48,50 +48,55 @@
                 android:textColor="#999999"
                 android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/item_agent_list_name"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/item_agent_list_name"
-                android:orientation="horizontal"
-                android:layout_marginBottom="2dp">
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!---->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginBottom="2dp">-->
 
+                <com.example.administrator.japanhouse.view.RatingBarView
+                    android:id="@+id/item_agent_list_ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/item_agent_list_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/item_agent_list_name"
+                    />
+                <!--<ImageView-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/star_border_show" />-->
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/star_border_show" />
+                <!--<ImageView-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/star_border_show"-->
+                    <!--android:layout_marginLeft="5dp"/>-->
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/star_border_show"
-                    android:layout_marginLeft="5dp"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/star_border_hide"-->
+                    <!--android:layout_marginLeft="5dp" />-->
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/star_border_hide"
-                    android:layout_marginLeft="5dp" />
+                <!--<ImageView-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/star_border_hide"-->
+                    <!--android:layout_marginLeft="5dp"/>-->
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/star_border_hide"
-                    android:layout_marginLeft="5dp"/>
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/star_border_hide"
-                    android:layout_marginLeft="5dp"/>
-            </LinearLayout>
+                <!--<ImageView-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/star_border_hide"-->
+                    <!--android:layout_marginLeft="5dp"/>-->
+            <!--</LinearLayout>-->
         </RelativeLayout>
 
         <TextView

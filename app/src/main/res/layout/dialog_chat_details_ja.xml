@@ -43,6 +43,7 @@
             android:textSize="14sp" />
 
         <com.example.administrator.japanhouse.view.RatingBarView
+            android:id="@+id/dialog_chat_tatingbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -56,18 +57,19 @@
             android:layout_marginRight="22dp"
             android:orientation="horizontal">
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_huanman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/dialog_chat_true_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="5dp"
                 android:text="回復が遅い"
-                android:textColor="#C7977F"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="13sp" />
 
             <View
@@ -75,18 +77,19 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_zuanye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/dialog_chat_false_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="5dp"
                 android:text="態度が悪い"
-                android:textColor="#666666"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="13sp" />
 
             <View
@@ -94,35 +97,37 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_lengdan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/dialog_chat_false_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="5dp"
                 android:text="情報不足"
-                android:textColor="#666666"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="13sp" />
         </LinearLayout>
 
-        <TextView
+        <CheckBox
             android:id="@+id/dialog_chat_buquan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:background="@drawable/dialog_chat_false_check"
+            android:background="@drawable/dialog_chat_radiobutton"
+            android:button="@null"
             android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="5dp"
             android:text="プロフェッショナルではない"
-            android:textColor="#666666"
+            android:textColor="@drawable/radiobutton_textcolor"
             android:textSize="13sp" />
 
         <EditText
@@ -141,6 +146,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"

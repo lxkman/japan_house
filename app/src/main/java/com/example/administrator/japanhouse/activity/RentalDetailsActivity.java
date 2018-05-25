@@ -1,40 +1,31 @@
 package com.example.administrator.japanhouse.activity;
 
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.RentalDetailsPicAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
-import com.example.administrator.japanhouse.fragment.mine.SellHouseActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.jzvd.JZVideoPlayerStandard;
 
 /**
  * 出租 / 出售 详情
@@ -125,7 +116,7 @@ public class RentalDetailsActivity extends BaseActivity {
         wm.getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         float density = dm.density;
-        int mWidth = (int) (width/density);
+        int mWidth = (int) (width / density);
         LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
         linearParams.height = (mWidth - 46) / 3 * 22 / 15;
         linearParams.width = (width - 52) / 3;
@@ -142,7 +133,7 @@ public class RentalDetailsActivity extends BaseActivity {
 //                    setResult(102);
 //                    finish();
 //                }else{
-                    finish();
+                finish();
 //                }
 
             }
@@ -174,86 +165,81 @@ public class RentalDetailsActivity extends BaseActivity {
         if (!TextUtils.isEmpty(detailsBean.getRefuseReason())) {
             tvRefuseReason.setText(detailsBean.getRefuseReason());
         } else {
-//            ltRefuseReason.setVisibility(View.GONE);
+            ltRefuseReason.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getArea())) {
             tvArea.setText(detailsBean.getArea());
         } else {
-//            ltArea.setVisibility(View.GONE);
+            ltArea.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getBathroom())) {
             tvBathroom.setText(detailsBean.getBathroom());
         } else {
-//            ltBathroom.setVisibility(View.GONE);
+            ltBathroom.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getDistance())) {
             tvDistance.setText(detailsBean.getDistance());
         } else {
-//            ltDistance.setVisibility(View.GONE);
+            ltDistance.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getEquipment())) {
             tvEquipment.setText(detailsBean.getEquipment());
         } else {
-//            ltEquipment.setVisibility(View.GONE);
+            ltEquipment.setVisibility(View.GONE);
         }
+
         if (!TextUtils.isEmpty(detailsBean.getFloor())) {
             tvFloor.setText(detailsBean.getFloor());
         } else {
-//            ltFloor.setVisibility(View.GONE);
+            ltFloor.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getLessorName())) {
             tvLessorName.setText(detailsBean.getLessorName());
         } else {
-//            ltLessorName.setVisibility(View.GONE);
+            ltLessorName.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getLessorPhone())) {
             tvLessorPhone.setText(detailsBean.getLessorPhone());
         } else {
-//            ltLessorPhone.setVisibility(View.GONE);
+            ltLessorPhone.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getPattern())) {
             tvPattern.setText(detailsBean.getPattern());
         } else {
-//            ltPattern.setVisibility(View.GONE);
+            ltPattern.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getLocation())) {
             tvLocation.setText(detailsBean.getLocation());
         } else {
-//            ltLoction.setVisibility(View.GONE);
+            ltLoction.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getToward())) {
             tvToward.setText(detailsBean.getToward());
         } else {
-//            ltToward.setVisibility(View.GONE);
+            ltToward.setVisibility(View.GONE);
         }
 
-//        if (detailsBean.getPicList() != null && detailsBean.getPicList().size() > 0) {
-            List<String> list = new ArrayList<>();
-            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
-            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
-            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
-            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
-            list.add("http://img5.imgtn.bdimg.com/it/u=2078801767,3074531576&fm=27&gp=0.jpg");
-            picAdapter = new RentalDetailsPicAdapter(this, list);
+        if (detailsBean.getPicList() != null && detailsBean.getPicList().size() > 0) {
+            picAdapter = new RentalDetailsPicAdapter(this, detailsBean.getPicList());
             roomPic.setAdapter(picAdapter);
-//        } else {
-//            ltRoomPic.setVisibility(View.GONE);
-//        }
+        } else {
+            ltRoomPic.setVisibility(View.GONE);
+        }
 
         if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
             path = detailsBean.getVideoList();
             roomVideo.setImageBitmap(getLocalVideoBitmap(path));
         } else {
-//            ltRoomVideo.setVisibility(View.GONE);
+            ltRoomVideo.setVisibility(View.GONE);
         }
     }
 

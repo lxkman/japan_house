@@ -147,6 +147,8 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
         });
     }
 
+
+
     @Override
     public void getLand(Response<LandBean> response) {
 

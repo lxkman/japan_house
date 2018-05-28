@@ -34,6 +34,8 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MapHouseBean;
 import com.example.administrator.japanhouse.bean.MapHouseDetailBean;
 import com.example.administrator.japanhouse.bean.MarkerBean;
+import com.example.administrator.japanhouse.bean.MoreCheckBean;
+import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -66,7 +68,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
     Unbinder unbinder;
-    private List<View> popupViews;
+    private List<View> popupViews=new ArrayList<>();
     private List<OneCheckBean> list;
     private MapView mapView;
     private BaiduMap baiduMap;
@@ -75,12 +77,25 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     private boolean isJa;
     private LocationClient mLocClient;
     private String mCity;
+    private String mjId = "-2";
+    private String sjId = "-2";
+    private List<String> zidingyiPriceList = new ArrayList<>();
+    private boolean isZiDingyiPrice;
+    private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
+    private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
+    private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_old, null, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         return view;
     }
 
@@ -129,72 +144,114 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
+        initLocation();
+        initListener();
     }
 
     private void initData() {
-        popupViews=new ArrayList<>();
-        String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+        final String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
-        /**
-         * 第一个界面
-         * */
-        list = new ArrayList<>();
-        FirstView firstView = new FirstView(mContext);
-        popupViews.add(firstView.firstView());
-        firstView.insertData(list, dropDownMenu);
-        firstView.setListener(this);
-
-        /**
-         * 第二个界面
-         * */
-        List<OneCheckBean> list1 = new ArrayList<>();
-        list1.add(new OneCheckBean(false, "不限"));
-        list1.add(new OneCheckBean(false, "80以下"));
-        list1.add(new OneCheckBean(false, "80-100"));
-        list1.add(new OneCheckBean(false, "100-150"));
-        list1.add(new OneCheckBean(false, "300以上"));
-        SecView secView = new SecView(mContext);
-        popupViews.add(secView.secView());
-        secView.setListener(this);
-        secView.insertData(list1, dropDownMenu);
-
-        /**
-         * 第三个界面
-         * */
-        List<OneCheckBean> list2 = new ArrayList<>();
-        list2.add(new OneCheckBean(false, "不限"));
-        list2.add(new OneCheckBean(false, "3-10万"));
-        list2.add(new OneCheckBean(false, "6-15万"));
-        list2.add(new OneCheckBean(false, "10万以上"));
-        ThreeView threeView = new ThreeView(mContext);
-        popupViews.add(threeView.firstView());
-        threeView.insertData(list2, dropDownMenu);
-        threeView.setListener(this);
-        /**
-         * 第四个界面
-         * */
-        List<OneCheckBean> list3 = new ArrayList<>();
-        list3.add(new OneCheckBean(false, "构造"));
-        list3.add(new OneCheckBean(false, "地段"));
-        list3.add(new OneCheckBean(false, "朝向"));
-        list3.add(new OneCheckBean(false, "面积(平米)"));
-        list3.add(new OneCheckBean(false, "室内设施"));
-        MoreView fourView = new MoreView(mContext);
-        popupViews.add(fourView.secView());
-        fourView.insertData(list3, dropDownMenu);
-        fourView.setListener(this);
-        View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
+        popupViews.clear();
+        final View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (MapView) fifthView.findViewById(R.id.mapview);
         ll_clear = (LinearLayout) fifthView.findViewById(R.id.ll_clear);
         ll_clear.setOnClickListener(this);
         mydrawcircleview = (MyDrawCircleView) fifthView.findViewById(R.id.mydrawcircleview);
-        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
         mapView.removeViewAt(1);//隐藏logo
         mapView.removeViewAt(2);//隐藏比例尺
-        mapView.showZoomControls(false);// 隐藏缩放控件
+        mapView.showZoomControls(false);//隐藏缩放控件
         baiduMap = mapView.getMap();
-        initLocation();
-        initListener();
+        HttpParams params = new HttpParams();
+        params.put("hType", 0);
+        OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<OldHouseShaiXuanBean>(OldHouseShaiXuanBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseShaiXuanBean> response) {
+                        int code = response.code();
+                        OldHouseShaiXuanBean shaiXuanBean = response.body();
+                        if (shaiXuanBean == null) {
+                            return;
+                        }
+                        OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+
+                        /**
+                         * 第一个界面
+                         * */
+                        list = new ArrayList<>();
+                        FirstView firstView = new FirstView(mContext);
+                        popupViews.add(firstView.firstView());
+                        firstView.insertData(list, dropDownMenu);
+                        firstView.setListener(MapOldhouseFragment.this);
+
+                        /**
+                         * 第二个界面
+                         * */
+                        mianji = shaiXuanBeanDatas.getMianji();
+                        List<OneCheckBean> list1 = new ArrayList<>();
+                        list1.add(new OneCheckBean(false, "不限"));
+                        if (mianji != null && mianji.size() > 0) {
+                            for (int i = 0; i < mianji.size(); i++) {
+                                OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
+                                list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
+                            }
+                        }
+                        SecView secView = new SecView(mContext);
+                        popupViews.add(secView.secView());
+                        secView.setListener(MapOldhouseFragment.this);
+                        secView.insertData(list1, dropDownMenu);
+
+                        /**
+                         * 第三个界面
+                         * */
+                        shoujia = shaiXuanBeanDatas.getShoujia();
+                        List<OneCheckBean> list2 = new ArrayList<>();
+                        list2.add(new OneCheckBean(false, "不限"));
+                        if (shoujia != null && shoujia.size() > 0) {
+                            for (int i = 0; i < shoujia.size(); i++) {
+                                OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
+                                list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
+                            }
+                        }
+                        ThreeView threeView = new ThreeView(mContext);
+                        popupViews.add(threeView.firstView());
+                        threeView.insertData(list2, dropDownMenu);
+                        threeView.setListener(MapOldhouseFragment.this);
+                        /**
+                         * 第四个界面
+                         * */
+                        List<MoreCheckBean> moreCheckBeanList = new ArrayList<MoreCheckBean>();
+                        List<OldHouseShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();
+                        if (more != null && more.size() > 0) {
+                            for (int i = 0; i < more.size(); i++) {
+                                OldHouseShaiXuanBean.DatasEntity.MoreEntity moreEntity = more.get(i);
+                                List<OldHouseShaiXuanBean.DatasEntity.MoreEntity.DataEntity> data = moreEntity.getData();
+                                String nameCn = moreEntity.getNameCn();
+                                String nameJpn = moreEntity.getNameJpn();
+                                MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                moreCheckBean.setName(isJa ? nameJpn : nameCn);
+                                if (data != null && data.size() > 0) {
+                                    List<OneCheckBean> list3 = new ArrayList<>();
+                                    for (int i1 = 0; i1 < data.size(); i1++) {
+                                        list3.add(new OneCheckBean(false,
+                                                isJa ? data.get(i1).getScreeValJpn() : data.get(i1).getScreeValCn(), data.get(i1).getId()));
+                                    }
+                                    moreCheckBean.setCheckBeanList(list3);
+                                }
+                                moreCheckBeanList.add(moreCheckBean);
+                            }
+                        }
+                        MoreView fourView = new MoreView(mContext);
+                        popupViews.add(fourView.secView());
+                        fourView.insertData3(moreCheckBeanList, dropDownMenu);
+                        fourView.setListener(MapOldhouseFragment.this);
+                        /**
+                         * Dropdownmenu下面的主体部分
+                         * */
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+                    }
+                });
     }
 
     private void initMap(double weidu, double jingdu) {
@@ -234,13 +291,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
     private void initOverlay(String city) {
         baiduMap.clear();
-        String country = CacheUtils.get(Constants.COUNTRY);
         HttpParams params = new HttpParams();
-        if (country != null && country.equals("ja")) {
-            isJa = true;
-        } else {
-            isJa = false;
-        }
         params.put("cityName", city);
         params.put("hType", 0);
         OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
@@ -328,13 +379,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
     private void loadAllXiaoQu(LatLng northeast, LatLng southwest) {
         baiduMap.clear();
-        String country = CacheUtils.get(Constants.COUNTRY);
         HttpParams params = new HttpParams();
-        if (country != null && country.equals("ja")) {
-            isJa = true;
-        } else {
-            isJa = false;
-        }
         params.put("starJd", southwest.longitude);
         params.put("endJd", northeast.longitude);
         params.put("starWd", southwest.latitude);
@@ -409,16 +454,50 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
     @Override
     public void onItemClick(View view, int postion, int itemPosition) {
-
+        switch (postion) {
+            case 1:
+                break;
+            case 2://面积
+                if (itemPosition == 0) {//说明是点击的不限
+                    mjId = "-2";
+                } else {
+                    if (mianji != null && mianji.size() > 0) {
+                        OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(itemPosition - 1);
+                        mjId = mianjiEntity.getId() + "";
+                    }
+                }
+                initData();
+                break;
+            case 3://售价
+                isZiDingyiPrice = false;
+                zidingyiPriceList.clear();
+                if (itemPosition == 0) {
+                    sjId = "-2";
+                } else {
+                    if (shoujia != null && shoujia.size() > 0) {
+                        sjId=shoujia.get(itemPosition-1).getId()+"";
+                    }
+                }
+                initData();
+                break;
+        }
     }
 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
-
+        if (shoujia != null && shoujia.size() > 0) {
+            isZiDingyiPrice = true;
+            sjId = "-1";
+            zidingyiPriceList.clear();
+            zidingyiPriceList = priceRegin;
+            initData();
+        }
     }
 
     @Override
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
-
+        mMoreSelectedBeanList.clear();
+        mMoreSelectedBeanList = moreSelectedBeanList;
+        initData();
     }
 }

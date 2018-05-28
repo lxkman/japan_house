@@ -12,18 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.ChinaListBean;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
-import com.example.administrator.japanhouse.bean.TudiListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.MyFooter;
@@ -58,27 +61,32 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     TextView searchTv;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
-    private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
-    private int page=1;
+    private int page = 1;
     private boolean isJa;
-    private List<TudiListBean.DatasEntity> mDatas;
+    private List<ChinaListBean.DatasEntity> mDatas;
     private String sjId = "-2";
     private List<String> zidingyiPriceList = new ArrayList<>();
     private boolean isZiDingyiPrice;
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
-    private List<String> hxsList=new ArrayList<>();
+    private List<String> hxsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinese_liebiao);
         ButterKnife.bind(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initView();
         initData();
         initListener();
@@ -213,7 +221,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         params.put("pageNo", page);
         if (isJa) {
             params.put("languageType", 1);
-        }else {
+        } else {
             params.put("languageType", 0);
         }
         params.put("hType", 1);
@@ -232,18 +240,18 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             params.putUrlParams("lcs", mMoreSelectedBeanList.get(2));//楼层
         if (mMoreSelectedBeanList.size() > 3)
             params.putUrlParams("cxs", mMoreSelectedBeanList.get(3));//朝向
-        OkGo.<TudiListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")
+        OkGo.<ChinaListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<TudiListBean>(ChineseLiebiaoActivity.this, TudiListBean.class) {
+                .execute(new DialogCallback<ChinaListBean>(ChineseLiebiaoActivity.this, ChinaListBean.class) {
                     @Override
-                    public void onSuccess(Response<TudiListBean> response) {
+                    public void onSuccess(Response<ChinaListBean> response) {
                         int code = response.code();
-                        TudiListBean tudiListBean = response.body();
-                        if (tudiListBean == null) {
+                        ChinaListBean chinaListBean = response.body();
+                        if (chinaListBean == null) {
                             return;
                         }
-                        List<TudiListBean.DatasEntity> datas = tudiListBean.getDatas();
+                        List<ChinaListBean.DatasEntity> datas = chinaListBean.getDatas();
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 Toast.makeText(ChineseLiebiaoActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
@@ -272,7 +280,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(ChineseLiebiaoActivity.this, ZhongguoDetailsActivity.class);
-                                intent.putExtra("id", mDatas.get(position).getId()+"");
+                                intent.putExtra("id", mDatas.get(position).getId() + "");
                                 startActivity(intent);
                             }
                         });
@@ -308,7 +316,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                     sjId = "-2";
                 } else {
                     if (shoujia != null && shoujia.size() > 0) {
-                        sjId=shoujia.get(itemPosition-1).getId()+"";
+                        sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
                 mDatas.clear();
@@ -339,15 +347,21 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         initData();
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<TudiListBean.DatasEntity, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<ChinaListBean.DatasEntity, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<TudiListBean.DatasEntity> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<ChinaListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, TudiListBean.DatasEntity item) {
-
+        protected void convert(BaseViewHolder helper, ChinaListBean.DatasEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getHouseImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万" : item.getSellingPriceCn()+"万")
+                    .setText(R.id.tv_ting, isJa ? "" : "");
         }
     }
 

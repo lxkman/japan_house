@@ -30,8 +30,8 @@ public class NewHouseMoreActivity extends BaseActivity {
     TextView tvDongcengNum;
     @BindView(R.id.tv_house_suoyouquan)
     TextView tvHouseSuoyouquan;
-    @BindView(R.id.tv_tudi_area)
-    TextView tvTudiArea;
+//    @BindView(R.id.tv_tudi_area)
+//    TextView tvTudiArea;
     @BindView(R.id.tv_house_years)
     TextView tvHouseYears;
     @BindView(R.id.tv_jianzhu_gongsi)

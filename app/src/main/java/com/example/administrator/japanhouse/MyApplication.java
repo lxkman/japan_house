@@ -3,12 +3,14 @@ package com.example.administrator.japanhouse;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
 import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.SpUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;

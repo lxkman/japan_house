@@ -1,5 +1,7 @@
 package com.example.administrator.japanhouse.bean;
 
+import android.os.Parcel;
+
 import java.util.List;
 
 /**
@@ -16,6 +18,11 @@ public class BieShuListBean {
     private String msg;
     private String code;
     private List<DatasEntity> datas;
+
+    protected BieShuListBean(Parcel in) {
+        msg = in.readString();
+        code = in.readString();
+    }
 
     public void setMsg(String msg) {
         this.msg = msg;

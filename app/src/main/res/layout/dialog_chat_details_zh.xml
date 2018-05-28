@@ -43,6 +43,7 @@
             android:textSize="14sp" />
 
         <com.example.administrator.japanhouse.view.RatingBarView
+            android:id="@+id/dialog_chat_tatingbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -54,35 +55,37 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_huanman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="17dp"
-                android:background="@drawable/dialog_chat_true_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="5dp"
                 android:text="回复缓慢"
-                android:textColor="#C7977F"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="13sp" />
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_zuanye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
                 android:layout_toRightOf="@id/dialog_chat_huanman"
-                android:background="@drawable/dialog_chat_false_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="5dp"
                 android:text="不够专业"
-                android:textColor="#666666"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="13sp" />
         </RelativeLayout>
 
@@ -92,35 +95,37 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp">
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_lengdan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="17dp"
-                android:background="@drawable/dialog_chat_false_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:paddingTop="5dp"
                 android:text="态度冷淡"
-                android:textColor="#666666"
                 android:textSize="13sp" />
 
-            <TextView
+            <CheckBox
                 android:id="@+id/dialog_chat_buquan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
                 android:layout_toRightOf="@id/dialog_chat_lengdan"
-                android:background="@drawable/dialog_chat_false_check"
+                android:background="@drawable/dialog_chat_radiobutton"
+                android:button="@null"
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="5dp"
                 android:text="信息不全"
-                android:textColor="#666666"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="13sp" />
         </RelativeLayout>
 
@@ -140,19 +145,19 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="提交"
-            android:textSize="14sp"
-            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
+            android:background="#C7977F"
+            android:gravity="center_horizontal"
             android:paddingBottom="8dp"
             android:paddingTop="7dp"
-            android:gravity="center_horizontal"
-            android:background="#C7977F"
-            />
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
     </LinearLayout>
 </RelativeLayout>

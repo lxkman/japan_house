@@ -3,14 +3,20 @@ package com.example.administrator.japanhouse.im;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.RatingBarView;
 
 import java.util.List;
 
@@ -29,6 +35,8 @@ public class RongChatActivity extends BaseActivity {
     private ImageView phone;
     private ImageView star;
 
+    private TextView tvAppraise;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,7 @@ public class RongChatActivity extends BaseActivity {
         back = (ImageView) findViewById(R.id.activity_chat_back);
         phone = (ImageView) findViewById(R.id.activity_chat_phone);
         star = (ImageView) findViewById(R.id.activity_chat_star);
+        tvAppraise = (TextView) findViewById(R.id.act_rongChat_appraise);
 
         //会话界面 对方id
         final String targetId = getIntent().getData().getQueryParameter("targetId");
@@ -52,16 +61,19 @@ public class RongChatActivity extends BaseActivity {
                 }
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.VISIBLE);
+                tvAppraise.setVisibility(View.VISIBLE);
             } else if (chat.equals(Constants.CHAT_FEEDBACK)) {
                 this.title.setText(getString(R.string.mine_userfeedback));
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.GONE);
+                tvAppraise.setVisibility(View.GONE);
             } else {
                 if (!TextUtils.isEmpty(title)){
                     this.title.setText(title);
                 }
                 phone.setVisibility(View.VISIBLE);
                 star.setVisibility(View.GONE);
+                tvAppraise.setVisibility(View.GONE);
             }
         }
 
@@ -78,6 +90,101 @@ public class RongChatActivity extends BaseActivity {
 //                RongCallClient.getInstance().startCall(Conversation.ConversationType.PRIVATE, targetId, null, RongCallCommon.CallMediaType.AUDIO, "");
             }
         });
+
+        final String country = CacheUtils.get(Constants.COUNTRY);
+
+        tvAppraise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(country) && TextUtils.equals(country, "ja")) {
+                    showJaDialog();
+                } else {
+                    showZhDialog();
+                }
+            }
+        });
+    }
+
+    private void showJaDialog() {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog
+                dialog = builder.setViewId(R.layout.dialog_chat_details_ja)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(true)
+                .builder();
+        CheckBox rbReply = dialog.getView(R.id.dialog_chat_huanman);
+        CheckBox rbNoMajor = dialog.getView(R.id.dialog_chat_zuanye);
+        CheckBox rbColdness = dialog.getView(R.id.dialog_chat_lengdan);
+        CheckBox rbMsgPartial = dialog.getView(R.id.dialog_chat_buquan);
+
+        RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
+        ratingBarView.setRatingCount(5);
+        ratingBarView.setSelectedCount(1);
+        ratingBarView.setSelectedIconResId(R.drawable.start_check);
+        ratingBarView.setNormalIconResId(R.drawable.start_nocheck);
+        ratingBarView.setClickable(true);
+        ratingBarView.setChildPadding(0);
+        ratingBarView.setChildMargin(12);
+        ratingBarView.setChildDimension(28);
+
+        dialog.getView(R.id.iv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.getView(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    private void showZhDialog() {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog
+                dialog = builder.setViewId(R.layout.dialog_chat_details_zh)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(true)
+                .builder();
+        CheckBox rbReply = dialog.getView(R.id.dialog_chat_huanman);
+        CheckBox rbNoMajor = dialog.getView(R.id.dialog_chat_zuanye);
+        CheckBox rbColdness = dialog.getView(R.id.dialog_chat_lengdan);
+        CheckBox rbMsgPartial = dialog.getView(R.id.dialog_chat_buquan);
+
+        RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
+        ratingBarView.setRatingCount(5);
+        ratingBarView.setSelectedCount(1);
+        ratingBarView.setSelectedIconResId(R.drawable.start_check);
+        ratingBarView.setNormalIconResId(R.drawable.start_nocheck);
+        ratingBarView.setClickable(true);
+        ratingBarView.setChildPadding(0);
+        ratingBarView.setChildMargin(12);
+        ratingBarView.setChildDimension(28);
+
+        dialog.getView(R.id.iv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getView(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 
     @Override

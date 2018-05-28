@@ -94,6 +94,7 @@
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/act_rental_scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
@@ -571,7 +572,6 @@
                     android:textSize="14sp" />
 
                 <com.example.administrator.japanhouse.view.HeightGridView
-                    android:listSelector="@android:color/transparent"
                     android:id="@+id/act_rental_picRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -580,6 +580,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="11dp"
                     android:horizontalSpacing="11dp"
+                    android:listSelector="@android:color/transparent"
                     android:numColumns="3"
                     android:verticalSpacing="10dp" />
             </LinearLayout>
@@ -608,7 +609,6 @@
                     android:textSize="14sp" />
 
                 <com.example.administrator.japanhouse.view.HeightGridView
-                    android:listSelector="@android:color/transparent"
                     android:id="@+id/act_rental_videoImg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -617,6 +617,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="11dp"
                     android:horizontalSpacing="11dp"
+                    android:listSelector="@android:color/transparent"
                     android:numColumns="3"
                     android:verticalSpacing="10dp" />
             </LinearLayout>

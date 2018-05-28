@@ -1,9 +1,15 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -11,21 +17,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.geocode.GeoCodeResult;
-import com.baidu.mapapi.search.geocode.GeoCoder;
-import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
-import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.view.CommonPopupWindow;
+import com.example.administrator.japanhouse.bean.TongQinHistroyBean;
+import com.example.administrator.japanhouse.utils.SpUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +63,18 @@ public class TongqinSearchActivity extends BaseActivity {
     TextView tvLocation;
     @BindView(R.id.location_rl)
     RelativeLayout locationRl;
-    private CommonPopupWindow popupWindow;
-    private List<String> historyList;
+    @BindView(R.id.search_list_recycler)
+    RecyclerView searchListRecycler;
+    @BindView(R.id.nestScroll)
+    NestedScrollView nestScroll;
+    private List<TongQinHistroyBean> mHistoryList = new ArrayList<>();
     private HistoryAdapter historyAdapter;
     private LocationClient mLocClient;
+    private String city;
+    private PoiSearch poiSearch;
+    private List<PoiInfo> addressList = new ArrayList<>();
+    private SearchListAdapter searchListAdapter;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +83,32 @@ public class TongqinSearchActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
         searchEt.setOnEditorActionListener(editorActionListener);
-        GeoCoder geoCoder = GeoCoder.newInstance();
-        geoCoder.setOnGetGeoCodeResultListener(geoCoderResultListener);
+        poiSearch = PoiSearch.newInstance();
+        poiSearch.setOnGetPoiSearchResultListener(poiListener);
         initLocation();
+        searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(searchEt.getText().toString())) {
+                    poiSearch.searchInCity((new PoiCitySearchOption())
+                            .city(city)
+                            .keyword(searchEt.getText().toString())
+                            .pageNum(10));
+                } else {
+                    addressList.clear();
+                    searchListAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     private void initLocation() {
@@ -84,32 +128,70 @@ public class TongqinSearchActivity extends BaseActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
+                city = bdLocation.getCity();
                 String addrStr = bdLocation.getAddrStr();
                 tvLocation.setText(addrStr);
             }
         });
     }
 
-    OnGetGeoCoderResultListener geoCoderResultListener = new OnGetGeoCoderResultListener() {
+    OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
 
-        public void onGetGeoCodeResult(GeoCodeResult result) {
-
-            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                //没有检索到结果
+        public void onGetPoiResult(PoiResult result) {
+            //获取POI检索结果
+            addressList = result.getAllPoi();
+            if (addressList != null && addressList.size() > 0) {
+                nestScroll.setVisibility(View.GONE);
+                searchListRecycler.setVisibility(View.VISIBLE);
+                searchListAdapter = new SearchListAdapter(R.layout.search_list_item, addressList);
+                searchListRecycler.setAdapter(searchListAdapter);
+                searchListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        doSavehistory(addressList.get(position));
+                        Intent intent = new Intent();
+                        intent.putExtra("address", addressList.get(position).address);
+                        LatLng location = addressList.get(position).location;
+                        double latitude = location.latitude;
+                        double longitude = location.longitude;
+                        intent.putExtra("latitude", latitude);
+                        intent.putExtra("longitude", longitude);
+                        setResult(1, intent);
+                        finish();
+                    }
+                });
+            } else {
+                Toast.makeText(mContext, "查询不到此地址", Toast.LENGTH_SHORT).show();
             }
-            //获取地理编码结果
+        }
+
+        public void onGetPoiDetailResult(PoiDetailResult result) {
+            //获取Place详情页检索结果
         }
 
         @Override
+        public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
 
-        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
-
-            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                //没有找到检索结果
-            }
-            //获取反向地理编码结果
         }
     };
+
+    private class SearchListAdapter extends BaseQuickAdapter<PoiInfo, BaseViewHolder> {
+
+        public SearchListAdapter(@LayoutRes int layoutResId, @Nullable List<PoiInfo> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, PoiInfo item) {
+            helper.setText(R.id.tv_Search_list, item.address);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        poiSearch.destroy();
+    }
 
     TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
 
@@ -126,41 +208,125 @@ public class TongqinSearchActivity extends BaseActivity {
     };
 
     private void initView() {
-        historyList = new ArrayList<>();
-        historyList.add("东京");
-        historyList.add("澳大利亚");
-        historyList.add("中国");
-        historyList.add("美国");
-        historyList.add("缅甸");
-        historyList.add("阿富汗");
         historyRecycler.setNestedScrollingEnabled(false);
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
-        historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
+        searchListRecycler.setNestedScrollingEnabled(false);
+        searchListRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mHistoryList = getHistory();
+        historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
         historyRecycler.setAdapter(historyAdapter);
+        historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                doSavehistory2(mHistoryList.get(position));
+                Intent intent = new Intent();
+                intent.putExtra("address", mHistoryList.get(position).getAddress());
+                double latitude = mHistoryList.get(position).getLatitude();
+                double longitude = mHistoryList.get(position).getLongitude();
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+                setResult(1, intent);
+                finish();
+            }
+        });
     }
 
-    @OnClick({R.id.cancle_tv, R.id.history_clear})
+    @OnClick({R.id.cancle_tv, R.id.history_clear, R.id.location_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cancle_tv:
                 finish();
                 break;
             case R.id.history_clear:
-                historyList.clear();
+                mHistoryList.clear();
                 historyAdapter.notifyDataSetChanged();
+                break;
+            case R.id.location_rl:
+                finish();
+                Intent intent = new Intent();
+                intent.putExtra("address", "");
+                setResult(1, intent);
                 break;
         }
     }
 
-    private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class HistoryAdapter extends BaseQuickAdapter<TongQinHistroyBean, BaseViewHolder> {
 
-        public HistoryAdapter(int layoutResId, @Nullable List<String> data) {
+        public HistoryAdapter(int layoutResId, @Nullable List<TongQinHistroyBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-            helper.setText(R.id.item_name_tv, item);
+        protected void convert(BaseViewHolder helper, TongQinHistroyBean item) {
+            helper.setText(R.id.item_name_tv, item.getAddress());
         }
+    }
+
+    //判断本地数据中有没有存在搜索过的数据，查重
+    private boolean isHasSelectData(String content) {
+        if (mHistoryList == null || mHistoryList.size() == 0) {
+            return false;
+        }
+        for (int i = 0; i < mHistoryList.size(); i++) {
+            if (mHistoryList.get(i).getAddress().equals(content)) {
+                position = i;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void doSavehistory(PoiInfo poiInfo) {
+
+        if (isHasSelectData(poiInfo.address)) {//查重
+            mHistoryList.remove(position);
+        }
+        //后来搜索的文字放在集合中的第一个位置
+        mHistoryList.add(0, new TongQinHistroyBean(poiInfo.address, poiInfo.location.latitude, poiInfo.location.longitude));
+
+        if (mHistoryList.size() == 6) {//实现本地历史搜索记录最多不超过5个
+            mHistoryList.remove(5);
+        }
+        //将这个mHistoryListData保存到sp中，其实sp中保存的就是这个mHistoryListData集合
+        saveHistory();
+    }
+
+    private void doSavehistory2(TongQinHistroyBean histroyBean) {
+
+        if (isHasSelectData(histroyBean.getAddress())) {//查重
+            mHistoryList.remove(position);
+        }
+        //后来搜索的文字放在集合中的第一个位置
+        mHistoryList.add(0, new TongQinHistroyBean(histroyBean.getAddress(), histroyBean.getLatitude()
+                , histroyBean.getLongitude()));
+
+        if (mHistoryList.size() == 6) {//实现本地历史搜索记录最多不超过5个
+            mHistoryList.remove(5);
+        }
+        //将这个mHistoryListData保存到sp中，其实sp中保存的就是这个mHistoryListData集合
+        saveHistory();
+    }
+
+    /**
+     * 保存历史查询记录
+     */
+    private void saveHistory() {
+        SpUtils.putString("tongqinhistory",
+                new Gson().toJson(mHistoryList));//将java对象转换成json字符串进行保存
+    }
+
+    /**
+     * 获取历史查询记录
+     *
+     * @return
+     */
+    private List<TongQinHistroyBean> getHistory() {
+        String historyJson = SpUtils.getString("tongqinhistory", "");
+        if (historyJson != null && !historyJson.equals("")) {//必须要加上后面的判断，因为获取的字符串默认值就是空字符串
+            //将json字符串转换成list集合
+            return new Gson().fromJson(historyJson, new TypeToken<List<TongQinHistroyBean>>() {
+            }.getType());
+        }
+        return new ArrayList<TongQinHistroyBean>();
     }
 }

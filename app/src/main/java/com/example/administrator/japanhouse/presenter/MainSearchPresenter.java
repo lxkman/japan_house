@@ -1,17 +1,15 @@
 package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
-import android.text.TextUtils;
 
+import com.example.administrator.japanhouse.MyApplication;
+import com.example.administrator.japanhouse.bean.BieShuListBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.model.SearchBusinessBean;
-import com.example.administrator.japanhouse.model.SearchHouseBean;
 import com.example.administrator.japanhouse.model.SearchLandBean;
-import com.example.administrator.japanhouse.model.SearchVillaBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
-import com.example.administrator.japanhouse.utils.CacheUtils;
-import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -31,17 +29,15 @@ public class MainSearchPresenter {
     }
 
     /**
-     *首页顶部搜索-提示语
+     * 首页顶部搜索-提示语
+     *
      * @param searchType
      * @param searchText
      */
-    public void getSearchHint(int searchType, String searchText){
+    public void getSearchHint(int searchType, String searchText) {
         String languageType = "0";
-        String country = CacheUtils.get(Constants.COUNTRY);
-        if (!TextUtils.isEmpty(country)) {
-            if (TextUtils.equals(country, "ja")) {
-                languageType = "1";
-            }
+        if (MyApplication.isJapanese()) {
+            languageType = "1";
         }
 
         HttpParams params = new HttpParams();
@@ -62,17 +58,15 @@ public class MainSearchPresenter {
     /**
      * searchType 0 2 4
      * 新房 二手房 租房
+     *
      * @param pageNo
      * @param searchType
      * @param searchText
      */
-    public void getSearchNewHouse(int pageNo, int searchType, String searchText){
+    public void getSearchNewHouse(int pageNo, int searchType, String searchText) {
         int languageType = 0;
-        String country = CacheUtils.get(Constants.COUNTRY);
-        if (!TextUtils.isEmpty(country)) {
-            if (TextUtils.equals(country, "ja")) {
-                languageType = 1;
-            }
+        if (MyApplication.isJapanese()) {
+            languageType = 1;
         }
 
         HttpParams params = new HttpParams();
@@ -80,13 +74,13 @@ public class MainSearchPresenter {
         params.put("searchType", searchType);
         params.put("searchText", searchText);
         params.put("languageType", languageType);
-        OkGo.<SearchHouseBean>post(MyUrls.BASEURL + "/app/index/indexsearch")
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/index/indexsearch")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<SearchHouseBean>(activity, SearchHouseBean.class) {
+                .execute(new DialogCallback<OldHouseListBean>(activity, OldHouseListBean.class) {
                     @Override
-                    public void onSuccess(Response<SearchHouseBean> response) {
-                        callBack.getSearchNewHouse(response);
+                    public void onSuccess(Response<OldHouseListBean> response) {
+//                        callBack.getSearchNewHouse(response);
                     }
                 });
     }
@@ -94,16 +88,15 @@ public class MainSearchPresenter {
     /**
      * searchType 1
      * 别墅
+     *
      * @param pageNo
      * @param searchText
      */
-    public void getSearchVilla(int pageNo, String searchText){
+    public void getSearchVilla(int pageNo, String searchText) {
         int languageType = 0;
-        String country = CacheUtils.get(Constants.COUNTRY);
-        if (!TextUtils.isEmpty(country)) {
-            if (TextUtils.equals(country, "ja")) {
-                languageType = 1;
-            }
+
+        if (MyApplication.isJapanese()) {
+            languageType = 1;
         }
 
         HttpParams params = new HttpParams();
@@ -111,13 +104,13 @@ public class MainSearchPresenter {
         params.put("searchType", 1);
         params.put("searchText", searchText);
         params.put("languageType", languageType);
-        OkGo.<SearchVillaBean>post(MyUrls.BASEURL + "/app/index/indexsearch")
+        OkGo.<BieShuListBean>post(MyUrls.BASEURL + "/app/index/indexsearch")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<SearchVillaBean>(activity, SearchVillaBean.class) {
+                .execute(new DialogCallback<BieShuListBean>(activity, BieShuListBean.class) {
                     @Override
-                    public void onSuccess(Response<SearchVillaBean> response) {
-                        callBack.getSearchVilla(response);
+                    public void onSuccess(Response<BieShuListBean> response) {
+//                        callBack.getSearchVilla(response);
                     }
                 });
     }
@@ -125,16 +118,14 @@ public class MainSearchPresenter {
     /**
      * searchType 3
      * 土地
+     *
      * @param pageNo
      * @param searchText
      */
-    public void getSearchLand(int pageNo, String searchText){
+    public void getSearchLand(int pageNo, String searchText) {
         int languageType = 0;
-        String country = CacheUtils.get(Constants.COUNTRY);
-        if (!TextUtils.isEmpty(country)) {
-            if (TextUtils.equals(country, "ja")) {
-                languageType = 1;
-            }
+        if (MyApplication.isJapanese()) {
+            languageType = 1;
         }
 
         HttpParams params = new HttpParams();
@@ -148,7 +139,7 @@ public class MainSearchPresenter {
                 .execute(new DialogCallback<SearchLandBean>(activity, SearchLandBean.class) {
                     @Override
                     public void onSuccess(Response<SearchLandBean> response) {
-                        callBack.getSearchLand(response);
+//                        callBack.getSearchLand(response);
                     }
                 });
     }
@@ -156,16 +147,14 @@ public class MainSearchPresenter {
     /**
      * searchType 5
      * 商业地产
+     *
      * @param pageNo
      * @param searchText
      */
-    public void getSearchBusiness(int pageNo, String searchText){
+    public void getSearchBusiness(int pageNo, String searchText) {
         int languageType = 0;
-        String country = CacheUtils.get(Constants.COUNTRY);
-        if (!TextUtils.isEmpty(country)) {
-            if (TextUtils.equals(country, "ja")) {
-                languageType = 1;
-            }
+        if (MyApplication.isJapanese()) {
+            languageType = 1;
         }
 
         HttpParams params = new HttpParams();
@@ -179,16 +168,20 @@ public class MainSearchPresenter {
                 .execute(new DialogCallback<SearchBusinessBean>(activity, SearchBusinessBean.class) {
                     @Override
                     public void onSuccess(Response<SearchBusinessBean> response) {
-                        callBack.getSearchBusiness(response);
+//                        callBack.getSearchBusiness(response);
                     }
                 });
     }
 
     public interface MainSearchCallBack {
         void getSearchHint(Response<TopSearchHintBean> response);
-        void getSearchNewHouse(Response<SearchHouseBean> response);
-        void getSearchVilla(Response<SearchVillaBean> response);
-        void getSearchLand(Response<SearchLandBean> response);
-        void getSearchBusiness(Response<SearchBusinessBean> response);
+
+//        void getSearchNewHouse(Response<OldHouseListBean> response);
+//
+//        void getSearchVilla(Response<BieShuListBean> response);
+//
+//        void getSearchLand(Response<SearchLandBean> response);
+//
+//        void getSearchBusiness(Response<SearchBusinessBean> response);
     }
 }

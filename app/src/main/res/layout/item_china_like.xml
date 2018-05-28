@@ -6,49 +6,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/item_pic_iv"
+            android:id="@+id/iv_tupian"
             android:layout_width="130dp"
             android:layout_height="90dp"
             android:src="@drawable/test_cnxh_iv"
             android:layout_margin="15dp"
             android:scaleType="fitXY"/>
         <TextView
-            android:id="@+id/item_name_tv"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/item_pic_iv"
+            android:layout_toRightOf="@+id/iv_tupian"
             android:text="泰和·金府大厦"
             android:layout_marginTop="20dp"
             android:textColor="@color/text_black"/>
         <TextView
-            android:id="@+id/item_address_tv"
+            android:id="@+id/tv_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="东京"
             android:drawableLeft="@drawable/home_map_like_iv"
             android:drawablePadding="5dp"
-            android:layout_below="@+id/item_name_tv"
-            android:layout_toRightOf="@+id/item_pic_iv"
+            android:layout_below="@+id/tv_title"
+            android:layout_toRightOf="@+id/iv_tupian"
             android:layout_marginTop="10dp"/>
         <TextView
-            android:id="@+id/item_ting_tv"
+            android:id="@+id/tv_ting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3室1厅"
             android:textColor="@color/gray"
-            android:layout_below="@+id/item_address_tv"
-            android:layout_toRightOf="@+id/item_pic_iv"
+            android:layout_below="@+id/tv_area"
+            android:layout_toRightOf="@+id/iv_tupian"
             android:layout_marginTop="10dp"/>
         <TextView
+            android:id="@+id/tv_mianji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="175㎡"
             android:layout_marginLeft="15dp"
             android:textColor="@color/gray"
-            android:layout_below="@+id/item_address_tv"
-            android:layout_toRightOf="@+id/item_ting_tv"
+            android:layout_below="@+id/tv_area"
+            android:layout_toRightOf="@+id/tv_ting"
             android:layout_marginTop="10dp"/>
         <TextView
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1750元/㎡"

@@ -66,7 +66,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, SydcLiebiaoActivity.class);
-                intent.putExtra("type", position + "");
+                intent.putExtra("type", position);
                 if (position == 0) {
                     intent.putExtra("houseType", "shangpu");
                 } else if (position == 1) {

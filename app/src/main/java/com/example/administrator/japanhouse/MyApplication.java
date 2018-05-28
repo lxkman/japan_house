@@ -3,14 +3,12 @@ package com.example.administrator.japanhouse;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.text.TextUtils;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
 import com.example.administrator.japanhouse.utils.CacheUtils;
-import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.SpUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -228,6 +226,7 @@ public class MyApplication extends Application {
                 .addCommonParams(params);                          //全局公共参数
 
     }
+
     public static boolean isJapanese(){
         String language = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(language) && TextUtils.equals(language, "ja")) {

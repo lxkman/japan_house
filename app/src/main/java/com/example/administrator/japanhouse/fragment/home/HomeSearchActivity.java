@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -9,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +26,6 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.SearchListAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.model.SearchBean;
-import com.example.administrator.japanhouse.model.SearchBusinessBean;
-import com.example.administrator.japanhouse.model.SearchHouseBean;
-import com.example.administrator.japanhouse.model.SearchLandBean;
-import com.example.administrator.japanhouse.model.SearchVillaBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -96,6 +92,10 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             locationTv.setText(getIntent().getStringExtra("popcontent"));
         }
 
+        if (TextUtils.isEmpty(getIntent().getStringExtra("home"))) {
+            locationTv.setClickable(false);
+        }
+
         state = getIntent().getIntExtra("state", 0);
 
         searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -142,22 +142,34 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
                     switch (state) {
                         case 0: //新房
-                            searchPresenter.getSearchNewHouse(1, 0, searchEt.getText().toString());
+                            Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
+                            newHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                            startActivity(newHouseIntent);
                             break;
                         case 1: //别墅
-                            searchPresenter.getSearchVilla(1, searchEt.getText().toString());
+                            Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
+                            villaIntent.putExtra("searchText", searchEt.getText().toString());
+                            startActivity(villaIntent);
                             break;
                         case 2: //二手房
-                            searchPresenter.getSearchNewHouse(1, 2, searchEt.getText().toString());
+                            Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
+                            oldHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                            startActivity(oldHouseIntent);
                             break;
                         case 3: //土地
-                            searchPresenter.getSearchLand(1, searchEt.getText().toString());
+                            Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
+                            landIntent.putExtra("searchText", searchEt.getText().toString());
+                            startActivity(landIntent);
                             break;
                         case 4: //租房
-                            searchPresenter.getSearchNewHouse(1, 4, searchEt.getText().toString());
+                            Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
+                            rentalIntent.putExtra("searchText", searchEt.getText().toString());
+                            startActivity(rentalIntent);
                             break;
                         case 5: //商业地产
-                            searchPresenter.getSearchBusiness(1, searchEt.getText().toString());
+                            Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
+                            businessIntent.putExtra("searchText", searchEt.getText().toString());
+                            startActivity(businessIntent);
                             break;
                     }
                     List<SearchBean> list = CacheUtils.get(Constants.SEARCH_HISTORY);
@@ -191,7 +203,6 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
         historyList = new ArrayList<>();
 
-
         historyRecycler.setNestedScrollingEnabled(false);
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
         historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
@@ -199,24 +210,37 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
                 switch (searchBean.get(position).state) {
-                    case 0: //新房
-                        searchPresenter.getSearchNewHouse(1, 0, searchBean.get(position).content);
+                    case 0: //新房  searchText
+                        Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
+                        newHouseIntent.putExtra("searchText", searchBean.get(position).content);
+                        startActivity(newHouseIntent);
                         break;
                     case 1: //别墅
-                        searchPresenter.getSearchVilla(1, searchBean.get(position).content);
+                        Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
+                        villaIntent.putExtra("searchText", searchBean.get(position).content);
+                        startActivity(villaIntent);
                         break;
                     case 2: //二手房
-                        searchPresenter.getSearchNewHouse(1, 2, searchBean.get(position).content);
+                        Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
+                        oldHouseIntent.putExtra("searchText", searchBean.get(position).content);
+                        startActivity(oldHouseIntent);
                         break;
                     case 3: //土地
-                        searchPresenter.getSearchLand(1, searchBean.get(position).content);
+                        Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
+                        landIntent.putExtra("searchText", searchBean.get(position).content);
+                        startActivity(landIntent);
                         break;
                     case 4: //租房
-                        searchPresenter.getSearchNewHouse(1, 4, searchBean.get(position).content);
+                        Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
+                        rentalIntent.putExtra("searchText", searchBean.get(position).content);
+                        startActivity(rentalIntent);
                         break;
                     case 5: //商业地产
-                        searchPresenter.getSearchBusiness(1, searchBean.get(position).content);
+                        Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
+                        businessIntent.putExtra("searchText", searchBean.get(position).content);
+                        startActivity(businessIntent);
                         break;
                 }
 
@@ -231,7 +255,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         queryCacheHistory();
     }
 
-    private void queryCacheHistory(){
+    private void queryCacheHistory() {
         historyList.clear();
         searchBean = CacheUtils.get(Constants.SEARCH_HISTORY);
         if (searchBean != null && searchBean.size() > 0) {
@@ -387,26 +411,6 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 searchListAdapter.setSearchContent(searchEt.getText().toString());
             }
         }
-    }
-
-    @Override
-    public void getSearchNewHouse(Response<SearchHouseBean> response) {
-        Log.v("======>>", "搜索成功");
-    }
-
-    @Override
-    public void getSearchVilla(Response<SearchVillaBean> response) {
-        Log.v("======>>", "搜索成功");
-    }
-
-    @Override
-    public void getSearchLand(Response<SearchLandBean> response) {
-        Log.v("======>>", "搜索成功");
-    }
-
-    @Override
-    public void getSearchBusiness(Response<SearchBusinessBean> response) {
-        Log.v("======>>", "搜索成功");
     }
 
     private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

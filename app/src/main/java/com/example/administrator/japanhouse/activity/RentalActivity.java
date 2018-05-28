@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
 import android.view.View;
@@ -99,6 +101,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     GridViewAddImgesAdpter adapter;
     GridViewAddVideoAdapter videoAdapter;
 
+    private NestedScrollView nestedScrollView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,12 +109,14 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
         setContentView(R.layout.activity_rental);
         ButterKnife.bind(this);
 
+        nestedScrollView = (NestedScrollView) findViewById(R.id.act_rental_scrollView);
+
         cameraList = new ArrayList<>();
-        cameraList.add("拍照");
-        cameraList.add("从相册中选择");
+        cameraList.add(getString(R.string.camera_pic));
+        cameraList.add(getString(R.string.chooise_camera));
         cameraListvideo = new ArrayList<>();
-        cameraListvideo.add("拍摄视频");
-        cameraListvideo.add("从相册中选择");
+        cameraListvideo.add(getString(R.string.camera_video));
+        cameraListvideo.add(getString(R.string.chooise_camera));
 
         //显示平方米
         SpannableString m2 = new SpannableString("m2");
@@ -166,6 +171,22 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 tabSell.setTextColor(Color.parseColor("#444444"));
                 tabSellIndicator.setBackgroundColor(Color.WHITE);
                 rentOrSell = true;
+
+//                nestedScrollView.scrollTo(0, 0);
+                etCall.setText("");
+                etContact.setText("");
+                etLocation.setText("");
+                etDistance.setText("");
+                etFloor.setText("");
+                etArea.setText("");
+                etPattern.setText("");
+                etToward.setText("");
+                etEquipment.setText("");
+                imgPathList.clear();
+                videoPath = "";
+                videoPathList.clear();
+                videoAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.act_rental_sell_lt:
                 tabSell.setTextColor(Color.parseColor("#c7977f"));
@@ -173,6 +194,23 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 tabRent.setTextColor(Color.parseColor("#444444"));
                 tabRentIndicator.setBackgroundColor(Color.WHITE);
                 rentOrSell = false;
+
+
+//                nestedScrollView.scrollTo(0, 0);
+                etCall.setText("");
+                etContact.setText("");
+                etLocation.setText("");
+                etDistance.setText("");
+                etFloor.setText("");
+                etArea.setText("");
+                etPattern.setText("");
+                etToward.setText("");
+                etEquipment.setText("");
+                imgPathList.clear();
+                videoPath = "";
+                videoPathList.clear();
+                videoAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.act_rental_check:
                 isBathroom = true;
@@ -181,7 +219,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 isBathroom = false;
                 break;
             case R.id.act_rental_entrust:
-//                if (!TextUtils.isEmpty(etCall.getText().toString()) && !TextUtils.isEmpty(etContact.getText().toString())) {
+                if (!TextUtils.isEmpty(etCall.getText().toString()) && !TextUtils.isEmpty(etContact.getText().toString())) {
 
                     String isbathRoom;
                     String strRentSell;
@@ -214,11 +252,10 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                             videoPath,
                             1);
 
-                        Intent intent = new Intent(this, RentalDetailsActivity.class);
-                        intent.putExtra("detailsBean", bean);
-                        startActivityForResult(intent, 101);
-//                }
-
+                    Intent intent = new Intent(this, RentalDetailsActivity.class);
+                    intent.putExtra("detailsBean", bean);
+                    startActivityForResult(intent, 101);
+                }
                 break;
         }
     }
@@ -231,15 +268,15 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .setItemWidth(0.9f)  //屏幕宽度*0.9
                 .setItemTextColor(R.color.text_black)  //设置item字体颜色
                 .setItemTextSize(16)  //设置item字体大小
-                .setCancleButtonText("取消")  //设置最底部“取消”按钮文本
+                .setCancleButtonText(getString(R.string.cancel))  //设置最底部“取消”按钮文本
                 .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
                     @Override
                     public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
                         switch (position) {
-                            case 0://从相册选择
+                            case 1://从相册选择
                                 requestPhoto();
                                 break;
-                            case 1://拍照
+                            case 0://拍照
                                 requestImage();
                                 break;
                         }
@@ -323,15 +360,15 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .setItemWidth(0.9f)  //屏幕宽度*0.9
                 .setItemTextColor(R.color.text_black)  //设置item字体颜色
                 .setItemTextSize(16)  //设置item字体大小
-                .setCancleButtonText("取消")  //设置最底部“取消”按钮文本
+                .setCancleButtonText(getString(R.string.cancel))  //设置最底部“取消”按钮文本
                 .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
                     @Override
                     public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
                         switch (position) {
-                            case 0://从相册选择
+                            case 1://从相册选择
                                 requestVideo();
                                 break;
-                            case 1://拍照
+                            case 0://拍照
                                 requestCamera();
                                 break;
                         }

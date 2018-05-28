@@ -79,13 +79,15 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
                     public void onSuccess(Response<ChinaCityItemBean> response) {
                         int code = response.code();
                         ChinaCityItemBean body = response.body();
-                        List<ChinaCityItemBean.DatasEntity> datas = body.getDatas();
+                        final List<ChinaCityItemBean.DatasEntity> datas = body.getDatas();
                         FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_chinese_city, datas);
                         fenleiRecycler.setAdapter(fenleiAdapter);
                         fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, HaiwaiListActivity.class));
+                                Intent intent = new Intent(mContext, HaiwaiListActivity.class);
+                                intent.putExtra("id",datas.get(position).getCountryOrcityId()+"");
+                                startActivity(intent);
                             }
                         });
                     }

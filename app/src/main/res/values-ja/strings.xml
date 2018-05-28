@@ -553,4 +553,8 @@
     <string name="gongjiao">バス</string>
     <string name="zijia">自動車</string>
     <string name="qingshurudizhi">住所を記入してください</string>
+    <string name="camera_pic">写真を撮る</string>
+    <string name="chooise_camera">アルバムの中から選択</string>
+    <string name="camera_video">拍摄视频</string>
+    <string name="cancel">キャンセル</string>
 </resources>

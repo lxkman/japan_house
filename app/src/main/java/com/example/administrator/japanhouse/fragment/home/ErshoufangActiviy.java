@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -76,6 +77,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
 
+    private String searchText = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +90,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         } else {
             isJa = false;
         }
+
+        searchText = getIntent().getStringExtra("searchText");
+        if (!TextUtils.isEmpty(searchText)) {
+            searchTv.setText(searchText);
+        }
+
         initView();
         initData();
         initListener();
@@ -226,6 +235,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
+        params.put("searchText", searchText);
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价

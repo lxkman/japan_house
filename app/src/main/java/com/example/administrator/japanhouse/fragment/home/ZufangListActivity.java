@@ -81,6 +81,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private List<ZuHouseShaiXuanBean.DatasEntity.ZujinEntity> zujin;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
 
+    private String searchText = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +108,12 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         } else if (mType == 5) {
             mType2 = 0;
         }
+
+        searchText = getIntent().getStringExtra("searchText");
+        if (!TextUtils.isEmpty(searchText)) {
+            searchTv.setText(searchText);
+        }
+
         initView();
         initData();
         initListener();
@@ -155,7 +163,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, TongqinActivity.class);
-                intent.putExtra("type", mType2);
+//                intent.putExtra("type", mType2);
                 startActivity(intent);
             }
         });
@@ -276,6 +284,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         params.put("hType", mType2);
         params.put("mjId", mjId);//面积
         params.put("zjId", zjId);//租金
+        params.put("searchText", searchText);
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价

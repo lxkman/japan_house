@@ -334,6 +334,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_See_More:
+
+
                 if (!TextUtils.isEmpty(houseType)) {
                     Intent intent;
                     switch (houseType) {

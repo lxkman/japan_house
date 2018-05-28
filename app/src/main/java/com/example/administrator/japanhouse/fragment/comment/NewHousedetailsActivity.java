@@ -29,24 +29,31 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
-import com.example.administrator.japanhouse.fragment.home.NewHouseActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
 import com.example.administrator.japanhouse.more.NewHouseMoreActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
@@ -92,7 +99,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.bmapView)
-    MapView mapView;
+    TextureMapView mapView;
     @BindView(R.id.shop_layout)
     LinearLayout shopLayout;
     @BindView(R.id.school_layout)
@@ -101,6 +108,20 @@ public class NewHousedetailsActivity extends BaseActivity {
     LinearLayout youeryuanLayout;
     @BindView(R.id.yiyuan_layout)
     LinearLayout yiyuanLayout;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_details_price)
+    TextView tvDetailsPrice;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.lishinew_wl)
+    TextView lishinewWl;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
@@ -113,7 +134,11 @@ public class NewHousedetailsActivity extends BaseActivity {
     private MyLocationListenner myListener = new MyLocationListenner();
     private LocationManager locationManager;
     private Intent intent;
-    private String Tag="1";
+    private String Tag = "1";
+    private String houseId;
+    private HouseDetailsBean.DatasBean datas;
+    private boolean isJa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,9 +158,10 @@ public class NewHousedetailsActivity extends BaseActivity {
         initScroll();
         initMap();
         initLocation();
-        intent = new Intent(NewHousedetailsActivity.this,MapActivity.class);
-        intent.putExtra("lat","35.68");
-        intent.putExtra("log","139.75");
+        initDetailsNet();
+        intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
+        intent.putExtra("lat", "35.68");
+        intent.putExtra("log", "139.75");
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +174,37 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void initDetailsNet() {
+        houseId = getIntent().getStringExtra("houseId");
+        String city = CacheUtils.get(Constants.COUNTRY);
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        HttpParams params = new HttpParams();
+//        if (houseId!=null&&!houseId.equals("")){
+        params.put("hId", "8");
+        OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<HouseDetailsBean>(this, HouseDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<HouseDetailsBean> response) {
+                        int code = response.code();
+                        HouseDetailsBean oldHouseListBean = response.body();
+                        datas = oldHouseListBean.getDatas();
+                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                    }
+                });
     }
 
     public void setMyExtensionModule() {
@@ -166,6 +223,7 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initLocation() {
         mLocClient = new LocationClient(this);
         mLocClient.registerLocationListener(myListener);
@@ -196,7 +254,7 @@ public class NewHousedetailsActivity extends BaseActivity {
 //        uiSettings. setZoomGesturesEnabled(false);//禁用缩放手势
 //        uiSettings. setOverlookingGesturesEnabled(false);//禁用俯视（3D）功能
 //        uiSettings .setRotateGesturesEnabled(false);//禁用地图旋转功能
-        uiSettings .setAllGesturesEnabled(false);//禁止所有手势
+        uiSettings.setAllGesturesEnabled(false);//禁止所有手势
 
         myListener = new MyLocationListenner();
         // 开启定位图层
@@ -218,9 +276,9 @@ public class NewHousedetailsActivity extends BaseActivity {
             @Override
             public void onMapClick(LatLng latLng) {
                 Intent intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
-                intent.putExtra("lat","35.68");
-                intent.putExtra("log","139.75");
-                intent.putExtra("TAG","1");
+                intent.putExtra("lat", "35.68");
+                intent.putExtra("log", "139.75");
+                intent.putExtra("TAG", "1");
                 startActivity(intent);
 
             }
@@ -283,7 +341,7 @@ public class NewHousedetailsActivity extends BaseActivity {
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
-//            mBaseFragmentList.add(new VidioFragment());
+            mBaseFragmentList.add(new VidioFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
             mBaseFragmentList.add(new BannerFragment());
@@ -350,19 +408,42 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(NewHousedetailsActivity.this, NewHouseActivity.class);
-                startActivity(intent);
-            }
-        });
+        params.put("hType", 1);
+        params.put("pageNo", "1");
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(NewHousedetailsActivity.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(NewHousedetailsActivity.this, NewHousedetailsActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
+
     }
 
     class MyAdapter extends FragmentStatePagerAdapter {
@@ -381,7 +462,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img,R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -392,30 +473,31 @@ public class NewHousedetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_See_More:
                 Intent intent1 = new Intent(NewHousedetailsActivity.this, NewHouseMoreActivity.class);
+                intent1.putExtra("datas", datas);
                 startActivity(intent1);
                 break;
             case R.id.back_img:
                 finish();
                 break;
             case R.id.shop_layout:
-                Tag="1";
-                intent.putExtra("TAG",Tag);
+                Tag = "1";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
             case R.id.school_layout:
-                Tag="2";
-                intent.putExtra("TAG",Tag);
+                Tag = "2";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
             case R.id.youeryuan_layout:
-                Tag="3";
-                intent.putExtra("TAG",Tag);
+                Tag = "3";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
             case R.id.yiyuan_layout:
 
-                Tag="4";
-                intent.putExtra("TAG",Tag);
+                Tag = "4";
+                intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
         }
@@ -494,14 +576,20 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LoveAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
 
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
             super(layoutResId, data);
         }
-
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getPriceJpn():item.getPriceCn());
+            Glide.with(NewHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
+
 }

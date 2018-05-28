@@ -21,15 +21,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.TudiDetailsBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.TudiMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -71,12 +80,39 @@ public class TudidetailsActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.tv_See_More)
     TextView tv_See_More;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_jiejiao)
+    TextView tvDetailsJiejiao;
+    @BindView(R.id.tv_details_gaojianzhu)
+    TextView tvDetailsGaojianzhu;
+    @BindView(R.id.tv_details_zhouweicaiguang)
+    TextView tvDetailsZhouweicaiguang;
+    @BindView(R.id.tv_details_zhouweifengjing)
+    TextView tvDetailsZhouweifengjing;
+    @BindView(R.id.tv_details_chezhanjuli)
+    TextView tvDetailsChezhanjuli;
+    @BindView(R.id.tv_details_jutiweizhi)
+    TextView tvDetailsJutiweizhi;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.tudi_wl)
+    TextView tudiWl;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
     private MyAdapter myAdapter;
+    private TudiDetailsBean.DatasBean datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +127,7 @@ public class TudidetailsActivity extends BaseActivity {
         //猜你喜欢
         initLoveRecycler();
         initScroll();
-
+        initDetailsNet();
         findViewById(R.id.tudi_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +140,39 @@ public class TudidetailsActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void initDetailsNet() {
+        String houseId = getIntent().getStringExtra("lId");
+        Toast.makeText(mContext, houseId, Toast.LENGTH_SHORT).show();
+        HttpParams params = new HttpParams();
+//        if (houseId!=null&&!houseId.equals("")){
+        params.put("lId", "1");
+        OkGo.<TudiDetailsBean>post(MyUrls.BASEURL + "/app/land/landinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<TudiDetailsBean>(this, TudiDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<TudiDetailsBean> response) {
+                        int code = response.code();
+                        TudiDetailsBean tudiDetailsBean = response.body();
+                        datas = tudiDetailsBean.getDatas();
+                        TudiDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        boolean isJa = MyUtils.isJa();
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tvPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsJiejiao.setText(isJa ? datas.getCornerJpn() : datas.getCornerCn());
+                        tvDetailsGaojianzhu.setText(isJa ? datas.getTallShipsJpn() : datas.getTallShipsCn());
+                        tvDetailsZhouweicaiguang.setText(isJa ? datas.getAroundLightingJpn() : datas.getAroundLightingCn());
+                        tvDetailsZhouweifengjing.setText(isJa ? datas.getAroundSceneryJpn() : datas.getAroundSceneryCn());
+                        tvDetailsChezhanjuli.setText(isJa ? datas.getStationJpn() : datas.getStationCn());
+                        tvDetailsJutiweizhi.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+//                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(TudidetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                    }
+                });
     }
 
     public void setMyExtensionModule() {
@@ -259,7 +328,8 @@ public class TudidetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_See_More:
-                Intent intent=new Intent(TudidetailsActivity.this, TudiMoreActivity.class);
+                Intent intent = new Intent(TudidetailsActivity.this, TudiMoreActivity.class);
+                intent.putExtra("datas", datas);
                 startActivity(intent);
                 break;
         }

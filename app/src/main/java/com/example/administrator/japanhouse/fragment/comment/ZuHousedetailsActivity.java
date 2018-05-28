@@ -23,10 +23,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.ZuBanGongMoreActivity;
 import com.example.administrator.japanhouse.more.ZuBieSuMoreActivity;
@@ -35,8 +38,14 @@ import com.example.administrator.japanhouse.more.ZuErCengMoreActivity;
 import com.example.administrator.japanhouse.more.ZuShangPuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuXueShengMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -80,6 +89,16 @@ public class ZuHousedetailsActivity extends BaseActivity {
     RelativeLayout re_top_bg;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
@@ -88,6 +107,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
     private FragmentManager fm;
     private MyAdapter myAdapter;
     private String houseType;
+    private HouseDetailsBean.DatasBean datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +128,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
         //猜你喜欢
         initLoveRecycler();
         initScroll();
+        initDetailsNet();
         findViewById(R.id.lishi_zu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +141,32 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void initDetailsNet() {
+        String houseId = getIntent().getStringExtra("houseId");
+        HttpParams params = new HttpParams();
+//        if (houseId!=null&&!houseId.equals("")){
+        params.put("hId", "8");
+        OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<HouseDetailsBean>(this, HouseDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<HouseDetailsBean> response) {
+                        int code = response.code();
+                        HouseDetailsBean oldHouseListBean = response.body();
+                        datas = oldHouseListBean.getDatas();
+                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        boolean isJa = MyUtils.isJa();
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tv_price.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(ZuHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                    }
+                });
     }
 
     public void setMyExtensionModule() {
@@ -287,25 +334,38 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_See_More:
-                if (!TextUtils.isEmpty(houseType)){
-                    switch (houseType){
+                if (!TextUtils.isEmpty(houseType)) {
+                    Intent intent;
+                    switch (houseType) {
                         case "duoceng":
-                            startActivity(new Intent(mContext, ZuDuoCengMoreActivity.class));
+                            intent = new Intent(mContext, ZuDuoCengMoreActivity.class);
+                            intent.putExtra("datas", datas);
+                            startActivity(intent);
                             break;
                         case "xuesheng":
-                            startActivity(new Intent(mContext, ZuXueShengMoreActivity.class));
+                            intent = new Intent(mContext, ZuXueShengMoreActivity.class);
+                            intent.putExtra("datas", datas);
+                            startActivity(intent);
                             break;
                         case "erceng":
-                            startActivity(new Intent(mContext, ZuErCengMoreActivity.class));
+                            intent = new Intent(mContext, ZuErCengMoreActivity.class);
+                            intent.putExtra("datas", datas);
+                            startActivity(intent);
                             break;
                         case "bieshu":
-                            startActivity(new Intent(mContext, ZuBieSuMoreActivity.class));
+                            intent = new Intent(mContext, ZuBieSuMoreActivity.class);
+                            intent.putExtra("datas", datas);
+                            startActivity(intent);
                             break;
                         case "shangpu":
-                            startActivity(new Intent(mContext, ZuShangPuMoreActivity.class));
+                            intent = new Intent(mContext, ZuShangPuMoreActivity.class);
+                            intent.putExtra("datas", datas);
+                            startActivity(intent);
                             break;
                         case "bangongshi":
-                            startActivity(new Intent(mContext, ZuBanGongMoreActivity.class));
+                            intent = new Intent(mContext, ZuBanGongMoreActivity.class);
+                            intent.putExtra("datas", datas);
+                            startActivity(intent);
                             break;
                     }
                 }

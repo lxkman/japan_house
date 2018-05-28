@@ -72,7 +72,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private boolean isJa;
     private int mType;
     private int mType2;
-    private List<OldHouseListBean.DatasEntity> mDatas;
+    private List<OldHouseListBean.DatasBean> mDatas;
     private String mjId = "-2";
     private String zjId = "-2";
     private List<String> zidingyiPriceList = new ArrayList<>();
@@ -292,7 +292,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         if (oldHouseListBean == null) {
                             return;
                         }
-                        List<OldHouseListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 Toast.makeText(ZufangListActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
@@ -468,14 +468,14 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         initData();
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasEntity, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasEntity> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasEntity item) {
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())

@@ -96,7 +96,9 @@ public class OldHouseMoreActivity extends BaseActivity {
         setContentView(R.layout.activity_old_house_more);
         ButterKnife.bind(this);
         datas = (HouseDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
-        initData();
+        if (datas != null) {
+            initData();
+        }
     }
 
     private void initData() {

@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,14 +70,45 @@ public class ZuBieSuMoreActivity extends BaseActivity {
     TextView tvHouseBeizhu;
     @BindView(R.id.activity_zui_jin)
     LinearLayout activityZuiJin;
-
+    private HouseDetailsBean.DatasBean datas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zu_bie_su_more);
         ButterKnife.bind(this);
+        datas = (HouseDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
+        if (datas != null) {
+            initData();
+        }
     }
-
+    private void initData() {
+        boolean ja = MyUtils.isJa();
+        tvWujianName.setText(ja ? datas.getArticleNameJpn() : datas.getArticleNameCn());/*物件名称*/
+        tvHousePrice.setText(ja ? datas.getRentJpn() : datas.getRentCn());/*售价*/
+        tvHouseArea.setText(ja ? datas.getAreaJpn() : datas.getAreaCn());/*面积*/
+        tvHouseHuxing.setText(ja ? datas.getDoorModelJpn() : datas.getDoorModelCn());/*户型*/
+        tvMoreLouceng.setText(ja ? datas.getFloorJpn() : datas.getFloorCn());/*楼层*/
+        tvHouseYears.setText(ja ? datas.getYearBuiltJpn() : datas.getYearBuiltCn());/*建筑年份*/
+        tvHouseGouzao.setText(ja ? datas.getBuildingConstructionJpn() : datas.getBuildingConstructionCn());/*建筑构造*/
+        tvHouseChaoxiang.setText(ja ? datas.getOrientationJpn() : datas.getOrientationCn());/*朝向*/
+        tvRuzhuRiqi.setText(ja ? datas.getDoichoIrinoDateJpn() : datas.getDoichoIrinoDateCn());/*入居日期*/
+        tvHouseQita.setText(ja ? datas.getRestsJpn() : datas.getRestsCn());/*其他*/
+        tvHouseDiduan.setText(ja ? datas.getDistrictJpn() : datas.getDistrictCn());/*地段*/
+        tvHouseJutiweizhi.setText(ja ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());/*具体位置*/
+        tvHouseZhuyaochezhan.setText(ja ? datas.getTrainStationJpn() : datas.getTrainStationCn());/*主要车站*/
+        tvHouseChezhanjuli.setText(ja ? datas.getStationDistanceJpn() : datas.getStationDistanceCn());/*车站距离*/
+        tvHouseFengjing.setText(ja ? datas.getSceneryJpn() : datas.getSceneryCn());/*窗外风景*/
+        tvHouseGongyong.setText(ja ? datas.getCommonPartsJpn() : datas.getCommonPartsCn());/*共用部分*/
+        tvHouseZhoubian.setText(ja ? datas.getSurroundingsJpn() : datas.getSurroundingsCn());/*周边环境*/
+        tvStopCar.setText(ja ? datas.getParkingSpaceJpn() : datas.getParkingSpaceCn());/*停车位*/
+        tvHouseShineishebei.setText(ja ? datas.getIndoorEquipmentJpn() : datas.getIndoorEquipmentCn());/*室内设备*/
+        tvHouseCook.setText(ja ? datas.getKitchenJpn() : datas.getKitchenCn());/*厨房*/
+        tvHouseWeishengjian.setText(ja ? datas.getToiletJpn() : datas.getToiletCn());/*卫生间*/
+        tvHouseYushi.setText(ja ? datas.getShowersJpn() : datas.getShowersCn());/*浴室*/
+        tvHouseBeizhu.setText(ja ? datas.getRemarksJpn() : datas.getRemarksCn());/*备注*/
+        tvChuqiFeiyong.setText(ja ? datas.getChargeJpn() : datas.getChargeCn());/*初期费用*/
+        tvHouseRujutiaojian.setText(ja ? datas.getDoichoIrinoConditionJpn() : datas.getDoichoIrinoConditionCn());/*入居条件*/
+    }
     @OnClick(R.id.back_img)
     public void onViewClicked() {
         finish();

@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,14 +44,32 @@ public class ZuXueShengMoreActivity extends BaseActivity {
     TextView tvHouseBeizhu;
     @BindView(R.id.activity_zui_jin)
     LinearLayout activityZuiJin;
-
+    private HouseDetailsBean.DatasBean datas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xue_sheng_more);
         ButterKnife.bind(this);
+        datas = (HouseDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
+        if (datas != null) {
+            initData();
+        }
     }
-
+    private void initData() {
+        boolean ja = MyUtils.isJa();
+        tvHousePrice.setText(ja ? datas.getRentJpn() : datas.getRentCn());/*售价*/
+        tvHouseArea.setText(ja ? datas.getAreaJpn() : datas.getAreaCn());/*面积*/
+        tvHouseHuxing.setText(ja ? datas.getDoorModelJpn() : datas.getDoorModelCn());/*户型*/
+        tvMoreLouceng.setText(ja ? datas.getFloorJpn() : datas.getFloorCn());/*楼层*/
+        tvHouseYears.setText(ja ? datas.getYearBuiltJpn() : datas.getYearBuiltCn());/*建筑年份*/
+        tvHouseChaoxiang.setText(ja ? datas.getOrientationJpn() : datas.getOrientationCn());/*朝向*/
+        tvHouseZhuyaochezhan.setText(ja ? datas.getTrainStationJpn() : datas.getTrainStationCn());/*主要车站*/
+        tvHouseChezhanjuli.setText(ja ? datas.getStationDistanceJpn() : datas.getStationDistanceCn());/*车站距离*/
+        tvHouseShineishebei.setText(ja ? datas.getIndoorEquipmentJpn() : datas.getIndoorEquipmentCn());/*室内设备*/
+        tvHouseBeizhu.setText(ja ? datas.getRemarksJpn() : datas.getRemarksCn());/*备注*/
+        tvHouseFangjianzhuangkuang.setText(ja ? datas.getRoomStatusJpn() : datas.getRoomStatusCn());/*房间状况*/
+        tvHouseFeiyong.setText(ja ? datas.getChargeJpn() : datas.getChargeCn());/*费用*/
+    }
     @OnClick(R.id.back_img)
     public void onViewClicked() {
         finish();

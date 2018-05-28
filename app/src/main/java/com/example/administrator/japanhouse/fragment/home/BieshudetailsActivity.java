@@ -32,6 +32,7 @@ import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.more.BieSuMoreActivity;
 import com.example.administrator.japanhouse.presenter.VillaDetailsPresenter;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.lzy.okgo.model.Response;
@@ -50,7 +51,7 @@ import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 
-public class BieshudetailsActivity extends BaseActivity implements VillaDetailsPresenter.VillaDetailsCallBack{
+public class BieshudetailsActivity extends BaseActivity implements VillaDetailsPresenter.VillaDetailsCallBack {
 
     @BindView(R.id.vp_vidio)
     ViewPager vpVidio;
@@ -76,6 +77,26 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     TextView tv_title;
     @BindView(R.id.tv_See_More)
     TextView tv_See_More;
+    @BindView(R.id.tv_house_name)
+    TextView tvHouseName;
+    @BindView(R.id.textView2)
+    TextView textView2;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+    @BindView(R.id.tv_house_huxing)
+    TextView tvHouseHuxing;
+    @BindView(R.id.tv_tudi_area)
+    TextView tvTudiArea;
+    @BindView(R.id.tv_jianzhu_area)
+    TextView tvJianzhuArea;
+    @BindView(R.id.tv_house_jutiweizhi)
+    TextView tvHouseJutiweizhi;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.xiezilou_wl)
+    TextView xiezilouWl;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
@@ -119,6 +140,25 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
 
     }
 
+    @Override
+    public void getVillaDetails(Response<VillaDetailsBean> response) {
+        if (response != null && response.body() != null) {
+            villaDetailsBean = response.body().getDatas();
+            setData();
+        }
+    }
+
+    private void setData() {
+        boolean ja = MyUtils.isJa();
+        tvHouseName.setText(ja ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn());
+        tvPrice.setText(ja ? villaDetailsBean.getSellingPriceJpn() : villaDetailsBean.getSellingPriceCn());
+        tvHouseHuxing.setText(villaDetailsBean.getHouseType());/*中日文同一个字段*/
+        tvTudiArea.setText(ja ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn());
+        tvJianzhuArea.setText(ja ? villaDetailsBean.getCoveredAreaJpn() : villaDetailsBean.getCoveredAreaCn());
+        tvHouseJutiweizhi.setText(ja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
+        tvDetailsLocation.setText(ja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
+    }
+
     public void setMyExtensionModule() {
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
         IExtensionModule defaultModule = null;
@@ -135,6 +175,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
             }
         }
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -231,12 +272,6 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         });
     }
 
-    @Override
-    public void getVillaDetails(Response<VillaDetailsBean> response) {
-        if (response != null && response.body() != null) {
-            villaDetailsBean = response.body().getDatas();
-        }
-    }
 
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {

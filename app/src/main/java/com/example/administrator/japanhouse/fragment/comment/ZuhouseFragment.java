@@ -63,7 +63,7 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
         tv_refresh_time.setText(currentDate+"更新");
-        tjNewHousePresenter.getHouseList(page,"1");
+        tjNewHousePresenter.getHouseList(page,"2");
     }
     private void initListener() {
         //        mSpringview.setType(SpringView.Type.FOLLOW);
@@ -74,7 +74,7 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
             public void onRefresh() {
                 isLoadMore = false;
                 page = 1;
-                tjNewHousePresenter.getHouseList(page,"1");
+                tjNewHousePresenter.getHouseList(page,"2");
                 String currentDate = MyUtils.getCurrentDate();
                 tv_refresh_time.setText(currentDate+"更新");
                 springview.onFinishFreshAndLoad();
@@ -84,7 +84,7 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
             public void onLoadmore() {
                 isLoadMore = true;
                 page++;
-                tjNewHousePresenter.getHouseList(page,"1");
+                tjNewHousePresenter.getHouseList(page,"2");
                 springview.onFinishFreshAndLoad();
             }
         });
@@ -128,7 +128,20 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(mContext,OldHousedetailsActivity.class);
+                Intent intent=new Intent(mContext,ZuHousedetailsActivity.class);
+                if (position == 0) {
+                    intent.putExtra("houseType", "duoceng");
+                } else if (position == 1) {
+                    intent.putExtra("houseType", "xuesheng");
+                } else if (position == 2) {
+                    intent.putExtra("houseType", "erceng");
+                } else if (position == 3) {
+                    intent.putExtra("houseType", "bieshu");
+                } else if (position == 4) {
+                    intent.putExtra("houseType", "shangpu");
+                } else if (position == 5) {
+                    intent.putExtra("houseType", "bangongshi");
+                }
                 startActivity(intent);
             }
         });

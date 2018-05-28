@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.TudiDetailsBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,15 +53,37 @@ public class TudiMoreActivity extends BaseActivity {
     TextView actTudiJineng;
     @BindView(R.id.act_tudi_beizhu)
     TextView actTudiBeizhu;
-
+    private TudiDetailsBean.DatasBean datas;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tudi_more);
         ButterKnife.bind(this);
+        datas = (TudiDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
+        if (datas != null) {
+            initData();
+        }
 
     }
+    private void initData() {
+        boolean ja = MyUtils.isJa();
+        actTudiShoujia.setText(ja ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());/*售价*/
+        actTudiMianji.setText(ja ? datas.getAreaJpn() : datas.getAreaCn());/*面积*/
+        actTudiSuoyouquan.setText(ja ? datas.getOwnershipJpn() : datas.getOwnershipCn());/*所有权*/
+        actTudiWeizhi.setText(ja ? datas.getLocationJpn() : datas.getLocationCn());/*位置*/
+        actTudiJutiweizhi.setText(ja ? datas.getOwnershipJpn() : datas.getOwnershipCn());/*具体位置*/
+        actTudiChezhanjuli.setText(ja ? datas.getStationJpn() : datas.getStationCn());/*车站距离*/
+        actTudiJianzhufugailv.setText(ja ? datas.getBuildingCoverageJpn() : datas.getBuildingCoverageCn());/*建筑覆盖率*/
+        actTudiRongjilv.setText(ja ? datas.getPlotRatioJpn() : datas.getPlotRatioCn());/*容积率*/
+        actTudiHuibaolv.setText(ja ? datas.getReturnRateJpn() : datas.getReturnRateCn());/*回报率*/
+        actTudiShifoujiejiao.setText(ja ? datas.getCornerJpn() : datas.getCornerCn());/*是否街角*/
+        actTudiNengfougaojianzhu.setText(ja ? datas.getTallShipsJpn() : datas.getTallShipsCn());/*能否高建筑*/
+        actTudiZhouweifengjing.setText(ja ? datas.getAroundSceneryJpn() : datas.getAroundSceneryCn());/*周围风景*/
+//        actTudiZhouweihuanjing.setText(ja ? datas.getRestsJpn() : datas.getRestsCn());/*周围环境*/
+        actTudiJineng.setText(ja ? datas.getEngineryJpn() : datas.getEngineryCn());/*机能*/
+        actTudiBeizhu.setText(ja ? datas.getRemarksJpn() : datas.getRemarksCn());/*备注*/
 
+    }
     @OnClick(R.id.back)
     public void onViewClicked(View view) {
         switch (view.getId()) {

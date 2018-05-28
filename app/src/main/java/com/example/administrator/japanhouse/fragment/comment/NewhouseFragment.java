@@ -131,7 +131,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(mContext, OldHousedetailsActivity.class);
+                Intent intent = new Intent(mContext, NewHousedetailsActivity.class);
                 startActivity(intent);
             }
         });

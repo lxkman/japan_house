@@ -1,8 +1,11 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -39,6 +42,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
@@ -118,6 +122,12 @@ public class OldHousedetailsActivity extends BaseActivity {
     CircleImageView tvDetailsManagerHead;
     @BindView(R.id.tv_details_manager_name)
     TextView tvDetailsManagerName;
+    @BindView(R.id.bdMap_layout)
+    LinearLayout bdMapLayout;
+    @BindView(R.id.lishi_old_wl)
+    TextView lishiOldWl;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
@@ -134,7 +144,16 @@ public class OldHousedetailsActivity extends BaseActivity {
     private boolean isJa;
     private String houseId;
     private HouseDetailsBean.DatasBean datas;
-
+    //头部 添加相应地区
+    private final static String BAIDU_HEAD = "baidumap://map/direction?region=0";
+    //起点的经纬度
+    private final static String BAIDU_ORIGIN = "&origin=";
+    //终点的经纬度
+    private final static String BAIDU_DESTINATION = "&destination=";
+    //路线规划方式
+    private final static String BAIDU_MODE = "&mode=walking";
+    //百度地图的包名
+    private final static String BAIDU_PKG = "com.baidu.BaiduMap";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,7 +202,7 @@ public class OldHousedetailsActivity extends BaseActivity {
         }
         HttpParams params = new HttpParams();
 //        if (houseId!=null&&!houseId.equals("")){
-            params.put("hId", "8");
+        params.put("hId", "8");
         OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
                 .tag(this)
                 .params(params)
@@ -199,50 +218,87 @@ public class OldHousedetailsActivity extends BaseActivity {
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
-                        Glide.with(OldHousedetailsActivity.this).load(hwdcBroker.getPic()+"").into(tvDetailsManagerHead);
+                        Glide.with(OldHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                     }
                 });
-        }
-//    }
-@OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
-public void onClick(View view) {
-    switch (view.getId()) {
-        case R.id.img_share:
-            showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
-            break;
-        case R.id.img_start:
-            Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
-            break;
-        case R.id.tv_See_More:
-            Intent intent1 = new Intent(OldHousedetailsActivity.this, OldHouseMoreActivity.class);
-            intent1.putExtra("datas",datas);
-            startActivity(intent1);
-            break;
-        case R.id.back_img:
-            finish();
-            break;
-        case R.id.shop_layout:
-            Tag = "1";
-            intent.putExtra("TAG", Tag);
-            startActivity(intent);
-            break;
-        case R.id.school_layout:
-            Tag = "2";
-            intent.putExtra("TAG", Tag);
-            startActivity(intent);
-            break;
-        case R.id.youeryuan_layout:
-            Tag = "3";
-            intent.putExtra("TAG", Tag);
-            startActivity(intent);
-            break;
-        case R.id.yiyuan_layout:
-            Tag = "4";
-            intent.putExtra("TAG", Tag);
-            startActivity(intent);
-            break;
     }
-}
+
+    //    }
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout,R.id.bdMap_layout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_share:
+                showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                break;
+            case R.id.img_start:
+                Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tv_See_More:
+                Intent intent1 = new Intent(OldHousedetailsActivity.this, OldHouseMoreActivity.class);
+                intent1.putExtra("datas", datas);
+                startActivity(intent1);
+                break;
+            case R.id.back_img:
+                finish();
+                break;
+            case R.id.shop_layout:
+                Tag = "1";
+                intent.putExtra("TAG", Tag);
+                startActivity(intent);
+                break;
+            case R.id.school_layout:
+                Tag = "2";
+                intent.putExtra("TAG", Tag);
+                startActivity(intent);
+                break;
+            case R.id.youeryuan_layout:
+                Tag = "3";
+                intent.putExtra("TAG", Tag);
+                startActivity(intent);
+                break;
+            case R.id.yiyuan_layout:
+                Tag = "4";
+                intent.putExtra("TAG", Tag);
+                startActivity(intent);
+                break;
+            case R.id.bdMap_layout:
+
+                //检测地图是否安装和唤起
+                if (checkMapAppsIsExist(OldHousedetailsActivity.this,BAIDU_PKG)){
+                    Toast.makeText(OldHousedetailsActivity.this,"百度地图已经安装",Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent();
+                    intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+"35.68"
+                            +","+"139.75"+BAIDU_DESTINATION+"40.05"+","+"116.30"
+                            +BAIDU_MODE));
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(OldHousedetailsActivity.this,"百度地图未安装",Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+        }
+    }
+
+    /**
+     * 检测地图应用是否安装
+     * @param context
+     * @param packagename
+     * @return
+     */
+    public boolean checkMapAppsIsExist(Context context, String packagename){
+        PackageInfo packageInfo;
+        try{
+            packageInfo = context.getPackageManager().getPackageInfo(packagename,0);
+        }catch (Exception e){
+            packageInfo = null;
+            e.printStackTrace();
+        }
+        if (packageInfo == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 
     public void setMyExtensionModule() {
@@ -423,19 +479,58 @@ public void onClick(View view) {
     }
 
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        params.put("hType", 0);
+        params.put("pageNo","1");
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(OldHousedetailsActivity.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-            }
-        });
+                            }
+                        });
+                    }
+                });
     }
+    class LoveAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
+
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getPriceJpn():item.getPriceCn());
+            Glide.with(OldHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+        }
+    }
+
 
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
@@ -527,14 +622,5 @@ public void onClick(View view) {
     }
 
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-        }
-    }
 }

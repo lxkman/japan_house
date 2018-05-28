@@ -78,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dip">
                     <TextView
+                        android:id="@+id/tv_house_name"
                         android:paddingLeft="15dip"
                         android:gravity="center_vertical"
                         android:textSize="15sp"
@@ -140,6 +141,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tv_house_huxing"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
@@ -169,6 +171,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tv_tudi_area"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
@@ -193,6 +196,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tv_jianzhu_area"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
@@ -233,6 +237,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tv_house_jutiweizhi"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
@@ -254,6 +259,7 @@
                                 android:src="@drawable/dingwei" />
 
                             <TextView
+                                android:id="@+id/tv_details_location"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="5dip"

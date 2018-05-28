@@ -1,9 +1,0 @@
-# view AndroidManifest.xml #generated:109
--keep class com.example.administrator.japanhouse.MyApplication { <init>(...); }
-
-# view AndroidManifest.xml #generated:462
--keep class io.rong.push.PushReceiver { <init>(...); }
-
-# view AndroidManifest.xml #generated:457
--keep class io.rong.push.PushService { <init>(...); }
-

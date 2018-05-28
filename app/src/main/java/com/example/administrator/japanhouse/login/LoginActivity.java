@@ -38,6 +38,8 @@ import org.zackratos.ultimatebar.UltimateBar;
 import java.util.HashMap;
 
 import butterknife.BindView;
+
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;

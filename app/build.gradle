@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
-
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "27.0.1"
@@ -11,28 +15,22 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-    }
 
-
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
-
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
     }
+
     signingConfigs {
         release {
             keyAlias 'China'
             keyPassword 'fujuwang'
             storePassword 'fujuwang'
-            storeFile file('D:/japanhouse.jks')
+            storeFile file('D:/keystore.jks')
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -45,8 +43,9 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    sourceSets {
-        main {
+
+    sourceSets{
+        main{
             jniLibs.srcDir 'libs'
             //说明so的路径为该libs路径，关联所有地图SDK的so文件
         }
@@ -55,6 +54,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'line-sdk-4.0.6', ext: 'aar')
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.liaoinstan.springview:library:1.3.0'
@@ -62,7 +62,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.jakewharton:butterknife:8.8.1'
-
     //不加下面这个butter会报空指针
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
@@ -86,8 +85,9 @@ dependencies {
     compile 'com.yanzhenjie:recyclerview-swipe:1.1.2'
     //pickerview
     compile 'com.contrarywind:wheelview:4.0.5'
-    compile files('libs/BaiduLBS_Android.jar')
     compile 'com.android.support:multidex:1.0.1'
     compile project(':CallKit')
     compile 'com.orhanobut:hawk:2.0.1'
+    compile 'com.android.support:customtabs:25.1.0'
+    compile project(':PushSDK')
 }

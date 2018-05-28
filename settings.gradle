@@ -1,1 +1,1 @@
-include ':app', ':indexlib',"IMKit","IMLib","CallLib"
+include ':app', ':indexlib',"IMKit","IMLib","CallLib","CallKit","PushSDK"

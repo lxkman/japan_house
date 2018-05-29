@@ -121,48 +121,6 @@ class MoreView implements View.OnClickListener {
         initData();
     }
 
-    void insertData2(String type, List<OneCheckBean> list, DropDownMenu dropDownMenu) {
-        mList = list;
-        mtype = type;
-        this.dropDownMenu = dropDownMenu;
-        mItemList0 = new ArrayList<>();
-        mItemList0.add(new OneCheckBean(false, "画圈找房"));
-        mItemList1 = new ArrayList<>();
-        mItemList1.add(new OneCheckBean(false, "砖木结构"));
-        mItemList1.add(new OneCheckBean(false, "砖混结构"));
-        mItemList1.add(new OneCheckBean(false, "钢结构"));
-        mItemList2 = new ArrayList<>();
-        mItemList2.add(new OneCheckBean(false, "商业街"));
-        mItemList2.add(new OneCheckBean(false, "办公区"));
-        mItemList2.add(new OneCheckBean(false, "购物中心"));
-        mItemList3 = new ArrayList<>();
-        mItemList3.add(new OneCheckBean(false, "向南"));
-        mItemList3.add(new OneCheckBean(false, "向北"));
-        mItemList3.add(new OneCheckBean(false, "东南"));
-        mItemList3.add(new OneCheckBean(false, "西南"));
-        mItemList3.add(new OneCheckBean(false, "东北"));
-        mItemList3.add(new OneCheckBean(false, "西北"));
-        mItemList4 = new ArrayList<>();
-        mItemList4.add(new OneCheckBean(false, "20"));
-        mItemList4.add(new OneCheckBean(false, "20-40"));
-        mItemList4.add(new OneCheckBean(false, "40-80"));
-        mItemList4.add(new OneCheckBean(false, "100以上"));
-        mItemList5 = new ArrayList<>();
-        mItemList5.add(new OneCheckBean(false, "热水器"));
-        mItemList5.add(new OneCheckBean(false, "电视"));
-        mItemList5.add(new OneCheckBean(false, "空调"));
-        mItemList5.add(new OneCheckBean(false, "冰箱"));
-        mItemList6 = new ArrayList<>();
-        mItemList6.add(new OneCheckBean(false, "3室1厅"));
-        mItemList6.add(new OneCheckBean(false, "2室1厅"));
-        mItemList6.add(new OneCheckBean(false, "1室1厅"));
-        mItemList6.add(new OneCheckBean(false, "公寓"));
-        mItemList7 = new ArrayList<>();
-        mItemList7.add(new OneCheckBean(false, "地板"));
-        mItemList7.add(new OneCheckBean(false, "榻榻米"));
-        initData();
-    }
-
     private void initData() {
         mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);

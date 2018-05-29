@@ -11,12 +11,22 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.bean.SydcListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +48,22 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     @BindView(R.id.like_recycler)
     RecyclerView likeRecycler;
     private int[] itemPic = {R.drawable.shangpumaimai_iv, R.drawable.xzlmaimai_iv,
-             R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
+            R.drawable.gaoerfu_iv, R.drawable.jiudian_iv};
     @BindView(R.id.rl_search)
     RelativeLayout rl_search;
+    private boolean isJa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_dichan);
         ButterKnife.bind(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initview();
     }
 
@@ -54,6 +71,8 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
         String[] itemName = {getString(R.string.business_symm),
                 getString(R.string.business_mmxzl),
                 getString(R.string.business_gefqc), getString(R.string.business_jd)};
+        likeRecycler.setNestedScrollingEnabled(false);
+        likeRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));
@@ -79,17 +98,34 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 startActivity(intent);
             }
         });
-        List<String> likeList = new ArrayList<>();
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeRecycler.setNestedScrollingEnabled(false);
-        likeRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, likeList);
-        likeRecycler.setAdapter(likeAdapter);
-        likeAdapter.setOnItemClickListener(this);
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
+        }
+        params.put("hType", 0);
+        params.put("pageNo", 1);
+        OkGo.<SydcListBean>post(MyUrls.BASEURL + "/app/realestate/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SydcListBean>(BusinessDichanActivity.this, SydcListBean.class) {
+                    @Override
+                    public void onSuccess(Response<SydcListBean> response) {
+                        int code = response.code();
+                        SydcListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<SydcListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        if (datas == null || datas.size() == 0) {
+                            return;
+                        }
+                        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, datas);
+                        likeRecycler.setAdapter(likeAdapter);
+                        likeAdapter.setOnItemClickListener(BusinessDichanActivity.this);
+                    }
+                });
     }
 
     @OnClick({R.id.title_back_iv, R.id.rl_search})
@@ -100,7 +136,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                 break;
             case R.id.rl_search:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent",getResources().getString(R.string.shangyedichan));
+                intent.putExtra("popcontent", getResources().getString(R.string.shangyedichan));
                 intent.putExtra("state", 5);
                 startActivity(intent);
                 break;
@@ -109,7 +145,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext,ShangpuDetailsActivity.class));
+        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {
@@ -125,15 +161,20 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
         }
     }
 
-    private class LikeAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class LikeAdapter extends BaseQuickAdapter<SydcListBean.DatasEntity, BaseViewHolder> {
 
-        public LikeAdapter(int layoutResId, @Nullable List<String> data) {
+        public LikeAdapter(int layoutResId, @Nullable List<SydcListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRealEstateImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() + "万" : item.getSellingPriceCn() + "万");
         }
     }
 

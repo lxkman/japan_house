@@ -18,6 +18,8 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ChinaCityItemBean;
+import com.example.administrator.japanhouse.bean.ChinaListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -27,7 +29,6 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -92,20 +93,36 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
                         });
                     }
                 });
-
-
-
-        List<String> likeList = new ArrayList<>();
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
         likeRecycler.setNestedScrollingEnabled(false);
         likeRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, likeList);
-        likeRecycler.setAdapter(likeAdapter);
-        likeAdapter.setOnItemClickListener(this);
+        HttpParams params2 = new HttpParams();
+        params2.put("pageNo", 1);
+        if (isJa) {
+            params2.put("languageType", 1);
+        }else {
+            params2.put("languageType", 0);
+        }
+        params2.put("hType", 0);
+        params2.put("cityId", 0);//城市id
+        OkGo.<ChinaListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")
+                .tag(this)
+                .params(params2)
+                .execute(new DialogCallback<ChinaListBean>(HaiWaiActivity.this, ChinaListBean.class) {
+                    @Override
+                    public void onSuccess(Response<ChinaListBean> response) {
+                        int code = response.code();
+                        ChinaListBean chinaListBean = response.body();
+                        if (chinaListBean == null) {
+                            return;
+                        }
+                        List<ChinaListBean.DatasEntity> datas = chinaListBean.getDatas();
+                        if (datas != null && datas.size() > 0) {
+                            LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, datas);
+                            likeRecycler.setAdapter(likeAdapter);
+                            likeAdapter.setOnItemClickListener(HaiWaiActivity.this);
+                        }
+                    }
+                });
     }
 
     @OnClick({R.id.title_back_iv, R.id.rl_search})
@@ -141,15 +158,21 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
         }
     }
 
-    private class LikeAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class LikeAdapter extends BaseQuickAdapter<ChinaListBean.DatasEntity, BaseViewHolder> {
 
-        public LikeAdapter(int layoutResId, @Nullable List<String> data) {
+        public LikeAdapter(int layoutResId, @Nullable List<ChinaListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, ChinaListBean.DatasEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getHouseImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万" : item.getSellingPriceCn()+"万")
+                    .setText(R.id.tv_ting, isJa ? "" : "");
         }
     }
 }

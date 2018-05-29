@@ -19,9 +19,9 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ChinaListBean;
+import com.example.administrator.japanhouse.bean.ChinaShaiXuanBean;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
-import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
@@ -71,8 +71,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     private String sjId = "-2";
     private List<String> zidingyiPriceList = new ArrayList<>();
     private boolean isZiDingyiPrice;
-    private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
-    private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
+    private List<ChinaShaiXuanBean.DatasEntity.HuxingEntity> huxing;
+    private List<ChinaShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
     private List<String> hxsList = new ArrayList<>();
 
@@ -124,18 +124,18 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         springview = (SpringView) fifthView.findViewById(R.id.springview);
         HttpParams params = new HttpParams();
         params.put("hType", 4);
-        OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
+        OkGo.<ChinaShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<OldHouseShaiXuanBean>(OldHouseShaiXuanBean.class) {
+                .execute(new JsonCallback<ChinaShaiXuanBean>(ChinaShaiXuanBean.class) {
                     @Override
-                    public void onSuccess(Response<OldHouseShaiXuanBean> response) {
+                    public void onSuccess(Response<ChinaShaiXuanBean> response) {
                         int code = response.code();
-                        OldHouseShaiXuanBean shaiXuanBean = response.body();
+                        ChinaShaiXuanBean shaiXuanBean = response.body();
                         if (shaiXuanBean == null) {
                             return;
                         }
-                        OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        ChinaShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
 
                         /**
                          * 第一个界面
@@ -154,7 +154,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         list2.add(new OneCheckBean(false, "不限"));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
-                                OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
+                                ChinaShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
                                 list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
                             }
                         }
@@ -166,12 +166,12 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         /**
                          * 第三个界面
                          * */
-                        mianji = shaiXuanBeanDatas.getMianji();
+                        huxing = shaiXuanBeanDatas.getHuxing();
                         List<OneCheckBean> list1 = new ArrayList<>();
                         list1.add(new OneCheckBean(false, "不限"));
-                        if (mianji != null && mianji.size() > 0) {
-                            for (int i = 0; i < mianji.size(); i++) {
-                                OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
+                        if (huxing != null && huxing.size() > 0) {
+                            for (int i = 0; i < huxing.size(); i++) {
+                                ChinaShaiXuanBean.DatasEntity.HuxingEntity mianjiEntity = huxing.get(i);
                                 list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
                             }
                         }
@@ -183,11 +183,11 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                          * 第四个界面
                          * */
                         List<MoreCheckBean> moreCheckBeanList = new ArrayList<MoreCheckBean>();
-                        List<OldHouseShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();
+                        List<ChinaShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();
                         if (more != null && more.size() > 0) {
                             for (int i = 0; i < more.size(); i++) {
-                                OldHouseShaiXuanBean.DatasEntity.MoreEntity moreEntity = more.get(i);
-                                List<OldHouseShaiXuanBean.DatasEntity.MoreEntity.DataEntity> data = moreEntity.getData();
+                                ChinaShaiXuanBean.DatasEntity.MoreEntity moreEntity = more.get(i);
+                                List<ChinaShaiXuanBean.DatasEntity.MoreEntity.DataEntity> data = moreEntity.getData();
                                 String nameCn = moreEntity.getNameCn();
                                 String nameJpn = moreEntity.getNameJpn();
                                 MoreCheckBean moreCheckBean = new MoreCheckBean();
@@ -299,10 +299,10 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                     hxsList.clear();
                     hxsList.add("-2");
                 } else {
-                    if (mianji != null && mianji.size() > 0) {
-                        OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(itemPosition - 1);
+                    if (huxing != null && huxing.size() > 0) {
+                        ChinaShaiXuanBean.DatasEntity.HuxingEntity huxingEntity = huxing.get(itemPosition - 1);
                         hxsList.clear();
-                        hxsList.add(mianjiEntity.getId() + "");
+                        hxsList.add(huxingEntity.getId() + "");
                     }
                 }
                 mDatas.clear();

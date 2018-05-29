@@ -228,7 +228,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         }else {
             params.put("languageType", 0);
         }
-        params.put("hType", 1);
+        params.put("hType", 0);
         params.put("cityId", id);//城市id
         params.put("sjId", sjId);//售价
         params.putUrlParams("hxs", hxsList);//户型
@@ -239,9 +239,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         if (mMoreSelectedBeanList.size() > 0)
             params.putUrlParams("mjs", mMoreSelectedBeanList.get(0));//面积
         if (mMoreSelectedBeanList.size() > 1)
-            params.putUrlParams("dds", mMoreSelectedBeanList.get(1));//地段
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
         if (mMoreSelectedBeanList.size() > 2)
-            params.putUrlParams("lcs", mMoreSelectedBeanList.get(2));//楼层
+            params.putUrlParams("dds", mMoreSelectedBeanList.get(2));//地段
         if (mMoreSelectedBeanList.size() > 3)
             params.putUrlParams("cxs", mMoreSelectedBeanList.get(3));//朝向
         OkGo.<TudiListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")

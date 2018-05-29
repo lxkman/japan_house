@@ -14,13 +14,21 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SpUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -65,23 +73,30 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             R.drawable.bieshu_iv_zu, R.drawable.shangpu_iv, R.drawable.bangongshi_iv};
     private int[] yanjiuitemPic = {R.drawable.test_jingzhuang_iv, R.drawable.test_dayangtai_iv,
             R.drawable.test_yangguangfang_iv, R.drawable.test_haohua_iv};
+    private boolean isJa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zufang);
         ButterKnife.bind(this);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initView();
     }
 
     private void initView() {
         String[] itemName = {getString(R.string.zufang_dsgy),
-                getString(R.string.zufang_xsgy) ,
+                getString(R.string.zufang_xsgy),
                 getString(R.string.zufang_ffzf),
                 getString(R.string.bieshu),
                 getString(R.string.zufang_sp),
                 getString(R.string.zufang_bgs),
-                };
+        };
         List<HomeItemBean> homeItemBeanList = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));
@@ -126,40 +141,61 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
-                intent.putExtra("yjType",position+"");
+                intent.putExtra("yjType", position + "");
                 startActivity(intent);
             }
         });
-
+        tuijianRecycler.setNestedScrollingEnabled(false);
+        tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
+        }
+        params.put("pageNo", 1);
+        params.put("hType", 0);
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(ZufangActivity.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        if (datas != null && datas.size() > 0) {
+                            LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_zufang_tuijian, datas);
+                            tuijianRecycler.setAdapter(likeAdapter);
+                            likeAdapter.setOnItemClickListener(ZufangActivity.this);
+                        }
+                    }
+                });
+        if (SpUtils.getBoolean("shendeng", false)) {
+            notShendengLl.setVisibility(View.GONE);
+            alreadyShendengLl.setVisibility(View.VISIBLE);
+        }
         List<String> likeList = new ArrayList<>();
         likeList.add("");
         likeList.add("");
         likeList.add("");
         likeList.add("");
         likeList.add("");
-        tuijianRecycler.setNestedScrollingEnabled(false);
-        tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_zufang_tuijian, likeList);
-        tuijianRecycler.setAdapter(likeAdapter);
-        likeAdapter.setOnItemClickListener(this);
-
-        if (SpUtils.getBoolean("shendeng",false)){
-            notShendengLl.setVisibility(View.GONE);
-            alreadyShendengLl.setVisibility(View.VISIBLE);
-        }
-
         shendengRecycler.setNestedScrollingEnabled(false);
-        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
-        ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout,likeList);
-//        View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_shendeng_footer,shendengRecycler,false);
-//        shendengAdapter.setFooterView(footerView);
+        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+        ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout, likeList);
+        //        View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_shendeng_footer,shendengRecycler,false);
+        //        shendengAdapter.setFooterView(footerView);
         shendengRecycler.setAdapter(shendengAdapter);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (SpUtils.getBoolean("shendeng",false)){
+        if (SpUtils.getBoolean("shendeng", false)) {
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
         }
@@ -195,32 +231,36 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         protected void convert(BaseViewHolder helper, HomeItemBean item) {
             ImageView imageView = helper.getView(R.id.item_pic_iv);
             Glide.with(mContext).load(item.getImg()).into(imageView);
-            TextView tv_content=helper.getView(R.id.tv_content);
+            TextView tv_content = helper.getView(R.id.tv_content);
             int position = helper.getAdapterPosition();
-            if (position==1){
+            if (position == 1) {
                 tv_content.setText("一居室大阳台");
-            }else if (position==2){
+            } else if (position == 2) {
                 tv_content.setText("朝南阳光房");
-            }else if (position==4){
+            } else if (position == 4) {
                 tv_content.setText("优品豪装");
             }
         }
     }
 
-    private class LikeAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class LikeAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
 
-        public LikeAdapter(int layoutResId, @Nullable List<String> data) {
+        public LikeAdapter(int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-            TextView tv_price=helper.getView(R.id.tv_price);
-            tv_price.setText("1750元/月");
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月");
         }
     }
 
-    private class ShendengAdapter extends BaseQuickAdapter<String, BaseViewHolder>{
+    private class ShendengAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public ShendengAdapter(int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
@@ -228,7 +268,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-            if (helper.getAdapterPosition()==4){
+            if (helper.getAdapterPosition() == 4) {
                 helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -249,7 +289,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
-                intent.putExtra("popcontent",getResources().getString(R.string.zu_house));
+                intent.putExtra("popcontent", getResources().getString(R.string.zu_house));
                 intent.putExtra("state", 4);
                 startActivity(intent);
                 break;

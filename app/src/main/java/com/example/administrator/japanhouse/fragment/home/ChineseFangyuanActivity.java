@@ -101,7 +101,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
             params2.put("languageType", 0);
         }
         params2.put("hType", 1);
-        params2.put("cityId", 0);//城市id
+//        params2.put("cityId", 0);//城市id
         OkGo.<ChinaListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")
                 .tag(this)
                 .params(params2)

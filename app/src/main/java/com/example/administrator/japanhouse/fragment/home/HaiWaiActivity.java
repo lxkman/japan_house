@@ -103,7 +103,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
             params2.put("languageType", 0);
         }
         params2.put("hType", 0);
-        params2.put("cityId", 0);//城市id
+//        params2.put("cityId", 0);//城市id
         OkGo.<ChinaListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")
                 .tag(this)
                 .params(params2)
@@ -171,8 +171,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万" : item.getSellingPriceCn()+"万")
-                    .setText(R.id.tv_ting, isJa ? "" : "");
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万" : item.getSellingPriceCn()+"万");
         }
     }
 }

@@ -52,6 +52,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
     @BindView(R.id.rl_search)
     RelativeLayout rl_search;
     private boolean isJa;
+    private List<SydcListBean.DatasEntity> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
         } else {
             params.put("languageType", 0);
         }
-        params.put("hType", 0);
+//        params.put("hType", 0);
         params.put("pageNo", 1);
         OkGo.<SydcListBean>post(MyUrls.BASEURL + "/app/realestate/searchlist")
                 .tag(this)
@@ -117,7 +118,7 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
                         if (oldHouseListBean == null) {
                             return;
                         }
-                        List<SydcListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        datas = oldHouseListBean.getDatas();
                         if (datas == null || datas.size() == 0) {
                             return;
                         }
@@ -145,7 +146,10 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
+        Intent intent = new Intent(mContext, ShangpuDetailsActivity.class);
+        intent.putExtra("houseId",datas.get(position).getId()+"");
+        intent.putExtra("houseType",datas.get(position).getHouseType());
+        startActivity(intent);
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {

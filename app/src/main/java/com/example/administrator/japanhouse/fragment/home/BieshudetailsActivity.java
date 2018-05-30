@@ -21,20 +21,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.BieShuListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.BannerFragment;
-import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.more.BieSuMoreActivity;
 import com.example.administrator.japanhouse.presenter.VillaDetailsPresenter;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
@@ -106,6 +111,8 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
 
     private VillaDetailsPresenter villaDetailsPresenter;
     private VillaDetailsBean.DatasBean villaDetailsBean;
+    private boolean isja;
+    private String houseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +122,8 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_bieshudetails);
         ButterKnife.bind(this);
-
+        //houseId(别墅id)
+        houseId = getIntent().getStringExtra("houseId");
         villaDetailsPresenter = new VillaDetailsPresenter(this, this);
         villaDetailsPresenter.getVillaDetails("1");
 
@@ -149,14 +157,14 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     }
 
     private void setData() {
-        boolean ja = MyUtils.isJa();
-        tvHouseName.setText(ja ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn());
-        tvPrice.setText(ja ? villaDetailsBean.getSellingPriceJpn() : villaDetailsBean.getSellingPriceCn());
+        isja = MyUtils.isJa();
+        tvHouseName.setText(isja ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn());
+        tvPrice.setText(isja ? villaDetailsBean.getSellingPriceJpn() : villaDetailsBean.getSellingPriceCn());
         tvHouseHuxing.setText(villaDetailsBean.getHouseType());/*中日文同一个字段*/
-        tvTudiArea.setText(ja ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn());
-        tvJianzhuArea.setText(ja ? villaDetailsBean.getCoveredAreaJpn() : villaDetailsBean.getCoveredAreaCn());
-        tvHouseJutiweizhi.setText(ja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
-        tvDetailsLocation.setText(ja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
+        tvTudiArea.setText(isja ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn());
+        tvJianzhuArea.setText(isja ? villaDetailsBean.getCoveredAreaJpn() : villaDetailsBean.getCoveredAreaCn());
+        tvHouseJutiweizhi.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
+        tvDetailsLocation.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
     }
 
     public void setMyExtensionModule() {
@@ -257,21 +265,59 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     }
 
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_sydc_like, mList);
+        HttpParams params = new HttpParams();
+        if (isja) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(mContext, XiezilouDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
+        params.put("pageNo","1");
+        OkGo.<BieShuListBean>post(MyUrls.BASEURL + "/app/villadom/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<BieShuListBean>(BieshudetailsActivity.this, BieShuListBean.class) {
+                    @Override
+                    public void onSuccess(Response<BieShuListBean> response) {
+                        int code = response.code();
+                        final BieShuListBean BieShuListBean = response.body();
+                        if (BieShuListBean == null) {
+                            return;
+                        }
+                        final List<BieShuListBean.DatasEntity> datas = BieShuListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(BieshudetailsActivity.this, BieshudetailsActivity.class);
+                                intent.putExtra("houseId", datas.get(position).getId());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
     }
+    class LoveAdapter extends BaseQuickAdapter<BieShuListBean.DatasEntity, BaseViewHolder> {
 
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<BieShuListBean.DatasEntity> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, BieShuListBean.DatasEntity item) {
+            helper.setText(R.id.tv_house_name,isja?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isja?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+//            helper.setText(R.id.tv_house_room,isja?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setVisible(R.id.tv_house_room,false);
+            helper.setText(R.id.tv_house_area,isja?item.getCoveredAreaJpn():item.getCoveredAreaCn());
+            helper.setText(R.id.tv_price,isja?item.getSellingPriceJpn():item.getSellingPriceCn());
+            Glide.with(BieshudetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+        }
+    }
 
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
@@ -369,14 +415,4 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         });
     }
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-        }
-    }
 }

@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.ShangYeDetailsBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,15 +43,32 @@ public class JiuDianMoreActivity extends BaseActivity {
     TextView actJiudianHuibaolv;
     @BindView(R.id.act_gaoerfu_beizhu)
     TextView actGaoerfuBeizhu;
-
+    private ShangYeDetailsBean.DatasBean datas;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jiudian_more);
         ButterKnife.bind(this);
+        datas = (ShangYeDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
+        if (datas != null) {
+            initData();
+        }
+    }
+    private void initData() {
+        boolean ja = MyUtils.isJa();
+        actJiudianShoujia.setText(ja?datas.getSellingPriceJpn():datas.getSellingPriceCn());/*售价*/
+        actJiudianSuoyouquan.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*所有权*/
+        actJiudianHuibaolv.setText(ja?datas.getReturnRateJpn():datas.getReturnRateCn());/*回报率*/
+        actJiudianChezhanjuli.setText(ja?datas.getStationDistanceJpn():datas.getStationDistanceCn());/*车站距离*/
+        actGaoerfuBeizhu.setText(ja?datas.getRemarksJpn():datas.getRemarksCn());/*备注*/
+        actJiudianXianzhuang.setText(ja ? datas.getActualityJpn() : datas.getActualityCn());/*现状*/
+        actJiudianJiudianloucengshu.setText(ja ? datas.getActualityJpn() : datas.getActualityCn());/*酒店楼层数*/
+        actJiudianJianzhunianfen.setText(ja?datas.getYearBuiltJpn():datas.getYearBuiltCn());/*建筑年份*/
+        actJiudianJianzhugouzao.setText(ja?datas.getBuildingConstructionJpn():datas.getBuildingConstructionCn());/*建筑构造*/
+        actJiudianDiyuyongtu.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*地域用途*/
+
 
     }
-
     @OnClick(R.id.back)
     public void onViewClicked(View view) {
         switch (view.getId()) {

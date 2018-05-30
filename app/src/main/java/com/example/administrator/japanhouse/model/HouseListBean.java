@@ -8,10 +8,11 @@ import java.util.List;
 
 public class HouseListBean {
 
+
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":1,"titleCn":"房屋标题中文（二手房）","titleJpn":"房屋标题日文（二手房）","specificLocationCn":"1","specificLocationJpn":"1","areaJpn":"","areaCn":"","priceCn":"","priceJpn":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","doorModelCn":"1R","doorModelJpn":"1R"}]
+     * datas : [{"id":1,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","specificLocationCn":"1","specificLocationJpn":"1","areaJpn":"100","areaCn":"100","priceCn":"","priceJpn":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","doorModelCn":"户型","doorModelJpn":"户型","houseType":""}]
      */
 
     private String msg;
@@ -45,18 +46,19 @@ public class HouseListBean {
     public static class DatasBean {
         /**
          * id : 1
-         * titleCn : 房屋标题中文（二手房）
-         * titleJpn : 房屋标题日文（二手房）
+         * titleCn : 房屋标题中文（租房）
+         * titleJpn : 房屋标题日文（租房）
          * specificLocationCn : 1
          * specificLocationJpn : 1
-         * areaJpn :
-         * areaCn :
+         * areaJpn : 100
+         * areaCn : 100
          * priceCn :
          * priceJpn :
          * videoImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
          * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
-         * doorModelCn : 1R
-         * doorModelJpn : 1R
+         * doorModelCn : 户型
+         * doorModelJpn : 户型
+         * houseType :
          */
 
         private int id;
@@ -72,6 +74,7 @@ public class HouseListBean {
         private String roomImgs;
         private String doorModelCn;
         private String doorModelJpn;
+        private String houseType;
 
         public int getId() {
             return id;
@@ -175,6 +178,14 @@ public class HouseListBean {
 
         public void setDoorModelJpn(String doorModelJpn) {
             this.doorModelJpn = doorModelJpn;
+        }
+
+        public String getHouseType() {
+            return houseType;
+        }
+
+        public void setHouseType(String houseType) {
+            this.houseType = houseType;
         }
     }
 }

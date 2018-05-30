@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -21,14 +22,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.ChinaListBean;
+import com.example.administrator.japanhouse.bean.ZhongGuoDetailsBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -68,6 +79,32 @@ public class ZhongguoDetailsActivity extends BaseActivity {
     RelativeLayout re_top_bg;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_details_price)
+    TextView tvDetailsPrice;
+    @BindView(R.id.tv_details_huxing)
+    TextView tvDetailsHuxing;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_diduan)
+    TextView tvDetailsDiduan;
+    @BindView(R.id.tv_details_louceng)
+    TextView tvDetailsLouceng;
+    @BindView(R.id.tv_details_chaoxiang)
+    TextView tvDetailsChaoxiang;
+    @BindView(R.id.tv_details_wuye)
+    TextView tvDetailsWuye;
+    @BindView(R.id.tv_details_jutiweizhi)
+    TextView tvDetailsJutiweizhi;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
+    @BindView(R.id.zhongguo_wl)
+    TextView zhongguoWl;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
@@ -75,7 +112,9 @@ public class ZhongguoDetailsActivity extends BaseActivity {
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
     private MyAdapter myAdapter;
-
+    private boolean isJa;
+    private String houseId,cityId;
+    private ZhongGuoDetailsBean.DatasBean datas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +128,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
         //猜你喜欢
         initLoveRecycler();
         initScroll();
-
+        initDetailsNet();
         findViewById(R.id.zhongguo_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +142,43 @@ public class ZhongguoDetailsActivity extends BaseActivity {
         });
 
     }
-
+    private void initDetailsNet() {
+        houseId = getIntent().getStringExtra("houseId");
+        cityId = getIntent().getStringExtra("cityId");
+        String city = CacheUtils.get(Constants.COUNTRY);
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        HttpParams params = new HttpParams();
+//        if (houseId!=null&&!houseId.equals("")){
+        params.put("oId", "1");
+        OkGo.<ZhongGuoDetailsBean>post(MyUrls.BASEURL + "/app/oiverseas/houseinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<ZhongGuoDetailsBean>(this, ZhongGuoDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<ZhongGuoDetailsBean> response) {
+                        int code = response.code();
+                        ZhongGuoDetailsBean ChinaListBean = response.body();
+                        datas = ChinaListBean.getDatas();
+                        ZhongGuoDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsHuxing.setText(isJa ? datas.getHouseTypeJpn() : datas.getHouseTypeCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsDiduan.setText(isJa ? datas.getDistrictJpn() : datas.getDistrictCn());
+                        tvDetailsLouceng.setText(isJa ? datas.getFloorJpn() : datas.getFloorCn());
+                        tvDetailsChaoxiang.setText(isJa ? datas.getOrientationJpn() : datas.getOrientationCn());
+                        tvDetailsWuye.setText(isJa ? datas.getTenementJpn() : datas.getTenementCn());
+                        tvDetailsJutiweizhi.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(ZhongguoDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                    }
+                });
+    }
     public void setMyExtensionModule() {
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
         IExtensionModule defaultModule = null;
@@ -120,6 +195,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -145,33 +221,63 @@ public class ZhongguoDetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_china_like, mList);
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(mContext, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
-            }
-        });
+        params.put("hType",1);
+        params.put("pageNo","1");
+        params.put("cityId", cityId);//城市id
+        OkGo.<ChinaListBean>post(MyUrls.BASEURL + "/app/oiverseas/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<ChinaListBean>(ZhongguoDetailsActivity.this, ChinaListBean.class) {
+                    @Override
+                    public void onSuccess(Response<ChinaListBean> response) {
+                        int code = response.code();
+                        final ChinaListBean ChinaListBean = response.body();
+                        if (ChinaListBean == null) {
+                            return;
+                        }
+                        List<ChinaListBean.DatasEntity> datas = ChinaListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(ZhongguoDetailsActivity.this, OldHousedetailsActivity.class);
+                                intent.putExtra("houseId",ChinaListBean.getDatas().get(position).getId());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
     }
+    class LoveAdapter extends BaseQuickAdapter<ChinaListBean.DatasEntity, BaseViewHolder> {
 
-
-
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<ChinaListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, ChinaListBean.DatasEntity item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+//            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getSellingPriceJpn():item.getSellingPriceCn());
+            Glide.with(ZhongguoDetailsActivity.this).load(item.getHouseImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
+
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
@@ -258,7 +364,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -272,11 +378,12 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                 break;
         }
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置
@@ -331,6 +438,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
             }
         });
     }
+
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {

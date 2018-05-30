@@ -111,7 +111,7 @@ public class OldHouseMoreActivity extends BaseActivity {
         tvHouseSuoyouquan.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*所有权*/
         tvHouseYears.setText(ja?datas.getYearBuiltJpn():datas.getYearBuiltCn());/*建筑年份*/
         tvHouseGouzao.setText(ja?datas.getBuildingConstructionJpn():datas.getBuildingConstructionCn());/*建筑构造*/
-        tvJianzhuGongsi.setText(ja?datas.getConstructionCompanyJpn():datas.getBuildingConstructionCn());/*建筑公司*/
+        tvJianzhuGongsi.setText(ja?datas.getConstructionCompanyJpn():datas.getConstructionCompanyCn());/*建筑公司*/
         tvHouseChaoxiang.setText(ja?datas.getOrientationJpn():datas.getOrientationCn());/*朝向*/
         tvPeopleNum.setText(ja?datas.getHouseholdsJpn():datas.getHouseholdsCn());/*总户数*/
         tvHouseHuibaolv.setText(ja?datas.getReturnRateJpn():datas.getReturnRateCn());/*回报率*/

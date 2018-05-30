@@ -297,7 +297,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(BieShuActivity.this, BieshudetailsActivity.class);
-                                intent.putExtra("id", mDatas.get(position).getId()+"");
+                                intent.putExtra("houseId", mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });

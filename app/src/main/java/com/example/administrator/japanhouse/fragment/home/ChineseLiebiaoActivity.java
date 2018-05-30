@@ -280,7 +280,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(ChineseLiebiaoActivity.this, ZhongguoDetailsActivity.class);
-                                intent.putExtra("id", mDatas.get(position).getId() + "");
+                                intent.putExtra("houseId", mDatas.get(position).getId() + "");
+                                intent.putExtra("cityId", id);
                                 startActivity(intent);
                             }
                         });

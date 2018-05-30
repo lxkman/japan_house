@@ -494,7 +494,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<OldHouseListBean> response) {
                         int code = response.code();
-                        OldHouseListBean oldHouseListBean = response.body();
+                        final OldHouseListBean oldHouseListBean = response.body();
                         if (oldHouseListBean == null) {
                             return;
                         }
@@ -508,7 +508,9 @@ public class OldHousedetailsActivity extends BaseActivity {
                         loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                                Intent intent = new Intent(OldHousedetailsActivity.this, OldHousedetailsActivity.class);
+                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId());
+                                startActivity(intent);
                             }
                         });
                     }

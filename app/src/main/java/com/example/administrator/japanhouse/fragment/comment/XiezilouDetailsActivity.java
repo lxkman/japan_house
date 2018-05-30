@@ -21,15 +21,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.ShangYeDetailsBean;
+import com.example.administrator.japanhouse.bean.SydcListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.XieZiLouMoreActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -71,12 +81,35 @@ public class XiezilouDetailsActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.tv_See_More)
     TextView tv_See_More;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_shoumaileixing)
+    TextView tvDetailsShoumaileixing;
+    @BindView(R.id.tv_details_jutiweizhi)
+    TextView tvDetailsJutiweizhi;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
+    @BindView(R.id.xiezilou_wl)
+    TextView xiezilouWl;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
     private MyAdapter myAdapter;
+    private boolean isJa;
+    private String houseId;
+    private ShangYeDetailsBean.DatasBean datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +126,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
         //猜你喜欢
         initLoveRecycler();
         initScroll();
+        initDetailsNet();
         findViewById(R.id.xiezilou_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +139,38 @@ public class XiezilouDetailsActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void initDetailsNet() {
+        houseId = getIntent().getStringExtra("houseId");
+        String city = CacheUtils.get(Constants.COUNTRY);
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        HttpParams params = new HttpParams();
+//        if (houseId!=null&&!houseId.equals("")){
+        params.put("hId", "1");
+        OkGo.<ShangYeDetailsBean>post(MyUrls.BASEURL + "/app/realestate/realestateinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<ShangYeDetailsBean>(this, ShangYeDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<ShangYeDetailsBean> response) {
+                        int code = response.code();
+                        ShangYeDetailsBean SydcListBean = response.body();
+                        datas = SydcListBean.getDatas();
+                        ShangYeDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tvPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsShoumaileixing.setText(isJa ? datas.getLeaseTypeJpn() : datas.getLeaseTypeCn());
+                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(XiezilouDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                    }
+                });
     }
 
     public void setMyExtensionModule() {
@@ -123,6 +189,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -148,6 +215,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
 //            mBaseFragmentList.add(new VidioFragment());
@@ -202,21 +270,60 @@ public class XiezilouDetailsActivity extends BaseActivity {
         mList.add("");
 
     }
-
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_sydc_like, mList);
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(mContext, XiezilouDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
+        params.put("hType", 2);
+        params.put("pageNo","1");
+        OkGo.<SydcListBean>post(MyUrls.BASEURL + "/app/realestate/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SydcListBean>(XiezilouDetailsActivity.this, SydcListBean.class) {
+                    @Override
+                    public void onSuccess(Response<SydcListBean> response) {
+                        int code = response.code();
+                        final SydcListBean SydcListBean = response.body();
+                        if (SydcListBean == null) {
+                            return;
+                        }
+                        List<SydcListBean.DatasEntity> datas = SydcListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(XiezilouDetailsActivity.this, XiezilouDetailsActivity.class);
+                                intent.putExtra("houseId",SydcListBean.getDatas().get(position).getId());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
+    }
+    class LoveAdapter extends BaseQuickAdapter<SydcListBean.DatasEntity, BaseViewHolder> {
+
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<SydcListBean.DatasEntity> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+//            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setVisible(R.id.tv_house_room,false);
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getSellingPriceJpn():item.getSellingPriceCn());
+            Glide.with(XiezilouDetailsActivity.this).load(item.getRealEstateImgs()).into((ImageView) helper.getView(R.id.img_house));
+        }
     }
 
     class MyAdapter extends FragmentStatePagerAdapter {
@@ -235,7 +342,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img,R.id.tv_See_More})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -248,7 +355,8 @@ public class XiezilouDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_See_More:
-                Intent intent=new Intent(XiezilouDetailsActivity.this, XieZiLouMoreActivity.class);
+                Intent intent = new Intent(XiezilouDetailsActivity.this, XieZiLouMoreActivity.class);
+                intent.putExtra("datas",datas);
                 startActivity(intent);
                 break;
         }
@@ -258,7 +366,7 @@ public class XiezilouDetailsActivity extends BaseActivity {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置
@@ -314,14 +422,4 @@ public class XiezilouDetailsActivity extends BaseActivity {
         });
     }
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-        }
-    }
 }

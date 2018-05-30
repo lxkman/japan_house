@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.ShangYeDetailsBean;
+import com.example.administrator.japanhouse.utils.MyUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,15 +75,47 @@ public class ShangPuMoreActivity extends BaseActivity {
     TextView actShangpuTiaojian;
     @BindView(R.id.act_gaoerfu_beizhu)
     TextView actGaoerfuBeizhu;
-
+    private ShangYeDetailsBean.DatasBean datas;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shangpu_more);
         ButterKnife.bind(this);
+        datas = (ShangYeDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
+        if (datas != null) {
+            initData();
+        }
+    }
+    private void initData() {
+        boolean ja = MyUtils.isJa();
+        actShangpuWujianmingcheng.setText(ja?datas.getTitleJpn():datas.getTitleCn());/*物件名称*/
+        actShangpuShoujia.setText(ja?datas.getSellingPriceJpn():datas.getSellingPriceCn());/*售价*/
+        actShangpuMianji.setText(ja?datas.getAreaJpn():datas.getAreaCn());/*面积*/
+        actShangpuSuoyouquan.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*所有权*/
+        actShangpuDiyuyongtu.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*地域用途*/
+        actShangpuJianzhunianfen.setText(ja?datas.getYearBuiltJpn():datas.getYearBuiltCn());/*建筑年份*/
+        actShangpuJianzhugouzao.setText(ja?datas.getBuildingConstructionJpn():datas.getBuildingConstructionCn());/*建筑构造*/
+        actShangpuChaoxiang.setText(ja?datas.getOrientationJpn():datas.getOrientationCn());/*朝向*/
+        actShangpuHuibaolv.setText(ja?datas.getReturnRateJpn():datas.getReturnRateCn());/*回报率*/
+        actShangpuRujuriqi.setText(ja?datas.getDoichoIrinoJpn():datas.getDistrictCn());/*入居日期*/
+        actShangpuDiduan.setText(ja?datas.getDistrictJpn():datas.getDistrictCn());/*地段*/
+        actShangpuJutiweizhi.setText(ja?datas.getSpecificLocationJpn():datas.getSpecificLocationCn());/*具体位置*/
+        actShangpuChezhanjuli.setText(ja?datas.getStationDistanceJpn():datas.getStationDistanceCn());/*车站距离*/
+        actShangpuTingchewei.setText(ja?datas.getParkingSpaceJpn():datas.getParkingSpaceCn());/*停车位*/
+        actShangpuShineishebei.setText(ja?datas.getIndoorEquipmentJpn():datas.getIndoorEquipmentCn());/*室内设备*/
+        actGaoerfuBeizhu.setText(ja?datas.getRemarksJpn():datas.getRemarksCn());/*备注*/
+        actShangpuShangpuzhaopai.setText(ja ? datas.getShopSignsJpn() : datas.getShopSignsCn());/*商铺招牌*/
+        actShangpuJujiagaodu.setText(ja ? datas.getBicepsShelfJpn() : datas.getBicepsShelfCn());/*举架高度*/
+        actShangpuShiwaishezhi.setText(ja ? datas.getOutdoorSettingJpn() : datas.getOutdoorSettingCn());/*室外设置*/
+        actShangpuTezheng.setText(ja ? datas.getCharacteristicJpn() : datas.getCharacteristicCn());/*特征*/
+        actShangpuTiaojian.setText(ja ? datas.getConditionJpn() : datas.getConditionCn());/*条件*/
+        actShangpuShoumaileixing.setText(ja ? datas.getLeaseTypeJpn() : datas.getLeaseTypeCn());/*售卖类型*/
+        actShangpuXianzhuang.setText(ja ? datas.getActualityJpn() : datas.getActualityCn());/*现状*/
+//        actShangpuYingyeleixing.setText(ja ? datas.() : datas.getActualityCn());/*营业类型*/
+//        actShangpuZhuyaochezhan.setText(ja?datas.getRailwayStationJpn():datas.getRailwayStationCn());/*主要车站*/
+//        actShangpuJianzhugongsi.setText(ja?datas.getConstructionCompanyJpn():datas.getConstructionCompanyCn());/*建筑公司*/
 
     }
-
     @OnClick(R.id.back)
     public void onViewClicked(View view) {
         switch (view.getId()) {

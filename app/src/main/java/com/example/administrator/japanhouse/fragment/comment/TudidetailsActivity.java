@@ -27,6 +27,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.TudiDetailsBean;
+import com.example.administrator.japanhouse.bean.TudiListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.TudiMoreActivity;
@@ -113,6 +114,7 @@ public class TudidetailsActivity extends BaseActivity {
     private FragmentManager fm;
     private MyAdapter myAdapter;
     private TudiDetailsBean.DatasBean datas;
+    private boolean isJa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +145,7 @@ public class TudidetailsActivity extends BaseActivity {
     }
 
     private void initDetailsNet() {
-        String houseId = getIntent().getStringExtra("lId");
+        String houseId = getIntent().getStringExtra("houseId");
         Toast.makeText(mContext, houseId, Toast.LENGTH_SHORT).show();
         HttpParams params = new HttpParams();
 //        if (houseId!=null&&!houseId.equals("")){
@@ -158,7 +160,7 @@ public class TudidetailsActivity extends BaseActivity {
                         TudiDetailsBean tudiDetailsBean = response.body();
                         datas = tudiDetailsBean.getDatas();
                         TudiDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
-                        boolean isJa = MyUtils.isJa();
+                        isJa = MyUtils.isJa();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
@@ -250,28 +252,57 @@ public class TudidetailsActivity extends BaseActivity {
     }
 
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(TudidetailsActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
-            }
-        });
+        params.put("pageNo","1");
+        OkGo.<TudiListBean>post(MyUrls.BASEURL + "/app/land/searchlist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<TudiListBean>(TudidetailsActivity.this, TudiListBean.class) {
+                    @Override
+                    public void onSuccess(Response<TudiListBean> response) {
+                        int code = response.code();
+                        final TudiListBean TudiListBean = response.body();
+                        if (TudiListBean == null) {
+                            return;
+                        }
+                        final List<TudiListBean.DatasEntity> datas = TudiListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(TudidetailsActivity.this, TudidetailsActivity.class);
+                                intent.putExtra("houseId", datas.get(position).getId());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
     }
+    class LoveAdapter extends BaseQuickAdapter<TudiListBean.DatasEntity, BaseViewHolder> {
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<TudiListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, TudiListBean.DatasEntity item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+//            helper.setText(R.id.tv_house_room,isja?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setVisible(R.id.tv_house_room,false);
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getSellingPriceJpn():item.getSellingPriceCn());
+            Glide.with(TudidetailsActivity.this).load(item.getLandImages()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 

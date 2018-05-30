@@ -26,7 +26,7 @@ import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
-import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -299,7 +299,8 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                Intent intent = new Intent(NewHouseActivity.this, OldHousedetailsActivity.class);
+                                Intent intent = new Intent(NewHouseActivity.this, NewHousedetailsActivity.class);
+                                intent.putExtra("houseId",mDatas.get(position).getId());
                                 startActivity(intent);
                             }
                         });

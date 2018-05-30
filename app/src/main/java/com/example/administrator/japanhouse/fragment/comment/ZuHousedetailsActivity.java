@@ -29,6 +29,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.ZuBanGongMoreActivity;
@@ -108,6 +109,9 @@ public class ZuHousedetailsActivity extends BaseActivity {
     private MyAdapter myAdapter;
     private String houseType;
     private HouseDetailsBean.DatasBean datas;
+    private boolean isJa;
+    private int mType;
+    private String houseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,11 +123,33 @@ public class ZuHousedetailsActivity extends BaseActivity {
         ButterKnife.bind(this);
         String iszu = getIntent().getStringExtra("iszu");
         houseType = getIntent().getStringExtra("houseType");
-        Toast.makeText(mContext, houseType, Toast.LENGTH_SHORT).show();
+        if (!TextUtils.isEmpty(houseType)) {
+            switch (houseType) {
+                case "duoceng":
+                    mType=5;
+                    break;
+                case "xuesheng":
+                    mType=4;
+                    break;
+                case "erceng":
+                    mType=3;
+                    break;
+                case "bieshu":
+                    mType=2;
+                    break;
+                case "shangpu":
+                    mType=1;
+                    break;
+                case "bangongshi":
+                    mType=0;
+                    break;
+            }
+        }
+        Log.d("ZuHousedetailsActivity", mType+"----------------");
+        Log.d("ZuHousedetailsActivity", houseType+"----------------");
         if (!TextUtils.isEmpty(iszu) && iszu.equals("iszu")) {
             tv_price.setText("1750元/月");
         }
-        initData();
         initViewPager();
         //猜你喜欢
         initLoveRecycler();
@@ -144,7 +170,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
     }
 
     private void initDetailsNet() {
-        String houseId = getIntent().getStringExtra("houseId");
+        houseId = getIntent().getStringExtra("houseId");
         HttpParams params = new HttpParams();
 //        if (houseId!=null&&!houseId.equals("")){
         params.put("hId", "8");
@@ -213,29 +239,60 @@ public class ZuHousedetailsActivity extends BaseActivity {
     }
 
     private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+        isJa = MyUtils.isJa();
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(ZuHousedetailsActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
-            }
-        });
+        params.put("hType",mType);
+        params.put("pageNo","1");
+            OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(ZuHousedetailsActivity.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        final OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(ZuHousedetailsActivity.this, ZuHousedetailsActivity.class);
+                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
     }
 
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LoveAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
 
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getPriceJpn():item.getPriceCn());
+            Glide.with(ZuHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 
@@ -334,8 +391,6 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_See_More:
-
-
                 if (!TextUtils.isEmpty(houseType)) {
                     Intent intent;
                     switch (houseType) {

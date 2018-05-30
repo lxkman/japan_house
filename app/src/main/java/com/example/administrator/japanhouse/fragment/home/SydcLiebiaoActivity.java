@@ -300,18 +300,27 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         liebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent;
                                 switch (houseType) {
                                     case "shangpu":
-                                        startActivity(new Intent(mContext, ShangpuDetailsActivity.class));
+                                         intent = new Intent(mContext, ShangpuDetailsActivity.class);
+                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        startActivity(intent);
                                         break;
                                     case "xiezilou":
-                                        startActivity(new Intent(mContext, XiezilouDetailsActivity.class));
+                                         intent = new Intent(mContext, XiezilouDetailsActivity.class);
+                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        startActivity(intent);
                                         break;
                                     case "gaoerfu":
-                                        startActivity(new Intent(mContext, GaoerfuDetailsActivity.class));
+                                        intent = new Intent(mContext, GaoerfuDetailsActivity.class);
+                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        startActivity(intent);
                                         break;
                                     case "jiudian":
-                                        startActivity(new Intent(mContext, JiudianDetailsActivity.class));
+                                        intent = new Intent(mContext, JiudianDetailsActivity.class);
+                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        startActivity(intent);
                                         break;
                                 }
                             }

@@ -40,8 +40,8 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HouseDetailsBean;
 import com.example.administrator.japanhouse.bean.OldHouseListBean;
+import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
@@ -153,29 +153,14 @@ public class NewHousedetailsActivity extends BaseActivity {
         initData();
         //猜你喜欢
         initLoveRecycler();
-        //请求网络
-        initNet();
         initScroll();
         initMap();
         initLocation();
         initDetailsNet();
-        intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
-        intent.putExtra("lat", "35.68");
-        intent.putExtra("log", "139.75");
-        findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(NewHousedetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(NewHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
-                }
-            }
-        });
+
 
     }
-
+    //详情字段接口
     private void initDetailsNet() {
         houseId = getIntent().getStringExtra("houseId");
         String city = CacheUtils.get(Constants.COUNTRY);
@@ -207,22 +192,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                 });
     }
 
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
-            }
-        }
-    }
+
 
     private void initLocation() {
         mLocClient = new LocationClient(this);
@@ -280,7 +250,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                 intent.putExtra("log", "139.75");
                 intent.putExtra("TAG", "1");
                 startActivity(intent);
-
             }
 
             @Override
@@ -316,28 +285,6 @@ public class NewHousedetailsActivity extends BaseActivity {
         });
     }
 
-    private void initNet() {
-        OkGo.post("")//URL
-                .tag(this)
-                .params("", "")
-                .execute(new JsonCallback<Object>() {
-                    @Override
-                    public void onSuccess(Response<Object> response) {
-
-                    }
-
-                    @Override
-                    public void onError(Response<Object> response) {
-                        super.onError(response);
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        super.onFinish();
-                    }
-
-                });
-    }
 
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
@@ -386,6 +333,22 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
     private void initData() {
+        intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
+        intent.putExtra("lat", "35.68");
+        intent.putExtra("log", "139.75");
+        findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(NewHousedetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(NewHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
+
+
         if (mList.size() <= 0) {
             mList.add("");
             mList.add("");
@@ -402,11 +365,32 @@ public class NewHousedetailsActivity extends BaseActivity {
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(NewHousedetailsActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
+                showHuxingDialog();
             }
         });
     }
 
+
+    private void showHuxingDialog() {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_huxingtu)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(Gravity.CENTER)
+                //设置动画
+                .setAnimation(R.style.Alpah_aniamtion)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+    }
+
+
+    //猜你喜欢
     private void initLoveRecycler() {
         HttpParams params = new HttpParams();
         if (isJa) {
@@ -423,7 +407,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<OldHouseListBean> response) {
                         int code = response.code();
-                        OldHouseListBean oldHouseListBean = response.body();
+                        final OldHouseListBean oldHouseListBean = response.body();
                         if (oldHouseListBean == null) {
                             return;
                         }
@@ -438,6 +422,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(NewHousedetailsActivity.this, NewHousedetailsActivity.class);
+                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId());
                                 startActivity(intent);
                             }
                         });
@@ -445,7 +430,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                 });
 
     }
-
+    //bannerAdapter
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -462,6 +447,9 @@ public class NewHousedetailsActivity extends BaseActivity {
         }
     }
 
+
+
+    private boolean isStart;
     @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -469,7 +457,13 @@ public class NewHousedetailsActivity extends BaseActivity {
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.img_start:
-                Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+                if (!isStart){
+                    initStart();
+                    isStart=true;
+                }else {
+                    initUnStart();
+                    isStart=false;
+                }
                 break;
             case R.id.tv_See_More:
                 Intent intent1 = new Intent(NewHousedetailsActivity.this, NewHouseMoreActivity.class);
@@ -495,14 +489,69 @@ public class NewHousedetailsActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.yiyuan_layout:
-
                 Tag = "4";
                 intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
         }
     }
+    //收藏
+    private void initStart() {
+        String token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
+        Log.d("NewHousedetailsActivity", token+"-------------");
+        HttpParams params = new HttpParams();
+        params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
+        params.put("token", token);//用户登录标识
+        params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
+        params.put("hId", "8");
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/insertcollectionhouse")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(NewHousedetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")){
+                            imgStart.setImageResource(R.drawable.shoucangg2);
+                            Toast.makeText(NewHousedetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
+    //取消收藏
+    private void initUnStart() {
+        String token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
+        Log.d("NewHousedetailsActivity", token+"-------------");
+        HttpParams params = new HttpParams();
+        params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
+        params.put("token", token);//用户登录标识
+        params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
+        params.put("hId", "8");
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/deletecollectionhouse")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(NewHousedetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")){
+                            imgStart.setImageResource(R.drawable.shoucang);
+                            Toast.makeText(NewHousedetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+    //分享弹窗
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
@@ -592,4 +641,21 @@ public class NewHousedetailsActivity extends BaseActivity {
         }
     }
 
+
+    public void setMyExtensionModule() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
+            }
+        }
+    }
 }

@@ -78,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dip">
                 <TextView
+                    android:id="@+id/tv_details_name"
                     android:paddingLeft="15dip"
                     android:gravity="center_vertical"
                     android:textSize="15sp"
@@ -139,6 +140,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_details_area"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -168,6 +170,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_details_shoumaileixing"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -210,6 +213,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_details_jutiweizhi"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -231,6 +235,7 @@
                             android:src="@drawable/dingwei" />
 
                         <TextView
+                            android:id="@+id/tv_details_location"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dip"
@@ -326,19 +331,22 @@
             android:layout_weight="0.7"
             android:layout_width="0dip"
             android:layout_height="match_parent">
-            <ImageView
-                android:padding="5dip"
-                android:src="@drawable/deful_touxiang"
-                android:layout_width="50dip"
-                android:layout_height="50dip" />
+            <com.example.administrator.japanhouse.view.CircleImageView
+                android:id="@+id/tv_details_manager_head"
+                android:layout_gravity="center"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:src="@drawable/deful_touxiang" />
+
             <TextView
+                android:id="@+id/tv_details_manager_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textColor="#333"
-                android:textSize="14dip"
                 android:paddingLeft="10dip"
                 android:text="杨金金"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:textColor="#333"
+                android:textSize="14dip" />
         </LinearLayout>
         <LinearLayout
             android:background="#c79880"

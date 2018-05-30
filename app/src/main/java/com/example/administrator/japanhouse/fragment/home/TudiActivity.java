@@ -287,7 +287,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(TudiActivity.this, TudidetailsActivity.class);
-                                intent.putExtra("id", mDatas.get(position).getId()+"");
+                                intent.putExtra("houseId", mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });

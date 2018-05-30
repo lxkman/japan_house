@@ -20,7 +20,6 @@
             android:id="@+id/tou_neirong"
             android:maxLines="2"
             android:textSize="14sp"
-            android:text="百科标题内容百科标题内容百科标题内容百科标题内容百科标题内容..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -36,7 +35,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tou_time"
-        android:text="01.22"
         />
 
 
@@ -52,7 +50,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/person"
-        android:text="1000人查看"
         />
 
     <View

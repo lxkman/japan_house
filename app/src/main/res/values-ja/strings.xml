@@ -557,4 +557,10 @@
     <string name="chooise_camera">アルバムの中から選択</string>
     <string name="camera_video">拍摄视频</string>
     <string name="cancel">キャンセル</string>
+    <string name="linitRange_max">最高%1$s万</string>
+    <string name="ageLimit_max">%1$sヶ月</string>
+    <string name="rate_max">月利%1$s</string>
+    <string name="item_apartment_people">%1$d人申し込みしました</string>
+    <string name="item_apartment_time">残り%1$d日%2$d時間%3$d分間</string>
+    <string name="people_readNum">人が見てる</string>
 </resources>

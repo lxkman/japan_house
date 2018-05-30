@@ -1,15 +1,14 @@
-package com.example.administrator.japanhouse.bean;
+package com.example.administrator.japanhouse.model;
 
 /**
- * Created by Mr赵 on 2018/5/10.
+ * Created by   admin on 2018/5/30.
  */
 
-public class BaiKe_Detail_Bean {
-
+public class OwnerDetailsBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"id":12,"titleCn":"购房百科标题","titleJpn":"日文","textType":"2","isDeleted":0,"status":"0","readNum":1,"createTime":null,"contentCn":"购房百科内容","contentJpn":""}
+     * datas : {"id":13,"titleCn":"业主百科标题","titleJpn":"日文","textType":"2","isDeleted":0,"status":"1","readNum":1,"createTime":1527476889000,"contentCn":"业主百科内容","contentJpn":"","imageUrl":""}
      */
 
     private String msg;
@@ -42,16 +41,17 @@ public class BaiKe_Detail_Bean {
 
     public static class DatasBean {
         /**
-         * id : 12
-         * titleCn : 购房百科标题
+         * id : 13
+         * titleCn : 业主百科标题
          * titleJpn : 日文
          * textType : 2
          * isDeleted : 0
-         * status : 0
+         * status : 1
          * readNum : 1
-         * createTime : null
-         * contentCn : 购房百科内容
+         * createTime : 1527476889000
+         * contentCn : 业主百科内容
          * contentJpn :
+         * imageUrl :
          */
 
         private int id;
@@ -64,6 +64,7 @@ public class BaiKe_Detail_Bean {
         private long createTime;
         private String contentCn;
         private String contentJpn;
+        private String imageUrl;
 
         public int getId() {
             return id;
@@ -143,6 +144,14 @@ public class BaiKe_Detail_Bean {
 
         public void setContentJpn(String contentJpn) {
             this.contentJpn = contentJpn;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,6 +148,7 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
                     booleenList.add(true);
                     adapterList.add(hotNameList.get(finalI));
                     setTimeShow();
+                    msgAdapter.notifyDataSetChanged();
                     answerIssue(finalI);
                 }
             });
@@ -190,6 +192,7 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
                     booleenList.add(true);
                     adapterList.add(hotNameList.get(finalI));
                     setTimeShow();
+                    msgAdapter.notifyDataSetChanged();
                     answerIssue(finalI);
                 }
             });
@@ -197,11 +200,16 @@ public class ZhinengActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void answerIssue(int position){
-        booleenList.add(false);
-        adapterList.add(answerList.get(position));
-        msgAdapter.notifyDataSetChanged();
-        setTimeShow();
+    private void answerIssue(final int position){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                booleenList.add(false);
+                adapterList.add(answerList.get(position));
+                msgAdapter.notifyDataSetChanged();
+                setTimeShow();
+            }
+        }, 1000);
     }
 
     @Override

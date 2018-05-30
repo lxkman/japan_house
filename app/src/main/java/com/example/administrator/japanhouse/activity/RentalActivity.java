@@ -23,11 +23,14 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.PicRentalAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.presenter.RentalPresenter;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.lzy.okgo.model.Response;
 import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
@@ -43,7 +46,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/4/17.
  */
 
-public class RentalActivity extends BaseActivity implements PicRentalAdapter.onItemClickListener {
+public class RentalActivity extends BaseActivity implements PicRentalAdapter.onItemClickListener, RentalPresenter.RentalCallBack {
 
     @BindView(R.id.act_rental_back)
     ImageView back;
@@ -103,6 +106,8 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
     private NestedScrollView nestedScrollView;
 
+    private RentalPresenter presenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +161,8 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 }
             }
         });
+
+        presenter = new RentalPresenter(this, this);
 
     }
 
@@ -255,6 +262,19 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                     Intent intent = new Intent(this, RentalDetailsActivity.class);
                     intent.putExtra("detailsBean", bean);
                     startActivityForResult(intent, 101);
+
+
+                    presenter.requestRental(etCall.getText().toString(),
+                            etContact.getText().toString(),
+                            etLocation.getText().toString(),
+                            etDistance.getText().toString(),
+                            etFloor.getText().toString(),
+                            etArea.getText().toString(),
+                            etPattern.getText().toString(),
+                            isBathroom ? "0" : "1",
+                            etToward.getText().toString(),
+                            etEquipment.getText().toString(),
+                            rentOrSell ? "1" : "0");
                 }
                 break;
         }
@@ -495,5 +515,10 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     @Override
     public void onClickDel(int position) {
         imgPathList.remove(position);
+    }
+
+    @Override
+    public void requestRental(Response<NoDataBean> response) {
+
     }
 }

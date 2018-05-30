@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.WenDa_Details_Pinglun_Bean;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class WenDa_Detil_Adapter extends RecyclerView.Adapter<WenDa_Detil_Adapter.ViewHolder> {
     Context context;
-    List<WenDa_Details_Pinglun_Bean.DatasBean>list;
+    List<WenDa_Details_Pinglun_Bean.DatasBean> list;
 
     public WenDa_Detil_Adapter(Context context, List<WenDa_Details_Pinglun_Bean.DatasBean> list) {
         this.context = context;
@@ -31,7 +31,7 @@ public class WenDa_Detil_Adapter extends RecyclerView.Adapter<WenDa_Detil_Adapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.toutiao_adapter, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.questions_details, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -41,20 +41,23 @@ public class WenDa_Detil_Adapter extends RecyclerView.Adapter<WenDa_Detil_Adapte
         long updateTime = list.get(position).getUpdateTime();
         String dateToString = getDateToString(String.valueOf(updateTime / 1000));
         holder.time.setText(dateToString);
-       holder.content.setText(list.get(position).getContent());
+        holder.content.setText(list.get(position).getContent());
+        holder.name.setText(list.get(position).getUser().getNickname());
+        Glide.with(context)
+                .load(list.get(position).getUser().getPic())
+                .into(holder.touxiang);
     }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView touxiang;
         public TextView name;
         public TextView time;
         public TextView content;
-        public TextView zanperson;
-        public ImageView zan;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,8 +65,6 @@ public class WenDa_Detil_Adapter extends RecyclerView.Adapter<WenDa_Detil_Adapte
             name = (TextView) itemView.findViewById(R.id.name);
             time = (TextView) itemView.findViewById(R.id.time);
             content = (TextView) itemView.findViewById(R.id.pinglun);
-            zanperson = (TextView) itemView.findViewById(R.id.zan_person);
-            zan = (ImageView) itemView.findViewById(R.id.zan);
         }
     }
 

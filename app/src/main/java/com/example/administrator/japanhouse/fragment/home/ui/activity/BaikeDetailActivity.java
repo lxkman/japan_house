@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.BaiKe_Detail_Bean;
-import com.example.administrator.japanhouse.bean.Bay_baike_Bean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -18,7 +17,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BaikeDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +26,6 @@ public class BaikeDetailActivity extends AppCompatActivity implements View.OnCli
     private View xian;
     private TextView title;
     private TextView time;
-    private TextView sfm;
     private TextView neirong;
     private int wid;
     private boolean isJa;
@@ -45,7 +44,6 @@ public class BaikeDetailActivity extends AppCompatActivity implements View.OnCli
         img_beak = (ImageView) findViewById(R.id.img_beak);
         title = (TextView) findViewById(R.id.title);
         time = (TextView) findViewById(R.id.time);
-        sfm = (TextView) findViewById(R.id.sfm);
         neirong = (TextView) findViewById(R.id.neirong);
         img_beak.setOnClickListener(this);
     }
@@ -69,6 +67,8 @@ public class BaikeDetailActivity extends AppCompatActivity implements View.OnCli
                         String code = body.getCode();
                         if(code.equals("200")){
                             BaiKe_Detail_Bean.DatasBean datas = body.getDatas();
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+                            String format = sdf.format(new Date(response.body().getDatas().getCreateTime()));
                             if(isJa){
                                 title.setText(datas.getTitleJpn());
                                 neirong.setText(datas.getContentJpn());
@@ -76,6 +76,7 @@ public class BaikeDetailActivity extends AppCompatActivity implements View.OnCli
                                 title.setText(datas.getTitleCn());
                                 neirong.setText(datas.getContentCn());
                             }
+                            time.setText(format);
                         }else if(code.equals("201")){
                             ToastUtils.getToast(BaikeDetailActivity.this,body.getMsg());
                         }else if(code.equals("500")){

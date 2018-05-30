@@ -48,7 +48,6 @@
             android:drawableLeft="@drawable/free_apartment_num"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
-            android:text="283人已报名"
             />
 
         <TextView
@@ -74,7 +73,6 @@
         android:layout_marginTop="12dp"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="活动标题内容，标题，标题"
         />
 
     <RelativeLayout
@@ -93,7 +91,6 @@
             android:textSize="14sp"
             android:drawableLeft="@drawable/free_apartment_time"
             android:drawablePadding="10dp"
-            android:text="剩余11天10小时20分"
             />
 
         <TextView

@@ -40,6 +40,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     private TextView fk_fangshi;
     private TextView hj_yaoqiu;
     private TextView sx_cailiao;
+    private TextView nl_yaoyiu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,14 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
         int id = getIntent().getIntExtra("id", 0);
         String name = getIntent().getStringExtra("name");
         String accrual = getIntent().getStringExtra("lixi");
-        double i = Integer.parseInt(accrual)*1.0d;
+//        double i = Integer.parseInt(accrual)*1.0d;
         String fanwei = getIntent().getStringExtra("fanwei");
         String zhouqi = getIntent().getStringExtra("zhouqi");
         String fangshi = getIntent().getStringExtra("fangshi");
         String shijian = getIntent().getStringExtra("shijian");
         String huji = getIntent().getStringExtra("huji");
         String cailiao = getIntent().getStringExtra("cailiao");
+        String age = getIntent().getStringExtra("age");
 
 
         img_beak = (ImageView) findViewById(R.id.img_beak);
@@ -74,6 +76,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
         price = (TextView) findViewById(R.id.price);
         hk_time = (TextView) findViewById(R.id.hk_time);
         hj_yaoqiu = (TextView) findViewById(R.id.hj_yaoqiu);
+        nl_yaoyiu = (TextView) findViewById(R.id.nl_yaoyiu);
         shenqing = (Button) findViewById(R.id.shenqing);
         kefu = (ImageView) findViewById(R.id.kefu);
         img_beak.setOnClickListener(this);
@@ -91,13 +94,14 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
         }
         //赋值
         dai_name.setText(name);
-        yuexi.setText("月息"+i+"%");
-        price.setText("最高"+fanwei+"万");
+        yuexi.setText(String.format(getString(R.string.rate_max), accrual));
+        price.setText(String.format(getString(R.string.linitRange_max), fanwei));
         nianxian.setText(zhouqi+"年");
         fk_fangshi.setText(fangshi);
         hk_time.setText(shijian);
         hj_yaoqiu.setText(huji);
         sx_cailiao.setText(cailiao);
+        nl_yaoyiu.setText(age);
     }
 
     @Override

@@ -555,4 +555,10 @@
     <string name="chooise_camera">从相册中选择</string>
     <string name="camera_video">拍摄视频</string>
     <string name="cancel">取消</string>
+    <string name="linitRange_max">最高%1$s万</string>
+    <string name="ageLimit_max">%1$s个月</string>
+    <string name="rate_max">月息%1$s</string>
+    <string name="item_apartment_people">%1$d人已报名</string>
+    <string name="item_apartment_time">剩余%1$d天%2$d小时%3$d分</string>
+    <string name="people_readNum">人查看</string>
 </resources>

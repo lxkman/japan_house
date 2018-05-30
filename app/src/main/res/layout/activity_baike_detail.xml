@@ -6,84 +6,77 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.BaikeDetailActivity">
+
     <RelativeLayout
         android:id="@+id/liner"
-        android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
+
         <ImageView
-            android:layout_margin="15dp"
-            android:layout_centerVertical="true"
             android:id="@+id/img_beak"
-            android:src="@drawable/img_beak"
             android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:src="@drawable/img_beak" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/details"
             android:layout_centerInParent="true"
-            android:textSize="16sp"
+            android:text="@string/details"
             android:textColor="@color/white"
-            />
+            android:textSize="16sp" />
     </RelativeLayout>
+
     <View
         android:id="@+id/xian"
-        android:layout_below="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/gray1"/>
+        android:layout_below="@+id/liner"
+        android:background="@color/gray1" />
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textColor="#000"
-            android:textSize="16sp"
-            android:id="@+id/title"
-            android:text="动态标题内容，标题，标题"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="16sp" />
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="10dp"
-                android:textSize="16sp"
-                android:text="2018.01.11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/time"
-                />
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:textSize="16sp"
-                android:text="14:20:30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sfm"
-                />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
             <TextView
                 android:id="@+id/neirong"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="奥术大师大所多所奥术大师大所多奥术大师大所大所多阿三大叔大叔大叔大奥术大师大所大所大所多奥术大师大所大所大所大所大所大所奥术大师大所大所大所大分公司的发送到发送到的说法是发送到发送到"
-                />
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@color/gray1"/>
+            android:background="@color/gray1" />
     </LinearLayout>
 </LinearLayout>

@@ -3,21 +3,19 @@ package com.example.administrator.japanhouse.fragment.home.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.Bay_baike_Bean;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.BaikeDetailActivity;
-import com.example.administrator.japanhouse.fragment.home.ui.activity.TouDetailActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,14 +24,15 @@ import java.util.List;
 
 public class BaikeAdapter extends RecyclerView.Adapter<BaikeAdapter.ViewHolder> {
     private Context context;
-    List<Bay_baike_Bean.DatasBean>list;
-    private  Boolean isJa;
+    List<Bay_baike_Bean.DatasBean> list;
+    private Boolean isJa;
 
     public BaikeAdapter(Context context, List<Bay_baike_Bean.DatasBean> list, Boolean isJa) {
         this.context = context;
         this.list = list;
         this.isJa = isJa;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.touadapter, parent, false);
@@ -44,39 +43,45 @@ public class BaikeAdapter extends RecyclerView.Adapter<BaikeAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Bay_baike_Bean.DatasBean datasBean = list.get(position);
-     holder.view.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             Intent intent = new Intent(context, BaikeDetailActivity.class);
-             intent.putExtra("wid",datasBean.getId());
-              context.startActivity(intent);
-         }
-     });
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BaikeDetailActivity.class);
+                intent.putExtra("wid", datasBean.getId());
+                context.startActivity(intent);
+            }
+        });
         String city = CacheUtils.get(Constants.COUNTRY);
-        if(city!=null&&city.equals("ja")){
-            isJa=true;
-        }else{
-            isJa=false;
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
         }
         //赋值
-        if(isJa){
+        if (isJa) {
             holder.neirong.setText(datasBean.getTitleJpn());
-        }else{
+        } else {
             holder.neirong.setText(datasBean.getTitleCn());
         }
-        holder.person.setText(datasBean.getReadNum()+"人查看");
+        holder.person.setText(datasBean.getReadNum() + context.getString(R.string.people_readNum));
+        Glide.with(context)
+                .load(datasBean.getImageUrl())
+                .into(holder.tou);
     }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView tou;
         public View view;
         public TextView neirong;
         public TextView time;
         public TextView person;
+
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;

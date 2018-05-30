@@ -9,7 +9,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.model.OwnerListBean;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by   admin on 2018/4/16.
@@ -19,8 +26,11 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
 
     private Activity activity;
 
-    public OwnerWikipediaAdapter(Activity activity) {
+    private List<OwnerListBean.DatasBean> datas;
+
+    public OwnerWikipediaAdapter(Activity activity, List<OwnerListBean.DatasBean> datas) {
         this.activity = activity;
+        this.datas = datas;
     }
 
     private onItemClickListener clickListener;
@@ -36,14 +46,23 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
         if (viewHolder instanceof OwnerWikipediaViewHolder) {
             OwnerWikipediaViewHolder holder = (OwnerWikipediaViewHolder) viewHolder;
+
+            holder.tvTitle.setText(MyApplication.isJapanese() ? datas.get(i).getTitleJpn() : datas.get(i).getTitleCn());
+            holder.tvNum.setText(datas.get(i).getReadNum() + "");
+            Glide.with(activity)
+                    .load(datas.get(i).getImageUrl())
+                    .into(holder.ivShow);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM.dd");
+            String format = sdf.format(new Date(datas.get(i).getCreateTime()));
+            holder.tvTime.setText(format);
 
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickListener.onItemClick();
+                    clickListener.onItemClick(datas.get(i).getId());
                 }
             });
         }
@@ -51,7 +70,7 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return 5;
+        return datas.size();
     }
 
     class OwnerWikipediaViewHolder extends RecyclerView.ViewHolder {
@@ -72,6 +91,6 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
     }
 
     public interface onItemClickListener{
-        void onItemClick();
+        void onItemClick(int itemId);
     }
 }

@@ -1,20 +1,22 @@
-package com.example.administrator.japanhouse.bean;
+package com.example.administrator.japanhouse.model;
+
+import java.util.List;
 
 /**
- * Created by Mr赵 on 2018/5/10.
+ * Created by   admin on 2018/5/29.
  */
 
-public class BaiKe_Detail_Bean {
+public class OwnerListBean {
 
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"id":12,"titleCn":"购房百科标题","titleJpn":"日文","textType":"2","isDeleted":0,"status":"0","readNum":1,"createTime":null,"contentCn":"购房百科内容","contentJpn":""}
+     * datas : [{"id":13,"titleCn":"业主百科标题","titleJpn":"日文","textType":"2","isDeleted":0,"status":"1","readNum":0,"createTime":1527476889000,"imageUrl":"","contentCn":"","contentJpn":""}]
      */
 
     private String msg;
     private String code;
-    private DatasBean datas;
+    private List<DatasBean> datas;
 
     public String getMsg() {
         return msg;
@@ -32,25 +34,26 @@ public class BaiKe_Detail_Bean {
         this.code = code;
     }
 
-    public DatasBean getDatas() {
+    public List<DatasBean> getDatas() {
         return datas;
     }
 
-    public void setDatas(DatasBean datas) {
+    public void setDatas(List<DatasBean> datas) {
         this.datas = datas;
     }
 
     public static class DatasBean {
         /**
-         * id : 12
-         * titleCn : 购房百科标题
+         * id : 13
+         * titleCn : 业主百科标题
          * titleJpn : 日文
          * textType : 2
          * isDeleted : 0
-         * status : 0
-         * readNum : 1
-         * createTime : null
-         * contentCn : 购房百科内容
+         * status : 1
+         * readNum : 0
+         * createTime : 1527476889000
+         * imageUrl :
+         * contentCn :
          * contentJpn :
          */
 
@@ -62,6 +65,7 @@ public class BaiKe_Detail_Bean {
         private String status;
         private int readNum;
         private long createTime;
+        private String imageUrl;
         private String contentCn;
         private String contentJpn;
 
@@ -127,6 +131,14 @@ public class BaiKe_Detail_Bean {
 
         public void setCreateTime(long createTime) {
             this.createTime = createTime;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
 
         public String getContentCn() {

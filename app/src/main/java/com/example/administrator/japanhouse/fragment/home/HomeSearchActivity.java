@@ -133,7 +133,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH && searchEt.getText().length() > 0) {
                     ((InputMethodManager) searchEt.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(
                                     getCurrentFocus()
@@ -172,14 +172,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             startActivity(businessIntent);
                             break;
                     }
-                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_HISTORY);
+                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
                     if (list != null) {
                         list.add(0, new SearchBean(state, searchEt.getText().toString()));
-                        CacheUtils.put(Constants.SEARCH_HISTORY, list);
+                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, list);
                     } else {
                         List<SearchBean> arrayList = new ArrayList<>();
                         arrayList.add(0, new SearchBean(state, searchEt.getText().toString()));
-                        CacheUtils.put(Constants.SEARCH_HISTORY, arrayList);
+                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, arrayList);
                     }
 
                     queryCacheHistory();
@@ -247,7 +247,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 SearchBean sb = searchBean.get(position);
                 searchBean.remove(position);
                 searchBean.add(0, sb);
-                CacheUtils.put(Constants.SEARCH_HISTORY, searchBean);
+                CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, searchBean);
                 queryCacheHistory();
             }
         });
@@ -257,7 +257,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
     private void queryCacheHistory() {
         historyList.clear();
-        searchBean = CacheUtils.get(Constants.SEARCH_HISTORY);
+        searchBean = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
         if (searchBean != null && searchBean.size() > 0) {
             for (int i = 0; i < searchBean.size(); i++) {
                 historyList.add(searchBean.get(i).content);
@@ -281,14 +281,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_HISTORY);
+                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
                     if (list != null) {
                         list.add(0, new SearchBean(state, hotNameList.get(finalI)));
-                        CacheUtils.put(Constants.SEARCH_HISTORY, list);
+                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, list);
                     } else {
                         List<SearchBean> arrayList = new ArrayList<>();
                         arrayList.add(0, new SearchBean(state, hotNameList.get(finalI)));
-                        CacheUtils.put(Constants.SEARCH_HISTORY, arrayList);
+                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, arrayList);
                     }
 
                     queryCacheHistory();
@@ -320,7 +320,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             case R.id.history_clear:
                 historyList.clear();
                 historyAdapter.notifyDataSetChanged();
-                CacheUtils.remove(Constants.SEARCH_HISTORY);
+                CacheUtils.remove(Constants.SEARCH_MAIN_HISTORY);
                 break;
         }
     }

@@ -11,7 +11,7 @@ public class Bay_baike_Bean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":12,"titleCn":"购房百科标题","titleJpn":"日文","textType":"2","isDeleted":0,"status":"0","readNum":0,"createTime":null,"contentCn":"","contentJpn":""}]
+     * datas : [{"id":12,"titleCn":"购房百科标题","titleJpn":"日文","textType":"2","isDeleted":0,"status":"0","readNum":0,"createTime":null,"imageUrl":"","contentCn":"","contentJpn":""}]
      */
 
     private String msg;
@@ -52,6 +52,7 @@ public class Bay_baike_Bean {
          * status : 0
          * readNum : 0
          * createTime : null
+         * imageUrl :
          * contentCn :
          * contentJpn :
          */
@@ -64,6 +65,7 @@ public class Bay_baike_Bean {
         private String status;
         private int readNum;
         private Object createTime;
+        private String imageUrl;
         private String contentCn;
         private String contentJpn;
 
@@ -129,6 +131,14 @@ public class Bay_baike_Bean {
 
         public void setCreateTime(Object createTime) {
             this.createTime = createTime;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
 
         public String getContentCn() {

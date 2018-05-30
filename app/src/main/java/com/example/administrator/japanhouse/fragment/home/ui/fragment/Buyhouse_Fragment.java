@@ -2,7 +2,6 @@ package com.example.administrator.japanhouse.fragment.home.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.bean.BaiKe_Detail_Bean;
 import com.example.administrator.japanhouse.bean.QueandansBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.fragment.home.ui.activity.BaikeDetailActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Buyhouse_Adapter;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
@@ -39,7 +36,15 @@ public class Buyhouse_Fragment extends BaseFragment{
     private SpringView sp_view;
     private Buyhouse_Adapter buyhouse_adapter;
     private int pageNo=1;
+    private String searchText;
     List<QueandansBean.DatasBean>list=new ArrayList<>();
+
+    public Buyhouse_Fragment() {
+    }
+
+    public Buyhouse_Fragment(String searchText) {
+        this.searchText = searchText;
+    }
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,7 +94,6 @@ public class Buyhouse_Fragment extends BaseFragment{
         sp_view.setFooter(new DefaultFooter(getActivity()));
         sp_view.setHeader(new DefaultHeader(getActivity()));
 
-
         //加载适配器
         buy_recyclwe.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         buyhouse_adapter = new Buyhouse_Adapter(getActivity(),list);
@@ -100,8 +104,9 @@ public class Buyhouse_Fragment extends BaseFragment{
     private void intdata() {
         HttpParams params = new HttpParams();
         params.put("pageNo",pageNo);
-        params.put("dType",1);
-        OkGo.<QueandansBean>post(MyUrls.BASEURL + "/app/askinfo/asklist")
+        params.put("searchText",searchText);
+        params.put("qType",1);
+        OkGo.<QueandansBean>post(MyUrls.BASEURL + "/app/askinfo/searchask")
                 .tag(this)
                 .params(params)
                 .execute(new DialogCallback<QueandansBean>(getActivity(),QueandansBean.class){

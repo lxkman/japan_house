@@ -13,7 +13,6 @@ import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.QueandansBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Buyhouse_Adapter;
-import com.example.administrator.japanhouse.fragment.home.ui.adapter.Sellhouse_Adapter;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
@@ -37,7 +36,16 @@ public class Sellhouse_Fragment extends BaseFragment{
     private SpringView sp_view;
     private Buyhouse_Adapter buyhouse_adapter;
     private int pageNo=1;
+    private String searchText;
     List<QueandansBean.DatasBean> list=new ArrayList<>();
+
+    public Sellhouse_Fragment() {
+    }
+
+    public Sellhouse_Fragment(String searchText) {
+        this.searchText = searchText;
+    }
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_buyhouse, container, false);
@@ -95,8 +103,9 @@ public class Sellhouse_Fragment extends BaseFragment{
     private void intdata() {
         HttpParams params = new HttpParams();
         params.put("pageNo",pageNo);
-        params.put("dType",2);
-        OkGo.<QueandansBean>post(MyUrls.BASEURL + "/app/askinfo/asklist")
+        params.put("searchText",searchText);
+        params.put("qType",2);
+        OkGo.<QueandansBean>post(MyUrls.BASEURL + "/app/askinfo/searchask")
                 .tag(this)
                 .params(params)
                 .execute(new DialogCallback<QueandansBean>(getActivity(),QueandansBean.class){

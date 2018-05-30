@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,11 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.bean.QueandansBean;
 import com.example.administrator.japanhouse.bean.WenDa_Details_Bean;
 import com.example.administrator.japanhouse.bean.WenDa_Details_Pinglun_Bean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdapter;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.WenDa_Detil_Adapter;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
@@ -117,7 +114,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
 
         //加载适配器
         wenda_recy.setLayoutManager(new LinearLayoutManager(this));
-        wenda_recy.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+//        wenda_recy.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         wenda_recy.setNestedScrollingEnabled(false);
         toutiaoAdapter = new WenDa_Detil_Adapter(this,list);
         wenda_recy.setAdapter(toutiaoAdapter);

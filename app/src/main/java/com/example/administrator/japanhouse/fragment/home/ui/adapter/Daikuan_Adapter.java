@@ -3,7 +3,6 @@ package com.example.administrator.japanhouse.fragment.home.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.example.administrator.japanhouse.fragment.home.ui.activity.DaikuanDet
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +40,7 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final LoansBean.DatasBean datasBean = list.get(position);
         final String rateCn = datasBean.getRateCn();
-        double i = Integer.parseInt(rateCn)*1.0d;
+//        double i = Integer.parseInt(rateCn)*1.0d;
         final String city = CacheUtils.get(Constants.COUNTRY);
         //点击跳转
       holder.view.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +57,7 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
                   intent.putExtra("shijian",datasBean.getPaymentScheduleJpn());
                   intent.putExtra("huji",datasBean.getCensusRegisterJpn());
                   intent.putExtra("cailiao",datasBean.getMaterialsJpn());
+                  intent.putExtra("age",datasBean.getAdmissionRequirementsJpn());
               }else{
                   intent.putExtra("id",datasBean.getId());
                   intent.putExtra("name",datasBean.getNameCn());
@@ -68,7 +67,7 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
                   intent.putExtra("fangshi",datasBean.getLendingWayCn());
                   intent.putExtra("shijian",datasBean.getPaymentScheduleCn());
                   intent.putExtra("huji",datasBean.getCensusRegisterCn());
-                  intent.putExtra("cailiao",datasBean.getMaterialsCn());
+                  intent.putExtra("age",datasBean.getAdmissionRequirementsCn());
               }
 
               context.startActivity(intent);
@@ -78,20 +77,20 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
             //贷款名称
             holder.name.setText(datasBean.getNameJpn());
             //贷款范围
-            holder.fanwei.setText("最高"+datasBean.getLimitRangeJpn()+"万");
+            holder.fanwei.setText(String.format(context.getString(R.string.linitRange_max), datasBean.getLimitRangeJpn()));
             //周期
-            holder.zhouqi.setText(datasBean.getAgeLimitJpn()+"个月");
+            holder.zhouqi.setText(String.format(context.getString(R.string.ageLimit_max), datasBean.getAgeLimitJpn()));
             //月息
-            holder.yuexi.setText("月息"+i+"%");
+            holder.yuexi.setText(String.format(context.getString(R.string.rate_max), datasBean.getRateJpn()));
         }else{
             //贷款名称
             holder.name.setText(datasBean.getNameCn());
             //贷款范围
-            holder.fanwei.setText("最高"+datasBean.getLimitRangeCn()+"万");
+            holder.fanwei.setText(String.format(context.getString(R.string.linitRange_max), datasBean.getLimitRangeCn()));
             //周期
-            holder.zhouqi.setText(datasBean.getAgeLimitCn()+"个月");
+            holder.zhouqi.setText(String.format(context.getString(R.string.ageLimit_max), datasBean.getAgeLimitCn()));
             //月息
-            holder.yuexi.setText("月息"+i+"%");
+            holder.yuexi.setText(String.format(context.getString(R.string.rate_max), datasBean.getRateCn()));
         }
 
     }

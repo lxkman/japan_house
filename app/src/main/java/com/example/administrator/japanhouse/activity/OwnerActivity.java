@@ -10,13 +10,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.OwnerAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
+import com.example.administrator.japanhouse.model.OwnerDetailsBean;
+import com.example.administrator.japanhouse.model.OwnerListBean;
+import com.example.administrator.japanhouse.presenter.OwnerPresenter;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,7 +33,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/4/16.
  */
 
-public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickItemListener {
+public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickItemListener, OwnerPresenter.OwnerCallBack {
 
 
     @BindView(R.id.act_owner_back)
@@ -46,6 +49,7 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
     @BindView(R.id.act_owner_recyclerView)
     RecyclerView recyclerview;
     private OwnerAdapter ownerAdapter;
+    private OwnerPresenter ownerPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +61,9 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
         ownerAdapter = new OwnerAdapter(this);
         ownerAdapter.setOnClickItemListener(this);
         recyclerview.setAdapter(ownerAdapter);
+
+        ownerPresenter = new OwnerPresenter(this, this);
+
     }
 
 
@@ -105,5 +112,15 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
                 OwnerWikipediaActivity.invoke(this);
                 break;
         }
+    }
+
+    @Override
+    public void getOwnerList(Response<OwnerListBean> response) {
+
+    }
+
+    @Override
+    public void getOwnerDetails(Response<OwnerDetailsBean> response) {
+
     }
 }

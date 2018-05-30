@@ -5,22 +5,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         >
 
         <ImageView
             android:id="@+id/act_apartment_back"
-            android:padding="10dp"
+            android:padding="15dp"
             android:src="@drawable/back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_centerInParent="true"
             android:textColor="@color/white"
             android:text="@string/activity_free_apartment"
@@ -37,9 +37,15 @@
             />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/act_apartment_recyclerView"
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/act_apartment_springView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/act_apartment_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

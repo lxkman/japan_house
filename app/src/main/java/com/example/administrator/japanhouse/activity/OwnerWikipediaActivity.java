@@ -3,15 +3,25 @@ package com.example.administrator.japanhouse.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.adapter.OwnerAdapter;
 import com.example.administrator.japanhouse.adapter.OwnerWikipediaAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.OwnerDetailsBean;
+import com.example.administrator.japanhouse.model.OwnerListBean;
+import com.example.administrator.japanhouse.presenter.OwnerPresenter;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.model.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,9 +29,14 @@ import com.example.administrator.japanhouse.base.BaseActivity;
  * Created by   admin on 2018/4/16.
  */
 
-public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikipediaAdapter.onItemClickListener{
+public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikipediaAdapter.onItemClickListener, OwnerPresenter.OwnerCallBack{
 
     private RecyclerView mRecyclerView;
+    private OwnerPresenter presenter;
+    private SpringView springView;
+    private int pageNo = 1;
+    private List<OwnerListBean.DatasBean> datas;
+    private OwnerWikipediaAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,10 +44,11 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
         setContentView(R.layout.activity_owner_wikipedia);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.act_owner_wikipedia_recyclerView);
-
+        springView = (SpringView) findViewById(R.id.act_owner_wikipedia_springView);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
-        OwnerWikipediaAdapter adapter = new OwnerWikipediaAdapter(this);
+        datas = new ArrayList<>();
+        adapter = new OwnerWikipediaAdapter(this, datas);
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
 
@@ -43,6 +59,39 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
                 finish();
             }
         });
+
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        datas.clear();
+                        pageNo = 1;
+                        presenter.getOwnerList(pageNo);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pageNo++;
+                        presenter.getOwnerList(pageNo);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+        });
+        springView.setFooter(new DefaultFooter(this));
+        springView.setHeader(new DefaultHeader(this));
+
+        presenter = new OwnerPresenter(this, this);
+        presenter.getOwnerList(pageNo);
     }
 
     public static void invoke(Context context){
@@ -51,7 +100,20 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
     }
 
     @Override
-    public void onItemClick() {
-        OwnerDetailsActivity.invoke(this);
+    public void onItemClick(int itemId) {
+        OwnerDetailsActivity.invoke(this, itemId);
+    }
+
+    @Override
+    public void getOwnerList(Response<OwnerListBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            datas.addAll(response.body().getDatas());
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getOwnerDetails(Response<OwnerDetailsBean> response) {
+
     }
 }

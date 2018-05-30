@@ -5,16 +5,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         >
 
         <ImageView
             android:id="@+id/act_owner_wikipedia_back"
-            android:padding="10dp"
+            android:padding="15dp"
             android:src="@drawable/back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             />
 
         <TextView
@@ -27,10 +27,16 @@
             />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/act_owner_wikipedia_recyclerView"
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/act_owner_wikipedia_springView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/act_owner_wikipedia_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            />
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

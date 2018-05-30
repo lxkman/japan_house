@@ -1,15 +1,11 @@
 package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -40,12 +36,16 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private Fragment currfit;
     private Buyhouse_Fragment buyhouse_fragment;
     private Sellhouse_Fragment sellhouse_fragment;
-    private int type=1;
+    private int type = 1;
+    private String searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        searchText = getIntent().getStringExtra("searchText");
+
         initView();
     }
 
@@ -72,79 +72,78 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         liner3.setOnClickListener(this);
         liner4.setOnClickListener(this);
         //默认显示界面
-        if(buyhouse_fragment==null){
-            buyhouse_fragment = new Buyhouse_Fragment();
+        if (buyhouse_fragment == null) {
+            buyhouse_fragment = new Buyhouse_Fragment(searchText);
         }
         AddFragment(buyhouse_fragment);
 
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @SuppressLint("ResourceAsColor")
+
     @Override
     public void onClick(View view) {
-          switch (view.getId()){
-              case R.id.img_beak:
-                  finish();
-                  break;
-              case R.id.search:
-                  //跳转搜索页面
-                  Intent intent1 = new Intent(QuestionActivity.this, SearchActivity.class);
-                  startActivity(intent1);
-                  break;
-              case R.id.liner1:
-                  text_buyfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                  text_sellfang.setTextColor(getResources().getColor(R.color.black));
-                     if(buyhouse_fragment==null){
-                         buyhouse_fragment = new Buyhouse_Fragment();
-                     }
-                     AddFragment(buyhouse_fragment);
-                  type=1;
+        switch (view.getId()) {
+            case R.id.img_beak:
+                finish();
+                break;
+            case R.id.search:
+                //跳转搜索页面
+                Intent intent1 = new Intent(QuestionActivity.this, SearchActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.liner1:
+                text_buyfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                text_sellfang.setTextColor(getResources().getColor(R.color.black));
+                if (buyhouse_fragment == null) {
+                    buyhouse_fragment = new Buyhouse_Fragment(searchText);
+                }
+                AddFragment(buyhouse_fragment);
+                type = 1;
 
-                  //转换页面
-                  break;
-              case R.id.liner2:
-                  text_sellfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                  text_buyfang.setTextColor(getResources().getColor(R.color.black));
-                  if(sellhouse_fragment==null){
-                      sellhouse_fragment = new Sellhouse_Fragment();
-                  }
-                  AddFragment(sellhouse_fragment);
-                  type=2;
-                  //转换页面
-                  break;
-              case R.id.liner3:
-                  Intent intent = new Intent(QuestionActivity.this, QuizActivity.class);
-                  intent.putExtra("type",type);
-                  startActivity(intent);
-                  break;
-              case R.id.liner4:
-                  //转换页面
-                  Intent wenda = new Intent(QuestionActivity.this, WendaItemActivity.class);
-                  startActivity(wenda);
-                  break;
+                //转换页面
+                break;
+            case R.id.liner2:
+                text_sellfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                text_buyfang.setTextColor(getResources().getColor(R.color.black));
+                if (sellhouse_fragment == null) {
+                    sellhouse_fragment = new Sellhouse_Fragment(searchText);
+                }
+                AddFragment(sellhouse_fragment);
+                type = 2;
+                //转换页面
+                break;
+            case R.id.liner3:
+                Intent intent = new Intent(QuestionActivity.this, QuizActivity.class);
+                intent.putExtra("type", type);
+                startActivity(intent);
+                break;
+            case R.id.liner4:
+                //转换页面
+                Intent wenda = new Intent(QuestionActivity.this, WendaItemActivity.class);
+                startActivity(wenda);
+                break;
 
 
-          }
+        }
     }
 
 
     /*
     * 动态添加fragment方法
     * */
-    public void AddFragment(Fragment f){
+    public void AddFragment(Fragment f) {
 
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        if(currfit !=null){
+        if (currfit != null) {
             fragmentTransaction.hide(currfit);
 
         }
-        if(!f.isAdded()){
-            fragmentTransaction.add(R.id.fl,f);
+        if (!f.isAdded()) {
+            fragmentTransaction.add(R.id.fl, f);
         }
         fragmentTransaction.show(f);
         fragmentTransaction.commit();
-        currfit =f;
+        currfit = f;
 
 
     }

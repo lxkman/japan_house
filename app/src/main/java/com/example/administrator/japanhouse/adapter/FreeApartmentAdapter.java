@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.adapter;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,25 +17,39 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.model.FreeApartmentBean;
 
-import org.w3c.dom.Text;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by   admin on 2018/4/17.
  */
 
-public class FreeApartmentAdapter extends RecyclerView.Adapter{
+public class FreeApartmentAdapter extends RecyclerView.Adapter {
 
     private Activity activity;
 
+    private String charsStr = "0123456789";
+
     private onClickListener onClickListener;
 
-    public FreeApartmentAdapter(Activity activity) {
+    private List<FreeApartmentBean.DatasBean> list;
+
+    private Map<TextView, CountDownTimer> map;
+
+    public FreeApartmentAdapter(Activity activity, List<FreeApartmentBean.DatasBean> list) {
         this.activity = activity;
+        this.list = list;
+        map = new HashMap<>();
+
     }
 
-    public void setOnClickListener(onClickListener onClickListener){
+    public void setOnClickListener(onClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
@@ -45,32 +60,56 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-        if (viewHolder instanceof FreeApartmentViewHolder) {
-            FreeApartmentViewHolder holder = (FreeApartmentViewHolder) viewHolder;
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
+        if (viewHolder instanceof FreeApartmentViewHolder && list != null) {
+            final FreeApartmentViewHolder holder = (FreeApartmentViewHolder) viewHolder;
+//            holder.setIsRecyclable(false);
+
+            long l = list.get(i).getEndTime() - list.get(i).getCurrentTime();
+
+            long days = l / (1000 * 60 * 60 * 24);
+            long hours = (l - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+            long minutes = (l - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
+            SpannableStringBuilder builder = new SpannableStringBuilder(
+                    String.format(activity.getString(R.string.item_apartment_time), days, hours, minutes));
+
+            char[] chars = builder.toString().toCharArray();
+            for (int j = 0; j < chars.length; j++) {
+                if (charsStr.contains(String.valueOf(chars[j]))) {
+                    builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FE972A")), j, j + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            holder.tvTime.setText(builder);
 
             //实现平方米的显示
             SpannableString m2 = new SpannableString("m2");
             m2.setSpan(new RelativeSizeSpan(0.5f), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             m2.setSpan(new SuperscriptSpan(), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("17500元/");
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(
+                    MyApplication.isJapanese() ? list.get(i).getPriceJpn() + "元/" : list.get(i).getPriceCn() + "元/");
             spannableStringBuilder.append(m2);
             holder.tvPrices.setText(spannableStringBuilder);
 
-            SpannableStringBuilder builder = new SpannableStringBuilder(holder.tvTime.getText().toString());
-            ForegroundColorSpan span1 = new ForegroundColorSpan(Color.parseColor("#FE972A"));
-            ForegroundColorSpan span2 = new ForegroundColorSpan(Color.parseColor("#FE972A"));
-            ForegroundColorSpan span3 = new ForegroundColorSpan(Color.parseColor("#FE972A"));
-            builder.setSpan(span1, 2, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            builder.setSpan(span2, 5, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            builder.setSpan(span3, 9, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            holder.tvTime.setText(builder);
+            Glide.with(activity)
+                    .load(list.get(i).getImages())
+                    .into(holder.icon);
+
+            holder.tvNum.setText(String.format(activity.getString(R.string.item_apartment_people), list.get(i).getPeopleCount()));
+
+            holder.tvTitle.setText(MyApplication.isJapanese() ? list.get(i).getActivityNameJpn() : list.get(i).getActivityNameCn());
 
             holder.tvSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListener.onSignUpClickListener();
+                    onClickListener.onSignUpClickListener(list.get(i).getId());
+                }
+            });
+
+            holder.tvPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onCallClickListener(list.get(i).getKfPhone());
                 }
             });
 
@@ -79,7 +118,7 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return 4;
+        return list.size();
     }
 
     class FreeApartmentViewHolder extends RecyclerView.ViewHolder {
@@ -103,7 +142,10 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter{
         }
     }
 
-    public interface onClickListener{
-        void onSignUpClickListener();
+    public interface onClickListener {
+        void onSignUpClickListener(int actionId);
+
+        void onCallClickListener(String tel);
     }
+
 }

@@ -1,6 +1,5 @@
 package com.example.administrator.japanhouse.fragment.home.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +29,6 @@ import java.util.List;
 /**
  * Created by Mr赵 on 2018/4/11.
  */
-@SuppressLint("ValidFragment")
 public class Buyhouse_Fragment extends BaseFragment{
 
     private RecyclerView buy_recyclwe;
@@ -43,15 +41,12 @@ public class Buyhouse_Fragment extends BaseFragment{
     public Buyhouse_Fragment() {
     }
 
-    public Buyhouse_Fragment(String searchText) {
-        this.searchText = searchText;
-    }
-
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_buyhouse, container, false);
         buy_recyclwe = (RecyclerView) view.findViewById(R.id.Buy_recycler);
         sp_view = (SpringView) view.findViewById(R.id.sp_view);
+        searchText=getArguments().getString("searchText");
         intdata();
 
         return view;

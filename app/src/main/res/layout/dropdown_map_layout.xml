@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.baidu.mapapi.map.MapView
+    <com.baidu.mapapi.map.TextureMapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true">
-    </com.baidu.mapapi.map.MapView>
+    </com.baidu.mapapi.map.TextureMapView>
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"

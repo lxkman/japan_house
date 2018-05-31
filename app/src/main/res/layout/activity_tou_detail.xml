@@ -40,6 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
        <LinearLayout
+           android:focusable="true"
+        android:focusableInTouchMode="true"
            android:orientation="vertical"
            android:layout_width="match_parent"
            android:layout_height="match_parent">
@@ -113,6 +115,7 @@
                android:background="@color/gray1"/>
 
              <android.support.v7.widget.RecyclerView
+
                  android:id="@+id/detail_recy"
                  android:layout_margin="10dp"
                  android:layout_width="match_parent"

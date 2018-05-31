@@ -300,7 +300,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(NewHouseActivity.this, NewHousedetailsActivity.class);
-                                intent.putExtra("houseId",mDatas.get(position).getId());
+                                intent.putExtra("houseId",mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });

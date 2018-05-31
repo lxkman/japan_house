@@ -12,7 +12,7 @@ public class HouseDetailsBean implements Serializable{
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"id":8,"locationLevel1Cn":"","locationLevel2Cn":"","locationLevel3Cn":"15","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","createTime":1526627538000,"updateTime":1526627540000,"isDeleted":0,"status":"2","houseType":"4","tableFlag":"","communityId":1,"longitude":100,"latitude":100,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","returnRateCn":"回报率（中文）","returnRateJpn":"回报率","articleNameCn":"物件名称","articleNameJpn":"物件名称","constructionCompanyCn":"建筑公司","constructionCompanyJpn":"建筑公司","orientationCn":"朝向","orientationJpn":"朝向","buildingConstructionCn":"建筑构造","buildingConstructionJpn":"建筑构造","householdsCn":"总户数","householdsJpn":"总户数","restsCn":"100000","restsJpn":"100000","sellingPriceCn":"","sellingPriceJpn":"","doichoIrinoDateCn":"入居日期","doichoIrinoDateJpn":"入居日期","ownershipCn":"所有权","ownershipJpn":"所有权","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","yearBuiltCn":"建筑年份","yearBuiltJpn":"建筑年份","floorCn":"楼层","floorJpn":"楼层","managementSocietyCn":"管理会社","managementSocietyJpn":"管理会社","manageCn":"管理","manageJpn":"管理","repairChargeCn":"修缮费","repairChargeJpn":"修缮费","administrativeFeeCn":"管理费","administrativeFeeJpn":"管理费","districtCn":"地段","districtJpn":"地段","specificLocationCn":"1","specificLocationJpn":"1","trainStationCn":"1","trainStationJpn":"1","stationDistanceCn":"车站距离","stationDistanceJpn":"车站距离","parkingSpaceCn":"停车位","parkingSpaceJpn":"停车位","indoorEquipmentCn":"室内设备","indoorEquipmentJpn":"室内设备","kitchenCn":"厨房","kitchenJpn":"厨房","toiletCn":"卫生间","toiletJpn":"卫生间","showersCn":"浴室","showersJpn":"浴室","testimonialCn":"证明书","testimonialJpn":"证明书","performanceCn":"性能","performanceJpn":"性能","defectsEnsureCn":"瑕疵保证","defectsEnsureJpn":"瑕疵保证","sceneryCn":"窗外风景","sceneryJpn":"窗外风景","surroundingsCn":"周边环境","surroundingsJpn":"周边环境","commonPartsCn":"共用部分","commonPartsJpn":"共用部分","remarksCn":"备注","remarksJpn":"备注","leaseTypeCn":"出租类型","leaseTypeJpn":"出租类型","rentCn":"10100","rentJpn":"10000","shopSignsCn":"商铺招牌","shopSignsJpn":"商铺招牌","outdoorSettingCn":"室外设置","outdoorSettingJpn":"室外设置","raisingPlateCn":"举架高度","raisingPlateJpn":"举架高度","characteristicCn":"特征","characteristicJpn":"特征","conditionCn":"条件","conditionJpn":"条件","privateSectionCn":"私有部分","privateSectionJpn":"私有部分","doichoIrinoConditionCn":"入居条件","doichoIrinoConditionJpn":"入居条件","gasElectricCn":"煤气和电力","gasElectricJpn":"煤气和电力","signYearCn":"签约年限","signYearJpn":"签约年限","chargeCn":"是是是","chargeJpn":"是是是","roomStatusCn":"房间状况(中文)","roomStatusJpn":"房间状况","videoUrls":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","areaSearch":50,"sellingPriceSearch":100000,"yearBuiltSearch":1994,"rentSearch":0,"floorSearch":0,"stationDistanceSearch":0,"brokerId":0,"popularChoiceCn":"","popularChoiceJpn":"","conditionsCn":"","conditionsJpn":"","hwdcBroker":{"id":8,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","nickname":"昵称","sex":"0","wechatId":null,"caeateTime":1525781849000,"updateTime":1526627540000,"isDeleted":0,"status":"2"}}
+     * datas : {"id":8,"locationLevel1Cn":"1","locationLevel2Cn":"2","locationLevel3Cn":"3","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","createTime":1526627538000,"updateTime":1526627540000,"isDeleted":0,"status":"2","houseType":"5","tableFlag":"0","communityId":1,"longitude":100,"latitude":100,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","returnRateCn":"回报率（中文）","returnRateJpn":"回报率","articleNameCn":"物件名称","articleNameJpn":"物件名称","constructionCompanyCn":"建筑公司","constructionCompanyJpn":"建筑公司","orientationCn":"朝向","orientationJpn":"朝向","buildingConstructionCn":"建筑构造","buildingConstructionJpn":"建筑构造","householdsCn":"总户数","householdsJpn":"总户数","restsCn":"100000","restsJpn":"100000","sellingPriceCn":"","sellingPriceJpn":"","doichoIrinoDateCn":"入居日期","doichoIrinoDateJpn":"入居日期","ownershipCn":"所有权","ownershipJpn":"所有权","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","yearBuiltCn":"建筑年份","yearBuiltJpn":"建筑年份","floorCn":"楼层","floorJpn":"楼层","managementSocietyCn":"管理会社","managementSocietyJpn":"管理会社","manageCn":"管理","manageJpn":"管理","repairChargeCn":"修缮费","repairChargeJpn":"修缮费","administrativeFeeCn":"管理费","administrativeFeeJpn":"管理费","districtCn":"地段","districtJpn":"地段","specificLocationCn":"1","specificLocationJpn":"1","trainStationCn":"1","trainStationJpn":"1","stationDistanceCn":"车站距离","stationDistanceJpn":"车站距离","parkingSpaceCn":"停车位","parkingSpaceJpn":"停车位","indoorEquipmentCn":"室内设备","indoorEquipmentJpn":"室内设备","kitchenCn":"厨房","kitchenJpn":"厨房","toiletCn":"卫生间","toiletJpn":"卫生间","showersCn":"浴室","showersJpn":"浴室","testimonialCn":"证明书","testimonialJpn":"证明书","performanceCn":"性能","performanceJpn":"性能","defectsEnsureCn":"瑕疵保证","defectsEnsureJpn":"瑕疵保证","sceneryCn":"窗外风景","sceneryJpn":"窗外风景","surroundingsCn":"周边环境","surroundingsJpn":"周边环境","commonPartsCn":"共用部分","commonPartsJpn":"共用部分","remarksCn":"备注","remarksJpn":"备注","leaseTypeCn":"出租类型","leaseTypeJpn":"出租类型","rentCn":"10100","rentJpn":"10000","shopSignsCn":"商铺招牌","shopSignsJpn":"商铺招牌","outdoorSettingCn":"室外设置","outdoorSettingJpn":"室外设置","raisingPlateCn":"举架高度","raisingPlateJpn":"举架高度","characteristicCn":"特征","characteristicJpn":"特征","conditionCn":"条件","conditionJpn":"条件","privateSectionCn":"私有部分","privateSectionJpn":"私有部分","doichoIrinoConditionCn":"入居条件","doichoIrinoConditionJpn":"入居条件","gasElectricCn":"煤气和电力","gasElectricJpn":"煤气和电力","signYearCn":"签约年限","signYearJpn":"签约年限","chargeCn":"是是是","chargeJpn":"是是是","roomStatusCn":"房间状况(中文)","roomStatusJpn":"房间状况","videoUrls":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","areaSearch":8,"sellingPriceSearch":8,"yearBuiltSearch":1994,"rentSearch":0,"floorSearch":0,"stationDistanceSearch":0,"brokerId":0,"popularChoiceCn":"","popularChoiceJpn":"","conditionsCn":"","conditionsJpn":"","hwdcBroker":{"id":8,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1526627540000,"isDeleted":0,"status":"2"}}
      */
 
     private String msg;
@@ -46,9 +46,9 @@ public class HouseDetailsBean implements Serializable{
     public static class DatasBean implements Serializable{
         /**
          * id : 8
-         * locationLevel1Cn :
-         * locationLevel2Cn :
-         * locationLevel3Cn : 15
+         * locationLevel1Cn : 1
+         * locationLevel2Cn : 2
+         * locationLevel3Cn : 3
          * locationLevel4Cn :
          * locationLevel1Jpn :
          * locationLevel2Jpn :
@@ -58,8 +58,8 @@ public class HouseDetailsBean implements Serializable{
          * updateTime : 1526627540000
          * isDeleted : 0
          * status : 2
-         * houseType : 4
-         * tableFlag :
+         * houseType : 5
+         * tableFlag : 0
          * communityId : 1
          * longitude : 100
          * latitude : 100
@@ -77,8 +77,8 @@ public class HouseDetailsBean implements Serializable{
          * buildingConstructionJpn : 建筑构造
          * householdsCn : 总户数
          * householdsJpn : 总户数
-         * restsCn : 100000：其他
-         * restsJpn : 100000：其他
+         * restsCn : 100000
+         * restsJpn : 100000
          * sellingPriceCn :
          * sellingPriceJpn :
          * doichoIrinoDateCn : 入居日期
@@ -105,8 +105,8 @@ public class HouseDetailsBean implements Serializable{
          * districtJpn : 地段
          * specificLocationCn : 1
          * specificLocationJpn : 1
-         * trainStationCn : 1 主要车站
-         * trainStationJpn : 1 主要车站
+         * trainStationCn : 1
+         * trainStationJpn : 1
          * stationDistanceCn : 车站距离
          * stationDistanceJpn : 车站距离
          * parkingSpaceCn : 停车位
@@ -162,8 +162,8 @@ public class HouseDetailsBean implements Serializable{
          * videoUrls :
          * videoImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
          * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
-         * areaSearch : 50
-         * sellingPriceSearch : 100000
+         * areaSearch : 8
+         * sellingPriceSearch : 8
          * yearBuiltSearch : 1994
          * rentSearch : 0
          * floorSearch : 0
@@ -173,7 +173,7 @@ public class HouseDetailsBean implements Serializable{
          * popularChoiceJpn :
          * conditionsCn :
          * conditionsJpn :
-         * hwdcBroker : {"id":8,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","nickname":"昵称","sex":"0","wechatId":null,"caeateTime":1525781849000,"updateTime":1526627540000,"isDeleted":0,"status":"2"}
+         * hwdcBroker : {"id":8,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1526627540000,"isDeleted":0,"status":"2"}
          */
 
         private int id;
@@ -1350,10 +1350,10 @@ public class HouseDetailsBean implements Serializable{
              * inYears : 3
              * period : 1
              * counts : 60
-             * pic : http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg
+             * pic : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg
              * nickname : 昵称
              * sex : 0
-             * wechatId : null
+             * wechatId : 123456
              * caeateTime : 1525781849000
              * updateTime : 1526627540000
              * isDeleted : 0
@@ -1373,7 +1373,7 @@ public class HouseDetailsBean implements Serializable{
             private String pic;
             private String nickname;
             private String sex;
-            private Object wechatId;
+            private String wechatId;
             private long caeateTime;
             private long updateTime;
             private int isDeleted;
@@ -1483,11 +1483,11 @@ public class HouseDetailsBean implements Serializable{
                 this.sex = sex;
             }
 
-            public Object getWechatId() {
+            public String getWechatId() {
                 return wechatId;
             }
 
-            public void setWechatId(Object wechatId) {
+            public void setWechatId(String wechatId) {
                 this.wechatId = wechatId;
             }
 

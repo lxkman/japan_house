@@ -163,6 +163,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     //详情字段接口
     private void initDetailsNet() {
         houseId = getIntent().getStringExtra("houseId");
+        Log.d("NewHousedetailsActivity", houseId+"-----------");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -171,7 +172,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         }
         HttpParams params = new HttpParams();
 //        if (houseId!=null&&!houseId.equals("")){
-        params.put("hId", "8");
+        params.put("hId",houseId);
         OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
                 .tag(this)
                 .params(params)
@@ -503,7 +504,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
         params.put("token", token);//用户登录标识
         params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
-        params.put("hId", "8");
+        params.put("hId",houseId);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/insertcollectionhouse")
                 .tag(this)
                 .params(params)
@@ -514,7 +515,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")){
-                            imgStart.setImageResource(R.drawable.shoucangg2);
+                            imgStart.setImageResource(R.drawable.shoucang2);
                             Toast.makeText(NewHousedetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
@@ -531,7 +532,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
         params.put("token", token);//用户登录标识
         params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
-        params.put("hId", "8");
+        params.put("hId",houseId);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/deletecollectionhouse")
                 .tag(this)
                 .params(params)

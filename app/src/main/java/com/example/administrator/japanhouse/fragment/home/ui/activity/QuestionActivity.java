@@ -73,7 +73,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         liner4.setOnClickListener(this);
         //默认显示界面
         if (buyhouse_fragment == null) {
-            buyhouse_fragment = new Buyhouse_Fragment(searchText);
+            buyhouse_fragment = new Buyhouse_Fragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("searchText", searchText);
+            buyhouse_fragment.setArguments(bundle);
         }
         AddFragment(buyhouse_fragment);
 
@@ -94,7 +97,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 text_buyfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 text_sellfang.setTextColor(getResources().getColor(R.color.black));
                 if (buyhouse_fragment == null) {
-                    buyhouse_fragment = new Buyhouse_Fragment(searchText);
+                    buyhouse_fragment = new Buyhouse_Fragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("searchText", searchText);
+                    buyhouse_fragment.setArguments(bundle);
                 }
                 AddFragment(buyhouse_fragment);
                 type = 1;
@@ -105,7 +111,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 text_sellfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 text_buyfang.setTextColor(getResources().getColor(R.color.black));
                 if (sellhouse_fragment == null) {
-                    sellhouse_fragment = new Sellhouse_Fragment(searchText);
+                    sellhouse_fragment = new Sellhouse_Fragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("searchText", searchText);
+                    sellhouse_fragment.setArguments(bundle);
                 }
                 AddFragment(sellhouse_fragment);
                 type = 2;

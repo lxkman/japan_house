@@ -16,6 +16,8 @@ import com.example.administrator.japanhouse.fragment.home.ui.activity.BaikeDetai
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,6 +66,9 @@ public class BaikeAdapter extends RecyclerView.Adapter<BaikeAdapter.ViewHolder> 
             holder.neirong.setText(datasBean.getTitleCn());
         }
         holder.person.setText(datasBean.getReadNum() + context.getString(R.string.people_readNum));
+        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd");
+        String format = sdf.format(new Date(datasBean.getCreateTime()));
+        holder.time.setText(format);
         Glide.with(context)
                 .load(datasBean.getImageUrl())
                 .into(holder.tou);

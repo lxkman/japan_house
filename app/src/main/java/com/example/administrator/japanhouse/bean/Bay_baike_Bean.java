@@ -64,7 +64,7 @@ public class Bay_baike_Bean {
         private int isDeleted;
         private String status;
         private int readNum;
-        private Object createTime;
+        private long createTime;
         private String imageUrl;
         private String contentCn;
         private String contentJpn;
@@ -125,11 +125,11 @@ public class Bay_baike_Bean {
             this.readNum = readNum;
         }
 
-        public Object getCreateTime() {
+        public long getCreateTime() {
             return createTime;
         }
 
-        public void setCreateTime(Object createTime) {
+        public void setCreateTime(long createTime) {
             this.createTime = createTime;
         }
 

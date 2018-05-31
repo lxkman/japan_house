@@ -29,7 +29,6 @@ import java.util.List;
 /**
  * Created by Mr赵 on 2018/4/11.
  */
-
 public class Sellhouse_Fragment extends BaseFragment{
 
     private RecyclerView buy_recyclwe;
@@ -42,15 +41,12 @@ public class Sellhouse_Fragment extends BaseFragment{
     public Sellhouse_Fragment() {
     }
 
-    public Sellhouse_Fragment(String searchText) {
-        this.searchText = searchText;
-    }
-
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_buyhouse, container, false);
         sp_view = (SpringView) view.findViewById(R.id.sp_view);
         buy_recyclwe = (RecyclerView) view.findViewById(R.id.Buy_recycler);
+        searchText=getArguments().getString("searchText");
         intdata();
         return view;
     }

@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * Created by Mr赵 on 2018/4/11.
  */
-
+@SuppressLint("ValidFragment")
 public class Sellhouse_Fragment extends BaseFragment{
 
     private RecyclerView buy_recyclwe;

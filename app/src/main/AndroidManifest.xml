@@ -157,7 +157,8 @@
         <activity
             android:name=".fragment.home.HomeSearchActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".fragment.home.ui.activity.QuestionActivity" />
+        <activity android:name=".fragment.home.ui.activity.QuestionActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".fragment.home.ui.activity.QuizActivity" />
         <activity android:name=".fragment.home.ui.activity.WendaItemActivity" />
         <activity android:name=".fragment.home.ui.activity.SearchActivity" />

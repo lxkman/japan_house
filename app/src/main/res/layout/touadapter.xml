@@ -6,9 +6,9 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imag_tou"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:src="@drawable/fangwu_xxxp"
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+         android:background="@drawable/fangwu_xxxp"
         />
     <LinearLayout
         android:layout_marginLeft="10dp"

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/item_zuijin_layout"
     >
 
     <LinearLayout
@@ -22,7 +23,7 @@
                     <ImageView
                         android:scaleType="fitXY"
                         android:id="@+id/img_house"
-                        android:src="@drawable/house"
+                        android:background="@drawable/house"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                     <ImageView
@@ -95,7 +96,8 @@
                             android:id="@+id/tv_house_area"
                             android:gravity="center_vertical"
                             android:textSize="13sp"
-                            android:text="  175㎡"
+                            android:layout_marginLeft="8dp"
+                            android:text="175㎡"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                     </LinearLayout>

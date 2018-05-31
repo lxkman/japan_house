@@ -27,6 +27,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.BieShuListBean;
+import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.BannerFragment;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
@@ -113,7 +114,9 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     private VillaDetailsBean.DatasBean villaDetailsBean;
     private boolean isja;
     private String houseId;
-
+    private String token;
+    private int isSc;
+    private boolean isStart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,8 +127,9 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         ButterKnife.bind(this);
         //houseId(别墅id)
         houseId = getIntent().getStringExtra("houseId");
+        token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         villaDetailsPresenter = new VillaDetailsPresenter(this, this);
-        villaDetailsPresenter.getVillaDetails("1");
+        villaDetailsPresenter.getVillaDetails(houseId,token);
 
         //banner
         initViewPager();
@@ -165,6 +169,14 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         tvJianzhuArea.setText(isja ? villaDetailsBean.getCoveredAreaJpn() : villaDetailsBean.getCoveredAreaCn());
         tvHouseJutiweizhi.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
         tvDetailsLocation.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
+        isSc = villaDetailsBean.getIsSc();
+        if (isSc==0){//收藏
+            isStart=true;
+            imgStart.setImageResource(R.drawable.shoucang2);
+        }else {//未收藏
+            isStart=false;
+            imgStart.setImageResource(R.drawable.shoucang);
+        }
     }
 
     public void setMyExtensionModule() {
@@ -342,7 +354,13 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.img_start:
-                Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+                if (!isStart){
+                    initStart();
+                    isStart=true;
+                }else {
+                    initUnStart();
+                    isStart=false;
+                }
                 break;
             case R.id.back_img:
                 finish();
@@ -354,7 +372,58 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
                 break;
         }
     }
+    //收藏
+    private void initStart() {
+        HttpParams params = new HttpParams();
+        params.put("hType", 4);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
+        params.put("token", token);//用户登录标识
+        params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
+        params.put("hId",houseId);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/insertcollectionhouse")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(BieshudetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")){
+                            imgStart.setImageResource(R.drawable.shoucang2);
+                            Toast.makeText(BieshudetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(BieshudetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
+    //取消收藏
+    private void initUnStart() {
+        HttpParams params = new HttpParams();
+        params.put("hType", 4);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
+        params.put("token", token);//用户登录标识
+        params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
+        params.put("hId",houseId);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/deletecollectionhouse")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(BieshudetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")){
+                            imgStart.setImageResource(R.drawable.shoucang);
+                            Toast.makeText(BieshudetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(BieshudetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭

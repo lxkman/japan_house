@@ -228,7 +228,15 @@ public class ShangYeDetailsBean {
         private String specificLocationCn;
         private String specificLocationJpn;
         private HwdcBrokerBean hwdcBroker;
+        private int isSc;
 
+        public int getIsSc() {
+            return isSc;
+        }
+
+        public void setIsSc(int isSc) {
+            this.isSc = isSc;
+        }
         public int getId() {
             return id;
         }

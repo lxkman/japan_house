@@ -1,7 +1,6 @@
 package com.example.administrator.japanhouse.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 /**
  * Created by   admin on 2018/5/23.
@@ -9,20 +8,16 @@ import android.os.Parcelable;
 
 public class VillaDetailsBean {
 
+
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"id":1,"brokerId":1,"houseType":"","titleCn":"别墅标题","titleJpn":"别墅标题","articleNameCn":"","articleNameJpn":"","homesLayerCn":"","homesLayerJpn":"","areaCn":"","areaJpn":"","ownershipCn":"","ownershipJpn":"","orientationCn":"","orientationJpn":"","architecturalCn":"","architecturalJpn":"","yearBuiltCn":"","yearBuiltJpn":"","districtCn":"","districtJpn":"","trainStationCn":"1","trainStationJpn":"1","specificLocationCn":"1","specificLocationJpn":"1","streetDistanceCn":"","streetDistanceJpn":"","landCn":"","landJpn":"","stationDistanceCn":"","stationDistanceJpn":"","indoorFacilityCn":"","indoorFacilityJpn":"","performanceCn":"","performanceJpn":"","testimonialCn":"","testimonialJpn":"","defectsEnsureCn":"","defectsEnsureJpn":"","coveredAreaCn":"","coveredAreaJpn":"","sellingPriceCn":"","sellingPriceJpn":"","buildingConstructionCn":"","buildingConstructionJpn":"","doichoIrinoDateCn":"","doichoIrinoDateJpn":"","parkCn":"","parkJpn":"","buildingWrap":"","plotRatio":"","currentSituationCn":"","currentSituationJpn":"","publicInformationDayCn":"","publicInformationDayJpn":"","kitchenCn":"","kitchenJpn":"","toiletCn":"","toiletJpn":"","showerRoomCn":"","showerRoomJpn":"","remarkCn":"","remarkJpn":"","villaTypeCn":"","villaTypeJpn":"","videoUrls":"","videoImgs":"","roomImgs":"","floorSearch":true,"areaSearch":0,"sellingPriceSearch":0,"yearBuiltSearch":0,"status":"","createTime":1527044102585,"updateTime":1527044102585,"isDeleted":0,"tableFlag":"","longitude":0,"latitude":0,"locationLevel1Cn":"","locationLevel2Cn":"","locationLevel3Cn":"","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","hwdcBroker":{"id":1,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg","nickname":"昵称","sex":"0","wechatId":null,"caeateTime":1525781849000,"updateTime":null,"isDeleted":0,"status":null}}
+     * datas : {"id":1,"brokerId":1,"houseType":"户型（汉语、日语通用）","titleCn":"别墅标题","titleJpn":"别墅标题","articleNameCn":"物件名称","articleNameJpn":"物件名称","homesLayerCn":"楼层","homesLayerJpn":"楼层","areaCn":"土地面积","areaJpn":"土地面积","ownershipCn":"所有权","ownershipJpn":"所有权","orientationCn":"朝向","orientationJpn":"朝向","architecturalCn":"建筑设计公司","architecturalJpn":"建筑设计公司","yearBuiltCn":"建筑年份","yearBuiltJpn":"建筑年份","districtCn":"地段","districtJpn":"地段","trainStationCn":"主要车站","trainStationJpn":"主要车站","specificLocationCn":"具体位置","specificLocationJpn":"具体位置","streetDistanceCn":"道路临街距离","streetDistanceJpn":"道路临街距离","landCn":"土地","landJpn":"土地","stationDistanceCn":"车站距离","stationDistanceJpn":"车站距离","indoorFacilityCn":"室内设施","indoorFacilityJpn":"室内设施","performanceCn":"性能","performanceJpn":"性能","testimonialCn":"证明书","testimonialJpn":"证明书","defectsEnsureCn":"瑕疵保证","defectsEnsureJpn":"瑕疵保证","coveredAreaCn":"建筑面积","coveredAreaJpn":"建筑面积","sellingPriceCn":"售价","sellingPriceJpn":"售价","buildingConstructionCn":"建筑构造","buildingConstructionJpn":"建筑构造","doichoIrinoDateCn":"入居日期","doichoIrinoDateJpn":"入居日期","parkCn":"停车场","parkJpn":"停车场","buildingWrap":"建筑覆盖（中文、日文共用）","plotRatio":"建筑覆盖（中文、日文共用）","currentSituationCn":"现状","currentSituationJpn":"现状","publicInformationDayCn":"公开情报日","publicInformationDayJpn":"公开情报日","kitchenCn":"厨房","kitchenJpn":"厨房","toiletCn":"卫生间","toiletJpn":"卫生间","showerRoomCn":"浴室","showerRoomJpn":"浴室","remarkCn":"备注","remarkJpn":"备注","villaTypeCn":"别墅类型","villaTypeJpn":"别墅类型","videoUrls":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","floorSearch":true,"areaSearch":10,"sellingPriceSearch":10,"yearBuiltSearch":10,"status":"","createTime":1527067561000,"updateTime":1527067564000,"isDeleted":0,"tableFlag":"4","longitude":1,"latitude":1,"locationLevel1Cn":"1","locationLevel2Cn":"2","locationLevel3Cn":"3","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","hwdcBroker":{"id":1,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1527067564000,"isDeleted":0,"status":""},"isSc":1}
      */
 
     private String msg;
     private String code;
     private DatasBean datas;
-
-    protected VillaDetailsBean(Parcel in) {
-        msg = in.readString();
-        code = in.readString();
-    }
 
     public String getMsg() {
         return msg;
@@ -48,114 +43,97 @@ public class VillaDetailsBean {
         this.datas = datas;
     }
 
-    public static class DatasBean implements Parcelable {
+    public static class DatasBean implements Serializable{
         /**
-         "id": 1,  //别墅ID
-         "brokerId": 1, //经纪人ID
-         "houseType": "", //别墅类型
-         "titleCn": "别墅标题",
-         "titleJpn": "别墅标题",
-         "articleNameCn": "", //物件名称（汉语）
-         "articleNameJpn": "",
-         "homesLayerCn": "", //楼层（中文）
-         "homesLayerJpn": "",
-         "areaCn": "", //土地面积（中文） 平方米
-         "areaJpn": "",
-         "ownershipCn": "", //所有权(中文)
-         "ownershipJpn": "",
-         "orientationCn": "", //朝向(中文)
-         "orientationJpn": "",
-         "architecturalCn": "", //建筑设计公司(中文)
-         "architecturalJpn": "",
-         "yearBuiltCn": "", //建筑年份(中文)
-         "yearBuiltJpn": "",
-         "districtCn": "", //地段(中文)
-         "districtJpn": "",
-         "trainStationCn": "1", //主要车站
-         "trainStationJpn": "1",
-         "specificLocationCn": "1", //具体位置（中文）
-         "specificLocationJpn": "1",
-         "streetDistanceCn": "", //道路临街距离(中文)
-         "streetDistanceJpn": "",
-         "landCn": "", //土地(中文)
-         "landJpn": "",
-         "stationDistanceCn": "", //车站距离（中文）
-         "stationDistanceJpn": "",
-         "indoorFacilityCn": "", //室内设施（中文）
-         "indoorFacilityJpn": "",
-         "performanceCn": "", //性能（中文）
-         "performanceJpn": "",
-         "testimonialCn": "", //证明书（中文）
-         "testimonialJpn": "",
-         "defectsEnsureCn": "", //瑕疵保证（中文）
-         "defectsEnsureJpn": "",
-         "coveredAreaCn": "", //建筑面积（中文）
-         "coveredAreaJpn": "",
-         "sellingPriceCn": "", //售价(中文)
-         "sellingPriceJpn": "",
-         "buildingConstructionCn": "", //建筑构造(中文)
-         "buildingConstructionJpn": "",
-         "doichoIrinoDateCn": "", //入居日期（中文）
-         "doichoIrinoDateJpn": "",
-         "parkCn": "", //停车场（中文）
-         "parkJpn": "",
-         "buildingWrap": "", //建筑覆盖（中文、日文共用）
-         "plotRatio": "", //容积率(中文、日文共用)
-         "currentSituationCn": "", //现状（中文）
-         "currentSituationJpn": "",
-         "publicInformationDayCn": "", //公开情报日(中文
-         "publicInformationDayJpn": "",
-         "kitchenCn": "", //厨房(中文)
-         "kitchenJpn": "",
-         "toiletCn": "", //卫生间（中文）
-         "toiletJpn": "",
-         "showerRoomCn": "", //浴室(中文)
-         "showerRoomJpn": "",
-         "remarkCn": "", //备注(中文)
-         "remarkJpn": "",
-         "villaTypeCn": "", //别墅类型（中文）
-         "villaTypeJpn": "",
-         "videoUrls": "", //视频路径
-         "videoImgs": "", //视频封面图，多张，逗号隔开
-         "roomImgs": "", //别墅图片，多张，逗号隔开
-         "floorSearch": true,
-         "areaSearch": 0,
-         "sellingPriceSearch": 0,
-         "yearBuiltSearch": 0,
-         "status": "",
-         "createTime": 1527044102585,
-         "updateTime": 1527044102585,
-         "isDeleted": 0,
-         "tableFlag": "",
-         "longitude": 0,
-         "latitude": 0,
-         "locationLevel1Cn": "",
-         "locationLevel2Cn": "",
-         "locationLevel3Cn": "",
-         "locationLevel4Cn": "",
-         "locationLevel1Jpn": "",
-         "locationLevel2Jpn": "",
-         "locationLevel3Jpn": "",
-         "locationLevel4Jpn": "",
-         "hwdcBroker": {
-         "id": 1,
-         "brokerName": "姓名",
-         "phone": "1234",
-         "password": "1232132",
-         "telePhone": "123132",
-         "shop": "所属门店",
-         "turnover": 100,
-         "inYears": 3,
-         "period": 1,
-         "counts": 60,
-         "pic": "http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg",
-         "nickname": "昵称",
-         "sex": "0",
-         "wechatId": null,
-         "caeateTime": 1525781849000,
-         "updateTime": null,
-         "isDeleted": 0,
-         "status": null
+         * id : 1
+         * brokerId : 1
+         * houseType : 户型（汉语、日语通用）
+         * titleCn : 别墅标题
+         * titleJpn : 别墅标题
+         * articleNameCn : 物件名称
+         * articleNameJpn : 物件名称
+         * homesLayerCn : 楼层
+         * homesLayerJpn : 楼层
+         * areaCn : 土地面积
+         * areaJpn : 土地面积
+         * ownershipCn : 所有权
+         * ownershipJpn : 所有权
+         * orientationCn : 朝向
+         * orientationJpn : 朝向
+         * architecturalCn : 建筑设计公司
+         * architecturalJpn : 建筑设计公司
+         * yearBuiltCn : 建筑年份
+         * yearBuiltJpn : 建筑年份
+         * districtCn : 地段
+         * districtJpn : 地段
+         * trainStationCn : 主要车站
+         * trainStationJpn : 主要车站
+         * specificLocationCn : 具体位置
+         * specificLocationJpn : 具体位置
+         * streetDistanceCn : 道路临街距离
+         * streetDistanceJpn : 道路临街距离
+         * landCn : 土地
+         * landJpn : 土地
+         * stationDistanceCn : 车站距离
+         * stationDistanceJpn : 车站距离
+         * indoorFacilityCn : 室内设施
+         * indoorFacilityJpn : 室内设施
+         * performanceCn : 性能
+         * performanceJpn : 性能
+         * testimonialCn : 证明书
+         * testimonialJpn : 证明书
+         * defectsEnsureCn : 瑕疵保证
+         * defectsEnsureJpn : 瑕疵保证
+         * coveredAreaCn : 建筑面积
+         * coveredAreaJpn : 建筑面积
+         * sellingPriceCn : 售价
+         * sellingPriceJpn : 售价
+         * buildingConstructionCn : 建筑构造
+         * buildingConstructionJpn : 建筑构造
+         * doichoIrinoDateCn : 入居日期
+         * doichoIrinoDateJpn : 入居日期
+         * parkCn : 停车场
+         * parkJpn : 停车场
+         * buildingWrap : 建筑覆盖（中文、日文共用）
+         * plotRatio : 建筑覆盖（中文、日文共用）
+         * currentSituationCn : 现状
+         * currentSituationJpn : 现状
+         * publicInformationDayCn : 公开情报日
+         * publicInformationDayJpn : 公开情报日
+         * kitchenCn : 厨房
+         * kitchenJpn : 厨房
+         * toiletCn : 卫生间
+         * toiletJpn : 卫生间
+         * showerRoomCn : 浴室
+         * showerRoomJpn : 浴室
+         * remarkCn : 备注
+         * remarkJpn : 备注
+         * villaTypeCn : 别墅类型
+         * villaTypeJpn : 别墅类型
+         * videoUrls :
+         * videoImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg
+         * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg
+         * floorSearch : true
+         * areaSearch : 10
+         * sellingPriceSearch : 10
+         * yearBuiltSearch : 10
+         * status :
+         * createTime : 1527067561000
+         * updateTime : 1527067564000
+         * isDeleted : 0
+         * tableFlag : 4
+         * longitude : 1
+         * latitude : 1
+         * locationLevel1Cn : 1
+         * locationLevel2Cn : 2
+         * locationLevel3Cn : 3
+         * locationLevel4Cn :
+         * locationLevel1Jpn :
+         * locationLevel2Jpn :
+         * locationLevel3Jpn :
+         * locationLevel4Jpn :
+         * hwdcBroker : {"id":1,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1527067564000,"isDeleted":0,"status":""}
+         * isSc : 1
          */
 
         private int id;
@@ -246,204 +224,7 @@ public class VillaDetailsBean {
         private String locationLevel3Jpn;
         private String locationLevel4Jpn;
         private HwdcBrokerBean hwdcBroker;
-
-        protected DatasBean(Parcel in) {
-            id = in.readInt();
-            brokerId = in.readInt();
-            houseType = in.readString();
-            titleCn = in.readString();
-            titleJpn = in.readString();
-            articleNameCn = in.readString();
-            articleNameJpn = in.readString();
-            homesLayerCn = in.readString();
-            homesLayerJpn = in.readString();
-            areaCn = in.readString();
-            areaJpn = in.readString();
-            ownershipCn = in.readString();
-            ownershipJpn = in.readString();
-            orientationCn = in.readString();
-            orientationJpn = in.readString();
-            architecturalCn = in.readString();
-            architecturalJpn = in.readString();
-            yearBuiltCn = in.readString();
-            yearBuiltJpn = in.readString();
-            districtCn = in.readString();
-            districtJpn = in.readString();
-            trainStationCn = in.readString();
-            trainStationJpn = in.readString();
-            specificLocationCn = in.readString();
-            specificLocationJpn = in.readString();
-            streetDistanceCn = in.readString();
-            streetDistanceJpn = in.readString();
-            landCn = in.readString();
-            landJpn = in.readString();
-            stationDistanceCn = in.readString();
-            stationDistanceJpn = in.readString();
-            indoorFacilityCn = in.readString();
-            indoorFacilityJpn = in.readString();
-            performanceCn = in.readString();
-            performanceJpn = in.readString();
-            testimonialCn = in.readString();
-            testimonialJpn = in.readString();
-            defectsEnsureCn = in.readString();
-            defectsEnsureJpn = in.readString();
-            coveredAreaCn = in.readString();
-            coveredAreaJpn = in.readString();
-            sellingPriceCn = in.readString();
-            sellingPriceJpn = in.readString();
-            buildingConstructionCn = in.readString();
-            buildingConstructionJpn = in.readString();
-            doichoIrinoDateCn = in.readString();
-            doichoIrinoDateJpn = in.readString();
-            parkCn = in.readString();
-            parkJpn = in.readString();
-            buildingWrap = in.readString();
-            plotRatio = in.readString();
-            currentSituationCn = in.readString();
-            currentSituationJpn = in.readString();
-            publicInformationDayCn = in.readString();
-            publicInformationDayJpn = in.readString();
-            kitchenCn = in.readString();
-            kitchenJpn = in.readString();
-            toiletCn = in.readString();
-            toiletJpn = in.readString();
-            showerRoomCn = in.readString();
-            showerRoomJpn = in.readString();
-            remarkCn = in.readString();
-            remarkJpn = in.readString();
-            villaTypeCn = in.readString();
-            villaTypeJpn = in.readString();
-            videoUrls = in.readString();
-            videoImgs = in.readString();
-            roomImgs = in.readString();
-            floorSearch = in.readByte() != 0;
-            areaSearch = in.readInt();
-            sellingPriceSearch = in.readInt();
-            yearBuiltSearch = in.readInt();
-            status = in.readString();
-            createTime = in.readLong();
-            updateTime = in.readLong();
-            isDeleted = in.readInt();
-            tableFlag = in.readString();
-            longitude = in.readInt();
-            latitude = in.readInt();
-            locationLevel1Cn = in.readString();
-            locationLevel2Cn = in.readString();
-            locationLevel3Cn = in.readString();
-            locationLevel4Cn = in.readString();
-            locationLevel1Jpn = in.readString();
-            locationLevel2Jpn = in.readString();
-            locationLevel3Jpn = in.readString();
-            locationLevel4Jpn = in.readString();
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(id);
-            dest.writeInt(brokerId);
-            dest.writeString(houseType);
-            dest.writeString(titleCn);
-            dest.writeString(titleJpn);
-            dest.writeString(articleNameCn);
-            dest.writeString(articleNameJpn);
-            dest.writeString(homesLayerCn);
-            dest.writeString(homesLayerJpn);
-            dest.writeString(areaCn);
-            dest.writeString(areaJpn);
-            dest.writeString(ownershipCn);
-            dest.writeString(ownershipJpn);
-            dest.writeString(orientationCn);
-            dest.writeString(orientationJpn);
-            dest.writeString(architecturalCn);
-            dest.writeString(architecturalJpn);
-            dest.writeString(yearBuiltCn);
-            dest.writeString(yearBuiltJpn);
-            dest.writeString(districtCn);
-            dest.writeString(districtJpn);
-            dest.writeString(trainStationCn);
-            dest.writeString(trainStationJpn);
-            dest.writeString(specificLocationCn);
-            dest.writeString(specificLocationJpn);
-            dest.writeString(streetDistanceCn);
-            dest.writeString(streetDistanceJpn);
-            dest.writeString(landCn);
-            dest.writeString(landJpn);
-            dest.writeString(stationDistanceCn);
-            dest.writeString(stationDistanceJpn);
-            dest.writeString(indoorFacilityCn);
-            dest.writeString(indoorFacilityJpn);
-            dest.writeString(performanceCn);
-            dest.writeString(performanceJpn);
-            dest.writeString(testimonialCn);
-            dest.writeString(testimonialJpn);
-            dest.writeString(defectsEnsureCn);
-            dest.writeString(defectsEnsureJpn);
-            dest.writeString(coveredAreaCn);
-            dest.writeString(coveredAreaJpn);
-            dest.writeString(sellingPriceCn);
-            dest.writeString(sellingPriceJpn);
-            dest.writeString(buildingConstructionCn);
-            dest.writeString(buildingConstructionJpn);
-            dest.writeString(doichoIrinoDateCn);
-            dest.writeString(doichoIrinoDateJpn);
-            dest.writeString(parkCn);
-            dest.writeString(parkJpn);
-            dest.writeString(buildingWrap);
-            dest.writeString(plotRatio);
-            dest.writeString(currentSituationCn);
-            dest.writeString(currentSituationJpn);
-            dest.writeString(publicInformationDayCn);
-            dest.writeString(publicInformationDayJpn);
-            dest.writeString(kitchenCn);
-            dest.writeString(kitchenJpn);
-            dest.writeString(toiletCn);
-            dest.writeString(toiletJpn);
-            dest.writeString(showerRoomCn);
-            dest.writeString(showerRoomJpn);
-            dest.writeString(remarkCn);
-            dest.writeString(remarkJpn);
-            dest.writeString(villaTypeCn);
-            dest.writeString(villaTypeJpn);
-            dest.writeString(videoUrls);
-            dest.writeString(videoImgs);
-            dest.writeString(roomImgs);
-            dest.writeByte((byte) (floorSearch ? 1 : 0));
-            dest.writeInt(areaSearch);
-            dest.writeInt(sellingPriceSearch);
-            dest.writeInt(yearBuiltSearch);
-            dest.writeString(status);
-            dest.writeLong(createTime);
-            dest.writeLong(updateTime);
-            dest.writeInt(isDeleted);
-            dest.writeString(tableFlag);
-            dest.writeInt(longitude);
-            dest.writeInt(latitude);
-            dest.writeString(locationLevel1Cn);
-            dest.writeString(locationLevel2Cn);
-            dest.writeString(locationLevel3Cn);
-            dest.writeString(locationLevel4Cn);
-            dest.writeString(locationLevel1Jpn);
-            dest.writeString(locationLevel2Jpn);
-            dest.writeString(locationLevel3Jpn);
-            dest.writeString(locationLevel4Jpn);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        public static final Creator<DatasBean> CREATOR = new Creator<DatasBean>() {
-            @Override
-            public DatasBean createFromParcel(Parcel in) {
-                return new DatasBean(in);
-            }
-
-            @Override
-            public DatasBean[] newArray(int size) {
-                return new DatasBean[size];
-            }
-        };
+        private int isSc;
 
         public int getId() {
             return id;
@@ -1149,7 +930,15 @@ public class VillaDetailsBean {
             this.hwdcBroker = hwdcBroker;
         }
 
-        public static class HwdcBrokerBean {
+        public int getIsSc() {
+            return isSc;
+        }
+
+        public void setIsSc(int isSc) {
+            this.isSc = isSc;
+        }
+
+        public static class HwdcBrokerBean implements Serializable{
             /**
              * id : 1
              * brokerName : 姓名
@@ -1161,14 +950,14 @@ public class VillaDetailsBean {
              * inYears : 3
              * period : 1
              * counts : 60
-             * pic : http://img5.imgtn.bdimg.com/it/u=1033062629,3975475618&fm=27&gp=0.jpg
+             * pic : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg
              * nickname : 昵称
              * sex : 0
-             * wechatId : null
+             * wechatId : 123456
              * caeateTime : 1525781849000
-             * updateTime : null
+             * updateTime : 1527067564000
              * isDeleted : 0
-             * status : null
+             * status :
              */
 
             private int id;
@@ -1184,11 +973,11 @@ public class VillaDetailsBean {
             private String pic;
             private String nickname;
             private String sex;
-            private Object wechatId;
+            private String wechatId;
             private long caeateTime;
-            private Object updateTime;
+            private long updateTime;
             private int isDeleted;
-            private Object status;
+            private String status;
 
             public int getId() {
                 return id;
@@ -1294,11 +1083,11 @@ public class VillaDetailsBean {
                 this.sex = sex;
             }
 
-            public Object getWechatId() {
+            public String getWechatId() {
                 return wechatId;
             }
 
-            public void setWechatId(Object wechatId) {
+            public void setWechatId(String wechatId) {
                 this.wechatId = wechatId;
             }
 
@@ -1310,11 +1099,11 @@ public class VillaDetailsBean {
                 this.caeateTime = caeateTime;
             }
 
-            public Object getUpdateTime() {
+            public long getUpdateTime() {
                 return updateTime;
             }
 
-            public void setUpdateTime(Object updateTime) {
+            public void setUpdateTime(long updateTime) {
                 this.updateTime = updateTime;
             }
 
@@ -1326,11 +1115,11 @@ public class VillaDetailsBean {
                 this.isDeleted = isDeleted;
             }
 
-            public Object getStatus() {
+            public String getStatus() {
                 return status;
             }
 
-            public void setStatus(Object status) {
+            public void setStatus(String status) {
                 this.status = status;
             }
         }

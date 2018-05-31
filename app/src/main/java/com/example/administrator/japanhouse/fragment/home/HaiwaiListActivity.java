@@ -283,7 +283,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(HaiwaiListActivity.this, HaiWaiDetailsActivity.class);
-                                intent.putExtra("id", mDatas.get(position).getId()+"");
+                                intent.putExtra("houseId", mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });

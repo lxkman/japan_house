@@ -304,22 +304,22 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                                 switch (houseType) {
                                     case "shangpu":
                                          intent = new Intent(mContext, ShangpuDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
                                         startActivity(intent);
                                         break;
                                     case "xiezilou":
                                          intent = new Intent(mContext, XiezilouDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
                                         startActivity(intent);
                                         break;
                                     case "gaoerfu":
                                         intent = new Intent(mContext, GaoerfuDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
                                         startActivity(intent);
                                         break;
                                     case "jiudian":
                                         intent = new Intent(mContext, JiudianDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId());
+                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
                                         startActivity(intent);
                                         break;
                                 }

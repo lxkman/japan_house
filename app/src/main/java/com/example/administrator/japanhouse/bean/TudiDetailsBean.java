@@ -162,6 +162,15 @@ public class TudiDetailsBean implements Serializable{
         private int sellingPriceSearch;
         private String landImgs;
         private HwdcBrokerBean hwdcBroker;
+        private int isSc;
+
+        public int getIsSc() {
+            return isSc;
+        }
+
+        public void setIsSc(int isSc) {
+            this.isSc = isSc;
+        }
 
         public int getId() {
             return id;

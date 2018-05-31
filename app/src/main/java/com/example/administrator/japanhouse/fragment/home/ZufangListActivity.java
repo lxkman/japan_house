@@ -332,7 +332,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                                 Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
                                 intent.putExtra("iszu", "iszu");
                                 intent.putExtra("houseType", houseType);
-                                intent.putExtra("houseId", mDatas.get(position).getId());
+                                intent.putExtra("houseId", mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });

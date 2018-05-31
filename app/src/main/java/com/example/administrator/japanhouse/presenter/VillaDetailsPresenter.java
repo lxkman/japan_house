@@ -26,9 +26,10 @@ public class VillaDetailsPresenter {
      *  别墅详情查询
      * @param vId 别墅ID
      */
-    public void getVillaDetails(String vId){
+    public void getVillaDetails(String vId,String token){
         HttpParams params = new HttpParams();
         params.put("vId", vId);
+        params.put("token", token);
         OkGo.<VillaDetailsBean>post(MyUrls.BASEURL + "/app/villadom/vildominfo")
                 .tag(this)
                 .params(params)

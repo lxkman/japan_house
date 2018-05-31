@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -27,8 +26,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.bean.ShangYeDetailsBean;
+import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.ShangPuMoreActivity;
@@ -109,7 +109,9 @@ public class ShangpuDetailsActivity extends BaseActivity {
     private boolean isJa;
     private String houseId;
     private ShangYeDetailsBean.DatasBean datas;
-
+    private String token;
+    private int isSc;
+    private boolean isStart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +120,6 @@ public class ShangpuDetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_shangpu_details);
         ButterKnife.bind(this);
-        String iszu = getIntent().getStringExtra("iszu");
-        if (!TextUtils.isEmpty(iszu) && iszu.equals("iszu")) {
-            tv_price.setText("1750元/月");
-        }
         //banner
         initViewPager();
         //户型图
@@ -145,6 +143,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
     }
 
     private void initDetailsNet() {
+        token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
@@ -153,8 +152,8 @@ public class ShangpuDetailsActivity extends BaseActivity {
             isJa = false;
         }
         HttpParams params = new HttpParams();
-//        if (houseId!=null&&!houseId.equals("")){
-        params.put("hId", "1");
+        params.put("hId", houseId);
+        params.put("token",token);
         OkGo.<ShangYeDetailsBean>post(MyUrls.BASEURL + "/app/realestate/realestateinfo")
                 .tag(this)
                 .params(params)
@@ -173,6 +172,14 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         tvDetailsJutiweizhi.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(ShangpuDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                        isSc = datas.getIsSc();
+                        if (isSc==0){//收藏
+                            isStart=true;
+                            imgStart.setImageResource(R.drawable.shoucang2);
+                        }else {//未收藏
+                            isStart=false;
+                            imgStart.setImageResource(R.drawable.shoucang);
+                        }
                     }
                 });
     }
@@ -353,7 +360,13 @@ public class ShangpuDetailsActivity extends BaseActivity {
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.img_start:
-                Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+                if (!isStart){
+                    initStart();
+                    isStart=true;
+                }else {
+                    initUnStart();
+                    isStart=false;
+                }
                 break;
             case R.id.back_img:
                 finish();
@@ -365,7 +378,58 @@ public class ShangpuDetailsActivity extends BaseActivity {
                 break;
         }
     }
+    //收藏
+    private void initStart() {
+        HttpParams params = new HttpParams();
+        params.put("hType", 5);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
+        params.put("token", token);//用户登录标识
+        params.put("shType", "3");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
+        params.put("hId",houseId);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/insertcollectionhouse")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(ShangpuDetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")){
+                            imgStart.setImageResource(R.drawable.shoucang2);
+                            Toast.makeText(ShangpuDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(ShangpuDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
+    //取消收藏
+    private void initUnStart() {
+        HttpParams params = new HttpParams();
+        params.put("hType", 5);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
+        params.put("token", token);//用户登录标识
+        params.put("shType", "3");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
+        params.put("hId",houseId);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/deletecollectionhouse")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(ShangpuDetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")){
+                            imgStart.setImageResource(R.drawable.shoucang);
+                            Toast.makeText(ShangpuDetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(ShangpuDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭

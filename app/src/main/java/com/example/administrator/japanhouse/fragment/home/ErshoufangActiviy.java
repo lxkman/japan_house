@@ -298,7 +298,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(ErshoufangActiviy.this, OldHousedetailsActivity.class);
-                                intent.putExtra("houseId",mDatas.get(position).getId());
+                                intent.putExtra("houseId",mDatas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });

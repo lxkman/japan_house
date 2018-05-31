@@ -132,7 +132,15 @@ public class ZhongGuoDetailsBean {
         private int brokerId;
         private String imgs;
         private HwdcBrokerBean hwdcBroker;
+        private int isSc;
 
+        public int getIsSc() {
+            return isSc;
+        }
+
+        public void setIsSc(int isSc) {
+            this.isSc = isSc;
+        }
         public int getId() {
             return id;
         }

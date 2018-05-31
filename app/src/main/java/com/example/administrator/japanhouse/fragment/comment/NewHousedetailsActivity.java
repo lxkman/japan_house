@@ -138,7 +138,9 @@ public class NewHousedetailsActivity extends BaseActivity {
     private String houseId;
     private HouseDetailsBean.DatasBean datas;
     private boolean isJa;
-
+    private String token;
+    private int isSc;
+    private boolean isStart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,12 +160,12 @@ public class NewHousedetailsActivity extends BaseActivity {
         initLocation();
         initDetailsNet();
 
-
     }
+
     //详情字段接口
     private void initDetailsNet() {
+        token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
-        Log.d("NewHousedetailsActivity", houseId+"-----------");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -171,8 +173,9 @@ public class NewHousedetailsActivity extends BaseActivity {
             isJa = false;
         }
         HttpParams params = new HttpParams();
-//        if (houseId!=null&&!houseId.equals("")){
         params.put("hId",houseId);
+        params.put("hType",1);
+        params.put("token",token);
         OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
                 .tag(this)
                 .params(params)
@@ -189,6 +192,14 @@ public class NewHousedetailsActivity extends BaseActivity {
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                        isSc = datas.getIsSc();
+                        if (isSc==0){//收藏
+                            isStart=true;
+                            imgStart.setImageResource(R.drawable.shoucang2);
+                        }else {//未收藏
+                            isStart=false;
+                            imgStart.setImageResource(R.drawable.shoucang);
+                        }
                     }
                 });
     }
@@ -450,7 +461,7 @@ public class NewHousedetailsActivity extends BaseActivity {
 
 
 
-    private boolean isStart;
+
     @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -498,7 +509,6 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
     //收藏
     private void initStart() {
-        String token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         Log.d("NewHousedetailsActivity", token+"-------------");
         HttpParams params = new HttpParams();
         params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地

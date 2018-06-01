@@ -158,6 +158,7 @@ public class JiudianDetailsActivity extends BaseActivity {
 //        if (houseId!=null&&!houseId.equals("")){
         params.put("hId", houseId);
         params.put("token",token);
+        params.put("htype",0);
         OkGo.<ShangYeDetailsBean>post(MyUrls.BASEURL + "/app/realestate/realestateinfo")
                 .tag(this)
                 .params(params)

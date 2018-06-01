@@ -157,6 +157,7 @@ public class GaoerfuDetailsActivity extends BaseActivity {
         HttpParams params = new HttpParams();
         params.put("hId", houseId);
         params.put("token",token);
+        params.put("htype",1);
         OkGo.<ShangYeDetailsBean>post(MyUrls.BASEURL + "/app/realestate/realestateinfo")
                 .tag(this)
                 .params(params)

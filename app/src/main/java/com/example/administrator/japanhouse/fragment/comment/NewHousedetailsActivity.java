@@ -6,9 +6,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -122,13 +122,13 @@ public class NewHousedetailsActivity extends BaseActivity {
     CircleImageView tvDetailsManagerHead;
     @BindView(R.id.tv_details_manager_name)
     TextView tvDetailsManagerName;
+
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList = new ArrayList();
-    private List<Fragment> mBaseFragmentList = new ArrayList<>();
+    private List<View> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
-    private MyAdapter myAdapter;
     private BaiduMap mBaiduMap;
     private LocationClient mLocClient;
     private MyLocationListenner myListener = new MyLocationListenner();
@@ -141,6 +141,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     private String token;
     private int isSc;
     private boolean isStart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -297,18 +298,46 @@ public class NewHousedetailsActivity extends BaseActivity {
         });
     }
 
-
+private int[] imgs={
+        R.drawable.bg_map,
+        R.drawable.bgxq,
+        R.drawable.bg_map,
+        R.drawable.bgxq,
+};
     private void initViewPager() {
         if (mBaseFragmentList.size() <= 0) {
-            mBaseFragmentList.add(new VidioFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
+            for (int i = 0; i < imgs.length; i++) {
+                View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
+                ImageView  img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                ImageView  imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
+                RelativeLayout  rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
+                img_banner.setImageResource(imgs[i]);
+                mBaseFragmentList.add(inflate);
+                if (i==0){
+                    imgStartVideo.setVisibility(View.VISIBLE);
+                }else {
+                    imgStartVideo.setVisibility(View.GONE);
+                }
+                final int finalI = i;
+                rela_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (finalI ==0) {
+                            Intent intent=new Intent(mContext,VideoDetailsActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Intent intent=new Intent(mContext,BannerDetailsActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+            }
+
+
         }
         tvAllNum.setText(mBaseFragmentList.size() + "");
-        fm = getSupportFragmentManager();
-        myAdapter = new MyAdapter(fm);
-        vpVidio.setAdapter(myAdapter);
+        vpVidio.setAdapter(adapter);
         vpVidio.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -316,11 +345,14 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
+
                 tvToNum.setText((position + 1) + "");
                 if (position == 1) {
                     JZVideoPlayer.releaseAllVideos();
+                }else if (position==0){
                 }
+
             }
 
             @Override
@@ -329,6 +361,36 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
     }
+    //需要给ViewPager设置适配器
+    PagerAdapter adapter=new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            // TODO Auto-generated method stub
+            return arg0==arg1;
+        }
+        //有多少个切换页
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return mBaseFragmentList.size();
+        }
+        //对超出范围的资源进行销毁
+        @Override
+        public void destroyItem(ViewGroup container, int position,
+                                Object object) {
+            // TODO Auto-generated method stub
+            container.removeView(mBaseFragmentList.get(position));
+        }
+        //对显示的资源进行初始化
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // TODO Auto-generated method stub
+            container.addView(mBaseFragmentList.get(position));
+            return mBaseFragmentList.get(position);
+        }
+
+    };
 
     @Override
     public void onBackPressed() {
@@ -441,22 +503,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                     }
                 });
 
-    }
-    //bannerAdapter
-    class MyAdapter extends FragmentStatePagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mBaseFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mBaseFragmentList.size();
-        }
     }
 
 

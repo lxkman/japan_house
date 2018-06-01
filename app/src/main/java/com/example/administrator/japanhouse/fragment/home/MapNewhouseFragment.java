@@ -37,6 +37,7 @@ import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.bean.QuYuBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -84,6 +85,12 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
+    private String[] headers;
+    private View fifthView;
+    private OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas;
+    private boolean isDitie;
+    private List<String> quyuList = new ArrayList<>();
+    private List<String> ditieList = new ArrayList<>();
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -149,10 +156,10 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     }
 
     private void initData() {
-        final String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+        headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
         popupViews.clear();
-        final View fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
+        fifthView = LayoutInflater.from(mContext).inflate(R.layout.dropdown_map_layout, null);
         mapView = (TextureMapView) fifthView.findViewById(R.id.mapview);
         ll_clear = (LinearLayout) fifthView.findViewById(R.id.ll_clear);
         ll_clear.setOnClickListener(this);
@@ -174,15 +181,87 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                         if (shaiXuanBean == null) {
                             return;
                         }
-                        OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        initShaiXuan();
+                    }
+                });
+    }
 
+    private void initShaiXuan() {
+        HttpParams params = new HttpParams();
+        params.put("cId", 2);
+        OkGo.<QuYuBean>post(MyUrls.BASEURL + "/app/areamanage/selectareaandsubway")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<QuYuBean>(QuYuBean.class) {
+                    @Override
+                    public void onSuccess(Response<QuYuBean> response) {
+                        QuYuBean body = response.body();
+                        QuYuBean.DatasEntity datas = body.getDatas();
+                        List<QuYuBean.DatasEntity.AreasEntity> areas = datas.getAreas();
+                        List<QuYuBean.DatasEntity.SubwaylinesEntity> subwaylines = datas.getSubwaylines();
+                        List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
+                        List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
+                        quyuListBean.add(new MoreCheckBean(true, "不限"));
+                        ditieListBean.add(new MoreCheckBean(true, "不限"));
+                        if (areas != null && areas.size() > 0) {
+                            for (int i = 0; i < areas.size(); i++) {
+                                QuYuBean.DatasEntity.AreasEntity areasEntity = areas.get(i);
+                                if (areasEntity != null) {
+                                    String administrationNameCn = areasEntity.getAdministrationNameCn();
+                                    String administrationNameJpn = areasEntity.getAdministrationNameJpn();
+                                    MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                    moreCheckBean.setName(isJa ? administrationNameJpn : administrationNameCn);
+                                    moreCheckBean.setId(areasEntity.getId());
+                                    List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
+                                    List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
+                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
+                                        for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
+                                            int id = hwdcAreaManages.get(i1).getId();
+                                            String areaNameCn = hwdcAreaManages.get(i1).getAreaNameCn();
+                                            String areaNameJpn = hwdcAreaManages.get(i1).getAreaNameJpn();
+                                            OneCheckBean oneCheckBean = new OneCheckBean(false, isJa ? areaNameJpn : areaNameCn, id);
+                                            oneCheckBeanList.add(oneCheckBean);
+                                        }
+                                    }
+                                    moreCheckBean.setCheckBeanList(oneCheckBeanList);
+                                    quyuListBean.add(moreCheckBean);
+                                }
+                            }
+                        }
+                        if (subwaylines != null && subwaylines.size() > 0) {
+                            for (int i = 0; i < subwaylines.size(); i++) {
+                                QuYuBean.DatasEntity.SubwaylinesEntity subwaylinesEntity = subwaylines.get(i);
+                                if (subwaylinesEntity != null) {
+                                    String lineNameCn = subwaylinesEntity.getLineNameCn();
+                                    String lineNameJpn = subwaylinesEntity.getLineNameJpn();
+                                    MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                    moreCheckBean.setName(isJa ? lineNameJpn : lineNameCn);
+                                    moreCheckBean.setId(subwaylinesEntity.getId());
+                                    List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
+                                    List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
+                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    if (subwayStations != null && subwayStations.size() > 0) {
+                                        for (int i1 = 0; i1 < subwayStations.size(); i1++) {
+                                            int id = subwayStations.get(i1).getId();
+                                            String stationNameCn = subwayStations.get(i1).getStationNameCn();
+                                            String stationNameJpn = subwayStations.get(i1).getStationNameJpn();
+                                            OneCheckBean oneCheckBean = new OneCheckBean(false, isJa ? stationNameJpn : stationNameCn, id);
+                                            oneCheckBeanList.add(oneCheckBean);
+                                        }
+                                    }
+                                    moreCheckBean.setCheckBeanList(oneCheckBeanList);
+                                    ditieListBean.add(moreCheckBean);
+                                }
+                            }
+                        }
                         /**
                          * 第一个界面
                          * */
-                        list = new ArrayList<>();
                         FirstView firstView = new FirstView(mContext);
                         popupViews.add(firstView.firstView());
-                        firstView.insertData(list, dropDownMenu);
+                        firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(MapNewhouseFragment.this);
 
                         /**

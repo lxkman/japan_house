@@ -23,6 +23,7 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.bean.QuYuBean;
 import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
@@ -83,6 +84,12 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
+    private View fifthView;
+    private String[] headers;
+    private OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas;
+    private boolean isDitie;
+    private List<String> quyuList = new ArrayList<>();
+    private List<String> ditieList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,12 +150,12 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             type2 = 9;
         }
         houseType = getIntent().getStringExtra("houseType");
-        final View fifthView = LayoutInflater.from(SydcLiebiaoActivity.this).inflate(R.layout.activity_main_view, null);
+        fifthView = LayoutInflater.from(SydcLiebiaoActivity.this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        final String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+        headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
 
         HttpParams params = new HttpParams();
@@ -165,15 +172,87 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         if (shaiXuanBean == null) {
                             return;
                         }
-                        OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        initShaiXuan();
+                    }
+                });
+    }
 
+    private void initShaiXuan() {
+        HttpParams params = new HttpParams();
+        params.put("cId", 2);
+        OkGo.<QuYuBean>post(MyUrls.BASEURL + "/app/areamanage/selectareaandsubway")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<QuYuBean>(QuYuBean.class) {
+                    @Override
+                    public void onSuccess(Response<QuYuBean> response) {
+                        QuYuBean body = response.body();
+                        QuYuBean.DatasEntity datas = body.getDatas();
+                        List<QuYuBean.DatasEntity.AreasEntity> areas = datas.getAreas();
+                        List<QuYuBean.DatasEntity.SubwaylinesEntity> subwaylines = datas.getSubwaylines();
+                        List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
+                        List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
+                        quyuListBean.add(new MoreCheckBean(true, "不限"));
+                        ditieListBean.add(new MoreCheckBean(true, "不限"));
+                        if (areas != null && areas.size() > 0) {
+                            for (int i = 0; i < areas.size(); i++) {
+                                QuYuBean.DatasEntity.AreasEntity areasEntity = areas.get(i);
+                                if (areasEntity != null) {
+                                    String administrationNameCn = areasEntity.getAdministrationNameCn();
+                                    String administrationNameJpn = areasEntity.getAdministrationNameJpn();
+                                    MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                    moreCheckBean.setName(isJa ? administrationNameJpn : administrationNameCn);
+                                    moreCheckBean.setId(areasEntity.getId());
+                                    List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
+                                    List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
+                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
+                                        for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
+                                            int id = hwdcAreaManages.get(i1).getId();
+                                            String areaNameCn = hwdcAreaManages.get(i1).getAreaNameCn();
+                                            String areaNameJpn = hwdcAreaManages.get(i1).getAreaNameJpn();
+                                            OneCheckBean oneCheckBean = new OneCheckBean(false, isJa ? areaNameJpn : areaNameCn, id);
+                                            oneCheckBeanList.add(oneCheckBean);
+                                        }
+                                    }
+                                    moreCheckBean.setCheckBeanList(oneCheckBeanList);
+                                    quyuListBean.add(moreCheckBean);
+                                }
+                            }
+                        }
+                        if (subwaylines != null && subwaylines.size() > 0) {
+                            for (int i = 0; i < subwaylines.size(); i++) {
+                                QuYuBean.DatasEntity.SubwaylinesEntity subwaylinesEntity = subwaylines.get(i);
+                                if (subwaylinesEntity != null) {
+                                    String lineNameCn = subwaylinesEntity.getLineNameCn();
+                                    String lineNameJpn = subwaylinesEntity.getLineNameJpn();
+                                    MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                    moreCheckBean.setName(isJa ? lineNameJpn : lineNameCn);
+                                    moreCheckBean.setId(subwaylinesEntity.getId());
+                                    List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
+                                    List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
+                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    if (subwayStations != null && subwayStations.size() > 0) {
+                                        for (int i1 = 0; i1 < subwayStations.size(); i1++) {
+                                            int id = subwayStations.get(i1).getId();
+                                            String stationNameCn = subwayStations.get(i1).getStationNameCn();
+                                            String stationNameJpn = subwayStations.get(i1).getStationNameJpn();
+                                            OneCheckBean oneCheckBean = new OneCheckBean(false, isJa ? stationNameJpn : stationNameCn, id);
+                                            oneCheckBeanList.add(oneCheckBean);
+                                        }
+                                    }
+                                    moreCheckBean.setCheckBeanList(oneCheckBeanList);
+                                    ditieListBean.add(moreCheckBean);
+                                }
+                            }
+                        }
                         /**
                          * 第一个界面
                          * */
-                        list = new ArrayList<>();
                         FirstView firstView = new FirstView(SydcLiebiaoActivity.this);
                         popupViews.add(firstView.firstView());
-                        firstView.insertData(list, dropDownMenu);
+                        firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(SydcLiebiaoActivity.this);
 
                         /**
@@ -260,6 +339,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
         }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
+        }
         initMoreParams(params);
         OkGo.<SydcListBean>post(MyUrls.BASEURL + "/app/realestate/searchlist")
                 .tag(this)
@@ -303,23 +387,23 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                                 Intent intent;
                                 switch (houseType) {
                                     case "shangpu":
-                                         intent = new Intent(mContext, ShangpuDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
+                                        intent = new Intent(mContext, ShangpuDetailsActivity.class);
+                                        intent.putExtra("houseId", mDatas.get(position).getId() + "");
                                         startActivity(intent);
                                         break;
                                     case "xiezilou":
-                                         intent = new Intent(mContext, XiezilouDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
+                                        intent = new Intent(mContext, XiezilouDetailsActivity.class);
+                                        intent.putExtra("houseId", mDatas.get(position).getId() + "");
                                         startActivity(intent);
                                         break;
                                     case "gaoerfu":
                                         intent = new Intent(mContext, GaoerfuDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
+                                        intent.putExtra("houseId", mDatas.get(position).getId() + "");
                                         startActivity(intent);
                                         break;
                                     case "jiudian":
                                         intent = new Intent(mContext, JiudianDetailsActivity.class);
-                                        intent.putExtra("houseId",mDatas.get(position).getId()+"");
+                                        intent.putExtra("houseId", mDatas.get(position).getId() + "");
                                         startActivity(intent);
                                         break;
                                 }
@@ -415,7 +499,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                     sjId = "-2";
                 } else {
                     if (shoujia != null && shoujia.size() > 0) {
-                        sjId=shoujia.get(itemPosition-1).getId()+"";
+                        sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
                 mDatas.clear();

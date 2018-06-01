@@ -24,6 +24,7 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OldHouseShaiXuanBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
+import com.example.administrator.japanhouse.bean.QuYuBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -77,6 +78,12 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
 
     private String searchText = "";
+    private View inflate;
+    private String[] headers;
+    private OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas;
+    private boolean isDitie;
+    private List<String> quyuList = new ArrayList<>();
+    private List<String> ditieList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,13 +131,13 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     }
 
     private void initView() {
-        final String[] headers = {getString(R.string.quyu), getString(R.string.lxkmianji),
+        headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
-        final View fifthView = LayoutInflater.from(this).inflate(R.layout.activity_main_view, null);
-        mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
+        inflate = LayoutInflater.from(this).inflate(R.layout.activity_main_view, null);
+        mrecycler = (RecyclerView) inflate.findViewById(R.id.mrecycler);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
-        springview = (SpringView) fifthView.findViewById(R.id.springview);
+        springview = (SpringView) inflate.findViewById(R.id.springview);
         HttpParams params = new HttpParams();
         params.put("hType", 3);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -144,15 +151,87 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                         if (shaiXuanBean == null) {
                             return;
                         }
-                        OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        initShaiXuan();
+                    }
+                });
+    }
 
+    private void initShaiXuan() {
+        HttpParams params = new HttpParams();
+        params.put("cId", 2);
+        OkGo.<QuYuBean>post(MyUrls.BASEURL + "/app/areamanage/selectareaandsubway")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<QuYuBean>(QuYuBean.class) {
+                    @Override
+                    public void onSuccess(Response<QuYuBean> response) {
+                        QuYuBean body = response.body();
+                        QuYuBean.DatasEntity datas = body.getDatas();
+                        List<QuYuBean.DatasEntity.AreasEntity> areas = datas.getAreas();
+                        List<QuYuBean.DatasEntity.SubwaylinesEntity> subwaylines = datas.getSubwaylines();
+                        List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
+                        List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
+                        quyuListBean.add(new MoreCheckBean(true, "不限"));
+                        ditieListBean.add(new MoreCheckBean(true, "不限"));
+                        if (areas != null && areas.size() > 0) {
+                            for (int i = 0; i < areas.size(); i++) {
+                                QuYuBean.DatasEntity.AreasEntity areasEntity = areas.get(i);
+                                if (areasEntity != null) {
+                                    String administrationNameCn = areasEntity.getAdministrationNameCn();
+                                    String administrationNameJpn = areasEntity.getAdministrationNameJpn();
+                                    MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                    moreCheckBean.setName(isJa ? administrationNameJpn : administrationNameCn);
+                                    moreCheckBean.setId(areasEntity.getId());
+                                    List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
+                                    List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
+                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
+                                        for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
+                                            int id = hwdcAreaManages.get(i1).getId();
+                                            String areaNameCn = hwdcAreaManages.get(i1).getAreaNameCn();
+                                            String areaNameJpn = hwdcAreaManages.get(i1).getAreaNameJpn();
+                                            OneCheckBean oneCheckBean = new OneCheckBean(false, isJa ? areaNameJpn : areaNameCn, id);
+                                            oneCheckBeanList.add(oneCheckBean);
+                                        }
+                                    }
+                                    moreCheckBean.setCheckBeanList(oneCheckBeanList);
+                                    quyuListBean.add(moreCheckBean);
+                                }
+                            }
+                        }
+                        if (subwaylines != null && subwaylines.size() > 0) {
+                            for (int i = 0; i < subwaylines.size(); i++) {
+                                QuYuBean.DatasEntity.SubwaylinesEntity subwaylinesEntity = subwaylines.get(i);
+                                if (subwaylinesEntity != null) {
+                                    String lineNameCn = subwaylinesEntity.getLineNameCn();
+                                    String lineNameJpn = subwaylinesEntity.getLineNameJpn();
+                                    MoreCheckBean moreCheckBean = new MoreCheckBean();
+                                    moreCheckBean.setName(isJa ? lineNameJpn : lineNameCn);
+                                    moreCheckBean.setId(subwaylinesEntity.getId());
+                                    List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
+                                    List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
+                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    if (subwayStations != null && subwayStations.size() > 0) {
+                                        for (int i1 = 0; i1 < subwayStations.size(); i1++) {
+                                            int id = subwayStations.get(i1).getId();
+                                            String stationNameCn = subwayStations.get(i1).getStationNameCn();
+                                            String stationNameJpn = subwayStations.get(i1).getStationNameJpn();
+                                            OneCheckBean oneCheckBean = new OneCheckBean(false, isJa ? stationNameJpn : stationNameCn, id);
+                                            oneCheckBeanList.add(oneCheckBean);
+                                        }
+                                    }
+                                    moreCheckBean.setCheckBeanList(oneCheckBeanList);
+                                    ditieListBean.add(moreCheckBean);
+                                }
+                            }
+                        }
                         /**
                          * 第一个界面
                          * */
-                        list = new ArrayList<>();
                         FirstView firstView = new FirstView(BieShuActivity.this);
                         popupViews.add(firstView.firstView());
-                        firstView.insertData(list, dropDownMenu);
+                        firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(BieShuActivity.this);
 
                         /**
@@ -219,7 +298,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, inflate);
                     }
                 });
     }
@@ -229,7 +308,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
         params.put("pageNo", page);
         if (isJa) {
             params.put("languageType", 1);
-        }else {
+        } else {
             params.put("languageType", 0);
         }
         params.put("mjId", mjId);//面积
@@ -238,6 +317,11 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+        }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
         }
         if (mMoreSelectedBeanList.size() > 0)
             params.putUrlParams("lxs", mMoreSelectedBeanList.get(0));//类型
@@ -297,7 +381,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(BieShuActivity.this, BieshudetailsActivity.class);
-                                intent.putExtra("houseId", mDatas.get(position).getId()+"");
+                                intent.putExtra("houseId", mDatas.get(position).getId() + "");
                                 startActivity(intent);
                             }
                         });
@@ -332,7 +416,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                     sjId = "-2";
                 } else {
                     if (shoujia != null && shoujia.size() > 0) {
-                        sjId=shoujia.get(itemPosition-1).getId()+"";
+                        sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
                 mDatas.clear();
@@ -343,14 +427,22 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
-        if (shoujia != null && shoujia.size() > 0) {
-            page = 1;
-            isZiDingyiPrice = true;
-            sjId = "-1";
-            zidingyiPriceList.clear();
-            zidingyiPriceList = priceRegin;
-            mDatas.clear();
-            initData();
+        if (postion == 1) {//区域
+            isDitie = false;
+            quyuList = priceRegin;
+        } else if (postion == 2) {//地铁
+            isDitie = true;
+            ditieList = priceRegin;
+        } else {//自定义价格
+            if (shoujia != null && shoujia.size() > 0) {
+                page = 1;
+                isZiDingyiPrice = true;
+                sjId = "-1";
+                zidingyiPriceList.clear();
+                zidingyiPriceList = priceRegin;
+                mDatas.clear();
+                initData();
+            }
         }
     }
 
@@ -377,7 +469,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getCoveredAreaJpn() : item.getCoveredAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万/㎡" : item.getSellingPriceCn()+"万/㎡");
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() + "万/㎡" : item.getSellingPriceCn() + "万/㎡");
         }
     }
 

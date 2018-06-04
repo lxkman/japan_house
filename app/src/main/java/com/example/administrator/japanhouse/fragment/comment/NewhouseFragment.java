@@ -120,6 +120,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
                 return;
             }
             if (!isLoadMore) {
+
                 mRefreshData = datas;
                 Toast.makeText(mContext, "刷新成功~", Toast.LENGTH_SHORT).show();
             } else {
@@ -132,6 +133,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(mContext, NewHousedetailsActivity.class);
+                intent.putExtra("houseId",mRefreshData.get(position).getId()+"");
                 startActivity(intent);
             }
         });

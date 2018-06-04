@@ -134,7 +134,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(mContext,TudidetailsActivity.class);
-                intent.putExtra("lId",mRefreshData.get(position).getId());
+                intent.putExtra("houseId",mRefreshData.get(position).getId()+"");
                 startActivity(intent);
             }
         });

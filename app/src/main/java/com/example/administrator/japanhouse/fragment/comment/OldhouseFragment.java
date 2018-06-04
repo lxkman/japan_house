@@ -129,7 +129,7 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(mContext,OldHousedetailsActivity.class);
-                intent.putExtra("houseId",mRefreshData.get(position).getId());
+                intent.putExtra("houseId",mRefreshData.get(position).getId()+"");
                 startActivity(intent);
             }
         });

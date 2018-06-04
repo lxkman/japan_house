@@ -32,6 +32,7 @@ public class TJNewHousePresenter {
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
         params.put("hType", hType);
+        params.put("cId", "2");
         OkGo.<HouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/recommendlist")
                 .tag(this)
                 .params(params)
@@ -50,6 +51,7 @@ public class TJNewHousePresenter {
     public void getLand(int pageNo){
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
+        params.put("cId", "2");
         OkGo.<LandBean>post(MyUrls.BASEURL + "/app/land/recommendland")
                 .tag(this)
                 .params(params)

@@ -127,7 +127,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     private LoveAdapter loveAdapter;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList = new ArrayList();
-    private List<View> mBaseFragmentList = new ArrayList<>();
+    private List<View> mBannerList = new ArrayList<>();
     private FragmentManager fm;
     private BaiduMap mBaiduMap;
     private LocationClient mLocClient;
@@ -141,6 +141,8 @@ public class NewHousedetailsActivity extends BaseActivity {
     private String token;
     private int isSc;
     private boolean isStart;
+    private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist;
+    private List<HouseDetailsBean.DatasBean.HxtlistBean> hxtlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,8 +152,8 @@ public class NewHousedetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_lishi_new_house);
         ButterKnife.bind(this);
+        initDetailsNet();
         //banner
-        initViewPager();
         //户型图
         initData();
         //猜你喜欢
@@ -159,14 +161,13 @@ public class NewHousedetailsActivity extends BaseActivity {
         initScroll();
         initMap();
         initLocation();
-        initDetailsNet();
-
     }
 
     //详情字段接口
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
+        Toast.makeText(mContext, houseId, Toast.LENGTH_SHORT).show();
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -186,6 +187,9 @@ public class NewHousedetailsActivity extends BaseActivity {
                         int code = response.code();
                         HouseDetailsBean oldHouseListBean = response.body();
                         datas = oldHouseListBean.getDatas();
+                        bannerlist = datas.getBannerlist();
+                        hxtlist = datas.getHxtlist();
+                        datas.getVideoImgs();
                         HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
@@ -201,6 +205,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                             isStart=false;
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
+                        initViewPager();
                     }
                 });
     }
@@ -297,23 +302,29 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
     }
-
-private int[] imgs={
-        R.drawable.bg_map,
-        R.drawable.bgxq,
-        R.drawable.bg_map,
-        R.drawable.bgxq,
-};
+private List<String> mUrlList =new ArrayList();
     private void initViewPager() {
-        if (mBaseFragmentList.size() <= 0) {
-            for (int i = 0; i < imgs.length; i++) {
+        if (mBannerList.size() <= 0) {
+            if (datas.getVideoUrls()!=null){
+                if (datas.getVideoUrls().equals("")){
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i).getVal()+"");
+                    }
+                }else {
+                    mUrlList.add(datas.getVideoImgs());
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i).getVal()+"");
+                    }
+                }
+            }
+            for (int i = 0; i < mUrlList.size(); i++) {
                 View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
                 ImageView  img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
                 ImageView  imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
                 RelativeLayout  rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
-                img_banner.setImageResource(imgs[i]);
-                mBaseFragmentList.add(inflate);
-                if (i==0){
+                Glide.with(this).load(mUrlList.get(i)).into(img_banner);
+                mBannerList.add(inflate);
+                if (i==0&&!datas.getVideoUrls().equals("")){
                     imgStartVideo.setVisibility(View.VISIBLE);
                 }else {
                     imgStartVideo.setVisibility(View.GONE);
@@ -322,11 +333,18 @@ private int[] imgs={
                 rela_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (finalI ==0) {
+                        if (finalI ==0&&!datas.getVideoUrls().equals("")) {
                             Intent intent=new Intent(mContext,VideoDetailsActivity.class);
+                            intent.putExtra("VideoUrl",mUrlList.get(0)+"");
                             startActivity(intent);
                         }else {
                             Intent intent=new Intent(mContext,BannerDetailsActivity.class);
+                            intent.putExtra("datas",datas);
+                            if (datas.getVideoUrls().equals("")){
+                                intent.putExtra("position",finalI+"");
+                            }else {
+                                intent.putExtra("position",(finalI-1)+"");
+                            }
                             startActivity(intent);
                         }
                     }
@@ -336,7 +354,7 @@ private int[] imgs={
 
 
         }
-        tvAllNum.setText(mBaseFragmentList.size() + "");
+        tvAllNum.setText(mBannerList.size() + "");
         vpVidio.setAdapter(adapter);
         vpVidio.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -373,21 +391,21 @@ private int[] imgs={
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return mBaseFragmentList.size();
+            return mBannerList.size();
         }
         //对超出范围的资源进行销毁
         @Override
         public void destroyItem(ViewGroup container, int position,
                                 Object object) {
             // TODO Auto-generated method stub
-            container.removeView(mBaseFragmentList.get(position));
+            container.removeView(mBannerList.get(position));
         }
         //对显示的资源进行初始化
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             // TODO Auto-generated method stub
-            container.addView(mBaseFragmentList.get(position));
-            return mBaseFragmentList.get(position);
+            container.addView(mBannerList.get(position));
+            return mBannerList.get(position);
         }
 
     };

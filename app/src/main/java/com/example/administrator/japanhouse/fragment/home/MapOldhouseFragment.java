@@ -202,8 +202,12 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         List<QuYuBean.DatasEntity.SubwaylinesEntity> subwaylines = datas.getSubwaylines();
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
-                        quyuListBean.add(new MoreCheckBean(true, "不限"));
-                        ditieListBean.add(new MoreCheckBean(true, "不限"));
+                        List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
+                        oneCheckBeanList1.add(new OneCheckBean(true, "不限"));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, "不限");
+                        moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
+                        quyuListBean.add(moreCheckBean1);
+                        ditieListBean.add(moreCheckBean1);
                         if (areas != null && areas.size() > 0) {
                             for (int i = 0; i < areas.size(); i++) {
                                 QuYuBean.DatasEntity.AreasEntity areasEntity = areas.get(i);
@@ -373,6 +377,35 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         HttpParams params = new HttpParams();
         params.put("cityName", city);
         params.put("hType", 0);
+        params.put("mjId", mjId);//面积
+        params.put("sjId", sjId);//售价
+        if (isZiDingyiPrice) {
+            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+        }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
+        }
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(3));//建筑构造
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("dds", mMoreSelectedBeanList.get(4));//地段
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("cxs", mMoreSelectedBeanList.get(5));//朝向
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(6));//车站距离
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
         OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
                 .tag(this)
                 .params(params)
@@ -459,11 +492,40 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     private void loadAllXiaoQu(LatLng northeast, LatLng southwest) {
         baiduMap.clear();
         HttpParams params = new HttpParams();
+        params.put("hType", 0);
         params.put("starJd", southwest.longitude);
         params.put("endJd", northeast.longitude);
         params.put("starWd", southwest.latitude);
         params.put("endWd", northeast.latitude);
-        params.put("hType", 0);
+        params.put("mjId", mjId);//面积
+        params.put("sjId", sjId);//售价
+        if (isZiDingyiPrice) {
+            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+        }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
+        }
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(3));//建筑构造
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("dds", mMoreSelectedBeanList.get(4));//地段
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("cxs", mMoreSelectedBeanList.get(5));//朝向
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(6));//车站距离
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
         OkGo.<MapHouseDetailBean>post(MyUrls.BASEURL + "/app/community/selectbyjwd")
                 .tag(this)
                 .params(params)
@@ -545,7 +607,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         mjId = mianjiEntity.getId() + "";
                     }
                 }
-                initData();
+                initOverlay(mCity);
                 break;
             case 3://售价
                 isZiDingyiPrice = false;
@@ -557,19 +619,27 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
-                initData();
+                initOverlay(mCity);
                 break;
         }
     }
 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
-        if (shoujia != null && shoujia.size() > 0) {
-            isZiDingyiPrice = true;
-            sjId = "-1";
-            zidingyiPriceList.clear();
-            zidingyiPriceList = priceRegin;
-            initData();
+        if (postion == 1) {//区域
+            isDitie = false;
+            quyuList = priceRegin;
+        } else if (postion == 2) {//地铁
+            isDitie = true;
+            ditieList = priceRegin;
+        } else {//自定义价格
+            if (shoujia != null && shoujia.size() > 0) {
+                isZiDingyiPrice = true;
+                sjId = "-1";
+                zidingyiPriceList.clear();
+                zidingyiPriceList = priceRegin;
+                initOverlay(mCity);
+            }
         }
     }
 
@@ -577,6 +647,6 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        initData();
+        initOverlay(mCity);
     }
 }

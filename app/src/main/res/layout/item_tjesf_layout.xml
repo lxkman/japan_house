@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/iv_tupian"
                 android:layout_width="200dp"
                 android:layout_height="140dp"
                 android:src="@drawable/test_tjesf_iv"
@@ -27,6 +28,7 @@
                 android:gravity="center_vertical"
                 android:background="#30000000">
                 <TextView
+                    android:id="@+id/tv_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="东京"
@@ -43,6 +45,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="5dp">
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="泰和丶金福大厦"
@@ -52,18 +55,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥1750万"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"/>
         <TextView
+            android:id="@+id/tv_ting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3室1厅"
             android:textColor="@color/text_gray"
             android:layout_marginLeft="20dp"/>
         <TextView
+            android:id="@+id/tv_mianji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="175㎡"

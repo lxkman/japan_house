@@ -19,8 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.AgentListActivity;
 import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
@@ -30,6 +32,8 @@ import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.bean.HomePageBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
@@ -41,7 +45,13 @@ import com.example.administrator.japanhouse.fragment.home.ui.activity.QuestionAc
 import com.example.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.ZhinengActivity;
 import com.example.administrator.japanhouse.utils.BannerUtils;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.RatingBarView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -113,7 +123,6 @@ public class HomeFragment extends BaseFragment {
     LinearLayout view011;
     @BindView(R.id.srcollview)
     NestedScrollView scrollView;
-    Unbinder unbinder2;
     @BindView(re_top_bg)
     RelativeLayout reTopBg;
     private int mDistanceY;
@@ -122,6 +131,7 @@ public class HomeFragment extends BaseFragment {
     private ImageView[] ivPoints;//小圆点图片的集合
     private List<HomeItemBean> homeItemBeanList;//总的数据源
     private List<View> viewPagerList;//GridView作为一个View对象添加到ViewPager集合中
+    private boolean isJa;
 
     private int[] itemPic = {
             R.drawable.home_xinfang_iv,
@@ -137,14 +147,20 @@ public class HomeFragment extends BaseFragment {
             R.drawable.home_zhongguofangyuan_iv,
             R.drawable.home_haiwaidichan_iv
     };
-    private List<String> itemTjxfList;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null);
         EventBus.getDefault().register(this);
         unbinder = ButterKnife.bind(this, view);
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         initViewData(view);
+        initData();
         initScroll();
         return view;
     }
@@ -279,130 +295,130 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
-        //-----item导航栏-----
-
         //-----城市探探-----
         //        tantanTv.requestFocus();
-        //-----城市探探-----
-
-        //-----banner-----
-        List<Integer> baaaneList = new ArrayList<>();
-        baaaneList.add(R.drawable.home_banner_iv);
-        baaaneList.add(R.drawable.home_banner_iv);
-        baaaneList.add(R.drawable.home_banner_iv);
-        BannerUtils.startBanner(banner, baaaneList);
-        banner.setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                //                TUtils.showShort(mContext, "点击了Banner" + position);
-                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
-            }
-        });
-        //-----banner-----
-
-        //-----推荐新房-----
-        List<String> tjxfList = new ArrayList<>();
-        tjxfList.add("");
-        tjxfList.add("");
-        itemTjxfList = new ArrayList<>();
-        itemTjxfList.add("");
-        itemTjxfList.add("");
-        itemTjxfList.add("");
-        itemTjxfList.add("");
         tjxfRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         tjxfRecycler.setNestedScrollingEnabled(false);
-        TjxfAdapter adapter = new TjxfAdapter(R.layout.item_home_tjxf, tjxfList);
-        tjxfRecycler.setAdapter(adapter);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
-            }
-        });
-        //-----推荐新房-----
-
-        //-----推荐二手房-----
-        List<String> tjesfList = new ArrayList<>();
-        tjesfList.add("");
-        tjesfList.add("");
-        tjesfList.add("");
         tjesfRecycler.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         tjesfRecycler.setLayoutManager(linearLayoutManager);
-        TjesfAdapter tjesfAdapter = new TjesfAdapter(R.layout.item_tjesf_layout, tjesfList);
-        tjesfRecycler.setAdapter(tjesfAdapter);
-        tjesfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, OldHousedetailsActivity.class));
-            }
-        });
-        //-----推荐二手房-----
-
-        //-----推荐优秀经纪人-----
-        List<String> tjyxjjrList = new ArrayList<>();
-        tjyxjjrList.add("");
-        tjyxjjrList.add("");
-        tjyxjjrList.add("");
-        tjyxjjrList.add("");
-        tjyxjjrList.add("");
         tjyxjjrRecycler.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(mContext);
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         tjyxjjrRecycler.setLayoutManager(linearLayoutManager1);
-        TjyxjjrAdapter tjyxjjrAdapter = new TjyxjjrAdapter(R.layout.item_tjyxjjr_layout, tjyxjjrList);
-        tjyxjjrRecycler.setAdapter(tjyxjjrAdapter);
-        tjyxjjrAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, ManagerActivity.class));
-            }
-        });
-        //-----推荐优秀经纪人-----
-
-        //-----推荐租房-----
         tjzfRecycler.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(mContext);
         linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         tjzfRecycler.setLayoutManager(linearLayoutManager2);
-        TjzfAdapter tjzfAdapter = new TjzfAdapter(R.layout.item_tjzf_layout, tjesfList);
-        tjzfRecycler.setAdapter(tjzfAdapter);
-        tjzfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
-            }
-        });
-        //-----推荐租房-----
-
-        //-----推荐土地-----
+        cnxhRecycler.setNestedScrollingEnabled(false);
+        cnxhRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         tjtdRecycler.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(mContext);
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         tjtdRecycler.setLayoutManager(linearLayoutManager3);
-        TjtdAdapter tjtdAdapter = new TjtdAdapter(R.layout.item_tjtd_layout, tjesfList);
-        tjtdRecycler.setAdapter(tjtdAdapter);
-        tjtdAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, TudidetailsActivity.class));
-            }
-        });
-        //-----推荐土地-----
+    }
 
-        //-----猜你喜欢-----
-        cnxhRecycler.setNestedScrollingEnabled(false);
-        cnxhRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        CnxhAdapter cnxhAdapter = new CnxhAdapter(R.layout.item_cnxh_layout, tjyxjjrList);
-        cnxhRecycler.setAdapter(cnxhAdapter);
-        cnxhAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
-            }
-        });
-        //-----猜你喜欢-----
+    private void initData() {
+        HttpParams params = new HttpParams();
+        params.put("cId", 2);
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
+        }
+        OkGo.<HomePageBean>post(MyUrls.BASEURL + "/app/index/init")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<HomePageBean>(mActivity, HomePageBean.class) {
+                    @Override
+                    public void onSuccess(Response<HomePageBean> response) {
+                        HomePageBean body = response.body();
+                        HomePageBean.DatasEntity datas = body.getDatas();
+                        List<HomePageBean.DatasEntity.CnxhEntity> cnxh = datas.getCnxh();//猜你喜欢
+                        List<HomePageBean.DatasEntity.ImagesEntity> images = datas.getImages();//banner
+                        List<HomePageBean.DatasEntity.TjesfEntity> tjesf = datas.getTjesf();//推荐二手房
+                        List<HomePageBean.DatasEntity.TjjjrEntity> tjjjr = datas.getTjjjr();//推荐经纪人
+                        List<HomePageBean.DatasEntity.TjtdEntity> tjtd = datas.getTjtd();//推荐土地
+                        List<HomePageBean.DatasEntity.TjxfEntity> tjxf = datas.getTjxf();//推荐新房
+                        List<HomePageBean.DatasEntity.TjzfEntity> tjzf = datas.getTjzf();//推荐租房
+                        //-----banner-----
+                        List<String> bannerList = new ArrayList<>();
+                        if (images!=null && images.size()>0){
+                            for (int i = 0; i < images.size(); i++) {
+                                String imageUrl = images.get(i).getImageUrl();
+                                bannerList.add(imageUrl);
+                            }
+                        }
+                        BannerUtils.startBanner(banner, bannerList);
+                        banner.setOnBannerListener(new OnBannerListener() {
+                            @Override
+                            public void OnBannerClick(int position) {
+                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                            }
+                        });
+                        //-----推荐新房-----
+                        TjxfAdapter adapter = new TjxfAdapter(R.layout.item_home_tjxf, tjxf);
+                        tjxfRecycler.setAdapter(adapter);
+                        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                            }
+                        });
+                        //-----推荐二手房-----
+                        TjesfAdapter tjesfAdapter = new TjesfAdapter(R.layout.item_tjesf_layout, tjesf);
+                        tjesfRecycler.setAdapter(tjesfAdapter);
+                        tjesfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(mContext, OldHousedetailsActivity.class));
+                            }
+                        });
+                        //-----推荐优秀经纪人-----
+                        TjyxjjrAdapter tjyxjjrAdapter = new TjyxjjrAdapter(R.layout.item_tjyxjjr_layout, tjjjr);
+                        tjyxjjrRecycler.setAdapter(tjyxjjrAdapter);
+                        tjyxjjrAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(mContext, ManagerActivity.class));
+                            }
+                        });
+                        //-----推荐租房-----
+                        TjzfAdapter tjzfAdapter = new TjzfAdapter(R.layout.item_tjzf_layout, tjzf);
+                        tjzfRecycler.setAdapter(tjzfAdapter);
+                        tjzfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+                            }
+                        });
+                        //-----推荐土地-----
+                        TjtdAdapter tjtdAdapter = new TjtdAdapter(R.layout.item_tjtd_layout, tjtd);
+                        tjtdRecycler.setAdapter(tjtdAdapter);
+                        tjtdAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(mContext, TudidetailsActivity.class));
+                            }
+                        });
+                        //-----猜你喜欢-----
+                        CnxhAdapter cnxhAdapter = new CnxhAdapter(R.layout.item_cnxh_layout, cnxh);
+                        cnxhRecycler.setAdapter(cnxhAdapter);
+                        cnxhAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(Response<HomePageBean> response) {
+                        super.onError(response);
+                        Log.e("xxx",response.getException().getMessage());
+                    }
+                });
     }
 
     @Override
@@ -440,28 +456,27 @@ public class HomeFragment extends BaseFragment {
         //        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder2 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
-    private class TjxfAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class TjxfAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjxfEntity, BaseViewHolder> {
 
-        public TjxfAdapter(int layoutResId, @Nullable List<String> data) {
+        public TjxfAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjxfEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjxfEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn()  + "元/㎡" : item.getPriceCn() + "元/㎡");
             RecyclerView itemTjxfRecycler = helper.getView(R.id.item_tjxf_recycler);
             itemTjxfRecycler.setNestedScrollingEnabled(false);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             itemTjxfRecycler.setLayoutManager(linearLayoutManager);
-            ItemTjxfAdapter itemTjxfAdapter = new ItemTjxfAdapter(R.layout.item_tjxf_item_layout, itemTjxfList);
+            ItemTjxfAdapter itemTjxfAdapter = new ItemTjxfAdapter(R.layout.item_tjxf_item_layout, item.getImageList());
             itemTjxfRecycler.setAdapter(itemTjxfAdapter);
             itemTjxfAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
@@ -472,38 +487,45 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    private class ItemTjxfAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class ItemTjxfAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjxfEntity.ImageListEntity, BaseViewHolder> {
 
-        public ItemTjxfAdapter(int layoutResId, @Nullable List<String> data) {
+        public ItemTjxfAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjxfEntity.ImageListEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjxfEntity.ImageListEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getVal())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
         }
     }
 
-    private class TjesfAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class TjesfAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjesfEntity, BaseViewHolder> {
 
-        public TjesfAdapter(int layoutResId, @Nullable List<String> data) {
+        public TjesfAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjesfEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjesfEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_ting, isJa ? "" : "")
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "万" : item.getPriceCn() + "万");
         }
     }
 
-    private class TjyxjjrAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class TjyxjjrAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjjjrEntity, BaseViewHolder> {
 
-        public TjyxjjrAdapter(int layoutResId, @Nullable List<String> data) {
+        public TjyxjjrAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjjjrEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjjjrEntity item) {
             RatingBarView ratingBarView = helper.getView(R.id.ratingBarView);
             ratingBarView.setRatingCount(5);//设置RatingBarView总数
             ratingBarView.setSelectedCount(2);//设置RatingBarView选中数
@@ -528,42 +550,63 @@ public class HomeFragment extends BaseFragment {
                     }
                 });
             }
+            Glide.with(MyApplication.getGloableContext()).load(item.getPic())
+                    .into((ImageView) helper.getView(R.id.iv_head));
+            helper.setText(R.id.tv_name, item.getNickname())
+                    .setText(R.id.tv_area, getResources().getString(R.string.zhuying)+item.getShop());
         }
     }
 
-    private class TjzfAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class TjzfAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjzfEntity, BaseViewHolder> {
 
-        public TjzfAdapter(int layoutResId, @Nullable List<String> data) {
+        public TjzfAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjzfEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjzfEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
+                    .setText(R.id.tv_ting, isJa ? "" : "")
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "万" : item.getPriceCn() + "万");
         }
     }
 
-    private class TjtdAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class TjtdAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjtdEntity, BaseViewHolder> {
 
-        public TjtdAdapter(int layoutResId, @Nullable List<String> data) {
+        public TjtdAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjtdEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjtdEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getLandImages())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() + "万/㎡" : item.getSellingPriceCn() + "万/㎡");
         }
     }
 
-    private class CnxhAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class CnxhAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.CnxhEntity, BaseViewHolder> {
 
-        public CnxhAdapter(int layoutResId, @Nullable List<String> data) {
+        public CnxhAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.CnxhEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.CnxhEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
+                    .setText(R.id.tv_ting, isJa ? "" : "")
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月");
         }
     }
 
@@ -583,7 +626,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.search_tv:
                 Intent intent1 = new Intent(mContext, HomeSearchActivity.class);
-                intent1.putExtra("home","home");
+                intent1.putExtra("home", "home");
                 startActivity(intent1);
                 break;
             case R.id.map_tv:

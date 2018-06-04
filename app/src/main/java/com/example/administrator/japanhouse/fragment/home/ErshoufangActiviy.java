@@ -171,8 +171,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                         List<QuYuBean.DatasEntity.SubwaylinesEntity> subwaylines = datas.getSubwaylines();
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
-                        quyuListBean.add(new MoreCheckBean(true, "不限"));
-                        ditieListBean.add(new MoreCheckBean(true, "不限"));
+                        List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
+                        oneCheckBeanList1.add(new OneCheckBean(true, "不限"));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, "不限");
+                        moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
+                        quyuListBean.add(moreCheckBean1);
+                        ditieListBean.add(moreCheckBean1);
                         if (areas != null && areas.size() > 0) {
                             for (int i = 0; i < areas.size(); i++) {
                                 QuYuBean.DatasEntity.AreasEntity areasEntity = areas.get(i);
@@ -308,6 +312,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         } else {
             params.put("languageType", 0);
         }
+        params.put("cId", 2);
         params.put("hType", 0);
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积

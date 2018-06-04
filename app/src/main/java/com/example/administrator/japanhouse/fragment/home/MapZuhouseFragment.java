@@ -169,7 +169,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         mapView.showZoomControls(false);//隐藏缩放控件
         baiduMap = mapView.getMap();
         HttpParams params = new HttpParams();
-        params.put("hType", 2);
+        params.put("hType", 0);
+        params.put("shType", 10);
         OkGo.<ZuHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/twoscreening/selectallscree")
                 .tag(this)
                 .params(params)
@@ -202,8 +203,12 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         List<QuYuBean.DatasEntity.SubwaylinesEntity> subwaylines = datas.getSubwaylines();
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
-                        quyuListBean.add(new MoreCheckBean(true, "不限"));
-                        ditieListBean.add(new MoreCheckBean(true, "不限"));
+                        List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
+                        oneCheckBeanList1.add(new OneCheckBean(true, "不限"));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, "不限");
+                        moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
+                        quyuListBean.add(moreCheckBean1);
+                        ditieListBean.add(moreCheckBean1);
                         if (areas != null && areas.size() > 0) {
                             for (int i = 0; i < areas.size(); i++) {
                                 QuYuBean.DatasEntity.AreasEntity areasEntity = areas.get(i);
@@ -372,6 +377,37 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         HttpParams params = new HttpParams();
         params.put("cityName", city);
         params.put("hType", 2);
+        params.put("mjId", mjId);//面积
+        params.put("zjId", zjId);//租金
+        if (isZiDingyiPrice) {
+            params.put("starZj", zidingyiPriceList.get(0));//租金最低价
+            params.put("endZj", zidingyiPriceList.get(1));//租金最高价
+        }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
+        }
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("cxs", mMoreSelectedBeanList.get(3));//朝向
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(4));//车站距离
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("cqfys", mMoreSelectedBeanList.get(5));//初期费用
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(6));//人气选择
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("fjzks", mMoreSelectedBeanList.get(7));//房间状况
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
+        if (mMoreSelectedBeanList.size() > 9)
+            params.putUrlParams("tjs", mMoreSelectedBeanList.get(9));//条件
         OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
                 .tag(this)
                 .params(params)
@@ -458,11 +494,42 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     private void loadAllXiaoQu(LatLng northeast, LatLng southwest) {
         baiduMap.clear();
         HttpParams params = new HttpParams();
+        params.put("hType", 2);
         params.put("starJd", southwest.longitude);
         params.put("endJd", northeast.longitude);
         params.put("starWd", southwest.latitude);
         params.put("endWd", northeast.latitude);
-        params.put("hType", 2);
+        params.put("mjId", mjId);//面积
+        params.put("zjId", zjId);//租金
+        if (isZiDingyiPrice) {
+            params.put("starZj", zidingyiPriceList.get(0));//租金最低价
+            params.put("endZj", zidingyiPriceList.get(1));//租金最高价
+        }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
+        }
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("cxs", mMoreSelectedBeanList.get(3));//朝向
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(4));//车站距离
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("cqfys", mMoreSelectedBeanList.get(5));//初期费用
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(6));//人气选择
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("fjzks", mMoreSelectedBeanList.get(7));//房间状况
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
+        if (mMoreSelectedBeanList.size() > 9)
+            params.putUrlParams("tjs", mMoreSelectedBeanList.get(9));//条件
         OkGo.<MapHouseDetailBean>post(MyUrls.BASEURL + "/app/community/selectbyjwd")
                 .tag(this)
                 .params(params)
@@ -532,16 +599,58 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
 
     @Override
     public void onItemClick(View view, int postion, int itemPosition) {
-
+        switch (postion) {
+            case 1:
+                break;
+            case 2://面积
+                if (itemPosition == 0) {//说明是点击的不限
+                    mjId = "-2";
+                } else {
+                    if (mianji != null && mianji.size() > 0) {
+                        ZuHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(itemPosition - 1);
+                        mjId = mianjiEntity.getId() + "";
+                    }
+                }
+                initOverlay(mCity);
+                break;
+            case 3://租金
+                isZiDingyiPrice = false;
+                zidingyiPriceList.clear();
+                if (itemPosition == 0) {
+                    zjId = "-2";
+                } else {
+                    if (zujin != null && zujin.size() > 0) {
+                        zjId = zujin.get(itemPosition - 1).getId() + "";
+                    }
+                }
+                initOverlay(mCity);
+                break;
+        }
     }
 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
-
+        if (postion == 1) {//区域
+            isDitie = false;
+            quyuList = priceRegin;
+        } else if (postion == 2) {//地铁
+            isDitie = true;
+            ditieList = priceRegin;
+        } else {//自定义价格
+            if (zujin != null && zujin.size() > 0) {
+                isZiDingyiPrice = true;
+                zjId = "-1";
+                zidingyiPriceList.clear();
+                zidingyiPriceList = priceRegin;
+                initOverlay(mCity);
+            }
+        }
     }
 
     @Override
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
-
+        mMoreSelectedBeanList.clear();
+        mMoreSelectedBeanList = moreSelectedBeanList;
+        initOverlay(mCity);
     }
 }

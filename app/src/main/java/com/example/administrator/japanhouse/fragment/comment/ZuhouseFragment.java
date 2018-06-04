@@ -132,6 +132,7 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(mContext,ZuHousedetailsActivity.class);
                 String houseType = mRefreshData.get(position).getHouseType();
+                intent.putExtra("houseId",mRefreshData.get(position).getId()+"");
                 if (houseType.equals("5")) {
                     intent.putExtra("houseType", "duoceng");
                 } else if (houseType.equals("4")) {

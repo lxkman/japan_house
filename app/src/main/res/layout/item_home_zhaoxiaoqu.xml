@@ -85,16 +85,12 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_mianji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/round_pick"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
-                android:paddingBottom="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="2dp"
-                android:text="100套在售"
+                android:text="150㎡ - 175㎡"
                 android:textColor="@color/colorPrimary"
                 android:textSize="13sp"/>
 

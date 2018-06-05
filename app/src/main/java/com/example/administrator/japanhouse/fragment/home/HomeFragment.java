@@ -337,11 +337,11 @@ public class HomeFragment extends BaseFragment {
                         HomePageBean.DatasEntity datas = body.getDatas();
                         List<HomePageBean.DatasEntity.CnxhEntity> cnxh = datas.getCnxh();//猜你喜欢
                         List<HomePageBean.DatasEntity.ImagesEntity> images = datas.getImages();//banner
-                        List<HomePageBean.DatasEntity.TjesfEntity> tjesf = datas.getTjesf();//推荐二手房
+                        final List<HomePageBean.DatasEntity.TjesfEntity> tjesf = datas.getTjesf();//推荐二手房
                         List<HomePageBean.DatasEntity.TjjjrEntity> tjjjr = datas.getTjjjr();//推荐经纪人
-                        List<HomePageBean.DatasEntity.TjtdEntity> tjtd = datas.getTjtd();//推荐土地
-                        List<HomePageBean.DatasEntity.TjxfEntity> tjxf = datas.getTjxf();//推荐新房
-                        List<HomePageBean.DatasEntity.TjzfEntity> tjzf = datas.getTjzf();//推荐租房
+                        final List<HomePageBean.DatasEntity.TjtdEntity> tjtd = datas.getTjtd();//推荐土地
+                        final List<HomePageBean.DatasEntity.TjxfEntity> tjxf = datas.getTjxf();//推荐新房
+                        final List<HomePageBean.DatasEntity.TjzfEntity> tjzf = datas.getTjzf();//推荐租房
                         //-----banner-----
                         List<String> bannerList = new ArrayList<>();
                         if (images!=null && images.size()>0){
@@ -363,7 +363,9 @@ public class HomeFragment extends BaseFragment {
                         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                                Intent intent = new Intent(mContext, NewHousedetailsActivity.class);
+                                intent.putExtra("houseId", tjxf.get(position).getId() + "");
+                                startActivity(intent);
                             }
                         });
                         //-----推荐二手房-----
@@ -372,7 +374,9 @@ public class HomeFragment extends BaseFragment {
                         tjesfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, OldHousedetailsActivity.class));
+                                Intent intent = new Intent(mContext, OldHousedetailsActivity.class);
+                                intent.putExtra("houseId", tjesf.get(position).getId() + "");
+                                startActivity(intent);
                             }
                         });
                         //-----推荐优秀经纪人-----
@@ -390,7 +394,23 @@ public class HomeFragment extends BaseFragment {
                         tjzfAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, ZuHousedetailsActivity.class));
+                                Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
+                                String houseType = tjzf.get(position).getHouseType();
+                                if (houseType.equals("5")) {
+                                    intent.putExtra("houseType", "duoceng");
+                                } else if (houseType.equals("4")) {
+                                    intent.putExtra("houseType", "xuesheng");
+                                } else if (houseType.equals("3")) {
+                                    intent.putExtra("houseType", "erceng");
+                                } else if (houseType.equals("2")) {
+                                    intent.putExtra("houseType", "bieshu");
+                                } else if (houseType.equals("1")) {
+                                    intent.putExtra("houseType", "shangpu");
+                                } else if (houseType.equals("0")) {
+                                    intent.putExtra("houseType", "bangongshi");
+                                }
+                                intent.putExtra("houseId", tjzf.get(position).getId() + "");
+                                startActivity(intent);
                             }
                         });
                         //-----推荐土地-----
@@ -399,7 +419,9 @@ public class HomeFragment extends BaseFragment {
                         tjtdAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, TudidetailsActivity.class));
+                                Intent intent = new Intent(mContext, TudidetailsActivity.class);
+                                intent.putExtra("houseId", tjtd.get(position).getId() + "");
+                                startActivity(intent);
                             }
                         });
                         //-----猜你喜欢-----
@@ -464,7 +486,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjxfEntity item) {
+        protected void convert(BaseViewHolder helper, final HomePageBean.DatasEntity.TjxfEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
@@ -481,7 +503,9 @@ public class HomeFragment extends BaseFragment {
             itemTjxfAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                    Intent intent = new Intent(mContext, NewHousedetailsActivity.class);
+                    intent.putExtra("houseId", item.getId() + "");
+                    startActivity(intent);
                 }
             });
         }

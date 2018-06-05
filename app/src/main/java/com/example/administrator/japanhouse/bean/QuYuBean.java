@@ -8,10 +8,11 @@ import java.util.List;
 
 public class QuYuBean {
 
+
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"subwaylines":[{"subwayStations":[{"stationNameJpn":"苹果园","isDeleted":"0","createTime":1527759590000,"stationNameCn":"苹果园","lineId":1,"updateTime":1527759592000,"id":1},{"stationNameJpn":"古城","isDeleted":"0","createTime":1527759607000,"stationNameCn":"古城","lineId":1,"updateTime":1527759609000,"id":2},{"stationNameJpn":"八角游乐园","isDeleted":"0","createTime":1527759633000,"stationNameCn":"八角游乐园","lineId":1,"updateTime":1527759635000,"id":3},{"stationNameJpn":"八宝山","isDeleted":"0","createTime":1527759653000,"stationNameCn":"八宝山","lineId":1,"updateTime":1527759656000,"id":4},{"stationNameJpn":"玉泉路","isDeleted":"0","createTime":1527759671000,"stationNameCn":"玉泉路","lineId":1,"updateTime":1527759673000,"id":5}],"isDeleted":"0","createTime":1527759531000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759533000,"id":1,"lineNameCn":"1号线","lineNameJpn":"1号线"},{"subwayStations":[{"stationNameJpn":"车公庄","isDeleted":"0","createTime":1527759697000,"stationNameCn":"车公庄","lineId":2,"updateTime":1527759699000,"id":6},{"stationNameJpn":"阜成门","isDeleted":"0","createTime":1527759717000,"stationNameCn":"阜成门","lineId":2,"updateTime":1527759719000,"id":7},{"stationNameJpn":"复兴门","isDeleted":"0","createTime":1527759735000,"stationNameCn":"复兴门","lineId":2,"updateTime":1527759737000,"id":8},{"stationNameJpn":"长椿街","isDeleted":"0","createTime":1527759759000,"stationNameCn":"长椿街","lineId":2,"updateTime":1527759760000,"id":9},{"stationNameJpn":"宣武门","isDeleted":"0","createTime":1527759777000,"stationNameCn":"宣武门","lineId":2,"updateTime":1527759779000,"id":10}],"isDeleted":"0","createTime":1527759557000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759559000,"id":2,"lineNameCn":"2号线","lineNameJpn":"2号线"}],"areas":[{"administrationNameCn":"海淀区","isDeleted":0,"createTime":1527145998000,"hwdcAreaManages":[{"isDeleted":"0","createTime":1527756338000,"threeAdministrativeId":3,"areaNameCn":"公主坟","areaNameJpn":"公主坟","updateTime":1527756339000,"id":1},{"isDeleted":"0","createTime":1527756356000,"threeAdministrativeId":3,"areaNameCn":"中关村","areaNameJpn":"中关村","updateTime":1527756358000,"id":2},{"isDeleted":"0","createTime":1527756377000,"threeAdministrativeId":3,"areaNameCn":"蓟门桥","areaNameJpn":"蓟门桥","updateTime":1527756379000,"id":3},{"isDeleted":"0","createTime":1527756398000,"threeAdministrativeId":3,"areaNameCn":"上地","areaNameJpn":"上地","updateTime":1527756400000,"id":4},{"isDeleted":"0","createTime":1527756419000,"threeAdministrativeId":3,"areaNameCn":"圆明园","areaNameJpn":"圆明园","updateTime":1527756422000,"id":5}],"latitude":1,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","houseNum":0,"parentId":2,"longitude":1,"status":"0"},{"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1527759278000,"hwdcAreaManages":[],"latitude":1,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","houseNum":0,"parentId":2,"longitude":1,"status":"0"}]}
+     * datas : {"subwaylines":[{"subwayStations":[{"stationNameJpn":"苹果园","isDeleted":"0","stationNameCn":"苹果园","createTime":1527759590000,"lineId":1,"updateTime":1527759592000,"id":1},{"stationNameJpn":"古城","isDeleted":"0","stationNameCn":"古城","createTime":1527759607000,"lineId":1,"updateTime":1527759609000,"id":2},{"stationNameJpn":"八角游乐园","isDeleted":"0","stationNameCn":"八角游乐园","createTime":1527759633000,"lineId":1,"updateTime":1527759635000,"id":3},{"stationNameJpn":"八宝山","isDeleted":"0","stationNameCn":"八宝山","createTime":1527759653000,"lineId":1,"updateTime":1527759656000,"id":4},{"stationNameJpn":"玉泉路","isDeleted":"0","stationNameCn":"玉泉路","createTime":1527759671000,"lineId":1,"updateTime":1527759673000,"id":5}],"isDeleted":"0","createTime":1527759531000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759533000,"id":1,"lineNameCn":"1号线","lineNameJpn":"1号线"},{"subwayStations":[{"stationNameJpn":"车公庄","isDeleted":"0","stationNameCn":"车公庄","createTime":1527759697000,"lineId":2,"updateTime":1527759699000,"id":6},{"stationNameJpn":"阜成门","isDeleted":"0","stationNameCn":"阜成门","createTime":1527759717000,"lineId":2,"updateTime":1527759719000,"id":7},{"stationNameJpn":"复兴门","isDeleted":"0","stationNameCn":"复兴门","createTime":1527759735000,"lineId":2,"updateTime":1527759737000,"id":8},{"stationNameJpn":"长椿街","isDeleted":"0","stationNameCn":"长椿街","createTime":1527759759000,"lineId":2,"updateTime":1527759760000,"id":9},{"stationNameJpn":"宣武门","isDeleted":"0","stationNameCn":"宣武门","createTime":1527759777000,"lineId":2,"updateTime":1527759779000,"id":10}],"isDeleted":"0","createTime":1527759557000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759559000,"id":2,"lineNameCn":"2号线","lineNameJpn":"2号线"}],"areas":[{"administrationNameCn":"海淀区","isDeleted":0,"createTime":1527145998000,"hwdcAreaManages":[{"isDeleted":"0","createTime":1527756338000,"threeAdministrativeId":3,"areaNameCn":"公主坟","areaNameJpn":"公主坟","updateTime":1527756339000,"id":1},{"isDeleted":"0","createTime":1527756356000,"threeAdministrativeId":3,"areaNameCn":"中关村","areaNameJpn":"中关村","updateTime":1527756358000,"id":2},{"isDeleted":"0","createTime":1527756377000,"threeAdministrativeId":3,"areaNameCn":"蓟门桥","areaNameJpn":"蓟门桥","updateTime":1527756379000,"id":3},{"isDeleted":"0","createTime":1527756398000,"threeAdministrativeId":3,"areaNameCn":"上地","areaNameJpn":"上地","updateTime":1527756400000,"id":4},{"isDeleted":"0","createTime":1527756419000,"threeAdministrativeId":3,"areaNameCn":"圆明园","areaNameJpn":"圆明园","updateTime":1527756422000,"id":5}],"latitude":116.03,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","parentId":2,"houseNum":0,"status":"0","longitude":39.53},{"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1527759278000,"hwdcAreaManages":[],"latitude":1,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","parentId":2,"houseNum":0,"status":"0","longitude":1}]}
      */
     private String msg;
     private String code;
@@ -43,8 +44,8 @@ public class QuYuBean {
 
     public static class DatasEntity {
         /**
-         * subwaylines : [{"subwayStations":[{"stationNameJpn":"苹果园","isDeleted":"0","createTime":1527759590000,"stationNameCn":"苹果园","lineId":1,"updateTime":1527759592000,"id":1},{"stationNameJpn":"古城","isDeleted":"0","createTime":1527759607000,"stationNameCn":"古城","lineId":1,"updateTime":1527759609000,"id":2},{"stationNameJpn":"八角游乐园","isDeleted":"0","createTime":1527759633000,"stationNameCn":"八角游乐园","lineId":1,"updateTime":1527759635000,"id":3},{"stationNameJpn":"八宝山","isDeleted":"0","createTime":1527759653000,"stationNameCn":"八宝山","lineId":1,"updateTime":1527759656000,"id":4},{"stationNameJpn":"玉泉路","isDeleted":"0","createTime":1527759671000,"stationNameCn":"玉泉路","lineId":1,"updateTime":1527759673000,"id":5}],"isDeleted":"0","createTime":1527759531000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759533000,"id":1,"lineNameCn":"1号线","lineNameJpn":"1号线"},{"subwayStations":[{"stationNameJpn":"车公庄","isDeleted":"0","createTime":1527759697000,"stationNameCn":"车公庄","lineId":2,"updateTime":1527759699000,"id":6},{"stationNameJpn":"阜成门","isDeleted":"0","createTime":1527759717000,"stationNameCn":"阜成门","lineId":2,"updateTime":1527759719000,"id":7},{"stationNameJpn":"复兴门","isDeleted":"0","createTime":1527759735000,"stationNameCn":"复兴门","lineId":2,"updateTime":1527759737000,"id":8},{"stationNameJpn":"长椿街","isDeleted":"0","createTime":1527759759000,"stationNameCn":"长椿街","lineId":2,"updateTime":1527759760000,"id":9},{"stationNameJpn":"宣武门","isDeleted":"0","createTime":1527759777000,"stationNameCn":"宣武门","lineId":2,"updateTime":1527759779000,"id":10}],"isDeleted":"0","createTime":1527759557000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759559000,"id":2,"lineNameCn":"2号线","lineNameJpn":"2号线"}]
-         * areas : [{"administrationNameCn":"海淀区","isDeleted":0,"createTime":1527145998000,"hwdcAreaManages":[{"isDeleted":"0","createTime":1527756338000,"threeAdministrativeId":3,"areaNameCn":"公主坟","areaNameJpn":"公主坟","updateTime":1527756339000,"id":1},{"isDeleted":"0","createTime":1527756356000,"threeAdministrativeId":3,"areaNameCn":"中关村","areaNameJpn":"中关村","updateTime":1527756358000,"id":2},{"isDeleted":"0","createTime":1527756377000,"threeAdministrativeId":3,"areaNameCn":"蓟门桥","areaNameJpn":"蓟门桥","updateTime":1527756379000,"id":3},{"isDeleted":"0","createTime":1527756398000,"threeAdministrativeId":3,"areaNameCn":"上地","areaNameJpn":"上地","updateTime":1527756400000,"id":4},{"isDeleted":"0","createTime":1527756419000,"threeAdministrativeId":3,"areaNameCn":"圆明园","areaNameJpn":"圆明园","updateTime":1527756422000,"id":5}],"latitude":1,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","houseNum":0,"parentId":2,"longitude":1,"status":"0"},{"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1527759278000,"hwdcAreaManages":[],"latitude":1,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","houseNum":0,"parentId":2,"longitude":1,"status":"0"}]
+         * subwaylines : [{"subwayStations":[{"stationNameJpn":"苹果园","isDeleted":"0","stationNameCn":"苹果园","createTime":1527759590000,"lineId":1,"updateTime":1527759592000,"id":1},{"stationNameJpn":"古城","isDeleted":"0","stationNameCn":"古城","createTime":1527759607000,"lineId":1,"updateTime":1527759609000,"id":2},{"stationNameJpn":"八角游乐园","isDeleted":"0","stationNameCn":"八角游乐园","createTime":1527759633000,"lineId":1,"updateTime":1527759635000,"id":3},{"stationNameJpn":"八宝山","isDeleted":"0","stationNameCn":"八宝山","createTime":1527759653000,"lineId":1,"updateTime":1527759656000,"id":4},{"stationNameJpn":"玉泉路","isDeleted":"0","stationNameCn":"玉泉路","createTime":1527759671000,"lineId":1,"updateTime":1527759673000,"id":5}],"isDeleted":"0","createTime":1527759531000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759533000,"id":1,"lineNameCn":"1号线","lineNameJpn":"1号线"},{"subwayStations":[{"stationNameJpn":"车公庄","isDeleted":"0","stationNameCn":"车公庄","createTime":1527759697000,"lineId":2,"updateTime":1527759699000,"id":6},{"stationNameJpn":"阜成门","isDeleted":"0","stationNameCn":"阜成门","createTime":1527759717000,"lineId":2,"updateTime":1527759719000,"id":7},{"stationNameJpn":"复兴门","isDeleted":"0","stationNameCn":"复兴门","createTime":1527759735000,"lineId":2,"updateTime":1527759737000,"id":8},{"stationNameJpn":"长椿街","isDeleted":"0","stationNameCn":"长椿街","createTime":1527759759000,"lineId":2,"updateTime":1527759760000,"id":9},{"stationNameJpn":"宣武门","isDeleted":"0","stationNameCn":"宣武门","createTime":1527759777000,"lineId":2,"updateTime":1527759779000,"id":10}],"isDeleted":"0","createTime":1527759557000,"lineType":0,"twoAdministrativeId":2,"updateTime":1527759559000,"id":2,"lineNameCn":"2号线","lineNameJpn":"2号线"}]
+         * areas : [{"administrationNameCn":"海淀区","isDeleted":0,"createTime":1527145998000,"hwdcAreaManages":[{"isDeleted":"0","createTime":1527756338000,"threeAdministrativeId":3,"areaNameCn":"公主坟","areaNameJpn":"公主坟","updateTime":1527756339000,"id":1},{"isDeleted":"0","createTime":1527756356000,"threeAdministrativeId":3,"areaNameCn":"中关村","areaNameJpn":"中关村","updateTime":1527756358000,"id":2},{"isDeleted":"0","createTime":1527756377000,"threeAdministrativeId":3,"areaNameCn":"蓟门桥","areaNameJpn":"蓟门桥","updateTime":1527756379000,"id":3},{"isDeleted":"0","createTime":1527756398000,"threeAdministrativeId":3,"areaNameCn":"上地","areaNameJpn":"上地","updateTime":1527756400000,"id":4},{"isDeleted":"0","createTime":1527756419000,"threeAdministrativeId":3,"areaNameCn":"圆明园","areaNameJpn":"圆明园","updateTime":1527756422000,"id":5}],"latitude":116.03,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","parentId":2,"houseNum":0,"status":"0","longitude":39.53},{"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1527759278000,"hwdcAreaManages":[],"latitude":1,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","parentId":2,"houseNum":0,"status":"0","longitude":1}]
          */
         private List<SubwaylinesEntity> subwaylines;
         private List<AreasEntity> areas;
@@ -67,7 +68,7 @@ public class QuYuBean {
 
         public static class SubwaylinesEntity {
             /**
-             * subwayStations : [{"stationNameJpn":"苹果园","isDeleted":"0","createTime":1527759590000,"stationNameCn":"苹果园","lineId":1,"updateTime":1527759592000,"id":1},{"stationNameJpn":"古城","isDeleted":"0","createTime":1527759607000,"stationNameCn":"古城","lineId":1,"updateTime":1527759609000,"id":2},{"stationNameJpn":"八角游乐园","isDeleted":"0","createTime":1527759633000,"stationNameCn":"八角游乐园","lineId":1,"updateTime":1527759635000,"id":3},{"stationNameJpn":"八宝山","isDeleted":"0","createTime":1527759653000,"stationNameCn":"八宝山","lineId":1,"updateTime":1527759656000,"id":4},{"stationNameJpn":"玉泉路","isDeleted":"0","createTime":1527759671000,"stationNameCn":"玉泉路","lineId":1,"updateTime":1527759673000,"id":5}]
+             * subwayStations : [{"stationNameJpn":"苹果园","isDeleted":"0","stationNameCn":"苹果园","createTime":1527759590000,"lineId":1,"updateTime":1527759592000,"id":1},{"stationNameJpn":"古城","isDeleted":"0","stationNameCn":"古城","createTime":1527759607000,"lineId":1,"updateTime":1527759609000,"id":2},{"stationNameJpn":"八角游乐园","isDeleted":"0","stationNameCn":"八角游乐园","createTime":1527759633000,"lineId":1,"updateTime":1527759635000,"id":3},{"stationNameJpn":"八宝山","isDeleted":"0","stationNameCn":"八宝山","createTime":1527759653000,"lineId":1,"updateTime":1527759656000,"id":4},{"stationNameJpn":"玉泉路","isDeleted":"0","stationNameCn":"玉泉路","createTime":1527759671000,"lineId":1,"updateTime":1527759673000,"id":5}]
              * isDeleted : 0
              * createTime : 1527759531000
              * lineType : 0
@@ -163,16 +164,16 @@ public class QuYuBean {
                 /**
                  * stationNameJpn : 苹果园
                  * isDeleted : 0
-                 * createTime : 1527759590000
                  * stationNameCn : 苹果园
+                 * createTime : 1527759590000
                  * lineId : 1
                  * updateTime : 1527759592000
                  * id : 1
                  */
                 private String stationNameJpn;
                 private String isDeleted;
-                private long createTime;
                 private String stationNameCn;
+                private long createTime;
                 private int lineId;
                 private long updateTime;
                 private int id;
@@ -185,12 +186,12 @@ public class QuYuBean {
                     this.isDeleted = isDeleted;
                 }
 
-                public void setCreateTime(long createTime) {
-                    this.createTime = createTime;
-                }
-
                 public void setStationNameCn(String stationNameCn) {
                     this.stationNameCn = stationNameCn;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
                 }
 
                 public void setLineId(int lineId) {
@@ -213,12 +214,12 @@ public class QuYuBean {
                     return isDeleted;
                 }
 
-                public long getCreateTime() {
-                    return createTime;
-                }
-
                 public String getStationNameCn() {
                     return stationNameCn;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
                 }
 
                 public int getLineId() {
@@ -241,27 +242,27 @@ public class QuYuBean {
              * isDeleted : 0
              * createTime : 1527145998000
              * hwdcAreaManages : [{"isDeleted":"0","createTime":1527756338000,"threeAdministrativeId":3,"areaNameCn":"公主坟","areaNameJpn":"公主坟","updateTime":1527756339000,"id":1},{"isDeleted":"0","createTime":1527756356000,"threeAdministrativeId":3,"areaNameCn":"中关村","areaNameJpn":"中关村","updateTime":1527756358000,"id":2},{"isDeleted":"0","createTime":1527756377000,"threeAdministrativeId":3,"areaNameCn":"蓟门桥","areaNameJpn":"蓟门桥","updateTime":1527756379000,"id":3},{"isDeleted":"0","createTime":1527756398000,"threeAdministrativeId":3,"areaNameCn":"上地","areaNameJpn":"上地","updateTime":1527756400000,"id":4},{"isDeleted":"0","createTime":1527756419000,"threeAdministrativeId":3,"areaNameCn":"圆明园","areaNameJpn":"圆明园","updateTime":1527756422000,"id":5}]
-             * latitude : 1
+             * latitude : 116.03
              * citylevel : 3
              * id : 3
              * administrationNameJpn : 海淀区
-             * houseNum : 0
              * parentId : 2
-             * longitude : 1
+             * houseNum : 0
              * status : 0
+             * longitude : 39.53
              */
             private String administrationNameCn;
             private int isDeleted;
             private long createTime;
             private List<HwdcAreaManagesEntity> hwdcAreaManages;
-            private int latitude;
+            private double latitude;
             private String citylevel;
             private int id;
             private String administrationNameJpn;
-            private int houseNum;
             private int parentId;
-            private int longitude;
+            private int houseNum;
             private String status;
+            private double longitude;
 
             public void setAdministrationNameCn(String administrationNameCn) {
                 this.administrationNameCn = administrationNameCn;
@@ -279,7 +280,7 @@ public class QuYuBean {
                 this.hwdcAreaManages = hwdcAreaManages;
             }
 
-            public void setLatitude(int latitude) {
+            public void setLatitude(double latitude) {
                 this.latitude = latitude;
             }
 
@@ -295,20 +296,20 @@ public class QuYuBean {
                 this.administrationNameJpn = administrationNameJpn;
             }
 
-            public void setHouseNum(int houseNum) {
-                this.houseNum = houseNum;
-            }
-
             public void setParentId(int parentId) {
                 this.parentId = parentId;
             }
 
-            public void setLongitude(int longitude) {
-                this.longitude = longitude;
+            public void setHouseNum(int houseNum) {
+                this.houseNum = houseNum;
             }
 
             public void setStatus(String status) {
                 this.status = status;
+            }
+
+            public void setLongitude(double longitude) {
+                this.longitude = longitude;
             }
 
             public String getAdministrationNameCn() {
@@ -327,7 +328,7 @@ public class QuYuBean {
                 return hwdcAreaManages;
             }
 
-            public int getLatitude() {
+            public double getLatitude() {
                 return latitude;
             }
 
@@ -343,20 +344,20 @@ public class QuYuBean {
                 return administrationNameJpn;
             }
 
-            public int getHouseNum() {
-                return houseNum;
-            }
-
             public int getParentId() {
                 return parentId;
             }
 
-            public int getLongitude() {
-                return longitude;
+            public int getHouseNum() {
+                return houseNum;
             }
 
             public String getStatus() {
                 return status;
+            }
+
+            public double getLongitude() {
+                return longitude;
             }
 
             public static class HwdcAreaManagesEntity {

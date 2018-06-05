@@ -335,6 +335,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         } else {
             params.put("languageType", 0);
         }
+        params.put("cId", 2);
         params.put("hType", type);
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积

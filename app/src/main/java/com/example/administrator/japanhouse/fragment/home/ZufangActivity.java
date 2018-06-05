@@ -19,7 +19,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
-import com.example.administrator.japanhouse.bean.OldHouseListBean;
+import com.example.administrator.japanhouse.bean.ZufangListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -74,6 +74,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     private int[] yanjiuitemPic = {R.drawable.test_jingzhuang_iv, R.drawable.test_dayangtai_iv,
             R.drawable.test_yangguangfang_iv, R.drawable.test_haohua_iv};
     private boolean isJa;
+    private List<ZufangListBean.DatasEntity> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +129,6 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 startActivity(intent);
             }
         });
-
         List<HomeItemBean> yanjiuItemBeanList = new ArrayList<>();
         for (int i = 0; i < yanjiuitemPic.length; i++) {
             yanjiuItemBeanList.add(new HomeItemBean(itemName[i], yanjiuitemPic[i]));
@@ -148,25 +148,19 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         tuijianRecycler.setNestedScrollingEnabled(false);
         tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         HttpParams params = new HttpParams();
-        if (isJa) {
-            params.put("languageType", 1);
-        } else {
-            params.put("languageType", 0);
-        }
-        params.put("pageNo", 1);
-        params.put("hType", 0);
-        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
+        params.put("cId", 2);
+        OkGo.<ZufangListBean>post(MyUrls.BASEURL + "/app/houseresourse/jrtj")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<OldHouseListBean>(ZufangActivity.this, OldHouseListBean.class) {
+                .execute(new DialogCallback<ZufangListBean>(ZufangActivity.this, ZufangListBean.class) {
                     @Override
-                    public void onSuccess(Response<OldHouseListBean> response) {
+                    public void onSuccess(Response<ZufangListBean> response) {
                         int code = response.code();
-                        OldHouseListBean oldHouseListBean = response.body();
+                        ZufangListBean oldHouseListBean = response.body();
                         if (oldHouseListBean == null) {
                             return;
                         }
-                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        datas = oldHouseListBean.getDatas();
                         if (datas != null && datas.size() > 0) {
                             LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_zufang_tuijian, datas);
                             tuijianRecycler.setAdapter(likeAdapter);
@@ -204,7 +198,21 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent = new Intent(ZufangActivity.this, ZuHousedetailsActivity.class);
-        intent.putExtra("houseType", "duoceng");
+        String houseType = datas.get(position).getHouseType();
+        if (houseType.equals("5")) {
+            intent.putExtra("houseType", "duoceng");
+        } else if (houseType.equals("4")) {
+            intent.putExtra("houseType", "xuesheng");
+        } else if (houseType.equals("3")) {
+            intent.putExtra("houseType", "erceng");
+        } else if (houseType.equals("2")) {
+            intent.putExtra("houseType", "bieshu");
+        } else if (houseType.equals("1")) {
+            intent.putExtra("houseType", "shangpu");
+        } else if (houseType.equals("0")) {
+            intent.putExtra("houseType", "bangongshi");
+        }
+        intent.putExtra("houseId", datas.get(position).getId() + "");
         startActivity(intent);
     }
 
@@ -243,14 +251,14 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         }
     }
 
-    private class LikeAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
+    private class LikeAdapter extends BaseQuickAdapter<ZufangListBean.DatasEntity, BaseViewHolder> {
 
-        public LikeAdapter(int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
+        public LikeAdapter(int layoutResId, @Nullable List<ZufangListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+        protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())

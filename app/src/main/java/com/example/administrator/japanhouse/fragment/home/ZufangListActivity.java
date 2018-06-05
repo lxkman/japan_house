@@ -20,10 +20,10 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
-import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.bean.QuYuBean;
 import com.example.administrator.japanhouse.bean.ZuHouseShaiXuanBean;
+import com.example.administrator.japanhouse.bean.ZufangListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
@@ -31,7 +31,6 @@ import com.example.administrator.japanhouse.fragment.mine.LiShiJiLuActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -66,14 +65,13 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
     private int page = 1;
     private boolean isJa;
     private int mType;
     private int mType2;
-    private List<OldHouseListBean.DatasBean> mDatas;
+    private List<ZufangListBean.DatasEntity> mDatas;
     private String mjId = "-2";
     private String zjId = "-2";
     private List<String> zidingyiPriceList = new ArrayList<>();
@@ -89,6 +87,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private boolean isDitie;
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
+    private boolean isMv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +162,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         shipinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TUtils.showShort(mContext, "视频房源");
+                isMv=true;
+                page = 1;
+                mDatas.clear();
+                initData();
             }
         });
         tongqinTv.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +179,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         jiluTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, LiShiJiLuActivity.class));
+                Intent intent = new Intent(mContext, LiShiJiLuActivity.class);
+                intent.putExtra("houseType", mType2);
+                startActivity(intent);
             }
         });
         headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
@@ -378,19 +382,22 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         } else {
             params.putUrlParams("qys", quyuList);//区域
         }
+        if (isMv){
+            params.put("isMv", 1);
+        }
         initMoreParams(params);
-        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
+        OkGo.<ZufangListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<OldHouseListBean>(ZufangListActivity.this, OldHouseListBean.class) {
+                .execute(new DialogCallback<ZufangListBean>(ZufangListActivity.this, ZufangListBean.class) {
                     @Override
-                    public void onSuccess(Response<OldHouseListBean> response) {
+                    public void onSuccess(Response<ZufangListBean> response) {
                         int code = response.code();
-                        OldHouseListBean oldHouseListBean = response.body();
+                        ZufangListBean oldHouseListBean = response.body();
                         if (oldHouseListBean == null) {
                             return;
                         }
-                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        List<ZufangListBean.DatasEntity> datas = oldHouseListBean.getDatas();
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 Toast.makeText(ZufangListActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
@@ -575,14 +582,14 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         initData();
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<ZufangListBean.DatasEntity, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<ZufangListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+        protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())

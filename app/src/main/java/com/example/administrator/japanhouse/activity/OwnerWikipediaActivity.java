@@ -107,7 +107,11 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
     @Override
     public void getOwnerList(Response<OwnerListBean> response) {
         if (response != null && response.body() != null && response.body().getDatas() != null) {
-            datas.addAll(response.body().getDatas());
+            if (response.body().getDatas().size() > 0) {
+                datas.addAll(response.body().getDatas());
+            } else {
+                pageNo --;
+            }
         }
         adapter.notifyDataSetChanged();
     }

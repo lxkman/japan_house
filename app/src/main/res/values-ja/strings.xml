@@ -563,4 +563,7 @@
     <string name="item_apartment_people">%1$d人申し込みしました</string>
     <string name="item_apartment_time">残り%1$d日%2$d時間%3$d分間</string>
     <string name="people_readNum">人が見てる</string>
+    <string name="frag_browe_record">最新浏览：</string>
+    <string name="string_refused">拒否</string>
+    <string name="string_review">レビュー中</string>
 </resources>

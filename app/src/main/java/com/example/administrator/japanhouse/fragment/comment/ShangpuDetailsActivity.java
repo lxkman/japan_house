@@ -90,8 +90,6 @@ public class ShangpuDetailsActivity extends BaseActivity {
     TextView tvDetailsArea;
     @BindView(R.id.tv_details_shoumaileixing)
     TextView tvDetailsShoumaileixing;
-    @BindView(R.id.tv_details_jutiweizhi)
-    TextView tvDetailsJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.shangpu_wl)
@@ -170,7 +168,6 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsShoumaileixing.setText(isJa ? datas.getLeaseTypeJpn() : datas.getLeaseTypeCn());
-                        tvDetailsJutiweizhi.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(ShangpuDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         isSc = datas.getIsSc();

@@ -1,119 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-            <ImageView
-                android:layout_marginBottom="10dp"
+    <com.example.administrator.japanhouse.view.EasySwipeMenuLayout
+        android:id="@+id/es"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentView="@+id/content_ll"
+        app:rightMenuView="@+id/shachu_tv">
+
+        <RelativeLayout
+            android:id="@+id/content_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <RelativeLayout
                 android:id="@+id/sell_img"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/house"
-                android:layout_gravity="center_vertical"
-                android:layout_width="132dip"
-                android:layout_height="90dip" />
-                <LinearLayout
-                    android:layout_alignTop="@+id/sell_img"
-                    android:layout_toRightOf="@+id/sell_img"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/liner1"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                      <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="@string/activity_rental_location"
-                          />
-                           <TextView
-                               android:id="@+id/weizhi"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:text="东京"
-                               android:textColor="#000"
-                               />
-                </LinearLayout>
+                android:layout_width="132dp"
+                android:layout_height="90dp">
+
+                <ImageView
+                    android:id="@+id/rent_house_icon"
+                    android:layout_width="132dip"
+                    android:layout_height="90dip"
+                    android:src="@drawable/house" />
+
+                <TextView
+                    android:id="@+id/sell_state_ja"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#4C000000"
+                    android:textColor="@color/white"
+                    android:text="审核中"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    />
+            </RelativeLayout>
+
             <LinearLayout
-                android:layout_toRightOf="@+id/sell_img"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/liner2"
-                android:layout_below="@+id/liner1"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
+                android:id="@+id/liner1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/sell_img"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/sell_img"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/activity_rental_distance"
-                    />
+                    android:text="@string/activity_rental_location"
+                    android:textSize="14sp" />
+
                 <TextView
-                    android:id="@+id/juli"
+                    android:id="@+id/weizhi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5公里以内"
                     android:textColor="#000"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
-    <LinearLayout
-        android:layout_toRightOf="@+id/sell_img"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/liner3"
-        android:layout_below="@+id/liner2"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_rental_area"
-            />
-        <TextView
-            android:id="@+id/mianji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="150m²—170m²"
-            android:textColor="#000"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_toRightOf="@+id/sell_img"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/liner4"
-        android:layout_below="@+id/liner3"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_rental_toward"
-            />
-        <TextView
-            android:id="@+id/chaoxiang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="向南"
-            android:textColor="#000"
-            />
-    </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/liner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/liner1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/sell_img"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_rental_distance"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/juli"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_rental_area"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/mianji"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/sell_state_zh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_review"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#f00"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/liner4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/liner2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/sell_img"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_rental_toward"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chaoxiang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/sell_state"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:id="@+id/shachu_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="已拒绝"
-            android:textColor="#f00"
-            android:textSize="16sp"
-            />
+            android:layout_height="match_parent"
+            android:background="#E73636"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/shanchu"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </com.example.administrator.japanhouse.view.EasySwipeMenuLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray1"
         android:layout_below="@+id/sell_img"
-        />
-</RelativeLayout>
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/gray1" />
+</LinearLayout>

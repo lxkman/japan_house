@@ -296,29 +296,6 @@
                         android:layout_height="match_parent" />
                 </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
-                    android:background="#fff"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dip">
-                    <TextView
-                        android:paddingLeft="15dip"
-                        android:gravity="center_vertical"
-                        android:text="@string/jutiweizhi"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:id="@+id/tv_details_jutiweizhi"
-                        android:textColor="@color/text_black"
-                        android:paddingLeft="5dip"
-                        android:gravity="center_vertical"
-                        android:text="具体位置信息展示，精确到都、道、府、县"
-                        android:textSize="14sp"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
 
                 <View
                     android:layout_marginRight="15dip"

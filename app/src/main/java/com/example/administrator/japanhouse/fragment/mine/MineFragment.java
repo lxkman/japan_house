@@ -2,13 +2,12 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +16,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.MineRecordAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.EventBean;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
 import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
+import com.example.administrator.japanhouse.model.HouseRecordListBean;
+import com.example.administrator.japanhouse.presenter.MinePresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.CircleImageView;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,16 +49,13 @@ import butterknife.Unbinder;
 import io.rong.imkit.DefaultExtensionModule;
 import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
-import io.rong.imkit.RongIM;
 
-import static com.example.administrator.japanhouse.R.id.tv_qustion;
-import static com.example.administrator.japanhouse.R.id.tv_wenjuan;
 
 /**
  * Created by Administrator on 2018/4/8.
  */
 
-public class MineFragment extends BaseFragment implements View.OnClickListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener, MinePresenter.MineCallBack {
     @BindView(R.id.iv_msg)
     ImageView ivMsg;
     @BindView(R.id.iv_setting)
@@ -133,10 +133,46 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     LinearLayout llDingyue2;
     private int mDistanceY;
 
+    private SpringView springView;
+    private int page = 1;
+    private MinePresenter presenter;
+    private List<HouseRecordListBean.DatasBean> list = new ArrayList<>();
+    private MineRecordAdapter adapter;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, rootView);
+
+        presenter = new MinePresenter(getActivity(), this);
+
+        springView = (SpringView) rootView.findViewById(R.id.frag_mine_springView);
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        page++;
+                        presenter.getHouseRecordList(MyApplication.getUserToken(), page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+        });
+
         initScroll();
         EventBus.getDefault().register(this);
         return rootView;
@@ -147,7 +183,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
 
     /*
     * 由于MainActivity的布局换成了不能滑动的viewpager，没用FragmentTransaction管理，所以这个方法直接就失效了
@@ -216,23 +251,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             tvQustion.setVisibility(View.VISIBLE);
             tvWenjuan.setVisibility(View.GONE);
         }
-        recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            list.add("");
-        }
-        FootAdapter footAdapter = new FootAdapter(R.layout.item_myfoot, list);
-        recyclerFoot.setAdapter(footAdapter);
-        footAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
-            }
-        });
+
+        recyclerFoot.setNestedScrollingEnabled(false);
+        recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        adapter = new MineRecordAdapter(mContext, list);
+        recyclerFoot.setAdapter(adapter);
+        presenter.getHouseRecordList(MyApplication.getUserToken(), page);
+//        startActivity(new Intent(mContext, NewHousedetailsActivity.class));
     }
 
     @OnClick({R.id.iv_msg, R.id.iv_setting, R.id.iv_head, R.id.rel_lianxiren_layout,
-            R.id.rel_lishi_layout, tv_qustion, R.id.ll_collect, R.id.ll_dingyue, R.id.ll_collect2, R.id.ll_dingyue2, R.id.tv_myorder,
+            R.id.rel_lishi_layout, R.id.tv_qustion, R.id.ll_collect, R.id.ll_dingyue, R.id.ll_collect2, R.id.ll_dingyue2, R.id.tv_myorder,
             R.id.tv_myask, R.id.tv_mysignup, R.id.tv_name, R.id.tv_sellinghouse, R.id.tv_myhouse_price, R.id.tv_calculator, R.id.tv_feedback,
             R.id.tv_myhouse_price1, R.id.tv_calculator1, R.id.tv_feedback1, R.id.tv_myask1, R.id.tv_wenjuan})
     public void onClick(View view) {
@@ -247,8 +276,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.iv_msg:
                 startActivity(new Intent(mContext, MineMsgActivity.class));
                 break;
-            case tv_qustion:
-            case tv_wenjuan:
+            case R.id.tv_qustion:
+            case R.id.tv_wenjuan:
                 startActivity(new Intent(mContext, WenJuanActivity.class));
                 break;
             //联系人
@@ -291,19 +320,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(mContext, FangjiadituActivity.class));
                 break;
             case R.id.tv_calculator:
-
             case R.id.tv_calculator1:
                 startActivity(new Intent(mContext, CalculatorActivity.class));
                 break;
             case R.id.tv_feedback:
             case R.id.tv_feedback1:
-                //                startActivity(new Intent(mContext, FeedbackActivity.class));
-                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constants.CHAT, Constants.CHAT_FEEDBACK);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.mine_userfeedback));
-                }
+                startActivity(new Intent(mContext, FeedbackActivity.class));
+//                SharedPreferencesUtils.getInstace(getActivity()).setStringPreference(Constants.CHAT, Constants.CHAT_FEEDBACK);
+//                setMyExtensionModule();
+//                if (RongIM.getInstance() != null) {
+//                    Log.e("MainActivity", "创建单聊");
+//                    RongIM.getInstance().startPrivateChat(getActivity(), "123456", getString(R.string.mine_userfeedback));
+//                }
                 break;
         }
     }
@@ -325,15 +353,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    private class FootAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public FootAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+    @Override
+    public void getHouseRecordList(Response<HouseRecordListBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                list.addAll(response.body().getDatas());
+            } else {
+                page --;
+            }
+            adapter.notifyDataSetChanged();
         }
     }
 

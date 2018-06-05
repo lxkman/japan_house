@@ -98,8 +98,6 @@ public class TudidetailsActivity extends BaseActivity {
     TextView tvDetailsZhouweifengjing;
     @BindView(R.id.tv_details_chezhanjuli)
     TextView tvDetailsChezhanjuli;
-    @BindView(R.id.tv_details_jutiweizhi)
-    TextView tvDetailsJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.tudi_wl)
@@ -174,7 +172,7 @@ public class TudidetailsActivity extends BaseActivity {
                         tvDetailsZhouweicaiguang.setText(isJa ? datas.getAroundLightingJpn() : datas.getAroundLightingCn());
                         tvDetailsZhouweifengjing.setText(isJa ? datas.getAroundSceneryJpn() : datas.getAroundSceneryCn());
                         tvDetailsChezhanjuli.setText(isJa ? datas.getStationJpn() : datas.getStationCn());
-                        tvDetailsJutiweizhi.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(TudidetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         isSc = datas.getIsSc();

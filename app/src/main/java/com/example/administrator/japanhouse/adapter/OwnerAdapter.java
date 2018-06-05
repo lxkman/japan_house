@@ -8,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.model.OwnerListBean;
+
+import java.util.List;
 
 /**
  * Created by   admin on 2018/4/16.
@@ -18,8 +22,11 @@ public class OwnerAdapter extends RecyclerView.Adapter{
 
     private Activity activity;
 
-    public OwnerAdapter(Activity activity) {
+    private List<OwnerListBean.DatasBean> datas;
+
+    public OwnerAdapter(Activity activity, List<OwnerListBean.DatasBean> datas) {
         this.activity = activity;
+        this.datas = datas;
     }
 
     private onClickItemListener listener;
@@ -35,13 +42,17 @@ public class OwnerAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
         if (viewHolder instanceof OwnerViewHolder) {
             OwnerViewHolder holder = (OwnerViewHolder) viewHolder;
+
+            holder.tvMess.setText(MyApplication.isJapanese() ? datas.get(i).getContentJpn() : datas.get(i).getContentCn());
+            holder.tvTitle.setText(MyApplication.isJapanese() ? datas.get(i).getTitleJpn() : datas.get(i).getTitleCn());
+
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick();
+                    listener.onItemClick(datas.get(i).getId());
                 }
             });
         }
@@ -50,7 +61,7 @@ public class OwnerAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return 3;
+        return datas.size();
     }
 
     class OwnerViewHolder extends RecyclerView.ViewHolder {
@@ -67,6 +78,6 @@ public class OwnerAdapter extends RecyclerView.Adapter{
     }
 
     public interface onClickItemListener{
-        void onItemClick();
+        void onItemClick(int itemId);
     }
 }

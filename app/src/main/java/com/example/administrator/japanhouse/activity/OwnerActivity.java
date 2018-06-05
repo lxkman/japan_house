@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,6 +23,9 @@ import com.example.administrator.japanhouse.utils.Constants;
 import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,20 +54,29 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
     RecyclerView recyclerview;
     private OwnerAdapter ownerAdapter;
     private OwnerPresenter ownerPresenter;
+    private List<OwnerListBean.DatasBean> datas;
+
+    private NestedScrollView mScrollView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner);
+
+        mScrollView = (NestedScrollView) findViewById(R.id.act_owner_scrollView);
+
         ButterKnife.bind(this);
+
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerview.setLayoutManager(manager);
-        ownerAdapter = new OwnerAdapter(this);
+        recyclerview.setNestedScrollingEnabled(false);
+        datas = new ArrayList<>();
+        ownerAdapter = new OwnerAdapter(this, datas);
         ownerAdapter.setOnClickItemListener(this);
         recyclerview.setAdapter(ownerAdapter);
 
         ownerPresenter = new OwnerPresenter(this, this);
-
+        ownerPresenter.getOwnerList(1);
     }
 
 
@@ -73,8 +86,8 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
     }
 
     @Override
-    public void onItemClick() {
-        OwnerDetailsActivity.invoke(this, 1);
+    public void onItemClick(int itemId) {
+        OwnerDetailsActivity.invoke(this, itemId);
     }
 
     @Override
@@ -116,7 +129,13 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
 
     @Override
     public void getOwnerList(Response<OwnerListBean> response) {
-
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                datas.addAll(response.body().getDatas());
+            }
+            ownerAdapter.notifyDataSetChanged();
+            mScrollView.scrollTo(0, 0);
+        }
     }
 
     @Override

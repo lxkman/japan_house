@@ -24,7 +24,6 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:ellipsize="end"
-        android:text="动态标题内容，标题，标题"
         />
 
     <TextView
@@ -39,6 +38,5 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="15dp"
         android:ellipsize="end"
-        android:text="面对美好的实物我们总是习惯观望，但好的产品不会一直为你等待. 绝代风华举世无双独一无二千古难求。立即恢复而发挥滚房源回复大场面大小风景回顾回姐..."
         />
 </LinearLayout>

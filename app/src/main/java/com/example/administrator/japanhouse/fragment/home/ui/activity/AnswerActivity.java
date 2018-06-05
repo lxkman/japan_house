@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.HuiDaBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
@@ -54,7 +55,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
     private void intdataview() {
         String content = ed_wen_content.getText().toString().trim();
         HttpParams params = new HttpParams();
-        params.put("token", MyUrls.TOKEN);
+        params.put("token", MyApplication.getUserToken());
         params.put("content",content);
         params.put("askId",askid);
         OkGo.<HuiDaBean>post(MyUrls.BASEURL + "/app/askinfo/insertask")

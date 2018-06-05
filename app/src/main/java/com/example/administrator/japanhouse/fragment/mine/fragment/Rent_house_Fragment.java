@@ -1,21 +1,25 @@
 package com.example.administrator.japanhouse.fragment.mine.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.RentalDetailsActivity;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.fragment.home.ui.adapter.MaiFang_house_Adapter;
+import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Rent_house_Adapter;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
+import com.example.administrator.japanhouse.model.SellHouseBean;
+import com.example.administrator.japanhouse.presenter.SellHousePresenter;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.model.Response;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
@@ -25,15 +29,52 @@ import java.util.List;
  * Created by Mr赵 on 2018/4/16.
  */
 
-public class Rent_house_Fragment extends BaseFragment {
+public class Rent_house_Fragment extends BaseFragment implements Rent_house_Adapter.OnItemClickListener, SellHousePresenter.SellHouseCallBack {
 
-    private SwipeMenuRecyclerView mrecycler;
+    private RecyclerView mrecycler;
     private Rent_house_Adapter rent_house_adapter;
-    List<String>mList=new ArrayList<>();
+    List<SellHouseBean.DatasBean> mList = new ArrayList<>();
+
+    private SpringView springView;
+    private SellHousePresenter presenter;
+    private int page = 1;
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sell_house_fragment, container, false);
-        mrecycler = (SwipeMenuRecyclerView) view.findViewById(R.id.mrecycler);
+        mrecycler = (RecyclerView) view.findViewById(R.id.mrecycler);
+
+        presenter = new SellHousePresenter(getActivity(), this);
+        presenter.getSellHouseList(MyApplication.getUserToken(), 0, page);
+        springView = (SpringView) view.findViewById(R.id.frag_sellHouse_springView);
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mList.clear();
+                        page = 1;
+                        presenter.getSellHouseList(MyApplication.getUserToken(), 0, page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        page++;
+                        presenter.getSellHouseList(MyApplication.getUserToken(), 0, page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+        });
+        springView.setFooter(new DefaultFooter(getActivity()));
+        springView.setHeader(new DefaultHeader(getActivity()));
         return view;
     }
 
@@ -44,46 +85,27 @@ public class Rent_house_Fragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-        if (mList.size()<=0){
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-        mrecycler.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        rent_house_adapter = new Rent_house_Adapter(getActivity(),mList);
-        // 设置监听器。
-        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
 
-        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
-            @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                mList.remove( menuBridge.getAdapterPosition());
-                menuBridge.closeMenu();
-                rent_house_adapter.notifyDataSetChanged();
-
-            }
-        });
+        mrecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        rent_house_adapter = new Rent_house_Adapter(getActivity(), mList);
         mrecycler.setAdapter(rent_house_adapter);
+        rent_house_adapter.setOnItemClickListener(this);
     }
-    // 创建菜单:
-    SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-//            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
-//            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
-            SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity()); // 各种文字和图标属性设置。
-            deleteItem.setWeight(100);
-            deleteItem.setHeight(380);
-            deleteItem.setText(getString(R.string.shanchu));
-            deleteItem.setTextSize(14);
-            deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
-            deleteItem.setTextColor(Color.WHITE);
-            rightMenu.addMenuItem(deleteItem); // 在Item右侧添加一个菜单。
-            // 注意:哪边不想要菜单,那么不要添加即可。
+
+    @Override
+    public void getSellHouseList(Response<SellHouseBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                mList.addAll(response.body().getDatas());
+            } else {
+                page --;
+            }
+            rent_house_adapter.notifyDataSetChanged();
         }
-    };
+    }
 
-
+    @Override
+    public void onClickListener(int position, RentalDetailsBean bean) {
+        RentalDetailsActivity.invoke(getActivity(), bean);
+    }
 }

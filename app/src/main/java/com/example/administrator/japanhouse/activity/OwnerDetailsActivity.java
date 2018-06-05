@@ -68,7 +68,6 @@ public class OwnerDetailsActivity extends BaseActivity implements OwnerPresenter
 
     @Override
     public void getOwnerDetails(Response<OwnerDetailsBean> response) {
-        Toast.makeText(this, response.body().getCode() + " ---- " + response.body().getMsg(), Toast.LENGTH_SHORT).show();
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             tvTitle.setText(MyApplication.isJapanese() ? response.body().getDatas().getTitleJpn() : response.body().getDatas().getTitleCn());
             tvContent.setText(Html.fromHtml(MyApplication.isJapanese() ? response.body().getDatas().getContentJpn() : response.body().getDatas().getContentCn()));

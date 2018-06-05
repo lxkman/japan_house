@@ -91,8 +91,6 @@ public class JiudianDetailsActivity extends BaseActivity {
     TextView tvDetailsLouceng;
     @BindView(R.id.tv_details_nianfen)
     TextView tvDetailsNianfen;
-    @BindView(R.id.tv_details_jutiweizhi)
-    TextView tvDetailsJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.tv_details_manager_head)

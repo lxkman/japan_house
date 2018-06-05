@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_mineList_layout"
+    android:layout_width="match_parent"
+    android:layout_height="120dip"
+    android:background="@drawable/zuji_bg"
+    android:orientation="horizontal"
+    >
 
-<LinearLayout android:id="@+id/layout_all_height"
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="120dip"
-              android:background="@drawable/zuji_bg"
-              android:orientation="horizontal">
     <ImageView
+        android:id="@+id/frag_mineList_icon"
         android:layout_width="132dip"
         android:layout_height="90dip"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dip"
-        android:src="@drawable/house"/>
+        android:background="@drawable/house" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="90dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dip"
         android:orientation="vertical">
+
         <TextView
+            android:id="@+id/frag_mineList_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
@@ -27,31 +32,36 @@
             android:singleLine="true"
             android:text="泰和·金府大厦"
             android:textColor="#333"
-            android:textSize="14sp"
-        />
+            android:textSize="14sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-            >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="15dip"
                     android:layout_height="15dip"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/dingwei"/>
+                    android:src="@drawable/dingwei" />
+
                 <TextView
+                    android:id="@+id/frag_mineList_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
                     android:text="东京"
-                    android:textSize="13sp"/>
+                    android:textSize="13sp" />
             </LinearLayout>
+
             <TextView
+                android:id="@+id/frag_mineList_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -59,27 +69,29 @@
                 android:gravity="center"
                 android:text="15万/㎡"
                 android:textColor="@color/shihuangse"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:orientation="horizontal"
-        >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="最新浏览："
-                android:textSize="13sp"/>
+                android:text="@string/frag_browe_record"
+                android:textSize="13sp" />
+
             <TextView
+                android:id="@+id/frag_mineList_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="03.12"
-                android:textSize="13sp"/>
+                android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
 

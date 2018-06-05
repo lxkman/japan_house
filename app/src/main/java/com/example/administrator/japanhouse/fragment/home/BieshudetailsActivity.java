@@ -95,8 +95,6 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     TextView tvTudiArea;
     @BindView(R.id.tv_jianzhu_area)
     TextView tvJianzhuArea;
-    @BindView(R.id.tv_house_jutiweizhi)
-    TextView tvHouseJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.xiezilou_wl)
@@ -167,7 +165,6 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         tvHouseHuxing.setText(villaDetailsBean.getHouseType());/*中日文同一个字段*/
         tvTudiArea.setText(isja ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn());
         tvJianzhuArea.setText(isja ? villaDetailsBean.getCoveredAreaJpn() : villaDetailsBean.getCoveredAreaCn());
-        tvHouseJutiweizhi.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
         tvDetailsLocation.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
         isSc = villaDetailsBean.getIsSc();
         if (isSc==0){//收藏

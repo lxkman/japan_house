@@ -1,193 +1,223 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.HouseHistoryAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.ZuHistroyBean;
-import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
-import com.example.administrator.japanhouse.utils.CacheUtils;
-import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
+import com.example.administrator.japanhouse.model.HouseRecordListBean;
+import com.example.administrator.japanhouse.presenter.HouseRecordPresenter;
 import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.SpUtils;
-import com.example.administrator.japanhouse.view.MyFooter;
-import com.example.administrator.japanhouse.view.MyHeader;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LiShiJiLuActivity extends BaseActivity {
+public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresenter.HouseRecordCallBack, HouseHistoryAdapter.OnItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
     @BindView(R.id.mrecycler)
-    SwipeMenuRecyclerView mrecycler;
-    @BindView(R.id.springview)
-    SpringView springview;
-    private LiebiaoAdapter liebiaoAdapter;
-    private int page = 1;
-    private boolean isJa;
-    private boolean isLoadMore;
-    private List<ZuHistroyBean.DatasEntity> mDatas;
+    RecyclerView mrecycler;
+    private List<HouseRecordListBean.DatasBean> mList = new ArrayList();
+
+    private HouseHistoryAdapter adapter;
+    private HouseRecordPresenter presenter;
+    private SpringView springView;
+    private int pageNo = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_li_shi);
         ButterKnife.bind(this);
-        String country = CacheUtils.get(Constants.COUNTRY);
-        if (country != null && country.equals("ja")) {
-            isJa = true;
-        } else {
-            isJa = false;
-        }
-        mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        initData();
-        initListener();
-    }
 
-    private void initListener() {
-        springview.setHeader(new MyHeader(this));
-        springview.setFooter(new MyFooter(this));
-        springview.setListener(new SpringView.OnFreshListener() {
+        presenter = new HouseRecordPresenter(this, this);
+        presenter.getHouseRecordList(MyApplication.getUserToken(), pageNo);
+
+        springView = (SpringView) findViewById(R.id.act_history_springView);
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
-                isLoadMore = false;
-                page = 1;
-                initData();
-                springview.onFinishFreshAndLoad();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mList.clear();
+                        pageNo = 1;
+                        presenter.getHouseRecordList(MyApplication.getUserToken(), pageNo);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
             }
 
             @Override
             public void onLoadmore() {
-                isLoadMore = true;
-                page++;
-                initData();
-                springview.onFinishFreshAndLoad();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pageNo++;
+                        presenter.getHouseRecordList(MyApplication.getUserToken(), pageNo);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
             }
         });
+        springView.setFooter(new DefaultFooter(this));
+        springView.setHeader(new DefaultHeader(this));
+
+        initData();
     }
 
     private void initData() {
-        int houseType = getIntent().getIntExtra("houseType", 0);
-        HttpParams params = new HttpParams();
-        params.put("pageNo", page);
-        params.put("shType", houseType);
-        params.put("token", SpUtils.getString("token", ""));
-        OkGo.<ZuHistroyBean>post(MyUrls.BASEURL + "/app/seehouselog/seezfhouselogs")
-                .tag(this)
-                .params(params)
-                .execute(new DialogCallback<ZuHistroyBean>(LiShiJiLuActivity.this, ZuHistroyBean.class) {
-                    @Override
-                    public void onSuccess(Response<ZuHistroyBean> response) {
-                        int code = response.code();
-                        ZuHistroyBean body = response.body();
-                        final List<ZuHistroyBean.DatasEntity> datas = body.getDatas();
-                        if (mDatas == null || mDatas.size() == 0) {
-                            if (datas == null || datas.size() == 0) {
-                                Toast.makeText(LiShiJiLuActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
-                                if (liebiaoAdapter != null) {
-                                    liebiaoAdapter.notifyDataSetChanged();
-                                }
-                                return;
-                            }
-                            mDatas = datas;
-                            liebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, datas);
-                            mrecycler.setAdapter(liebiaoAdapter);
-                        } else {
-                            if (datas == null || datas.size() == 0) {
-                                Toast.makeText(LiShiJiLuActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            if (!isLoadMore) {
-                                mDatas = datas;
-                                Toast.makeText(LiShiJiLuActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
-                            } else {
-                                mDatas.addAll(datas);
-                            }
-                            liebiaoAdapter.notifyDataSetChanged();
-                        }
-                        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
-
-                        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
-                            @Override
-                            public void onItemClick(SwipeMenuBridge menuBridge) {
-                                datas.remove(menuBridge.getAdapterPosition());
-                                menuBridge.closeMenu();
-                                liebiaoAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }
-                });
+        adapter = new HouseHistoryAdapter(this, mList);
+        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mrecycler.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
     }
 
-    // 创建菜单:
-    SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-            //            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
-            //            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
-            SwipeMenuItem deleteItem = new SwipeMenuItem(LiShiJiLuActivity.this); // 各种文字和图标属性设置。
-            deleteItem.setWeight(100);
-            deleteItem.setHeight(380);
-            deleteItem.setText(getResources().getString(R.string.shanchu));
-            deleteItem.setTextSize(14);
-            deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
-            deleteItem.setTextColor(Color.WHITE);
-            rightMenu.addMenuItem(deleteItem); // 在Item右侧添加一个菜单。
-            // 注意:哪边不想要菜单,那么不要添加即可。
+    @Override
+    public void getHouseRecordList(Response<HouseRecordListBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                mList.addAll(response.body().getDatas());
+            }  else {
+                pageNo --;
+            }
+            adapter.notifyDataSetChanged();
         }
-    };
+    }
+
+    @Override
+    public void onItemClickListener(String hType, String ShType, int houseId) {
+        if (!TextUtils.isEmpty(hType)) {
+            if (TextUtils.equals(hType, "0")) { //二手房
+                Intent intent = new Intent(this, OldHousedetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "1")) { //新房
+                Intent intent = new Intent(this, NewHousedetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "2")) { //租房
+                Intent intent = new Intent(this, ZuHousedetailsActivity.class);
+
+                if (TextUtils.equals(ShType, "0")) { //办公室出租
+                    intent.putExtra("houseId", houseId + "");
+                    intent.putExtra("houseType", "bangongshi");
+                } else if (TextUtils.equals(ShType, "1")) { //商铺出租
+                    intent.putExtra("houseId", houseId + "");
+                    intent.putExtra("houseType", "shangpu");
+                } else if (TextUtils.equals(ShType, "2")) { //别墅
+                    intent.putExtra("houseId", houseId + "");
+                    intent.putExtra("houseType", "bieshu");
+                } else if (TextUtils.equals(ShType, "3")) { //二层公寓
+                    intent.putExtra("houseId", houseId + "");
+                    intent.putExtra("houseType", "erceng");
+                } else if (TextUtils.equals(ShType, "4")) { //学生公寓
+                    intent.putExtra("houseId", houseId + "");
+                    intent.putExtra("houseType", "xuesheng");
+                } else if (TextUtils.equals(ShType, "5")) { //多层公寓
+                    intent.putExtra("houseId", houseId + "");
+                    intent.putExtra("houseType", "duoceng");
+                }
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "3")) {  //土地
+                Intent intent = new Intent(this, TudidetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "4")) {  //别墅
+                Intent intent = new Intent(this, BieshudetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "5")) {  //商业地产
+                if (TextUtils.equals(ShType, "0")) {    //酒店
+                    Intent intent = new Intent(this, JiudianDetailsActivity.class);
+                    intent.putExtra("houseId", houseId + "");
+                    startActivity(intent);
+                } else if (TextUtils.equals(ShType, "1")) { //高尔夫球场
+                    Intent intent = new Intent(this, GaoerfuDetailsActivity.class);
+                    intent.putExtra("houseId", houseId + "");
+                    startActivity(intent);
+                } else if (TextUtils.equals(ShType, "2")) { //写字楼
+                    Intent intent = new Intent(this, XiezilouDetailsActivity.class);
+                    intent.putExtra("houseId", houseId + "");
+                    startActivity(intent);
+                } else if (TextUtils.equals(ShType, "3")) { //商铺
+                    Intent intent = new Intent(this, ShangpuDetailsActivity.class);
+                    intent.putExtra("houseId", houseId + "");
+                    startActivity(intent);
+                }
+            } else if (TextUtils.equals(hType, "6")) { //中国房源
+                Intent intent = new Intent(this, ZhongguoDetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "7")) {  //海外房源
+                Intent intent = new Intent(this, HaiWaiDetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            } else if (TextUtils.equals(hType, "8")) {  //找团地
+                Intent intent = new Intent(this, XiaoQuDetailsActivity.class);
+                intent.putExtra("houseId", houseId + "");
+                startActivity(intent);
+            }
+
+        }
+    }
+
+    @Override
+    public void onItemDeleteClickListener(int position) {
+        mList.remove(position);
+        adapter.notifyDataSetChanged();
+    }
 
 
-    class LiebiaoAdapter extends BaseQuickAdapter<ZuHistroyBean.DatasEntity, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<ZuHistroyBean.DatasEntity> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, ZuHistroyBean.DatasEntity item) {
+        protected void convert(BaseViewHolder helper, String item) {
             helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(LiShiJiLuActivity.this, NewHousedetailsActivity.class));
                 }
             });
-            Glide.with(MyApplication.getGloableContext()).load(item.getImageUrl())
-                    .into((ImageView) helper.getView(R.id.img_house));
-            helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_house_address, isJa ? item.getAddressJpn() : item.getAddressCn())
-                    .setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月")
-                    .setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
         }
     }
 

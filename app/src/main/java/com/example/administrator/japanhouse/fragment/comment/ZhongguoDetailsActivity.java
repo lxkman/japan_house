@@ -96,8 +96,6 @@ public class ZhongguoDetailsActivity extends BaseActivity {
     TextView tvDetailsChaoxiang;
     @BindView(R.id.tv_details_wuye)
     TextView tvDetailsWuye;
-    @BindView(R.id.tv_details_jutiweizhi)
-    TextView tvDetailsJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.tv_details_manager_head)
@@ -178,7 +176,6 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                         tvDetailsLouceng.setText(isJa ? datas.getFloorJpn() : datas.getFloorCn());
                         tvDetailsChaoxiang.setText(isJa ? datas.getOrientationJpn() : datas.getOrientationCn());
                         tvDetailsWuye.setText(isJa ? datas.getTenementJpn() : datas.getTenementCn());
-                        tvDetailsJutiweizhi.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(ZhongguoDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);

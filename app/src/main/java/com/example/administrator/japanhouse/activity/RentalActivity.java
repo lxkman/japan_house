@@ -231,9 +231,9 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                     String isbathRoom;
                     String strRentSell;
                     if (isBathroom) {
-                        isbathRoom = "是";
+                        isbathRoom = "0";
                     } else {
-                        isbathRoom = "否";
+                        isbathRoom = "1";
                     }
 
                     if (rentOrSell) {
@@ -243,7 +243,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                     }
 
                     RentalDetailsBean bean = new RentalDetailsBean(strRentSell,
-                            1,
+                            "0",
                             null,
                             etCall.getText().toString(),
                             etContact.getText().toString(),
@@ -257,7 +257,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                             etEquipment.getText().toString(),
                             imgPathList,
                             videoPath,
-                            1);
+                            null);
 
                     Intent intent = new Intent(this, RentalDetailsActivity.class);
                     intent.putExtra("detailsBean", bean);

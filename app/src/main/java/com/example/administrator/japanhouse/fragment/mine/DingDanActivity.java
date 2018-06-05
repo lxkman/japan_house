@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse.fragment.mine;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,9 +12,17 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.OrderAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.OrderBean;
+import com.example.administrator.japanhouse.presenter.OrderPresenter;
 import com.example.administrator.japanhouse.utils.ToastUtils;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.model.Response;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -28,79 +37,98 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DingDanActivity extends BaseActivity {
+public class DingDanActivity extends BaseActivity implements OrderPresenter.OrderCallBack {
     @BindView(R.id.back_img)
     ImageView backImg;
     @BindView(R.id.mrecycler)
     SwipeMenuRecyclerView mrecycler;
-    private List<String> mList=new ArrayList();
-    private LiebiaoAdapter liebiaoAdapter;
+    private List<OrderBean.DatasBean> mList = new ArrayList();
+    private OrderAdapter liebiaoAdapter;
+
+    private OrderPresenter presenter;
+    private int page = 1;
+    private SpringView springView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ding_dan);
         ButterKnife.bind(this);
-        initData();
-    }
-    private void initData() {
-        if (mList.size()<=0){
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,mList);
+
+        liebiaoAdapter = new OrderAdapter(this, mList);
         mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mrecycler.setAdapter(liebiaoAdapter);
 
-        // 设置监听器。
-        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
+        presenter = new OrderPresenter(this, this);
+        presenter.getOrderList(MyApplication.getUserToken(), page);
 
-        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+        springView = (SpringView) findViewById(R.id.act_order_springView);
+
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setListener(new SpringView.OnFreshListener() {
             @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                mList.remove( menuBridge.getAdapterPosition());
-                menuBridge.closeMenu();
-                liebiaoAdapter.notifyDataSetChanged();
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mList.clear();
+                        page = 1;
+                        presenter.getOrderList(MyApplication.getUserToken(), page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        page++;
+                        presenter.getOrderList(MyApplication.getUserToken(), page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
             }
         });
-        mrecycler.setAdapter(liebiaoAdapter);
+        springView.setFooter(new DefaultFooter(this));
+        springView.setHeader(new DefaultHeader(this));
+
     }
-    // 创建菜单:
-    SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-//            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
-//            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
-            SwipeMenuItem deleteItem = new SwipeMenuItem(DingDanActivity.this); // 各种文字和图标属性设置。
-            deleteItem.setWeight(100);
-            deleteItem.setHeight(380);
-            deleteItem.setText("   删除   ");
-            deleteItem.setTextSize(14);
-            deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
-            deleteItem.setTextColor(Color.WHITE);
-            rightMenu.addMenuItem(deleteItem); // 在Item右侧添加一个菜单。
-            // 注意:哪边不想要菜单,那么不要添加即可。
-        }
-    };
+
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId,data);
+            super(layoutResId, data);
         }
+
         @Override
         protected void convert(final BaseViewHolder helper, final String item) {
-                helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(DingDanActivity.this, DingDan_DetilsActivity.class);
-                        startActivity(intent);
-                    }
-                });
+            helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(DingDanActivity.this, DingDan_DetilsActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
     }
+
     @OnClick(R.id.back_img)
     public void onClick() {
         finish();
+    }
+
+    @Override
+    public void getOrderList(Response<OrderBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                mList.addAll(response.body().getDatas());
+            } else {
+                page --;
+            }
+
+            liebiaoAdapter.notifyDataSetChanged();
+        }
     }
 }

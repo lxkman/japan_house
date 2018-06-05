@@ -560,4 +560,7 @@
     <string name="item_apartment_people">%1$d人已报名</string>
     <string name="item_apartment_time">剩余%1$d天%2$d小时%3$d分</string>
     <string name="people_readNum">人查看</string>
+    <string name="frag_browe_record">最新浏览：</string>
+    <string name="string_refused">已拒绝</string>
+    <string name="string_review">审核中</string>
 </resources>

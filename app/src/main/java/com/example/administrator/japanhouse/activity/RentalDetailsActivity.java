@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.RentalDetailsPicAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -148,18 +149,28 @@ public class RentalDetailsActivity extends BaseActivity {
     }
 
     private void init(RentalDetailsBean detailsBean) {
-        switch (detailsBean.getRoomState()) {
-            case 1:
-                tvRentalState.setText(getString(R.string.activity_rental_details_audit));
-                tvRentalState.setTextColor(Color.GREEN);
-                break;
-            case 2:
-                tvRentalState.setText(getString(R.string.activity_rental_details_refused));
-                tvRentalState.setTextColor(Color.RED);
-                break;
-            case 3:
+//        switch (detailsBean.getRoomState()) {
+//            case 1:
+//                tvRentalState.setText(getString(R.string.activity_rental_details_audit));
+//                tvRentalState.setTextColor(Color.GREEN);
+//                break;
+//            case 2:
+//                tvRentalState.setText(getString(R.string.activity_rental_details_refused));
+//                tvRentalState.setTextColor(Color.RED);
+//                break;
+//            case 3:
+//
+//                break;
+//        }
+//0审核中 1已拒绝 2已通过
+        if (TextUtils.equals(detailsBean.getRoomState(), "0")) {
+            tvRentalState.setText(getString(R.string.activity_rental_details_audit));
+            tvRentalState.setTextColor(Color.GREEN);
+        } else if (TextUtils.equals(detailsBean.getRoomState(), "1")) {
+            tvRentalState.setText(getString(R.string.activity_rental_details_refused));
+            tvRentalState.setTextColor(Color.RED);
+        } else if (TextUtils.equals(detailsBean.getRoomState(), "2")) {
 
-                break;
         }
 
         if (!TextUtils.isEmpty(detailsBean.getRefuseReason())) {
@@ -175,7 +186,12 @@ public class RentalDetailsActivity extends BaseActivity {
         }
 
         if (!TextUtils.isEmpty(detailsBean.getBathroom())) {
-            tvBathroom.setText(detailsBean.getBathroom());
+            if (TextUtils.equals(detailsBean.getBathroom(), "0")) {
+                tvBathroom.setText(getString(R.string.yes));
+            } else {
+                tvBathroom.setText(getString(R.string.no));
+            }
+
         } else {
             ltBathroom.setVisibility(View.GONE);
         }
@@ -235,11 +251,16 @@ public class RentalDetailsActivity extends BaseActivity {
             ltRoomPic.setVisibility(View.GONE);
         }
 
-        if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
+        if (detailsBean.getVideoPic() != null) {
             path = detailsBean.getVideoList();
-            roomVideo.setImageBitmap(getLocalVideoBitmap(path));
+            Glide.with(this).load(detailsBean.getVideoPic()).into(roomVideo);
         } else {
-            ltRoomVideo.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
+                path = detailsBean.getVideoList();
+                roomVideo.setImageBitmap(getLocalVideoBitmap(path));
+            } else {
+                ltRoomVideo.setVisibility(View.GONE);
+            }
         }
     }
 

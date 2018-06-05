@@ -48,7 +48,7 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
     private static MyApplication application;
 
-    public static final String token1 = "yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==";
+    public static final String token1 = "jEOJtiOxmPTyb2CdFT7a0m7tnvnoFRHtvRSk65MeRaWjhNUpICiAMXNDGqU1IaYQIzUdPu/qnOp8M7h4kf7iUj1PG9N7Nuem";
 
     @Override
     public void onCreate() {
@@ -104,6 +104,9 @@ public class MyApplication extends Application {
         RongIM.init(this);
 
         /**
+         *
+         * jEOJtiOxmPTyb2CdFT7a0m7tnvnoFRHtvRSk65MeRaWjhNUpICiAMXNDGqU1IaYQIzUdPu/qnOp8M7h4kf7iUj1PG9N7Nuem         123456789
+         *
          * f2+AlWV8zuooyGsXatiiuZtacAbWKJAKs7xt/96ZapGfFyCIuQAUQ6GvccmqXXIgyZaVJawFDNQXfFYeg33Oyw==111111
          * zZpOAITWWL4fpEnEryMT6W7tnvnoFRHtvRSk65MeRaWjhNUpICiAMeAsdWqpv9eZkCcfaLVPfU4emRfjS8IkRA==123456
          * yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==12345
@@ -236,6 +239,10 @@ public class MyApplication extends Application {
 
         }
         return false;
+    }
+
+    public static String getUserToken(){
+        return "74880cc6e0b1658f5467ccc1b3b41e3a";
     }
 }
 

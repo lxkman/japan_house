@@ -216,6 +216,8 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 long hours = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
                 long minutes = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
                 second = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60) - minutes * 1000 * 60) ;
+            } else {
+                pageNo --;
             }
         }
         freeApartmentAdapter.notifyDataSetChanged();

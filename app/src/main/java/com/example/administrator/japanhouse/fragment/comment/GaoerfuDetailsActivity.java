@@ -91,8 +91,6 @@ public class GaoerfuDetailsActivity extends BaseActivity {
     TextView tvPrice;
     @BindView(R.id.tv_details_area)
     TextView tvDetailsArea;
-    @BindView(R.id.tv_details_jutiweizhi)
-    TextView tvDetailsJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.tv_details_manager_head)

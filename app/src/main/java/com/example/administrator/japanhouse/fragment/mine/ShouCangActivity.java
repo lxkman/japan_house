@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.CollectionListAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -69,7 +70,7 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
         ButterKnife.bind(this);
 
         presenter = new CollectionPresenter(this, this);
-        presenter.getCollectionHouseList(page, MyUrls.TOKEN);
+        presenter.getCollectionHouseList(page, MyApplication.getUserToken());
 
         springView = (SpringView) findViewById(R.id.act_collection_springView);
 
@@ -82,7 +83,7 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
                     public void run() {
                         mList.clear();
                         page = 1;
-                        presenter.getCollectionHouseList(page, MyUrls.TOKEN);
+                        presenter.getCollectionHouseList(page, MyApplication.getUserToken());
                     }
                 }, 0);
                 springView.onFinishFreshAndLoad();
@@ -94,7 +95,7 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
                     @Override
                     public void run() {
                         page++;
-                        presenter.getCollectionHouseList(page, MyUrls.TOKEN);
+                        presenter.getCollectionHouseList(page, MyApplication.getUserToken());
                     }
                 }, 0);
                 springView.onFinishFreshAndLoad();
@@ -112,46 +113,17 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
         liebiaoAdapter.setOnItemClickListener(this);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        // 设置监听器。
-        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
-
-        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
-            @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                mList.remove(menuBridge.getAdapterPosition());
-                menuBridge.closeMenu();
-                liebiaoAdapter.notifyDataSetChanged();
-
-            }
-        });
         mrecycler.setAdapter(liebiaoAdapter);
 
     }
-
-    // 创建菜单:
-    SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-//            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
-//            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
-            SwipeMenuItem deleteItem = new SwipeMenuItem(ShouCangActivity.this); // 各种文字和图标属性设置。
-            deleteItem.setWeight(100);
-            deleteItem.setHeight(380);
-            deleteItem.setText("   删除   ");
-            deleteItem.setTextSize(14);
-            deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
-            deleteItem.setTextColor(Color.WHITE);
-            rightMenu.addMenuItem(deleteItem); // 在Item右侧添加一个菜单。
-            // 注意:哪边不想要菜单,那么不要添加即可。
-        }
-    };
 
     @Override
     public void getCollectionHouseList(Response<CollectionListBean> response) {
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
+            } else {
+                page --;
             }
             liebiaoAdapter.notifyDataSetChanged();
         }
@@ -234,6 +206,11 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
         }
     }
 
+    @Override
+    public void itemDeleteClickListener(int position) {
+        mList.remove(position);
+        liebiaoAdapter.notifyDataSetChanged();
+    }
 
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 

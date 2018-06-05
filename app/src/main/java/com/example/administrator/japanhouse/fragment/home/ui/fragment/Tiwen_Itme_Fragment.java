@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.Bay_baike_Bean;
@@ -99,7 +100,7 @@ public class Tiwen_Itme_Fragment extends BaseFragment {
         HttpHeaders headers = new HttpHeaders();
         headers.put("ad","");
         HttpParams params = new HttpParams();
-        params.put("token",MyUrls.TOKEN);
+        params.put("token", MyApplication.getUserToken());
         params.put("pageNo",pageNo);
         OkGo.<TiwenBean>post(MyUrls.BASEURL + "/app/askinfo/myquestion")
                 .tag(this)

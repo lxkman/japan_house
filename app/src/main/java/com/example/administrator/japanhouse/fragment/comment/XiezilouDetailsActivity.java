@@ -90,8 +90,6 @@ public class XiezilouDetailsActivity extends BaseActivity {
     TextView tvDetailsArea;
     @BindView(R.id.tv_details_shoumaileixing)
     TextView tvDetailsShoumaileixing;
-    @BindView(R.id.tv_details_jutiweizhi)
-    TextView tvDetailsJutiweizhi;
     @BindView(R.id.tv_details_location)
     TextView tvDetailsLocation;
     @BindView(R.id.tv_details_manager_head)

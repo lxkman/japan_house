@@ -232,7 +232,7 @@ public class HouseDetailsBean implements Serializable{
         private int isSc;
         private String kitchenCn;
         private String kitchenJpn;
-        private int latitude;
+        private float latitude;
         private String leaseTypeCn;
         private String leaseTypeJpn;
         private String locationLevel1Cn;
@@ -243,7 +243,7 @@ public class HouseDetailsBean implements Serializable{
         private String locationLevel3Jpn;
         private String locationLevel4Cn;
         private String locationLevel4Jpn;
-        private int longitude;
+        private float longitude;
         private String manageCn;
         private String manageJpn;
         private String managementSocietyCn;
@@ -723,11 +723,11 @@ public class HouseDetailsBean implements Serializable{
             this.kitchenJpn = kitchenJpn;
         }
 
-        public int getLatitude() {
+        public float getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(int latitude) {
+        public void setLatitude(float latitude) {
             this.latitude = latitude;
         }
 
@@ -811,11 +811,11 @@ public class HouseDetailsBean implements Serializable{
             this.locationLevel4Jpn = locationLevel4Jpn;
         }
 
-        public int getLongitude() {
+        public float getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(int longitude) {
+        public void setLongitude(float longitude) {
             this.longitude = longitude;
         }
 

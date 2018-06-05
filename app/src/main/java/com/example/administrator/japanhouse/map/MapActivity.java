@@ -2,7 +2,6 @@ package com.example.administrator.japanhouse.map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,7 +36,6 @@ import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.utils.OpenClientUtil;
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
@@ -157,12 +155,12 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
         MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
         //添加定位信息
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(14).build()));   // 设置级别
-        LatLng ll = new LatLng(Double.parseDouble("35.68"),
-                Double.parseDouble("139.75"));
+        LatLng ll = new LatLng(Double.parseDouble(lat),
+                Double.parseDouble(log));
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(ll));
         MyLocationData.Builder builder = new MyLocationData.Builder();
-        builder.latitude(Double.parseDouble("35.68"));
-        builder.longitude(Double.parseDouble("139.75"));
+        builder.latitude(Double.parseDouble(lat));
+        builder.longitude(Double.parseDouble(log));
         MyLocationData data = builder.build();
         //设置定位的小图标
         BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory

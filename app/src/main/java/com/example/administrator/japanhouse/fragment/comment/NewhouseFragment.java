@@ -66,7 +66,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
         tv_refresh_time.setText(currentDate + "更新");
-        tjNewHousePresenter.getHouseList(page, "2");
+        tjNewHousePresenter.getHouseList(page, "1");
     }
 
     private void initListener() {
@@ -78,7 +78,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             public void onRefresh() {
                 isLoadMore = false;
                 page = 1;
-                tjNewHousePresenter.getHouseList(page, "2");
+                tjNewHousePresenter.getHouseList(page, "1");
                 String currentDate = MyUtils.getCurrentDate();
                 tv_refresh_time.setText(currentDate + "更新");
                 springview.onFinishFreshAndLoad();
@@ -88,7 +88,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             public void onLoadmore() {
                 isLoadMore = true;
                 page++;
-                tjNewHousePresenter.getHouseList(page, "2");
+                tjNewHousePresenter.getHouseList(page, "1");
                 springview.onFinishFreshAndLoad();
             }
         });

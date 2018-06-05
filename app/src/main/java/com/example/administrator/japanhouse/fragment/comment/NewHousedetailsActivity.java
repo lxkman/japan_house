@@ -1,8 +1,11 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -122,6 +125,8 @@ public class NewHousedetailsActivity extends BaseActivity {
     CircleImageView tvDetailsManagerHead;
     @BindView(R.id.tv_details_manager_name)
     TextView tvDetailsManagerName;
+    @BindView(R.id.bdMap_layout)
+    LinearLayout bdMapLayout;
 
     private int mDistanceY;
     private LoveAdapter loveAdapter;
@@ -143,7 +148,16 @@ public class NewHousedetailsActivity extends BaseActivity {
     private boolean isStart;
     private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist;
     private List<HouseDetailsBean.DatasBean.HxtlistBean> hxtlist;
-
+    //头部 添加相应地区
+    private final static String BAIDU_HEAD = "baidumap://map/direction?region=0";
+    //起点的经纬度
+    private final static String BAIDU_ORIGIN = "&origin=";
+    //终点的经纬度
+    private final static String BAIDU_DESTINATION = "&destination=";
+    //路线规划方式
+    private final static String BAIDU_MODE = "&mode=walking";
+    //百度地图的包名
+    private final static String BAIDU_PKG = "com.baidu.BaiduMap";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,15 +166,12 @@ public class NewHousedetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_lishi_new_house);
         ButterKnife.bind(this);
+
         initDetailsNet();
-        //banner
-        //户型图
-        initData();
         //猜你喜欢
         initLoveRecycler();
         initScroll();
-        initMap();
-        initLocation();
+
     }
 
     //详情字段接口
@@ -168,6 +179,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
         Toast.makeText(mContext, houseId, Toast.LENGTH_SHORT).show();
+        Log.d("NewHousedetailsActivity", token+"--------------");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -175,9 +187,9 @@ public class NewHousedetailsActivity extends BaseActivity {
             isJa = false;
         }
         HttpParams params = new HttpParams();
-        params.put("hId",houseId);
-        params.put("hType",1);
-        params.put("token",token);
+        params.put("hId", houseId);
+        params.put("hType", 1);
+        params.put("token", token);
         OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
                 .tag(this)
                 .params(params)
@@ -198,18 +210,20 @@ public class NewHousedetailsActivity extends BaseActivity {
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         isSc = datas.getIsSc();
-                        if (isSc==0){//收藏
-                            isStart=true;
+                        if (isSc == 0) {//收藏
+                            isStart = true;
                             imgStart.setImageResource(R.drawable.shoucang2);
-                        }else {//未收藏
-                            isStart=false;
+                        } else {//未收藏
+                            isStart = false;
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
                         initViewPager();
+                        initLocation();
+                        initMap();
+                        initData();
                     }
                 });
     }
-
 
 
     private void initLocation() {
@@ -233,8 +247,6 @@ public class NewHousedetailsActivity extends BaseActivity {
         mapView.removeViewAt(1);//隐藏logo
         mapView.removeViewAt(2);//隐藏比例尺
         mapView.showZoomControls(false);// 隐藏缩放控件
-
-
         mBaiduMap = mapView.getMap();
 
         UiSettings uiSettings = mBaiduMap.getUiSettings();
@@ -248,12 +260,12 @@ public class NewHousedetailsActivity extends BaseActivity {
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(14).build()));   // 设置级别
-        LatLng ll = new LatLng(Double.parseDouble("35.68"),
-                Double.parseDouble("139.75"));
+        LatLng ll = new LatLng(Double.parseDouble(String.valueOf(datas.getLatitude())),
+                Double.parseDouble(String.valueOf(datas.getLongitude())));
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(ll));
         MyLocationData.Builder builder = new MyLocationData.Builder();
-        builder.latitude(Double.parseDouble("35.68"));
-        builder.longitude(Double.parseDouble("139.75"));
+        builder.latitude(Double.parseDouble(String.valueOf(datas.getLatitude())));
+        builder.longitude(Double.parseDouble(String.valueOf(datas.getLongitude())));
         MyLocationData data = builder.build();
         mBaiduMap.setMyLocationData(data);
         MapClick();
@@ -264,8 +276,8 @@ public class NewHousedetailsActivity extends BaseActivity {
             @Override
             public void onMapClick(LatLng latLng) {
                 Intent intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
-                intent.putExtra("lat", "35.68");
-                intent.putExtra("log", "139.75");
+                intent.putExtra("lat", String.valueOf(datas.getLatitude()));
+                intent.putExtra("log", String.valueOf(datas.getLongitude()));
                 intent.putExtra("TAG", "1");
                 startActivity(intent);
             }
@@ -302,48 +314,51 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
     }
-private List<String> mUrlList =new ArrayList();
+
+    private List<String> mUrlList = new ArrayList();
+
     private void initViewPager() {
         if (mBannerList.size() <= 0) {
-            if (datas.getVideoUrls()!=null){
-                if (datas.getVideoUrls().equals("")){
+            if (datas.getVideoUrls() != null) {
+                if (datas.getVideoUrls().equals("")) {
                     for (int i = 0; i < bannerlist.size(); i++) {
-                        mUrlList.add(bannerlist.get(i).getVal()+"");
+                        mUrlList.add(bannerlist.get(i).getVal() + "");
                     }
-                }else {
+                } else {
                     mUrlList.add(datas.getVideoImgs());
                     for (int i = 0; i < bannerlist.size(); i++) {
-                        mUrlList.add(bannerlist.get(i).getVal()+"");
+                        mUrlList.add(bannerlist.get(i).getVal() + "");
                     }
                 }
             }
             for (int i = 0; i < mUrlList.size(); i++) {
                 View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
-                ImageView  img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
-                ImageView  imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
-                RelativeLayout  rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                ImageView imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
+                RelativeLayout rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
                 Glide.with(this).load(mUrlList.get(i)).into(img_banner);
                 mBannerList.add(inflate);
-                if (i==0&&!datas.getVideoUrls().equals("")){
+                if (i == 0 && !datas.getVideoUrls().equals("")) {
                     imgStartVideo.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     imgStartVideo.setVisibility(View.GONE);
                 }
                 final int finalI = i;
                 rela_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (finalI ==0&&!datas.getVideoUrls().equals("")) {
-                            Intent intent=new Intent(mContext,VideoDetailsActivity.class);
-                            intent.putExtra("VideoUrl",mUrlList.get(0)+"");
+                        if (finalI == 0 && !datas.getVideoUrls().equals("")) {
+                            Intent intent = new Intent(mContext, VideoDetailsActivity.class);
+                            intent.putExtra("VideoUrl", datas.getVideoUrls() + "");
+                            intent.putExtra("VideoImg", datas.getVideoImgs() + "");
                             startActivity(intent);
-                        }else {
-                            Intent intent=new Intent(mContext,BannerDetailsActivity.class);
-                            intent.putExtra("datas",datas);
-                            if (datas.getVideoUrls().equals("")){
-                                intent.putExtra("position",finalI+"");
-                            }else {
-                                intent.putExtra("position",(finalI-1)+"");
+                        } else {
+                            Intent intent = new Intent(mContext, BannerDetailsActivity.class);
+                            intent.putExtra("datas", datas);
+                            if (datas.getVideoUrls().equals("")) {
+                                intent.putExtra("position", finalI + "");
+                            } else {
+                                intent.putExtra("position", (finalI - 1) + "");
                             }
                             startActivity(intent);
                         }
@@ -367,8 +382,8 @@ private List<String> mUrlList =new ArrayList();
 
                 tvToNum.setText((position + 1) + "");
                 if (position == 1) {
-                    JZVideoPlayer.releaseAllVideos();
-                }else if (position==0){
+
+                } else if (position == 0) {
                 }
 
             }
@@ -379,20 +394,23 @@ private List<String> mUrlList =new ArrayList();
             }
         });
     }
+
     //需要给ViewPager设置适配器
-    PagerAdapter adapter=new PagerAdapter() {
+    PagerAdapter adapter = new PagerAdapter() {
 
         @Override
         public boolean isViewFromObject(View arg0, Object arg1) {
             // TODO Auto-generated method stub
-            return arg0==arg1;
+            return arg0 == arg1;
         }
+
         //有多少个切换页
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
             return mBannerList.size();
         }
+
         //对超出范围的资源进行销毁
         @Override
         public void destroyItem(ViewGroup container, int position,
@@ -400,6 +418,7 @@ private List<String> mUrlList =new ArrayList();
             // TODO Auto-generated method stub
             container.removeView(mBannerList.get(position));
         }
+
         //对显示的资源进行初始化
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
@@ -426,8 +445,8 @@ private List<String> mUrlList =new ArrayList();
 
     private void initData() {
         intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
-        intent.putExtra("lat", "35.68");
-        intent.putExtra("log", "139.75");
+        intent.putExtra("lat", datas.getLatitude()+"");
+        intent.putExtra("log", datas.getLongitude()+"");
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -449,7 +468,7 @@ private List<String> mUrlList =new ArrayList();
 
 
         if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, mList);
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, hxtlist);
         }
         HuxingRecycler.setLayoutManager(new GridLayoutManager(NewHousedetailsActivity.this, 3));
         HuxingRecycler.setNestedScrollingEnabled(false);
@@ -457,13 +476,13 @@ private List<String> mUrlList =new ArrayList();
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showHuxingDialog();
+                showHuxingDialog(position);
             }
         });
     }
 
 
-    private void showHuxingDialog() {
+    private void showHuxingDialog(int position) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         final BaseDialog dialog = builder.setViewId(R.layout.dialog_huxingtu)
                 //设置dialogpadding
@@ -479,6 +498,8 @@ private List<String> mUrlList =new ArrayList();
                 //设置监听事件
                 .builder();
         dialog.show();
+        ImageView img_dialog_huxing = (ImageView) dialog.findViewById(R.id.img_dialog_huxing);
+        Glide.with(NewHousedetailsActivity.this).load(hxtlist.get(position).getVal()).into(img_dialog_huxing);
     }
 
 
@@ -514,7 +535,7 @@ private List<String> mUrlList =new ArrayList();
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(NewHousedetailsActivity.this, NewHousedetailsActivity.class);
-                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId());
+                                intent.putExtra("houseId", oldHouseListBean.getDatas().get(position).getId());
                                 startActivity(intent);
                             }
                         });
@@ -524,21 +545,19 @@ private List<String> mUrlList =new ArrayList();
     }
 
 
-
-
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout,R.id.bdMap_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.img_start:
-                if (!isStart){
+                if (!isStart) {
                     initStart();
-                    isStart=true;
-                }else {
+                    isStart = true;
+                } else {
                     initUnStart();
-                    isStart=false;
+                    isStart = false;
                 }
                 break;
             case R.id.tv_See_More:
@@ -569,16 +588,49 @@ private List<String> mUrlList =new ArrayList();
                 intent.putExtra("TAG", Tag);
                 startActivity(intent);
                 break;
+            case R.id.bdMap_layout:
+                //检测地图是否安装和唤起
+                if (checkMapAppsIsExist(NewHousedetailsActivity.this,BAIDU_PKG)){
+                    Toast.makeText(NewHousedetailsActivity.this,"百度地图已经安装",Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent();
+                    intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+"35.68"
+                            +","+"139.75"+BAIDU_DESTINATION+"40.05"+","+"116.30"
+                            +BAIDU_MODE));
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(NewHousedetailsActivity.this,"百度地图未安装",Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+    /**
+     * 检测地图应用是否安装
+     * @param context
+     * @param packagename
+     * @return
+     */
+    public boolean checkMapAppsIsExist(Context context, String packagename){
+        PackageInfo packageInfo;
+        try{
+            packageInfo = context.getPackageManager().getPackageInfo(packagename,0);
+        }catch (Exception e){
+            packageInfo = null;
+            e.printStackTrace();
+        }
+        if (packageInfo == null){
+            return false;
+        }else{
+            return true;
         }
     }
     //收藏
     private void initStart() {
-        Log.d("NewHousedetailsActivity", token+"-------------");
+        Log.d("NewHousedetailsActivity", token + "-------------");
         HttpParams params = new HttpParams();
         params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
         params.put("token", token);//用户登录标识
         params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
-        params.put("hId",houseId);
+        params.put("hId", houseId);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/insertcollectionhouse")
                 .tag(this)
                 .params(params)
@@ -588,25 +640,26 @@ private List<String> mUrlList =new ArrayList();
                         int code = response.code();
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
-                        if (code1.equals("200")){
+                        if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
                             Toast.makeText(NewHousedetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
+
     //取消收藏
     private void initUnStart() {
         String token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
-        Log.d("NewHousedetailsActivity", token+"-------------");
+        Log.d("NewHousedetailsActivity", token + "-------------");
         HttpParams params = new HttpParams();
         params.put("hType", 1);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
         params.put("token", token);//用户登录标识
         params.put("shType", "");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
-        params.put("hId",houseId);
+        params.put("hId", houseId);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/deletecollectionhouse")
                 .tag(this)
                 .params(params)
@@ -616,16 +669,17 @@ private List<String> mUrlList =new ArrayList();
                         int code = response.code();
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
-                        if (code1.equals("200")){
+                        if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
                             Toast.makeText(NewHousedetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
+
     //分享弹窗
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
@@ -688,14 +742,15 @@ private List<String> mUrlList =new ArrayList();
     }
 
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<HouseDetailsBean.DatasBean.HxtlistBean, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<HouseDetailsBean.DatasBean.HxtlistBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, HouseDetailsBean.DatasBean.HxtlistBean item) {
+            Glide.with(NewHousedetailsActivity.this).load(item.getVal()).into((ImageView) helper.getView(R.id.img_huxing));
         }
     }
 
@@ -705,13 +760,14 @@ private List<String> mUrlList =new ArrayList();
         public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
             super(layoutResId, data);
         }
+
         @Override
         protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
-            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
-            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
-            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
-            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
-            helper.setText(R.id.tv_price,isJa?item.getPriceJpn():item.getPriceCn());
+            helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
+            helper.setText(R.id.tv_house_address, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
+            helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
+            helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
             Glide.with(NewHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }

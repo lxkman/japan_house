@@ -22,7 +22,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="关于房价涨幅"
+                android:text=""
                 android:textStyle="bold"
                 android:textColor="@color/text_black"
                 android:singleLine="true"
@@ -35,7 +35,7 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:lineSpacingExtra="5dp"
-                android:text="阿达大厦大厦等哈说的哈时间快点哈时间看到哈萨克几点回家凯撒红卡仕达金卡和圣诞节喀什安达市多"
+                android:text=""
                 android:drawablePadding="5dp"/>
         </LinearLayout>
     </RelativeLayout>

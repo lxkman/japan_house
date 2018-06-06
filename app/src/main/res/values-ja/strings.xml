@@ -566,4 +566,6 @@
     <string name="frag_browe_record">最新浏览：</string>
     <string name="string_refused">拒否</string>
     <string name="string_review">レビュー中</string>
+    <string name="huaquanzhaofang">丸を書いて検索</string>
+    <string name="buxian">不制限</string>
 </resources>

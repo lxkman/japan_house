@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -22,6 +23,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.utils.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,17 +52,18 @@ public class TongqinActivity extends BaseActivity {
             R.drawable.ditie_iv, R.drawable.zijia_iv};
     private OptionsPickerView pvCustomOptions;
     private List<String> timeList;
-    //    private int type;
     private LocationClient mLocClient;
     private double mylongitude;
     private double mylatitude;
+    private TypeAdapter typeAdapter;
+    private List<HomeItemBean> typeList;
+    private String lastTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tongqin);
         ButterKnife.bind(this);
-        //        type = getIntent().getIntExtra("type", 0);
         initView();
         initLocation();
     }
@@ -104,25 +107,25 @@ public class TongqinActivity extends BaseActivity {
         timeList.add("75");
         timeList.add("90");
 
-        final List<HomeItemBean> list = new ArrayList<>();
-        list.add(new HomeItemBean(false, itemPic[0], getString(R.string.buxing)));
-        list.add(new HomeItemBean(false, itemPic[1], getString(R.string.qixing)));
-        list.add(new HomeItemBean(false, itemPic[2], getString(R.string.gongjiao)));
-        list.add(new HomeItemBean(false, itemPic[3], getString(R.string.ditie)));
-        list.add(new HomeItemBean(true, itemPic[4], getString(R.string.zijia)));
+        typeList = new ArrayList<>();
+        typeList.add(new HomeItemBean(false, itemPic[0], getString(R.string.buxing)));
+        typeList.add(new HomeItemBean(false, itemPic[1], getString(R.string.qixing)));
+        typeList.add(new HomeItemBean(false, itemPic[2], getString(R.string.gongjiao)));
+        typeList.add(new HomeItemBean(false, itemPic[3], getString(R.string.ditie)));
+        typeList.add(new HomeItemBean(true, itemPic[4], getString(R.string.zijia)));
 
         typeRecycler.setNestedScrollingEnabled(false);
         typeRecycler.setLayoutManager(new GridLayoutManager(mContext, 5));
-        final TypeAdapter typeAdapter = new TypeAdapter(R.layout.item_tongqin_type, list);
+        typeAdapter = new TypeAdapter(R.layout.item_tongqin_type, typeList);
         typeRecycler.setAdapter(typeAdapter);
         typeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                for (int i = 0; i < list.size(); i++) {
+                for (int i = 0; i < typeList.size(); i++) {
                     if (position == i) {
-                        list.get(i).setChecked(true);
+                        typeList.get(i).setChecked(true);
                     } else {
-                        list.get(i).setChecked(false);
+                        typeList.get(i).setChecked(false);
                     }
                 }
                 typeAdapter.notifyDataSetChanged();
@@ -131,8 +134,47 @@ public class TongqinActivity extends BaseActivity {
     }
 
     private void go() {
+        int position = getCheckedTypePosition();
+        if (TextUtils.isEmpty(lastTime)){
+            Toast.makeText(this, getResources().getString(R.string.qingxuanzeshijian), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int time = Integer.parseInt(lastTime);
+        int distance = 0;
+        switch (position) {
+            case 0:
+                distance = 80 * time;
+                break;
+            case 1:
+                distance = 400 * time;
+                break;
+            case 2:
+                distance = 800 * time;
+                break;
+            case 3:
+                distance = 1000 * time;
+                break;
+            case 4:
+                distance = 1500 * time;
+                break;
+        }
+        double[] around = MapUtils.getjingweidufanwei(mylatitude, mylongitude, distance);
+        Intent intent = new Intent();
+        intent.putExtra("starJd", around[0]);
+        intent.putExtra("endJd", around[1]);
+        intent.putExtra("starWd", around[2]);
+        intent.putExtra("endWd", around[3]);
+        setResult(1, intent);
         finish();
-        startActivity(new Intent(mContext, ZufangListActivity.class));
+    }
+
+    private int getCheckedTypePosition() {
+        for (int i = 0; i < typeList.size(); i++) {
+            if (typeList.get(i).isChecked()) {
+                return i;
+            }
+        }
+        return 4;//默认是自驾
     }
 
     private class TypeAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {
@@ -158,8 +200,8 @@ public class TongqinActivity extends BaseActivity {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                String tx = data.get(options1);
-                timeTv.setText(tx);
+                lastTime = data.get(options1);
+                timeTv.setText(lastTime);
             }
         })
                 .setLayoutRes(R.layout.pickerview_custom_options, new CustomListener() {

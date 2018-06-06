@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -335,7 +336,7 @@ public class HomeFragment extends BaseFragment {
                     public void onSuccess(Response<HomePageBean> response) {
                         HomePageBean body = response.body();
                         HomePageBean.DatasEntity datas = body.getDatas();
-                        List<HomePageBean.DatasEntity.CnxhEntity> cnxh = datas.getCnxh();//猜你喜欢
+                        final List<HomePageBean.DatasEntity.CnxhEntity> cnxh = datas.getCnxh();//猜你喜欢
                         List<HomePageBean.DatasEntity.ImagesEntity> images = datas.getImages();//banner
                         final List<HomePageBean.DatasEntity.TjesfEntity> tjesf = datas.getTjesf();//推荐二手房
                         List<HomePageBean.DatasEntity.TjjjrEntity> tjjjr = datas.getTjjjr();//推荐经纪人
@@ -344,7 +345,7 @@ public class HomeFragment extends BaseFragment {
                         final List<HomePageBean.DatasEntity.TjzfEntity> tjzf = datas.getTjzf();//推荐租房
                         //-----banner-----
                         List<String> bannerList = new ArrayList<>();
-                        if (images!=null && images.size()>0){
+                        if (images != null && images.size() > 0) {
                             for (int i = 0; i < images.size(); i++) {
                                 String imageUrl = images.get(i).getImageUrl();
                                 bannerList.add(imageUrl);
@@ -354,7 +355,7 @@ public class HomeFragment extends BaseFragment {
                         banner.setOnBannerListener(new OnBannerListener() {
                             @Override
                             public void OnBannerClick(int position) {
-                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                                //                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
                             }
                         });
                         //-----推荐新房-----
@@ -408,6 +409,8 @@ public class HomeFragment extends BaseFragment {
                                     intent.putExtra("houseType", "shangpu");
                                 } else if (houseType.equals("0")) {
                                     intent.putExtra("houseType", "bangongshi");
+                                }else if (houseType.equals("6")) {
+                                    intent.putExtra("houseType", "zhaotuandi");
                                 }
                                 intent.putExtra("houseId", tjzf.get(position).getId() + "");
                                 startActivity(intent);
@@ -430,7 +433,36 @@ public class HomeFragment extends BaseFragment {
                         cnxhAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                                String status = cnxh.get(position).getStatus();
+                                if (TextUtils.isEmpty(status)) {
+                                    return;
+                                }
+                                Intent intent = null;
+                                if (status.equals("0")) {
+                                    intent = new Intent(mContext, OldHousedetailsActivity.class);
+                                } else if (status.equals("1")) {
+                                    intent = new Intent(mContext, NewHousedetailsActivity.class);
+                                } else if (status.equals("2")) {
+                                    intent = new Intent(mContext, ZuHousedetailsActivity.class);
+                                    String houseType = cnxh.get(position).getHouseType();
+                                    if (houseType.equals("5")) {
+                                        intent.putExtra("houseType", "duoceng");
+                                    } else if (houseType.equals("4")) {
+                                        intent.putExtra("houseType", "xuesheng");
+                                    } else if (houseType.equals("3")) {
+                                        intent.putExtra("houseType", "erceng");
+                                    } else if (houseType.equals("2")) {
+                                        intent.putExtra("houseType", "bieshu");
+                                    } else if (houseType.equals("1")) {
+                                        intent.putExtra("houseType", "shangpu");
+                                    } else if (houseType.equals("0")) {
+                                        intent.putExtra("houseType", "bangongshi");
+                                    }else if (houseType.equals("6")) {
+                                        intent.putExtra("houseType", "zhaotuandi");
+                                    }
+                                }
+                                intent.putExtra("houseId", cnxh.get(position).getId() + "");
+                                startActivity(intent);
                             }
                         });
                     }
@@ -438,7 +470,7 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public void onError(Response<HomePageBean> response) {
                         super.onError(response);
-                        Log.e("xxx",response.getException().getMessage());
+                        Log.e("xxx", response.getException().getMessage());
                     }
                 });
     }
@@ -491,8 +523,8 @@ public class HomeFragment extends BaseFragment {
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
-                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn()  + "元/㎡" : item.getPriceCn() + "元/㎡");
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
             RecyclerView itemTjxfRecycler = helper.getView(R.id.item_tjxf_recycler);
             itemTjxfRecycler.setNestedScrollingEnabled(false);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -537,8 +569,8 @@ public class HomeFragment extends BaseFragment {
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_ting, isJa ? "" : "")
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "万" : item.getPriceCn() + "万");
+                    .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 
@@ -552,7 +584,7 @@ public class HomeFragment extends BaseFragment {
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjjjrEntity item) {
             RatingBarView ratingBarView = helper.getView(R.id.ratingBarView);
             ratingBarView.setRatingCount(5);//设置RatingBarView总数
-            ratingBarView.setSelectedCount(2);//设置RatingBarView选中数
+            ratingBarView.setSelectedCount((int) item.getAvgStar());//设置RatingBarView选中数
             ratingBarView.setSelectedIconResId(R.drawable.start_check);//设置RatingBarView选中的图片id
             ratingBarView.setNormalIconResId(R.drawable.start_nocheck);//设置RatingBarView正常图片id
             ratingBarView.setClickable(false);//设置RatingBarView是否可点击
@@ -577,7 +609,7 @@ public class HomeFragment extends BaseFragment {
             Glide.with(MyApplication.getGloableContext()).load(item.getPic())
                     .into((ImageView) helper.getView(R.id.iv_head));
             helper.setText(R.id.tv_name, item.getNickname())
-                    .setText(R.id.tv_area, getResources().getString(R.string.zhuying)+item.getShop());
+                    .setText(R.id.tv_area, getResources().getString(R.string.zhuying) + item.getShop());
         }
     }
 
@@ -593,9 +625,9 @@ public class HomeFragment extends BaseFragment {
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
-                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
-                    .setText(R.id.tv_ting, isJa ? "" : "")
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "万" : item.getPriceCn() + "万");
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 
@@ -611,8 +643,8 @@ public class HomeFragment extends BaseFragment {
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
-                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() + "万/㎡" : item.getSellingPriceCn() + "万/㎡");
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
         }
     }
 
@@ -628,9 +660,9 @@ public class HomeFragment extends BaseFragment {
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
-                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn()+"㎡" : item.getAreaCn()+"㎡")
-                    .setText(R.id.tv_ting, isJa ? "" : "")
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月");
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 

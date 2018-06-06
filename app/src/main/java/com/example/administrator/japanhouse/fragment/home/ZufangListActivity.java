@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +28,7 @@ import com.example.administrator.japanhouse.bean.ZufangListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
-import com.example.administrator.japanhouse.fragment.mine.LiShiJiLuActivity;
+import com.example.administrator.japanhouse.fragment.mine.fragment.LiShiJiLu2Activity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -88,6 +89,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
     private boolean isMv;
+    private boolean isTongQin;
+    private double starJd;
+    private double endJd;
+    private double starWd;
+    private double endWd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +138,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             @Override
             public void onRefresh() {
                 isLoadMore = false;
+                isMv = false;
                 page = 1;
                 initData();
                 springview.onFinishFreshAndLoad();
@@ -162,7 +169,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         shipinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isMv=true;
+                isMv = true;
                 page = 1;
                 mDatas.clear();
                 initData();
@@ -172,14 +179,13 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, TongqinActivity.class);
-                //                intent.putExtra("type", mType2);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
         jiluTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, LiShiJiLuActivity.class);
+                Intent intent = new Intent(mContext, LiShiJiLu2Activity.class);
                 intent.putExtra("houseType", mType2);
                 startActivity(intent);
             }
@@ -222,8 +228,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true, "不限"));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, "不限");
+                        oneCheckBeanList1.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -238,7 +244,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -264,7 +270,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -292,7 +298,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false, "不限"));
+                        list1.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -309,7 +315,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                          * */
                         zujin = shaiXuanBeanDatas.getZujin();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false, "不限"));
+                        list2.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
                         if (zujin != null && zujin.size() > 0) {
                             for (int i = 0; i < zujin.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.ZujinEntity shoujiaEntity = zujin.get(i);
@@ -346,7 +352,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         }
                         MoreView fourView = new MoreView(ZufangListActivity.this);
                         popupViews.add(fourView.secView());
-                        fourView.insertData3(moreCheckBeanList, dropDownMenu);
+                        fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(ZufangListActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
@@ -382,9 +388,16 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         } else {
             params.putUrlParams("qys", quyuList);//区域
         }
-        if (isMv){
+        if (isMv) {
             params.put("isMv", 1);
         }
+        if (isTongQin) {
+            params.put("starJd", starJd);
+            params.put("endJd", endJd);
+            params.put("starWd", starWd);
+            params.put("endWd", endWd);
+        }
+
         initMoreParams(params);
         OkGo.<ZufangListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
                 .tag(this)
@@ -595,7 +608,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月");
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 
@@ -628,4 +641,18 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1) {
+            starJd = data.getDoubleExtra("starJd", 0);
+            endJd = data.getDoubleExtra("endJd", 0);
+            starWd = data.getDoubleExtra("starWd", 0);
+            endWd = data.getDoubleExtra("endWd", 0);
+            page=1;
+            mDatas.clear();
+            initData();
+            Log.e("xxx", "开始经度:" + starJd + "\n" + "结束经度:" + endJd + "\n" + "开始纬度:" + starWd + "\n" + "结束纬度:" + endWd);
+        }
+    }
 }

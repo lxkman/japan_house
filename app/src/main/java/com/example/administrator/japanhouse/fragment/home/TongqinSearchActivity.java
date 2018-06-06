@@ -284,8 +284,8 @@ public class TongqinSearchActivity extends BaseActivity {
         //后来搜索的文字放在集合中的第一个位置
         mHistoryList.add(0, new TongQinHistroyBean(poiInfo.address, poiInfo.location.latitude, poiInfo.location.longitude));
 
-        if (mHistoryList.size() == 6) {//实现本地历史搜索记录最多不超过5个
-            mHistoryList.remove(5);
+        if (mHistoryList.size() == 11) {//实现本地历史搜索记录最多不超过10个
+            mHistoryList.remove(10);
         }
         //将这个mHistoryListData保存到sp中，其实sp中保存的就是这个mHistoryListData集合
         saveHistory();

@@ -164,8 +164,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true, "不限"));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, "不限");
+                        oneCheckBeanList1.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -180,7 +180,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -206,7 +206,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -233,7 +233,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                          * */
                         shoujia = shaiXuanBeanDatas.getShoujia();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false, "不限"));
+                        list2.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
                                 ChinaShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
@@ -250,7 +250,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                          * */
                         huxing = shaiXuanBeanDatas.getHuxing();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false, "不限"));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (huxing != null && huxing.size() > 0) {
                             for (int i = 0; i < huxing.size(); i++) {
                                 ChinaShaiXuanBean.DatasEntity.HuxingEntity mianjiEntity = huxing.get(i);
@@ -287,7 +287,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         }
                         MoreView fourView = new MoreView(ChineseLiebiaoActivity.this);
                         popupViews.add(fourView.secView());
-                        fourView.insertData3(moreCheckBeanList, dropDownMenu);
+                        fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(ChineseLiebiaoActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
@@ -457,7 +457,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() + "万" : item.getSellingPriceCn() + "万")
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn())
                     .setText(R.id.tv_ting, isJa ? "" : "");
         }
     }

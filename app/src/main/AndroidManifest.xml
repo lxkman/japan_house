@@ -145,6 +145,7 @@
         <activity android:name=".fragment.mine.AboutUsActivity" />
         <activity android:name=".fragment.mine.LianxirenActivity" />
         <activity android:name=".fragment.mine.LiShiJiLuActivity" />
+        <activity android:name=".fragment.mine.fragment.LiShiJiLu2Activity" />
         <activity android:name=".fragment.mine.DingDanActivity" />
         <activity android:name=".fragment.mine.DingYueActivity" />
         <activity android:name=".fragment.mine.ShouCangActivity" />

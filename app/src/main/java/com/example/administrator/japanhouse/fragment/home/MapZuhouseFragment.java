@@ -204,8 +204,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true, "不限"));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, "不限");
+                        oneCheckBeanList1.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,  getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -220,7 +220,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    oneCheckBeanList.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -246,7 +246,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, "不限"));
+                                    oneCheckBeanList.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -273,7 +273,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false, "不限"));
+                        list1.add(new OneCheckBean(false,  getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -290,7 +290,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                          * */
                         zujin = shaiXuanBeanDatas.getZujin();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false, "不限"));
+                        list2.add(new OneCheckBean(false,  getResources().getString(R.string.buxian)));
                         if (zujin != null && zujin.size() > 0) {
                             for (int i = 0; i < zujin.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.ZujinEntity shoujiaEntity = zujin.get(i);
@@ -305,6 +305,11 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                          * 第四个界面
                          * */
                         List<MoreCheckBean> moreCheckBeanList = new ArrayList<MoreCheckBean>();
+                        MoreCheckBean huaquanBean=new MoreCheckBean(false,getResources().getString(R.string.quyu));
+                        List<OneCheckBean> itemBean = new ArrayList<>();
+                        itemBean.add(new OneCheckBean(false,getResources().getString(R.string.huaquanzhaofang)));
+                        huaquanBean.setCheckBeanList(itemBean);
+                        moreCheckBeanList.add(huaquanBean);
                         List<ZuHouseShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();
                         if (more != null && more.size() > 0) {
                             for (int i = 0; i < more.size(); i++) {
@@ -327,7 +332,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         }
                         MoreView fourView = new MoreView(mContext);
                         popupViews.add(fourView.secView());
-                        fourView.insertData3(moreCheckBeanList, dropDownMenu);
+                        fourView.insertData(moreCheckBeanList, dropDownMenu,"zuhouse");
                         fourView.setListener(MapZuhouseFragment.this);
                         /**
                          * Dropdownmenu下面的主体部分

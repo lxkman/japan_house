@@ -125,6 +125,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 } else if (position == 5) {
                     intent.putExtra("houseType", "bangongshi");
                     intent.putExtra("edt_hint", getResources().getString(R.string.xuanbangongshiflc));
+                }else if (position == 6) {
+                    intent.putExtra("houseType", "zhaotuandi");
                 }
                 startActivity(intent);
             }
@@ -238,16 +240,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         @Override
         protected void convert(BaseViewHolder helper, HomeItemBean item) {
             ImageView imageView = helper.getView(R.id.item_pic_iv);
-            Glide.with(mContext).load(item.getImg()).into(imageView);
-            TextView tv_content = helper.getView(R.id.tv_content);
-            int position = helper.getAdapterPosition();
-            if (position == 1) {
-                tv_content.setText("一居室大阳台");
-            } else if (position == 2) {
-                tv_content.setText("朝南阳光房");
-            } else if (position == 4) {
-                tv_content.setText("优品豪装");
-            }
+            Glide.with(MyApplication.getGloableContext()).load(item.getImg()).into(imageView);
+            helper.setText(R.id.tv_content,item.getTitle());
         }
     }
 
@@ -264,7 +258,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月");
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn()  : item.getPriceCn() );
         }
     }
 
@@ -281,7 +275,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(mContext, ShendengListActivity.class));
+                        startActivity(new Intent(mContext, ShendengFirstStepActivity.class));
                     }
                 });
             }

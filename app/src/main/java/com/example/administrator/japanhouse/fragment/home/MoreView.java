@@ -33,24 +33,13 @@ class MoreView implements View.OnClickListener {
     private Context context;
     private MyItemClickListener listener;
     private RecyclerView mrecycler;
-    private LiebiaoAdapter mLiebiaoAdapter;
-    private List<OneCheckBean> mList = new ArrayList();
-    private List<OneCheckBean> mItemList0 = new ArrayList();
     private Button btn_sure;
     private Button btn_reset;
     private DropDownMenu dropDownMenu;
     private LinearLayout ll_root;
-    private String mtype;
-    private List<OneCheckBean> mItemList1;
-    private List<OneCheckBean> mItemList2;
-    private List<OneCheckBean> mItemList3;
-    private List<OneCheckBean> mItemList4;
-    private List<OneCheckBean> mItemList5;
-    private List<OneCheckBean> mItemList6;
-    private List<OneCheckBean> mItemList7;
     private List<MoreCheckBean> moreCheckBeanList = new ArrayList<>();
-    private boolean ruleData;
-    private LiebiaoAdapter2 liebiaoAdapter2;
+    private LiebiaoAdapter liebiaoAdapter;
+    private String mtype;
 
     MoreView(Context context) {
         this.context = context;
@@ -67,6 +56,8 @@ class MoreView implements View.OnClickListener {
         layoutParams.height = MyUtils.getScreenHeight(context) * 3 / 4;
         ll_root.setLayoutParams(layoutParams);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
+        mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        mrecycler.setNestedScrollingEnabled(false);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
         btn_reset = (Button) view.findViewById(R.id.btn_reset);
         btn_reset.setOnClickListener(this);
@@ -74,64 +65,24 @@ class MoreView implements View.OnClickListener {
         return view;
     }
 
-    void insertData3(List<MoreCheckBean> more, DropDownMenu dropDownMenu) {
+    void insertData(List<MoreCheckBean> more, DropDownMenu dropDownMenu, String type) {
         this.dropDownMenu = dropDownMenu;
         moreCheckBeanList.clear();
         moreCheckBeanList = more;
-        ruleData = true;
+        mtype = type;
         initData();
     }
 
-    void insertData(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
-        mList = list;
+    void insertData(List<MoreCheckBean> more, DropDownMenu dropDownMenu) {
         this.dropDownMenu = dropDownMenu;
-        mItemList1 = new ArrayList<>();
-        mItemList1.add(new OneCheckBean(false, "砖木结构"));
-        mItemList1.add(new OneCheckBean(false, "砖混结构"));
-        mItemList1.add(new OneCheckBean(false, "钢结构"));
-        mItemList2 = new ArrayList<>();
-        mItemList2.add(new OneCheckBean(false, "商业街"));
-        mItemList2.add(new OneCheckBean(false, "办公区"));
-        mItemList2.add(new OneCheckBean(false, "购物中心"));
-        mItemList3 = new ArrayList<>();
-        mItemList3.add(new OneCheckBean(false, "向南"));
-        mItemList3.add(new OneCheckBean(false, "向北"));
-        mItemList3.add(new OneCheckBean(false, "东南"));
-        mItemList3.add(new OneCheckBean(false, "西南"));
-        mItemList3.add(new OneCheckBean(false, "东北"));
-        mItemList3.add(new OneCheckBean(false, "西北"));
-        mItemList4 = new ArrayList<>();
-        mItemList4.add(new OneCheckBean(false, "20"));
-        mItemList4.add(new OneCheckBean(false, "20-40"));
-        mItemList4.add(new OneCheckBean(false, "40-80"));
-        mItemList4.add(new OneCheckBean(false, "100以上"));
-        mItemList5 = new ArrayList<>();
-        mItemList5.add(new OneCheckBean(false, "热水器"));
-        mItemList5.add(new OneCheckBean(false, "电视"));
-        mItemList5.add(new OneCheckBean(false, "空调"));
-        mItemList5.add(new OneCheckBean(false, "冰箱"));
-        mItemList6 = new ArrayList<>();
-        mItemList6.add(new OneCheckBean(false, "3室1厅"));
-        mItemList6.add(new OneCheckBean(false, "2室1厅"));
-        mItemList6.add(new OneCheckBean(false, "1室1厅"));
-        mItemList6.add(new OneCheckBean(false, "公寓"));
-        mItemList7 = new ArrayList<>();
-        mItemList7.add(new OneCheckBean(false, "地板"));
-        mItemList7.add(new OneCheckBean(false, "榻榻米"));
+        moreCheckBeanList.clear();
+        moreCheckBeanList = more;
         initData();
     }
 
     private void initData() {
-        mrecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        mrecycler.setNestedScrollingEnabled(false);
-        if (!ruleData && mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.more_item, mList);
-            mrecycler.setAdapter(mLiebiaoAdapter);
-        }
-        if (ruleData) {
-            liebiaoAdapter2 = new LiebiaoAdapter2(R.layout.more_item, moreCheckBeanList);
-            mrecycler.setAdapter(liebiaoAdapter2);
-        }
+        liebiaoAdapter = new LiebiaoAdapter(R.layout.more_item, moreCheckBeanList);
+        mrecycler.setAdapter(liebiaoAdapter);
     }
 
     @Override
@@ -147,19 +98,19 @@ class MoreView implements View.OnClickListener {
         }
     }
 
-    private void chongzhi(){
+    private void chongzhi() {
         if (moreCheckBeanList != null && moreCheckBeanList.size() > 0) {
             for (int i = 0; i < moreCheckBeanList.size(); i++) {
                 MoreCheckBean moreCheckBean = moreCheckBeanList.get(i);
                 List<OneCheckBean> checkBeanList = moreCheckBean.getCheckBeanList();
-                if (checkBeanList!=null && checkBeanList.size()>0){
+                if (checkBeanList != null && checkBeanList.size() > 0) {
                     for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
                         checkBeanList.get(i1).setChecked(false);
                     }
                 }
             }
-            if (liebiaoAdapter2!=null){
-                liebiaoAdapter2.notifyDataSetChanged();
+            if (liebiaoAdapter != null) {
+                liebiaoAdapter.notifyDataSetChanged();
                 listener.onMoreItemClick(null, new ArrayList<List<String>>());
             }
         }
@@ -186,39 +137,6 @@ class MoreView implements View.OnClickListener {
         return selectedBeen;
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
-
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<OneCheckBean> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(final BaseViewHolder helper, OneCheckBean item) {
-            helper.setText(R.id.rb_title, item.getName());
-            RecyclerView recycler_item = helper.getView(R.id.recycler_item);
-            recycler_item.setNestedScrollingEnabled(false);
-            recycler_item.setLayoutManager(new GridLayoutManager(mContext, 4));
-            if (item.getName().equals("区域")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList0));
-            } else if (item.getName().equals("构造")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList1));
-            } else if (item.getName().equals("地段")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList2));
-            } else if (item.getName().equals("朝向")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList3));
-            } else if (item.getName().equals("面积(平米)")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList4));
-            } else if (item.getName().equals("格局")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList6));
-            } else if (item.getName().equals("洋室")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList7));
-            } else if (item.getName().equals("和室")) {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList7));
-            } else {
-                recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, mItemList5));
-            }
-        }
-    }
 
     class ItemAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
 
@@ -240,7 +158,7 @@ class MoreView implements View.OnClickListener {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (item.getName().equals("画圈找房")) {
+                    if (item.getName().equals(mContext.getResources().getString(R.string.huaquanzhaofang))) {
                         dropDownMenu.closeMenu();
                         if (!TextUtils.isEmpty(mtype)) {
                             if (mtype.equals("newhouse")) {
@@ -253,19 +171,15 @@ class MoreView implements View.OnClickListener {
                         }
                     }
                     item.setChecked(!item.isChecked());
-                    if (!ruleData) {
-                        mLiebiaoAdapter.notifyDataSetChanged();
-                    } else {
-                        liebiaoAdapter2.notifyDataSetChanged();
-                    }
+                    liebiaoAdapter.notifyDataSetChanged();
                 }
             });
         }
     }
 
-    class LiebiaoAdapter2 extends BaseQuickAdapter<MoreCheckBean, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<MoreCheckBean, BaseViewHolder> {
 
-        public LiebiaoAdapter2(@LayoutRes int layoutResId, @Nullable List<MoreCheckBean> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<MoreCheckBean> data) {
             super(layoutResId, data);
         }
 
@@ -274,6 +188,7 @@ class MoreView implements View.OnClickListener {
             helper.setText(R.id.rb_title, item.getName());
             RecyclerView recycler_item = helper.getView(R.id.recycler_item);
             recycler_item.setNestedScrollingEnabled(false);
+//            recycler_item.setLayoutManager(new FlowLayoutManager());
             recycler_item.setLayoutManager(new GridLayoutManager(mContext, 4));
             recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, item.getCheckBeanList()));
         }

@@ -100,7 +100,7 @@ public class YanjiuListActivity extends BaseActivity {
                                      @Override
                                      public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                          Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
-                                         intent.putExtra("yjType", datas.get(position).getId() + "");
+                                         intent.putExtra("yjType", datas.get(position).getYjType() + "");
                                          startActivity(intent);
                                      }
                                  });

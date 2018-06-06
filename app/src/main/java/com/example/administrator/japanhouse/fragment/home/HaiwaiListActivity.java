@@ -154,7 +154,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                          * */
                         shoujia = shaiXuanBeanDatas.getShoujia();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false, "不限"));
+                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
                                 ChinaShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
@@ -171,7 +171,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                          * */
                         huxing = shaiXuanBeanDatas.getHuxing();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false, "不限"));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (huxing != null && huxing.size() > 0) {
                             for (int i = 0; i < huxing.size(); i++) {
                                 ChinaShaiXuanBean.DatasEntity.HuxingEntity huxingEntity = huxing.get(i);
@@ -208,7 +208,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                         }
                         MoreView fourView = new MoreView(HaiwaiListActivity.this);
                         popupViews.add(fourView.secView());
-                        fourView.insertData3(moreCheckBeanList, dropDownMenu);
+                        fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(HaiwaiListActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
@@ -364,7 +364,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()+"万" : item.getSellingPriceCn()+"万");
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn(): item.getSellingPriceCn());
         }
     }
 

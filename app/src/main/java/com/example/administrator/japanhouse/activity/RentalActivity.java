@@ -20,6 +20,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.adapter.GridViewAddImgesAdpter;
+import com.example.administrator.japanhouse.activity.adapter.GridViewAddVideoAdapter;
 import com.example.administrator.japanhouse.adapter.PicRentalAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;

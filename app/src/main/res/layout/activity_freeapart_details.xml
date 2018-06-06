@@ -47,20 +47,21 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/act_singUp_details_icon"
+                android:id="@+id/act_freeApart_icon"
                 android:layout_width="match_parent"
                 android:layout_height="176dip"
                 android:scaleType="fitXY"
-                android:background="@drawable/singup_bg" />
+                android:src="@drawable/singup_bg" />
             <!--日文-->
             <LinearLayout
-                android:id="@+id/act_singUp_details_layout_ja"
+                android:id="@+id/act_freeApart_layout_ja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
-                    android:id="@+id/act_singUp_details_title_ja"
+                    android:id="@+id/act_freeApart_title_ja"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -68,20 +69,22 @@
                     android:layout_marginTop="12dp"
                     android:text="活动名称"
                     android:textColor="#444"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    />
 
                 <TextView
-                    android:id="@+id/act_singUp_details_time_ja"
+                    android:id="@+id/act_freeApart_time_ja"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
+                    android:textColor="#444444"
+                    android:textSize="14sp"
                     android:drawableLeft="@drawable/free_apartment_time"
                     android:drawablePadding="10dp"
                     android:text="@string/item_apartment_time"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    />
 
                 <View
                     android:layout_width="match_parent"
@@ -91,69 +94,115 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip">
 
                     <TextView
-                        android:id="@+id/act_singUp_details_num_ja"
+                        android:id="@+id/act_freeApart_num_ja"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="15dip"
                         android:layout_marginRight="15dip"
-                        android:layout_marginTop="12dp"
                         android:layout_weight="1"
+                        android:layout_marginLeft="15dip"
                         android:text="@string/renyibaoming"
                         android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/act_freeApart_apply_ja"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dip"
+                        android:layout_marginRight="15dip"
+                        android:background="@drawable/round_chengse"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:text="@string/now_singup"
+                        android:textColor="#fff" />
                 </LinearLayout>
             </LinearLayout>
 
             <!--中文-->
             <LinearLayout
-                android:id="@+id/act_singUp_details_layout_zh"
+                android:id="@+id/act_freeApart_layout_zh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                >
 
-
-                <TextView
-                    android:id="@+id/act_singUp_details_title_zh"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="12dp"
-                    android:text="活动名称"
-                    android:textColor="#444"
-                    android:textSize="15sp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
 
                     <TextView
-                        android:id="@+id/act_singUp_details_time_zh"
+                        android:id="@+id/act_freeApart_title_zh"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="12dp"
+                        android:text="活动名称"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/act_freeApart_time_zh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#444444"
+                        android:textSize="14sp"
                         android:drawableLeft="@drawable/free_apartment_time"
                         android:drawablePadding="10dp"
                         android:text="@string/item_apartment_time"
-                        android:textColor="#444444"
-                        android:layout_centerVertical="true"
-                        android:textSize="14sp" />
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="15dp"
+                        />
+
+                </LinearLayout>
+
+                <view
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#f8f8f8"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
 
                     <TextView
-                        android:id="@+id/act_singUp_details_num_zh"
+                        android:id="@+id/act_freeApart_num_zh"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="15dip"
                         android:drawableLeft="@drawable/free_apartment_num"
                         android:drawablePadding="5dp"
-                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dip"
                         android:text="@string/renyibaoming"
-                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="14dp"
                         android:textSize="12sp" />
-                </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/act_freeApart_apply_zh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dip"
+                        android:layout_marginRight="15dip"
+                        android:background="@drawable/round_chengse"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:layout_marginLeft="15dip"
+                        android:text="@string/now_singup"
+                        android:layout_marginTop="12dp"
+                        android:textColor="#fff" />
+                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -200,7 +249,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/act_singUp_details_details"
+                    android:id="@+id/act_freeApart_details"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -225,7 +274,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/act_singUp_details_range"
+                    android:id="@+id/act_freeApart_range"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -259,7 +308,7 @@
                         android:src="@drawable/phont" />
 
                     <TextView
-                        android:id="@+id/act_singUp_details_phone"
+                        android:id="@+id/act_freeApart_phone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -325,7 +374,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/act_singUp_details_houseBs"
+                    android:id="@+id/act_freeApart_houseBs"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -350,7 +399,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/act_singUp_details_date"
+                    android:id="@+id/act_freeApart_date"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -375,7 +424,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/act_singUp_details_address"
+                    android:id="@+id/act_freeApart_address"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -409,14 +458,14 @@
             android:paddingLeft="10dip">
 
             <ImageView
-                android:id="@+id/act_singUp_details_managerIcon"
+                android:id="@+id/act_freeApart_managerIcon"
                 android:layout_width="50dip"
                 android:layout_height="50dip"
                 android:padding="5dip"
                 android:src="@drawable/deful_touxiang" />
 
             <TextView
-                android:id="@+id/act_singUp_details_managerName"
+                android:id="@+id/act_freeApart_managerName"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -433,7 +482,7 @@
             android:background="#c79880">
 
             <TextView
-                android:id="@+id/act_singUp_details_wChat"
+                android:id="@+id/act_freeApart_wChat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -451,7 +500,7 @@
             android:background="#d79369">
 
             <TextView
-                android:id="@+id/act_singUp_details_managerPhone"
+                android:id="@+id/act_freeApart_managerPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

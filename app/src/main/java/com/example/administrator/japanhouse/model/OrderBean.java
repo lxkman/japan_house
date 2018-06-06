@@ -1,5 +1,8 @@
 package com.example.administrator.japanhouse.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -41,7 +44,7 @@ public class OrderBean {
         this.datas = datas;
     }
 
-    public static class DatasBean {
+    public static class DatasBean implements Parcelable {
         /**
          * id : 8
          * houseId : 1
@@ -89,6 +92,74 @@ public class OrderBean {
         private int isDeleted;
         private String doorTypeCn;
         private String doorTypeJpn;
+
+        protected DatasBean(Parcel in) {
+            id = in.readInt();
+            houseId = in.readInt();
+            userId = in.readInt();
+            transactionPriceCn = in.readString();
+            transactionPriceJpn = in.readString();
+            titleCn = in.readString();
+            titleJpn = in.readString();
+            priceCn = in.readString();
+            priceJpn = in.readString();
+            areaCn = in.readString();
+            areaJpn = in.readString();
+            yearBuiltCn = in.readString();
+            yearBuiltJpn = in.readString();
+            imgUrl = in.readString();
+            addressCn = in.readString();
+            addressJpn = in.readString();
+            houseType = in.readString();
+            createTime = in.readLong();
+            updateTime = in.readLong();
+            isDeleted = in.readInt();
+            doorTypeCn = in.readString();
+            doorTypeJpn = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(id);
+            dest.writeInt(houseId);
+            dest.writeInt(userId);
+            dest.writeString(transactionPriceCn);
+            dest.writeString(transactionPriceJpn);
+            dest.writeString(titleCn);
+            dest.writeString(titleJpn);
+            dest.writeString(priceCn);
+            dest.writeString(priceJpn);
+            dest.writeString(areaCn);
+            dest.writeString(areaJpn);
+            dest.writeString(yearBuiltCn);
+            dest.writeString(yearBuiltJpn);
+            dest.writeString(imgUrl);
+            dest.writeString(addressCn);
+            dest.writeString(addressJpn);
+            dest.writeString(houseType);
+            dest.writeLong(createTime);
+            dest.writeLong(updateTime);
+            dest.writeInt(isDeleted);
+            dest.writeString(doorTypeCn);
+            dest.writeString(doorTypeJpn);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<DatasBean> CREATOR = new Creator<DatasBean>() {
+            @Override
+            public DatasBean createFromParcel(Parcel in) {
+                return new DatasBean(in);
+            }
+
+            @Override
+            public DatasBean[] newArray(int size) {
+                return new DatasBean[size];
+            }
+        };
 
         public int getId() {
             return id;

@@ -50,7 +50,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionCallBack, CollectionListAdapter.OnItemClickListener {
+public class
+ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionCallBack, CollectionListAdapter.OnItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -210,25 +211,6 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
     public void itemDeleteClickListener(int position) {
         mList.remove(position);
         liebiaoAdapter.notifyDataSetChanged();
-    }
-
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-            helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(ShouCangActivity.this, ZuHousedetailsActivity.class));
-                }
-            });
-
-
-        }
     }
 
     @OnClick(R.id.back_img)

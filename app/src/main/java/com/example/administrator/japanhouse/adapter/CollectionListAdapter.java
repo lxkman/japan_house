@@ -66,7 +66,7 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
             viewHolder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    listener.itemDeleteClickListener(position);
                 }
             });
         }

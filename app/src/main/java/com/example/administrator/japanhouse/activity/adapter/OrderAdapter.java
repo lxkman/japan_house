@@ -1,4 +1,4 @@
-package com.example.administrator.japanhouse.activity;
+package com.example.administrator.japanhouse.activity.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.model.OrderBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +24,12 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter {
     private Activity activity;
     private List<OrderBean.DatasBean> datas;
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public OrderAdapter(Activity activity, List<OrderBean.DatasBean> datas) {
         this.activity = activity;
@@ -35,16 +43,44 @@ public class OrderAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OrderViewHolder) {
             OrderViewHolder viewHolder = (OrderViewHolder) holder;
-
+            if (datas.get(position).getImgUrl() != null) {
+                Glide.with(activity)
+                        .load(getList(datas.get(position).getImgUrl()).get(0))
+                        .into(viewHolder.icon);
+            }
             viewHolder.name.setText(MyApplication.isJapanese() ? datas.get(position).getTitleJpn() : datas.get(position).getTitleCn());
             viewHolder.address.setText(MyApplication.isJapanese() ? datas.get(position).getAddressJpn() : datas.get(position).getAddressCn());
             viewHolder.price.setText(MyApplication.isJapanese() ? datas.get(position).getPriceJpn() : datas.get(position).getPriceCn());
             viewHolder.room.setText(MyApplication.isJapanese() ? datas.get(position).getDoorTypeJpn() : datas.get(position).getDoorTypeCn());
             viewHolder.area.setText(MyApplication.isJapanese() ? datas.get(position).getAreaJpn() : datas.get(position).getAreaCn());
+
+            viewHolder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClickListener(datas.get(position));
+                }
+            });
+
+            viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemDeteleListener(position);
+                }
+            });
         }
+    }
+
+    private List<String> getList(String pic) {
+        String d[] = pic.split(",");
+        List<String> picList = new ArrayList();
+
+        for (int i = 0; i < d.length; i++) {
+            picList.add(d[i]);
+        }
+        return picList;
     }
 
     @Override
@@ -74,5 +110,10 @@ public class OrderAdapter extends RecyclerView.Adapter {
             layout = (LinearLayout) itemView.findViewById(R.id.content_ll);
             delete = (TextView) itemView.findViewById(R.id.shachu_tv);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClickListener(OrderBean.DatasBean bean);
+        void onItemDeteleListener(int position);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
@@ -14,20 +13,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.activity.OrderAdapter;
+import com.example.administrator.japanhouse.activity.adapter.OrderAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.model.OrderBean;
 import com.example.administrator.japanhouse.presenter.OrderPresenter;
-import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
@@ -37,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DingDanActivity extends BaseActivity implements OrderPresenter.OrderCallBack {
+public class DingDanActivity extends BaseActivity implements OrderPresenter.OrderCallBack, OrderAdapter.OnItemClickListener {
     @BindView(R.id.back_img)
     ImageView backImg;
     @BindView(R.id.mrecycler)
@@ -97,21 +90,17 @@ public class DingDanActivity extends BaseActivity implements OrderPresenter.Orde
 
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
+    @Override
+    public void onItemClickListener(OrderBean.DatasBean bean) {
+        Intent intent = new Intent(DingDanActivity.this, DingDan_DetilsActivity.class);
+        intent.putExtra("datas", bean);
+        startActivity(intent);
+    }
 
-        @Override
-        protected void convert(final BaseViewHolder helper, final String item) {
-            helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(DingDanActivity.this, DingDan_DetilsActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
+    @Override
+    public void onItemDeteleListener(int position) {
+        mList.remove(position);
+        liebiaoAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.back_img)

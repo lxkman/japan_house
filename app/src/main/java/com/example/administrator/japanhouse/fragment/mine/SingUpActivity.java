@@ -3,21 +3,27 @@ package com.example.administrator.japanhouse.fragment.mine;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.adapter.SingUpAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.model.SingUpBean;
+import com.example.administrator.japanhouse.presenter.SingUpPresenter;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.model.Response;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
@@ -27,83 +33,97 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SingUpActivity extends BaseActivity {
+public class SingUpActivity extends BaseActivity implements SingUpPresenter.SingUpCallBack, SingUpAdapter.OnItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
     @BindView(R.id.mrecycler)
     SwipeMenuRecyclerView mrecycler;
-    private List<String> mList=new ArrayList();
-    private LiebiaoAdapter liebiaoAdapter;
+    private List<SingUpBean.DatasBean> mList = new ArrayList();
+    private SingUpAdapter adapter;
+
+    private SingUpPresenter presenter;
+    private SpringView springView;
+    private int page = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
         ButterKnife.bind(this);
-        initData();
-    }
 
-    private void initData() {
-        if (mList.size()<=0){
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_singup,mList);
+        presenter = new SingUpPresenter(this, this);
+
+        adapter = new SingUpAdapter(this, mList);
         mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mrecycler.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
 
-        // 设置监听器。
-        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
+        springView = (SpringView) findViewById(R.id.act_singUp_springView);
 
-        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+        springView.setType(SpringView.Type.FOLLOW);
+        springView.setListener(new SpringView.OnFreshListener() {
             @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                mList.remove( menuBridge.getAdapterPosition());
-                menuBridge.closeMenu();
-                liebiaoAdapter.notifyDataSetChanged();
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mList.clear();
+                        page = 1;
+                        presenter.getSingUpList(MyApplication.getUserToken(), page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        page++;
+                        presenter.getSingUpList(MyApplication.getUserToken(), page);
+                    }
+                }, 0);
+                springView.onFinishFreshAndLoad();
             }
         });
-        mrecycler.setAdapter(liebiaoAdapter);
+        springView.setFooter(new DefaultFooter(this));
+        springView.setHeader(new DefaultHeader(this));
+
+        presenter.getSingUpList(MyApplication.getUserToken(), page);
+    }
+
+    @Override
+    public void getSingUpList(Response<SingUpBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                mList.addAll(response.body().getDatas());
+            } else {
+                page--;
+            }
+
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void deteleSingUp(Response<NoDataBean> response) {
 
     }
-    // 创建菜单:
-    SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-//            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
-//            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
-            SwipeMenuItem deleteItem = new SwipeMenuItem(SingUpActivity.this); // 各种文字和图标属性设置。
-            deleteItem.setWeight(100);
-            deleteItem.setHeight(380);
-            deleteItem.setText("   删除   ");
-            deleteItem.setTextSize(14);
-            deleteItem.setBackgroundColor(getResources().getColor(R.color.red1));
-            deleteItem.setTextColor(Color.WHITE);
-            rightMenu.addMenuItem(deleteItem); // 在Item右侧添加一个菜单。
-            // 注意:哪边不想要菜单,那么不要添加即可。
-        }
-    };
 
+    @Override
+    public void onItemDeteleListener(int position, String sId) {
+        mList.remove(position);
+        adapter.notifyDataSetChanged();
+        presenter.deteleSingUp(sId, MyApplication.getUserToken());
+    }
 
-
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId,data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper,String item) {
-            helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(SingUpActivity.this,SingUpDetailsActivity.class));
-                }
-            });
-        }
+    @Override
+    public void onItemClickListener(SingUpBean.DatasBean bean) {
+        Intent intent = new Intent(SingUpActivity.this, SingUpDetailsActivity.class);
+        intent.putExtra("datas", bean);
+        startActivity(intent);
     }
 
     @OnClick(R.id.back_img)

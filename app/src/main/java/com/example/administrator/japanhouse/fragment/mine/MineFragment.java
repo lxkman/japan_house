@@ -16,11 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.activity.MineRecordAdapter;
+import com.example.administrator.japanhouse.activity.adapter.MineRecordAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
@@ -31,7 +30,6 @@ import com.example.administrator.japanhouse.presenter.MinePresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.view.CircleImageView;
-import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
 

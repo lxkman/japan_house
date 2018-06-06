@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 
 import java.util.ArrayList;
@@ -17,17 +19,13 @@ import java.util.List;
 
 public class DingDan_Adapter extends RecyclerView.Adapter<DingDan_Adapter.ViewHolder> {
     private Context context;
-   List<String> list=new ArrayList<>();
-    public DingDan_Adapter(Context context) {
+    List<String> list = new ArrayList<>();
+
+    public DingDan_Adapter(Context context, List<String> list) {
         this.context = context;
-        data();
+        this.list = list;
     }
 
-    private void data() {
-        for (int i=0;i<5;i++){
-            list.add("");
-        }
-    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.dingdan_adapter, parent, false);
@@ -37,7 +35,9 @@ public class DingDan_Adapter extends RecyclerView.Adapter<DingDan_Adapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Glide.with(context)
+                .load(list.get(position))
+                .into(holder.imag);
     }
 
     @Override
@@ -45,10 +45,11 @@ public class DingDan_Adapter extends RecyclerView.Adapter<DingDan_Adapter.ViewHo
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imag;
         public View view;
+
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;

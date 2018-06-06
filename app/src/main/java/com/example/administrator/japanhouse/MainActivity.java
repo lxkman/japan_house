@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.administrator.japanhouse.activity.FragPagerAdapter;
+import com.example.administrator.japanhouse.activity.adapter.FragPagerAdapter;
 import com.example.administrator.japanhouse.activity.NoScrollViewPager;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;

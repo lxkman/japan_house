@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.adapter.AgentListAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 
 import butterknife.BindView;

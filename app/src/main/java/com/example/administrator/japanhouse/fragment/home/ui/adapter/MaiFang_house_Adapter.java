@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -127,13 +129,13 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
         public TextView weizhi;
         public TextView juli;
         public TextView mianji;
-        public View view;
+        public RelativeLayout view;
         TextView stateZh;
         TextView stateJa;
 
         public Viewholder(View itemView) {
             super(itemView);
-            view = itemView;
+            view = (RelativeLayout) itemView.findViewById(R.id.content_ll);
             sell_img = (ImageView) itemView.findViewById(R.id.rent_house_icon);
             weizhi = (TextView) itemView.findViewById(R.id.weizhi);
             juli = (TextView) itemView.findViewById(R.id.juli);

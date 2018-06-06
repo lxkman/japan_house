@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,8 +18,13 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.bumptech.glide.Glide;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.model.UserInfo;
+import com.example.administrator.japanhouse.presenter.UserPresenter;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.BaseSelectPopupWindow;
@@ -28,6 +34,7 @@ import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.lzy.okgo.model.Response;
 import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
@@ -41,7 +48,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyDataActivity extends BaseActivity implements View.OnClickListener {
+public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -73,11 +80,19 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     private BaseSelectPopupWindow popWiw;// 昵称 编辑框
     private TimePickerView pvCustomLunar;
 
+    private UserPresenter presenter;
+
+    private int mSex;
+    private String mBirthday;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
         ButterKnife.bind(this);
+
+        presenter = new UserPresenter(this, this);
+
         llWoman.setOnClickListener(this);
         llMan.setOnClickListener(this);
         backImg.setOnClickListener(this);
@@ -86,6 +101,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         tvBirthday.setOnClickListener(this);
         initLunarPicker();//初始化时间选择器
         initListener();
+
+        presenter.getUserInfo(MyApplication.getUserToken());
     }
 
     private void initListener() {
@@ -124,10 +141,12 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             case R.id.ll_woman:
                 cbWoman.setChecked(true);
                 cbMan.setChecked(false);
+                mSex = 1;
                 break;
             case R.id.ll_man:
                 cbMan.setChecked(true);
                 cbWoman.setChecked(false);
+                mSex = 0;
                 break;
             case R.id.back_img:
                 SoftKeyboardTool.closeKeyboard(this);
@@ -309,6 +328,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     return;
                 }*/
                 tvBirthday.setText(getTime(date));
+                mBirthday = getTime(date);
                 //                requestEditInfo(BIRTHDAY, getTime(date));
             }
         })
@@ -356,4 +376,49 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     }
 
 
+    @Override
+    public void getUserInfo(Response<UserInfo> response) {
+        UserInfo.DatasBean datasBean = response.body().getDatas();
+        if (!TextUtils.isEmpty(datasBean.getSex())) {
+            if (TextUtils.equals(datasBean.getSex(), "1")) {
+                cbWoman.setChecked(true);
+                cbMan.setChecked(false);
+                mSex = 1;
+            } else {
+                cbMan.setChecked(true);
+                cbWoman.setChecked(false);
+                mSex = 0;
+            }
+        }
+
+        if (!TextUtils.isEmpty(datasBean.getPic())) {
+            Glide.with(this)
+                    .load(datasBean.getPic())
+                    .into(ivHead);
+        }
+
+        if (!TextUtils.isEmpty(datasBean.getNickname())) {
+            et_name.setText(datasBean.getNickname());
+        }
+
+        if (datasBean.getBirthday() != 0) {
+            tvBirthday.setText(getTime(new Date(datasBean.getBirthday())));
+            mBirthday = tvBirthday.getText().toString();
+        }
+
+        if (!TextUtils.isEmpty(datasBean.getPhone())) {
+            tvPhone.setText(datasBean.getPhone());
+        }
+    }
+
+    @Override
+    public void finish() {
+        presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday);
+        super.finish();
+    }
+
+    @Override
+    public void updateUserInfo(Response<NoDataBean> response) {
+
+    }
 }

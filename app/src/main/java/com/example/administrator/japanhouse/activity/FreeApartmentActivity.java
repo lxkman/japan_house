@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -61,8 +63,6 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
     private FreeApartmentPresenter presenter;
     private int pageNo = 1;
     private List<FreeApartmentBean.DatasBean> datas = new ArrayList<>();
-
-    private long second;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -202,6 +202,20 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
         ShowCallDialog(tel);
     }
 
+    @Override
+    public void onItemDeteleClickListener(int position) {
+        datas.remove(position);
+
+        if (datas.size() > 0) {
+            long days = (datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) / (1000 * 60 * 60 * 24);
+            long hours = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+            long minutes = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
+            long second = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60) - minutes * 1000 * 60) ;
+            cancelTimer();
+            startTimer(second + 1000L);
+        }
+    }
+
     public static void invoke(Context context) {
         Intent intent = new Intent(context, FreeApartmentActivity.class);
         context.startActivity(intent);
@@ -215,15 +229,14 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
                 long days = (datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) / (1000 * 60 * 60 * 24);
                 long hours = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
                 long minutes = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
-                second = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60) - minutes * 1000 * 60) ;
+                long second = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60) - minutes * 1000 * 60) ;
+                cancelTimer();
+                startTimer(second + 1000L);
+                freeApartmentAdapter.notifyDataSetChanged();
             } else {
                 pageNo --;
             }
         }
-        freeApartmentAdapter.notifyDataSetChanged();
-
-        cancelTimer();
-        startTimer(second + 1000L);
     }
 
     @Override
@@ -259,6 +272,7 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
         @Override
         public void onTick(long millisUntilFinished) {
             long time = millisUntilFinished / 1000L;
+            Log.e("==========>>>", millisUntilFinished + "--+++--" + time);
             for (int i = 0; i < datas.size(); i++) {
                 datas.get(i).setCurrentTime(datas.get(i).getCurrentTime() + 1000L);
             }

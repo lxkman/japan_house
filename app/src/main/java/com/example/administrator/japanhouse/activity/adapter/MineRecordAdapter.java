@@ -1,4 +1,4 @@
-package com.example.administrator.japanhouse.activity;
+package com.example.administrator.japanhouse.activity.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

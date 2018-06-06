@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.activity.SimpleBaseAdapter;
+import com.example.administrator.japanhouse.activity.adapter.SimpleBaseAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.utils.flow;
 import com.example.administrator.japanhouse.utils.CacheUtils;

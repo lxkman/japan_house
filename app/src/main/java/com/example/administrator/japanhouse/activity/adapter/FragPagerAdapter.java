@@ -1,4 +1,4 @@
-package com.example.administrator.japanhouse.activity;
+package com.example.administrator.japanhouse.activity.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

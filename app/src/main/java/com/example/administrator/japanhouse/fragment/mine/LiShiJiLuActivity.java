@@ -15,7 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.activity.HouseHistoryAdapter;
+import com.example.administrator.japanhouse.activity.adapter.HouseHistoryAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;

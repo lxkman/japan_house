@@ -410,6 +410,7 @@
             android:screenOrientation="portrait"
             />
         <activity android:name=".fragment.comment.BannerDetailsActivity"></activity>
+        <activity android:name=".activity.FreeApartmentDetailsActivity"></activity>
     </application>
 
 </manifest>

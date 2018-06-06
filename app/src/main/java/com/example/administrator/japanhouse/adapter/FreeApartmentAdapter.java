@@ -22,6 +22,7 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.model.FreeApartmentBean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +68,10 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
 
             long l = list.get(i).getEndTime() - list.get(i).getCurrentTime();
 
+            if (l <= 0) {
+                onClickListener.onItemDeteleClickListener(i);
+            }
+
             long days = l / (1000 * 60 * 60 * 24);
             long hours = (l - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
             long minutes = (l - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
@@ -92,7 +97,7 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
             holder.tvPrices.setText(spannableStringBuilder);
 
             Glide.with(activity)
-                    .load(list.get(i).getImages())
+                    .load(getList(list.get(i).getImages()).get(0))
                     .into(holder.icon);
 
             holder.tvNum.setText(String.format(activity.getString(R.string.item_apartment_people), list.get(i).getPeopleCount()));
@@ -114,6 +119,16 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
             });
 
         }
+    }
+
+    private List<String> getList(String pic) {
+        String d[] = pic.split(",");
+        List<String> picList = new ArrayList();
+
+        for (int i = 0; i < d.length; i++) {
+            picList.add(d[i]);
+        }
+        return picList;
     }
 
     @Override
@@ -146,6 +161,8 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
         void onSignUpClickListener(int actionId);
 
         void onCallClickListener(String tel);
+
+        void onItemDeteleClickListener(int position);
     }
 
 }

@@ -7,7 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,21 +15,32 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HouseDetailsBean;
+import com.example.administrator.japanhouse.bean.OldHouseListBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.TuanDiMoreActivity;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -71,12 +82,44 @@ public class XiaoQuDetailsActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.tv_See_More)
     TextView tv_See_More;
+    @BindView(R.id.tv_details_price)
+    TextView tvDetailsPrice;
+    @BindView(R.id.tv_details_area)
+    TextView tvDetailsArea;
+    @BindView(R.id.tv_details_huxing)
+    TextView tvDetailsHuxing;
+    @BindView(R.id.tv_details_chaoxiang)
+    TextView tvDetailsChaoxiang;
+    @BindView(R.id.tv_details_location)
+    TextView tvDetailsLocation;
+    @BindView(R.id.xiaoqu_wl)
+    TextView xiaoquWl;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
+    @BindView(R.id.tv_details_name)
+    TextView tvDetailsName;
+    @BindView(R.id.tv_details_manager_head)
+    CircleImageView tvDetailsManagerHead;
+    @BindView(R.id.tv_details_manager_name)
+    TextView tvDetailsManagerName;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
-    private MyAdapter myAdapter;
+    private ZuHousedetailsActivity.MyAdapter myAdapter;
+    private String houseType;
+    private HouseDetailsBean.DatasBean datas;
+    private boolean isJa;
+    private int mType;
+    private String houseId;
+    private String token;
+    private int isSc;
+    private boolean isStart;
+    private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist;
+    private List<HouseDetailsBean.DatasBean.HxtlistBean> hxtlist;
+    private List<String> mUrlList = new ArrayList();
+    private List<View> mBannerList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,23 +129,52 @@ public class XiaoQuDetailsActivity extends BaseActivity {
         UltimateBar ultimateBar = new UltimateBar(this);
         ultimateBar.setImmersionBar(false);
         ButterKnife.bind(this);
-        initData();
-        initViewPager();
+        initDetailsNet();
         //猜你喜欢
         initLoveRecycler();
         initScroll();
-        findViewById(R.id.xiaoqu_wl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(XiaoQuDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(XiaoQuDetailsActivity.this, "123456", getString(R.string.act_chat_title));
-                }
-            }
-        });
 
+
+    }
+
+    private void initDetailsNet() {
+        token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
+        houseId = getIntent().getStringExtra("houseId");
+        HttpParams params = new HttpParams();
+        params.put("hId", houseId);
+        params.put("hType", 2);
+        params.put("token", token);
+        OkGo.<HouseDetailsBean>post(MyUrls.BASEURL + "/app/houseresourse/houseinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<HouseDetailsBean>(this, HouseDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<HouseDetailsBean> response) {
+                        int code = response.code();
+                        HouseDetailsBean oldHouseListBean = response.body();
+                        datas = oldHouseListBean.getDatas();
+                        bannerlist = datas.getBannerlist();
+                        hxtlist = datas.getHxtlist();
+                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        boolean isJa = MyUtils.isJa();
+                        tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
+                        tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
+                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                        Glide.with(XiaoQuDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                        isSc = datas.getIsSc();
+                        if (isSc == 0) {//收藏
+                            isStart = true;
+                            imgStart.setImageResource(R.drawable.shoucang2);
+                        } else {//未收藏
+                            isStart = false;
+                            imgStart.setImageResource(R.drawable.shoucang);
+                        }
+                        initViewPager();
+                        initData();
+                    }
+                });
     }
 
     public void setMyExtensionModule() {
@@ -121,6 +193,7 @@ public class XiaoQuDetailsActivity extends BaseActivity {
             }
         }
     }
+
     private void initScroll() {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -146,17 +219,61 @@ public class XiaoQuDetailsActivity extends BaseActivity {
             }
         });
     }
+
     private void initViewPager() {
-        if (mBaseFragmentList.size() <= 0) {
-//            mBaseFragmentList.add(new VidioFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
+        if (mBannerList.size() <= 0) {
+            if (datas.getVideoUrls() != null) {
+                if (datas.getVideoUrls().equals("")) {
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i).getVal() + "");
+                    }
+                } else {
+                    mUrlList.add(datas.getVideoImgs());
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i).getVal() + "");
+                    }
+                }
+            }
+            for (int i = 0; i < mUrlList.size(); i++) {
+                View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                ImageView imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
+                RelativeLayout rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
+                Glide.with(this).load(mUrlList.get(i)).into(img_banner);
+                mBannerList.add(inflate);
+                if (i == 0 && !datas.getVideoUrls().equals("")) {
+                    imgStartVideo.setVisibility(View.VISIBLE);
+                } else {
+                    imgStartVideo.setVisibility(View.GONE);
+                }
+                final int finalI = i;
+                rela_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (finalI == 0 && !datas.getVideoUrls().equals("")) {
+                            Intent intent = new Intent(mContext, VideoDetailsActivity.class);
+                            intent.putExtra("VideoUrl", datas.getVideoUrls() + "");
+                            intent.putExtra("VideoImg", datas.getVideoImgs() + "");
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(mContext, BannerDetailsActivity.class);
+                            intent.putExtra("datas", datas);
+                            if (datas.getVideoUrls().equals("")) {
+                                intent.putExtra("position", finalI + "");
+                            } else {
+                                intent.putExtra("position", (finalI - 1) + "");
+                            }
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+            }
+
+
         }
-        tvAllNum.setText(mBaseFragmentList.size() + "");
-        fm = getSupportFragmentManager();
-        myAdapter = new MyAdapter(fm);
-        vpVidio.setAdapter(myAdapter);
+        tvAllNum.setText(mBannerList.size() + "");
+        vpVidio.setAdapter(adapter);
         vpVidio.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -164,11 +281,14 @@ public class XiaoQuDetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
+
                 tvToNum.setText((position + 1) + "");
                 if (position == 1) {
-                    JZVideoPlayer.releaseAllVideos();
+
+                } else if (position == 0) {
                 }
+
             }
 
             @Override
@@ -178,29 +298,95 @@ public class XiaoQuDetailsActivity extends BaseActivity {
         });
     }
 
-    private void initLoveRecycler() {
-        if (loveAdapter == null) {
-            loveAdapter = new LoveAdapter(R.layout.item_zuijin, mList);
+    //需要给ViewPager设置适配器
+    PagerAdapter adapter = new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            // TODO Auto-generated method stub
+            return arg0 == arg1;
         }
-        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        loveRecycler.setNestedScrollingEnabled(false);
-        loveRecycler.setAdapter(loveAdapter);
-        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(XiaoQuDetailsActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        //有多少个切换页
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return mBannerList.size();
+        }
+
+        //对超出范围的资源进行销毁
+        @Override
+        public void destroyItem(ViewGroup container, int position,
+                                Object object) {
+            // TODO Auto-generated method stub
+            container.removeView(mBannerList.get(position));
+        }
+
+        //对显示的资源进行初始化
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // TODO Auto-generated method stub
+            container.addView(mBannerList.get(position));
+            return mBannerList.get(position);
+        }
+
+    };
+
+    private void initLoveRecycler() {
+        isJa = MyUtils.isJa();
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
+        }
+        params.put("hType","6");
+        params.put("pageNo","1");
+        params.put("cId",2);
+        OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<OldHouseListBean>(XiaoQuDetailsActivity.this, OldHouseListBean.class) {
+                    @Override
+                    public void onSuccess(Response<OldHouseListBean> response) {
+                        int code = response.code();
+                        final OldHouseListBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
+                        List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        if (loveAdapter == null) {
+                            loveAdapter = new LoveAdapter(R.layout.item_zuijin, datas);
+                        }
+                        loveRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                        loveRecycler.setNestedScrollingEnabled(false);
+                        loveRecycler.setAdapter(loveAdapter);
+                        loveAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(XiaoQuDetailsActivity.this, ZuHousedetailsActivity.class);
+                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId()+"");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
     }
 
-    class LoveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LoveAdapter extends BaseQuickAdapter<OldHouseListBean.DatasBean, BaseViewHolder> {
 
-        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<OldHouseListBean.DatasBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
+            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
+            helper.setText(R.id.tv_price,isJa?item.getPriceJpn():item.getPriceCn());
+            Glide.with(XiaoQuDetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 
@@ -219,32 +405,22 @@ public class XiaoQuDetailsActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-
+        findViewById(R.id.xiaoqu_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(XiaoQuDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(XiaoQuDetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
     }
 
 
-    class MyAdapter extends FragmentStatePagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
 
-        @Override
-        public Fragment getItem(int position) {
-            return mBaseFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mBaseFragmentList.size();
-        }
-    }
-
-    @OnClick({R.id.img_share, R.id.img_start,R.id.back_img,R.id.tv_See_More})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
@@ -257,16 +433,18 @@ public class XiaoQuDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_See_More:
-                Intent intent=new Intent(XiaoQuDetailsActivity.this, TuanDiMoreActivity.class);
+                Intent intent = new Intent(XiaoQuDetailsActivity.this, TuanDiMoreActivity.class);
+                intent.putExtra("datas", datas);
                 startActivity(intent);
                 break;
         }
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_share)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_share)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置

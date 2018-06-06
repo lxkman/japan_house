@@ -30,10 +30,11 @@ public class BannerDetailsActivity extends BaseActivity {
     TextView tvNum;
     @BindView(R.id.tv_all_num)
     TextView tvAllNum;
-    private HouseDetailsBean.DatasBean datas;
+    private List<String> bannerlist;
     private List<View> mBannerList = new ArrayList<>();
-    private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist;
     private String position;
+    private HouseDetailsBean.DatasBean datas;
+    private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +43,44 @@ public class BannerDetailsActivity extends BaseActivity {
         ButterKnife.bind(this);
         position = getIntent().getStringExtra("position");
         datas = (HouseDetailsBean.DatasBean) getIntent().getSerializableExtra("datas");
-        bannerlist = datas.getBannerlist();
+        bannerlist = (List<String>) getIntent().getSerializableExtra("bannerlist");
+        if (datas!=null){
+            bannerlist1 = datas.getBannerlist();
+        }
         initVpBanner();
     }
 
     private void initVpBanner() {
-        int screenWidth = MyUtils.getScreenWidth(BannerDetailsActivity.this);
-
-        for (int i = 0; i < bannerlist.size(); i++) {
-            View inflate = View.inflate(mContext, R.layout.banner_layout, null);
-            ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
-            //设置图片参数
-            ViewGroup.LayoutParams layoutParams = img_banner.getLayoutParams();
-            layoutParams.width = screenWidth;
-            layoutParams.height = (int) (screenWidth*0.7);
-            img_banner.setLayoutParams(layoutParams);
-            Glide.with(this).load(bannerlist.get(i).getVal()).into(img_banner);
-            mBannerList.add(inflate);
+        if (bannerlist!=null) {
+            int screenWidth = MyUtils.getScreenWidth(BannerDetailsActivity.this);
+            for (int i = 0; i < bannerlist.size(); i++) {
+                View inflate = View.inflate(mContext, R.layout.banner_layout, null);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                //设置图片参数
+                ViewGroup.LayoutParams layoutParams = img_banner.getLayoutParams();
+                layoutParams.width = screenWidth;
+                layoutParams.height = (int) (screenWidth * 0.7);
+                img_banner.setLayoutParams(layoutParams);
+                Glide.with(this).load(bannerlist.get(i)).into(img_banner);
+                mBannerList.add(inflate);
+            }
+            tvAllNum.setText(bannerlist.size()+"");
+        }else {
+            int screenWidth = MyUtils.getScreenWidth(BannerDetailsActivity.this);
+            for (int i = 0; i < bannerlist1.size(); i++) {
+                View inflate = View.inflate(mContext, R.layout.banner_layout, null);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                //设置图片参数
+                ViewGroup.LayoutParams layoutParams = img_banner.getLayoutParams();
+                layoutParams.width = screenWidth;
+                layoutParams.height = (int) (screenWidth * 0.7);
+                img_banner.setLayoutParams(layoutParams);
+                Glide.with(this).load(bannerlist1.get(i).getVal()).into(img_banner);
+                mBannerList.add(inflate);
+            }
+            tvAllNum.setText(bannerlist1.size()+"");
         }
 
-        tvAllNum.setText(bannerlist.size()+"");
         tvNum.setText(Integer.parseInt(position)+1 + "");
         vpBanner.setAdapter(adapter);
         vpBanner.setCurrentItem(Integer.parseInt(position));

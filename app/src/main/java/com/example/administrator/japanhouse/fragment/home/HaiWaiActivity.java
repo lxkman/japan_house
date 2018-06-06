@@ -52,6 +52,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
     private int[] itemPic = {R.drawable.aodaliya_iv, R.drawable.meiguo_iv, R.drawable.jianada_iv,
             R.drawable.yingguo_iv, R.drawable.taiguo_iv, R.drawable.xinxilan_iv};
     private boolean isJa;
+    private List<ChinaListBean.DatasEntity> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +116,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
                         if (chinaListBean == null) {
                             return;
                         }
-                        List<ChinaListBean.DatasEntity> datas = chinaListBean.getDatas();
+                        datas = chinaListBean.getDatas();
                         if (datas != null && datas.size() > 0) {
                             LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_sydc_like, datas);
                             likeRecycler.setAdapter(likeAdapter);
@@ -141,7 +142,9 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext, HaiWaiDetailsActivity.class));
+        Intent intent=new Intent(mContext, HaiWaiDetailsActivity.class);
+        intent.putExtra("houseId",datas.get(position).getId()+"");
+        startActivity(intent);
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<ChinaCityItemBean.DatasEntity, BaseViewHolder> {

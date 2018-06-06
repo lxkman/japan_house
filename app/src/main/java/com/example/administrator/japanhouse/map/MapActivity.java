@@ -122,12 +122,16 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
 
             @Override
             public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+                LatLng location = poiDetailResult.getLocation();
+                double latitude = location.latitude;
+                double longitude = location.longitude;
+                Log.d("MapActivity", "latitude:" + latitude+"-------");
+                Log.d("MapActivity", "longitude:" + longitude+"-------");
 
             }
 
             @Override
             public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-
             }
 
 

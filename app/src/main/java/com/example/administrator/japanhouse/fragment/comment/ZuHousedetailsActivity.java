@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +18,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -116,7 +118,20 @@ public class ZuHousedetailsActivity extends BaseActivity {
     private String token;
     private int isSc;
     private boolean isStart;
-
+    private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist;
+    private List<HouseDetailsBean.DatasBean.HxtlistBean> hxtlist;
+    private List<String> mUrlList = new ArrayList();
+    private List<View> mBannerList = new ArrayList<>();
+    //头部 添加相应地区
+    private final static String BAIDU_HEAD = "baidumap://map/direction?region=0";
+    //起点的经纬度
+    private final static String BAIDU_ORIGIN = "&origin=";
+    //终点的经纬度
+    private final static String BAIDU_DESTINATION = "&destination=";
+    //路线规划方式
+    private final static String BAIDU_MODE = "&mode=walking";
+    //百度地图的包名
+    private final static String BAIDU_PKG = "com.baidu.BaiduMap";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,28 +164,12 @@ public class ZuHousedetailsActivity extends BaseActivity {
                     break;
             }
         }
-        Log.d("ZuHousedetailsActivity", mType+"----------------");
-        Log.d("ZuHousedetailsActivity", houseType+"----------------");
-        if (!TextUtils.isEmpty(iszu) && iszu.equals("iszu")) {
-            tv_price.setText("1750元/月");
-        }
-        initData();
-        initViewPager();
+
         //猜你喜欢
         initLoveRecycler();
         initScroll();
         initDetailsNet();
-        findViewById(R.id.lishi_zu_wl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(ZuHousedetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(ZuHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
-                }
-            }
-        });
+
 
     }
 
@@ -190,6 +189,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
                         int code = response.code();
                         HouseDetailsBean oldHouseListBean = response.body();
                         datas = oldHouseListBean.getDatas();
+                        bannerlist = datas.getBannerlist();
+                        hxtlist = datas.getHxtlist();
                         HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
                         boolean isJa = MyUtils.isJa();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
@@ -206,6 +207,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
                             isStart=false;
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
+                        initViewPager();
+                        initData();
                     }
                 });
     }
@@ -263,6 +266,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
         }
         params.put("hType",mType);
         params.put("pageNo","1");
+        params.put("cId",2);
             OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
                 .tag(this)
                 .params(params)
@@ -285,7 +289,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(ZuHousedetailsActivity.this, ZuHousedetailsActivity.class);
-                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId());
+                                intent.putExtra("houseId",oldHouseListBean.getDatas().get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });
@@ -312,16 +316,59 @@ public class ZuHousedetailsActivity extends BaseActivity {
     }
 
     private void initViewPager() {
-        if (mBaseFragmentList.size() <= 0) {
-            //            mBaseFragmentList.add(new VidioFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
+        if (mBannerList.size() <= 0) {
+            if (datas.getVideoUrls() != null) {
+                if (datas.getVideoUrls().equals("")) {
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i).getVal() + "");
+                    }
+                } else {
+                    mUrlList.add(datas.getVideoImgs());
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i).getVal() + "");
+                    }
+                }
+            }
+            for (int i = 0; i < mUrlList.size(); i++) {
+                View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                ImageView imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
+                RelativeLayout rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
+                Glide.with(this).load(mUrlList.get(i)).into(img_banner);
+                mBannerList.add(inflate);
+                if (i == 0 && !datas.getVideoUrls().equals("")) {
+                    imgStartVideo.setVisibility(View.VISIBLE);
+                } else {
+                    imgStartVideo.setVisibility(View.GONE);
+                }
+                final int finalI = i;
+                rela_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (finalI == 0 && !datas.getVideoUrls().equals("")) {
+                            Intent intent = new Intent(mContext, VideoDetailsActivity.class);
+                            intent.putExtra("VideoUrl", datas.getVideoUrls() + "");
+                            intent.putExtra("VideoImg", datas.getVideoImgs() + "");
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(mContext, BannerDetailsActivity.class);
+                            intent.putExtra("datas", datas);
+                            if (datas.getVideoUrls().equals("")) {
+                                intent.putExtra("position", finalI + "");
+                            } else {
+                                intent.putExtra("position", (finalI - 1) + "");
+                            }
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+            }
+
+
         }
-        tvAllNum.setText(mBaseFragmentList.size() + "");
-        fm = getSupportFragmentManager();
-        myAdapter = new MyAdapter(fm);
-        vpVidio.setAdapter(myAdapter);
+        tvAllNum.setText(mBannerList.size() + "");
+        vpVidio.setAdapter(adapter);
         vpVidio.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -329,11 +376,14 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
+
                 tvToNum.setText((position + 1) + "");
                 if (position == 1) {
-                    JZVideoPlayer.releaseAllVideos();
+
+                } else if (position == 0) {
                 }
+
             }
 
             @Override
@@ -342,6 +392,40 @@ public class ZuHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
+    //需要给ViewPager设置适配器
+    PagerAdapter adapter = new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            // TODO Auto-generated method stub
+            return arg0 == arg1;
+        }
+
+        //有多少个切换页
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return mBannerList.size();
+        }
+
+        //对超出范围的资源进行销毁
+        @Override
+        public void destroyItem(ViewGroup container, int position,
+                                Object object) {
+            // TODO Auto-generated method stub
+            container.removeView(mBannerList.get(position));
+        }
+
+        //对显示的资源进行初始化
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // TODO Auto-generated method stub
+            container.addView(mBannerList.get(position));
+            return mBannerList.get(position);
+        }
+
+    };
 
     @Override
     public void onBackPressed() {
@@ -358,15 +442,21 @@ public class ZuHousedetailsActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
+        findViewById(R.id.lishi_zu_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(ZuHousedetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(ZuHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
 
 
         if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, mList);
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, hxtlist);
         }
         HuxingRecycler.setLayoutManager(new GridLayoutManager(ZuHousedetailsActivity.this, 3));
         HuxingRecycler.setNestedScrollingEnabled(false);
@@ -374,9 +464,28 @@ public class ZuHousedetailsActivity extends BaseActivity {
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(ZuHousedetailsActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
+                showHuxingDialog(position);
             }
         });
+    }
+    private void showHuxingDialog(int position) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_huxingtu)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(Gravity.CENTER)
+                //设置动画
+                .setAnimation(R.style.Alpah_aniamtion)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        ImageView img_dialog_huxing = (ImageView) dialog.findViewById(R.id.img_dialog_huxing);
+        Glide.with(ZuHousedetailsActivity.this).load(hxtlist.get(position).getVal()).into(img_dialog_huxing);
     }
 
 
@@ -565,14 +674,16 @@ public class ZuHousedetailsActivity extends BaseActivity {
         });
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<HouseDetailsBean.DatasBean.HxtlistBean, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<HouseDetailsBean.DatasBean.HxtlistBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, HouseDetailsBean.DatasBean.HxtlistBean item) {
+            Glide.with(ZuHousedetailsActivity.this).load(item.getVal()).into((ImageView) helper.getView(R.id.img_huxing));
+
         }
     }
 }

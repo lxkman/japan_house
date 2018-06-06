@@ -148,6 +148,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     private boolean isStart;
     private List<HouseDetailsBean.DatasBean.BannerlistBean> bannerlist;
     private List<HouseDetailsBean.DatasBean.HxtlistBean> hxtlist;
+    private List<String> mUrlList = new ArrayList();
     //头部 添加相应地区
     private final static String BAIDU_HEAD = "baidumap://map/direction?region=0";
     //起点的经纬度
@@ -178,8 +179,6 @@ public class NewHousedetailsActivity extends BaseActivity {
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
-        Toast.makeText(mContext, houseId, Toast.LENGTH_SHORT).show();
-        Log.d("NewHousedetailsActivity", token+"--------------");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -201,7 +200,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                         datas = oldHouseListBean.getDatas();
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
-                        datas.getVideoImgs();
                         HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
@@ -315,7 +313,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         });
     }
 
-    private List<String> mUrlList = new ArrayList();
+
 
     private void initViewPager() {
         if (mBannerList.size() <= 0) {
@@ -460,12 +458,6 @@ public class NewHousedetailsActivity extends BaseActivity {
         });
 
 
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-
 
         if (mLiebiaoAdapter == null) {
             mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, hxtlist);
@@ -513,6 +505,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         }
         params.put("hType", 1);
         params.put("pageNo", "1");
+        params.put("cId",2);
         OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
                 .tag(this)
                 .params(params)
@@ -535,7 +528,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(NewHousedetailsActivity.this, NewHousedetailsActivity.class);
-                                intent.putExtra("houseId", oldHouseListBean.getDatas().get(position).getId());
+                                intent.putExtra("houseId", oldHouseListBean.getDatas().get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });
@@ -594,7 +587,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                     Toast.makeText(NewHousedetailsActivity.this,"百度地图已经安装",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent();
                     intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+"35.68"
-                            +","+"139.75"+BAIDU_DESTINATION+"40.05"+","+"116.30"
+                            +","+"139.75"+BAIDU_DESTINATION+datas.getLatitude()+","+datas.getLongitude()
                             +BAIDU_MODE));
                     startActivity(intent);
                 }else {

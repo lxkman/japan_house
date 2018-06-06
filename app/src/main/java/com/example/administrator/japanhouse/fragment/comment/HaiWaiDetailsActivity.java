@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,7 +46,9 @@ import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -119,6 +123,11 @@ public class HaiWaiDetailsActivity extends BaseActivity {
     private String token;
     private int isSc;
     private boolean isStart;
+    private List<View> mBannerList = new ArrayList<>();
+    private List<String> bannerlist;
+    private List<String> huxinglist;
+    private List<String> mUrlList = new ArrayList();
+    private String houseImgs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,23 +136,11 @@ public class HaiWaiDetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_hai_wai_details);
         ButterKnife.bind(this);
-        initData();
-        initViewPager();
-        //猜你喜欢
+
         initLoveRecycler();
         initScroll();
         initDetailsNet();
-        findViewById(R.id.haiwai_wl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(HaiWaiDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(HaiWaiDetailsActivity.this, "123456", getString(R.string.act_chat_title));
-                }
-            }
-        });
+
 
     }
     private void initDetailsNet() {
@@ -189,6 +186,8 @@ public class HaiWaiDetailsActivity extends BaseActivity {
                             isStart=false;
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
+                        initData();
+                        initViewPager();
                     }
                 });
     }
@@ -267,7 +266,7 @@ public class HaiWaiDetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(HaiWaiDetailsActivity.this, OldHousedetailsActivity.class);
-                                intent.putExtra("houseId",ChinaListBean.getDatas().get(position).getId());
+                                intent.putExtra("houseId",ChinaListBean.getDatas().get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });
@@ -293,16 +292,59 @@ public class HaiWaiDetailsActivity extends BaseActivity {
 
 
     private void initViewPager() {
-        if (mBaseFragmentList.size() <= 0) {
-//            mBaseFragmentList.add(new VidioFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
+        houseImgs = datas.getImgs();
+        String str2=houseImgs.replace("", "");//去掉所用空格
+        bannerlist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
+        if (mBannerList.size() <= 0) {
+            if (datas.getVideoUrls() != null) {
+                if (datas.getVideoUrls().equals("")) {
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i) + "");
+                    }
+                } else {
+                    mUrlList.add(datas.getVideoImgs());
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i) + "");
+                    }
+                }
+            }
+            for (int i = 0; i < mUrlList.size(); i++) {
+                View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                ImageView imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
+                RelativeLayout rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
+                Glide.with(this).load(mUrlList.get(i)).into(img_banner);
+                mBannerList.add(inflate);
+                if (i == 0 && !datas.getVideoUrls().equals("")) {
+                    imgStartVideo.setVisibility(View.VISIBLE);
+                } else {
+                    imgStartVideo.setVisibility(View.GONE);
+                }
+                final int finalI = i;
+                rela_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (finalI == 0 && !datas.getVideoUrls().equals("")) {
+                            Intent intent = new Intent(mContext, VideoDetailsActivity.class);
+                            intent.putExtra("VideoUrl", datas.getVideoUrls() + "");
+                            intent.putExtra("VideoImg", datas.getVideoImgs() + "");
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(mContext, BannerDetailsActivity.class);
+                            intent.putExtra("bannerlist", (Serializable) bannerlist);
+                            if (datas.getVideoUrls().equals("")) {
+                                intent.putExtra("position", finalI + "");
+                            } else {
+                                intent.putExtra("position", (finalI - 1) + "");
+                            }
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
         }
-        tvAllNum.setText(mBaseFragmentList.size() + "");
-        fm = getSupportFragmentManager();
-        myAdapter = new MyAdapter(fm);
-        vpVidio.setAdapter(myAdapter);
+        tvAllNum.setText(mBannerList.size() + "");
+        vpVidio.setAdapter(adapter);
         vpVidio.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -310,11 +352,14 @@ public class HaiWaiDetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
+
                 tvToNum.setText((position + 1) + "");
                 if (position == 1) {
-                    JZVideoPlayer.releaseAllVideos();
+
+                } else if (position == 0) {
                 }
+
             }
 
             @Override
@@ -323,6 +368,40 @@ public class HaiWaiDetailsActivity extends BaseActivity {
             }
         });
     }
+
+    //需要给ViewPager设置适配器
+    PagerAdapter adapter = new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            // TODO Auto-generated method stub
+            return arg0 == arg1;
+        }
+
+        //有多少个切换页
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return mBannerList.size();
+        }
+
+        //对超出范围的资源进行销毁
+        @Override
+        public void destroyItem(ViewGroup container, int position,
+                                Object object) {
+            // TODO Auto-generated method stub
+            container.removeView(mBannerList.get(position));
+        }
+
+        //对显示的资源进行初始化
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // TODO Auto-generated method stub
+            container.addView(mBannerList.get(position));
+            return mBannerList.get(position);
+        }
+
+    };
 
     @Override
     public void onBackPressed() {
@@ -339,25 +418,52 @@ public class HaiWaiDetailsActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
+        findViewById(R.id.haiwai_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(HaiWaiDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(HaiWaiDetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
 
-
+        String floorImg =  datas.getFloorImg();
+        String str2=floorImg.replace("", "");//去掉所用空格
+        huxinglist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
         if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, mList);
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, huxinglist);
         }
-        HuxingRecycler.setLayoutManager(new GridLayoutManager(HaiWaiDetailsActivity.this, 3));
+        HuxingRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
         HuxingRecycler.setNestedScrollingEnabled(false);
         HuxingRecycler.setAdapter(mLiebiaoAdapter);
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(HaiWaiDetailsActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
+                showHuxingDialog(position);
             }
         });
+    }
+    private void showHuxingDialog(int position) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_huxingtu)
+                //设置dialogpadding
+                .setPaddingdp(0, 0, 0, 0)
+                //设置显示位置
+                .setGravity(Gravity.CENTER)
+                //设置动画
+                .setAnimation(R.style.Alpah_aniamtion)
+                //设置dialog的宽高
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                //设置触摸dialog外围是否关闭
+                .isOnTouchCanceled(true)
+                //设置监听事件
+                .builder();
+        dialog.show();
+        ImageView img_dialog_huxing = (ImageView) dialog.findViewById(R.id.img_dialog_huxing);
+        Glide.with(HaiWaiDetailsActivity.this).load(huxinglist.get(position)).into(img_dialog_huxing);
     }
 
 
@@ -517,6 +623,8 @@ public class HaiWaiDetailsActivity extends BaseActivity {
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
+            Glide.with(HaiWaiDetailsActivity.this).load(item).into((ImageView) helper.getView(R.id.img_huxing));
+
         }
     }
 }

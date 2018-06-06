@@ -50,6 +50,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
     @BindView(R.id.rl_search)
     RelativeLayout rl_search;
     private boolean isJa;
+    private List<ChinaListBean.DatasEntity> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
                         if (chinaListBean == null) {
                             return;
                         }
-                        List<ChinaListBean.DatasEntity> datas = chinaListBean.getDatas();
+                        datas = chinaListBean.getDatas();
                         if (datas != null && datas.size() > 0) {
                             LikeAdapter likeAdapter = new LikeAdapter(R.layout.item_china_like, datas);
                             likeRecycler.setAdapter(likeAdapter);
@@ -139,7 +140,9 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        startActivity(new Intent(mContext, ZhongguoDetailsActivity.class));
+        Intent intent=new Intent(mContext, ZhongguoDetailsActivity.class);
+        intent.putExtra("houseId",datas.get(position).getId()+"");
+        startActivity(intent);
     }
 
     private class FenleiAdapter extends BaseQuickAdapter<ChinaCityItemBean.DatasEntity, BaseViewHolder> {

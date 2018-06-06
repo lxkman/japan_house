@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,7 +46,9 @@ import com.lzy.okgo.model.Response;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -118,6 +122,11 @@ public class TudidetailsActivity extends BaseActivity {
     private String token;
     private int isSc;
     private boolean isStart;
+    private List<View> mBannerList = new ArrayList<>();
+    private List<String> bannerlist;
+    private List<String> mUrlList = new ArrayList();
+    private String landImgs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,22 +136,11 @@ public class TudidetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         ButterKnife.bind(this);
         initData();
-        initViewPager();
+
         //猜你喜欢
         initLoveRecycler();
         initScroll();
         initDetailsNet();
-        findViewById(R.id.tudi_wl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(TudidetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(TudidetailsActivity.this, "123456", getString(R.string.act_chat_title));
-                }
-            }
-        });
 
     }
 
@@ -161,6 +159,8 @@ public class TudidetailsActivity extends BaseActivity {
                         int code = response.code();
                         TudiDetailsBean tudiDetailsBean = response.body();
                         datas = tudiDetailsBean.getDatas();
+                        landImgs = datas.getLandImgs();//轮播图
+                        Log.d("TudidetailsActivity", landImgs);
                         TudiDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
                         isJa = MyUtils.isJa();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
@@ -183,6 +183,7 @@ public class TudidetailsActivity extends BaseActivity {
                             isStart=false;
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
+                        initViewPager();
                     }
                 });
     }
@@ -230,16 +231,61 @@ public class TudidetailsActivity extends BaseActivity {
         });
     }
     private void initViewPager() {
-        if (mBaseFragmentList.size() <= 0) {
-//            mBaseFragmentList.add(new VidioFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
-            mBaseFragmentList.add(new BannerFragment());
+        String str2=landImgs.replace("", "");//去掉所用空格
+        bannerlist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
+        if (mBannerList.size() <= 0) {
+            if (datas.getVideoUrls() != null) {
+                if (datas.getVideoUrls().equals("")) {
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i) + "");
+                    }
+                } else {
+                    mUrlList.add(datas.getVideoImgs());
+                    for (int i = 0; i < bannerlist.size(); i++) {
+                        mUrlList.add(bannerlist.get(i) + "");
+                    }
+                }
+            }
+            for (int i = 0; i < mUrlList.size(); i++) {
+                View inflate = View.inflate(mContext, R.layout.details_banner_layout, null);
+                ImageView img_banner = (ImageView) inflate.findViewById(R.id.img_banner);
+                ImageView imgStartVideo = (ImageView) inflate.findViewById(R.id.img_start_video);
+                RelativeLayout rela_layout = (RelativeLayout) inflate.findViewById(R.id.rela_layout);
+                Glide.with(this).load(mUrlList.get(i)).into(img_banner);
+                mBannerList.add(inflate);
+                if (i == 0 && !datas.getVideoUrls().equals("")) {
+                    imgStartVideo.setVisibility(View.VISIBLE);
+                } else {
+                    imgStartVideo.setVisibility(View.GONE);
+                }
+                final int finalI = i;
+                rela_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (finalI == 0 && !datas.getVideoUrls().equals("")) {
+                            Intent intent = new Intent(mContext, VideoDetailsActivity.class);
+                            intent.putExtra("VideoUrl", datas.getVideoUrls() + "");
+                            intent.putExtra("VideoImg", datas.getVideoImgs() + "");
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(mContext, BannerDetailsActivity.class);
+                            intent.putExtra("bannerlist", (Serializable) bannerlist);
+                            if (datas.getVideoUrls().equals("")) {
+                                intent.putExtra("position", finalI + "");
+                            } else {
+                                intent.putExtra("position", (finalI - 1) + "");
+                            }
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+            }
+
+
         }
-        tvAllNum.setText(mBaseFragmentList.size() + "");
-        fm = getSupportFragmentManager();
-        myAdapter = new MyAdapter(fm);
-        vpVidio.setAdapter(myAdapter);
+        tvAllNum.setText(mBannerList.size() + "");
+        vpVidio.setAdapter(adapter);
         vpVidio.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -247,11 +293,14 @@ public class TudidetailsActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
+
                 tvToNum.setText((position + 1) + "");
                 if (position == 1) {
-                    JZVideoPlayer.releaseAllVideos();
+
+                } else if (position == 0) {
                 }
+
             }
 
             @Override
@@ -260,6 +309,41 @@ public class TudidetailsActivity extends BaseActivity {
             }
         });
     }
+
+    //需要给ViewPager设置适配器
+    PagerAdapter adapter = new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            // TODO Auto-generated method stub
+            return arg0 == arg1;
+        }
+
+        //有多少个切换页
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return mBannerList.size();
+        }
+
+        //对超出范围的资源进行销毁
+        @Override
+        public void destroyItem(ViewGroup container, int position,
+                                Object object) {
+            // TODO Auto-generated method stub
+            container.removeView(mBannerList.get(position));
+        }
+
+        //对显示的资源进行初始化
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // TODO Auto-generated method stub
+            container.addView(mBannerList.get(position));
+            return mBannerList.get(position);
+        }
+
+    };
+
 
     private void initLoveRecycler() {
         HttpParams params = new HttpParams();
@@ -291,7 +375,7 @@ public class TudidetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(TudidetailsActivity.this, TudidetailsActivity.class);
-                                intent.putExtra("houseId", datas.get(position).getId());
+                                intent.putExtra("houseId", datas.get(position).getId()+"");
                                 startActivity(intent);
                             }
                         });
@@ -331,11 +415,18 @@ public class TudidetailsActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
+        findViewById(R.id.tudi_wl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.getInstace(TudidetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
+                setMyExtensionModule();
+                if (RongIM.getInstance() != null) {
+                    Log.e("MainActivity", "创建单聊");
+                    RongIM.getInstance().startPrivateChat(TudidetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                }
+            }
+        });
+
 
     }
 

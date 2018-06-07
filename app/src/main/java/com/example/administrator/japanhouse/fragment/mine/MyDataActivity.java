@@ -379,6 +379,9 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void getUserInfo(Response<UserInfo> response) {
         UserInfo.DatasBean datasBean = response.body().getDatas();
+        if (datasBean == null)
+            return;
+
         if (!TextUtils.isEmpty(datasBean.getSex())) {
             if (TextUtils.equals(datasBean.getSex(), "1")) {
                 cbWoman.setChecked(true);

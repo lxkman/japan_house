@@ -1,18 +1,31 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.TopSearchHintBean;
+import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SydcSearchActivity extends BaseActivity {
+public class SydcSearchActivity extends BaseActivity implements MainSearchPresenter.MainSearchCallBack, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.search_et)
     EditText searchEt;
@@ -29,34 +42,110 @@ public class SydcSearchActivity extends BaseActivity {
     TextView cancleTv;
     @BindView(R.id.hotsearch_recycler)
     FluidLayout fluidlayout;
+    @BindView(R.id.scrollview)
+    NestedScrollView scrollView;
+    @BindView(R.id.search_list_recycler)
+    RecyclerView searchListRecycler;
+    private MainSearchPresenter searchPresenter;
+    private int state;
+    private int state2 = 100;
+    private SearchListAdapter searchListAdapter;
+    private List<String> SearchList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sydc_search);
         ButterKnife.bind(this);
-        initView();
+        searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        searchPresenter = new MainSearchPresenter(this, this);
         if (!TextUtils.isEmpty(getIntent().getStringExtra("edt_hint"))) {
             searchEt.setHint(getIntent().getStringExtra("edt_hint"));
         }
-        searchEt.setOnEditorActionListener(editorActionListener);
+        state = getIntent().getIntExtra("state", 0);
+        state2 = getIntent().getIntExtra("state2", 0);
+        initHot();
+        initListener();
     }
 
-    TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
-
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                //                SoftKeyboardTool.closeKeyboard(mSearchEt);//关闭软键盘
-                searchEt.setFocusable(true);
-                searchEt.setFocusableInTouchMode(true);
-                return true;
+    private void initListener() {
+        searchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    //                SoftKeyboardTool.closeKeyboard(mSearchEt);//关闭软键盘
+                    searchEt.setFocusable(true);
+                    searchEt.setFocusableInTouchMode(true);
+                    if (SearchList == null || SearchList.size() == 0) {
+                        Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    tiaozhuan();
+                    return true;
+                }
+                return false;
             }
-            return false;
-        }
-    };
+        });
+        searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-    private void initView() {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0) {
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
+                } else {
+                    scrollView.setVisibility(View.VISIBLE);
+                    searchListRecycler.setVisibility(View.GONE);
+                }
+                SearchList.clear();
+                if (searchListAdapter != null) {
+                    searchListAdapter.notifyDataSetChanged();
+                }
+                if (state == 7) {
+                    if (state2 != 100) {
+                        searchPresenter.getSearchHint(state, state2, searchEt.getText().toString());
+                    } else {
+                        searchPresenter.getSearchHint(state, searchEt.getText().toString());
+                    }
+                } else {
+                    searchPresenter.getSearchHint(state, searchEt.getText().toString());
+                }
+            }
+        });
+    }
+
+    private void tiaozhuan() {
+        switch (state) {
+            case 6: //海外地产
+                Intent newHouseIntent = new Intent(SydcSearchActivity.this, HaiwaiListActivity.class);
+                newHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                startActivity(newHouseIntent);
+                break;
+            case 7: //中国房源
+                if (state2 == 100) {
+                    Intent businessIntent = new Intent(SydcSearchActivity.this, ChineseLiebiaoActivity.class);
+                    businessIntent.putExtra("searchText", searchEt.getText().toString());
+                    startActivity(businessIntent);
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("searchText", searchEt.getText().toString());
+                    setResult(11, intent);
+                    finish();
+                }
+                break;
+        }
+    }
+
+    private void initHot() {
         fluidlayout.removeAllViews();
         final List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
@@ -84,8 +173,46 @@ public class SydcSearchActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+    }
+
+    private class SearchListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+
+        public SearchListAdapter(int layoutResId, @Nullable List<String> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, String item) {
+            helper.setText(R.id.tv_Search_list, item);
+        }
+    }
+
     @OnClick(R.id.cancle_tv)
     public void onViewClicked() {
         finish();
+    }
+
+    @Override
+    public void getSearchHint(Response<TopSearchHintBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                for (int i = 0; i < response.body().getDatas().size(); i++) {
+                    SearchList.add(response.body().getDatas().get(i).getVal());
+                }
+                if (SearchList == null || SearchList.size() == 0) {
+                    Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                }
+                if (searchListAdapter == null) {
+                    searchListAdapter = new SearchListAdapter(R.layout.search_list_item, SearchList);
+                    searchListRecycler.setAdapter(searchListAdapter);
+                } else {
+                    searchListAdapter.notifyDataSetChanged();
+                }
+                searchListAdapter.setOnItemClickListener(SydcSearchActivity.this);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ public class HomePageBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"tjtd":[{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":4,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":9,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":3,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":11,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"}],"images":[{"imageName":"3","activeTime":1526378446000,"updateTime":1523496539000,"sort":0,"imageDesc":"3","imageStatus":2,"isActive":0,"imageLink":"3","isDeleted":0,"createTime":1523444722000,"imageUrl":"","id":63,"imageType":2},{"imageName":"3","activeTime":1526378446000,"updateTime":1523496539000,"sort":0,"imageDesc":"3","imageStatus":2,"isActive":0,"imageLink":"3","isDeleted":0,"createTime":1523444722000,"imageUrl":"","id":64,"imageType":2}],"tjxf":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":32,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":42,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":52,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"}],"tjzf":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":74,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":8,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"1000元","houseType":"","priceCn":"1000元","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":2,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":10,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"}],"cnxh":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":4,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":14,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":24,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":34,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":44,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"}],"tjesf":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":21,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":31,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":41,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"}],"tjjjr":[{"period":1,"shop":"所属门店","counts":60,"sex":"0","areaNameCn":"公主坟","inYears":3,"caeateTime":1525781849000,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","telePhone":"123132","avgStar":5,"password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","wechatId":"123456","areaNameJpn":"公主坟","id":2,"brokerName":"我是经纪人","turnover":100,"status":""},{"period":1,"shop":"所属门店","counts":60,"sex":"0","areaNameCn":"公主坟","inYears":3,"caeateTime":1525781849000,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","telePhone":"123132","avgStar":3.6,"password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","wechatId":"123456","areaNameJpn":"公主坟","id":1,"brokerName":"姓名","turnover":100,"status":""}]}
+     * datas : {"tjtd":[{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":4,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":9,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":3,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":11,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"}],"images":[{"hid":3,"linkShtype":0,"linkHtype":2,"isDeleted":"0","createTime":1528278180000,"imageUrl":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2666571232,3775299784&fm=27&gp=0.jpg","updateTime":1528278182000,"id":2,"isEnable":0}],"tjxf":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":32,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":42,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":52,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"}],"tjzf":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":74,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":8,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"1000元","houseType":"","priceCn":"1000元","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":2,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":10,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"}],"cnxh":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":4,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":14,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":24,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":34,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":44,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"}],"tjesf":[{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":21,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":31,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":41,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"}],"tjjjr":[{"period":1,"shop":"所属门店","counts":60,"areaNameCn":"公主坟","sex":"0","caeateTime":1525781849000,"inYears":3,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","avgStar":5,"telePhone":"123132","password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","areaNameJpn":"公主坟","wechatId":"123456","id":2,"brokerName":"我是经纪人","turnover":100,"status":""},{"period":1,"shop":"所属门店","counts":60,"areaNameCn":"公主坟","sex":"0","caeateTime":1525781849000,"inYears":3,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","avgStar":3.6,"telePhone":"123132","password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","areaNameJpn":"公主坟","wechatId":"123456","id":1,"brokerName":"姓名","turnover":100,"status":""}],"cstt":[{"isDeleted":0,"createTime":1524552167000,"readNum":0,"titleCn":"标题","contentCn":"","titleJpn":"标题","contentJpn":"","id":1,"status":"1"}]}
      */
     private String msg;
     private String code;
@@ -44,13 +44,14 @@ public class HomePageBean {
 
     public static class DatasEntity {
         /**
-         * tjtd : [{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":4,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":9,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":3,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":11,"specificLocationJpn":"具体位置","imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"sellingPriceJpn":"售价"}]
-         * images : [{"imageName":"3","activeTime":1526378446000,"updateTime":1523496539000,"sort":0,"imageDesc":"3","imageStatus":2,"isActive":0,"imageLink":"3","isDeleted":0,"createTime":1523444722000,"imageUrl":"","id":63,"imageType":2},{"imageName":"3","activeTime":1526378446000,"updateTime":1523496539000,"sort":0,"imageDesc":"3","imageStatus":2,"isActive":0,"imageLink":"3","isDeleted":0,"createTime":1523444722000,"imageUrl":"","id":64,"imageType":2}]
-         * tjxf : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":32,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":42,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":52,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"}]
-         * tjzf : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":74,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":8,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"1000元","houseType":"","priceCn":"1000元","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":2,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":10,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"}]
-         * cnxh : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":4,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":14,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":24,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":34,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":44,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"}]
-         * tjesf : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":21,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":31,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","specificLocationJpn":"1","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":41,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"}]
-         * tjjjr : [{"period":1,"shop":"所属门店","counts":60,"sex":"0","areaNameCn":"公主坟","inYears":3,"caeateTime":1525781849000,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","telePhone":"123132","avgStar":5,"password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","wechatId":"123456","areaNameJpn":"公主坟","id":2,"brokerName":"我是经纪人","turnover":100,"status":""},{"period":1,"shop":"所属门店","counts":60,"sex":"0","areaNameCn":"公主坟","inYears":3,"caeateTime":1525781849000,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","telePhone":"123132","avgStar":3.6,"password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","wechatId":"123456","areaNameJpn":"公主坟","id":1,"brokerName":"姓名","turnover":100,"status":""}]
+         * tjtd : [{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":4,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":9,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":3,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"},{"specificLocationCn":"具体位置","areaCn":"面积","sellingPriceCn":"售价","videoImgs":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","titleCn":"标题","titleJpn":"标题","areaJpn":"面积","landImages":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg","id":11,"imageList":[{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}],"specificLocationJpn":"具体位置","sellingPriceJpn":"售价"}]
+         * images : [{"hid":3,"linkShtype":0,"linkHtype":2,"isDeleted":"0","createTime":1528278180000,"imageUrl":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2666571232,3775299784&fm=27&gp=0.jpg","updateTime":1528278182000,"id":2,"isEnable":0}]
+         * tjxf : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":32,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":42,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":52,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"}]
+         * tjzf : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":74,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":8,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"1000元","houseType":"","priceCn":"1000元","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":2,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"5","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":10,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"}]
+         * cnxh : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":12,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"0","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":103,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":4,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":14,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":24,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":34,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":44,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":22,"doorModelCn":"户型","imageList":[],"doorModelJpn":"户型","status":"1"}]
+         * tjesf : [{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":11,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"1","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":54,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"2"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":21,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":31,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"},{"specificLocationCn":"1","areaCn":"100","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","priceJpn":"","houseType":"","priceCn":"","rentJpn":"10000","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg","specificLocationJpn":"1","rentCn":"10100","titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","areaJpn":"100","id":41,"doorModelCn":"户型","imageList":[{"val":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg"}],"doorModelJpn":"户型","status":"0"}]
+         * tjjjr : [{"period":1,"shop":"所属门店","counts":60,"areaNameCn":"公主坟","sex":"0","caeateTime":1525781849000,"inYears":3,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","avgStar":5,"telePhone":"123132","password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","areaNameJpn":"公主坟","wechatId":"123456","id":2,"brokerName":"我是经纪人","turnover":100,"status":""},{"period":1,"shop":"所属门店","counts":60,"areaNameCn":"公主坟","sex":"0","caeateTime":1525781849000,"inYears":3,"updateTime":1525781851000,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","avgStar":3.6,"telePhone":"123132","password":"1232132","isDeleted":0,"phone":"1234","nickname":"昵称","areaNameJpn":"公主坟","wechatId":"123456","id":1,"brokerName":"姓名","turnover":100,"status":""}]
+         * cstt : [{"isDeleted":0,"createTime":1524552167000,"readNum":0,"titleCn":"标题","contentCn":"","titleJpn":"标题","contentJpn":"","id":1,"status":"1"}]
          */
         private List<TjtdEntity> tjtd;
         private List<ImagesEntity> images;
@@ -59,6 +60,7 @@ public class HomePageBean {
         private List<CnxhEntity> cnxh;
         private List<TjesfEntity> tjesf;
         private List<TjjjrEntity> tjjjr;
+        private List<CsttEntity> cstt;
 
         public void setTjtd(List<TjtdEntity> tjtd) {
             this.tjtd = tjtd;
@@ -86,6 +88,10 @@ public class HomePageBean {
 
         public void setTjjjr(List<TjjjrEntity> tjjjr) {
             this.tjjjr = tjjjr;
+        }
+
+        public void setCstt(List<CsttEntity> cstt) {
+            this.cstt = cstt;
         }
 
         public List<TjtdEntity> getTjtd() {
@@ -116,6 +122,10 @@ public class HomePageBean {
             return tjjjr;
         }
 
+        public List<CsttEntity> getCstt() {
+            return cstt;
+        }
+
         public static class TjtdEntity {
             /**
              * specificLocationCn : 具体位置
@@ -127,8 +137,8 @@ public class HomePageBean {
              * areaJpn : 面积
              * landImages : https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg
              * id : 4
-             * specificLocationJpn : 具体位置
              * imageList : [{"val":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526960221&di=d5a70cd88be67479c20836cbdb04c46d&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg"}]
+             * specificLocationJpn : 具体位置
              * sellingPriceJpn : 售价
              */
             private String specificLocationCn;
@@ -140,8 +150,8 @@ public class HomePageBean {
             private String areaJpn;
             private String landImages;
             private int id;
-            private String specificLocationJpn;
             private List<ImageListEntity> imageList;
+            private String specificLocationJpn;
             private String sellingPriceJpn;
 
             public void setSpecificLocationCn(String specificLocationCn) {
@@ -180,12 +190,12 @@ public class HomePageBean {
                 this.id = id;
             }
 
-            public void setSpecificLocationJpn(String specificLocationJpn) {
-                this.specificLocationJpn = specificLocationJpn;
-            }
-
             public void setImageList(List<ImageListEntity> imageList) {
                 this.imageList = imageList;
+            }
+
+            public void setSpecificLocationJpn(String specificLocationJpn) {
+                this.specificLocationJpn = specificLocationJpn;
             }
 
             public void setSellingPriceJpn(String sellingPriceJpn) {
@@ -228,12 +238,12 @@ public class HomePageBean {
                 return id;
             }
 
-            public String getSpecificLocationJpn() {
-                return specificLocationJpn;
-            }
-
             public List<ImageListEntity> getImageList() {
                 return imageList;
+            }
+
+            public String getSpecificLocationJpn() {
+                return specificLocationJpn;
             }
 
             public String getSellingPriceJpn() {
@@ -258,67 +268,39 @@ public class HomePageBean {
 
         public static class ImagesEntity {
             /**
-             * imageName : 3
-             * activeTime : 1526378446000
-             * updateTime : 1523496539000
-             * sort : 0
-             * imageDesc : 3
-             * imageStatus : 2
-             * isActive : 0
-             * imageLink : 3
+             * hid : 3
+             * linkShtype : 0
+             * linkHtype : 2
              * isDeleted : 0
-             * createTime : 1523444722000
-             * imageUrl :
-             * id : 63
-             * imageType : 2
+             * createTime : 1528278180000
+             * imageUrl : https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2666571232,3775299784&fm=27&gp=0.jpg
+             * updateTime : 1528278182000
+             * id : 2
+             * isEnable : 0
              */
-            private String imageName;
-            private long activeTime;
-            private long updateTime;
-            private int sort;
-            private String imageDesc;
-            private int imageStatus;
-            private int isActive;
-            private String imageLink;
-            private int isDeleted;
+            private int hid;
+            private int linkShtype;
+            private int linkHtype;
+            private String isDeleted;
             private long createTime;
             private String imageUrl;
+            private long updateTime;
             private int id;
-            private int imageType;
+            private int isEnable;
 
-            public void setImageName(String imageName) {
-                this.imageName = imageName;
+            public void setHid(int hid) {
+                this.hid = hid;
             }
 
-            public void setActiveTime(long activeTime) {
-                this.activeTime = activeTime;
+            public void setLinkShtype(int linkShtype) {
+                this.linkShtype = linkShtype;
             }
 
-            public void setUpdateTime(long updateTime) {
-                this.updateTime = updateTime;
+            public void setLinkHtype(int linkHtype) {
+                this.linkHtype = linkHtype;
             }
 
-            public void setSort(int sort) {
-                this.sort = sort;
-            }
-
-            public void setImageDesc(String imageDesc) {
-                this.imageDesc = imageDesc;
-            }
-
-            public void setImageStatus(int imageStatus) {
-                this.imageStatus = imageStatus;
-            }
-
-            public void setIsActive(int isActive) {
-                this.isActive = isActive;
-            }
-
-            public void setImageLink(String imageLink) {
-                this.imageLink = imageLink;
-            }
-
-            public void setIsDeleted(int isDeleted) {
+            public void setIsDeleted(String isDeleted) {
                 this.isDeleted = isDeleted;
             }
 
@@ -330,47 +312,31 @@ public class HomePageBean {
                 this.imageUrl = imageUrl;
             }
 
+            public void setUpdateTime(long updateTime) {
+                this.updateTime = updateTime;
+            }
+
             public void setId(int id) {
                 this.id = id;
             }
 
-            public void setImageType(int imageType) {
-                this.imageType = imageType;
+            public void setIsEnable(int isEnable) {
+                this.isEnable = isEnable;
             }
 
-            public String getImageName() {
-                return imageName;
+            public int getHid() {
+                return hid;
             }
 
-            public long getActiveTime() {
-                return activeTime;
+            public int getLinkShtype() {
+                return linkShtype;
             }
 
-            public long getUpdateTime() {
-                return updateTime;
+            public int getLinkHtype() {
+                return linkHtype;
             }
 
-            public int getSort() {
-                return sort;
-            }
-
-            public String getImageDesc() {
-                return imageDesc;
-            }
-
-            public int getImageStatus() {
-                return imageStatus;
-            }
-
-            public int getIsActive() {
-                return isActive;
-            }
-
-            public String getImageLink() {
-                return imageLink;
-            }
-
-            public int getIsDeleted() {
+            public String getIsDeleted() {
                 return isDeleted;
             }
 
@@ -382,12 +348,16 @@ public class HomePageBean {
                 return imageUrl;
             }
 
+            public long getUpdateTime() {
+                return updateTime;
+            }
+
             public int getId() {
                 return id;
             }
 
-            public int getImageType() {
-                return imageType;
+            public int getIsEnable() {
+                return isEnable;
             }
         }
 
@@ -400,8 +370,8 @@ public class HomePageBean {
              * houseType :
              * priceCn :
              * rentJpn : 10000
-             * specificLocationJpn : 1
              * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+             * specificLocationJpn : 1
              * rentCn : 10100
              * titleCn : 房屋标题中文（租房）
              * titleJpn : 房屋标题日文（租房）
@@ -419,8 +389,8 @@ public class HomePageBean {
             private String houseType;
             private String priceCn;
             private String rentJpn;
-            private String specificLocationJpn;
             private String roomImgs;
+            private String specificLocationJpn;
             private String rentCn;
             private String titleCn;
             private String titleJpn;
@@ -459,12 +429,12 @@ public class HomePageBean {
                 this.rentJpn = rentJpn;
             }
 
-            public void setSpecificLocationJpn(String specificLocationJpn) {
-                this.specificLocationJpn = specificLocationJpn;
-            }
-
             public void setRoomImgs(String roomImgs) {
                 this.roomImgs = roomImgs;
+            }
+
+            public void setSpecificLocationJpn(String specificLocationJpn) {
+                this.specificLocationJpn = specificLocationJpn;
             }
 
             public void setRentCn(String rentCn) {
@@ -531,12 +501,12 @@ public class HomePageBean {
                 return rentJpn;
             }
 
-            public String getSpecificLocationJpn() {
-                return specificLocationJpn;
-            }
-
             public String getRoomImgs() {
                 return roomImgs;
+            }
+
+            public String getSpecificLocationJpn() {
+                return specificLocationJpn;
             }
 
             public String getRentCn() {
@@ -600,8 +570,8 @@ public class HomePageBean {
              * houseType : 0
              * priceCn :
              * rentJpn : 10000
-             * specificLocationJpn : 1
              * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+             * specificLocationJpn : 1
              * rentCn : 10100
              * titleCn : 房屋标题中文（租房）
              * titleJpn : 房屋标题日文（租房）
@@ -619,8 +589,8 @@ public class HomePageBean {
             private String houseType;
             private String priceCn;
             private String rentJpn;
-            private String specificLocationJpn;
             private String roomImgs;
+            private String specificLocationJpn;
             private String rentCn;
             private String titleCn;
             private String titleJpn;
@@ -659,12 +629,12 @@ public class HomePageBean {
                 this.rentJpn = rentJpn;
             }
 
-            public void setSpecificLocationJpn(String specificLocationJpn) {
-                this.specificLocationJpn = specificLocationJpn;
-            }
-
             public void setRoomImgs(String roomImgs) {
                 this.roomImgs = roomImgs;
+            }
+
+            public void setSpecificLocationJpn(String specificLocationJpn) {
+                this.specificLocationJpn = specificLocationJpn;
             }
 
             public void setRentCn(String rentCn) {
@@ -731,12 +701,12 @@ public class HomePageBean {
                 return rentJpn;
             }
 
-            public String getSpecificLocationJpn() {
-                return specificLocationJpn;
-            }
-
             public String getRoomImgs() {
                 return roomImgs;
+            }
+
+            public String getSpecificLocationJpn() {
+                return specificLocationJpn;
             }
 
             public String getRentCn() {
@@ -800,8 +770,8 @@ public class HomePageBean {
              * houseType :
              * priceCn :
              * rentJpn : 10000
-             * specificLocationJpn : 1
              * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+             * specificLocationJpn : 1
              * rentCn : 10100
              * titleCn : 房屋标题中文（租房）
              * titleJpn : 房屋标题日文（租房）
@@ -819,8 +789,8 @@ public class HomePageBean {
             private String houseType;
             private String priceCn;
             private String rentJpn;
-            private String specificLocationJpn;
             private String roomImgs;
+            private String specificLocationJpn;
             private String rentCn;
             private String titleCn;
             private String titleJpn;
@@ -859,12 +829,12 @@ public class HomePageBean {
                 this.rentJpn = rentJpn;
             }
 
-            public void setSpecificLocationJpn(String specificLocationJpn) {
-                this.specificLocationJpn = specificLocationJpn;
-            }
-
             public void setRoomImgs(String roomImgs) {
                 this.roomImgs = roomImgs;
+            }
+
+            public void setSpecificLocationJpn(String specificLocationJpn) {
+                this.specificLocationJpn = specificLocationJpn;
             }
 
             public void setRentCn(String rentCn) {
@@ -931,12 +901,12 @@ public class HomePageBean {
                 return rentJpn;
             }
 
-            public String getSpecificLocationJpn() {
-                return specificLocationJpn;
-            }
-
             public String getRoomImgs() {
                 return roomImgs;
+            }
+
+            public String getSpecificLocationJpn() {
+                return specificLocationJpn;
             }
 
             public String getRentCn() {
@@ -985,8 +955,8 @@ public class HomePageBean {
              * houseType :
              * priceCn :
              * rentJpn : 10000
-             * specificLocationJpn : 1
              * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527055539469&di=2767442bde9416f0f4110731a704eae5&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F03087bf40ad162d97cc5dcbe1ddfa9ec8a13cd6d.jpg
+             * specificLocationJpn : 1
              * rentCn : 10100
              * titleCn : 房屋标题中文（租房）
              * titleJpn : 房屋标题日文（租房）
@@ -1004,8 +974,8 @@ public class HomePageBean {
             private String houseType;
             private String priceCn;
             private String rentJpn;
-            private String specificLocationJpn;
             private String roomImgs;
+            private String specificLocationJpn;
             private String rentCn;
             private String titleCn;
             private String titleJpn;
@@ -1044,12 +1014,12 @@ public class HomePageBean {
                 this.rentJpn = rentJpn;
             }
 
-            public void setSpecificLocationJpn(String specificLocationJpn) {
-                this.specificLocationJpn = specificLocationJpn;
-            }
-
             public void setRoomImgs(String roomImgs) {
                 this.roomImgs = roomImgs;
+            }
+
+            public void setSpecificLocationJpn(String specificLocationJpn) {
+                this.specificLocationJpn = specificLocationJpn;
             }
 
             public void setRentCn(String rentCn) {
@@ -1116,12 +1086,12 @@ public class HomePageBean {
                 return rentJpn;
             }
 
-            public String getSpecificLocationJpn() {
-                return specificLocationJpn;
-            }
-
             public String getRoomImgs() {
                 return roomImgs;
+            }
+
+            public String getSpecificLocationJpn() {
+                return specificLocationJpn;
             }
 
             public String getRentCn() {
@@ -1181,20 +1151,20 @@ public class HomePageBean {
              * period : 1
              * shop : 所属门店
              * counts : 60
-             * sex : 0
              * areaNameCn : 公主坟
-             * inYears : 3
+             * sex : 0
              * caeateTime : 1525781849000
+             * inYears : 3
              * updateTime : 1525781851000
              * pic : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg
-             * telePhone : 123132
              * avgStar : 5
+             * telePhone : 123132
              * password : 1232132
              * isDeleted : 0
              * phone : 1234
              * nickname : 昵称
-             * wechatId : 123456
              * areaNameJpn : 公主坟
+             * wechatId : 123456
              * id : 2
              * brokerName : 我是经纪人
              * turnover : 100
@@ -1203,20 +1173,20 @@ public class HomePageBean {
             private int period;
             private String shop;
             private int counts;
-            private String sex;
             private String areaNameCn;
-            private int inYears;
+            private String sex;
             private long caeateTime;
+            private int inYears;
             private long updateTime;
             private String pic;
-            private String telePhone;
             private float avgStar;
+            private String telePhone;
             private String password;
             private int isDeleted;
             private String phone;
             private String nickname;
-            private String wechatId;
             private String areaNameJpn;
+            private String wechatId;
             private int id;
             private String brokerName;
             private int turnover;
@@ -1234,20 +1204,20 @@ public class HomePageBean {
                 this.counts = counts;
             }
 
-            public void setSex(String sex) {
-                this.sex = sex;
-            }
-
             public void setAreaNameCn(String areaNameCn) {
                 this.areaNameCn = areaNameCn;
             }
 
-            public void setInYears(int inYears) {
-                this.inYears = inYears;
+            public void setSex(String sex) {
+                this.sex = sex;
             }
 
             public void setCaeateTime(long caeateTime) {
                 this.caeateTime = caeateTime;
+            }
+
+            public void setInYears(int inYears) {
+                this.inYears = inYears;
             }
 
             public void setUpdateTime(long updateTime) {
@@ -1258,12 +1228,12 @@ public class HomePageBean {
                 this.pic = pic;
             }
 
-            public void setTelePhone(String telePhone) {
-                this.telePhone = telePhone;
-            }
-
             public void setAvgStar(float avgStar) {
                 this.avgStar = avgStar;
+            }
+
+            public void setTelePhone(String telePhone) {
+                this.telePhone = telePhone;
             }
 
             public void setPassword(String password) {
@@ -1282,12 +1252,12 @@ public class HomePageBean {
                 this.nickname = nickname;
             }
 
-            public void setWechatId(String wechatId) {
-                this.wechatId = wechatId;
-            }
-
             public void setAreaNameJpn(String areaNameJpn) {
                 this.areaNameJpn = areaNameJpn;
+            }
+
+            public void setWechatId(String wechatId) {
+                this.wechatId = wechatId;
             }
 
             public void setId(int id) {
@@ -1318,20 +1288,20 @@ public class HomePageBean {
                 return counts;
             }
 
-            public String getSex() {
-                return sex;
-            }
-
             public String getAreaNameCn() {
                 return areaNameCn;
             }
 
-            public int getInYears() {
-                return inYears;
+            public String getSex() {
+                return sex;
             }
 
             public long getCaeateTime() {
                 return caeateTime;
+            }
+
+            public int getInYears() {
+                return inYears;
             }
 
             public long getUpdateTime() {
@@ -1342,12 +1312,12 @@ public class HomePageBean {
                 return pic;
             }
 
-            public String getTelePhone() {
-                return telePhone;
-            }
-
             public float getAvgStar() {
                 return avgStar;
+            }
+
+            public String getTelePhone() {
+                return telePhone;
             }
 
             public String getPassword() {
@@ -1366,12 +1336,12 @@ public class HomePageBean {
                 return nickname;
             }
 
-            public String getWechatId() {
-                return wechatId;
-            }
-
             public String getAreaNameJpn() {
                 return areaNameJpn;
+            }
+
+            public String getWechatId() {
+                return wechatId;
             }
 
             public int getId() {
@@ -1384,6 +1354,101 @@ public class HomePageBean {
 
             public int getTurnover() {
                 return turnover;
+            }
+
+            public String getStatus() {
+                return status;
+            }
+        }
+
+        public static class CsttEntity {
+            /**
+             * isDeleted : 0
+             * createTime : 1524552167000
+             * readNum : 0
+             * titleCn : 标题
+             * contentCn :
+             * titleJpn : 标题
+             * contentJpn :
+             * id : 1
+             * status : 1
+             */
+            private int isDeleted;
+            private long createTime;
+            private int readNum;
+            private String titleCn;
+            private String contentCn;
+            private String titleJpn;
+            private String contentJpn;
+            private int id;
+            private String status;
+
+            public void setIsDeleted(int isDeleted) {
+                this.isDeleted = isDeleted;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
+
+            public void setReadNum(int readNum) {
+                this.readNum = readNum;
+            }
+
+            public void setTitleCn(String titleCn) {
+                this.titleCn = titleCn;
+            }
+
+            public void setContentCn(String contentCn) {
+                this.contentCn = contentCn;
+            }
+
+            public void setTitleJpn(String titleJpn) {
+                this.titleJpn = titleJpn;
+            }
+
+            public void setContentJpn(String contentJpn) {
+                this.contentJpn = contentJpn;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public void setStatus(String status) {
+                this.status = status;
+            }
+
+            public int getIsDeleted() {
+                return isDeleted;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public int getReadNum() {
+                return readNum;
+            }
+
+            public String getTitleCn() {
+                return titleCn;
+            }
+
+            public String getContentCn() {
+                return contentCn;
+            }
+
+            public String getTitleJpn() {
+                return titleJpn;
+            }
+
+            public String getContentJpn() {
+                return contentJpn;
+            }
+
+            public int getId() {
+                return id;
             }
 
             public String getStatus() {

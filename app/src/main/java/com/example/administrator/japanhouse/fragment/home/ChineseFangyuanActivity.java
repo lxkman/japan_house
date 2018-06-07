@@ -133,6 +133,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
             case R.id.rl_search:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
                 intent.putExtra("edt_hint", getResources().getString(R.string.qsrdcmchqy));
+                intent.putExtra("state", 7);
                 startActivity(intent);
                 break;
         }
@@ -173,7 +174,7 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn())
-                    .setText(R.id.tv_ting, isJa ? "" : "");
+                    .setText(R.id.tv_ting, isJa ? item.getHouseTypeJpn() : item.getHouseTypeCn());
         }
     }
 }

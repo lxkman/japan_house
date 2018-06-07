@@ -135,6 +135,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
             case R.id.rl_search:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
                 intent.putExtra("edt_hint", getResources().getString(R.string.qsrdcmchqy));
+                intent.putExtra("state", 6);
                 startActivity(intent);
                 break;
         }

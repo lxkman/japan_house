@@ -255,11 +255,8 @@
                     android:layout_marginBottom="5dp"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="50dp"
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -269,13 +266,14 @@
                         android:textColor="@color/text_black"
                         android:drawableRight="@drawable/home_tuijian_iv"
                         android:drawablePadding="5dp"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="15dp"/>
                     <ImageView
                         android:id="@+id/view_07"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/home_more_iv"
                         android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
                         android:layout_centerVertical="true"/>
                     <TextView
                         android:id="@+id/tjyxjjr_more_tv"

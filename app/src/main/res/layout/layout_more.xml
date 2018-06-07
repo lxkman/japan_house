@@ -39,6 +39,7 @@
                 android:background="#f4f4f4"
                 android:text="@string/chongzhi"
                 android:textColor="@color/colorPrimary"
+                style="?android:attr/borderlessButtonStyle"
                 android:textSize="15sp"/>
             <Button
                 android:id="@+id/btn_sure"

@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="2500元以下"
+        android:textSize="12sp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/text_gray"
         android:background="@drawable/bg_shendeng_false"/>

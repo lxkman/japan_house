@@ -567,4 +567,6 @@
     <string name="singUp_time">报名时间：%1$s</string>
     <string name="huaquanzhaofang">画圈找房</string>
     <string name="buxian">不限</string>
+    <string name="tongqinfangfa">通勤方式</string>
+    <string name="dingweizhong">定位中…</string>
 </resources>

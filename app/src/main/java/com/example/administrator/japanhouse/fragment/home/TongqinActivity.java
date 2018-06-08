@@ -86,7 +86,8 @@ public class TongqinActivity extends BaseActivity {
                 mylongitude = bdLocation.getLongitude();
                 mylatitude = bdLocation.getLatitude();
                 String addrStr = bdLocation.getAddrStr();
-                locationTv.setText(addrStr);
+                String street = bdLocation.getStreet();
+                locationTv.setText(street);
             }
         });
     }
@@ -108,11 +109,11 @@ public class TongqinActivity extends BaseActivity {
         timeList.add("90");
 
         typeList = new ArrayList<>();
-        typeList.add(new HomeItemBean(false, itemPic[0], getString(R.string.buxing)));
+        typeList.add(new HomeItemBean(true, itemPic[0], getString(R.string.buxing)));
         typeList.add(new HomeItemBean(false, itemPic[1], getString(R.string.qixing)));
         typeList.add(new HomeItemBean(false, itemPic[2], getString(R.string.gongjiao)));
         typeList.add(new HomeItemBean(false, itemPic[3], getString(R.string.ditie)));
-        typeList.add(new HomeItemBean(true, itemPic[4], getString(R.string.zijia)));
+        typeList.add(new HomeItemBean(false, itemPic[4], getString(R.string.zijia)));
 
         typeRecycler.setNestedScrollingEnabled(false);
         typeRecycler.setLayoutManager(new GridLayoutManager(mContext, 5));
@@ -174,7 +175,7 @@ public class TongqinActivity extends BaseActivity {
                 return i;
             }
         }
-        return 4;//默认是自驾
+        return 0;//默认是步行
     }
 
     private class TypeAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {
@@ -267,7 +268,7 @@ public class TongqinActivity extends BaseActivity {
             } else {
                 mylatitude = data.getDoubleExtra("latitude", mylatitude);
                 mylongitude = data.getDoubleExtra("longitude", mylongitude);
-                locationTv.setText(address);
+                locationTv.setText(address.length()>14?address.substring(0,14)+"...":address);
             }
         }
     }

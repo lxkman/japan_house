@@ -570,4 +570,6 @@
     <string name="singUp_time">报名时间：%1$s</string>
     <string name="huaquanzhaofang">丸を書いて検索</string>
     <string name="buxian">不制限</string>
+    <string name="tongqinfangfa">通勤方法</string>
+    <string name="dingweizhong">ポジショニング…</string>
 </resources>

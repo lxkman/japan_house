@@ -38,15 +38,22 @@
             android:id="@+id/location_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="上地九街"
+            android:text="@string/dingweizhong"
             android:textColor="@color/text_black"
-            android:padding="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:paddingBottom="15dp"
+            android:textSize="16sp"
+            android:paddingRight="5dp"
             android:drawableLeft="@drawable/locaiton_yellow_iv"
             android:drawablePadding="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nindeweizhi"
+            android:gravity="center"
             android:textColor="@color/text_gray"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/location_tv"/>
@@ -67,7 +74,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tongqinzhaofnag"
+            android:text="@string/tongqinfangfa"
             android:textColor="@color/text_black"
             android:padding="15dp"/>
         <android.support.v7.widget.RecyclerView

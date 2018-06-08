@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,13 +25,10 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiIndoorResult;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
@@ -47,7 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TongqinSearchActivity extends BaseActivity {
+public class TongqinSearchActivity extends BaseActivity implements OnGetSuggestionResultListener {
 
     @BindView(R.id.search_et)
     EditText searchEt;
@@ -71,10 +69,12 @@ public class TongqinSearchActivity extends BaseActivity {
     private HistoryAdapter historyAdapter;
     private LocationClient mLocClient;
     private String city;
-    private PoiSearch poiSearch;
-    private List<PoiInfo> addressList = new ArrayList<>();
+    //    private PoiSearch poiSearch;
+    //    private List<PoiInfo> addressList = new ArrayList<>();
     private SearchListAdapter searchListAdapter;
     private int position;
+    private SuggestionSearch mSuggestionSearch = null;
+    private List<SuggestionResult.SuggestionInfo> allSuggestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +82,15 @@ public class TongqinSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_tongqin_search);
         ButterKnife.bind(this);
         initView();
-        searchEt.setOnEditorActionListener(editorActionListener);
-        poiSearch = PoiSearch.newInstance();
-        poiSearch.setOnGetPoiSearchResultListener(poiListener);
+        // 初始化搜索模块，注册搜索事件监听
+        //        poiSearch = PoiSearch.newInstance();
+        //        poiSearch.setOnGetPoiSearchResultListener(poiListener);
+        //        poiSearch.setOnGetPoiSearchResultListener(
+        // 初始化建议搜索模块，注册建议搜索事件监听
+        mSuggestionSearch = SuggestionSearch.newInstance();
+        mSuggestionSearch.setOnGetSuggestionResultListener(this);
         initLocation();
+        searchEt.setOnEditorActionListener(editorActionListener);
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,20 +98,41 @@ public class TongqinSearchActivity extends BaseActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence cs, int start, int before, int count) {
+                if (cs.length() <= 0) {
+                    if (allSuggestions != null) {
+                        allSuggestions.clear();
+                    }
+                    if (searchListAdapter != null) {
+                        searchListAdapter.notifyDataSetChanged();
+                    }
+                    return;
+                }
+                if (TextUtils.isEmpty(city)) {
+                    return;
+                }
+                /**
+                 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+                 */
+                mSuggestionSearch
+                        .requestSuggestion((new SuggestionSearchOption())
+                                .keyword(cs.toString()).city(city));
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!TextUtils.isEmpty(searchEt.getText().toString())) {
-                    poiSearch.searchInCity((new PoiCitySearchOption())
-                            .city(city)
-                            .keyword(searchEt.getText().toString())
-                            .pageNum(10));
-                } else {
-                    addressList.clear();
-                    searchListAdapter.notifyDataSetChanged();
-                }
+                //                if (!TextUtils.isEmpty(searchEt.getText().toString())) {
+                //                    if (TextUtils.isEmpty(city)){
+                //                        return;
+                //                    }
+                //                    poiSearch.searchInCity((new PoiCitySearchOption())
+                //                            .city(city)
+                //                            .keyword(searchEt.getText().toString())
+                //                            .pageNum(20));
+                //                } else {
+                //                    addressList.clear();
+                //                    searchListAdapter.notifyDataSetChanged();
+                //                }
             }
         });
     }
@@ -128,14 +154,16 @@ public class TongqinSearchActivity extends BaseActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
+                Log.e("cccc", latitude + "  " + longitude);
                 city = bdLocation.getCity();
                 String addrStr = bdLocation.getAddrStr();
-                tvLocation.setText(addrStr);
+                String street = bdLocation.getStreet();
+                tvLocation.setText(street);
             }
         });
     }
 
-    OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
+    /*OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
 
         public void onGetPoiResult(PoiResult result) {
             //获取POI检索结果
@@ -150,7 +178,7 @@ public class TongqinSearchActivity extends BaseActivity {
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         doSavehistory(addressList.get(position));
                         Intent intent = new Intent();
-                        intent.putExtra("address", addressList.get(position).address);
+                        intent.putExtra("address", addressList.get(position).name + "(" + addressList.get(position).address + ")");
                         LatLng location = addressList.get(position).location;
                         double latitude = location.latitude;
                         double longitude = location.longitude;
@@ -173,24 +201,53 @@ public class TongqinSearchActivity extends BaseActivity {
         public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
 
         }
-    };
+    };*/
 
-    private class SearchListAdapter extends BaseQuickAdapter<PoiInfo, BaseViewHolder> {
+    @Override
+    public void onGetSuggestionResult(SuggestionResult suggestionResult) {
+        allSuggestions = suggestionResult.getAllSuggestions();
+        if (allSuggestions != null && allSuggestions.size() > 0) {
+            nestScroll.setVisibility(View.GONE);
+            searchListRecycler.setVisibility(View.VISIBLE);
+            searchListAdapter = new SearchListAdapter(R.layout.search_list_item, allSuggestions);
+            searchListRecycler.setAdapter(searchListAdapter);
+            searchListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    doSavehistory(allSuggestions.get(position));
+                    Intent intent = new Intent();
+                    intent.putExtra("address", allSuggestions.get(position).key + "(" + allSuggestions.get(position).district + ")");
+                    LatLng location = allSuggestions.get(position).pt;
+                    double latitude = location.latitude;
+                    double longitude = location.longitude;
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
+                    setResult(1, intent);
+                    finish();
+                }
+            });
+        } else {
+            Toast.makeText(mContext, "查询不到此地址", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        public SearchListAdapter(@LayoutRes int layoutResId, @Nullable List<PoiInfo> data) {
+    private class SearchListAdapter extends BaseQuickAdapter<SuggestionResult.SuggestionInfo, BaseViewHolder> {
+
+        public SearchListAdapter(@LayoutRes int layoutResId, @Nullable List<SuggestionResult.SuggestionInfo> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, PoiInfo item) {
-            helper.setText(R.id.tv_Search_list, item.address);
+        protected void convert(BaseViewHolder helper, SuggestionResult.SuggestionInfo item) {
+            helper.setText(R.id.tv_Search_list, item.key + "(" + item.district + ")");
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        poiSearch.destroy();
+        //        poiSearch.destroy();
+        mSuggestionSearch.destroy();
     }
 
     TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
@@ -276,13 +333,13 @@ public class TongqinSearchActivity extends BaseActivity {
         return false;
     }
 
-    private void doSavehistory(PoiInfo poiInfo) {
+    private void doSavehistory(SuggestionResult.SuggestionInfo suggestionInfo) {
 
-        if (isHasSelectData(poiInfo.address)) {//查重
+        if (isHasSelectData(suggestionInfo.key)) {//查重
             mHistoryList.remove(position);
         }
         //后来搜索的文字放在集合中的第一个位置
-        mHistoryList.add(0, new TongQinHistroyBean(poiInfo.address, poiInfo.location.latitude, poiInfo.location.longitude));
+        mHistoryList.add(0, new TongQinHistroyBean(suggestionInfo.key, suggestionInfo.pt.latitude, suggestionInfo.pt.longitude));
 
         if (mHistoryList.size() == 11) {//实现本地历史搜索记录最多不超过10个
             mHistoryList.remove(10);
@@ -300,8 +357,8 @@ public class TongqinSearchActivity extends BaseActivity {
         mHistoryList.add(0, new TongQinHistroyBean(histroyBean.getAddress(), histroyBean.getLatitude()
                 , histroyBean.getLongitude()));
 
-        if (mHistoryList.size() == 6) {//实现本地历史搜索记录最多不超过5个
-            mHistoryList.remove(5);
+        if (mHistoryList.size() == 11) {//实现本地历史搜索记录最多不超过10个
+            mHistoryList.remove(10);
         }
         //将这个mHistoryListData保存到sp中，其实sp中保存的就是这个mHistoryListData集合
         saveHistory();

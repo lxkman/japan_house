@@ -49,6 +49,7 @@ import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
 import com.example.administrator.japanhouse.more.NewHouseMoreActivity;
+import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -132,6 +133,8 @@ public class NewHousedetailsActivity extends BaseActivity {
     TextView tvDetailsManagerPhone;
     @BindView(R.id.activity_lishi_new_house)
     RelativeLayout activityLishiNewHouse;
+    @BindView(R.id.tv_details_phone)
+    TextView tvDetailsPhone;
 
     private int mDistanceY;
     private LoveAdapter loveAdapter;
@@ -183,12 +186,11 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
 
-
-
     //详情字段接口
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
+        new HouseLogPresenter(this).setHouseLog("1",houseId,"");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -217,7 +219,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
-
+                        tvDetailsPhone.setText(datas.getKpPhone()+"");
                         isSc = datas.getIsSc();
                         if (isSc == 0) {//收藏
                             isStart = true;
@@ -580,14 +582,14 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout,R.id.tv_details_manager_phone})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.tv_details_manager_phone:
-                ShowCallDialog(hwdcBroker.getPhone()+"");
+                ShowCallDialog(hwdcBroker.getPhone() + "");
                 break;
             case R.id.img_start:
                 if (MyUtils.isLogin(this)) {
@@ -642,7 +644,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {
-                    Toast.makeText(NewHousedetailsActivity.this, "百度地图未安装", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewHousedetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

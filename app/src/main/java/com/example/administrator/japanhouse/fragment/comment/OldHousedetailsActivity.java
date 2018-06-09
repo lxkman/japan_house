@@ -51,6 +51,7 @@ import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
 import com.example.administrator.japanhouse.more.OldHouseMoreActivity;
+import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -165,6 +166,8 @@ public class OldHousedetailsActivity extends BaseActivity {
     private final static String BAIDU_MODE = "&mode=walking";
     //百度地图的包名
     private final static String BAIDU_PKG = "com.baidu.BaiduMap";
+    private HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,6 +188,7 @@ public class OldHousedetailsActivity extends BaseActivity {
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
+        new HouseLogPresenter(this).setHouseLog("0",houseId,"");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -206,7 +210,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                         datas = oldHouseListBean.getDatas();
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
-                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        hwdcBroker = datas.getHwdcBroker();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
@@ -230,11 +234,47 @@ public class OldHousedetailsActivity extends BaseActivity {
     }
 
     //    }
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout,R.id.bdMap_layout})
+    private void ShowCallDialog(final String tel) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.call_layout)
+                .setPaddingdp(0, 10, 0, 10)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(false)
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+        final TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText(tel);
+        TextView text_pause = dialog.getView(R.id.text_pause);
+
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tel));
+                startActivity(dialIntent);
+            }
+        });
+
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout,R.id.bdMap_layout,R.id.tv_details_manager_phone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                break;
+            case R.id.tv_details_manager_phone:
+                ShowCallDialog(hwdcBroker.getPhone()+"");
                 break;
             case R.id.img_start:
                 if (MyUtils.isLogin(this)){

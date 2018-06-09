@@ -1,7 +1,10 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -34,6 +37,7 @@ import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.more.ShangPuMoreActivity;
+import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -103,6 +107,12 @@ public class ShangpuDetailsActivity extends BaseActivity {
     CircleImageView tvDetailsManagerHead;
     @BindView(R.id.tv_details_manager_name)
     TextView tvDetailsManagerName;
+    @BindView(R.id.textView2)
+    TextView textView2;
+    @BindView(R.id.tv_details_manager_phone)
+    TextView tvDetailsManagerPhone;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
     private int mDistanceY;
     private LoveAdapter loveAdapter;
     private List<String> mList = new ArrayList();
@@ -119,6 +129,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
     private List<String> bannerlist;
     private List<String> mUrlList = new ArrayList();
     private String realEstateImgs;
+    private ShangYeDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +153,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
+        new HouseLogPresenter(this).setHouseLog("5",houseId,"3");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -150,8 +162,8 @@ public class ShangpuDetailsActivity extends BaseActivity {
         }
         HttpParams params = new HttpParams();
         params.put("hId", houseId);
-        params.put("token",token);
-        params.put("htype",3);
+        params.put("token", token);
+        params.put("htype", 3);
         OkGo.<ShangYeDetailsBean>post(MyUrls.BASEURL + "/app/realestate/realestateinfo")
                 .tag(this)
                 .params(params)
@@ -161,7 +173,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         int code = response.code();
                         ShangYeDetailsBean SydcListBean = response.body();
                         datas = SydcListBean.getDatas();
-                        ShangYeDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        hwdcBroker = datas.getHwdcBroker();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tv_price.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
@@ -170,11 +182,11 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(ShangpuDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         isSc = datas.getIsSc();
-                        if (isSc==0){//收藏
-                            isStart=true;
+                        if (isSc == 0) {//收藏
+                            isStart = true;
                             imgStart.setImageResource(R.drawable.shoucang2);
-                        }else {//未收藏
-                            isStart=false;
+                        } else {//未收藏
+                            isStart = false;
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
                         initViewPager();
@@ -227,7 +239,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
 
     private void initViewPager() {
         realEstateImgs = datas.getRealEstateImgs();
-        String str2=realEstateImgs.replace("", "");//去掉所用空格
+        String str2 = realEstateImgs.replace("", "");//去掉所用空格
         bannerlist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
         if (mBannerList.size() <= 0) {
             if (datas.getVideoUrls() != null) {
@@ -377,8 +389,8 @@ public class ShangpuDetailsActivity extends BaseActivity {
             params.put("languageType", 0);
         }
         params.put("hType", 3);
-        params.put("pageNo","1");
-        params.put("cId","2");
+        params.put("pageNo", "1");
+        params.put("cId", "2");
         OkGo.<SydcListBean>post(MyUrls.BASEURL + "/app/realestate/searchlist")
                 .tag(this)
                 .params(params)
@@ -401,13 +413,14 @@ public class ShangpuDetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(ShangpuDetailsActivity.this, ShangpuDetailsActivity.class);
-                                intent.putExtra("houseId",SydcListBean.getDatas().get(position).getId()+"");
+                                intent.putExtra("houseId", SydcListBean.getDatas().get(position).getId() + "");
                                 startActivity(intent);
                             }
                         });
                     }
                 });
     }
+
     class LoveAdapter extends BaseQuickAdapter<SydcListBean.DatasEntity, BaseViewHolder> {
 
         public LoveAdapter(@LayoutRes int layoutResId, @Nullable List<SydcListBean.DatasEntity> data) {
@@ -416,15 +429,16 @@ public class ShangpuDetailsActivity extends BaseActivity {
 
         @Override
         protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
-            helper.setText(R.id.tv_house_name,isJa?item.getTitleJpn():item.getTitleCn());
-            helper.setText(R.id.tv_house_address,isJa?item.getSpecificLocationJpn():item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
+            helper.setText(R.id.tv_house_address, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
 //            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
-            helper.setVisible(R.id.tv_house_room,false);
-            helper.setText(R.id.tv_house_area,isJa?item.getAreaJpn():item.getAreaCn());
-            helper.setText(R.id.tv_price,isJa?item.getSellingPriceJpn():item.getSellingPriceCn());
+            helper.setVisible(R.id.tv_house_room, false);
+            helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
+            helper.setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
             Glide.with(ShangpuDetailsActivity.this).load(item.getRealEstateImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
+
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -440,15 +454,97 @@ public class ShangpuDetailsActivity extends BaseActivity {
             return mBaseFragmentList.size();
         }
     }
+    private void ShowCallDialog(final String tel) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.call_layout)
+                .setPaddingdp(0, 10, 0, 10)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(false)
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+        final TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText(tel);
+        TextView text_pause = dialog.getView(R.id.text_pause);
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More})
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tel));
+                startActivity(dialIntent);
+            }
+        });
+
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    //头部 添加相应地区
+    private final static String BAIDU_HEAD = "baidumap://map/direction?region=0";
+    //起点的经纬度
+    private final static String BAIDU_ORIGIN = "&origin=";
+    //终点的经纬度
+    private final static String BAIDU_DESTINATION = "&destination=";
+    //路线规划方式
+    private final static String BAIDU_MODE = "&mode=walking";
+    //百度地图的包名
+    private final static String BAIDU_PKG = "com.baidu.BaiduMap";
+
+
+    /**
+     * 检测地图应用是否安装
+     *
+     * @param context
+     * @param packagename
+     * @return
+     */
+    public boolean checkMapAppsIsExist(Context context, String packagename) {
+        PackageInfo packageInfo;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
+        } catch (Exception e) {
+            packageInfo = null;
+            e.printStackTrace();
+        }
+        if (packageInfo == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More,R.id.tv_details_location,R.id.tv_details_manager_phone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
+            case R.id.tv_details_location:
+                //检测地图是否安装和唤起
+                if (checkMapAppsIsExist(ShangpuDetailsActivity.this, BAIDU_PKG)) {
+                    Toast.makeText(ShangpuDetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
+                            + "," + "139.75" + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
+                            + BAIDU_MODE));
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ShangpuDetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.tv_details_manager_phone:
+                ShowCallDialog(hwdcBroker.getPhone() + "");
+                break;
             case R.id.img_start:
-                if (MyUtils.isLogin(this)){
+                if (MyUtils.isLogin(this)) {
                     if (!isStart) {
                         initStart();
                         isStart = true;
@@ -456,7 +552,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         initUnStart();
                         isStart = false;
                     }
-                }else {
+                } else {
                     Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
@@ -466,18 +562,19 @@ public class ShangpuDetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_See_More:
                 Intent intent = new Intent(ShangpuDetailsActivity.this, ShangPuMoreActivity.class);
-                intent.putExtra("datas",datas);
+                intent.putExtra("datas", datas);
                 startActivity(intent);
                 break;
         }
     }
+
     //收藏
     private void initStart() {
         HttpParams params = new HttpParams();
         params.put("hType", 5);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
         params.put("token", token);//用户登录标识
         params.put("shType", "3");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
-        params.put("hId",houseId);
+        params.put("hId", houseId);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/insertcollectionhouse")
                 .tag(this)
                 .params(params)
@@ -487,23 +584,24 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         int code = response.code();
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
-                        if (code1.equals("200")){
+                        if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
                             Toast.makeText(ShangpuDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(ShangpuDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
+
     //取消收藏
     private void initUnStart() {
         HttpParams params = new HttpParams();
         params.put("hType", 5);//房源类型 0二手房 1新房 2租房 3土地 4别墅 5商业地产 6中国房源 7海外房源 8找团地
         params.put("token", token);//用户登录标识
         params.put("shType", "3");//房源类型下的小类型 例：租房下的二层公寓传3 租房（0办公室出租 1商铺出租 2别墅 3二层公寓 4学生公寓详情 5多层公寓详情） 商业地产（0酒店 1高尔夫球场 2写字楼 3商铺）
-        params.put("hId",houseId);
+        params.put("hId", houseId);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/collectionhouse/deletecollectionhouse")
                 .tag(this)
                 .params(params)
@@ -513,16 +611,17 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         int code = response.code();
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
-                        if (code1.equals("200")){
+                        if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
                             Toast.makeText(ShangpuDetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(ShangpuDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭

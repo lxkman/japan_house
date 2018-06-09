@@ -321,7 +321,7 @@
                         android:gravity="center_vertical"
                         android:text="花满香橙小区"
                         android:textSize="14sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
                 <View
@@ -452,6 +452,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/tv_details_manager_phone"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#fff"

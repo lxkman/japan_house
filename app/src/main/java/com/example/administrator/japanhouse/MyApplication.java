@@ -10,6 +10,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -245,8 +246,9 @@ public class MyApplication extends Application {
         return "74880cc6e0b1658f5467ccc1b3b41e3a";
     }
 
-    public static String getUserId(){
-        return "98456456456";
+    public static String getUserId(Context context){
+        String uid = SharedPreferencesUtils.getInstace(context).getStringPreference("uid", "");
+        return uid;
     }
 }
 

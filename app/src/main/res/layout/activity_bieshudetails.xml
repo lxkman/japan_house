@@ -331,12 +331,14 @@
                 android:layout_weight="0.7"
                 android:layout_width="0dip"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:padding="5dip"
+                <com.example.administrator.japanhouse.view.CircleImageView
+                    android:id="@+id/tv_details_manager_head"
                     android:src="@drawable/deful_touxiang"
-                    android:layout_width="50dip"
-                    android:layout_height="50dip" />
+                    android:layout_gravity="center"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip" />
                 <TextView
+                    android:id="@+id/tv_details_manager_name"
                     android:gravity="center_vertical"
                     android:textColor="#333"
                     android:textSize="14dip"
@@ -367,6 +369,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/tv_details_manager_phone"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#fff"

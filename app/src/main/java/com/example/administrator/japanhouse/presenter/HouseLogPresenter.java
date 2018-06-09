@@ -26,9 +26,9 @@ public class HouseLogPresenter {
      * @param houseId
      * @param shType
      */
-    public void setHouseLog(int houseType, int houseId, int shType){
+    public void setHouseLog(String houseType, String houseId, String shType){
         HttpParams params = new HttpParams();
-        params.put("userId", MyApplication.getUserId());
+        params.put("userId", MyApplication.getUserId(activity));
         params.put("houseType", houseType);
         params.put("houseId", houseId);
         params.put("shType", shType);

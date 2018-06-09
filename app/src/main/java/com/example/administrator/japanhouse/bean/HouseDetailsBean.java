@@ -311,6 +311,7 @@ public class HouseDetailsBean implements Serializable{
         private String videoUrls;
         private String yearBuiltCn;
         private String yearBuiltJpn;
+        private String kpPhone;
         private int yearBuiltSearch;
         private List<BannerlistBean> bannerlist;
         private List<HxtlistBean> hxtlist;
@@ -1351,10 +1352,16 @@ public class HouseDetailsBean implements Serializable{
             return yearBuiltJpn;
         }
 
+        public void setKpPhone(String kpPhone) {
+            this.kpPhone = kpPhone;
+        }
+        public String getKpPhone() {
+            return kpPhone;
+        }
+
         public void setYearBuiltJpn(String yearBuiltJpn) {
             this.yearBuiltJpn = yearBuiltJpn;
         }
-
         public int getYearBuiltSearch() {
             return yearBuiltSearch;
         }

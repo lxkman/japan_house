@@ -19,18 +19,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.adapter.SearchListAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.model.SearchBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
@@ -43,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeSearchActivity extends BaseActivity implements MainSearchPresenter.MainSearchCallBack {
+public class HomeSearchActivity extends BaseActivity implements MainSearchPresenter.MainSearchCallBack, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.location_tv)
     TextView locationTv;
@@ -63,16 +62,17 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
     ImageView historyClear;
     @BindView(R.id.search_list_recycler)
     RecyclerView searchListRecycler;
+    @BindView(R.id.act_homeSearch_scroll)
+    NestedScrollView scrollView;
     private CommonPopupWindow popupWindow;
     private List<String> historyList;
     private List<String> SearchList = new ArrayList<>();
     private HistoryAdapter historyAdapter;
-    private NestedScrollView scrollView;
-
     private MainSearchPresenter searchPresenter;
     private SearchListAdapter searchListAdapter;
-    private String country = "";
+    private boolean isJa;
     private int state;
+    private int state2 = 100;
     private List<SearchBean> searchBean;
 
     @Override
@@ -80,28 +80,27 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_search);
         ButterKnife.bind(this);
-        initView();
-
-        scrollView = (NestedScrollView) findViewById(R.id.act_homeSearch_scroll);
-
-        country = CacheUtils.get(Constants.COUNTRY);
-
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
         searchPresenter = new MainSearchPresenter(this, this);
-
         if (!TextUtils.isEmpty(getIntent().getStringExtra("popcontent"))) {
             locationTv.setText(getIntent().getStringExtra("popcontent"));
         }
-
         if (TextUtils.isEmpty(getIntent().getStringExtra("home"))) {
             locationTv.setClickable(false);
         }
-
         state = getIntent().getIntExtra("state", 0);
-
+        state2 = getIntent().getIntExtra("state2", 0);
         searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        searchListAdapter = new SearchListAdapter(this, SearchList, MyUtils.isJa());
-        searchListRecycler.setAdapter(searchListAdapter);
+        initHot();
+        initListener();
+    }
 
+    private void initListener() {
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -110,6 +109,11 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
@@ -117,15 +121,25 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                     scrollView.setVisibility(View.VISIBLE);
                     searchListRecycler.setVisibility(View.GONE);
                 }
-
                 SearchList.clear();
-                searchListAdapter.notifyDataSetChanged();
-                searchPresenter.getSearchHint(state, searchEt.getText().toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                if (searchListAdapter != null) {
+                    searchListAdapter.notifyDataSetChanged();
+                }
+                if (state == 4) {
+                    if (state2 != 100) {
+                        searchPresenter.getSearchHint(state, state2, searchEt.getText().toString());
+                    } else {
+                        searchPresenter.getSearchHint(state, searchEt.getText().toString());
+                    }
+                } else if (state == 5) {
+                    if (state2 != 100) {
+                        searchPresenter.getSearchHint(state, state2, searchEt.getText().toString());
+                    } else {
+                        searchPresenter.getSearchHint(state, searchEt.getText().toString());
+                    }
+                } else {
+                    searchPresenter.getSearchHint(state, searchEt.getText().toString());
+                }
             }
         });
 
@@ -139,59 +153,78 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                                     getCurrentFocus()
                                             .getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
-
-                    switch (state) {
-                        case 0: //新房
-                            Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
-                            newHouseIntent.putExtra("searchText", searchEt.getText().toString());
-                            startActivity(newHouseIntent);
-                            break;
-                        case 1: //别墅
-                            Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
-                            villaIntent.putExtra("searchText", searchEt.getText().toString());
-                            startActivity(villaIntent);
-                            break;
-                        case 2: //二手房
-                            Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
-                            oldHouseIntent.putExtra("searchText", searchEt.getText().toString());
-                            startActivity(oldHouseIntent);
-                            break;
-                        case 3: //土地
-                            Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
-                            landIntent.putExtra("searchText", searchEt.getText().toString());
-                            startActivity(landIntent);
-                            break;
-                        case 4: //租房
-                            Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
-                            rentalIntent.putExtra("searchText", searchEt.getText().toString());
-                            startActivity(rentalIntent);
-                            break;
-                        case 5: //商业地产
-                            Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
-                            businessIntent.putExtra("searchText", searchEt.getText().toString());
-                            startActivity(businessIntent);
-                            break;
+                    if (SearchList == null || SearchList.size() == 0) {
+                        Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                        return false;
                     }
-                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
-                    if (list != null) {
-                        list.add(0, new SearchBean(state, searchEt.getText().toString()));
-                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, list);
-                    } else {
-                        List<SearchBean> arrayList = new ArrayList<>();
-                        arrayList.add(0, new SearchBean(state, searchEt.getText().toString()));
-                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, arrayList);
-                    }
-
-                    queryCacheHistory();
+                    tiaozhuan();
                     return true;
                 }
                 return false;
             }
         });
-
     }
 
-    private void initView() {
+    private void tiaozhuan() {
+        switch (state) {
+            case 0: //新房
+                Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
+                newHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                startActivity(newHouseIntent);
+                break;
+            case 1: //别墅
+                Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
+                villaIntent.putExtra("searchText", searchEt.getText().toString());
+                startActivity(villaIntent);
+                break;
+            case 2: //二手房
+                Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
+                oldHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                startActivity(oldHouseIntent);
+                break;
+            case 3: //土地
+                Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
+                landIntent.putExtra("searchText", searchEt.getText().toString());
+                startActivity(landIntent);
+                break;
+            case 4: //租房
+                if (state2 == 100) {
+                    Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
+                    rentalIntent.putExtra("searchText", searchEt.getText().toString());
+                    startActivity(rentalIntent);
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("searchText", searchEt.getText().toString());
+                    setResult(11, intent);
+                    finish();
+                }
+                break;
+            case 5: //商业地产
+                if (state2 == 100) {
+                    Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
+                    businessIntent.putExtra("searchText", searchEt.getText().toString());
+                    startActivity(businessIntent);
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("searchText", searchEt.getText().toString());
+                    setResult(11, intent);
+                    finish();
+                }
+                break;
+        }
+        List<SearchBean> list = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
+        if (list != null) {
+            list.add(0, new SearchBean(state, searchEt.getText().toString()));
+            CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, list);
+        } else {
+            List<SearchBean> arrayList = new ArrayList<>();
+            arrayList.add(0, new SearchBean(state, searchEt.getText().toString()));
+            CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, arrayList);
+        }
+        queryCacheHistory();
+    }
+
+    private void initHot() {
         List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
         hotNameList.add("青森县");
@@ -251,7 +284,6 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 queryCacheHistory();
             }
         });
-
         queryCacheHistory();
     }
 
@@ -406,11 +438,23 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 for (int i = 0; i < response.body().getDatas().size(); i++) {
                     SearchList.add(response.body().getDatas().get(i).getVal());
                 }
-
-                searchListAdapter.notifyDataSetChanged();
-                searchListAdapter.setSearchContent(searchEt.getText().toString());
+                if (SearchList == null || SearchList.size() == 0) {
+                    Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                }
+                if (searchListAdapter == null) {
+                    searchListAdapter = new SearchListAdapter(R.layout.search_list_item, SearchList);
+                    searchListRecycler.setAdapter(searchListAdapter);
+                } else {
+                    searchListAdapter.notifyDataSetChanged();
+                }
+                searchListAdapter.setOnItemClickListener(HomeSearchActivity.this);
             }
         }
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        tiaozhuan();
     }
 
     private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
@@ -422,6 +466,18 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         @Override
         protected void convert(BaseViewHolder helper, String item) {
             helper.setText(R.id.item_name_tv, item);
+        }
+    }
+
+    private class SearchListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+
+        public SearchListAdapter(int layoutResId, @Nullable List<String> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, String item) {
+            helper.setText(R.id.tv_Search_list, item);
         }
     }
 

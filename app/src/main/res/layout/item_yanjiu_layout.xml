@@ -3,12 +3,13 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginRight="10dp"
-             android:layout_marginTop="10dp"
+             android:layout_marginBottom="10dp"
 >
     <ImageView
         android:id="@+id/item_pic_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
+        android:scaleType="fitXY"
         android:src="@drawable/test_dayangtai_iv"/>
     <TextView
         android:id="@+id/tv_content"

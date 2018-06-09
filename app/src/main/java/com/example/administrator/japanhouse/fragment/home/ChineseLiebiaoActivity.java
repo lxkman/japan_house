@@ -48,6 +48,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.R.attr.id;
+
 public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
@@ -82,6 +84,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     private boolean isDitie;
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
+    private String cityId;
+    private String searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         } else {
             isJa = false;
         }
+        searchText = getIntent().getStringExtra("searchText");
         initView();
         initData();
         initListener();
@@ -299,7 +304,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
 
 
     private void initData() {
-        final String id = getIntent().getStringExtra("id");
+        cityId = getIntent().getStringExtra("id");
         HttpParams params = new HttpParams();
         params.put("pageNo", page);
         if (isJa) {
@@ -308,9 +313,10 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             params.put("languageType", 0);
         }
         params.put("hType", 1);
-        params.put("cityId", id);//城市id
+        params.put("cityId", cityId);//城市id
         params.put("sjId", sjId);//售价
         params.putUrlParams("hxs", hxsList);//户型
+        params.put("searchText", searchText);//搜索
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
@@ -458,7 +464,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn())
-                    .setText(R.id.tv_ting, isJa ? "" : "");
+                    .setText(R.id.tv_ting, isJa ? item.getHouseTypeJpn() : item.getHouseTypeCn());
         }
     }
 
@@ -480,8 +486,20 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
                 intent.putExtra("edt_hint", getResources().getString(R.string.qsrdcmchqy));
-                startActivity(intent);
+                intent.putExtra("state", 7);
+                intent.putExtra("cityId",cityId);
+                startActivityForResult(intent,0);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
+        }
+    }
 }

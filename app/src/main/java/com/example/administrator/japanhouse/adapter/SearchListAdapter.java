@@ -1,11 +1,7 @@
 package com.example.administrator.japanhouse.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,20 +39,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        if (list != null && list.size() > 0 && searchContent != null) {
-            int indexOf = list.get(position).indexOf(searchContent);
-
-            if (indexOf != -1) {
-                SpannableStringBuilder builder = new SpannableStringBuilder(list.get(position));
-                ForegroundColorSpan span1 = new ForegroundColorSpan(Color.parseColor("#FE972A"));
-                builder.setSpan(span1, indexOf, indexOf + searchContent.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.tv_Search_list.setText(builder);
-            } else {
-                holder.tv_Search_list.setText(list.get(position));
-            }
-
-        }
 
 
     }

@@ -340,6 +340,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
+        params.put("searchText", searchText);
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
@@ -571,8 +572,19 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.shangyedichan));
                 intent.putExtra("state", 5);
-                startActivity(intent);
+                intent.putExtra("state2", type);
+                startActivityForResult(intent,0);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
+        }
+    }
 }

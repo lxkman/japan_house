@@ -66,6 +66,24 @@ public class ChinaListBean {
         private int id;
         private String specificLocationJpn;
         private String sellingPriceJpn;
+        private String houseTypeCn;
+        private String houseTypeJpn;
+
+        public String getHouseTypeJpn() {
+            return houseTypeJpn;
+        }
+
+        public void setHouseTypeJpn(String houseTypeJpn) {
+            this.houseTypeJpn = houseTypeJpn;
+        }
+
+        public String getHouseTypeCn() {
+            return houseTypeCn;
+        }
+
+        public void setHouseTypeCn(String houseTypeCn) {
+            this.houseTypeCn = houseTypeCn;
+        }
 
         public void setSpecificLocationCn(String specificLocationCn) {
             this.specificLocationCn = specificLocationCn;

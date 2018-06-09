@@ -637,7 +637,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.zu_house));
                 intent.putExtra("state", 4);
-                startActivity(intent);
+                intent.putExtra("state2", mType2);
+                startActivityForResult(intent,0);
         }
     }
 
@@ -653,6 +654,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             mDatas.clear();
             initData();
             Log.e("xxx", "开始经度:" + starJd + "\n" + "结束经度:" + endJd + "\n" + "开始纬度:" + starWd + "\n" + "结束纬度:" + endWd);
+        }else if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
         }
     }
 }

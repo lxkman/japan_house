@@ -32,10 +32,8 @@ public class FirstView implements View.OnClickListener {
     private RecyclerView mrecycler2;
     private RecyclerView mrecycler3;
     private OneAdapter oneAdapter;
-    private TwoAdapter twoAdapter;
     private ThreeAdapter threeAdapter;
     private List<OneCheckBean> mList1 = new ArrayList();
-    private List<OneCheckBean> mList2 = new ArrayList();
     private List<OneCheckBean> mList3 = new ArrayList();
     private Button btn_sure;
     private Button btn_reset;
@@ -81,58 +79,16 @@ public class FirstView implements View.OnClickListener {
         return view;
     }
 
-    void insertData(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
-        mList2 = list;
-        mList2.add(new OneCheckBean(true, "不限"));
-        mList2.add(new OneCheckBean(false, "朝阳"));
-        mList2.add(new OneCheckBean(false, "海淀"));
-        mList2.add(new OneCheckBean(false, "昌平"));
-        mList2.add(new OneCheckBean(false, "通州"));
-        mList2.add(new OneCheckBean(false, "房山"));
-        mList2.add(new OneCheckBean(false, "顺义"));
-        mList3.add(new OneCheckBean(true, "不限"));
-        mList3.add(new OneCheckBean(false, "测试1"));
-        mList3.add(new OneCheckBean(false, "测试2"));
-        mList3.add(new OneCheckBean(false, "测试3"));
-        mList3.add(new OneCheckBean(false, "测试4"));
-        mList3.add(new OneCheckBean(false, "测试5"));
-        mList3.add(new OneCheckBean(false, "测试6"));
-        mList3.add(new OneCheckBean(false, "测试7"));
-        this.dropDownMenu = dropDownMenu;
-        initData();
-    }
-
     public void insertData(List<MoreCheckBean> quyuListBean, List<MoreCheckBean> ditieListBean, DropDownMenu dropDownMenu) {
         mQuyuListBean.clear();
         mDitieListBean.clear();
         mQuyuListBean = quyuListBean;
         mDitieListBean = ditieListBean;
         this.dropDownMenu = dropDownMenu;
-        initData2();
+        initData();
     }
 
     private void initData() {
-        if (oneAdapter == null) {
-            oneAdapter = new OneAdapter(R.layout.leixing_item2, mList1);
-        }
-        if (twoAdapter == null) {
-            twoAdapter = new TwoAdapter(R.layout.leixing_item2, mList2);
-        }
-        if (threeAdapter == null) {
-            threeAdapter = new ThreeAdapter(R.layout.leixing_item2, mList3);
-        }
-        mrecycler1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        mrecycler1.setNestedScrollingEnabled(false);
-        mrecycler2.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        mrecycler2.setNestedScrollingEnabled(false);
-        mrecycler3.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        mrecycler3.setNestedScrollingEnabled(false);
-        mrecycler1.setAdapter(oneAdapter);
-        mrecycler2.setAdapter(twoAdapter);
-        mrecycler3.setAdapter(threeAdapter);
-    }
-
-    private void initData2() {
         if (oneAdapter == null) {
             oneAdapter = new OneAdapter(R.layout.leixing_item2, mList1);
             mrecycler1.setAdapter(oneAdapter);
@@ -196,7 +152,7 @@ public class FirstView implements View.OnClickListener {
                     setFirstChecked(mQuyuListBean);
                     setFirstChecked(mDitieListBean);
                     oneAdapter.notifyDataSetChanged();
-                    initData2();
+                    initData();
                 }
             });
         }
@@ -229,7 +185,7 @@ public class FirstView implements View.OnClickListener {
                     }
                     setFirstCheckedItem(mQuyuListBean, adapterPosition2);
                     quYuAdapter.notifyDataSetChanged();
-                    initData2();
+                    initData();
                 }
 
             });
@@ -344,41 +300,12 @@ public class FirstView implements View.OnClickListener {
                     }
                     setFirstCheckedItem(mDitieListBean, adapterPosition2);
                     diTieAdapter.notifyDataSetChanged();
-                    initData2();
+                    initData();
                 }
             });
         }
     }
 
-
-    class TwoAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
-
-        public TwoAdapter(@LayoutRes int layoutResId, @Nullable List<OneCheckBean> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(final BaseViewHolder helper, OneCheckBean item) {
-            helper.setText(R.id.rb_title, item.getName());
-            helper.setChecked(R.id.rb_title, item.isChecked());
-            helper.setVisible(R.id.img_isCheck, false);
-            helper.getView(R.id.rb_title).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //直接在外层用adapter的点击事件就不管用，真是邪门
-                    for (int i = 0; i < mList2.size(); i++) {
-                        if (helper.getAdapterPosition() == i) {
-                            mList2.get(i).setChecked(true);
-                        } else {
-                            mList2.get(i).setChecked(false);
-                        }
-                    }
-                    twoAdapter.notifyDataSetChanged();
-                }
-
-            });
-        }
-    }
 
     class ThreeAdapter extends BaseQuickAdapter<OneCheckBean, BaseViewHolder> {
 

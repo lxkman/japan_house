@@ -20,9 +20,15 @@ import com.example.administrator.japanhouse.adapter.HeaderRecyclerAndFooterWrapp
 import com.example.administrator.japanhouse.adapter.ViewHolder;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.CityBean;
+import com.example.administrator.japanhouse.bean.CityListBean;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.DividerItemDecoration;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.mcxtzhang.indexlib.IndexBar.widget.IndexBar;
 import com.mcxtzhang.indexlib.suspension.SuspensionDecoration;
 
@@ -55,7 +61,7 @@ public class LocationActivity extends BaseActivity {
      * 显示指示器DialogText
      */
     private TextView mTvSideBarHint;
-    private List<CityBean> cityList;
+    private List<CityBean> cityBeanList;
     private CityAdapter cityAdapter;
     private List<String> hotList;
 
@@ -66,7 +72,34 @@ public class LocationActivity extends BaseActivity {
         setContentView(R.layout.activity_location);
         ButterKnife.bind(this);
         initView();
+        initData();
         searchTv.setOnEditorActionListener(editorActionListener);
+    }
+
+    private void initData() {
+        HttpParams params = new HttpParams();
+        params.put("languageType", 0);
+        OkGo.<CityListBean>post(MyUrls.BASEURL + "/app/city/getcity")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<CityListBean>(LocationActivity.this, CityListBean.class) {
+                    @Override
+                    public void onSuccess(Response<CityListBean> response) {
+                        int code = response.code();
+                        CityListBean body = response.body();
+                        List<CityListBean.DatasEntity> datas = body.getDatas();
+                        List<String> citysList = new ArrayList<String>();
+                        if (datas != null && datas.size() > 0) {
+                            for (int i = 0; i < datas.size(); i++) {
+                                CityListBean.DatasEntity datasEntity = datas.get(i);
+                                String administrationNameCn = datasEntity.getAdministrationNameCn();
+                                citysList.add(administrationNameCn);
+                            }
+                        }
+                        initDatas(citysList);
+                        //                        initDatas(getResources().getStringArray(R.array.provinces));
+                    }
+                });
     }
 
     TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
@@ -94,11 +127,11 @@ public class LocationActivity extends BaseActivity {
         hotList.add("");
         cityRecycler = (RecyclerView) findViewById(R.id.city_recycler);
         cityRecycler.setLayoutManager(mManager = new LinearLayoutManager(mContext));
-        cityAdapter = new CityAdapter(this, cityList);
+        cityAdapter = new CityAdapter(this, cityBeanList);
         cityAdapter.setOnItemClickListener(new CityAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                EventBus.getDefault().postSticky(new EventBean("changecity", cityList.get(position-1).getCity()));
+                EventBus.getDefault().postSticky(new EventBean("changecity", cityBeanList.get(position - 1).getCity()));
                 finish();
             }
         });
@@ -122,7 +155,7 @@ public class LocationActivity extends BaseActivity {
         };
         mHeaderAdapter.setHeaderView(R.layout.item_head_mylocation, "");
         cityRecycler.setAdapter(mHeaderAdapter);
-        cityRecycler.addItemDecoration(mDecoration = new SuspensionDecoration(this, cityList).setHeaderViewCount(mHeaderAdapter.getHeaderViewCount()));
+        cityRecycler.addItemDecoration(mDecoration = new SuspensionDecoration(this, cityBeanList).setHeaderViewCount(mHeaderAdapter.getHeaderViewCount()));
 
         //如果add两个，那么按照先后顺序，依次渲染。
         cityRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
@@ -135,7 +168,6 @@ public class LocationActivity extends BaseActivity {
                 .setNeedRealIndex(true)//设置需要真实的索引
                 .setmLayoutManager(mManager);//设置RecyclerView的LayoutManager
 
-        initDatas(getResources().getStringArray(R.array.provinces));
     }
 
     /**
@@ -144,21 +176,21 @@ public class LocationActivity extends BaseActivity {
      * @param data
      * @return
      */
-    private void initDatas(final String[] data) {
-        cityList = new ArrayList<>();
-        for (int i = 0; i < data.length; i++) {
+    private void initDatas(final List<String> data) {
+        cityBeanList = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
             CityBean cityBean = new CityBean();
-            cityBean.setCity(data[i]);//设置城市名称
-            cityList.add(cityBean);
+            cityBean.setCity(data.get(i));//设置城市名称
+            cityBeanList.add(cityBean);
         }
 
-        mIndexBar.setmSourceDatas(cityList)//设置数据
+        mIndexBar.setmSourceDatas(cityBeanList)//设置数据
                 .setHeaderViewCount(mHeaderAdapter.getHeaderViewCount())//设置HeaderView数量
                 .invalidate();
 
-        cityAdapter.setDatas(cityList);
+        cityAdapter.setDatas(cityBeanList);
         mHeaderAdapter.notifyDataSetChanged();
-        mDecoration.setmDatas(cityList);
+        mDecoration.setmDatas(cityBeanList);
     }
 
     private class HotcityAdapter extends BaseQuickAdapter<String, BaseViewHolder> {

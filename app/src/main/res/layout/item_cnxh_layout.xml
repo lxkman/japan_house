@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,17 +17,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_margin="10dp"
             android:layout_toRightOf="@+id/iv_tupian"
-            android:layout_margin="10dp">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="让你的生活有品质，某*小区提供服务"
-                android:textColor="@color/text_black"
+                android:ellipsize="end"
                 android:singleLine="true"
-                android:ellipsize="end"/>
+                android:text="让你的生活有品质，某*小区提供服务"
+                android:textColor="@color/text_black"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,17 +36,17 @@
                     android:id="@+id/tv_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="东京"
                     android:drawableLeft="@drawable/home_map_like_iv"
-                    android:drawablePadding="5dp"/>
+                    android:drawablePadding="5dp"
+                    android:text="东京"/>
                 <TextView
                     android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:text="1750元/月"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:layout_alignParentRight="true"/>
+                    android:textStyle="bold"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -60,17 +62,17 @@
                     android:id="@+id/tv_mianji"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="175㎡"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/tv_ting"
-                    android:textColor="@color/text_gray"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="175㎡"
+                    android:textColor="@color/text_gray"/>
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray1"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:background="@color/gray1"/>
 </LinearLayout>

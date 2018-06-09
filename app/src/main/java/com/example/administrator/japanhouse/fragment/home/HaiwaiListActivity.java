@@ -70,6 +70,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     private List<ChinaShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
     private List<String> hxsList=new ArrayList<>();
+    private String searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         } else {
             isJa = false;
         }
+        searchText = getIntent().getStringExtra("searchText");
         initView();
         initData();
         initListener();
@@ -231,6 +233,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         params.put("cityId", id);//城市id
         params.put("sjId", sjId);//售价
         params.putUrlParams("hxs", hxsList);//户型
+        params.put("searchText", searchText);//搜索
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价

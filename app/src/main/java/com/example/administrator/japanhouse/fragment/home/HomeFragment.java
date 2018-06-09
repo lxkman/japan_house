@@ -36,9 +36,15 @@ import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.bean.HomePageBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
+import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Buyhouse_Baike_Activity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Daikuan_Activity;
@@ -337,12 +343,16 @@ public class HomeFragment extends BaseFragment {
                         HomePageBean body = response.body();
                         HomePageBean.DatasEntity datas = body.getDatas();
                         final List<HomePageBean.DatasEntity.CnxhEntity> cnxh = datas.getCnxh();//猜你喜欢
-                        List<HomePageBean.DatasEntity.ImagesEntity> images = datas.getImages();//banner
+                        final List<HomePageBean.DatasEntity.ImagesEntity> images = datas.getImages();//banner
                         final List<HomePageBean.DatasEntity.TjesfEntity> tjesf = datas.getTjesf();//推荐二手房
                         List<HomePageBean.DatasEntity.TjjjrEntity> tjjjr = datas.getTjjjr();//推荐经纪人
                         final List<HomePageBean.DatasEntity.TjtdEntity> tjtd = datas.getTjtd();//推荐土地
                         final List<HomePageBean.DatasEntity.TjxfEntity> tjxf = datas.getTjxf();//推荐新房
                         final List<HomePageBean.DatasEntity.TjzfEntity> tjzf = datas.getTjzf();//推荐租房
+                        List<HomePageBean.DatasEntity.CsttEntity> cstt = datas.getCstt();//楼市探探
+                        if (cstt != null && cstt.size() > 0) {
+                            tantanTv.setText(isJa ? cstt.get(0).getTitleJpn() : cstt.get(0).getTitleCn());
+                        }
                         //-----banner-----
                         List<String> bannerList = new ArrayList<>();
                         if (images != null && images.size() > 0) {
@@ -355,7 +365,60 @@ public class HomeFragment extends BaseFragment {
                         banner.setOnBannerListener(new OnBannerListener() {
                             @Override
                             public void OnBannerClick(int position) {
-                                //                                startActivity(new Intent(mContext, NewHousedetailsActivity.class));
+                                int linkHtype = images.get(position).getLinkHtype();
+                                int linkShtype = images.get(position).getLinkShtype();
+                                Intent intent = null;
+                                switch (linkHtype) {
+                                    case 0:
+                                        intent = new Intent(mContext, OldHousedetailsActivity.class);
+                                        break;
+                                    case 1:
+                                        intent = new Intent(mContext, NewHousedetailsActivity.class);
+                                        break;
+                                    case 2:
+                                        intent = new Intent(mContext, ZuHousedetailsActivity.class);
+                                        if (linkShtype == 5) {
+                                            intent.putExtra("houseType", "duoceng");
+                                        } else if (linkShtype == 4) {
+                                            intent.putExtra("houseType", "xuesheng");
+                                        } else if (linkShtype == 3) {
+                                            intent.putExtra("houseType", "erceng");
+                                        } else if (linkShtype == 2) {
+                                            intent.putExtra("houseType", "bieshu");
+                                        } else if (linkShtype == 1) {
+                                            intent.putExtra("houseType", "shangpu");
+                                        } else if (linkShtype == 0) {
+                                            intent.putExtra("houseType", "bangongshi");
+                                        } else if (linkShtype == 6) {
+                                            intent.putExtra("houseType", "zhaotuandi");
+                                        }
+                                        break;
+                                    case 3:
+                                        intent = new Intent(mContext, TudidetailsActivity.class);
+                                        break;
+                                    case 4:
+                                        intent = new Intent(mContext, BieshudetailsActivity.class);
+                                        break;
+                                    case 5:
+                                        if (linkShtype == 0) {
+                                            intent = new Intent(mContext, JiudianDetailsActivity.class);
+                                        } else if (linkShtype == 1) {
+                                            intent = new Intent(mContext, GaoerfuDetailsActivity.class);
+                                        } else if (linkShtype == 2) {
+                                            intent = new Intent(mContext, XiezilouDetailsActivity.class);
+                                        } else if (linkShtype == 3) {
+                                            intent = new Intent(mContext, ShangpuDetailsActivity.class);
+                                        }
+                                        break;
+                                    case 6:
+                                        intent = new Intent(mContext, ZhongguoDetailsActivity.class);
+                                        break;
+                                    case 7:
+                                        intent = new Intent(mContext, HaiWaiDetailsActivity.class);
+                                        break;
+                                }
+                                intent.putExtra("houseId", images.get(position).getId() + "");
+                                startActivity(intent);
                             }
                         });
                         //-----推荐新房-----
@@ -409,7 +472,7 @@ public class HomeFragment extends BaseFragment {
                                     intent.putExtra("houseType", "shangpu");
                                 } else if (houseType.equals("0")) {
                                     intent.putExtra("houseType", "bangongshi");
-                                }else if (houseType.equals("6")) {
+                                } else if (houseType.equals("6")) {
                                     intent.putExtra("houseType", "zhaotuandi");
                                 }
                                 intent.putExtra("houseId", tjzf.get(position).getId() + "");
@@ -457,7 +520,7 @@ public class HomeFragment extends BaseFragment {
                                         intent.putExtra("houseType", "shangpu");
                                     } else if (houseType.equals("0")) {
                                         intent.putExtra("houseType", "bangongshi");
-                                    }else if (houseType.equals("6")) {
+                                    } else if (houseType.equals("6")) {
                                         intent.putExtra("houseType", "zhaotuandi");
                                     }
                                 }

@@ -142,7 +142,7 @@ public class MyUtils {
 
     public static String longtoStringDate(Long millis){
         Date nowTime = new Date(millis);
-        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy.MM.dd  hh:mm:ss");
         String retStrFormatNowDate = sdFormatter.format(nowTime);
         return retStrFormatNowDate;
     }

@@ -183,6 +183,8 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
 
+
+
     //详情字段接口
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");

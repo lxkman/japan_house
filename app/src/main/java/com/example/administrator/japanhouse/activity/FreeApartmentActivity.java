@@ -49,7 +49,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/4/17.
  */
 
-public class FreeApartmentActivity extends BaseActivity implements FreeApartmentAdapter.onClickListener, FreeApartmentPresenter.FreeApartmentCallBack {
+public class  FreeApartmentActivity extends BaseActivity implements FreeApartmentAdapter.onClickListener, FreeApartmentPresenter.FreeApartmentCallBack {
 
     @BindView(R.id.act_apartment_back)
     ImageView actApartmentBack;
@@ -272,7 +272,6 @@ public class FreeApartmentActivity extends BaseActivity implements FreeApartment
         @Override
         public void onTick(long millisUntilFinished) {
             long time = millisUntilFinished / 1000L;
-            Log.e("==========>>>", millisUntilFinished + "--+++--" + time);
             for (int i = 0; i < datas.size(); i++) {
                 datas.get(i).setCurrentTime(datas.get(i).getCurrentTime() + 1000L);
             }

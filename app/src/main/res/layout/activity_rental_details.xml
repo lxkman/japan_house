@@ -79,8 +79,8 @@
                     android:id="@+id/act_rental_details_refuseReason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="价格太高了"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -103,8 +103,8 @@
                     android:id="@+id/act_rental_details_lessorName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="姜先生"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -127,8 +127,8 @@
                     android:id="@+id/act_rental_details_lessorPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="12345678901"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -151,8 +151,8 @@
                     android:id="@+id/act_rental_details_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="北海道"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -175,8 +175,8 @@
                     android:id="@+id/act_rental_details_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="10公里内"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -247,8 +247,8 @@
                     android:id="@+id/act_rental_details_pattern"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="3室1厅"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -271,8 +271,8 @@
                     android:id="@+id/act_rental_details_bathroom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="是"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -295,8 +295,8 @@
                     android:id="@+id/act_rental_details_toward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="南向"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -319,8 +319,8 @@
                     android:id="@+id/act_rental_details_equipment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#2A2A2A"
                     android:text="咖啡厅、台球场、篮球场"
+                    android:textColor="#2A2A2A"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -344,8 +344,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:horizontalSpacing="8dp"
                     android:layout_marginTop="10dp"
+                    android:horizontalSpacing="8dp"
                     android:numColumns="3"
                     android:verticalSpacing="8dp" />
             </LinearLayout>
@@ -366,28 +366,16 @@
                     android:textColor="#999999"
                     android:textSize="14sp" />
 
-                <RelativeLayout
-                    android:id="@+id/act_rental_details_relative"
+
+                <com.example.administrator.japanhouse.view.HeightGridView
+                    android:id="@+id/act_rental_details_video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    >
-
-                    <ImageView
-                        android:id="@+id/act_rental_details_img"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"
-                         />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/start_video"
-                        android:layout_centerInParent="true"
-                        />
-                </RelativeLayout>
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="8dp" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

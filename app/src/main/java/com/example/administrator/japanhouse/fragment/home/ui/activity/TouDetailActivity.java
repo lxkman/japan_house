@@ -17,6 +17,7 @@ import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.TouListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdapter;
+import com.example.administrator.japanhouse.presenter.TopLinePresenter;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
@@ -25,7 +26,7 @@ import com.lzy.okgo.model.Response;
 
 import java.util.List;
 
-public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener,ToutiaoAdapter.OnItemPraiseListener {
 
     private ImageView img_beak;
     private TextView title;
@@ -39,10 +40,15 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
     private String tid;
     private String token;
 
+    private TopLinePresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tou_detail);
+
+        presenter = new TopLinePresenter();
+
         initView();
         initplNet();
     }
@@ -117,6 +123,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                             detail_recy.addItemDecoration(new DividerItemDecoration(TouDetailActivity.this,DividerItemDecoration.VERTICAL));
                             detail_recy.setNestedScrollingEnabled(false);
                             ToutiaoAdapter touAdapter = new ToutiaoAdapter(TouDetailActivity.this,datas);
+                            touAdapter.setOnItemPraiseListener(TouDetailActivity.this);
                             detail_recy.setAdapter(touAdapter);
                         }
                     }
@@ -141,5 +148,15 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onItemUpListener(int commentId) {
+        presenter.thumbUpComment(commentId);
+    }
+
+    @Override
+    public void onItemDwonListener(int commentId) {
+        presenter.thumbDownComment(commentId);
     }
 }

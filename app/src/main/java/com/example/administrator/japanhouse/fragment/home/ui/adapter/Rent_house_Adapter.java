@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.home.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.RentalDetailsActivity;
@@ -81,6 +83,18 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
         holder.mianji.setText(list.get(position).getArea() + "㎡");
         holder.chaoxiang.setText(list.get(position).getToward());
 
+        if (!TextUtils.isEmpty(list.get(position).getVideoUrl())) {
+            Glide.with(context)
+                    .load(list.get(position).getVideoImageUrl())
+                    .into(holder.sell_img);
+            holder.start.setVisibility(View.VISIBLE);
+        } else {
+            Glide.with(context)
+                    .load(list.get(position).getImgs())
+                    .into(holder.sell_img);
+            holder.start.setVisibility(View.GONE);
+        }
+
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,6 +145,7 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
         public RelativeLayout view;
         TextView stateZh;
         TextView stateJa;
+        ImageView start;
 
         public Viewholder(View itemView) {
             super(itemView);
@@ -142,6 +157,7 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
             chaoxiang = (TextView) itemView.findViewById(R.id.chaoxiang);
             stateZh = (TextView) itemView.findViewById(R.id.sell_state_zh);
             stateJa = (TextView) itemView.findViewById(R.id.sell_state_ja);
+            start = (ImageView) itemView.findViewById(R.id.rent_house_start);
         }
     }
 

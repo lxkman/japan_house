@@ -81,6 +81,17 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
         holder.mianji.setText(list.get(position).getArea() + "㎡");
         holder.chaoxiang.setText(list.get(position).getToward());
 
+        if (!TextUtils.isEmpty(list.get(position).getVideoUrl())) {
+            Glide.with(context)
+                    .load(list.get(position).getVideoImageUrl())
+                    .into(holder.sell_img);
+            holder.start.setVisibility(View.VISIBLE);
+        } else {
+            Glide.with(context)
+                    .load(list.get(position).getImgs())
+                    .into(holder.sell_img);
+            holder.start.setVisibility(View.GONE);
+        }
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,11 +143,13 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
         public RelativeLayout view;
         TextView stateZh;
         TextView stateJa;
+        ImageView start;
 
         public Viewholder(View itemView) {
             super(itemView);
             view = (RelativeLayout) itemView.findViewById(R.id.content_ll);
             sell_img = (ImageView) itemView.findViewById(R.id.rent_house_icon);
+            start = (ImageView) itemView.findViewById(R.id.rent_house_start);
             weizhi = (TextView) itemView.findViewById(R.id.weizhi);
             juli = (TextView) itemView.findViewById(R.id.juli);
             mianji = (TextView) itemView.findViewById(R.id.mianji);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.GridView;
@@ -19,11 +20,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.adapter.RentDetailsVideoAdapter;
+import com.example.administrator.japanhouse.activity.adapter.RentDetailsVideoBitmapAdapter;
 import com.example.administrator.japanhouse.adapter.RentalDetailsPicAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +38,7 @@ import butterknife.ButterKnife;
  * Created by   admin on 2018/4/17.
  */
 
-public class RentalDetailsActivity extends BaseActivity {
+public class RentalDetailsActivity extends BaseActivity implements RentDetailsVideoBitmapAdapter.OnItemClickListener, RentDetailsVideoAdapter.OnItemClickListener {
 
     @BindView(R.id.act_rental_details_title)
     TextView tvTitle;
@@ -89,14 +94,16 @@ public class RentalDetailsActivity extends BaseActivity {
     GridView roomPic;
     @BindView(R.id.act_rental_details_liner_roomPic)
     LinearLayout ltRoomPic;
-    @BindView(R.id.act_rental_details_img)
-    ImageView roomVideo;
     @BindView(R.id.act_rental_details_liner_roomVideo)
     LinearLayout ltRoomVideo;
 
     private RentalDetailsPicAdapter picAdapter;
+    private RentDetailsVideoAdapter adapter;
+    private RentDetailsVideoBitmapAdapter bitmapAdapter;
 
     private String path;
+
+    private GridView gvVideo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,62 +113,31 @@ public class RentalDetailsActivity extends BaseActivity {
 
         final RentalDetailsBean detailsBean = getIntent().getParcelableExtra("detailsBean");
 
+        gvVideo = (GridView) findViewById(R.id.act_rental_details_video);
+
         if (!TextUtils.isEmpty(detailsBean.getTitle())) {
             tvTitle.setText(detailsBean.getTitle());
         }
-
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.act_rental_details_relative);
-
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics dm = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        float density = dm.density;
-        int mWidth = (int) (width / density);
-        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
-        linearParams.height = (mWidth - 46) / 3 * 22 / 15;
-        linearParams.width = (width - 52) / 3;
-        relativeLayout.setLayoutParams(linearParams);
 
         init(detailsBean);
 
         findViewById(R.id.act_rental_details_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(detailsBean.getIsCreate() != 0){
-//                    Intent intent = new Intent(RentalDetailsActivity.this, SellHouseActivity.class);
-//                    startActivity(intent);
-//                    setResult(102);
-//                    finish();
-//                }else{
                 finish();
-//                }
-
             }
         });
 
-        roomVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FullScreenActivity.invoke(RentalDetailsActivity.this, path);
-            }
-        });
+//        roomVideo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FullScreenActivity.invoke(RentalDetailsActivity.this, path);
+//            }
+//        });
+
     }
 
     private void init(RentalDetailsBean detailsBean) {
-//        switch (detailsBean.getRoomState()) {
-//            case 1:
-//                tvRentalState.setText(getString(R.string.activity_rental_details_audit));
-//                tvRentalState.setTextColor(Color.GREEN);
-//                break;
-//            case 2:
-//                tvRentalState.setText(getString(R.string.activity_rental_details_refused));
-//                tvRentalState.setTextColor(Color.RED);
-//                break;
-//            case 3:
-//
-//                break;
-//        }
 //0审核中 1已拒绝 2已通过
         if (TextUtils.equals(detailsBean.getRoomState(), "0")) {
             tvRentalState.setText(getString(R.string.activity_rental_details_audit));
@@ -251,13 +227,21 @@ public class RentalDetailsActivity extends BaseActivity {
             ltRoomPic.setVisibility(View.GONE);
         }
 
-        if (detailsBean.getVideoPic() != null) {
+        if (!TextUtils.isEmpty(detailsBean.getVideoPic())) {
             path = detailsBean.getVideoList();
-            Glide.with(this).load(detailsBean.getVideoPic()).into(roomVideo);
+            List<String> stringList = new ArrayList<>();
+            stringList.add(detailsBean.getVideoPic());
+            adapter = new RentDetailsVideoAdapter(this, stringList);
+            gvVideo.setAdapter(adapter);
+            adapter.setOnItemClickListener(this);
         } else {
             if (!TextUtils.isEmpty(detailsBean.getVideoList())) {
                 path = detailsBean.getVideoList();
-                roomVideo.setImageBitmap(getLocalVideoBitmap(path));
+                List<String> stringList = new ArrayList<>();
+                stringList.add(path);
+                bitmapAdapter = new RentDetailsVideoBitmapAdapter(this, stringList);
+                gvVideo.setAdapter(bitmapAdapter);
+                bitmapAdapter.setOnItemClickListener(this);
             } else {
                 ltRoomVideo.setVisibility(View.GONE);
             }
@@ -301,5 +285,15 @@ public class RentalDetailsActivity extends BaseActivity {
         Intent intent = new Intent(context, RentalDetailsActivity.class);
         intent.putExtra("detailsBean", detailsBean);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onBitmapClickListener() {
+        FullScreenActivity.invoke(RentalDetailsActivity.this, path);
+    }
+
+    @Override
+    public void onClickItemListener() {
+        FullScreenActivity.invoke(RentalDetailsActivity.this, path);
     }
 }

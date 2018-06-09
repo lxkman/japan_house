@@ -1,9 +1,14 @@
 package com.example.administrator.japanhouse.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,6 +16,11 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.FreeApartmentBean;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.presenter.FreeApartmentPresenter;
+import com.example.administrator.japanhouse.view.BaseDialog;
+import com.lzy.okgo.model.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +29,7 @@ import butterknife.OnClick;
 /**
  * admin  2018/6/6
  */
-public class FreeApartmentDetailsActivity extends BaseActivity {
+public class FreeApartmentDetailsActivity extends BaseActivity implements FreeApartmentPresenter.FreeApartmentCallBack {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -66,12 +76,14 @@ public class FreeApartmentDetailsActivity extends BaseActivity {
     @BindView(R.id.act_freeApart_managerPhone)
     TextView managerPhone;
 
+    private FreeApartmentPresenter presenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freeapart_details);
         ButterKnife.bind(this);
-
+        presenter = new FreeApartmentPresenter(this, this);
         initView();
     }
 
@@ -85,7 +97,7 @@ public class FreeApartmentDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.back_img, R.id.act_freeApart_wChat, R.id.act_freeApart_managerPhone})
+    @OnClick({R.id.back_img, R.id.act_freeApart_wChat, R.id.act_freeApart_managerPhone, R.id.act_freeApart_apply_ja, R.id.act_freeApart_apply_zh})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_img:
@@ -95,6 +107,86 @@ public class FreeApartmentDetailsActivity extends BaseActivity {
                 break;
             case R.id.act_freeApart_managerPhone:
                 break;
+
+            case R.id.act_freeApart_apply_ja:
+            case R.id.act_freeApart_apply_zh:
+
+                break;
         }
+    }
+
+    private void showSignupDialog(final int actionId) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_checkroom)
+                .setPaddingdp(20, 0, 20, 0)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(true)
+                .builder();
+
+        final EditText etName = dialog.getView(R.id.et_singup_name);
+        final EditText etPhone = dialog.getView(R.id.et_singup_phone);
+
+        dialog.getView(R.id.iv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getView(R.id.tv_singup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(etName.getText().toString()) && !TextUtils.isEmpty(etPhone.getText().toString())) {
+                    presenter.getSignUp(1, actionId, etPhone.getText().toString(), etName.getText().toString());
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    private void ShowCallDialog(final String tel) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.call_layout)
+                .setPaddingdp(0, 10, 0, 10)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(false)
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+        final TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText(tel);
+        TextView text_pause = dialog.getView(R.id.text_pause);
+
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tel));
+                startActivity(dialIntent);
+            }
+        });
+
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    @Override
+    public void getFreeApartmentList(Response<FreeApartmentBean> response) {
+
+    }
+
+    @Override
+    public void getSignUp(Response<NoDataBean> response) {
+
     }
 }

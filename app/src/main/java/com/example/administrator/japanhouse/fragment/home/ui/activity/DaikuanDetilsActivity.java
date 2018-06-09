@@ -13,11 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +49,9 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     private TextView sx_cailiao;
     private TextView nl_yaoyiu;
 
+
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +64,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
 
     private void initView() {
         //获取跳转的所有数据
-        int id = getIntent().getIntExtra("id", 0);
+        id = getIntent().getIntExtra("id", 0);
         String name = getIntent().getStringExtra("name");
         String accrual = getIntent().getStringExtra("lixi");
 //        double i = Integer.parseInt(accrual)*1.0d;
@@ -214,7 +224,22 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
                     if (flag) {
                         uname.setText("");
                         utel.setText("");
-                        Toast.makeText(DaikuanDetilsActivity.this, "已提交", Toast.LENGTH_SHORT).show();
+
+                        HttpParams params = new HttpParams();
+                        params.put("token", MyApplication.getUserToken());
+                        params.put("applicationName", uname.getText().toString());
+                        params.put("applicationPhone", utel.getText().toString());
+                        params.put("localId", id);
+                        OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/application/insertapplication")
+                                .tag(this)
+                                .params(params)
+                                .execute(new DialogCallback<NoDataBean>(DaikuanDetilsActivity.this, NoDataBean.class) {
+                                    @Override
+                                    public void onSuccess(Response<NoDataBean> response) {
+                                        Toast.makeText(DaikuanDetilsActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                         dialog.dismiss();
                     } else {
                         Toast.makeText(DaikuanDetilsActivity.this, "请阅读用户协议", Toast.LENGTH_SHORT).show();

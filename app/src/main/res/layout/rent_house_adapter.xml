@@ -33,13 +33,21 @@
                 <TextView
                     android:id="@+id/sell_state_ja"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentBottom="true"
                     android:background="#4C000000"
                     android:textColor="@color/white"
                     android:text="审核中"
                     android:textSize="16sp"
                     android:gravity="center"
+                    />
+
+                <ImageView
+                    android:id="@+id/rent_house_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/start_video"
+                    android:layout_centerInParent="true"
                     />
             </RelativeLayout>
 

@@ -51,22 +51,16 @@
                 android:text="2018.01.11"
                 />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/zan"
-                android:layout_toLeftOf="@+id/zan_person"
-                android:background="@drawable/zan"
-                android:layout_alignBottom="@+id/zan_person"
-                />
             <TextView
-                android:layout_alignParentRight="true"
-                android:layout_margin="10dp"
+                android:id="@+id/view_comment_praiseView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000"
-                android:id="@+id/zan_person"
-                />
+                android:layout_alignParentRight="true"
+                android:layout_alignBottom="@id/time"
+                android:layout_marginRight="15dp"
+                android:drawableLeft="@drawable/up_praise"
+                android:drawablePadding="10dp"
+                android:text="0" />
 
         </RelativeLayout>
     </LinearLayout>

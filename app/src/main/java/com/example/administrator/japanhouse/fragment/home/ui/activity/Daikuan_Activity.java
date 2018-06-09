@@ -20,6 +20,7 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.LoansBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Daikuan_Adapter;
+import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;

@@ -23,6 +23,8 @@ import java.util.List;
 import io.rong.imkit.DefaultExtensionModule;
 import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 
 
 /**
@@ -62,11 +64,6 @@ public class RongChatActivity extends BaseActivity {
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.VISIBLE);
                 tvAppraise.setVisibility(View.VISIBLE);
-            } else if (chat.equals(Constants.CHAT_FEEDBACK)) {
-                this.title.setText(getString(R.string.mine_userfeedback));
-                phone.setVisibility(View.GONE);
-                star.setVisibility(View.GONE);
-                tvAppraise.setVisibility(View.GONE);
             } else {
                 if (!TextUtils.isEmpty(title)){
                     this.title.setText(title);
@@ -75,6 +72,13 @@ public class RongChatActivity extends BaseActivity {
                 star.setVisibility(View.GONE);
                 tvAppraise.setVisibility(View.GONE);
             }
+        } else {
+            if (!TextUtils.isEmpty(title)){
+                this.title.setText(title);
+            }
+            phone.setVisibility(View.VISIBLE);
+            star.setVisibility(View.GONE);
+            tvAppraise.setVisibility(View.GONE);
         }
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +188,12 @@ public class RongChatActivity extends BaseActivity {
             }
         });
         dialog.show();
-
+        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+            @Override
+            public UserInfo getUserInfo(String s) {
+                return null;
+            }
+        }, true);
     }
 
     @Override

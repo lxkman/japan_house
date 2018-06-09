@@ -244,5 +244,9 @@ public class MyApplication extends Application {
     public static String getUserToken(){
         return "74880cc6e0b1658f5467ccc1b3b41e3a";
     }
+
+    public static String getUserId(){
+        return "98456456456";
+    }
 }
 

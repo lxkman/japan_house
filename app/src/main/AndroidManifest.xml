@@ -406,7 +406,7 @@
         <activity android:name=".more.TudiMoreActivity" />
         <activity android:name=".more.XieZiLouMoreActivity" />
         <activity android:name=".fragment.comment.VideoDetailsActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             />
         <activity android:name=".fragment.comment.BannerDetailsActivity"></activity>

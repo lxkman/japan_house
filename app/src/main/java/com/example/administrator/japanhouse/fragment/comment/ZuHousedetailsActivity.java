@@ -512,12 +512,17 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.img_start:
-                if (!isStart){
-                    initStart();
-                    isStart=true;
+                if (MyUtils.isLogin(this)){
+                    if (!isStart) {
+                        initStart();
+                        isStart = true;
+                    } else {
+                        initUnStart();
+                        isStart = false;
+                    }
                 }else {
-                    initUnStart();
-                    isStart=false;
+                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyUtils.StartLoginActivity(this);
                 }
                 break;
             case R.id.tv_See_More:

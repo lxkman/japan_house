@@ -7,12 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
+import com.example.administrator.japanhouse.view.CircleImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,23 +22,22 @@ import java.util.List;
 
 public class ToutiaoAdapter extends RecyclerView.Adapter<ToutiaoAdapter.ViewHolder> {
     Context context;
-    List<String>list=new ArrayList<>();
-    public ToutiaoAdapter(Context context) {
+    List<com.example.administrator.japanhouse.bean.TouListBean.DatasBean> datas;
+    public ToutiaoAdapter(Context context,List<com.example.administrator.japanhouse.bean.TouListBean.DatasBean> datas) {
         this.context = context;
-        data();
+        this.datas=datas;
     }
 
-    private void data() {
-        for (int i=0;i<10;i++){
-            list.add("");
-        }
-
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.toutiao_adapter, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
+        Glide.with(context).load(datas.get(viewType).getHwdcUser().getPic()).into(viewHolder.touxiang);
+        viewHolder.name.setText(datas.get(viewType).getHwdcUser().getNickname()+"");
+        viewHolder.time.setText(MyUtils.getDateToStringH(datas.get(viewType).getHwdcUser().getCreateTime()+"")+"");
+        viewHolder.pinglun.setText(datas.get(viewType).getContent()+"");
+        viewHolder.zanperson.setText(datas.get(viewType).getZanNum()+"");
         return viewHolder;
     }
 
@@ -53,24 +53,24 @@ public class ToutiaoAdapter extends RecyclerView.Adapter<ToutiaoAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return datas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView touxiang;
+        public CircleImageView touxiang;
         public TextView name;
         public TextView time;
-        public TextView neirong;
+        public TextView pinglun;
         public TextView zanperson;
         public ImageView zan;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            touxiang = (ImageView) itemView.findViewById(R.id.touxiang);
+            touxiang = (CircleImageView) itemView.findViewById(R.id.touxiang);
             name = (TextView) itemView.findViewById(R.id.name);
             time = (TextView) itemView.findViewById(R.id.time);
-            neirong = (TextView) itemView.findViewById(R.id.neirong);
+            pinglun = (TextView) itemView.findViewById(R.id.pinglun);
             zanperson = (TextView) itemView.findViewById(R.id.zan_person);
             zan = (ImageView) itemView.findViewById(R.id.zan);
         }

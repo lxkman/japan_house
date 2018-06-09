@@ -15,6 +15,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.japanhouse.login.LoginActivity;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.math.BigInteger;
@@ -71,13 +73,26 @@ public class MyUtils {
             return str;
         }
     }
-    public static boolean isJa(){
+    public static boolean isJa() {
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public static boolean isLogin(Context context){
+        String token = SharedPreferencesUtils.getInstace(context).getStringPreference("token", "");
+        if (token != null && !token.equals("")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static void StartLoginActivity(Context context){
+        Intent intent=new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 
 

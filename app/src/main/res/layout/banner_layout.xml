@@ -5,6 +5,7 @@
     android:layout_centerInParent="true"
     android:id="@+id/rela_layout">
     <LinearLayout
+        android:background="#000"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -13,7 +14,6 @@
             android:clickable="false"
             android:id="@+id/img_banner"
             android:scaleType="fitXY"
-            android:src="@drawable/bg_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

@@ -52,6 +52,7 @@ import com.example.administrator.japanhouse.more.NewHouseMoreActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.CircleImageView;
@@ -127,6 +128,10 @@ public class NewHousedetailsActivity extends BaseActivity {
     TextView tvDetailsManagerName;
     @BindView(R.id.bdMap_layout)
     LinearLayout bdMapLayout;
+    @BindView(R.id.tv_details_manager_phone)
+    TextView tvDetailsManagerPhone;
+    @BindView(R.id.activity_lishi_new_house)
+    RelativeLayout activityLishiNewHouse;
 
     private int mDistanceY;
     private LoveAdapter loveAdapter;
@@ -159,6 +164,8 @@ public class NewHousedetailsActivity extends BaseActivity {
     private final static String BAIDU_MODE = "&mode=walking";
     //百度地图的包名
     private final static String BAIDU_PKG = "com.baidu.BaiduMap";
+    private HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,7 +181,6 @@ public class NewHousedetailsActivity extends BaseActivity {
         initScroll();
 
     }
-
 
 
     //详情字段接口
@@ -202,13 +208,14 @@ public class NewHousedetailsActivity extends BaseActivity {
                         datas = oldHouseListBean.getDatas();
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
-                        HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker = datas.getHwdcBroker();
+                        hwdcBroker = datas.getHwdcBroker();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+
                         isSc = datas.getIsSc();
                         if (isSc == 0) {//收藏
                             isStart = true;
@@ -314,7 +321,6 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
     }
-
 
 
     private void initViewPager() {
@@ -445,8 +451,8 @@ public class NewHousedetailsActivity extends BaseActivity {
 
     private void initData() {
         intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
-        intent.putExtra("lat", datas.getLatitude()+"");
-        intent.putExtra("log", datas.getLongitude()+"");
+        intent.putExtra("lat", datas.getLatitude() + "");
+        intent.putExtra("log", datas.getLongitude() + "");
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -458,7 +464,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                 }
             }
         });
-
 
 
         if (mLiebiaoAdapter == null) {
@@ -496,6 +501,39 @@ public class NewHousedetailsActivity extends BaseActivity {
         Glide.with(NewHousedetailsActivity.this).load(hxtlist.get(position).getVal()).into(img_dialog_huxing);
     }
 
+    private void ShowCallDialog(final String tel) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.call_layout)
+                .setPaddingdp(0, 10, 0, 10)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(false)
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+        final TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText(tel);
+        TextView text_pause = dialog.getView(R.id.text_pause);
+
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tel));
+                startActivity(dialIntent);
+            }
+        });
+
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
     //猜你喜欢
     private void initLoveRecycler() {
@@ -507,7 +545,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         }
         params.put("hType", 1);
         params.put("pageNo", "1");
-        params.put("cId",2);
+        params.put("cId", 2);
         OkGo.<OldHouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlist")
                 .tag(this)
                 .params(params)
@@ -530,7 +568,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(NewHousedetailsActivity.this, NewHousedetailsActivity.class);
-                                intent.putExtra("houseId", oldHouseListBean.getDatas().get(position).getId()+"");
+                                intent.putExtra("houseId", oldHouseListBean.getDatas().get(position).getId() + "");
                                 startActivity(intent);
                             }
                         });
@@ -540,20 +578,29 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout,R.id.bdMap_layout})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout,R.id.tv_details_manager_phone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
+            case R.id.tv_details_manager_phone:
+                ShowCallDialog(hwdcBroker.getPhone()+"");
+                break;
             case R.id.img_start:
-                if (!isStart) {
-                    initStart();
-                    isStart = true;
+                if (MyUtils.isLogin(this)) {
+                    if (!isStart) {
+                        initStart();
+                        isStart = true;
+                    } else {
+                        initUnStart();
+                        isStart = false;
+                    }
                 } else {
-                    initUnStart();
-                    isStart = false;
+                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyUtils.StartLoginActivity(this);
                 }
+
                 break;
             case R.id.tv_See_More:
                 Intent intent1 = new Intent(NewHousedetailsActivity.this, NewHouseMoreActivity.class);
@@ -585,39 +632,42 @@ public class NewHousedetailsActivity extends BaseActivity {
                 break;
             case R.id.bdMap_layout:
                 //检测地图是否安装和唤起
-                if (checkMapAppsIsExist(NewHousedetailsActivity.this,BAIDU_PKG)){
-                    Toast.makeText(NewHousedetailsActivity.this,"百度地图已经安装",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent();
-                    intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+"35.68"
-                            +","+"139.75"+BAIDU_DESTINATION+datas.getLatitude()+","+datas.getLongitude()
-                            +BAIDU_MODE));
+                if (checkMapAppsIsExist(NewHousedetailsActivity.this, BAIDU_PKG)) {
+                    Toast.makeText(NewHousedetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
+                            + "," + "139.75" + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
+                            + BAIDU_MODE));
                     startActivity(intent);
-                }else {
-                    Toast.makeText(NewHousedetailsActivity.this,"百度地图未安装",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(NewHousedetailsActivity.this, "百度地图未安装", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
+
     /**
      * 检测地图应用是否安装
+     *
      * @param context
      * @param packagename
      * @return
      */
-    public boolean checkMapAppsIsExist(Context context, String packagename){
+    public boolean checkMapAppsIsExist(Context context, String packagename) {
         PackageInfo packageInfo;
-        try{
-            packageInfo = context.getPackageManager().getPackageInfo(packagename,0);
-        }catch (Exception e){
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
+        } catch (Exception e) {
             packageInfo = null;
             e.printStackTrace();
         }
-        if (packageInfo == null){
+        if (packageInfo == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
+
     //收藏
     private void initStart() {
         Log.d("NewHousedetailsActivity", token + "-------------");

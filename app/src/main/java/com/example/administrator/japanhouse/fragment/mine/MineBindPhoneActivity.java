@@ -2,12 +2,14 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -21,7 +23,7 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
     @BindView(R.id.back_img)
     ImageView backImg;
     @BindView(R.id.edt_phone)
-    EditText edtPhone;
+    TextView edtPhone;
     @BindView(R.id.edt_code)
     EditText edtCode;
     @BindView(R.id.tv_getcode)
@@ -53,8 +55,12 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
                 SendSmsTimerUtils.sendSms(tvGetcode, R.color.shihuangse, R.color.shihuangse);
                 break;
             case R.id.btn_next:
-                startActivity(new Intent(this,ChangePhoneActivity.class));
-                finish();
+                if (!TextUtils.isEmpty(edtCode.getText().toString())){
+                    startActivity(new Intent(this,ChangePhoneActivity.class));
+                    finish();
+                }else {
+                    Toast.makeText(mContext, "请输入正确的验证码", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

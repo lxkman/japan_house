@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
+    <com.example.administrator.japanhouse.view.CircleImageView
         android:id="@+id/touxiang"
         android:src="@drawable/touxiang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
         />
 
     <LinearLayout

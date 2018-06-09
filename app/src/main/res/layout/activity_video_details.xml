@@ -8,5 +8,5 @@
         android:background="#fff"
         android:id="@+id/videoplayer"
         android:layout_width="match_parent"
-        android:layout_height="255dip"/>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

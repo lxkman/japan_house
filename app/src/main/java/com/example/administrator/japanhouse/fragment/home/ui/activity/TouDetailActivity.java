@@ -14,12 +14,16 @@ import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.bean.TouListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdapter;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import java.util.List;
 
 public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,12 +37,14 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
     private EditText ed_pinglun;
     private String pinglun;
     private String tid;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tou_detail);
         initView();
+        initplNet();
     }
 
     private void initView() {
@@ -63,13 +69,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
         time.setText(timeValue+"");
         neirong.setText(contentValue);
 
-       //加载适配器
-        detail_recy.setLayoutManager(new LinearLayoutManager(this));
-        detail_recy.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
-        detail_recy.setNestedScrollingEnabled(false);
-        //detail_recy.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        ToutiaoAdapter touAdapter = new ToutiaoAdapter(this);
-        detail_recy.setAdapter(touAdapter);
+
 
     }
 
@@ -95,10 +95,37 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
 
         }
     }
-
+    //评论列表
+    private void initplNet() {
+        token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
+        HttpParams params = new HttpParams();
+        params.put("token", token);
+        params.put("tId", tid+"");
+        params.put("pageNo","1");
+        OkGo.<TouListBean>post(MyUrls.BASEURL + "/app/topline/commentslist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<TouListBean>(this, TouListBean.class) {
+                    @Override
+                    public void onSuccess(Response<TouListBean> response) {
+                        int code = response.code();
+                        TouListBean TouListBean = response.body();
+                        if (code==200&&TouListBean.getCode().equals("200")){
+                            List<com.example.administrator.japanhouse.bean.TouListBean.DatasBean> datas = TouListBean.getDatas();
+                            //加载适配器
+                            detail_recy.setLayoutManager(new LinearLayoutManager(TouDetailActivity.this));
+                            detail_recy.addItemDecoration(new DividerItemDecoration(TouDetailActivity.this,DividerItemDecoration.VERTICAL));
+                            detail_recy.setNestedScrollingEnabled(false);
+                            ToutiaoAdapter touAdapter = new ToutiaoAdapter(TouDetailActivity.this,datas);
+                            detail_recy.setAdapter(touAdapter);
+                        }
+                    }
+                });
+    }
+    //发表评论
     private void initNet() {
         HttpParams params = new HttpParams();
-        params.put("token", "111");
+        params.put("token", token);
         params.put("tId", tid+"");
         params.put("tContent",pinglun);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/topline/insertcomments")

@@ -146,6 +146,28 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 });
     }
 
+    private boolean isYuSuanChecked() {
+        if (yusuanList != null && yusuanList.size() > 0) {
+            for (int i = 0; i < yusuanList.size(); i++) {
+                if (yusuanList.get(i).isChecked()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isHuxingChecked() {
+        if (huxingList != null && huxingList.size() > 0) {
+            for (int i = 0; i < huxingList.size(); i++) {
+                if (huxingList.get(i).isChecked()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void initquyu() {
         HttpParams params = new HttpParams();
         params.put("cId", 2);
@@ -195,14 +217,14 @@ public class ShendengFirstStepActivity extends BaseActivity {
         yusuanRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
         huxingRecycler.setNestedScrollingEnabled(false);
         huxingRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
+        weizhiRecycler.setNestedScrollingEnabled(false);
+        weizhiRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
         final List<OneCheckBean> weizhiList = new ArrayList<>();
         weizhiList.add(new OneCheckBean(false, "石景山・杨庄"));
         weizhiList.add(new OneCheckBean(false, "石景山・古城"));
         weizhiList.add(new OneCheckBean(false, "大兴・高米店"));
         weizhiList.add(new OneCheckBean(false, "延庆・延庆城区"));
         weizhiList.add(new OneCheckBean(false, "房山・琉璃河"));
-        weizhiRecycler.setNestedScrollingEnabled(false);
-        weizhiRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
         final WeizhiAdapter weizhiAdapter = new WeizhiAdapter(R.layout.item_shendeng_yusuan, weizhiList);
         View footerView = LayoutInflater.from(this).inflate(R.layout.item_footer_shendeng, weizhiRecycler, false);
         weizhiAdapter.addFooterView(footerView);
@@ -239,7 +261,7 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 //设置动画
                 .setAnimation(R.style.Bottom_Top_aniamtion)
                 //设置dialog的宽高
-                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, MyUtils.getScreenHeight(this)/2)
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, MyUtils.getScreenHeight(this) / 2)
                 //设置触摸dialog外围是否关闭
                 .isOnTouchCanceled(true)
                 //设置监听事件
@@ -247,6 +269,12 @@ public class ShendengFirstStepActivity extends BaseActivity {
         mDialog.getView(R.id.btn_sure).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!isYuSuanChecked()) {
+                    return;
+                }
+                if (!isHuxingChecked()) {
+                    return;
+                }
                 mDialog.dismiss();
             }
         });
@@ -336,6 +364,12 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.next_tv:
+                if (!isYuSuanChecked()) {
+                    return;
+                }
+                if (!isHuxingChecked()) {
+                    return;
+                }
                 startActivity(new Intent(mContext, ShendengSecondStepActivity.class));
                 finish();
                 break;
@@ -375,6 +409,7 @@ public class ShendengFirstStepActivity extends BaseActivity {
         }
     }
 
+    /*点击朝阳区的时候清除其他区域所有item的选中状态*/
     private void setFirstCheckedItem(List<MoreCheckBean> list, int adapterPosition) {
         if (list != null && list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {

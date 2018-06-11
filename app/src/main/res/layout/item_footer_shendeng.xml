@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:orientation="vertical">
     <LinearLayout
         android:id="@+id/footerview"
         android:layout_width="100dp"
@@ -9,15 +9,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="╋"
             android:padding="10dp"
-            android:textColor="@color/colorPrimary"/>
+            android:text="+"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="更多位置"
             android:layout_gravity="center"
             android:gravity="center"
+            android:text="更多位置"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 </LinearLayout>

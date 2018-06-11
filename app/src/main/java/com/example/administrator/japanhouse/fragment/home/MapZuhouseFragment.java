@@ -70,7 +70,6 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     DropDownMenu dropDownMenu;
     Unbinder unbinder;
     private List<View> popupViews = new ArrayList<>();
-    private List<OneCheckBean> list;
     private TextureMapView mapView;
     private BaiduMap baiduMap;
     MyDrawCircleView mydrawcircleview;
@@ -483,7 +482,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 Logger.e("xxxx", "百度地图状态改变结束");
                 if (mapStatus.zoom < 12) {
-                    initLocation();
+                    initOverlay(mCity);
                 } else if (mapStatus.zoom >= 12) {
                     //                    LatLng target = mapStatus.target;
                     //                    allupdate(target.latitude + "", target.longitude + "");

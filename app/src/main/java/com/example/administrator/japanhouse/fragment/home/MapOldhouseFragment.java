@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse.fragment.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,6 @@ import com.example.administrator.japanhouse.view.MyDrawCircleView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-import com.orhanobut.logger.Logger;
 import com.yyydjk.library.DropDownMenu;
 
 import org.greenrobot.eventbus.EventBus;
@@ -70,7 +70,6 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     DropDownMenu dropDownMenu;
     Unbinder unbinder;
     private List<View> popupViews = new ArrayList<>();
-    private List<OneCheckBean> list;
     private TextureMapView mapView;
     private BaiduMap baiduMap;
     MyDrawCircleView mydrawcircleview;
@@ -464,7 +463,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         baiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
-                Logger.e("xxxx", "百度地图状态开始改变");
+                Log.e("xxxx", "百度地图状态开始改变");
             }
 
             @Override
@@ -479,9 +478,9 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
-                Logger.e("xxxx", "百度地图状态改变结束");
+                Log.e("xxxx", "百度地图状态改变结束");
                 if (mapStatus.zoom < 12) {
-                    initLocation();
+                    initOverlay(mCity);
                 } else if (mapStatus.zoom >= 12) {
                     //                    LatLng target = mapStatus.target;
                     //                    allupdate(target.latitude + "", target.longitude + "");

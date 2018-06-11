@@ -253,6 +253,7 @@ public class FirstView implements View.OnClickListener {
         }
     }
 
+    /*点击朝阳区的时候清除其他区域所有item的选中状态*/
     private void setFirstCheckedItem(List<MoreCheckBean> list, int adapterPosition) {
         if (list != null && list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {

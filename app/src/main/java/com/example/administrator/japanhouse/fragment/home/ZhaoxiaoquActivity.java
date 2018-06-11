@@ -62,9 +62,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     TextView searchTv;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
-    private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
     private int page=1;
@@ -83,6 +81,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     private boolean isDitie;
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
+    private String searchText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -316,6 +315,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
         params.put("hType", 6);
         params.put("mjId", mjId);//面积
         params.put("zjId", zjId);//租金
+        params.put("searchText", searchText);
         if (isZiDingyiPrice) {
             params.put("starZj", zidingyiPriceList.get(0));//租金最低价
             params.put("endZj", zidingyiPriceList.get(1));//租金最高价
@@ -487,8 +487,19 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                 finish();
                 break;
             case R.id.search_tv:
-                startActivity(new Intent(mContext,SydcSearchActivity.class));
+                startActivityForResult(new Intent(mContext,ZhaoTuanDiSearchActivity.class),0);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
         }
     }
 

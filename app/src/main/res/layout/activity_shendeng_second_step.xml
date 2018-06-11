@@ -20,7 +20,7 @@
             android:layout_height="50dip" />
         <TextView
             android:id="@+id/title_content_tv"
-            android:text="神灯找房"
+            android:text="@string/shendengzhaofnag"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:layout_centerVertical="true"
@@ -49,13 +49,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="想要"
+                        android:text="@string/xiangyao"
                         android:textSize="15sp"
                         android:textColor="@color/text_black"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="（可多选）"
+                        android:text="@string/keduoxuan"
                         android:textSize="15sp"
                         android:textColor="@color/gray"
                         android:layout_marginLeft="10dp"/>
@@ -79,13 +79,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="不想要"
+                        android:text="@string/buxiangyao"
                         android:textSize="15sp"
                         android:textColor="@color/text_black"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="（可多选）"
+                        android:text="@string/keduoxuan"
                         android:textSize="15sp"
                         android:textColor="@color/gray"
                         android:layout_marginLeft="10dp"/>
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="60dp"
-                android:text="完成"
+                android:text="@string/wancheng"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="15dp"

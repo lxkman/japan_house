@@ -570,4 +570,6 @@
     <string name="buxian">不限</string>
     <string name="tongqinfangfa">通勤方式</string>
     <string name="dingweizhong">定位中…</string>
+    <string name="xiangyao">想要</string>
+    <string name="buxiangyao">不想要</string>
 </resources>

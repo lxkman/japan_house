@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
@@ -21,10 +25,18 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.FangjiaMapBean;
 import com.example.administrator.japanhouse.bean.MarkerBean;
+import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.ChartView;
 import com.example.administrator.japanhouse.view.ChartViewOneLine;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,27 +67,38 @@ public class FangjiadituActivity extends BaseActivity {
     //第二条折线
     private Map<String, Float> value1 = new HashMap<>();
     //第一条折线对应的折点
-    List<Float> mlist=new ArrayList<>();
+    List<Float> mlist = new ArrayList<>();
     //第二条折线对应的折点
-    List<Float> mlist1=new ArrayList<>();
+    List<Float> mlist1 = new ArrayList<>();
+    private boolean isJa;
+    private LocationClient mLocClient;
+    private String mCity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fangjiaditu);
         ButterKnife.bind(this);
-        initMap();
+        baiduMap=mapview.getMap();
+        String country = CacheUtils.get(Constants.COUNTRY);
+        if (country != null && country.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
+        initLocation();
         initChartList();
     }
 
     private void initChartList() {
         for (int i = 10; i > 0; i--) {
-            mlist.add((float) (Math.random()*3.5+0.5));
-            mlist1.add((float) (Math.random()*3.5+0.5));
+            mlist.add((float) (Math.random() * 3.5 + 0.5));
+            mlist1.add((float) (Math.random() * 3.5 + 0.5));
         }
-        for (int i =0; i <10 ; i++) {
-            xValue.add("11-1"+i);
-            value.put("11-1"+i, mlist.get(i));
-            value1.put("11-1"+i, mlist1.get(i));
+        for (int i = 0; i < 10; i++) {
+            xValue.add("11-1" + i);
+            value.put("11-1" + i, mlist.get(i));
+            value1.put("11-1" + i, mlist1.get(i));
         }
         yValue.add((float) 0.55);
         yValue.add((float) 1.55);
@@ -85,7 +108,7 @@ public class FangjiadituActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_location, R.id.layout_pop,R.id.back_img})
+    @OnClick({R.id.btn_location, R.id.layout_pop, R.id.back_img})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_location:
@@ -104,7 +127,7 @@ public class FangjiadituActivity extends BaseActivity {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_mp_chart)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_mp_chart)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置
@@ -121,11 +144,12 @@ public class FangjiadituActivity extends BaseActivity {
         //绘制折线图
         initLineChart(dialog);
     }
+
     private void showMPChartOneLine(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
-        final BaseDialog  dialog = builder.setViewId(R.layout.dialog_mp_chart_oneline)
+        final BaseDialog dialog = builder.setViewId(R.layout.dialog_mp_chart_oneline)
                 //设置dialogpadding
                 .setPaddingdp(0, 0, 0, 0)
                 //设置显示位置
@@ -142,71 +166,107 @@ public class FangjiadituActivity extends BaseActivity {
         //绘制折线图
         initLineChartOneLine(dialog);
     }
+
     private void initLineChart(BaseDialog dialog) {
         ChartView chartview = (ChartView) dialog.findViewById(R.id.chartview);
-        chartview.setValueTwoLine(value,value1, xValue, yValue);
+        chartview.setValueTwoLine(value, value1, xValue, yValue);
     }
+
     private void initLineChartOneLine(BaseDialog dialog) {
         ChartViewOneLine chartview = (ChartViewOneLine) dialog.findViewById(R.id.chartview);
         chartview.setValueOneLine(value1, xValue, yValue);
     }
 
-    private void initMap() {
-        mapview.removeViewAt(1);//隐藏logo
-        mapview.removeViewAt(2);//隐藏比例尺
-        mapview.showZoomControls(false);// 隐藏缩放控件
-        baiduMap = mapview.getMap();
 
-        LatLng center = new LatLng(35.68, 139.75); // 默认 东京
-        float zoom = 13.0f; // 默认 11级
+    private void initLocation() {
+        mLocClient = new LocationClient(mContext);
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式
+        option.setNeedDeviceDirect(true);// 设置返回结果包含手机的方向
+        option.setOpenGps(true);
+        option.setAddrType("all");// 返回的定位结果包含地址信息
+        option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+        option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
+        option.setIsNeedLocationPoiList(true);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                double longitude = bdLocation.getLongitude();
+                double latitude = bdLocation.getLatitude();
+                mCity = bdLocation.getCity();
+                initMap(latitude, longitude);
+                initOverlay();
+            }
+        });
+    }
+
+    private void initMap(double weidu, double jingdu) {
+        LatLng center = new LatLng(weidu, jingdu);
+        //        LatLng center = new LatLng(35.68, 139.75); // 默认 东京
+        float zoom = 11.0f; // 默认 11级
         MapStatus mMapStatus = new MapStatus.Builder().target(
                 center).zoom(zoom).build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory
                 .newMapStatus(mMapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
-        initOverlay();
     }
 
 
     private void initOverlay() {
-        List<MarkerBean> markerBeanList = new ArrayList<>();
-        markerBeanList.add(new MarkerBean(139.738954,35.707239));
-        markerBeanList.add(new MarkerBean(139.83439,35.678863));
-        markerBeanList.add(new MarkerBean(139.741541,35.643203));
-        markerBeanList.add(new MarkerBean(139.690661,35.638979));
-        markerBeanList.add(new MarkerBean(139.758788,35.684492));
-        markerBeanList.add(new MarkerBean(139.758788,35.728807));
-
-        List<OverlayOptions> overlayOptionsList = new ArrayList<>();
-        for (int i = 0; i < markerBeanList.size(); i++) {
-            View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
-            TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
-            ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
-            TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
-            if (i==0){
-                iv.setImageResource(R.drawable.arrowtop);
-            }
-            if (i==2){
-                iv.setImageResource(R.drawable.arrowtop);
-            }
-            if (i==4){
-                iv.setImageResource(R.drawable.arrowtop);
-            }
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromView(markView))
-                    .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
-                    .zIndex(13)
-                    .draggable(true);
-            overlayOptionsList.add(markerOptions);
-        }
-        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                showMPChart(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
-                return false;
-            }
-        });
-        baiduMap.addOverlays(overlayOptionsList);
+        baiduMap.clear();
+        HttpParams params = new HttpParams();
+        params.put("cId", 2);
+        OkGo.<FangjiaMapBean>post(MyUrls.BASEURL + "/app/city/fjmap")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<FangjiaMapBean>(FangjiaMapBean.class) {
+                    @Override
+                    public void onSuccess(Response<FangjiaMapBean> response) {
+                        int code = response.code();
+                        FangjiaMapBean body = response.body();
+                        FangjiaMapBean.DatasEntity datas = body.getDatas();
+                        List<FangjiaMapBean.DatasEntity.QysEntity> qys = datas.getQys();
+                        if (datas != null && qys.size() > 0) {
+                            List<MarkerBean> markerBeanList = new ArrayList<>();
+                            List<OverlayOptions> overlayOptionsList = new ArrayList<>();
+                            for (int i = 0; i < qys.size(); i++) {
+                                FangjiaMapBean.DatasEntity.QysEntity datasEntity = qys.get(i);
+                                markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatitude()));
+                                View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
+                                TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
+                                ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
+                                TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
+                                content.setText(isJa ? datasEntity.getAdministrationNameJpn() : datasEntity.getAdministrationNameCn());
+                                title.setText(datasEntity.getHouseNum() + "万套");
+                                if (datasEntity.getPriceStete()==0) {
+                                    iv.setVisibility(View.GONE);
+                                }else if (datasEntity.getPriceStete()==1) {
+                                    iv.setVisibility(View.VISIBLE);
+                                    iv.setImageResource(R.drawable.arrowtop);
+                                }else if (datasEntity.getPriceStete()==2) {
+                                    iv.setVisibility(View.VISIBLE);
+                                    iv.setImageResource(R.drawable.arrowdown);
+                                }
+                                MarkerOptions markerOptions = new MarkerOptions()
+                                        .icon(BitmapDescriptorFactory.fromView(markView))
+                                        .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                                        .zIndex(11)
+                                        .draggable(true);
+                                overlayOptionsList.add(markerOptions);
+                            }
+                            baiduMap.addOverlays(overlayOptionsList);
+                            baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(Marker marker) {
+                                    showMPChart(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                                    return false;
+                                }
+                            });
+                        }
+                    }
+                });
     }
 
 }

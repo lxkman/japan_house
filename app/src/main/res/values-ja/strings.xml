@@ -572,4 +572,6 @@
     <string name="buxian">不制限</string>
     <string name="tongqinfangfa">通勤方法</string>
     <string name="dingweizhong">ポジショニング…</string>
+    <string name="xiangyao">探したい</string>
+    <string name="buxiangyao">要らない</string>
 </resources>

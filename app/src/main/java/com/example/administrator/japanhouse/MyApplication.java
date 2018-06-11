@@ -237,7 +237,6 @@ public class MyApplication extends Application {
         String language = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(language) && TextUtils.equals(language, "ja")) {
             return true;
-
         }
         return false;
     }

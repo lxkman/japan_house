@@ -19,20 +19,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.model.SearchBean;
+import com.example.administrator.japanhouse.bean.HomeSearchHistroyBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
+import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
@@ -64,8 +66,9 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
     RecyclerView searchListRecycler;
     @BindView(R.id.act_homeSearch_scroll)
     NestedScrollView scrollView;
+    @BindView(R.id.tv_noContent)
+    TextView tvNoContent;
     private CommonPopupWindow popupWindow;
-    private List<String> historyList;
     private List<String> SearchList = new ArrayList<>();
     private HistoryAdapter historyAdapter;
     private MainSearchPresenter searchPresenter;
@@ -73,7 +76,8 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
     private boolean isJa;
     private int state;
     private int state2 = 100;
-    private List<SearchBean> searchBean;
+    private List<HomeSearchHistroyBean> mHistoryList = new ArrayList<>();
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +101,25 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         state2 = getIntent().getIntExtra("state2", 0);
         searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         initHot();
+        initHistroy();
         initListener();
+    }
+
+    private void initHistroy() {
+        historyRecycler.setNestedScrollingEnabled(false);
+        historyRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mHistoryList = getHistory();
+        historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
+        historyRecycler.setAdapter(historyAdapter);
+        historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                state=mHistoryList.get(position).getState();
+                state2=mHistoryList.get(position).getState2();
+                tiaozhuan(mHistoryList.get(position).getContent());
+                doSavehistory2(mHistoryList.get(position));
+            }
+        });
     }
 
     private void initListener() {
@@ -117,13 +139,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 if (s.length() > 0) {
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
+                    tvNoContent.setVisibility(View.GONE);
                 } else {
                     scrollView.setVisibility(View.VISIBLE);
                     searchListRecycler.setVisibility(View.GONE);
-                }
-                SearchList.clear();
-                if (searchListAdapter != null) {
-                    searchListAdapter.notifyDataSetChanged();
+                    tvNoContent.setVisibility(View.GONE);
+                    return;
                 }
                 if (state == 4) {
                     if (state2 != 100) {
@@ -154,10 +175,15 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                                             .getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
                     if (SearchList == null || SearchList.size() == 0) {
-                        Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                        tvNoContent.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.GONE);
+                        searchListRecycler.setVisibility(View.GONE);
                         return false;
                     }
-                    tiaozhuan();
+                    tvNoContent.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
+                    tiaozhuan(searchEt.getText().toString());
                     return true;
                 }
                 return false;
@@ -165,36 +191,36 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         });
     }
 
-    private void tiaozhuan() {
+    private void tiaozhuan(String searchText) {
         switch (state) {
             case 0: //新房
                 Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
-                newHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                newHouseIntent.putExtra("searchText", searchText);
                 startActivity(newHouseIntent);
                 break;
             case 1: //别墅
                 Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
-                villaIntent.putExtra("searchText", searchEt.getText().toString());
+                villaIntent.putExtra("searchText", searchText);
                 startActivity(villaIntent);
                 break;
             case 2: //二手房
                 Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
-                oldHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                oldHouseIntent.putExtra("searchText", searchText);
                 startActivity(oldHouseIntent);
                 break;
             case 3: //土地
                 Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
-                landIntent.putExtra("searchText", searchEt.getText().toString());
+                landIntent.putExtra("searchText", searchText);
                 startActivity(landIntent);
                 break;
             case 4: //租房
                 if (state2 == 100) {
                     Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
-                    rentalIntent.putExtra("searchText", searchEt.getText().toString());
+                    rentalIntent.putExtra("searchText", searchText);
                     startActivity(rentalIntent);
                 } else {
                     Intent intent = new Intent();
-                    intent.putExtra("searchText", searchEt.getText().toString());
+                    intent.putExtra("searchText", searchText);
                     setResult(11, intent);
                     finish();
                 }
@@ -202,103 +228,27 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             case 5: //商业地产
                 if (state2 == 100) {
                     Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
-                    businessIntent.putExtra("searchText", searchEt.getText().toString());
+                    businessIntent.putExtra("searchText", searchText);
                     startActivity(businessIntent);
                 } else {
                     Intent intent = new Intent();
-                    intent.putExtra("searchText", searchEt.getText().toString());
+                    intent.putExtra("searchText", searchText);
                     setResult(11, intent);
                     finish();
                 }
                 break;
         }
-        List<SearchBean> list = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
-        if (list != null) {
-            list.add(0, new SearchBean(state, searchEt.getText().toString()));
-            CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, list);
-        } else {
-            List<SearchBean> arrayList = new ArrayList<>();
-            arrayList.add(0, new SearchBean(state, searchEt.getText().toString()));
-            CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, arrayList);
-        }
-        queryCacheHistory();
+        doSavehistory(state, state2, searchText);
     }
 
     private void initHot() {
-        List<String> hotNameList = new ArrayList<>();
+        final List<String> hotNameList = new ArrayList<>();
         hotNameList.add("朝阳");
         hotNameList.add("青森县");
         hotNameList.add("采光");
         hotNameList.add("南向");
         hotNameList.add("秋田县");
         hotNameList.add("山形县");
-        initHot(hotNameList);
-
-        historyList = new ArrayList<>();
-
-        historyRecycler.setNestedScrollingEnabled(false);
-        historyRecycler.setLayoutManager(new LinearLayoutManager(this));
-        historyAdapter = new HistoryAdapter(R.layout.item_history_search, historyList);
-        historyRecycler.setAdapter(historyAdapter);
-        historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-                switch (searchBean.get(position).state) {
-                    case 0: //新房  searchText
-                        Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
-                        newHouseIntent.putExtra("searchText", searchBean.get(position).content);
-                        startActivity(newHouseIntent);
-                        break;
-                    case 1: //别墅
-                        Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
-                        villaIntent.putExtra("searchText", searchBean.get(position).content);
-                        startActivity(villaIntent);
-                        break;
-                    case 2: //二手房
-                        Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
-                        oldHouseIntent.putExtra("searchText", searchBean.get(position).content);
-                        startActivity(oldHouseIntent);
-                        break;
-                    case 3: //土地
-                        Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
-                        landIntent.putExtra("searchText", searchBean.get(position).content);
-                        startActivity(landIntent);
-                        break;
-                    case 4: //租房
-                        Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
-                        rentalIntent.putExtra("searchText", searchBean.get(position).content);
-                        startActivity(rentalIntent);
-                        break;
-                    case 5: //商业地产
-                        Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
-                        businessIntent.putExtra("searchText", searchBean.get(position).content);
-                        startActivity(businessIntent);
-                        break;
-                }
-
-                SearchBean sb = searchBean.get(position);
-                searchBean.remove(position);
-                searchBean.add(0, sb);
-                CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, searchBean);
-                queryCacheHistory();
-            }
-        });
-        queryCacheHistory();
-    }
-
-    private void queryCacheHistory() {
-        historyList.clear();
-        searchBean = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
-        if (searchBean != null && searchBean.size() > 0) {
-            for (int i = 0; i < searchBean.size(); i++) {
-                historyList.add(searchBean.get(i).content);
-            }
-            historyAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private void initHot(final List<String> hotNameList) {
         fluidlayout.removeAllViews();
         for (int i = 0; i < hotNameList.size(); i++) {
             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
@@ -309,21 +259,10 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             );
             params.setMargins(12, 12, 12, 12);
             fluidlayout.addView(tv, params);
-            final int finalI = i;
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    List<SearchBean> list = CacheUtils.get(Constants.SEARCH_MAIN_HISTORY);
-                    if (list != null) {
-                        list.add(0, new SearchBean(state, hotNameList.get(finalI)));
-                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, list);
-                    } else {
-                        List<SearchBean> arrayList = new ArrayList<>();
-                        arrayList.add(0, new SearchBean(state, hotNameList.get(finalI)));
-                        CacheUtils.put(Constants.SEARCH_MAIN_HISTORY, arrayList);
-                    }
 
-                    queryCacheHistory();
                 }
             });
         }
@@ -347,12 +286,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 hotNameList.add("南向3");
                 hotNameList.add("秋田县g");
                 hotNameList.add("山形县sfs");
-                initHot(hotNameList);
+                //                initHot(hotNameList);
                 break;
             case R.id.history_clear:
-                historyList.clear();
+                mHistoryList.clear();
                 historyAdapter.notifyDataSetChanged();
-                CacheUtils.remove(Constants.SEARCH_MAIN_HISTORY);
+                saveHistory();
                 break;
         }
     }
@@ -433,13 +372,23 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
     @Override
     public void getSearchHint(Response<TopSearchHintBean> response) {
+        SearchList.clear();
+        if (searchListAdapter != null) {
+            searchListAdapter.notifyDataSetChanged();
+        }
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 for (int i = 0; i < response.body().getDatas().size(); i++) {
                     SearchList.add(response.body().getDatas().get(i).getVal());
                 }
                 if (SearchList == null || SearchList.size() == 0) {
-                    Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                    tvNoContent.setVisibility(View.VISIBLE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.GONE);
+                } else {
+                    tvNoContent.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
                 }
                 if (searchListAdapter == null) {
                     searchListAdapter = new SearchListAdapter(R.layout.search_list_item, SearchList);
@@ -448,24 +397,32 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                     searchListAdapter.notifyDataSetChanged();
                 }
                 searchListAdapter.setOnItemClickListener(HomeSearchActivity.this);
+            } else {
+                tvNoContent.setVisibility(View.VISIBLE);
+                scrollView.setVisibility(View.GONE);
+                searchListRecycler.setVisibility(View.GONE);
             }
+        } else {
+            tvNoContent.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+            searchListRecycler.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        tiaozhuan();
+        tiaozhuan(SearchList.get(position));
     }
 
-    private class HistoryAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class HistoryAdapter extends BaseQuickAdapter<HomeSearchHistroyBean, BaseViewHolder> {
 
-        public HistoryAdapter(int layoutResId, @Nullable List<String> data) {
+        public HistoryAdapter(int layoutResId, @Nullable List<HomeSearchHistroyBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-            helper.setText(R.id.item_name_tv, item);
+        protected void convert(BaseViewHolder helper, HomeSearchHistroyBean item) {
+            helper.setText(R.id.item_name_tv, item.getContent());
         }
     }
 
@@ -479,6 +436,71 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         protected void convert(BaseViewHolder helper, String item) {
             helper.setText(R.id.tv_Search_list, item);
         }
+    }
+
+    //判断本地数据中有没有存在搜索过的数据，查重
+    private boolean isHasSelectData(String content) {
+        if (mHistoryList == null || mHistoryList.size() == 0) {
+            return false;
+        }
+        for (int i = 0; i < mHistoryList.size(); i++) {
+            if (mHistoryList.get(i).getContent().equals(content)) {
+                position = i;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void doSavehistory(int state, int state2, String content) {
+        if (isHasSelectData(content)) {//查重
+            mHistoryList.remove(position);
+        }
+        //后来搜索的文字放在集合中的第一个位置
+        mHistoryList.add(0, new HomeSearchHistroyBean(state, state2, content));
+        if (mHistoryList.size() == 11) {//实现本地历史搜索记录最多不超过10个
+            mHistoryList.remove(10);
+        }
+        //将这个mHistoryListData保存到sp中，其实sp中保存的就是这个mHistoryListData集合
+        saveHistory();
+    }
+
+    private void doSavehistory2(HomeSearchHistroyBean histroyBean) {
+        if (isHasSelectData(histroyBean.getContent())) {//查重
+            mHistoryList.remove(position);
+        }
+        //后来搜索的文字放在集合中的第一个位置
+        mHistoryList.add(0, new HomeSearchHistroyBean(histroyBean.getState(), histroyBean.getState2()
+                , histroyBean.getContent()));
+
+        if (mHistoryList.size() == 11) {//实现本地历史搜索记录最多不超过10个
+            mHistoryList.remove(10);
+        }
+        //将这个mHistoryListData保存到sp中，其实sp中保存的就是这个mHistoryListData集合
+        saveHistory();
+    }
+
+    /**
+     * 保存历史查询记录
+     */
+    private void saveHistory() {
+        SpUtils.putString("homesearchhistory" + state + state2,
+                new Gson().toJson(mHistoryList));//将java对象转换成json字符串进行保存
+    }
+
+    /**
+     * 获取历史查询记录
+     *
+     * @return
+     */
+    private List<HomeSearchHistroyBean> getHistory() {
+        String historyJson = SpUtils.getString("homesearchhistory" + state + state2, "");
+        if (historyJson != null && !historyJson.equals("")) {//必须要加上后面的判断，因为获取的字符串默认值就是空字符串
+            //将json字符串转换成list集合
+            return new Gson().fromJson(historyJson, new TypeToken<List<HomeSearchHistroyBean>>() {
+            }.getType());
+        }
+        return new ArrayList<HomeSearchHistroyBean>();
     }
 
 }

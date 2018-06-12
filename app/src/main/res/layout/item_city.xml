@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="16dp"
+              android:paddingRight="20dp"
+              android:orientation="vertical">
+<!--在这设置paddingLeft是因为recyclerview自定义Decoration时会获取item的paddingleft-->
+    <TextView
+        android:id="@+id/tv_city"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#FFDFDFDF"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:textColor="#FF999999"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_city"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -411,10 +411,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".fragment.comment.BannerDetailsActivity"/>
         <activity android:name=".activity.FreeApartmentDetailsActivity"/>
-        <activity android:name=".fragment.home.ZhaoTuanDiSearchActivity">
-        </activity>
-        <activity android:name=".fragment.home.LocationActivity2">
-        </activity>
+        <activity android:name=".fragment.home.ZhaoTuanDiSearchActivity"/>
+        <activity android:name=".fragment.home.LocationActivity2"
+                  android:windowSoftInputMode="stateHidden|adjustPan"/>
     </application>
 
 </manifest>

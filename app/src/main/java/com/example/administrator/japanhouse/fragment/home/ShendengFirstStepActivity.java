@@ -157,6 +157,30 @@ public class ShendengFirstStepActivity extends BaseActivity {
         return false;
     }
 
+    private String getAllYuSuanChecked() {
+        String yusuan="";
+        if (yusuanList != null && yusuanList.size() > 0) {
+            for (int i = 0; i < yusuanList.size(); i++) {
+                if (yusuanList.get(i).isChecked()) {
+                    yusuan=yusuanList.get(i).getId()+"";
+                }
+            }
+        }
+        return yusuan;
+    }
+
+    private String getAllHuxingChecked() {
+        String huxingid="";
+        if (huxingList != null && huxingList.size() > 0) {
+            for (int i = 0; i < huxingList.size(); i++) {
+                if (huxingList.get(i).isChecked()) {
+                    huxingid=huxingList.get(i).getId()+"";
+                }
+            }
+        }
+        return huxingid;
+    }
+
     private boolean isHuxingChecked() {
         if (huxingList != null && huxingList.size() > 0) {
             for (int i = 0; i < huxingList.size(); i++) {
@@ -370,7 +394,10 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 if (!isHuxingChecked()) {
                     return;
                 }
-                startActivity(new Intent(mContext, ShendengSecondStepActivity.class));
+                Intent intent = new Intent(mContext, ShendengSecondStepActivity.class);
+                intent.putExtra("hxs", getAllHuxingChecked());
+                intent.putExtra("zjId",getAllYuSuanChecked());
+                startActivity(intent);
                 finish();
                 break;
         }

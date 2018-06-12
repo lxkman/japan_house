@@ -92,12 +92,11 @@ public class LocationActivity extends BaseActivity {
                         if (datas != null && datas.size() > 0) {
                             for (int i = 0; i < datas.size(); i++) {
                                 CityListBean.DatasEntity datasEntity = datas.get(i);
-                                String administrationNameCn = datasEntity.getAdministrationNameCn();
-                                citysList.add(administrationNameCn);
+//                                String administrationNameCn = datasEntity.getAdministrationNameCn();
+//                                citysList.add(administrationNameCn);
                             }
                         }
                         initDatas(citysList);
-                        //                        initDatas(getResources().getStringArray(R.array.provinces));
                     }
                 });
     }

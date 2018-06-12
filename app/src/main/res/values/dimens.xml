@@ -5,4 +5,6 @@
     <dimen name="x_22">11dp</dimen>
     <dimen name="x_40">20dp</dimen>
     <dimen name="x_24">12dp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
 </resources>

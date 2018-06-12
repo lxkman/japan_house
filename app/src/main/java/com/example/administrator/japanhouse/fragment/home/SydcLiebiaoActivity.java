@@ -67,7 +67,6 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
     private int type;
     private int type2;
     private String houseType;

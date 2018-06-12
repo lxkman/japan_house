@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -46,6 +45,8 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
     NestedScrollView scrollView;
     @BindView(R.id.search_list_recycler)
     RecyclerView searchListRecycler;
+    @BindView(R.id.tv_noContent)
+    TextView tvNoContent;
     private MainSearchPresenter searchPresenter;
     private SearchListAdapter searchListAdapter;
     private List<String> SearchList = new ArrayList<>();
@@ -73,13 +74,14 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
                     searchEt.setFocusable(true);
                     searchEt.setFocusableInTouchMode(true);
                     if (SearchList == null || SearchList.size() == 0) {
-                        Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                        tvNoContent.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.GONE);
+                        searchListRecycler.setVisibility(View.GONE);
                         return false;
                     }
-                    Intent intent = new Intent();
-                    intent.putExtra("searchText", searchEt.getText().toString());
-                    setResult(11, intent);
-                    finish();
+                    tvNoContent.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
                     return true;
                 }
                 return false;
@@ -101,13 +103,16 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
                 if (s.length() > 0) {
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
+                    tvNoContent.setVisibility(View.GONE);
                 } else {
                     scrollView.setVisibility(View.VISIBLE);
                     searchListRecycler.setVisibility(View.GONE);
-                }
-                SearchList.clear();
-                if (searchListAdapter != null) {
-                    searchListAdapter.notifyDataSetChanged();
+                    tvNoContent.setVisibility(View.GONE);
+                    Intent intent = new Intent();
+                    intent.putExtra("searchText", searchEt.getText().toString());
+                    setResult(11, intent);
+                    finish();
+                    return;
                 }
                 searchPresenter.getSearchHint(4, 6, searchEt.getText().toString());
             }
@@ -144,7 +149,10 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        Intent intent = new Intent();
+        intent.putExtra("searchText", SearchList.get(position));
+        setResult(11, intent);
+        finish();
     }
 
     private class SearchListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
@@ -166,13 +174,23 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
 
     @Override
     public void getSearchHint(Response<TopSearchHintBean> response) {
+        SearchList.clear();
+        if (searchListAdapter != null) {
+            searchListAdapter.notifyDataSetChanged();
+        }
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 for (int i = 0; i < response.body().getDatas().size(); i++) {
                     SearchList.add(response.body().getDatas().get(i).getVal());
                 }
                 if (SearchList == null || SearchList.size() == 0) {
-                    Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                    tvNoContent.setVisibility(View.VISIBLE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.GONE);
+                }else {
+                    tvNoContent.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
                 }
                 if (searchListAdapter == null) {
                     searchListAdapter = new SearchListAdapter(R.layout.search_list_item, SearchList);
@@ -181,7 +199,15 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
                     searchListAdapter.notifyDataSetChanged();
                 }
                 searchListAdapter.setOnItemClickListener(ZhaoTuanDiSearchActivity.this);
+            }else {
+                tvNoContent.setVisibility(View.VISIBLE);
+                scrollView.setVisibility(View.GONE);
+                searchListRecycler.setVisibility(View.GONE);
             }
+        }else {
+            tvNoContent.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+            searchListRecycler.setVisibility(View.GONE);
         }
     }
 }

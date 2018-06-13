@@ -57,6 +57,8 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
         setContentView(R.layout.activity_shou_cang);
         ButterKnife.bind(this);
 
+
+
         presenter = new CollectionPresenter(this, this);
         presenter.getCollectionHouseList(page, MyApplication.getUserToken());
 

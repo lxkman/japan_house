@@ -29,6 +29,7 @@
                     android:layout_height="0dip"
                     android:layout_weight="1"/>
                 <TextView
+                    android:id="@+id/tv_dialog_price"
                     android:textColor="#fe982b"
                     android:textSize="16sp"
                     android:gravity="center"
@@ -59,6 +60,7 @@
                     android:layout_height="0dip"
                     android:layout_weight="1"/>
                 <TextView
+                    android:id="@+id/tv_mouth"
                     android:drawablePadding="10dip"
                     android:drawableLeft="@drawable/shangjiantou"
                     android:textColor="#555"
@@ -91,6 +93,7 @@
                     android:layout_height="0dip"
                     android:layout_weight="1"/>
                 <TextView
+                    android:id="@+id/tv_years"
                     android:drawablePadding="10dip"
                     android:drawableLeft="@drawable/xiajiantou"
                     android:textColor="#555"

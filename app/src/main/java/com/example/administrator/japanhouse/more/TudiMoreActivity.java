@@ -71,7 +71,7 @@ public class TudiMoreActivity extends BaseActivity {
         actTudiMianji.setText(ja ? datas.getAreaJpn() : datas.getAreaCn());/*面积*/
         actTudiSuoyouquan.setText(ja ? datas.getOwnershipJpn() : datas.getOwnershipCn());/*所有权*/
         actTudiWeizhi.setText(ja ? datas.getLocationJpn() : datas.getLocationCn());/*位置*/
-        actTudiJutiweizhi.setText(ja ? datas.getOwnershipJpn() : datas.getOwnershipCn());/*具体位置*/
+        actTudiJutiweizhi.setText(ja ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());/*具体位置*/
         actTudiChezhanjuli.setText(ja ? datas.getStationJpn() : datas.getStationCn());/*车站距离*/
         actTudiJianzhufugailv.setText(ja ? datas.getBuildingCoverageJpn() : datas.getBuildingCoverageCn());/*建筑覆盖率*/
         actTudiRongjilv.setText(ja ? datas.getPlotRatioJpn() : datas.getPlotRatioCn());/*容积率*/

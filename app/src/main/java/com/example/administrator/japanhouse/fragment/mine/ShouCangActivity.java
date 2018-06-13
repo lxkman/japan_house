@@ -1,18 +1,12 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.CollectionListAdapter;
@@ -31,16 +25,10 @@ import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActiv
 import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
 import com.example.administrator.japanhouse.more.CollectionListBean;
 import com.example.administrator.japanhouse.presenter.CollectionPresenter;
-import com.example.administrator.japanhouse.utils.MyUrls;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
@@ -59,7 +47,6 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
     SwipeMenuRecyclerView mrecycler;
     private List<CollectionListBean.DatasBean> mList = new ArrayList();
     private CollectionListAdapter liebiaoAdapter;
-
     private CollectionPresenter presenter;
     private SpringView springView;
     private int page = 1;

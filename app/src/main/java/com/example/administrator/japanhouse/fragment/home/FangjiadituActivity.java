@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,12 +26,14 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.ChartBean;
 import com.example.administrator.japanhouse.bean.FangjiaMapBean;
 import com.example.administrator.japanhouse.bean.MarkerBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.ChartView;
 import com.example.administrator.japanhouse.view.ChartViewOneLine;
@@ -73,6 +76,13 @@ public class FangjiadituActivity extends BaseActivity {
     private boolean isJa;
     private LocationClient mLocClient;
     private String mCity;
+    private List<FangjiaMapBean.DatasEntity.CityzxtEntity> cityzxt;
+    private Float monthbfb;
+    private Float yearbfb;
+    private List<ChartBean.DatasBean.ZxtlistBean> zxtlist;
+    private int bigVal;
+    private int endVal;
+    private int avgMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,24 +97,55 @@ public class FangjiadituActivity extends BaseActivity {
             isJa = false;
         }
         initLocation();
-        initChartList();
+
+
+    }
+
+    private void initChartNet(int id) {
+        HttpParams params = new HttpParams();
+        params.put("qId", id);
+        OkGo.<ChartBean>post(MyUrls.BASEURL + "/app/houseresourse/maphouse")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<ChartBean>(ChartBean.class) {
+                    @Override
+                    public void onSuccess(Response<ChartBean> response) {
+                        int code = response.code();
+                        ChartBean body = response.body();
+                        ChartBean.DatasBean datas = body.getDatas();
+                        zxtlist = datas.getZxtlist();
+                        monthbfb = datas.getMonthbfb();
+                        yearbfb = datas.getYearbfb();
+                        ChartBean.DatasBean.BigandsmallvalBean bigandsmallval = datas.getBigandsmallval();
+                        bigVal = bigandsmallval.getBigVal();
+                        endVal = bigandsmallval.getEndVal();
+                    }
+                });
     }
 
     private void initChartList() {
-        for (int i = 10; i > 0; i--) {
-            mlist.add((float) (Math.random() * 3.5 + 0.5));
-            mlist1.add((float) (Math.random() * 3.5 + 0.5));
+        mlist.clear();
+        mlist1.clear();
+        xValue.clear();
+        value.clear();
+        value1.clear();
+        yValue.clear();
+
+        for (int i = 0; i < cityzxt.size(); i++) {
+            mlist.add((float) cityzxt.get(i).getAvgPrice());
+            xValue.add(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())));
+            value.put(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())), mlist.get(i));
         }
-        for (int i = 0; i < 10; i++) {
-            xValue.add("11-1" + i);
-            value.put("11-1" + i, mlist.get(i));
-            value1.put("11-1" + i, mlist1.get(i));
+        for (int i = 0; i < zxtlist.size(); i++) {
+            mlist1.add((float) zxtlist.get(i).getAvgPrice());
+            value1.put(MyUtils.getDateToStringM(String.valueOf(zxtlist.get(i).getDays())), mlist1.get(i));
         }
-        yValue.add((float) 0.55);
-        yValue.add((float) 1.55);
-        yValue.add((float) 2.55);
-        yValue.add((float) 3.55);
-        yValue.add((float) 4.55);
+       int num = (bigVal-endVal)/3;
+        yValue.add((float) endVal);
+        yValue.add((float) endVal+num);
+        yValue.add((float) endVal+num*2);
+        yValue.add((float) endVal+num*3);
+        yValue.add((float) bigVal);
     }
 
 
@@ -141,6 +182,25 @@ public class FangjiadituActivity extends BaseActivity {
                 //设置监听事件
                 .builder();
         dialog.show();
+        TextView tv_mouth = (TextView) dialog.findViewById(R.id.tv_mouth);
+        TextView tv_years = (TextView) dialog.findViewById(R.id.tv_years);
+        TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
+        tv_dialog_price.setText(avgMoney+"元/平");
+        Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
+        //一定要加这行！！！！！！！！！！！
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        if (monthbfb>=0){//上月增长
+            tv_mouth.setText(monthbfb+"");
+        }else {//下降
+            tv_mouth.setText(monthbfb*(-1)+"");
+            tv_mouth.setCompoundDrawables(drawable,null,null,null);
+        }
+        if (yearbfb>=0){//去年增长
+            tv_years.setText(yearbfb+"");
+        }else {//下降
+            tv_years.setCompoundDrawables(drawable,null,null,null);
+            tv_years.setText(yearbfb*(-1)+"");
+        }
         //绘制折线图
         initLineChart(dialog);
     }
@@ -163,20 +223,40 @@ public class FangjiadituActivity extends BaseActivity {
                 //设置监听事件
                 .builder();
         dialog.show();
+        TextView tv_mouth = (TextView) dialog.findViewById(R.id.tv_mouth);
+        TextView tv_years = (TextView) dialog.findViewById(R.id.tv_years);
+        TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
+        tv_dialog_price.setText(avgMoney+"元/平");
+        Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
+        //一定要加这行！！！！！！！！！！！
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        if (monthbfb>=0){//上月增长
+            tv_mouth.setText(monthbfb+"");
+        }else {//下降
+            tv_mouth.setText(monthbfb*(-1)+"");
+            tv_mouth.setCompoundDrawables(drawable,null,null,null);
+        }
+        if (yearbfb>=0){//去年增长
+            tv_years.setText(yearbfb+"");
+        }else {//下降
+            tv_years.setCompoundDrawables(drawable,null,null,null);
+            tv_years.setText(yearbfb*(-1)+"");
+        }
         //绘制折线图
         initLineChartOneLine(dialog);
     }
 
     private void initLineChart(BaseDialog dialog) {
+        initChartList();
         ChartView chartview = (ChartView) dialog.findViewById(R.id.chartview);
         chartview.setValueTwoLine(value, value1, xValue, yValue);
     }
 
     private void initLineChartOneLine(BaseDialog dialog) {
+        initChartList();
         ChartViewOneLine chartview = (ChartViewOneLine) dialog.findViewById(R.id.chartview);
-        chartview.setValueOneLine(value1, xValue, yValue);
+        chartview.setValueOneLine(value, xValue, yValue);
     }
-
 
     private void initLocation() {
         mLocClient = new LocationClient(mContext);
@@ -227,6 +307,9 @@ public class FangjiadituActivity extends BaseActivity {
                         int code = response.code();
                         FangjiaMapBean body = response.body();
                         FangjiaMapBean.DatasEntity datas = body.getDatas();
+                        FangjiaMapBean.DatasEntity.CityEntity city = datas.getCity();
+                        avgMoney = city.getAvgMoney();
+                        cityzxt = datas.getCityzxt();
                         List<FangjiaMapBean.DatasEntity.QysEntity> qys = datas.getQys();
                         if (datas != null && qys.size() > 0) {
                             List<MarkerBean> markerBeanList = new ArrayList<>();
@@ -255,6 +338,7 @@ public class FangjiadituActivity extends BaseActivity {
                                         .zIndex(11)
                                         .draggable(true);
                                 overlayOptionsList.add(markerOptions);
+                                initChartNet(qys.get(i).getId());
                             }
                             baiduMap.addOverlays(overlayOptionsList);
                             baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
@@ -264,7 +348,9 @@ public class FangjiadituActivity extends BaseActivity {
                                     return false;
                                 }
                             });
+
                         }
+
                     }
                 });
     }

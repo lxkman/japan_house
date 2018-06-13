@@ -297,6 +297,7 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
             case R.id.history_clear:
                 mHistoryList.clear();
                 historyAdapter.notifyDataSetChanged();
+                saveHistory();
                 break;
             case R.id.location_rl:
                 finish();

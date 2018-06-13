@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -46,6 +45,8 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
     NestedScrollView scrollView;
     @BindView(R.id.search_list_recycler)
     RecyclerView searchListRecycler;
+    @BindView(R.id.tv_noContent)
+    TextView tvNoContent;
     private MainSearchPresenter searchPresenter;
     private int state;
     private int state2 = 100;
@@ -77,10 +78,15 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
                     searchEt.setFocusable(true);
                     searchEt.setFocusableInTouchMode(true);
                     if (SearchList == null || SearchList.size() == 0) {
-                        Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                        tvNoContent.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.GONE);
+                        searchListRecycler.setVisibility(View.GONE);
                         return false;
                     }
-                    tiaozhuan();
+                    tvNoContent.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
+                    tiaozhuan(searchEt.getText().toString());
                     return true;
                 }
                 return false;
@@ -102,13 +108,12 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
                 if (s.length() > 0) {
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
+                    tvNoContent.setVisibility(View.GONE);
                 } else {
                     scrollView.setVisibility(View.VISIBLE);
                     searchListRecycler.setVisibility(View.GONE);
-                }
-                SearchList.clear();
-                if (searchListAdapter != null) {
-                    searchListAdapter.notifyDataSetChanged();
+                    tvNoContent.setVisibility(View.GONE);
+                    return;
                 }
                 if (state == 7) {
                     if (state2 != 100) {
@@ -123,21 +128,21 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
         });
     }
 
-    private void tiaozhuan() {
+    private void tiaozhuan(String searchText) {
         switch (state) {
             case 6: //海外地产
                 Intent newHouseIntent = new Intent(SydcSearchActivity.this, HaiwaiListActivity.class);
-                newHouseIntent.putExtra("searchText", searchEt.getText().toString());
+                newHouseIntent.putExtra("searchText", searchText);
                 startActivity(newHouseIntent);
                 break;
             case 7: //中国房源
                 if (state2 == 100) {
                     Intent businessIntent = new Intent(SydcSearchActivity.this, ChineseLiebiaoActivity.class);
-                    businessIntent.putExtra("searchText", searchEt.getText().toString());
+                    businessIntent.putExtra("searchText", searchText);
                     startActivity(businessIntent);
                 } else {
                     Intent intent = new Intent();
-                    intent.putExtra("searchText", searchEt.getText().toString());
+                    intent.putExtra("searchText", searchText);
                     setResult(11, intent);
                     finish();
                 }
@@ -175,7 +180,7 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        tiaozhuan(SearchList.get(position));
     }
 
     private class SearchListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
@@ -197,13 +202,23 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
 
     @Override
     public void getSearchHint(Response<TopSearchHintBean> response) {
+        SearchList.clear();
+        if (searchListAdapter != null) {
+            searchListAdapter.notifyDataSetChanged();
+        }
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 for (int i = 0; i < response.body().getDatas().size(); i++) {
                     SearchList.add(response.body().getDatas().get(i).getVal());
                 }
                 if (SearchList == null || SearchList.size() == 0) {
-                    Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                    tvNoContent.setVisibility(View.VISIBLE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.GONE);
+                }else {
+                    tvNoContent.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
                 }
                 if (searchListAdapter == null) {
                     searchListAdapter = new SearchListAdapter(R.layout.search_list_item, SearchList);
@@ -212,7 +227,15 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
                     searchListAdapter.notifyDataSetChanged();
                 }
                 searchListAdapter.setOnItemClickListener(SydcSearchActivity.this);
+            }else {
+                tvNoContent.setVisibility(View.VISIBLE);
+                scrollView.setVisibility(View.GONE);
+                searchListRecycler.setVisibility(View.GONE);
             }
+        }else {
+            tvNoContent.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+            searchListRecycler.setVisibility(View.GONE);
         }
     }
 }

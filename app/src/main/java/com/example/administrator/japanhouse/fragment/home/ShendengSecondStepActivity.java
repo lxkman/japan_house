@@ -21,6 +21,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +41,8 @@ public class ShendengSecondStepActivity extends BaseActivity {
     @BindView(R.id.finish_tv)
     TextView finishTv;
     private boolean isJa;
+    private HashMap<String, List<String>> hashMap_want = new HashMap<>();
+    private HashMap<String, List<String>> hashMap_dontwant = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,63 +139,92 @@ public class ShendengSecondStepActivity extends BaseActivity {
                 break;
             case R.id.finish_tv:
                 SpUtils.putBoolean("shendeng", true);
-                startActivity(new Intent(mContext, ShendengListActivity.class));
+                Intent intent = new Intent(mContext, ShendengListActivity.class);
+                intent.putExtra("hxs", getIntent().getStringExtra("hxs"));
+                intent.putExtra("zjId", getIntent().getStringExtra("zjId"));
+                startActivity(intent);
                 finish();
                 break;
         }
     }
+
+//    private HashMap<String, List<String>> getLastIds() {
+//        HashMap<String, List<String>> hashMap = new HashMap();
+//        for (String key : hashMap_want.keySet()) {
+//
+//        }
+//    }
 
     private List<OneCheckBean> getxiangyao(ShenDengRuleBean.DatasEntity.XytjEntity xytj) {
         List<OneCheckBean> wantList = new ArrayList<>();
         if (xytj != null) {
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ChaoxiangEntity> chaoxiang = xytj.getChaoxiang();
             if (chaoxiang != null && chaoxiang.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chaoxiang.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chaoxiang.get(i).getScreeValJpn() : chaoxiang.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chaoxiang.get(i).getId() + "");
                 }
+                hashMap_want.put("cxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ChezhanjuliEntity> chezhanjuli = xytj.getChezhanjuli();
             if (chezhanjuli != null && chezhanjuli.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chezhanjuli.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chezhanjuli.get(i).getScreeValJpn() : chezhanjuli.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chezhanjuli.get(i).getId() + "");
                 }
+                hashMap_want.put("czjls", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ChuqifeiyongEntity> chuqifeiyong = xytj.getChuqifeiyong();
             if (chuqifeiyong != null && chuqifeiyong.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chuqifeiyong.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chuqifeiyong.get(i).getScreeValJpn() : chuqifeiyong.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chuqifeiyong.get(i).getId() + "");
                 }
+                hashMap_want.put("cqfys", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ChuzuleixingEntity> chuzuleixing = xytj.getChuzuleixing();
             if (chuzuleixing != null && chuzuleixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chuzuleixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chuzuleixing.get(i).getScreeValJpn() : chuzuleixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chuzuleixing.get(i).getId() + "");
                 }
+                hashMap_want.put("czlxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.DiduanEntity> diduan = xytj.getDiduan();
             if (diduan != null && diduan.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < diduan.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? diduan.get(i).getScreeValJpn() : diduan.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(diduan.get(i).getId() + "");
                 }
+                hashMap_want.put("dds", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.FangjianzhuangkuangEntity> fangjianzhuangkuang = xytj.getFangjianzhuangkuang();
             if (fangjianzhuangkuang != null && fangjianzhuangkuang.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < fangjianzhuangkuang.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? fangjianzhuangkuang.get(i).getScreeValJpn() : fangjianzhuangkuang.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(fangjianzhuangkuang.get(i).getId() + "");
                 }
+                hashMap_want.put("fjzks", list);
             }
+            //户型不用写
             List<ShenDengRuleBean.DatasEntity.XytjEntity.HuxingEntity> huxing = xytj.getHuxing();
             if (huxing != null && huxing.size() > 0) {
                 for (int i = 0; i < huxing.size(); i++) {
@@ -203,52 +235,71 @@ public class ShendengSecondStepActivity extends BaseActivity {
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.JianzhugouzaoEntity> jianzhugouzao = xytj.getJianzhugouzao();
             if (jianzhugouzao != null && jianzhugouzao.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jianzhugouzao.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jianzhugouzao.get(i).getScreeValJpn() : jianzhugouzao.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jianzhugouzao.get(i).getId() + "");
                 }
+                hashMap_want.put("jzgzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.JianzhunianfenEntity> jianzhunianfen = xytj.getJianzhunianfen();
             if (jianzhunianfen != null && jianzhunianfen.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jianzhunianfen.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jianzhunianfen.get(i).getScreeValJpn() : jianzhunianfen.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jianzhunianfen.get(i).getId() + "");
                 }
+                hashMap_want.put("jznfs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.JiudianleixingEntity> jiudianleixing = xytj.getJiudianleixing();
             if (jiudianleixing != null && jiudianleixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jiudianleixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jiudianleixing.get(i).getScreeValJpn() : jiudianleixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jiudianleixing.get(i).getId() + "");
                 }
+                hashMap_want.put("jdlxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.JiudianloucengshuEntity> jiudianloucengshu = xytj.getJiudianloucengshu();
             if (jiudianloucengshu != null && jiudianloucengshu.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jiudianloucengshu.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jiudianloucengshu.get(i).getScreeValJpn() : jiudianloucengshu.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jiudianloucengshu.get(i).getId() + "");
                 }
+                hashMap_want.put("jdlcs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.LoucengEntity> louceng = xytj.getLouceng();
             if (louceng != null && louceng.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < louceng.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? louceng.get(i).getScreeValJpn() : louceng.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(louceng.get(i).getId() + "");
                 }
+                hashMap_want.put("lcs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.MianjiEntity> mianji = xytj.getMianji();
             if (mianji != null && mianji.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < mianji.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? mianji.get(i).getScreeValJpn() : mianji.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(mianji.get(i).getId() + "");
                 }
+                hashMap_want.put("mjId", list);
             }
+            //租金不用写
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ZujinEntity> zujin = xytj.getZujin();
             if (zujin != null && zujin.size() > 0) {
                 for (int i = 0; i < zujin.size(); i++) {
@@ -259,52 +310,71 @@ public class ShendengSecondStepActivity extends BaseActivity {
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.YingyeleixingEntity> yingyeleixing = xytj.getYingyeleixing();
             if (yingyeleixing != null && yingyeleixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < yingyeleixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? yingyeleixing.get(i).getScreeValJpn() : yingyeleixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(yingyeleixing.get(i).getId() + "");
                 }
+                hashMap_want.put("yylxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.XianzhuangEntity> xianzhuang = xytj.getXianzhuang();
             if (xianzhuang != null && xianzhuang.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < xianzhuang.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? xianzhuang.get(i).getScreeValJpn() : xianzhuang.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(xianzhuang.get(i).getId() + "");
                 }
+                hashMap_want.put("xzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.TiaojianEntity> tiaojian = xytj.getTiaojian();
             if (tiaojian != null && tiaojian.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < tiaojian.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? tiaojian.get(i).getScreeValJpn() : tiaojian.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(tiaojian.get(i).getId() + "");
                 }
+                hashMap_want.put("tjs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.TezhengEntity> tezheng = xytj.getTezheng();
             if (tezheng != null && tezheng.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < tezheng.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? tezheng.get(i).getScreeValJpn() : tezheng.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(tezheng.get(i).getId() + "");
                 }
+                hashMap_want.put("tzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.SuoyouquanEntity> suoyouquan = xytj.getSuoyouquan();
             if (suoyouquan != null && suoyouquan.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < suoyouquan.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? suoyouquan.get(i).getScreeValJpn() : suoyouquan.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(suoyouquan.get(i).getId() + "");
                 }
+                hashMap_want.put("syqs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ShoumaileixingEntity> shoumaileixing = xytj.getShoumaileixing();
             if (shoumaileixing != null && shoumaileixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < shoumaileixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? shoumaileixing.get(i).getScreeValJpn() : shoumaileixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(shoumaileixing.get(i).getId() + "");
                 }
+                hashMap_want.put("smlxs", list);
             }
+            //售价不用写
             List<ShenDengRuleBean.DatasEntity.XytjEntity.ShoujiaEntity> shoujia = xytj.getShoujia();
             if (shoujia != null && shoujia.size() > 0) {
                 for (int i = 0; i < shoujia.size(); i++) {
@@ -315,19 +385,25 @@ public class ShendengSecondStepActivity extends BaseActivity {
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.RujuriqiEntity> rujuriqi = xytj.getRujuriqi();
             if (rujuriqi != null && rujuriqi.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < rujuriqi.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? rujuriqi.get(i).getScreeValJpn() : rujuriqi.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(rujuriqi.get(i).getId() + "");
                 }
+                hashMap_want.put("rjrqs", list);
             }
             List<ShenDengRuleBean.DatasEntity.XytjEntity.RenqixuanzeEntity> renqixuanze = xytj.getRenqixuanze();
             if (renqixuanze != null && renqixuanze.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < renqixuanze.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? renqixuanze.get(i).getScreeValJpn() : renqixuanze.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(renqixuanze.get(i).getId() + "");
                 }
+                hashMap_want.put("rqxzs", list);
             }
         }
         return wantList;
@@ -338,52 +414,71 @@ public class ShendengSecondStepActivity extends BaseActivity {
         if (bxytjEntity != null) {
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChaoxiangEntity> chaoxiang = bxytjEntity.getChaoxiang();
             if (chaoxiang != null && chaoxiang.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chaoxiang.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chaoxiang.get(i).getScreeValJpn() : chaoxiang.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chaoxiang.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("cxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChezhanjuliEntity> chezhanjuli = bxytjEntity.getChezhanjuli();
             if (chezhanjuli != null && chezhanjuli.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chezhanjuli.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chezhanjuli.get(i).getScreeValJpn() : chezhanjuli.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chezhanjuli.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("czjls", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChuqifeiyongEntity> chuqifeiyong = bxytjEntity.getChuqifeiyong();
             if (chuqifeiyong != null && chuqifeiyong.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chuqifeiyong.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chuqifeiyong.get(i).getScreeValJpn() : chuqifeiyong.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chuqifeiyong.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("cqfys", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChuzuleixingEntity> chuzuleixing = bxytjEntity.getChuzuleixing();
             if (chuzuleixing != null && chuzuleixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < chuzuleixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? chuzuleixing.get(i).getScreeValJpn() : chuzuleixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(chuzuleixing.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("czlxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.DiduanEntity> diduan = bxytjEntity.getDiduan();
             if (diduan != null && diduan.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < diduan.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? diduan.get(i).getScreeValJpn() : diduan.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(diduan.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("dds", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.FangjianzhuangkuangEntity> fangjianzhuangkuang = bxytjEntity.getFangjianzhuangkuang();
             if (fangjianzhuangkuang != null && fangjianzhuangkuang.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < fangjianzhuangkuang.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? fangjianzhuangkuang.get(i).getScreeValJpn() : fangjianzhuangkuang.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(fangjianzhuangkuang.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("fjzks", list);
             }
+            //户型不用写
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.HuxingEntity> huxing = bxytjEntity.getHuxing();
             if (huxing != null && huxing.size() > 0) {
                 for (int i = 0; i < huxing.size(); i++) {
@@ -394,52 +489,71 @@ public class ShendengSecondStepActivity extends BaseActivity {
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JianzhugouzaoEntity> jianzhugouzao = bxytjEntity.getJianzhugouzao();
             if (jianzhugouzao != null && jianzhugouzao.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jianzhugouzao.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jianzhugouzao.get(i).getScreeValJpn() : jianzhugouzao.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jianzhugouzao.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("jzgzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JianzhunianfenEntity> jianzhunianfen = bxytjEntity.getJianzhunianfen();
             if (jianzhunianfen != null && jianzhunianfen.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jianzhunianfen.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jianzhunianfen.get(i).getScreeValJpn() : jianzhunianfen.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jianzhunianfen.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("jznfs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JiudianleixingEntity> jiudianleixing = bxytjEntity.getJiudianleixing();
             if (jiudianleixing != null && jiudianleixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jiudianleixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jiudianleixing.get(i).getScreeValJpn() : jiudianleixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jiudianleixing.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("jdlxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JiudianloucengshuEntity> jiudianloucengshu = bxytjEntity.getJiudianloucengshu();
             if (jiudianloucengshu != null && jiudianloucengshu.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < jiudianloucengshu.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? jiudianloucengshu.get(i).getScreeValJpn() : jiudianloucengshu.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(jiudianloucengshu.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("jdlcs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.LoucengEntity> louceng = bxytjEntity.getLouceng();
             if (louceng != null && louceng.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < louceng.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? louceng.get(i).getScreeValJpn() : louceng.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(louceng.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("lcs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.MianjiEntity> mianji = bxytjEntity.getMianji();
             if (mianji != null && mianji.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < mianji.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? mianji.get(i).getScreeValJpn() : mianji.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(mianji.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("mjId", list);
             }
+            //租金不用写
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ZujinEntity> zujin = bxytjEntity.getZujin();
             if (zujin != null && zujin.size() > 0) {
                 for (int i = 0; i < zujin.size(); i++) {
@@ -450,52 +564,71 @@ public class ShendengSecondStepActivity extends BaseActivity {
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.YingyeleixingEntity> yingyeleixing = bxytjEntity.getYingyeleixing();
             if (yingyeleixing != null && yingyeleixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < yingyeleixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? yingyeleixing.get(i).getScreeValJpn() : yingyeleixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(yingyeleixing.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("yylxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.XianzhuangEntity> xianzhuang = bxytjEntity.getXianzhuang();
             if (xianzhuang != null && xianzhuang.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < xianzhuang.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? xianzhuang.get(i).getScreeValJpn() : xianzhuang.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(xianzhuang.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("xzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.TiaojianEntity> tiaojian = bxytjEntity.getTiaojian();
             if (tiaojian != null && tiaojian.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < tiaojian.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? tiaojian.get(i).getScreeValJpn() : tiaojian.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(tiaojian.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("tjs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.TezhengEntity> tezheng = bxytjEntity.getTezheng();
             if (tezheng != null && tezheng.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < tezheng.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? tezheng.get(i).getScreeValJpn() : tezheng.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(tezheng.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("tzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.SuoyouquanEntity> suoyouquan = bxytjEntity.getSuoyouquan();
             if (suoyouquan != null && suoyouquan.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < suoyouquan.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? suoyouquan.get(i).getScreeValJpn() : suoyouquan.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(suoyouquan.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("syqs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ShoumaileixingEntity> shoumaileixing = bxytjEntity.getShoumaileixing();
             if (shoumaileixing != null && shoumaileixing.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < shoumaileixing.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? shoumaileixing.get(i).getScreeValJpn() : shoumaileixing.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(shoumaileixing.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("smlxs", list);
             }
+            //售价不用写
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ShoujiaEntity> shoujia = bxytjEntity.getShoujia();
             if (shoujia != null && shoujia.size() > 0) {
                 for (int i = 0; i < shoujia.size(); i++) {
@@ -506,19 +639,25 @@ public class ShendengSecondStepActivity extends BaseActivity {
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.RujuriqiEntity> rujuriqi = bxytjEntity.getRujuriqi();
             if (rujuriqi != null && rujuriqi.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < rujuriqi.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? rujuriqi.get(i).getScreeValJpn() : rujuriqi.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(rujuriqi.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("rjrqs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.RenqixuanzeEntity> renqixuanze = bxytjEntity.getRenqixuanze();
             if (renqixuanze != null && renqixuanze.size() > 0) {
+                List<String> list = new ArrayList<>();
                 for (int i = 0; i < renqixuanze.size(); i++) {
                     OneCheckBean oneCheckBean = new OneCheckBean(false,
                             isJa ? renqixuanze.get(i).getScreeValJpn() : renqixuanze.get(i).getScreeValCn());
                     wantList.add(oneCheckBean);
+                    list.add(renqixuanze.get(i).getId() + "");
                 }
+                hashMap_dontwant.put("rqxzs", list);
             }
         }
         return wantList;

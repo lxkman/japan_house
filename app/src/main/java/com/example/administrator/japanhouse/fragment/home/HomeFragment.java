@@ -31,7 +31,6 @@ import com.example.administrator.japanhouse.activity.OwnerActivity;
 import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
-import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.bean.HomePageBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
@@ -55,16 +54,13 @@ import com.example.administrator.japanhouse.utils.BannerUtils;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,7 +154,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null);
-        EventBus.getDefault().register(this);
         unbinder = ButterKnife.bind(this, view);
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {
@@ -175,18 +170,18 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void myEvent(EventBean eventBean) {
-        if (eventBean.getMsg().equals("changecity")) {
-            String city = eventBean.getMsg2();
-            if (city != null && city.length() <= 3) {
-                locationTv.setText(city);
-            } else if (city != null && city.length() > 3) {
-                locationTv.setText(city.substring(0, 2) + "...");
-            }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String cityName = data.getStringExtra("cityName");
+        int cityId = data.getIntExtra("cityId",0);
+        SpUtils.putInt("cityId",cityId);
+        if (cityName != null && cityName.length() <= 3) {
+            locationTv.setText(cityName);
+        } else if (cityName != null && cityName.length() > 3) {
+            locationTv.setText(cityName.substring(0, 2) + "...");
         }
     }
 
@@ -741,7 +736,7 @@ public class HomeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.location_tv:
-                startActivity(new Intent(mContext, LocationActivity.class));
+                startActivityForResult(new Intent(mContext, LocationActivity2.class),0);
                 break;
             case R.id.search_tv:
                 Intent intent1 = new Intent(mContext, HomeSearchActivity.class);

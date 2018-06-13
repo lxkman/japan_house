@@ -151,4 +151,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
+    <TextView
+        android:id="@+id/tv_noContent"
+        android:visibility="gone"
+        android:textColor="@color/text_black"
+        android:text="@string/meiyousousuojieguo"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="match_parent"/>
 </LinearLayout>

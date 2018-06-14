@@ -43,7 +43,7 @@ public class AgentListAdapter extends RecyclerView.Adapter {
         viewHolder.wChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChat(activity, "userid", "name");
+                ImManager.enterChat(activity, "userid", "name", "pic");
             }
         });
 

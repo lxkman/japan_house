@@ -461,7 +461,9 @@ public class NewHousedetailsActivity extends BaseActivity {
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(NewHousedetailsActivity.this, "userid", "name");
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(NewHousedetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

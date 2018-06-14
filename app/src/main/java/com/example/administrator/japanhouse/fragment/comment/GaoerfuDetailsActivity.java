@@ -352,7 +352,9 @@ public class GaoerfuDetailsActivity extends BaseActivity {
         findViewById(R.id.gaoerfu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(GaoerfuDetailsActivity.this, "userid", "name");
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(GaoerfuDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

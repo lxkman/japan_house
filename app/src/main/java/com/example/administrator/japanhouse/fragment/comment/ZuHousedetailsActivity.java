@@ -434,8 +434,9 @@ public class ZuHousedetailsActivity extends BaseActivity {
         findViewById(R.id.lishi_zu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(ZuHousedetailsActivity.this, "userid", "name");
-
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(ZuHousedetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

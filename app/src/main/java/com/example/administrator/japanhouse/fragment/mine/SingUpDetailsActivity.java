@@ -166,7 +166,7 @@ public class SingUpDetailsActivity extends BaseActivity {
                 break;
             case R.id.act_singUp_details_wChat:
                 if (datasBean != null && datasBean.getHwdcBroker() != null) {
-                    ImManager.enterChatDetails(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName());
+                    ImManager.enterChatDetails(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName(), datasBean.getHwdcBroker().getPic());
                 }
                 break;
             case R.id.act_singUp_details_managerPhone:

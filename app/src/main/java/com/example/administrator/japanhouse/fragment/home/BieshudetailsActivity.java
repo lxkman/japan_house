@@ -155,7 +155,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         villaDetailsPresenter = new VillaDetailsPresenter(this, this);
         villaDetailsPresenter.getVillaDetails(houseId, token);
-        new HouseLogPresenter(this).setHouseLog("4",houseId,"");
+        new HouseLogPresenter(this).setHouseLog("4", houseId, "");
 
         //户型图
         initData();
@@ -165,7 +165,9 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         findViewById(R.id.xiezilou_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(BieshudetailsActivity.this, "userid", "name");
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(BieshudetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

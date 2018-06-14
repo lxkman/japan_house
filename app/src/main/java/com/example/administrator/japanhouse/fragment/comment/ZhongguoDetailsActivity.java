@@ -413,8 +413,9 @@ public class ZhongguoDetailsActivity extends BaseActivity {
         findViewById(R.id.zhongguo_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(ZhongguoDetailsActivity.this, "userid", "name");
-
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(ZhongguoDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
         String floorImg = datas.getFloorImg();

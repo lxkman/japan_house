@@ -37,14 +37,11 @@ public class MaskPlugin implements IPluginModule {
             @Override
             public void onSuccess(RongIMClient.BlacklistStatus blacklistStatus) {
                 if (blacklistStatus == RongIMClient.BlacklistStatus.IN_BLACK_LIST) {
-                    ImManager.removeFromBlack(id);
-                    TUtils.showFail(fragment.getActivity(), "移除成功");
+                    ImManager.removeFromBlack(id, fragment.getActivity());
                 } else {
-                    ImManager.addToBlack(id);
-                    TUtils.showFail(fragment.getActivity(), "拉黑成功");
+                    ImManager.addToBlack(id, fragment.getActivity());
                 }
             }
-
 
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {

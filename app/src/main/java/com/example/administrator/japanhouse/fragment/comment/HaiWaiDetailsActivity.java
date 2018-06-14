@@ -420,7 +420,9 @@ public class HaiWaiDetailsActivity extends BaseActivity {
         findViewById(R.id.haiwai_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(HaiWaiDetailsActivity.this, "userid", "name");
+                if (hwdcBroker != null){
+                    ImManager.enterChatDetails(HaiWaiDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

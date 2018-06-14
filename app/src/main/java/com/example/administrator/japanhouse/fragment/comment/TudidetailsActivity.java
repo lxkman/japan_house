@@ -410,8 +410,9 @@ public class TudidetailsActivity extends BaseActivity {
         findViewById(R.id.tudi_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(TudidetailsActivity.this, "userid", "name");
-
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(TudidetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

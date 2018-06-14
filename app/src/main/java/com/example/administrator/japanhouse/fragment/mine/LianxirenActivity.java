@@ -132,7 +132,7 @@ public class LianxirenActivity extends BaseActivity implements LinkmanPresenter.
 
     @Override
     public void onItemClickListener(LinkmanBean.DatasBean.ListBean bean) {
-        ImManager.enterChat(this, bean.getId() + "", bean.getBrokerName());
+        ImManager.enterChat(this, bean.getId() + "", bean.getBrokerName(), bean.getPic());
     }
 
     @Override

@@ -115,6 +115,6 @@ public class StartWechatActivity extends BaseActivity  implements LinkmanPresent
 
     @Override
     public void onItemClickListener(LinkmanBean.DatasBean.ListBean bean) {
-        ImManager.enterChat(this, bean.getId() + "", bean.getBrokerName());
+        ImManager.enterChat(this, bean.getId() + "", bean.getBrokerName(), bean.getPic());
     }
 }

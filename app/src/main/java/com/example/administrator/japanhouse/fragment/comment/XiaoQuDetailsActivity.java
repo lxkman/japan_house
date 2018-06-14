@@ -401,8 +401,9 @@ public class XiaoQuDetailsActivity extends BaseActivity {
         findViewById(R.id.xiaoqu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(XiaoQuDetailsActivity.this, "userid", "name");
-
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(XiaoQuDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
     }

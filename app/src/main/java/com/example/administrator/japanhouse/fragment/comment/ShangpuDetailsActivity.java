@@ -354,7 +354,9 @@ public class ShangpuDetailsActivity extends BaseActivity {
         findViewById(R.id.shangpu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(ShangpuDetailsActivity.this, "userid", "name");
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(ShangpuDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

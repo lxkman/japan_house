@@ -634,7 +634,9 @@ public class OldHousedetailsActivity extends BaseActivity {
         findViewById(R.id.lishi_old_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(OldHousedetailsActivity.this, "userid", "name");
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(OldHousedetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
         if (mList.size() <= 0) {

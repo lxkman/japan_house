@@ -344,8 +344,9 @@ public class XiezilouDetailsActivity extends BaseActivity {
         findViewById(R.id.xiezilou_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChatDetails(XiezilouDetailsActivity.this, "userid", "name");
-
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(XiezilouDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }
             }
         });
 

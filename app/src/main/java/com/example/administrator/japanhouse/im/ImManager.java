@@ -7,10 +7,12 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 
 import java.io.File;
 import java.util.List;
@@ -242,13 +244,13 @@ public class ImManager {
      * 将某个用户加到黑名单中。
      * <p>当把对方加入黑名单后，对方再发消息时，就会提示“您的消息已经发出, 但被对方拒收”。但您仍然可以给对方发送消息。</p>
      *
-     * @param userId   用户 Id。
+     * @param userId 用户 Id。
      */
-    public static void addToBlack(String userId){
+    public static void addToBlack(String userId, final Context context) {
         RongIM.getInstance().addToBlacklist(userId, new RongIMClient.OperationCallback() {
             @Override
             public void onSuccess() {
-
+                TUtils.showFail(context, "拉黑成功");
             }
 
             @Override
@@ -261,13 +263,13 @@ public class ImManager {
     /**
      * 将个某用户从黑名单中移出。
      *
-     * @param userId   用户 Id。
+     * @param userId 用户 Id。
      */
-    public static void removeFromBlack(String userId){
+    public static void removeFromBlack(String userId, final Context context) {
         RongIM.getInstance().removeFromBlacklist(userId, new RongIMClient.OperationCallback() {
             @Override
             public void onSuccess() {
-
+                TUtils.showFail(context, "移除成功");
             }
 
             @Override
@@ -278,19 +280,17 @@ public class ImManager {
 
     }
 
-    public static void enterChatDetails(Context context, String userId, String chatName){
+    public static void enterChatDetails(Context context, String userId, String chatName, String avatar) {
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
         setMyExtensionModule();
         if (RongIM.getInstance() != null) {
-            Log.e("MainActivity", "创建单聊");
             RongIM.getInstance().startPrivateChat(context, userId, chatName);
         }
     }
 
-    public static void enterChat(Context context, String userId, String chatName){
+    public static void enterChat(Context context, String userId, String chatName, String avatar) {
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_TALK);
         if (RongIM.getInstance() != null) {
-            Log.e("MainActivity", "创建单聊");
             RongIM.getInstance().startPrivateChat(context, userId, chatName);
         }
     }

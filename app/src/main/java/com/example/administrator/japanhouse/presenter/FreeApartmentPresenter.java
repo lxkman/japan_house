@@ -46,12 +46,7 @@ public class FreeApartmentPresenter {
                 .execute(new DialogCallback<FreeApartmentBean>(activity, FreeApartmentBean.class) {
                     @Override
                     public void onSuccess(Response<FreeApartmentBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
-                            callBack.getFreeApartmentList(response);
-                        }
+                        callBack.getFreeApartmentList(response);
                     }
 
                     @Override
@@ -82,12 +77,7 @@ public class FreeApartmentPresenter {
                 .execute(new DialogCallback<NoDataBean>(activity, NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
-                            callBack.getSignUp(response);
-                        }
+                        callBack.getSignUp(response);
                     }
                 });
     }

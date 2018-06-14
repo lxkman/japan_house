@@ -31,6 +31,7 @@ import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActi
 import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.more.CollectionListBean;
 import com.example.administrator.japanhouse.presenter.CollectionPresenter;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -129,6 +130,12 @@ public class ShouCangActivity extends BaseActivity implements CollectionPresente
 
     @Override
     public void getCollectionHouseList(Response<CollectionListBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (isRefresh) {
             TUtils.showFail(this, getString(R.string.refresh_success));
         }

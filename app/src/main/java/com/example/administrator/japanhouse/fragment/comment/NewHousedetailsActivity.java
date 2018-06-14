@@ -46,6 +46,7 @@ import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
 import com.example.administrator.japanhouse.more.NewHouseMoreActivity;
@@ -460,12 +461,7 @@ public class NewHousedetailsActivity extends BaseActivity {
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(NewHousedetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(NewHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
-                }
+                ImManager.enterChatDetails(NewHousedetailsActivity.this, "userid", "name");
             }
         });
 
@@ -818,24 +814,6 @@ public class NewHousedetailsActivity extends BaseActivity {
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
             Glide.with(NewHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
-        }
-    }
-
-
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
-            }
         }
     }
 }

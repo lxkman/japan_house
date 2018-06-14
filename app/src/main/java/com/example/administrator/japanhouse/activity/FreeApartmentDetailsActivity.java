@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.im.ImManager;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.FreeApartmentBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.FreeApartmentPresenter;
@@ -181,7 +183,7 @@ public class FreeApartmentDetailsActivity extends BaseActivity implements FreeAp
                 break;
             case R.id.act_freeApart_wChat:
                 if (datasBean != null && datasBean.getHwdcBroker() != null) {
-                    RongIM.getInstance().startPrivateChat(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName());
+                    ImManager.enterChatDetails(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName());
                 }
                 break;
             case R.id.act_freeApart_managerPhone:
@@ -273,7 +275,11 @@ public class FreeApartmentDetailsActivity extends BaseActivity implements FreeAp
 
     @Override
     public void getSignUp(Response<NoDataBean> response) {
-
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
     }
 
     @Override

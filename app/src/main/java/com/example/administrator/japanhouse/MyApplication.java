@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
@@ -46,6 +47,7 @@ import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.UserInfo;
 import okhttp3.OkHttpClient;
 
 /**
@@ -109,7 +111,7 @@ public class MyApplication extends Application {
 
     private void initRc() {
         RongIM.init(this);
-
+        RongIM.getInstance().setMessageAttachedUserInfo(true);
         /**
          *
          * jEOJtiOxmPTyb2CdFT7a0m7tnvnoFRHtvRSk65MeRaWjhNUpICiAMXNDGqU1IaYQIzUdPu/qnOp8M7h4kf7iUj1PG9N7Nuem         123456789
@@ -119,21 +121,17 @@ public class MyApplication extends Application {
          * yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==12345
          */
 
-        LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
+        final LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
 
         if (bean != null && bean.getRongCloudToken() != null) {
             RongIM.connect(bean.getRongCloudToken(), new RongIMClient.ConnectCallback() {
                 @Override
                 public void onSuccess(String s) {
-                    Log.e("MainActivity", "——onSuccess—-" +
-                            s.toString());
-
+                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse(bean.getPic())));
                 }
 
                 @Override
                 public void onError(RongIMClient.ErrorCode errorCode) {
-                    Log.e("MainActivity", "——onError—-" +
-                            errorCode);
                 }
 
                 @Override
@@ -306,6 +304,7 @@ public class MyApplication extends Application {
                 Log.e("=============>>", "清除成功");
             }
 
+            RongIM.getInstance().logout();
         }
     }
 }

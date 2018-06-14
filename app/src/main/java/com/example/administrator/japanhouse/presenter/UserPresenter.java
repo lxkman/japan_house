@@ -41,12 +41,7 @@ public class UserPresenter {
                 .execute(new DialogCallback<UserInfo>(activity, UserInfo.class) {
                     @Override
                     public void onSuccess(Response<UserInfo> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
                             callBack.getUserInfo(response);
-                        }
                     }
                 });
     }
@@ -71,12 +66,7 @@ public class UserPresenter {
                 .execute(new DialogCallback<NoDataBean>(activity, NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
                             callBack.updateUserInfo(response);
-                        }
                     }
                 });
     }

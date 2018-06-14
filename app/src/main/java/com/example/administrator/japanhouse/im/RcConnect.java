@@ -14,7 +14,7 @@ import io.rong.imlib.model.UserInfo;
 /**
  * admin  2018/6/12
  */
-public class RcConect {
+public class RcConnect {
 
     public static void rongCloudConection(String token){
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
@@ -23,7 +23,6 @@ public class RcConect {
                 Log.e("MainActivity", "——onSuccess—-" +
                         s.toString());
                 setUserInfo();
-                setUserInfo1();
             }
 
             @Override
@@ -40,17 +39,18 @@ public class RcConect {
     }
 
     public static void setUserInfo(){
-        final LoginBean.DatasBean loginBean = CacheUtils.get(Constants.USERINFO);
+        LoginBean.DatasBean loginBean = CacheUtils.get(Constants.USERINFO);
 
         if (loginBean == null)
             return;
 
-        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
-            @Override
-            public UserInfo getUserInfo(String s) {
-                return new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic()));
-            }
-        }, true);
+        RongIM.getInstance().setCurrentUserInfo(new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic())));
+//        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+//            @Override
+//            public UserInfo getUserInfo(String s) {
+//                return new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic()));
+//            }
+//        }, true);
     }
 
     public static void setUserInfo1(){

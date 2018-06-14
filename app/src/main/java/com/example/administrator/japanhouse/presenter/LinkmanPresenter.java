@@ -40,12 +40,7 @@ public class LinkmanPresenter {
                 .execute(new DialogCallback<LinkmanBean>(activity, LinkmanBean.class) {
                     @Override
                     public void onSuccess(Response<LinkmanBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
-                            callBack.getLinkmanList(response);
-                        }
+                        callBack.getLinkmanList(response);
                     }
                 });
     }

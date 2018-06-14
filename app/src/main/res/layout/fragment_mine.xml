@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <com.liaoinstan.springview.widget.SpringView
-        android:id="@+id/frag_mine_springView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestScroll"
         android:layout_width="match_parent"
@@ -599,10 +593,10 @@
                             android:background="@color/shihuangse"></View>
                     </LinearLayout>
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_foot"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_foot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <TextView
@@ -620,7 +614,6 @@
             </FrameLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-    </com.liaoinstan.springview.widget.SpringView>
 
     <RelativeLayout
         android:id="@+id/re_top_bg"

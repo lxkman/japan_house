@@ -457,11 +457,11 @@
             android:orientation="horizontal"
             android:paddingLeft="10dip">
 
-            <ImageView
+            <com.example.administrator.japanhouse.view.CircleImageView
                 android:id="@+id/act_freeApart_managerIcon"
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:padding="5dip"
+                android:layout_gravity="center"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
                 android:src="@drawable/deful_touxiang" />
 
             <TextView

@@ -19,12 +19,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.GridViewAddImgesAdpter;
 import com.example.administrator.japanhouse.activity.adapter.GridViewAddVideoAdapter;
 import com.example.administrator.japanhouse.adapter.PicRentalAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.RentalPresenter;
 import com.luck.picture.lib.PictureSelector;
@@ -521,6 +523,10 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
     @Override
     public void requestRental(Response<NoDataBean> response) {
-
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
     }
 }

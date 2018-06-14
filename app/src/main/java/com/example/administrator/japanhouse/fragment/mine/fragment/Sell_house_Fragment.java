@@ -1,9 +1,11 @@
 package com.example.administrator.japanhouse.fragment.mine.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.example.administrator.japanhouse.activity.RentalDetailsActivity;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.MaiFang_house_Adapter;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.SellHouseBean;
 import com.example.administrator.japanhouse.presenter.SellHousePresenter;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -106,6 +109,12 @@ public class Sell_house_Fragment extends BaseFragment implements MaiFang_house_A
 
     @Override
     public void getSellHouseList(Response<SellHouseBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (isRefresh) {
             TUtils.showFail(getContext(), getString(R.string.refresh_success));
         }

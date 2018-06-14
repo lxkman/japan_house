@@ -132,7 +132,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     LinearLayout llDingyue2;
     private int mDistanceY;
 
-    private SpringView springView;
     private int page = 1;
     private MinePresenter presenter;
     private List<HouseRecordListBean.DatasBean> list = new ArrayList<>();
@@ -144,33 +143,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         unbinder = ButterKnife.bind(this, rootView);
 
         presenter = new MinePresenter(getActivity(), this);
-
-        springView = (SpringView) rootView.findViewById(R.id.frag_mine_springView);
-        springView.setType(SpringView.Type.FOLLOW);
-        springView.setListener(new SpringView.OnFreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                }, 0);
-                springView.onFinishFreshAndLoad();
-            }
-
-            @Override
-            public void onLoadmore() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        page++;
-                        presenter.getHouseRecordList(MyApplication.getUserToken(), page);
-                    }
-                }, 0);
-                springView.onFinishFreshAndLoad();
-            }
-        });
+        presenter.getHouseRecordList(MyApplication.getUserToken(), page);
 
         initScroll();
         EventBus.getDefault().register(this);
@@ -252,10 +225,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
 
         recyclerFoot.setNestedScrollingEnabled(false);
-        recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        recyclerFoot.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         adapter = new MineRecordAdapter(mContext, list);
         recyclerFoot.setAdapter(adapter);
-        presenter.getHouseRecordList(MyApplication.getUserToken(), page);
 //        startActivity(new Intent(mContext, NewHousedetailsActivity.class));
     }
 
@@ -335,23 +307,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new FeedBackExtensionModule());
-            }
-        }
-    }
-
     @Override
     public void getHouseRecordList(Response<HouseRecordListBean> response) {
 
@@ -364,8 +319,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 list.addAll(response.body().getDatas());
-            } else {
-                page --;
             }
             adapter.notifyDataSetChanged();
         }

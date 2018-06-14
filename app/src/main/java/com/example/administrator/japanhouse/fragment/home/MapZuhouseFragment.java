@@ -645,6 +645,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             case R.id.ll_clear:
                 isHuaQuan=false;
                 loadAllXiaoQu(curr_northeast,curr_southwest);
+                ll_clear.setVisibility(View.GONE);
                 break;
         }
     }

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -31,6 +30,8 @@ import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActi
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -78,7 +79,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
-
+    private TextView tvNoContent;
     private String searchText = "";
     private OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas;
     private String[] headers;
@@ -140,6 +141,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
+        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 1);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -309,6 +311,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)){
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         HttpParams params = new HttpParams();
         if (isJa) {
             params.put("languageType", 1);
@@ -360,9 +368,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                             return;
                         }
                         List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(NewHouseActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -373,12 +384,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(NewHouseActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.meiyougengduoshujule));
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(NewHouseActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.shuaxinchenggong));
                             } else {
                                 mDatas.addAll(datas);
                             }

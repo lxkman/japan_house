@@ -77,6 +77,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                         ShenDengRuleBean.DatasEntity.XytjEntity xytj = datas.getXytj();
                         ShenDengRuleBean.DatasEntity.BxytjEntity bxytj = datas.getBxytj();
                         wantList = getxiangyao(xytj);
+                        wantList.get(0).setChecked(true);
                         for (int i = 0; i < wantList.size(); i++) {
                             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_shendeng_second, null);
                             tv.setText(wantList.get(i).getName());
@@ -84,6 +85,10 @@ public class ShendengSecondStepActivity extends BaseActivity {
                                     ViewGroup.LayoutParams.WRAP_CONTENT,
                                     ViewGroup.LayoutParams.WRAP_CONTENT
                             );
+                            if (wantList.get(i).isChecked()) {
+                                tv.setBackground(getResources().getDrawable(R.drawable.bg_shendeng_sec_true));
+                                tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            }
                             params.setMargins(12, 12, 12, 12);
                             wantFluidlayout.addView(tv, params);
                             final int finalI = i;
@@ -104,6 +109,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                         }
                         notwantFluidlayout.removeAllViews();
                         final List<OneCheckBean> nowantList = getbuxiangyao(bxytj);
+                        nowantList.get(0).setChecked(true);
                         for (int i = 0; i < nowantList.size(); i++) {
                             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_shendeng_second, null);
                             tv.setText(nowantList.get(i).getName());
@@ -111,6 +117,10 @@ public class ShendengSecondStepActivity extends BaseActivity {
                                     ViewGroup.LayoutParams.WRAP_CONTENT,
                                     ViewGroup.LayoutParams.WRAP_CONTENT
                             );
+                            if (nowantList.get(i).isChecked()) {
+                                tv.setBackground(getResources().getDrawable(R.drawable.bg_shendeng_sec_true));
+                                tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            }
                             params.setMargins(12, 12, 12, 12);
                             notwantFluidlayout.addView(tv, params);
                             final int finalI = i;

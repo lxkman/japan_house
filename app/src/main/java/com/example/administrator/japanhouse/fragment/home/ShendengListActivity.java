@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -24,6 +23,7 @@ import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActiv
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
@@ -152,12 +152,12 @@ public class ShendengListActivity extends BaseActivity {
                             liebiaoAdapter.addHeaderView(headerView);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ShendengListActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.meiyougengduoshujule));
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(ShendengListActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.shuaxinchenggong));
                             } else {
                                 mDatas.addAll(datas);
                             }

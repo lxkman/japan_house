@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,6 +18,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.YanJiuListBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -42,6 +42,8 @@ public class YanjiuListActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.springview)
     SpringView springview;
+    @BindView(R.id.tv_noContent)
+    TextView tvNoContent;
     private int page = 1;
     private boolean isLoadMore;
     private List<YanJiuListBean.DatasEntity> mDatas;
@@ -72,9 +74,12 @@ public class YanjiuListActivity extends BaseActivity {
                                      return;
                                  }
                                  final List<YanJiuListBean.DatasEntity> datas = yanJiuListBean.getDatas();
+                                 tvNoContent.setVisibility(View.GONE);
+                                 springview.setVisibility(View.VISIBLE);
                                  if (mDatas == null || mDatas.size() == 0) {
                                      if (datas == null || datas.size() == 0) {
-                                         Toast.makeText(YanjiuListActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                         tvNoContent.setVisibility(View.VISIBLE);
+                                         springview.setVisibility(View.GONE);
                                          if (listAdapter != null) {
                                              listAdapter.notifyDataSetChanged();
                                          }
@@ -85,12 +90,12 @@ public class YanjiuListActivity extends BaseActivity {
                                      recyclerView.setAdapter(listAdapter);
                                  } else {
                                      if (datas == null || datas.size() == 0) {
-                                         Toast.makeText(YanjiuListActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                         TUtils.showFail(mContext, getString(R.string.meiyougengduoshujule));
                                          return;
                                      }
                                      if (!isLoadMore) {
                                          mDatas = datas;
-                                         Toast.makeText(YanjiuListActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                         TUtils.showFail(mContext, getString(R.string.shuaxinchenggong));
                                      } else {
                                          mDatas.addAll(datas);
                                      }
@@ -100,7 +105,9 @@ public class YanjiuListActivity extends BaseActivity {
                                      @Override
                                      public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                          Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
-                                         intent.putExtra("yjType", datas.get(position).getYjType() + "");
+                                         intent.putExtra("title", datas.get(position).getYjTitle() + "");
+                                         intent.putExtra("content", datas.get(position).getYjContent() + "");
+                                         intent.putExtra("time", datas.get(position).getCreateTime());
                                          startActivity(intent);
                                      }
                                  });

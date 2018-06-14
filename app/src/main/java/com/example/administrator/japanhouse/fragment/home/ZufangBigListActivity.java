@@ -27,7 +27,6 @@ import com.example.administrator.japanhouse.bean.ZufangListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
-import com.example.administrator.japanhouse.fragment.mine.fragment.LiShiJiLu2Activity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -52,7 +51,7 @@ import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 
-public class ZufangListActivity extends BaseActivity implements MyItemClickListener {
+public class ZufangBigListActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -71,8 +70,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private boolean isLoadMore;
     private int page = 1;
     private boolean isJa;
-    private int mType;
-    private int mType2;
     private List<ZufangListBean.DatasEntity> mDatas;
     private String mjId = "-2";
     private String zjId = "-2";
@@ -106,20 +103,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             isJa = true;
         } else {
             isJa = false;
-        }
-        mType = getIntent().getIntExtra("type", 0);
-        if (mType == 0) {
-            mType2 = 5;
-        } else if (mType == 1) {
-            mType2 = 4;
-        } else if (mType == 2) {
-            mType2 = 3;
-        } else if (mType == 3) {
-            mType2 = 2;
-        } else if (mType == 4) {
-            mType2 = 1;
-        } else if (mType == 5) {
-            mType2 = 0;
         }
         searchText = getIntent().getStringExtra("searchText");
         if (!TextUtils.isEmpty(searchText)) {
@@ -157,44 +140,17 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         /**
          * Dropdownmenu下面的主体部分
          * */
-        fifthView = LayoutInflater.from(ZufangListActivity.this).inflate(R.layout.activity_zufang_view, null);
+        fifthView = LayoutInflater.from(ZufangBigListActivity.this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        TextView shipinTv = (TextView) fifthView.findViewById(R.id.shipin_tv);
-        TextView tongqinTv = (TextView) fifthView.findViewById(R.id.tongqin_tv);
-        TextView jiluTv = (TextView) fifthView.findViewById(R.id.jilu_tv);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
         tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
-        shipinTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isMv = true;
-                page = 1;
-                mDatas.clear();
-                initData();
-            }
-        });
-        tongqinTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, TongqinActivity.class);
-                startActivityForResult(intent, 0);
-            }
-        });
-        jiluTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, LiShiJiLu2Activity.class);
-                intent.putExtra("houseType", mType2);
-                startActivity(intent);
-            }
-        });
         headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.zujin), getString(R.string.gengduo)};
         HttpParams params = new HttpParams();
         params.put("hType", 0);
-        params.put("shType", mType);
+        params.put("shType", 10);
         OkGo.<ZuHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/twoscreening/selectallscree")
                 .tag(this)
                 .params(params)
@@ -288,10 +244,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         /**
                          * 第一个界面
                          * */
-                        FirstView firstView = new FirstView(ZufangListActivity.this);
+                        FirstView firstView = new FirstView(ZufangBigListActivity.this);
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
-                        firstView.setListener(ZufangListActivity.this);
+                        firstView.setListener(ZufangBigListActivity.this);
 
                         /**
                          * 第二个界面
@@ -305,9 +261,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                                 list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
                             }
                         }
-                        SecView secView = new SecView(ZufangListActivity.this);
+                        SecView secView = new SecView(ZufangBigListActivity.this);
                         popupViews.add(secView.secView());
-                        secView.setListener(ZufangListActivity.this);
+                        secView.setListener(ZufangBigListActivity.this);
                         secView.insertData(list1, dropDownMenu);
 
                         /**
@@ -322,10 +278,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                                 list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
                             }
                         }
-                        ThreeView threeView = new ThreeView(ZufangListActivity.this);
+                        ThreeView threeView = new ThreeView(ZufangBigListActivity.this);
                         popupViews.add(threeView.firstView());
                         threeView.insertData2(list2, dropDownMenu, true);
-                        threeView.setListener(ZufangListActivity.this);
+                        threeView.setListener(ZufangBigListActivity.this);
                         /**
                          * 第四个界面
                          * */
@@ -350,10 +306,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                                 moreCheckBeanList.add(moreCheckBean);
                             }
                         }
-                        MoreView fourView = new MoreView(ZufangListActivity.this);
+                        MoreView fourView = new MoreView(ZufangBigListActivity.this);
                         popupViews.add(fourView.secView());
                         fourView.insertData(moreCheckBeanList, dropDownMenu);
-                        fourView.setListener(ZufangListActivity.this);
+                        fourView.setListener(ZufangBigListActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
@@ -381,7 +337,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         }
         params.put("cId", 2);
         params.put("pageNo", page);
-        params.put("hType", mType2);
         params.put("mjId", mjId);//面积
         params.put("zjId", zjId);//租金
         params.put("searchText", searchText);
@@ -403,12 +358,30 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             params.put("starWd", starWd);
             params.put("endWd", endWd);
         }
-
-        initMoreParams(params);
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("cxs", mMoreSelectedBeanList.get(3));//朝向
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(4));//车站距离
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("cqfys", mMoreSelectedBeanList.get(5));//初期费用
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(6));//人气选择
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("fjzks", mMoreSelectedBeanList.get(7));//房间状况
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
+        if (mMoreSelectedBeanList.size() > 9)
+            params.putUrlParams("tjs", mMoreSelectedBeanList.get(9));//条件
         OkGo.<ZufangListBean>post(MyUrls.BASEURL + "/app/houseresourse/searchlistzf")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<ZufangListBean>(ZufangListActivity.this, ZufangListBean.class) {
+                .execute(new DialogCallback<ZufangListBean>(ZufangBigListActivity.this, ZufangListBean.class) {
                     @Override
                     public void onSuccess(Response<ZufangListBean> response) {
                         int code = response.code();
@@ -458,85 +431,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 });
     }
 
-    private void initMoreParams(HttpParams params) {
-        switch (mType) {
-            case 0://多层公寓
-            case 2://二层公寓
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("cxs", mMoreSelectedBeanList.get(3));//朝向
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(4));//车站距离
-                if (mMoreSelectedBeanList.size() > 5)
-                    params.putUrlParams("cqfys", mMoreSelectedBeanList.get(5));//初期费用
-                if (mMoreSelectedBeanList.size() > 6)
-                    params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(6));//人气选择
-                break;
-            case 1://学生公寓
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("cxs", mMoreSelectedBeanList.get(2));//朝向
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(3));//车站距离
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("fjzks", mMoreSelectedBeanList.get(4));//房间状况
-                break;
-            case 3://别墅
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("lcs", mMoreSelectedBeanList.get(0));//楼层
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("jznfs", mMoreSelectedBeanList.get(1));//建筑年份
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("cxs", mMoreSelectedBeanList.get(2));//朝向
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(3));//建筑构造
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("dds", mMoreSelectedBeanList.get(4));//地段
-                if (mMoreSelectedBeanList.size() > 5)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(5));//车站距离
-                if (mMoreSelectedBeanList.size() > 6)
-                    params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(6));//入居日期
-                break;
-            case 4://商铺出租
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("czlxs", mMoreSelectedBeanList.get(0));//出租类型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(1));//车站距离
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("yylxs", mMoreSelectedBeanList.get(2));//营业类型
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("jznfs", mMoreSelectedBeanList.get(3));//建筑年份
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(4));//建筑构造
-                if (mMoreSelectedBeanList.size() > 5)
-                    params.putUrlParams("tzs", mMoreSelectedBeanList.get(5));//特征
-                if (mMoreSelectedBeanList.size() > 6)
-                    params.putUrlParams("tjs", mMoreSelectedBeanList.get(6));//条件
-                break;
-            case 5://办公室出租
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("czlxs", mMoreSelectedBeanList.get(0));//出租类型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(1));//车站距离
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("lcs", mMoreSelectedBeanList.get(2));//楼层
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("jznfs", mMoreSelectedBeanList.get(3));//建筑年份
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("cqfys", mMoreSelectedBeanList.get(4));//初期费用
-                if (mMoreSelectedBeanList.size() > 5)
-                    params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(5));//人气选择
-                break;
-        }
-    }
 
     @Override
     public void onItemClick(View view, int postion, int itemPosition) {
@@ -646,7 +540,6 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.zu_house));
                 intent.putExtra("state", 4);
-                intent.putExtra("state2", mType2);
                 startActivityForResult(intent,0);
         }
     }

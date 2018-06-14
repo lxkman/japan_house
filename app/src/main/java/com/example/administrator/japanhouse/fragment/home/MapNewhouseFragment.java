@@ -642,6 +642,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
             case R.id.ll_clear:
                 isHuaQuan=false;
                 loadAllXiaoQu(curr_northeast,curr_southwest);
+                ll_clear.setVisibility(View.GONE);
                 break;
         }
     }

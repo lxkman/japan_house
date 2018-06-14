@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,17 +17,14 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ZuHistroyBean;
-import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.presenter.ZuHistroyPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.SpUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
@@ -42,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LiShiJiLu2Activity extends BaseActivity {
+public class LiShiJiLu2Activity extends BaseActivity implements ZuHistroyPresenter.ZuHistroyCallBack {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -50,11 +47,15 @@ public class LiShiJiLu2Activity extends BaseActivity {
     SwipeMenuRecyclerView mrecycler;
     @BindView(R.id.springview)
     SpringView springview;
+    @BindView(R.id.tv_noContent)
+    TextView tvNoContent;
     private LiebiaoAdapter liebiaoAdapter;
     private int page = 1;
     private boolean isJa;
     private boolean isLoadMore;
     private List<ZuHistroyBean.DatasEntity> mDatas;
+    private ZuHistroyPresenter presenter;
+    private int houseType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,9 @@ public class LiShiJiLu2Activity extends BaseActivity {
         }
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        initData();
+        presenter = new ZuHistroyPresenter(this,this);
+        houseType = getIntent().getIntExtra("houseType", 0);
+        presenter.getZuHistroyList(page, houseType);
         initListener();
     }
 
@@ -81,7 +84,7 @@ public class LiShiJiLu2Activity extends BaseActivity {
             public void onRefresh() {
                 isLoadMore = false;
                 page = 1;
-                initData();
+                presenter.getZuHistroyList(page, houseType);
                 springview.onFinishFreshAndLoad();
             }
 
@@ -89,63 +92,10 @@ public class LiShiJiLu2Activity extends BaseActivity {
             public void onLoadmore() {
                 isLoadMore = true;
                 page++;
-                initData();
+                presenter.getZuHistroyList(page, houseType);
                 springview.onFinishFreshAndLoad();
             }
         });
-    }
-
-    private void initData() {
-        int houseType = getIntent().getIntExtra("houseType", 0);
-        HttpParams params = new HttpParams();
-        params.put("pageNo", page);
-        params.put("shType", houseType);
-        params.put("token", SpUtils.getString("token", ""));
-        OkGo.<ZuHistroyBean>post(MyUrls.BASEURL + "/app/seehouselog/seezfhouselogs")
-                .tag(this)
-                .params(params)
-                .execute(new DialogCallback<ZuHistroyBean>(LiShiJiLu2Activity.this, ZuHistroyBean.class) {
-                    @Override
-                    public void onSuccess(Response<ZuHistroyBean> response) {
-                        int code = response.code();
-                        ZuHistroyBean body = response.body();
-                        final List<ZuHistroyBean.DatasEntity> datas = body.getDatas();
-                        if (mDatas == null || mDatas.size() == 0) {
-                            if (datas == null || datas.size() == 0) {
-                                Toast.makeText(LiShiJiLu2Activity.this, "无数据~", Toast.LENGTH_SHORT).show();
-                                if (liebiaoAdapter != null) {
-                                    liebiaoAdapter.notifyDataSetChanged();
-                                }
-                                return;
-                            }
-                            mDatas = datas;
-                            liebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, datas);
-                            mrecycler.setAdapter(liebiaoAdapter);
-                        } else {
-                            if (datas == null || datas.size() == 0) {
-                                Toast.makeText(LiShiJiLu2Activity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            if (!isLoadMore) {
-                                mDatas = datas;
-                                Toast.makeText(LiShiJiLu2Activity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
-                            } else {
-                                mDatas.addAll(datas);
-                            }
-                            liebiaoAdapter.notifyDataSetChanged();
-                        }
-                        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
-
-                        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
-                            @Override
-                            public void onItemClick(SwipeMenuBridge menuBridge) {
-                                datas.remove(menuBridge.getAdapterPosition());
-                                menuBridge.closeMenu();
-                                liebiaoAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }
-                });
     }
 
     // 创建菜单:
@@ -166,6 +116,50 @@ public class LiShiJiLu2Activity extends BaseActivity {
         }
     };
 
+    @Override
+    public void getZuHistroyList(Response<ZuHistroyBean> response) {
+        ZuHistroyBean body = response.body();
+        final List<ZuHistroyBean.DatasEntity> datas = body.getDatas();
+        tvNoContent.setVisibility(View.GONE);
+        springview.setVisibility(View.VISIBLE);
+        if (mDatas == null || mDatas.size() == 0) {
+            if (datas == null || datas.size() == 0) {
+                tvNoContent.setVisibility(View.VISIBLE);
+                springview.setVisibility(View.GONE);
+                if (liebiaoAdapter != null) {
+                    liebiaoAdapter.notifyDataSetChanged();
+                }
+                return;
+            }
+            mDatas = datas;
+            liebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, datas);
+            mrecycler.setAdapter(liebiaoAdapter);
+        } else {
+            if (datas == null || datas.size() == 0) {
+                TUtils.showFail(mContext, getString(R.string.meiyougengduoshujule));
+                return;
+            }
+            if (!isLoadMore) {
+                mDatas = datas;
+                TUtils.showFail(mContext, getString(R.string.shuaxinchenggong));
+            } else {
+                mDatas.addAll(datas);
+            }
+            liebiaoAdapter.notifyDataSetChanged();
+        }
+        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
+
+        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+            @Override
+            public void onItemClick(SwipeMenuBridge menuBridge) {
+                presenter.deteleHouseRecord(mDatas.get(menuBridge.getPosition()).getId(),houseType);
+                datas.remove(menuBridge.getAdapterPosition());
+                menuBridge.closeMenu();
+                liebiaoAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
 
     class LiebiaoAdapter extends BaseQuickAdapter<ZuHistroyBean.DatasEntity, BaseViewHolder> {
 
@@ -174,11 +168,29 @@ public class LiShiJiLu2Activity extends BaseActivity {
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, ZuHistroyBean.DatasEntity item) {
+        protected void convert(final BaseViewHolder helper, ZuHistroyBean.DatasEntity item) {
             helper.getView(R.id.layout_all_height).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(LiShiJiLu2Activity.this, NewHousedetailsActivity.class));
+                    Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
+                    String houseType = mData.get(helper.getAdapterPosition()).getShType();
+                    if (houseType.equals("5")) {
+                        intent.putExtra("houseType", "duoceng");
+                    } else if (houseType.equals("4")) {
+                        intent.putExtra("houseType", "xuesheng");
+                    } else if (houseType.equals("3")) {
+                        intent.putExtra("houseType", "erceng");
+                    } else if (houseType.equals("2")) {
+                        intent.putExtra("houseType", "bieshu");
+                    } else if (houseType.equals("1")) {
+                        intent.putExtra("houseType", "shangpu");
+                    } else if (houseType.equals("0")) {
+                        intent.putExtra("houseType", "bangongshi");
+                    } else if (houseType.equals("6")) {
+                        intent.putExtra("houseType", "zhaotuandi");
+                    }
+                    intent.putExtra("houseId", mData.get(helper.getAdapterPosition()).getId() + "");
+                    startActivity(intent);
                 }
             });
             Glide.with(MyApplication.getGloableContext()).load(item.getImageUrl())
@@ -186,7 +198,7 @@ public class LiShiJiLu2Activity extends BaseActivity {
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_house_address, isJa ? item.getAddressJpn() : item.getAddressCn())
                     .setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() + "元/月" : item.getPriceCn() + "元/月")
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
                     .setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
         }
     }

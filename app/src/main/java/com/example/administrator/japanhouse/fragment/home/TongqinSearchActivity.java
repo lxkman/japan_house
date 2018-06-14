@@ -33,9 +33,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.TongQinHistroyBean;
-import com.example.administrator.japanhouse.utils.SpUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +139,7 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
                  */
                 mSuggestionSearch
                         .requestSuggestion((new SuggestionSearchOption())
-                                .keyword(searchEt.getText().toString().toString()).city(city));
+                                .keyword(searchEt.getText().toString()).city(city));
             }
         });
     }
@@ -281,23 +279,25 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
         searchListRecycler.setNestedScrollingEnabled(false);
         searchListRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mHistoryList = getHistory();
-        historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
-        historyRecycler.setAdapter(historyAdapter);
-        historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                doSavehistory2(mHistoryList.get(position));
-                Intent intent = new Intent();
-                intent.putExtra("address", mHistoryList.get(position).getAddress());
-                double latitude = mHistoryList.get(position).getLatitude();
-                double longitude = mHistoryList.get(position).getLongitude();
-                intent.putExtra("latitude", latitude);
-                intent.putExtra("longitude", longitude);
-                setResult(1, intent);
-                finish();
-            }
-        });
+        if (getHistory() != null && getHistory().size() > 0) {
+            mHistoryList = getHistory();
+            historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
+            historyRecycler.setAdapter(historyAdapter);
+            historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    doSavehistory2(mHistoryList.get(position));
+                    Intent intent = new Intent();
+                    intent.putExtra("address", mHistoryList.get(position).getAddress());
+                    double latitude = mHistoryList.get(position).getLatitude();
+                    double longitude = mHistoryList.get(position).getLongitude();
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
+                    setResult(1, intent);
+                    finish();
+                }
+            });
+        }
     }
 
     @OnClick({R.id.cancle_tv, R.id.history_clear, R.id.location_rl})
@@ -381,8 +381,9 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
      * 保存历史查询记录
      */
     private void saveHistory() {
-        SpUtils.putString("tongqinhistory",
-                new Gson().toJson(mHistoryList));//将java对象转换成json字符串进行保存
+        CacheUtils.put("tongqinhistory", mHistoryList);
+        //        SpUtils.putString("tongqinhistory",
+        //                new Gson().toJson(mHistoryList));//将java对象转换成json字符串进行保存
     }
 
     /**
@@ -391,12 +392,13 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
      * @return
      */
     private List<TongQinHistroyBean> getHistory() {
-        String historyJson = SpUtils.getString("tongqinhistory", "");
-        if (historyJson != null && !historyJson.equals("")) {//必须要加上后面的判断，因为获取的字符串默认值就是空字符串
-            //将json字符串转换成list集合
-            return new Gson().fromJson(historyJson, new TypeToken<List<TongQinHistroyBean>>() {
-            }.getType());
-        }
-        return new ArrayList<TongQinHistroyBean>();
+        return CacheUtils.get("tongqinhistory");
+        //        String historyJson = SpUtils.getString("tongqinhistory", "");
+        //        if (historyJson != null && !historyJson.equals("")) {//必须要加上后面的判断，因为获取的字符串默认值就是空字符串
+        //            //将json字符串转换成list集合
+        //            return new Gson().fromJson(historyJson, new TypeToken<List<TongQinHistroyBean>>() {
+        //            }.getType());
+        //        }
+        //        return new ArrayList<TongQinHistroyBean>();
     }
 }

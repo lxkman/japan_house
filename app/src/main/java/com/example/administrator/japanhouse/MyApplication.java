@@ -8,15 +8,12 @@ import android.net.Uri;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
-import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -288,7 +285,8 @@ public class MyApplication extends Application {
     }
 
     public static void logOut(){
-        CacheUtils.remove(Constants.USERINFO);
+        CacheUtils.removeAll();
+//        CacheUtils.remove(Constants.USERINFO);
 
         if (RongIM.getInstance() != null) {
 

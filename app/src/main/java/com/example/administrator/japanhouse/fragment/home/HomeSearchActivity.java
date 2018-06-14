@@ -30,11 +30,8 @@ import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
-import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.view.CommonPopupWindow;
 import com.example.administrator.japanhouse.view.FluidLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
@@ -108,18 +105,20 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
     private void initHistroy() {
         historyRecycler.setNestedScrollingEnabled(false);
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mHistoryList = getHistory();
-        historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
-        historyRecycler.setAdapter(historyAdapter);
-        historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                state=mHistoryList.get(position).getState();
-                state2=mHistoryList.get(position).getState2();
-                tiaozhuan(mHistoryList.get(position).getContent());
-                doSavehistory2(mHistoryList.get(position));
-            }
-        });
+        if (getHistory() != null && getHistory().size() > 0) {
+            mHistoryList = getHistory();
+            historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
+            historyRecycler.setAdapter(historyAdapter);
+            historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    state = mHistoryList.get(position).getState();
+                    state2 = mHistoryList.get(position).getState2();
+                    tiaozhuan(mHistoryList.get(position).getContent());
+                    doSavehistory2(mHistoryList.get(position));
+                }
+            });
+        }
     }
 
     private void initListener() {
@@ -215,7 +214,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 break;
             case 4: //租房
                 if (state2 == 100) {
-                    Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangListActivity.class);
+                    Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangBigListActivity.class);
                     rentalIntent.putExtra("searchText", searchText);
                     startActivity(rentalIntent);
                 } else {
@@ -227,7 +226,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 break;
             case 5: //商业地产
                 if (state2 == 100) {
-                    Intent businessIntent = new Intent(HomeSearchActivity.this, SydcLiebiaoActivity.class);
+                    Intent businessIntent = new Intent(HomeSearchActivity.this, SydcBigLiebiaoActivity.class);
                     businessIntent.putExtra("searchText", searchText);
                     startActivity(businessIntent);
                 } else {
@@ -484,8 +483,9 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
      * 保存历史查询记录
      */
     private void saveHistory() {
-        SpUtils.putString("homesearchhistory" + state + state2,
-                new Gson().toJson(mHistoryList));//将java对象转换成json字符串进行保存
+        CacheUtils.put("homesearchhistory" + state + state2, mHistoryList);
+        //        SpUtils.putString("homesearchhistory" + state + state2,
+        //                new Gson().toJson(mHistoryList));//将java对象转换成json字符串进行保存
     }
 
     /**
@@ -494,13 +494,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
      * @return
      */
     private List<HomeSearchHistroyBean> getHistory() {
-        String historyJson = SpUtils.getString("homesearchhistory" + state + state2, "");
-        if (historyJson != null && !historyJson.equals("")) {//必须要加上后面的判断，因为获取的字符串默认值就是空字符串
-            //将json字符串转换成list集合
-            return new Gson().fromJson(historyJson, new TypeToken<List<HomeSearchHistroyBean>>() {
-            }.getType());
-        }
-        return new ArrayList<HomeSearchHistroyBean>();
+        return CacheUtils.get("homesearchhistory" + state + state2);
+        //        String historyJson = SpUtils.getString("homesearchhistory" + state + state2, "");
+        //        if (historyJson != null && !historyJson.equals("")) {//必须要加上后面的判断，因为获取的字符串默认值就是空字符串
+        //            //将json字符串转换成list集合
+        //            return new Gson().fromJson(historyJson, new TypeToken<List<HomeSearchHistroyBean>>() {
+        //            }.getType());
+        //        }
+        //        return new ArrayList<HomeSearchHistroyBean>();
     }
 
 }

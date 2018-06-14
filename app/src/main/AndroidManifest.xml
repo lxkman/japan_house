@@ -414,6 +414,8 @@
         <activity android:name=".fragment.home.ZhaoTuanDiSearchActivity"/>
         <activity android:name=".fragment.home.LocationActivity2"
                   android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".fragment.home.SydcBigLiebiaoActivity"/>
+        <activity android:name=".fragment.home.ZufangBigListActivity"/>
     </application>
 
 </manifest>

@@ -7,22 +7,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.RentalDetailsActivity;
-import com.example.administrator.japanhouse.adapter.OwnerWikipediaAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.MaiFang_house_Adapter;
 import com.example.administrator.japanhouse.model.SellHouseBean;
 import com.example.administrator.japanhouse.presenter.SellHousePresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +38,16 @@ public class Sell_house_Fragment extends BaseFragment implements MaiFang_house_A
     private SpringView springView;
     private SellHousePresenter presenter;
     private int page = 1;
+
+    private TextView state;
+    private boolean isRefresh = true;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sell_house_fragment, container, false);
+
+        state = (TextView) view.findViewById(R.id.no_more_data);
+
         mrecycler = (RecyclerView) view.findViewById(R.id.mrecycler);
         presenter = new SellHousePresenter(getActivity(), this);
         presenter.getSellHouseList(MyApplication.getUserToken(), 1, page);
@@ -54,6 +60,7 @@ public class Sell_house_Fragment extends BaseFragment implements MaiFang_house_A
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         mList.clear();
                         page = 1;
                         presenter.getSellHouseList(MyApplication.getUserToken(), 1, page);
@@ -67,6 +74,7 @@ public class Sell_house_Fragment extends BaseFragment implements MaiFang_house_A
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         page++;
                         presenter.getSellHouseList(MyApplication.getUserToken(), 1, page);
                     }
@@ -98,18 +106,49 @@ public class Sell_house_Fragment extends BaseFragment implements MaiFang_house_A
 
     @Override
     public void getSellHouseList(Response<SellHouseBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(getContext(), getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_sell_data));
         if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (page == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
             } else {
                 page --;
+                if (!isRefresh) {
+                    TUtils.showFail(getContext(), getString(R.string.refresh_no_data));
+                }
             }
             sell_house_adapter.notifyDataSetChanged();
         }
     }
 
     @Override
+    public void sellHouseNetwork() {
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
+        }
+        TUtils.showFail(getContext(), getString(R.string.refresh_fail));
+    }
+
+    @Override
     public void onClickListener(int position, RentalDetailsBean bean) {
         RentalDetailsActivity.invoke(getActivity(), bean);
+    }
+
+    @Override
+    public void onItemDeteleListener(int position, SellHouseBean.DatasBean datasBean) {
+        presenter.deteleSellHouse(datasBean.getId());
+        mList.remove(position);
+        sell_house_adapter.notifyDataSetChanged();
     }
 }

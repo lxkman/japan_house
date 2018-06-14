@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,6 +19,7 @@ import com.example.administrator.japanhouse.fragment.chat.ChatFragment;
 import com.example.administrator.japanhouse.fragment.comment.CommentFragment;
 import com.example.administrator.japanhouse.fragment.home.HomeFragment;
 import com.example.administrator.japanhouse.fragment.mine.MineFragment;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.administrator.japanhouse.R.id.rb_chat;
+import static com.example.administrator.japanhouse.R.id.swipe_content;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.rb_home)
@@ -47,6 +50,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.activity_main)
     LinearLayout activityMain;
     private long preTime;
+
+    private int page = 1;
 
     private NoScrollViewPager mViewPager;
     private FragPagerAdapter pagerAdapter;
@@ -91,15 +96,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 switch (position) {
                     case 0:
+                        page = 1;
                         rbHome.setChecked(true);
                         break;
                     case 1:
+                        page = 2;
                         rbChat.setChecked(true);
                         break;
                     case 2:
+                        page = 3;
                         rbComment.setChecked(true);
                         break;
                     case 3:
+                        page = 4;
                         rbMine.setChecked(true);
                         break;
                 }
@@ -127,18 +136,62 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rb_home:
+                page = 1;
                 mViewPager.setCurrentItem(0);
                 EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case rb_chat:
+                if (!MyApplication.isLogin()) {
+                    switch (page) {
+                        case 1:
+                            rbHome.setChecked(true);
+                            break;
+                        case 2:
+                            rbChat.setChecked(true);
+                            break;
+                        case 3:
+                            rbComment.setChecked(true);
+                            break;
+                        case 4:
+                            rbMine.setChecked(true);
+                            break;
+                    }
+
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
+                page = 2;
                 mViewPager.setCurrentItem(1);
                 EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case R.id.rb_comment:
+                page = 3;
                 mViewPager.setCurrentItem(2);
                 EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case R.id.rb_mine:
+                if (!MyApplication.isLogin()) {
+                    switch (page) {
+                        case 1:
+                            rbHome.setChecked(true);
+                            break;
+                        case 2:
+                            rbChat.setChecked(true);
+                            break;
+                        case 3:
+                            rbComment.setChecked(true);
+                            break;
+                        case 4:
+                            rbMine.setChecked(true);
+                            break;
+                    }
+
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
+                page = 4;
                 mViewPager.setCurrentItem(3);
                 break;
         }
@@ -158,6 +211,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void msgEvent(EventBean eventBean) {
         if (TextUtils.equals(Constants.EVENT_CHAT, eventBean.getMsg())) {
+            if (!MyApplication.isLogin()) {
+                switch (page) {
+                    case 1:
+                        rbHome.setChecked(true);
+                        break;
+                    case 2:
+                        rbChat.setChecked(true);
+                        break;
+                    case 3:
+                        rbComment.setChecked(true);
+                        break;
+                    case 4:
+                        rbMine.setChecked(true);
+                        break;
+                }
+
+                startActivity(new Intent(this, LoginActivity.class));
+                return;
+            }
+
             mViewPager.setCurrentItem(1);
         }
     }

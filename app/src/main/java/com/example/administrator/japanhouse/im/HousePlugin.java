@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
@@ -30,6 +31,7 @@ public class HousePlugin implements IPluginModule {
     @Override
     public void onClick(Fragment fragment, RongExtension rongExtension) {
         Intent intent = new Intent(fragment.getActivity(), ManagerActivity.class);
+        String id = fragment.getActivity().getIntent().getData().getQueryParameter("targetId");
         rongExtension.startActivityForPluginResult(intent, 23, this);
     }
 

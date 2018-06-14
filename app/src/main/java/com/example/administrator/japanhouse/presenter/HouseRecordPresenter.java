@@ -1,10 +1,18 @@
 package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.text.TextUtils;
 
+import com.example.administrator.japanhouse.MyApplication;
+import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.HouseRecordListBean;
+import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -28,22 +36,61 @@ public class HouseRecordPresenter {
      * @param token
      * @param pageNo
      */
-    public void getHouseRecordList(String token, int pageNo){
+    public void getHouseRecordList(String token, int pageNo) {
         HttpParams params = new HttpParams();
         params.put("token", token);
         params.put("pageNo", pageNo);
         OkGo.<HouseRecordListBean>post(MyUrls.BASEURL + "/app/seehouselog/seehouselogs")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<HouseRecordListBean>(HouseRecordListBean.class) {
+                .execute(new DialogCallback<HouseRecordListBean>(activity, HouseRecordListBean.class) {
                     @Override
                     public void onSuccess(Response<HouseRecordListBean> response) {
-                        callBack.getHouseRecordList(response);
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        } else {
+                            callBack.getHouseRecordList(response);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<HouseRecordListBean> response) {
+                        super.onError(response);
+                        callBack.historyNetwork();
                     }
                 });
     }
 
-    public interface HouseRecordCallBack{
+    /**
+     * @param hType
+     * @param hId
+     * @param shType
+     */
+    public void deteleHouseRecord(String hType, int hId, String shType) {
+        HttpParams params = new HttpParams();
+        params.put("token", MyApplication.getUserToken());
+        params.put("hType", hType);
+        params.put("hId", hId);
+        params.put("shType", shType);
+        OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/seehouselog/deletekflog")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
+                    @Override
+                    public void onSuccess(Response<NoDataBean> response) {
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        }
+                    }
+
+                });
+    }
+
+    public interface HouseRecordCallBack {
         void getHouseRecordList(Response<HouseRecordListBean> response);
+
+        void historyNetwork();
     }
 }

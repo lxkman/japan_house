@@ -4,51 +4,58 @@
     android:id="@+id/activity_lianxiren"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <LinearLayout
-        android:background="@color/shihuangse"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dip">
+        android:layout_height="50dip"
+        android:background="@color/shihuangse"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/back_img"
-            android:padding="15dp"
-            android:src="@drawable/back"
             android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:layout_height="50dip"
+            android:padding="15dp"
+            android:src="@drawable/back" />
+
         <TextView
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:text="@string/people"
             android:layout_width="0dip"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:gravity="center"
+            android:text="@string/people"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_add_people"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="#fff"
-            android:text="@string/people_add"
             android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:layout_height="50dip"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/people_add"
+            android:textColor="#fff"
+            android:textSize="16sp" />
     </LinearLayout>
 
-
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:background="#fff"
-            android:id="@+id/Mrecycler"
-            android:nestedScrollingEnabled="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.NestedScrollView>
 
+        <TextView
+            android:id="@+id/no_more_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/act_linkman_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:nestedScrollingEnabled="false" />
+    </RelativeLayout>
 </LinearLayout>

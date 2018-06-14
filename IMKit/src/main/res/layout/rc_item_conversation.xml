@@ -22,7 +22,7 @@
             android:layout_height="50dp"
             android:background="@android:color/transparent"
             android:layout_gravity="center"
-            app:RCDefDrawable="@drawable/rc_default_portrait"
+            app:RCDefDrawable="@drawable/deful_touxiang"
             app:RCShape="circle" />
 
         <FrameLayout

@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.FreeApartmentAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -28,6 +29,7 @@ import com.example.administrator.japanhouse.model.FreeApartmentBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.FreeApartmentPresenter;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
@@ -64,11 +66,16 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
     private int pageNo = 1;
     private List<FreeApartmentBean.DatasBean> datas = new ArrayList<>();
 
+    private TextView state;
+    private boolean isRefresh = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_free_apartment);
         ButterKnife.bind(this);
+
+        state = (TextView) findViewById(R.id.no_more_data);
 
         springView = (SpringView) findViewById(R.id.act_apartment_springView);
 
@@ -88,6 +95,7 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         datas.clear();
                         pageNo = 1;
                         presenter.getFreeApartmentList(pageNo);
@@ -101,6 +109,7 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         pageNo++;
                         presenter.getFreeApartmentList(pageNo);
                     }
@@ -150,7 +159,7 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(etName.getText().toString()) && !TextUtils.isEmpty(etPhone.getText().toString())) {
-                    presenter.getSignUp(1, actionId, etPhone.getText().toString(), etName.getText().toString());
+                    presenter.getSignUp(MyApplication.getUserId(FreeApartmentActivity.this), actionId, etPhone.getText().toString(), etName.getText().toString());
                     dialog.dismiss();
                 }
             }
@@ -216,6 +225,13 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
         }
     }
 
+    @Override
+    public void onItemClickListener(FreeApartmentBean.DatasBean datasBean) {
+        Intent intent = new Intent(this, FreeApartmentDetailsActivity.class);
+        intent.putExtra("datas", datasBean);
+        startActivity(intent);
+    }
+
     public static void invoke(Context context) {
         Intent intent = new Intent(context, FreeApartmentActivity.class);
         context.startActivity(intent);
@@ -223,8 +239,29 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
 
     @Override
     public void getFreeApartmentList(Response<FreeApartmentBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(this, getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_data));
+
         if (response != null && response.body() != null && response.body().getDatas() != null) {
-            datas.addAll(response.body().getDatas());
+            if (pageNo == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
+            if (response.body().getDatas().size() > 0) {
+                datas.addAll(response.body().getDatas());
+            } else {
+                pageNo --;
+                if (!isRefresh) {
+                    TUtils.showFail(this, getString(R.string.refresh_no_data));
+                }
+            }
+
             if (datas.size() > 0) {
                 long days = (datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) / (1000 * 60 * 60 * 24);
                 long hours = ((datas.get(0).getEndTime() - datas.get(0).getCurrentTime()) - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
@@ -249,6 +286,15 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
             } else if (TextUtils.equals(response.body().getCode(), "-1")) {
                 Toast.makeText(this, "报名失败", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    public void freeApartmentNetwork() {
+        TUtils.showFail(this, getString(R.string.refresh_fail));
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
         }
     }
 

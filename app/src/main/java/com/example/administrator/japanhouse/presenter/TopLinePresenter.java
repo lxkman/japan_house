@@ -1,8 +1,12 @@
 package com.example.administrator.japanhouse.presenter;
 
+import android.content.Intent;
+import android.text.TextUtils;
+
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
@@ -28,7 +32,10 @@ public class TopLinePresenter {
                 .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        }
                     }
                 });
     }
@@ -47,7 +54,10 @@ public class TopLinePresenter {
                 .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        }
                     }
                 });
     }

@@ -2,12 +2,17 @@ package com.example.administrator.japanhouse;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.im.TalkExtensionModule;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -40,6 +45,7 @@ import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 import okhttp3.OkHttpClient;
 
 /**
@@ -47,7 +53,7 @@ import okhttp3.OkHttpClient;
  */
 
 public class MyApplication extends Application {
-    private static MyApplication application;
+    public static MyApplication application;
 
     public static final String token1 = "jEOJtiOxmPTyb2CdFT7a0m7tnvnoFRHtvRSk65MeRaWjhNUpICiAMXNDGqU1IaYQIzUdPu/qnOp8M7h4kf7iUj1PG9N7Nuem";
 
@@ -113,25 +119,29 @@ public class MyApplication extends Application {
          * yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==12345
          */
 
+        LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
 
-        RongIM.connect(token1, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onSuccess(String s) {
-                Log.e("MainActivity", "——onSuccess—-" +
-                        s.toString());
-            }
+        if (bean != null && bean.getRongCloudToken() != null) {
+            RongIM.connect(bean.getRongCloudToken(), new RongIMClient.ConnectCallback() {
+                @Override
+                public void onSuccess(String s) {
+                    Log.e("MainActivity", "——onSuccess—-" +
+                            s.toString());
 
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-                Log.e("MainActivity", "——onError—-" +
-                        errorCode);
-            }
+                }
 
-            @Override
-            public void onTokenIncorrect() {
-                //Connect Token 失效的状态处理，需要重新获取 Token
-            }
-        });
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    Log.e("MainActivity", "——onError—-" +
+                            errorCode);
+                }
+
+                @Override
+                public void onTokenIncorrect() {
+                    //Connect Token 失效的状态处理，需要重新获取 Token
+                }
+            });
+        }
 
         setMyExtensionModule();
     }
@@ -242,12 +252,61 @@ public class MyApplication extends Application {
     }
 
     public static String getUserToken(){
-        return "74880cc6e0b1658f5467ccc1b3b41e3a";
+        LoginBean.DatasBean datasBean = CacheUtils.get(Constants.USERINFO);
+        if (datasBean != null) {
+            return datasBean.getToken();
+        }
+        return null;
     }
 
     public static String getUserId(Context context){
-        String uid = SharedPreferencesUtils.getInstace(context).getStringPreference("uid", "");
-        return uid;
+        LoginBean.DatasBean datasBean = CacheUtils.get(Constants.USERINFO);
+        if (datasBean != null) {
+            return datasBean.getId() + "";
+        }
+        return "";
+    }
+
+    public static boolean isLogin(){
+        LoginBean.DatasBean datasBean = CacheUtils.get(Constants.USERINFO);
+        if (datasBean == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isNetworkAvailable() {
+        ConnectivityManager connectivity = (ConnectivityManager)
+                application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void logOut(){
+        CacheUtils.remove(Constants.USERINFO);
+
+        if (RongIM.getInstance() != null) {
+
+            List<Conversation> conversationList = RongIM.getInstance().getRongIMClient().getConversationList();
+
+            if (conversationList != null && conversationList.size() > 0) {
+
+                for (Conversation c : conversationList) {
+
+                    RongIM.getInstance().getRongIMClient().removeConversation(c.getConversationType(), c.getTargetId());
+
+                }
+                Log.e("=============>>", "清除成功");
+            }
+
+        }
     }
 }
 

@@ -88,7 +88,7 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
             holder.start.setVisibility(View.VISIBLE);
         } else {
             Glide.with(context)
-                    .load(list.get(position).getImgs())
+                    .load(getList(list.get(position).getImgs()).get(0))
                     .into(holder.sell_img);
             holder.start.setVisibility(View.GONE);
         }
@@ -114,6 +114,13 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
                         getList(list.get(position).getImgs()),
                         list.get(position).getVideoUrl(),
                         list.get(position).getVideoImageUrl()));
+            }
+        });
+
+        holder.detele.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemDeteleListener(position, list.get(position));
             }
         });
     }
@@ -145,9 +152,12 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
         TextView stateJa;
         ImageView start;
 
+        TextView detele;
+
         public Viewholder(View itemView) {
             super(itemView);
             view = (RelativeLayout) itemView.findViewById(R.id.content_ll);
+            detele = (TextView) itemView.findViewById(R.id.shachu_tv);
             sell_img = (ImageView) itemView.findViewById(R.id.rent_house_icon);
             start = (ImageView) itemView.findViewById(R.id.rent_house_start);
             weizhi = (TextView) itemView.findViewById(R.id.weizhi);
@@ -161,5 +171,6 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
 
     public interface OnItemClickListener {
         void onClickListener(int position, RentalDetailsBean bean);
+        void onItemDeteleListener(int position, SellHouseBean.DatasBean datasBean);
     }
 }

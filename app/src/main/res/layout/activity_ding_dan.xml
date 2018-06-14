@@ -30,19 +30,30 @@
             android:layout_height="50dip" />
     </LinearLayout>
 
-    <com.liaoinstan.springview.widget.SpringView
-        android:id="@+id/act_order_springView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/no_more_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            />
 
-        <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
-            android:background="#fff"
-            android:layout_marginTop="10dip"
-            android:id="@+id/mrecycler"
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/act_order_springView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
-    </com.liaoinstan.springview.widget.SpringView>
+            android:layout_height="match_parent">
 
-
+            <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                android:background="#fff"
+                android:layout_marginTop="10dip"
+                android:id="@+id/mrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+        </com.liaoinstan.springview.widget.SpringView>
+    </RelativeLayout>
 </LinearLayout>

@@ -76,4 +76,9 @@ public class OwnerDetailsActivity extends BaseActivity implements OwnerPresenter
             tvDate.setText(format);
         }
     }
+
+    @Override
+    public void ownerListNetwork() {
+
+    }
 }

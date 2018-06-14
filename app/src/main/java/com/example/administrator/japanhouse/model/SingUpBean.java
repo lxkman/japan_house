@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class SingUpBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":1,"activityNameCn":"活动名称","activityNameJpn":"活动名称","priceCn":"价格","priceJpn":"价格","summarizeCn":"概述","summarizeJpn":"概述","peopleCount":10,"createTime":1526380661000,"updateTime":1526380661000,"isDeleted":0,"status":"","startTime":1526975553000,"endTime":1527753156000,"images":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1527823590&di=8869e90fa7328ac62c094d27b4bfbe02&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg,https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527833774869&di=554e1ab6c341d02bd30f898955c119f5&imgtype=0&src=http%3A%2F%2Fold.bz55.com%2Fuploads%2Fallimg%2F130107%2F1-13010F92F9.jpg","tagsJpn":"标签（中文），逗号隔开","kfPhone":"110","bmNum":1,"currentTime":1528186368886}]
+     * datas : [{"id":2,"activityNameCn":"活动名称","activityNameJpn":"活动名称","priceCn":"价格","priceJpn":"价格","summarizeCn":"概述","summarizeJpn":"概述","peopleCount":10,"createTime":1526380661000,"updateTime":1526380661000,"isDeleted":0,"status":"","startTime":1527148353000,"endTime":1528271556000,"images":"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1527823590&di=8869e90fa7328ac62c094d27b4bfbe02&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg,https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527833774869&di=554e1ab6c341d02bd30f898955c119f5&imgtype=0&src=http%3A%2F%2Fold.bz55.com%2Fuploads%2Fallimg%2F130107%2F1-13010F92F9.jpg","tagsCn":"标签（中文），逗号隔开","tagsJpn":"标签（中文），逗号隔开","kfPhone":"110","usingRangeCn":"海淀区","usingRangeJpn":"海淀区","houseAreaCn":"120平方米","houseAreaJpn":"120平方米","kpTime":1528529944000,"addressCn":"海淀区-昌平","addressJpn":"海淀区-昌平","bmNum":null,"isbm":1,"currentTime":1528684943182,"hwdcBroker":{"id":2,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1526380661000,"isDeleted":0,"status":""}}]
      */
 
     private String msg;
@@ -45,9 +46,9 @@ public class SingUpBean {
         this.datas = datas;
     }
 
-    public static class DatasBean implements Parcelable{
+    public static class DatasBean implements Serializable {
         /**
-         * id : 1
+         * id : 2
          * activityNameCn : 活动名称
          * activityNameJpn : 活动名称
          * priceCn : 价格
@@ -59,13 +60,23 @@ public class SingUpBean {
          * updateTime : 1526380661000
          * isDeleted : 0
          * status :
-         * startTime : 1526975553000
-         * endTime : 1527753156000
+         * startTime : 1527148353000
+         * endTime : 1528271556000
          * images : https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1527823590&di=8869e90fa7328ac62c094d27b4bfbe02&src=http://www.08lr.cn/uploads/allimg/170513/1-1F513100951.jpg,https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527833774869&di=554e1ab6c341d02bd30f898955c119f5&imgtype=0&src=http%3A%2F%2Fold.bz55.com%2Fuploads%2Fallimg%2F130107%2F1-13010F92F9.jpg
+         * tagsCn : 标签（中文），逗号隔开
          * tagsJpn : 标签（中文），逗号隔开
          * kfPhone : 110
-         * bmNum : 1
-         * currentTime : 1528186368886
+         * usingRangeCn : 海淀区
+         * usingRangeJpn : 海淀区
+         * houseAreaCn : 120平方米
+         * houseAreaJpn : 120平方米
+         * kpTime : 1528529944000
+         * addressCn : 海淀区-昌平
+         * addressJpn : 海淀区-昌平
+         * bmNum : null
+         * isbm : 1
+         * currentTime : 1528684943182
+         * hwdcBroker : {"id":2,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1526380661000,"isDeleted":0,"status":""}
          */
 
         private int id;
@@ -83,72 +94,20 @@ public class SingUpBean {
         private long startTime;
         private long endTime;
         private String images;
+        private String tagsCn;
         private String tagsJpn;
         private String kfPhone;
-        private int bmNum;
+        private String usingRangeCn;
+        private String usingRangeJpn;
+        private String houseAreaCn;
+        private String houseAreaJpn;
+        private long kpTime;
+        private String addressCn;
+        private String addressJpn;
+        private Object bmNum;
+        private int isbm;
         private long currentTime;
-
-        protected DatasBean(Parcel in) {
-            id = in.readInt();
-            activityNameCn = in.readString();
-            activityNameJpn = in.readString();
-            priceCn = in.readString();
-            priceJpn = in.readString();
-            summarizeCn = in.readString();
-            summarizeJpn = in.readString();
-            peopleCount = in.readInt();
-            createTime = in.readLong();
-            updateTime = in.readLong();
-            isDeleted = in.readInt();
-            status = in.readString();
-            startTime = in.readLong();
-            endTime = in.readLong();
-            images = in.readString();
-            tagsJpn = in.readString();
-            kfPhone = in.readString();
-            bmNum = in.readInt();
-            currentTime = in.readLong();
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(id);
-            dest.writeString(activityNameCn);
-            dest.writeString(activityNameJpn);
-            dest.writeString(priceCn);
-            dest.writeString(priceJpn);
-            dest.writeString(summarizeCn);
-            dest.writeString(summarizeJpn);
-            dest.writeInt(peopleCount);
-            dest.writeLong(createTime);
-            dest.writeLong(updateTime);
-            dest.writeInt(isDeleted);
-            dest.writeString(status);
-            dest.writeLong(startTime);
-            dest.writeLong(endTime);
-            dest.writeString(images);
-            dest.writeString(tagsJpn);
-            dest.writeString(kfPhone);
-            dest.writeInt(bmNum);
-            dest.writeLong(currentTime);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        public static final Creator<DatasBean> CREATOR = new Creator<DatasBean>() {
-            @Override
-            public DatasBean createFromParcel(Parcel in) {
-                return new DatasBean(in);
-            }
-
-            @Override
-            public DatasBean[] newArray(int size) {
-                return new DatasBean[size];
-            }
-        };
+        private HwdcBrokerBean hwdcBroker;
 
         public int getId() {
             return id;
@@ -270,6 +229,14 @@ public class SingUpBean {
             this.images = images;
         }
 
+        public String getTagsCn() {
+            return tagsCn;
+        }
+
+        public void setTagsCn(String tagsCn) {
+            this.tagsCn = tagsCn;
+        }
+
         public String getTagsJpn() {
             return tagsJpn;
         }
@@ -286,12 +253,76 @@ public class SingUpBean {
             this.kfPhone = kfPhone;
         }
 
-        public int getBmNum() {
+        public String getUsingRangeCn() {
+            return usingRangeCn;
+        }
+
+        public void setUsingRangeCn(String usingRangeCn) {
+            this.usingRangeCn = usingRangeCn;
+        }
+
+        public String getUsingRangeJpn() {
+            return usingRangeJpn;
+        }
+
+        public void setUsingRangeJpn(String usingRangeJpn) {
+            this.usingRangeJpn = usingRangeJpn;
+        }
+
+        public String getHouseAreaCn() {
+            return houseAreaCn;
+        }
+
+        public void setHouseAreaCn(String houseAreaCn) {
+            this.houseAreaCn = houseAreaCn;
+        }
+
+        public String getHouseAreaJpn() {
+            return houseAreaJpn;
+        }
+
+        public void setHouseAreaJpn(String houseAreaJpn) {
+            this.houseAreaJpn = houseAreaJpn;
+        }
+
+        public long getKpTime() {
+            return kpTime;
+        }
+
+        public void setKpTime(long kpTime) {
+            this.kpTime = kpTime;
+        }
+
+        public String getAddressCn() {
+            return addressCn;
+        }
+
+        public void setAddressCn(String addressCn) {
+            this.addressCn = addressCn;
+        }
+
+        public String getAddressJpn() {
+            return addressJpn;
+        }
+
+        public void setAddressJpn(String addressJpn) {
+            this.addressJpn = addressJpn;
+        }
+
+        public Object getBmNum() {
             return bmNum;
         }
 
-        public void setBmNum(int bmNum) {
+        public void setBmNum(Object bmNum) {
             this.bmNum = bmNum;
+        }
+
+        public int getIsbm() {
+            return isbm;
+        }
+
+        public void setIsbm(int isbm) {
+            this.isbm = isbm;
         }
 
         public long getCurrentTime() {
@@ -300,6 +331,200 @@ public class SingUpBean {
 
         public void setCurrentTime(long currentTime) {
             this.currentTime = currentTime;
+        }
+
+        public HwdcBrokerBean getHwdcBroker() {
+            return hwdcBroker;
+        }
+
+        public void setHwdcBroker(HwdcBrokerBean hwdcBroker) {
+            this.hwdcBroker = hwdcBroker;
+        }
+
+        public static class HwdcBrokerBean implements Serializable {
+            /**
+             * id : 2
+             * brokerName : 姓名
+             * phone : 1234
+             * password : 1232132
+             * telePhone : 123132
+             * shop : 所属门店
+             * turnover : 100
+             * inYears : 3
+             * period : 1
+             * counts : 60
+             * pic : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg
+             * nickname : 昵称
+             * sex : 0
+             * wechatId : 123456
+             * caeateTime : 1525781849000
+             * updateTime : 1526380661000
+             * isDeleted : 0
+             * status :
+             */
+
+            private int id;
+            private String brokerName;
+            private String phone;
+            private String password;
+            private String telePhone;
+            private String shop;
+            private int turnover;
+            private int inYears;
+            private int period;
+            private int counts;
+            private String pic;
+            private String nickname;
+            private String sex;
+            private String wechatId;
+            private long caeateTime;
+            private long updateTime;
+            private int isDeleted;
+            private String status;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getBrokerName() {
+                return brokerName;
+            }
+
+            public void setBrokerName(String brokerName) {
+                this.brokerName = brokerName;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
+
+            public String getPassword() {
+                return password;
+            }
+
+            public void setPassword(String password) {
+                this.password = password;
+            }
+
+            public String getTelePhone() {
+                return telePhone;
+            }
+
+            public void setTelePhone(String telePhone) {
+                this.telePhone = telePhone;
+            }
+
+            public String getShop() {
+                return shop;
+            }
+
+            public void setShop(String shop) {
+                this.shop = shop;
+            }
+
+            public int getTurnover() {
+                return turnover;
+            }
+
+            public void setTurnover(int turnover) {
+                this.turnover = turnover;
+            }
+
+            public int getInYears() {
+                return inYears;
+            }
+
+            public void setInYears(int inYears) {
+                this.inYears = inYears;
+            }
+
+            public int getPeriod() {
+                return period;
+            }
+
+            public void setPeriod(int period) {
+                this.period = period;
+            }
+
+            public int getCounts() {
+                return counts;
+            }
+
+            public void setCounts(int counts) {
+                this.counts = counts;
+            }
+
+            public String getPic() {
+                return pic;
+            }
+
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
+
+            public String getNickname() {
+                return nickname;
+            }
+
+            public void setNickname(String nickname) {
+                this.nickname = nickname;
+            }
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
+
+            public String getWechatId() {
+                return wechatId;
+            }
+
+            public void setWechatId(String wechatId) {
+                this.wechatId = wechatId;
+            }
+
+            public long getCaeateTime() {
+                return caeateTime;
+            }
+
+            public void setCaeateTime(long caeateTime) {
+                this.caeateTime = caeateTime;
+            }
+
+            public long getUpdateTime() {
+                return updateTime;
+            }
+
+            public void setUpdateTime(long updateTime) {
+                this.updateTime = updateTime;
+            }
+
+            public int getIsDeleted() {
+                return isDeleted;
+            }
+
+            public void setIsDeleted(int isDeleted) {
+                this.isDeleted = isDeleted;
+            }
+
+            public String getStatus() {
+                return status;
+            }
+
+            public void setStatus(String status) {
+                this.status = status;
+            }
         }
     }
 }

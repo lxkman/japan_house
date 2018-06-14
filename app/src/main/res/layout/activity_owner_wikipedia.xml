@@ -27,16 +27,29 @@
             />
     </RelativeLayout>
 
-    <com.liaoinstan.springview.widget.SpringView
-        android:id="@+id/act_owner_wikipedia_springView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/act_owner_wikipedia_recyclerView"
+        <TextView
+            android:id="@+id/no_more_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/act_owner_wikipedia_springView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            />
-    </com.liaoinstan.springview.widget.SpringView>
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/act_owner_wikipedia_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                />
+        </com.liaoinstan.springview.widget.SpringView>
+    </RelativeLayout>
 </LinearLayout>

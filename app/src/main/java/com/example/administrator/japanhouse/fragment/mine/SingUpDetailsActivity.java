@@ -1,11 +1,15 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,14 +21,19 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.model.SingUpBean;
+import com.example.administrator.japanhouse.view.BaseDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
 
 public class SingUpDetailsActivity extends BaseActivity {
 
@@ -79,7 +88,7 @@ public class SingUpDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_sing_up_details);
         ButterKnife.bind(this);
 
-        datasBean = getIntent().getParcelableExtra("datas");
+        datasBean = (SingUpBean.DatasBean) getIntent().getSerializableExtra("datas");
 
         initView();
     }
@@ -105,6 +114,20 @@ public class SingUpDetailsActivity extends BaseActivity {
         numZh.setText(String.format(getString(R.string.item_apartment_people), datasBean.getPeopleCount()));
         phone.setText(datasBean.getKfPhone());
         houseBs.setText(MyApplication.isJapanese() ? datasBean.getPriceJpn() + "/平" : datasBean.getPriceCn() + "/平");
+
+        details.setText(MyApplication.isJapanese() ? datasBean.getSummarizeJpn() : datasBean.getSummarizeCn());
+        range.setText(MyApplication.isJapanese() ? datasBean.getUsingRangeJpn() : datasBean.getUsingRangeCn());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        date.setText(sdf.format(new Date(datasBean.getKpTime())));
+        address.setText(MyApplication.isJapanese() ? datasBean.getAddressJpn() : datasBean.getAddressCn());
+
+        if (datasBean.getHwdcBroker() != null) {
+            Glide.with(this)
+                    .load(datasBean.getHwdcBroker().getPic())
+                    .into(managerIcon);
+
+            managerName.setText(datasBean.getHwdcBroker().getBrokerName());
+        }
 //        date.setText();
 //        address.setText();
 
@@ -141,10 +164,50 @@ public class SingUpDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.act_singUp_details_wChat:
+                if (datasBean != null && datasBean.getHwdcBroker() != null) {
+                    RongIM.getInstance().startPrivateChat(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName());
+                }
                 break;
             case R.id.act_singUp_details_managerPhone:
+                if (datasBean != null && datasBean.getHwdcBroker() != null) {
+                    ShowCallDialog(datasBean.getHwdcBroker().getTelePhone());
+                }
                 break;
         }
+    }
+
+    private void ShowCallDialog(final String tel) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.call_layout)
+                .setPaddingdp(0, 10, 0, 10)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(false)
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+        final TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText(tel);
+        TextView text_pause = dialog.getView(R.id.text_pause);
+
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tel));
+                startActivity(dialIntent);
+            }
+        });
+
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private List<String> getList(String pic) {

@@ -1,5 +1,7 @@
 package com.example.administrator.japanhouse.im;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -12,11 +14,14 @@ import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.UserBean;
+import com.example.administrator.japanhouse.presenter.FromPhonePresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.RatingBarView;
+import com.lzy.okgo.model.Response;
 
 import java.util.List;
 
@@ -31,13 +36,19 @@ import io.rong.imlib.model.UserInfo;
  * Created by   admin on 2018/4/25.
  */
 
-public class RongChatActivity extends BaseActivity {
+public class RongChatActivity extends BaseActivity implements FromPhonePresenter.PhoneCallBack {
     private TextView title;
     private ImageView back;
     private ImageView phone;
-    private ImageView star;
+    private CheckBox star;
 
     private TextView tvAppraise;
+
+    private FromPhonePresenter presenter;
+
+    private String strPhone = "";
+
+    private int state = 0; //0否 1是
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,25 +58,28 @@ public class RongChatActivity extends BaseActivity {
         title = (TextView) findViewById(R.id.activity_chat_title);
         back = (ImageView) findViewById(R.id.activity_chat_back);
         phone = (ImageView) findViewById(R.id.activity_chat_phone);
-        star = (ImageView) findViewById(R.id.activity_chat_star);
+        star = (CheckBox) findViewById(R.id.activity_chat_star);
         tvAppraise = (TextView) findViewById(R.id.act_rongChat_appraise);
 
         //会话界面 对方id
         final String targetId = getIntent().getData().getQueryParameter("targetId");
+        presenter = new FromPhonePresenter(this, this);
+        presenter.getUserPhone(targetId);
+
         //对方 昵称
         String title = getIntent().getData().getQueryParameter("title");
 
         String chat = SharedPreferencesUtils.getInstace(this).getStringPreference(Constants.CHAT, "");
         if (!TextUtils.isEmpty(chat)) {
-            if (chat.equals(Constants.CHAT_DETAILS)){
-                if (!TextUtils.isEmpty(title)){
+            if (chat.equals(Constants.CHAT_DETAILS)) {
+                if (!TextUtils.isEmpty(title)) {
                     this.title.setText(title);
                 }
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.VISIBLE);
                 tvAppraise.setVisibility(View.VISIBLE);
             } else {
-                if (!TextUtils.isEmpty(title)){
+                if (!TextUtils.isEmpty(title)) {
                     this.title.setText(title);
                 }
                 phone.setVisibility(View.VISIBLE);
@@ -73,7 +87,7 @@ public class RongChatActivity extends BaseActivity {
                 tvAppraise.setVisibility(View.GONE);
             }
         } else {
-            if (!TextUtils.isEmpty(title)){
+            if (!TextUtils.isEmpty(title)) {
                 this.title.setText(title);
             }
             phone.setVisibility(View.VISIBLE);
@@ -91,7 +105,20 @@ public class RongChatActivity extends BaseActivity {
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                RongCallClient.getInstance().startCall(Conversation.ConversationType.PRIVATE, targetId, null, RongCallCommon.CallMediaType.AUDIO, "");
+                if (strPhone != null && !"".equals(strPhone)) {
+                    ShowCallDialog(strPhone);
+                }
+            }
+        });
+
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (star.isChecked()) {
+                    presenter.deteleLinkman(targetId);
+                } else {
+                    presenter.addLinkman(targetId);
+                }
             }
         });
 
@@ -107,6 +134,40 @@ public class RongChatActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void ShowCallDialog(final String tel) {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        final BaseDialog dialog = builder.setViewId(R.layout.call_layout)
+                .setPaddingdp(0, 10, 0, 10)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(R.style.bottom_tab_style)
+                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .isOnTouchCanceled(false)
+                .builder();
+        dialog.show();
+        TextView text_sure = dialog.getView(R.id.text_sure);
+        final TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText(tel);
+        TextView text_pause = dialog.getView(R.id.text_pause);
+
+        text_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tel));
+                startActivity(dialIntent);
+            }
+        });
+
+        text_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void showJaDialog() {
@@ -214,5 +275,20 @@ public class RongChatActivity extends BaseActivity {
             }
         }
         super.finish();
+    }
+
+    @Override
+    public void getUserPhone(Response<UserBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+
+            strPhone = response.body().getDatas().getPhone();
+            state = response.body().getDatas().getIstxl();
+
+            if (response.body().getDatas().getIstxl() == 1) {
+                star.setChecked(true);
+            } else {
+                star.setChecked(false);
+            }
+        }
     }
 }

@@ -2,10 +2,13 @@ package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
 
+import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.model.OwnerDetailsBean;
 import com.example.administrator.japanhouse.model.OwnerListBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -33,10 +36,16 @@ public class OwnerPresenter {
         OkGo.<OwnerListBean>post(MyUrls.BASEURL + "/app/textsource/ownerencyclopedia")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<OwnerListBean>(OwnerListBean.class) {
+                .execute(new DialogCallback<OwnerListBean>(activity, OwnerListBean.class) {
                     @Override
                     public void onSuccess(Response<OwnerListBean> response) {
                         callBack.getOwnerList(response);
+                    }
+
+                    @Override
+                    public void onError(Response<OwnerListBean> response) {
+                        super.onError(response);
+                        callBack.ownerListNetwork();
                     }
                 });
     }
@@ -51,7 +60,7 @@ public class OwnerPresenter {
         OkGo.<OwnerDetailsBean>post(MyUrls.BASEURL + "/app/textsource/purchasewikipediaInfo")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<OwnerDetailsBean>(OwnerDetailsBean.class) {
+                .execute(new DialogCallback<OwnerDetailsBean>(activity, OwnerDetailsBean.class) {
                     @Override
                     public void onSuccess(Response<OwnerDetailsBean> response) {
                         callBack.getOwnerDetails(response);
@@ -62,5 +71,6 @@ public class OwnerPresenter {
     public interface OwnerCallBack{
         void getOwnerList(Response<OwnerListBean> response);
         void getOwnerDetails(Response<OwnerDetailsBean> response);
+        void ownerListNetwork();
     }
 }

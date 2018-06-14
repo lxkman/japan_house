@@ -1,8 +1,12 @@
 package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.text.TextUtils;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
@@ -23,10 +27,11 @@ public class VillaDetailsPresenter {
     }
 
     /**
-     *  别墅详情查询
+     * 别墅详情查询
+     *
      * @param vId 别墅ID
      */
-    public void getVillaDetails(String vId,String token){
+    public void getVillaDetails(String vId, String token) {
         HttpParams params = new HttpParams();
         params.put("vId", vId);
         params.put("token", token);
@@ -36,12 +41,17 @@ public class VillaDetailsPresenter {
                 .execute(new DialogCallback<VillaDetailsBean>(activity, VillaDetailsBean.class) {
                     @Override
                     public void onSuccess(Response<VillaDetailsBean> response) {
-                        callBack.getVillaDetails(response);
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        } else {
+                            callBack.getVillaDetails(response);
+                        }
                     }
                 });
     }
 
-    public interface VillaDetailsCallBack{
+    public interface VillaDetailsCallBack {
         void getVillaDetails(Response<VillaDetailsBean> response);
     }
 }

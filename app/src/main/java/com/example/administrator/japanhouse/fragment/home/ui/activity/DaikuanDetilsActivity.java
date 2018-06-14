@@ -17,6 +17,7 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -236,7 +237,10 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
                                 .execute(new DialogCallback<NoDataBean>(DaikuanDetilsActivity.this, NoDataBean.class) {
                                     @Override
                                     public void onSuccess(Response<NoDataBean> response) {
-                                        Toast.makeText(DaikuanDetilsActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                                            startActivity(new Intent(DaikuanDetilsActivity.this, LoginActivity.class));
+                                            MyApplication.logOut();
+                                        }
                                     }
                                 });
 

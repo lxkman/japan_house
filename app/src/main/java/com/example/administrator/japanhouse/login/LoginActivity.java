@@ -22,6 +22,9 @@ import com.example.administrator.japanhouse.base.UMLoginActivity;
 import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.bean.LoginParmeter;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.im.RcConect;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -180,11 +183,16 @@ public class LoginActivity extends UMLoginActivity {
                             @Override
                             public void onSuccess(Response<LoginBean> response) {
                                 int code = response.code();
-                                LoginBean LoginBean = response.body();
+                                LoginBean loginBean = response.body();
 //                                Log.d("LoginActivity", LoginBean.getCode()+"-------------");
-                                if (LoginBean.getCode().equals("200")){
-                                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid",LoginBean.getDatas().getUid()+"");
-                                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("token",LoginBean.getDatas().getToken()+"");
+                                if (loginBean.getCode().equals("200")){
+                                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid",loginBean.getDatas().getId()+"");
+                                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("token",loginBean.getDatas().getToken()+"");
+
+                                    RcConect.rongCloudConection(loginBean.getDatas().getRongCloudToken());
+
+                                    CacheUtils.put(Constants.USERINFO, loginBean.getDatas());
+
                                     Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
 
                                     HashMap<String, Boolean> hm = new HashMap<>();
@@ -194,9 +202,9 @@ public class LoginActivity extends UMLoginActivity {
                             //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
                                     RongIM.getInstance().startConversationList(LoginActivity.this, hm);
                                     finish();
-                                }else if (LoginBean.getCode().equals("-1")){
+                                }else if (loginBean.getCode().equals("-1")){
                                     Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
-                                }else if (LoginBean.getCode().equals("206")){
+                                }else if (loginBean.getCode().equals("206")){
                                     Toast.makeText(LoginActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
                                 }
                             }

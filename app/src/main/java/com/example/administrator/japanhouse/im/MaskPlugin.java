@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.utils.TUtils;
 
 import io.rong.imkit.RongExtension;
 import io.rong.imkit.RongIM;
@@ -29,8 +31,26 @@ public class MaskPlugin implements IPluginModule {
     }
 
     @Override
-    public void onClick(Fragment fragment, RongExtension rongExtension) {
+    public void onClick(final Fragment fragment, RongExtension rongExtension) {
+        final String id = fragment.getActivity().getIntent().getData().getQueryParameter("targetId");
+        RongIM.getInstance().getBlacklistStatus(id, new RongIMClient.ResultCallback<RongIMClient.BlacklistStatus>() {
+            @Override
+            public void onSuccess(RongIMClient.BlacklistStatus blacklistStatus) {
+                if (blacklistStatus == RongIMClient.BlacklistStatus.IN_BLACK_LIST) {
+                    ImManager.removeFromBlack(id);
+                    TUtils.showFail(fragment.getActivity(), "移除成功");
+                } else {
+                    ImManager.addToBlack(id);
+                    TUtils.showFail(fragment.getActivity(), "拉黑成功");
+                }
+            }
 
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
     }
 
     @Override

@@ -57,14 +57,14 @@ public class LanguageActivity extends BaseActivity {
 
         location = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(location)) {
-            if (TextUtils.equals(location, "zh")) {
-                imgCheckZhongwen.setVisibility(View.VISIBLE);
-                imgCheckRiwen.setVisibility(View.GONE);
-                city = "zh";
-            } else if (TextUtils.equals(location, "ja")) {
+            if (TextUtils.equals(location, "ja")) {
                 imgCheckZhongwen.setVisibility(View.GONE);
                 imgCheckRiwen.setVisibility(View.VISIBLE);
                 city = "ja";
+            } else {
+                imgCheckZhongwen.setVisibility(View.VISIBLE);
+                imgCheckRiwen.setVisibility(View.GONE);
+                city = "zh";
             }
         }
     }

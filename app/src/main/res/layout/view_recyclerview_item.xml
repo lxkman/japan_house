@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/item_linkman_title"
@@ -10,7 +11,11 @@
         android:background="#eee"
         android:gravity="center_vertical"
         android:paddingLeft="15dip"
-        android:textSize="14sp"
         android:text="A"
         android:textColor="#444" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/item_linkman_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

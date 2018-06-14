@@ -1,11 +1,19 @@
 package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.text.TextUtils;
 
+import com.example.administrator.japanhouse.MyApplication;
+import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.model.HouseRecordListBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.SingUpBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -24,32 +32,44 @@ public class SingUpPresenter {
     }
 
     /**
+     * 查看我的报名
      *
-     *  查看我的报名
      * @param token
      * @param pageNo
      */
-    public void getSingUpList(String token, int pageNo){
+    public void getSingUpList(String token, int pageNo) {
         HttpParams params = new HttpParams();
         params.put("token", token);
         params.put("pageNo", pageNo);
         OkGo.<SingUpBean>post(MyUrls.BASEURL + "/app/seehouse/myseehouse")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<SingUpBean>(SingUpBean.class) {
+                .execute(new DialogCallback<SingUpBean>(activity, SingUpBean.class) {
                     @Override
                     public void onSuccess(Response<SingUpBean> response) {
-                        callBack.getSingUpList(response);
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        } else {
+                            callBack.getSingUpList(response);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<SingUpBean> response) {
+                        super.onError(response);
+                        callBack.singUpNetwork();
                     }
                 });
     }
 
     /**
-     *  删除报名
+     * 删除报名
+     *
      * @param sId
      * @param token
      */
-    public void deteleSingUp(String sId, String token){
+    public void deteleSingUp(String sId, String token) {
         HttpParams params = new HttpParams();
         params.put("sId", sId);
         params.put("token", token);
@@ -59,13 +79,21 @@ public class SingUpPresenter {
                 .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-                        callBack.deteleSingUp(response);
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        } else {
+                            callBack.deteleSingUp(response);
+                        }
                     }
                 });
     }
 
     public interface SingUpCallBack {
         void getSingUpList(Response<SingUpBean> response);
+
         void deteleSingUp(Response<NoDataBean> response);
+
+        void singUpNetwork();
     }
 }

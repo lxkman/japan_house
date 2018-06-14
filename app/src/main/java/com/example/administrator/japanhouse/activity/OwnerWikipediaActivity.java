@@ -8,13 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.OwnerWikipediaAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.model.OwnerDetailsBean;
 import com.example.administrator.japanhouse.model.OwnerListBean;
 import com.example.administrator.japanhouse.presenter.OwnerPresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -38,10 +41,15 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
     private List<OwnerListBean.DatasBean> datas;
     private OwnerWikipediaAdapter adapter;
 
+    private TextView state;
+    private boolean isRefresh = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_wikipedia);
+
+        state = (TextView) findViewById(R.id.no_more_data);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.act_owner_wikipedia_recyclerView);
         springView = (SpringView) findViewById(R.id.act_owner_wikipedia_springView);
@@ -67,6 +75,7 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         datas.clear();
                         pageNo = 1;
                         presenter.getOwnerList(pageNo);
@@ -80,6 +89,7 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         pageNo++;
                         presenter.getOwnerList(pageNo);
                     }
@@ -106,11 +116,27 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
 
     @Override
     public void getOwnerList(Response<OwnerListBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(this, getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_data));
+
         if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (pageNo == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (response.body().getDatas().size() > 0) {
                 datas.addAll(response.body().getDatas());
             } else {
                 pageNo --;
+                if (!isRefresh) {
+                    TUtils.showFail(this, getString(R.string.refresh_no_data));
+                }
             }
         }
         adapter.notifyDataSetChanged();
@@ -119,5 +145,14 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
     @Override
     public void getOwnerDetails(Response<OwnerDetailsBean> response) {
 
+    }
+
+    @Override
+    public void ownerListNetwork() {
+        TUtils.showFail(this, getString(R.string.refresh_fail));
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
+        }
     }
 }

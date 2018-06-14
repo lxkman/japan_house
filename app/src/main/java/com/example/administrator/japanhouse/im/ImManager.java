@@ -250,30 +250,6 @@ public class ImManager {
     }
 
     /**
-     * 获取某用户是否在黑名单中。
-     *
-     * @param userId   用户 Id。
-     */
-    public static boolean getBlacklist(String userId){
-        final boolean[] isInBlack = new boolean[1];
-        isInBlack[0] = false;
-        RongIM.getInstance().getBlacklistStatus(userId, new RongIMClient.ResultCallback<RongIMClient.BlacklistStatus>() {
-            @Override
-            public void onSuccess(RongIMClient.BlacklistStatus blacklistStatus) {
-                if (blacklistStatus == RongIMClient.BlacklistStatus.IN_BLACK_LIST) {
-                    isInBlack[0] = true;
-                }
-            }
-
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-
-            }
-        });
-        return isInBlack[0];
-    }
-
-    /**
      * 将个某用户从黑名单中移出。
      *
      * @param userId   用户 Id。

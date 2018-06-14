@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
@@ -28,14 +29,14 @@ public class HouseLogPresenter {
      */
     public void setHouseLog(String houseType, String houseId, String shType){
         HttpParams params = new HttpParams();
-        params.put("userId", MyApplication.getUserId(activity));
+        params.put("token", MyApplication.getUserToken());
         params.put("houseType", houseType);
         params.put("houseId", houseId);
         params.put("shType", shType);
         OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/seehouselog/insertkflog")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<NoDataBean>(activity, NoDataBean.class) {
+                .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
                     }

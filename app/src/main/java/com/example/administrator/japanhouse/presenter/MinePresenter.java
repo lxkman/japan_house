@@ -1,8 +1,12 @@
 package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.text.TextUtils;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.HouseRecordListBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
@@ -28,7 +32,7 @@ public class MinePresenter {
      * @param token
      * @param pageNo
      */
-    public void getHouseRecordList(String token, int pageNo){
+    public void getHouseRecordList(String token, int pageNo) {
         HttpParams params = new HttpParams();
         params.put("token", token);
         params.put("pageNo", pageNo);
@@ -39,6 +43,7 @@ public class MinePresenter {
                     @Override
                     public void onSuccess(Response<HouseRecordListBean> response) {
                         callBack.getHouseRecordList(response);
+
                     }
                 });
     }

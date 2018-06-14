@@ -27,9 +27,6 @@ public class StartWechatActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.Mrecycler)
     RecyclerView Mrecycler;
-    private LiebiaoAdapter mLiebiaoAdapter;
-    private List<String> mList = new ArrayList();
-    private ItemAdapter itemAdapter;
     private RecyclerView mrecycler_item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +37,8 @@ public class StartWechatActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (mList.size() <= 0) {
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-        if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.lianxiren_item, mList);
-        }
         Mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         Mrecycler.setNestedScrollingEnabled(false);
-        Mrecycler.setAdapter(mLiebiaoAdapter);
-        mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(StartWechatActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @OnClick(R.id.back_img)
@@ -66,41 +46,5 @@ public class StartWechatActivity extends BaseActivity {
         finish();
     }
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-            mrecycler_item = helper.getView(R.id.mrecycler_item);
-            if (itemAdapter == null) {
-                itemAdapter = new ItemAdapter(R.layout.item_lianxiren, mList);
-            }
-            mrecycler_item.setLayoutManager(new LinearLayoutManager(StartWechatActivity.this, LinearLayoutManager.VERTICAL, false));
-            mrecycler_item.setNestedScrollingEnabled(false);
-            itemAdapter.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Toast.makeText(StartWechatActivity.this, "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
-                }
-            });
-            mrecycler_item.setAdapter(itemAdapter);
-
-        }
-    }
-
-
-    class ItemAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-        public ItemAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
-        }
-    }
 }

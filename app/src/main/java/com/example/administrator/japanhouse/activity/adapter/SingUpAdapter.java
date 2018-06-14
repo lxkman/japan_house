@@ -15,7 +15,9 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.model.SingUpBean;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,8 +54,9 @@ public class SingUpAdapter extends RecyclerView.Adapter {
                     .load(getList(datas.get(position).getImages()).get(0))
                     .into(viewHolder.icon);
             viewHolder.title.setText(MyApplication.isJapanese() ? datas.get(position).getActivityNameJpn() : datas.get(position).getActivityNameCn());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             viewHolder.time.setText(new SpannableStringBuilder(
-                    String.format(activity.getString(R.string.singUp_time), "时间")));
+                    String.format(activity.getString(R.string.singUp_time), sdf.format(new Date(datas.get(position).getCreateTime())))));
 
 
             viewHolder.detele.setOnClickListener(new View.OnClickListener() {

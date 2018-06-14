@@ -28,6 +28,7 @@
                     android:layout_width="132dip"
                     android:layout_height="90dip"
                     android:layout_gravity="center_vertical"
+                    android:scaleType="centerCrop"
                     android:layout_marginLeft="15dip"
                     android:background="@drawable/house" />
 

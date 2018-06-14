@@ -5,6 +5,7 @@ package com.example.administrator.japanhouse.utils;
  */
 
 public class Constants {
+    public static final String USERINFO = "USERINFO";
     public static final String CHAT = "CHAT";
     public static final String CHAT_FEEDBACK = "CHAT_FEEDBACK"; //进入聊天室
     public static final String CHAT_DETAILS = "CHAT_DETAILS";   //详情进入聊天室

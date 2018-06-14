@@ -1,12 +1,20 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.CollectionListAdapter;
@@ -25,10 +33,17 @@ import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActiv
 import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
 import com.example.administrator.japanhouse.more.CollectionListBean;
 import com.example.administrator.japanhouse.presenter.CollectionPresenter;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
@@ -38,8 +53,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class
-ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionCallBack, CollectionListAdapter.OnItemClickListener {
+public class ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionCallBack, CollectionListAdapter.OnItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -47,9 +61,13 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
     SwipeMenuRecyclerView mrecycler;
     private List<CollectionListBean.DatasBean> mList = new ArrayList();
     private CollectionListAdapter liebiaoAdapter;
+
     private CollectionPresenter presenter;
     private SpringView springView;
     private int page = 1;
+
+    private TextView state;
+    private boolean isRefresh = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +75,10 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
         setContentView(R.layout.activity_shou_cang);
         ButterKnife.bind(this);
 
-
-
         presenter = new CollectionPresenter(this, this);
         presenter.getCollectionHouseList(page, MyApplication.getUserToken());
+
+        state = (TextView) findViewById(R.id.no_more_data);
 
         springView = (SpringView) findViewById(R.id.act_collection_springView);
 
@@ -71,6 +89,7 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         mList.clear();
                         page = 1;
                         presenter.getCollectionHouseList(page, MyApplication.getUserToken());
@@ -84,6 +103,7 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         page++;
                         presenter.getCollectionHouseList(page, MyApplication.getUserToken());
                     }
@@ -109,13 +129,40 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
 
     @Override
     public void getCollectionHouseList(Response<CollectionListBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(this, getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_collection_data));
         if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (page == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
             } else {
-                page --;
+                page--;
+                if (!isRefresh) {
+                    TUtils.showFail(this, getString(R.string.refresh_no_data));
+                }
             }
+
             liebiaoAdapter.notifyDataSetChanged();
+        }
+
+
+    }
+
+    @Override
+    public void collectionNetwork() {
+        TUtils.showFail(this, getString(R.string.refresh_fail));
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
         }
     }
 
@@ -197,7 +244,8 @@ ShouCangActivity extends BaseActivity implements CollectionPresenter.CollectionC
     }
 
     @Override
-    public void itemDeleteClickListener(int position) {
+    public void itemDeleteClickListener(int position, CollectionListBean.DatasBean datasBean) {
+        presenter.deteleCollectionHouse(datasBean.getHType(), datasBean.getShType(), datasBean.getId());
         mList.remove(position);
         liebiaoAdapter.notifyDataSetChanged();
     }

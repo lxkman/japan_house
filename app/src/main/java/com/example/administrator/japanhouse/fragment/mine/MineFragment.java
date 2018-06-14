@@ -25,6 +25,7 @@ import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity;
 import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.HouseRecordListBean;
 import com.example.administrator.japanhouse.presenter.MinePresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -353,6 +354,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void getHouseRecordList(Response<HouseRecordListBean> response) {
+
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 list.addAll(response.body().getDatas());

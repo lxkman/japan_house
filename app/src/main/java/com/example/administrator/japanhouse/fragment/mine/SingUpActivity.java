@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,6 +21,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.SingUpBean;
 import com.example.administrator.japanhouse.presenter.SingUpPresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -45,11 +47,18 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
     private SingUpPresenter presenter;
     private SpringView springView;
     private int page = 1;
+
+    private TextView state;
+
+    private boolean isRefresh = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
         ButterKnife.bind(this);
+
+        state = (TextView) findViewById(R.id.no_more_data);
 
         presenter = new SingUpPresenter(this, this);
 
@@ -68,6 +77,7 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         mList.clear();
                         page = 1;
                         presenter.getSingUpList(MyApplication.getUserToken(), page);
@@ -81,6 +91,7 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         page++;
                         presenter.getSingUpList(MyApplication.getUserToken(), page);
                     }
@@ -96,11 +107,26 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
 
     @Override
     public void getSingUpList(Response<SingUpBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(this, getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_order_data));
         if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (page == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
             } else {
                 page--;
+                if (!isRefresh) {
+                    TUtils.showFail(this, getString(R.string.refresh_no_data));
+                }
             }
 
             adapter.notifyDataSetChanged();
@@ -110,6 +136,15 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
     @Override
     public void deteleSingUp(Response<NoDataBean> response) {
 
+    }
+
+    @Override
+    public void singUpNetwork() {
+        TUtils.showFail(this, getString(R.string.refresh_fail));
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
+        }
     }
 
     @Override

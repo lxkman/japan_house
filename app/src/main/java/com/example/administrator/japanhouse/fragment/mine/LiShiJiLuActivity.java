@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -31,6 +32,7 @@ import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActiv
 import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
 import com.example.administrator.japanhouse.model.HouseRecordListBean;
 import com.example.administrator.japanhouse.presenter.HouseRecordPresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -56,11 +58,16 @@ public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresen
     private SpringView springView;
     private int pageNo = 1;
 
+    private TextView state;
+    private boolean isRefresh = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_li_shi);
         ButterKnife.bind(this);
+
+        state = (TextView) findViewById(R.id.no_more_data);
 
         presenter = new HouseRecordPresenter(this, this);
         presenter.getHouseRecordList(MyApplication.getUserToken(), pageNo);
@@ -73,6 +80,7 @@ public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresen
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         mList.clear();
                         pageNo = 1;
                         presenter.getHouseRecordList(MyApplication.getUserToken(), pageNo);
@@ -86,6 +94,7 @@ public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresen
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         pageNo++;
                         presenter.getHouseRecordList(MyApplication.getUserToken(), pageNo);
                     }
@@ -108,13 +117,37 @@ public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresen
 
     @Override
     public void getHouseRecordList(Response<HouseRecordListBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(this, getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_history_data));
         if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (pageNo == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
             }  else {
                 pageNo --;
+                if (!isRefresh) {
+                    TUtils.showFail(this, getString(R.string.refresh_no_data));
+                }
             }
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void historyNetwork() {
+        TUtils.showFail(this, getString(R.string.refresh_fail));
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
         }
     }
 
@@ -196,7 +229,8 @@ public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresen
     }
 
     @Override
-    public void onItemDeleteClickListener(int position) {
+    public void onItemDeleteClickListener(int position, HouseRecordListBean.DatasBean datasBean) {
+        presenter.deteleHouseRecord(datasBean.getHType(), datasBean.getId(), datasBean.getShType());
         mList.remove(position);
         adapter.notifyDataSetChanged();
     }

@@ -1,7 +1,14 @@
 package com.example.administrator.japanhouse.utils;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.administrator.japanhouse.R;
 
 /**
  * Toast统一管理类
@@ -86,4 +93,22 @@ public class TUtils {
 			Toast.makeText(context, message, duration).show();
 	}
 
+	public static void showFail(Context context, String msg){
+		Toast toast = new Toast(context);
+		toast.setGravity(Gravity.BOTTOM, 0, 80);
+		LinearLayout ll = new LinearLayout(context);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setBackground(context.getResources().getDrawable(R.drawable.toast_bg));
+		TextView myTextView = new TextView(context);
+		myTextView.setText(msg);
+		myTextView.setTextColor(Color.WHITE);
+		myTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
+		int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+		int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+		ll.setPadding(15, 8, 15, 8);
+		ll.addView(myTextView, new LinearLayout.LayoutParams(lHeight, lWidth));
+
+		toast.setView(ll);
+		toast.show();
+	}
 }

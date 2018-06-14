@@ -60,7 +60,7 @@ public class HouseHistoryAdapter extends RecyclerView.Adapter {
             viewHolder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemDeleteClickListener(position);
+                    onItemClickListener.onItemDeleteClickListener(position, datas.get(position));
                 }
             });
 
@@ -104,6 +104,6 @@ public class HouseHistoryAdapter extends RecyclerView.Adapter {
 
     public interface OnItemClickListener{
         void onItemClickListener(String hType, String shType, int itemId);
-        void onItemDeleteClickListener(int position);
+        void onItemDeleteClickListener(int position, HouseRecordListBean.DatasBean datasBean);
     }
 }

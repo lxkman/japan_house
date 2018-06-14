@@ -12,7 +12,7 @@ public class HouseRecordListBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":2,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","addressCn":"1","addressJpn":"1","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","priceCn":"1000元","priceJpn":"1000元","hType":"1","shType":"","imageUrl":"","videoImageUrl":""}]
+     * datas : [{"id":4,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","addressCn":"1","addressJpn":"1","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","priceCn":"3000元/月","priceJpn":"10000","hType":"2","shType":"1","imageUrl":"","videoImageUrl":"","createTime":1528699738000},{"id":1,"titleCn":"别墅标题","titleJpn":"别墅标题","addressCn":"具体位置","addressJpn":"具体位置","doorModelCn":"","doorModelJpn":"","areaCn":"","areaJpn":"","priceCn":"售价","priceJpn":"售价","hType":"4","shType":"","imageUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","videoImageUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","createTime":1528699664000},{"id":2,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","addressCn":"1","addressJpn":"1","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","priceCn":"3000万","priceJpn":"3000万","hType":"1","shType":"","imageUrl":"","videoImageUrl":"","createTime":1528699366000}]
      */
 
     private String msg;
@@ -45,7 +45,7 @@ public class HouseRecordListBean {
 
     public static class DatasBean {
         /**
-         * id : 2
+         * id : 4
          * titleCn : 房屋标题中文（租房）
          * titleJpn : 房屋标题日文（租房）
          * addressCn : 1
@@ -54,12 +54,13 @@ public class HouseRecordListBean {
          * doorModelJpn : 户型
          * areaCn : 100
          * areaJpn : 100
-         * priceCn : 1000元
-         * priceJpn : 1000元
-         * hType : 1
-         * shType :
+         * priceCn : 3000元/月
+         * priceJpn : 10000
+         * hType : 2
+         * shType : 1
          * imageUrl :
          * videoImageUrl :
+         * createTime : 1528699738000
          */
 
         private int id;
@@ -77,6 +78,7 @@ public class HouseRecordListBean {
         private String shType;
         private String imageUrl;
         private String videoImageUrl;
+        private long createTime;
 
         public int getId() {
             return id;
@@ -196,6 +198,14 @@ public class HouseRecordListBean {
 
         public void setVideoImageUrl(String videoImageUrl) {
             this.videoImageUrl = videoImageUrl;
+        }
+
+        public long getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(long createTime) {
+            this.createTime = createTime;
         }
     }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
@@ -17,6 +18,7 @@ import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Rent_house_Adapter;
 import com.example.administrator.japanhouse.model.SellHouseBean;
 import com.example.administrator.japanhouse.presenter.SellHousePresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -39,10 +41,16 @@ public class Rent_house_Fragment extends BaseFragment implements Rent_house_Adap
     private SpringView springView;
     private SellHousePresenter presenter;
     private int page = 1;
+
+    private TextView state;
+    private boolean isRefresh = true;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sell_house_fragment, container, false);
         mrecycler = (RecyclerView) view.findViewById(R.id.mrecycler);
+
+        state = (TextView) view.findViewById(R.id.no_more_data);
 
         presenter = new SellHousePresenter(getActivity(), this);
         presenter.getSellHouseList(MyApplication.getUserToken(), 0, page);
@@ -54,6 +62,7 @@ public class Rent_house_Fragment extends BaseFragment implements Rent_house_Adap
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = true;
                         mList.clear();
                         page = 1;
                         presenter.getSellHouseList(MyApplication.getUserToken(), 0, page);
@@ -67,6 +76,7 @@ public class Rent_house_Fragment extends BaseFragment implements Rent_house_Adap
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        isRefresh = false;
                         page++;
                         presenter.getSellHouseList(MyApplication.getUserToken(), 0, page);
                     }
@@ -95,18 +105,49 @@ public class Rent_house_Fragment extends BaseFragment implements Rent_house_Adap
 
     @Override
     public void getSellHouseList(Response<SellHouseBean> response) {
+        if (isRefresh) {
+            TUtils.showFail(getContext(), getString(R.string.refresh_success));
+        }
+        state.setText(getString(R.string.no_more_rent_data));
         if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (page == 1) {
+                if (response.body().getDatas().size() > 0) {
+                    state.setVisibility(View.GONE);
+                } else {
+                    state.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
             } else {
                 page --;
+                if (!isRefresh) {
+                    TUtils.showFail(getContext(), getString(R.string.refresh_no_data));
+                }
             }
             rent_house_adapter.notifyDataSetChanged();
         }
     }
 
     @Override
+    public void sellHouseNetwork() {
+        TUtils.showFail(getContext(), getString(R.string.refresh_fail));
+        if (!MyApplication.isNetworkAvailable()) {
+            state.setVisibility(View.VISIBLE);
+            state.setText(getString(R.string.no_network));
+        }
+    }
+
+    @Override
     public void onClickListener(int position, RentalDetailsBean bean) {
         RentalDetailsActivity.invoke(getActivity(), bean);
+    }
+
+    @Override
+    public void onItemDeteleListener(int position, SellHouseBean.DatasBean datasBean) {
+        presenter.deteleSellHouse(datasBean.getId());
+        mList.remove(position);
+        rent_house_adapter.notifyDataSetChanged();
     }
 }

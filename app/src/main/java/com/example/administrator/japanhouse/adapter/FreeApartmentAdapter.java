@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.adapter;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.CountDownTimer;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -11,16 +12,20 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SuperscriptSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.model.FreeApartmentBean;
+import com.example.administrator.japanhouse.utils.TUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +77,7 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
                 onClickListener.onItemDeteleClickListener(i);
             }
 
-            long days = l / (1000 * 60 * 60 * 24);
+            final long days = l / (1000 * 60 * 60 * 24);
             long hours = (l - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
             long minutes = (l - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
             SpannableStringBuilder builder = new SpannableStringBuilder(
@@ -107,7 +112,12 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
             holder.tvSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListener.onSignUpClickListener(list.get(i).getId());
+                    if (list.get(i).getIsbm() == 1) {
+                        TUtils.showFail(activity, activity.getString(R.string.not_repeat_singUp));
+                    } else {
+                        onClickListener.onSignUpClickListener(list.get(i).getId());
+                    }
+
                 }
             });
 
@@ -115,6 +125,15 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     onClickListener.onCallClickListener(list.get(i).getKfPhone());
+                }
+            });
+
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("tag", "------------------------- - " + list.get(i).getIsbm());
+                    Log.e("tag", "------------------------- -  " + list.get(i).getId());
+                    onClickListener.onItemClickListener(list.get(i));
                 }
             });
 
@@ -144,6 +163,7 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
         TextView tvPrices;
         TextView tvPhone;
         TextView tvSignUp;
+        LinearLayout layout;
 
         public FreeApartmentViewHolder(View itemView) {
             super(itemView);
@@ -154,6 +174,7 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
             tvPrices = (TextView) itemView.findViewById(R.id.item_apartment_prices);
             tvPhone = (TextView) itemView.findViewById(R.id.item_apartment_phone);
             tvSignUp = (TextView) itemView.findViewById(R.id.item_apartment_signUp);
+            layout = (LinearLayout) itemView.findViewById(R.id.item_apartment_layout);
         }
     }
 
@@ -163,6 +184,8 @@ public class FreeApartmentAdapter extends RecyclerView.Adapter {
         void onCallClickListener(String tel);
 
         void onItemDeteleClickListener(int position);
+
+        void onItemClickListener(FreeApartmentBean.DatasBean datasBean);
     }
 
 }

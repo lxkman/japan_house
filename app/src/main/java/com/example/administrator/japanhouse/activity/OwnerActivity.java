@@ -142,4 +142,9 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
     public void getOwnerDetails(Response<OwnerDetailsBean> response) {
 
     }
+
+    @Override
+    public void ownerListNetwork() {
+
+    }
 }

@@ -164,7 +164,7 @@
 
                 </LinearLayout>
 
-                <view
+                <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#f8f8f8"

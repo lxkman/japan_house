@@ -34,14 +34,17 @@
             android:src="@drawable/chat_phone"
             android:visibility="gone" />
 
-        <ImageView
+        <CheckBox
+            android:background="@drawable/chat_collect_flase"
+            android:button="@null"
             android:id="@+id/activity_chat_star"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_alignParentRight="true"
-            android:padding="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
             android:src="@drawable/chat_collect_flase"
-            android:visibility="gone" />
+         />
     </RelativeLayout>
 
     <fragment

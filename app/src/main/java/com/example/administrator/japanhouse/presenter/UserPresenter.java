@@ -1,8 +1,13 @@
 package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.text.TextUtils;
 
+import com.example.administrator.japanhouse.MyApplication;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserInfo;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -24,6 +29,7 @@ public class UserPresenter {
 
     /**
      * 获取用户信息
+     *
      * @param token
      */
     public void getUserInfo(String token) {
@@ -32,22 +38,28 @@ public class UserPresenter {
         OkGo.<UserInfo>post(MyUrls.BASEURL + "/app/user/getmyinfo")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<UserInfo>(UserInfo.class) {
+                .execute(new DialogCallback<UserInfo>(activity, UserInfo.class) {
                     @Override
                     public void onSuccess(Response<UserInfo> response) {
-                        callBack.getUserInfo(response);
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        } else {
+                            callBack.getUserInfo(response);
+                        }
                     }
                 });
     }
 
     /**
-     *  更新用户信息
+     * 更新用户信息
+     *
      * @param token
      * @param nickName
      * @param sex
      * @param age
      */
-    public void updateUserInfo(String token, String nickName, int sex, String age){
+    public void updateUserInfo(String token, String nickName, int sex, String age) {
         HttpParams params = new HttpParams();
         params.put("token", token);
         params.put("nickName", nickName);
@@ -56,16 +68,22 @@ public class UserPresenter {
         OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/user/updateinfo")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
+                .execute(new DialogCallback<NoDataBean>(activity, NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-                        callBack.updateUserInfo(response);
+                        if (TextUtils.equals(response.body().getCode(), "201")) {
+                            activity.startActivity(new Intent(activity, LoginActivity.class));
+                            MyApplication.logOut();
+                        } else {
+                            callBack.updateUserInfo(response);
+                        }
                     }
                 });
     }
 
     public interface UserCallBack {
         void getUserInfo(Response<UserInfo> response);
+
         void updateUserInfo(Response<NoDataBean> response);
     }
 }

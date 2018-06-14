@@ -15,11 +15,11 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +43,8 @@ public class ShendengSecondStepActivity extends BaseActivity {
     private boolean isJa;
     private HashMap<String, List<String>> hashMap_want = new HashMap<>();
     private HashMap<String, List<String>> hashMap_dontwant = new HashMap<>();
+    private List<String> allCheckedTextList;
+    private List<OneCheckBean> wantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
         } else {
             isJa = false;
         }
+        allCheckedTextList = (List<String>) getIntent().getSerializableExtra("checkedcontent");
         initView();
     }
 
@@ -73,7 +76,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                         ShenDengRuleBean.DatasEntity datas = shenDengRuleBean.getDatas();
                         ShenDengRuleBean.DatasEntity.XytjEntity xytj = datas.getXytj();
                         ShenDengRuleBean.DatasEntity.BxytjEntity bxytj = datas.getBxytj();
-                        final List<OneCheckBean> wantList = getxiangyao(xytj);
+                        wantList = getxiangyao(xytj);
                         for (int i = 0; i < wantList.size(); i++) {
                             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_shendeng_second, null);
                             tv.setText(wantList.get(i).getName());
@@ -138,22 +141,29 @@ public class ShendengSecondStepActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.finish_tv:
-                SpUtils.putBoolean("shendeng", true);
                 Intent intent = new Intent(mContext, ShendengListActivity.class);
                 intent.putExtra("hxs", getIntent().getStringExtra("hxs"));
                 intent.putExtra("zjId", getIntent().getStringExtra("zjId"));
+                getWantAllText();
+                intent.putExtra("checkedcontent", (Serializable) allCheckedTextList);
+                intent.putExtra("qys", (Serializable) getIntent().getSerializableExtra("qys"));
+                intent.putExtra("want", hashMap_want);
+                intent.putExtra("dontwant", hashMap_dontwant);
                 startActivity(intent);
                 finish();
                 break;
         }
     }
 
-//    private HashMap<String, List<String>> getLastIds() {
-//        HashMap<String, List<String>> hashMap = new HashMap();
-//        for (String key : hashMap_want.keySet()) {
-//
-//        }
-//    }
+    private void getWantAllText() {
+        if (wantList != null && wantList.size() > 0) {
+            for (int i = 0; i < wantList.size(); i++) {
+                if (wantList.get(i).isChecked()) {
+                    allCheckedTextList.add(wantList.get(i).getName());
+                }
+            }
+        }
+    }
 
     private List<OneCheckBean> getxiangyao(ShenDengRuleBean.DatasEntity.XytjEntity xytj) {
         List<OneCheckBean> wantList = new ArrayList<>();
@@ -421,7 +431,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(chaoxiang.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("cxs", list);
+                hashMap_dontwant.put("nocxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChezhanjuliEntity> chezhanjuli = bxytjEntity.getChezhanjuli();
             if (chezhanjuli != null && chezhanjuli.size() > 0) {
@@ -432,7 +442,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(chezhanjuli.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("czjls", list);
+                hashMap_dontwant.put("noczjls", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChuqifeiyongEntity> chuqifeiyong = bxytjEntity.getChuqifeiyong();
             if (chuqifeiyong != null && chuqifeiyong.size() > 0) {
@@ -443,7 +453,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(chuqifeiyong.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("cqfys", list);
+                hashMap_dontwant.put("nocqfys", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ChuzuleixingEntity> chuzuleixing = bxytjEntity.getChuzuleixing();
             if (chuzuleixing != null && chuzuleixing.size() > 0) {
@@ -454,7 +464,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(chuzuleixing.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("czlxs", list);
+                hashMap_dontwant.put("noczlxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.DiduanEntity> diduan = bxytjEntity.getDiduan();
             if (diduan != null && diduan.size() > 0) {
@@ -465,7 +475,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(diduan.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("dds", list);
+                hashMap_dontwant.put("nodds", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.FangjianzhuangkuangEntity> fangjianzhuangkuang = bxytjEntity.getFangjianzhuangkuang();
             if (fangjianzhuangkuang != null && fangjianzhuangkuang.size() > 0) {
@@ -476,7 +486,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(fangjianzhuangkuang.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("fjzks", list);
+                hashMap_dontwant.put("nofjzks", list);
             }
             //户型不用写
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.HuxingEntity> huxing = bxytjEntity.getHuxing();
@@ -496,7 +506,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(jianzhugouzao.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("jzgzs", list);
+                hashMap_dontwant.put("nojzgzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JianzhunianfenEntity> jianzhunianfen = bxytjEntity.getJianzhunianfen();
             if (jianzhunianfen != null && jianzhunianfen.size() > 0) {
@@ -507,7 +517,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(jianzhunianfen.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("jznfs", list);
+                hashMap_dontwant.put("nojznfs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JiudianleixingEntity> jiudianleixing = bxytjEntity.getJiudianleixing();
             if (jiudianleixing != null && jiudianleixing.size() > 0) {
@@ -518,7 +528,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(jiudianleixing.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("jdlxs", list);
+                hashMap_dontwant.put("nojdlxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.JiudianloucengshuEntity> jiudianloucengshu = bxytjEntity.getJiudianloucengshu();
             if (jiudianloucengshu != null && jiudianloucengshu.size() > 0) {
@@ -529,7 +539,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(jiudianloucengshu.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("jdlcs", list);
+                hashMap_dontwant.put("nojdlcs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.LoucengEntity> louceng = bxytjEntity.getLouceng();
             if (louceng != null && louceng.size() > 0) {
@@ -540,7 +550,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(louceng.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("lcs", list);
+                hashMap_dontwant.put("nolcs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.MianjiEntity> mianji = bxytjEntity.getMianji();
             if (mianji != null && mianji.size() > 0) {
@@ -551,7 +561,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(mianji.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("mjId", list);
+                hashMap_dontwant.put("nomjId", list);
             }
             //租金不用写
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ZujinEntity> zujin = bxytjEntity.getZujin();
@@ -571,7 +581,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(yingyeleixing.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("yylxs", list);
+                hashMap_dontwant.put("noyylxs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.XianzhuangEntity> xianzhuang = bxytjEntity.getXianzhuang();
             if (xianzhuang != null && xianzhuang.size() > 0) {
@@ -582,7 +592,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(xianzhuang.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("xzs", list);
+                hashMap_dontwant.put("noxzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.TiaojianEntity> tiaojian = bxytjEntity.getTiaojian();
             if (tiaojian != null && tiaojian.size() > 0) {
@@ -593,7 +603,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(tiaojian.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("tjs", list);
+                hashMap_dontwant.put("notjs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.TezhengEntity> tezheng = bxytjEntity.getTezheng();
             if (tezheng != null && tezheng.size() > 0) {
@@ -604,7 +614,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(tezheng.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("tzs", list);
+                hashMap_dontwant.put("notzs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.SuoyouquanEntity> suoyouquan = bxytjEntity.getSuoyouquan();
             if (suoyouquan != null && suoyouquan.size() > 0) {
@@ -615,7 +625,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(suoyouquan.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("syqs", list);
+                hashMap_dontwant.put("nosyqs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ShoumaileixingEntity> shoumaileixing = bxytjEntity.getShoumaileixing();
             if (shoumaileixing != null && shoumaileixing.size() > 0) {
@@ -626,7 +636,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(shoumaileixing.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("smlxs", list);
+                hashMap_dontwant.put("nosmlxs", list);
             }
             //售价不用写
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.ShoujiaEntity> shoujia = bxytjEntity.getShoujia();
@@ -646,7 +656,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(rujuriqi.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("rjrqs", list);
+                hashMap_dontwant.put("norjrqs", list);
             }
             List<ShenDengRuleBean.DatasEntity.BxytjEntity.RenqixuanzeEntity> renqixuanze = bxytjEntity.getRenqixuanze();
             if (renqixuanze != null && renqixuanze.size() > 0) {
@@ -657,7 +667,7 @@ public class ShendengSecondStepActivity extends BaseActivity {
                     wantList.add(oneCheckBean);
                     list.add(renqixuanze.get(i).getId() + "");
                 }
-                hashMap_dontwant.put("rqxzs", list);
+                hashMap_dontwant.put("norqxzs", list);
             }
         }
         return wantList;

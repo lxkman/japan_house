@@ -588,4 +588,9 @@
     <string name="xiangyao">想要</string>
     <string name="buxiangyao">不想要</string>
     <string name="meiyousousuojieguo">没有搜索结果</string>
+    <string name="zanwugengduoshuju">暂无更多数据</string>
+    <string name="meiyougengduoshujule">没有更多数据了</string>
+    <string name="shuaxinchenggong">刷新成功</string>
+    <string name="wangluoshiqulianjie">网络失去连接，请检查您的网络~</string>
+    <string name="gengduoweizhi">更多位置</string>
 </resources>

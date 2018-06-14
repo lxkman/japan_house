@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +26,6 @@ import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActiv
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.SpUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -33,6 +33,7 @@ import com.lzy.okgo.model.Response;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -75,6 +76,9 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             R.drawable.test_yangguangfang_iv, R.drawable.test_haohua_iv};
     private boolean isJa;
     private List<ZufangListBean.DatasEntity> datas;
+    private HashMap<String, List<String>> hashMap_want;
+    private HashMap<String, List<String>> hashMap_dontwant;
+    private List<ZufangListBean.DatasEntity> shendengDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +108,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         }
         fenleiRecycler.setNestedScrollingEnabled(false);
         fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
+        shendengRecycler.setNestedScrollingEnabled(false);
+        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList);
         fenleiRecycler.setAdapter(fenleiAdapter);
         fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -125,7 +131,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 } else if (position == 5) {
                     intent.putExtra("houseType", "bangongshi");
                     intent.putExtra("edt_hint", getResources().getString(R.string.xuanbangongshiflc));
-                }else if (position == 6) {
+                } else if (position == 6) {
                     intent.putExtra("houseType", "zhaotuandi");
                 }
                 startActivity(intent);
@@ -170,30 +176,65 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                         }
                     }
                 });
-        if (SpUtils.getBoolean("shendeng", false)) {
+        if (!TextUtils.isEmpty((String)CacheUtils.get("shendeng_hxs"))) {
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
+            goShendeng();
         }
-        List<String> likeList = new ArrayList<>();
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        likeList.add("");
-        shendengRecycler.setNestedScrollingEnabled(false);
-        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout, likeList);
-        //        View footerView = LayoutInflater.from(mContext).inflate(R.layout.item_shendeng_footer,shendengRecycler,false);
-        //        shendengAdapter.setFooterView(footerView);
-        shendengRecycler.setAdapter(shendengAdapter);
+    }
+
+    private void goShendeng() {
+        hashMap_want = (HashMap<String, List<String>>) CacheUtils.get("shendeng_want");
+        hashMap_dontwant = (HashMap<String, List<String>>) CacheUtils.get("shendeng_dontwant");
+        String hxs = CacheUtils.get("shendeng_hxs");
+        String zjId = CacheUtils.get("shendeng_zjId");
+        List<String> qys = CacheUtils.get("shendeng_qys");
+        HttpParams params = new HttpParams();
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
+        }
+        params.put("cId", 2);
+        params.put("pageNo", 1);
+        params.put("hxs", hxs);//户型
+        params.put("zjId", zjId);//租金
+        params.putUrlParams("qys", qys);//区域
+        if (hashMap_want != null && hashMap_want.size() > 0) {
+            for (String key : hashMap_want.keySet()) {
+                params.putUrlParams(key, hashMap_want.get(key));
+            }
+        }
+        if (hashMap_dontwant != null && hashMap_dontwant.size() > 0) {
+            for (String key : hashMap_dontwant.keySet()) {
+                params.putUrlParams(key, hashMap_dontwant.get(key));
+            }
+        }
+        OkGo.<ZufangListBean>post(MyUrls.BASEURL + "/app/houseresourse/sdzflist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<ZufangListBean>(ZufangActivity.this, ZufangListBean.class) {
+                    @Override
+                    public void onSuccess(Response<ZufangListBean> response) {
+                        int code = response.code();
+                        ZufangListBean zufangListBean = response.body();
+                        if (zufangListBean == null) {
+                            return;
+                        }
+                        shendengDatas = zufangListBean.getDatas();
+                        ShendengAdapter shendengAdapter = new ShendengAdapter(R.layout.item_shendeng_layout, shendengDatas);
+                        shendengRecycler.setAdapter(shendengAdapter);
+                    }
+                });
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (SpUtils.getBoolean("shendeng", false)) {
+        if (!TextUtils.isEmpty((String)CacheUtils.get("shendeng_hxs"))) {
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
+            goShendeng();
         }
     }
 
@@ -241,7 +282,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         protected void convert(BaseViewHolder helper, HomeItemBean item) {
             ImageView imageView = helper.getView(R.id.item_pic_iv);
             Glide.with(MyApplication.getGloableContext()).load(item.getImg()).into(imageView);
-            helper.setText(R.id.tv_content,item.getTitle());
+            helper.setText(R.id.tv_content, item.getTitle());
         }
     }
 
@@ -258,19 +299,26 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn()  : item.getPriceCn() );
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
         }
     }
 
-    private class ShendengAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class ShendengAdapter extends BaseQuickAdapter<ZufangListBean.DatasEntity, BaseViewHolder> {
 
-        public ShendengAdapter(int layoutResId, @Nullable List<String> data) {
+        public ShendengAdapter(int layoutResId, @Nullable List<ZufangListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-            if (helper.getAdapterPosition() == 4) {
+        protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
+            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+                    .into((ImageView) helper.getView(R.id.iv_tupian));
+            helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
+                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
+                    .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+            if (helper.getAdapterPosition() == shendengDatas.size()-1) {
                 helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
                     @Override

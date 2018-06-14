@@ -31,6 +31,7 @@ import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActi
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -61,6 +62,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
+    private TextView tvNoContent;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private LiebiaoAdapter liebiaoAdapter;
@@ -137,6 +139,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         mrecycler.setLayoutManager(new LinearLayoutManager(ErshoufangActiviy.this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
+        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 0);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -172,8 +175,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,getResources().getString(R.string.buxian));
+                        oneCheckBeanList1.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -188,7 +191,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -214,7 +217,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -241,7 +244,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -258,7 +261,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                          * */
                         shoujia = shaiXuanBeanDatas.getShoujia();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
@@ -306,6 +309,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)){
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         HttpParams params = new HttpParams();
         if (isJa) {
             params.put("languageType", 1);
@@ -357,9 +366,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                             return;
                         }
                         List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ErshoufangActiviy.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -370,12 +382,12 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ErshoufangActiviy.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ErshoufangActiviy.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(ErshoufangActiviy.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ErshoufangActiviy.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
                             } else {
                                 mDatas.addAll(datas);
                             }
@@ -432,11 +444,11 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
         if (postion == 1) {//区域
-            isDitie=false;
-            quyuList=priceRegin;
+            isDitie = false;
+            quyuList = priceRegin;
         } else if (postion == 2) {//地铁
-            isDitie=true;
-            ditieList=priceRegin;
+            isDitie = true;
+            ditieList = priceRegin;
         } else {//自定义价格
             if (shoujia != null && shoujia.size() > 0) {
                 page = 1;

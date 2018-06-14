@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse.fragment.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,22 +58,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by power on 2018/4/20.
  */
 
 public class MapZuhouseFragment extends BaseFragment implements MyItemClickListener, View.OnClickListener {
-    @BindView(R.id.dropDownMenu)
-    DropDownMenu dropDownMenu;
-    Unbinder unbinder;
+    private DropDownMenu dropDownMenu;
     private List<View> popupViews = new ArrayList<>();
     private TextureMapView mapView;
     private BaiduMap baiduMap;
-    MyDrawCircleView mydrawcircleview;
+    private MyDrawCircleView mydrawcircleview;
     private LinearLayout ll_clear;
     private boolean isJa;
     private LocationClient mLocClient;
@@ -90,18 +85,29 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     private boolean isDitie;
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
+    private List<LatLng> latLngList;
+    private boolean isHuaQuan;
+    private double[] vertx;
+    private double[] verty;
+    private LatLng curr_northeast;
+    private LatLng curr_southwest;
+    private boolean isevent;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_old, null, false);
-        unbinder = ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
+        dropDownMenu= (DropDownMenu) view.findViewById(R.id.dropDownMenu);
+        if (!isevent) {
+            EventBus.getDefault().register(this);
+            isevent = true;
+        }
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {
             isJa = true;
         } else {
             isJa = false;
         }
+        Log.e("xxx","fragment222"+" oncreateView()");
         return view;
     }
 
@@ -109,11 +115,13 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        Log.e("xxx","fragment222"+" onDestroy()");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e("xxx","fragment222"+" onActivityCreated()");
         initData();
         initLocation();
         initListener();
@@ -125,6 +133,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             mydrawcircleview.clearAll("zu");
             mydrawcircleview.setVisibility(View.VISIBLE);
             baiduMap.clear();
+            //画圈时设置缩放13
+            baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(13).build()));
         }
     }
 
@@ -134,7 +144,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             mydrawcircleview.setVisibility(View.GONE);
             ll_clear.setVisibility(View.VISIBLE);
             List<android.graphics.Point> pointList = mapBean.getPointList();
-            List<LatLng> latLngList = new ArrayList<>();
+            latLngList = new ArrayList<>();
             if (pointList != null && pointList.size() > 0) {
                 for (int i = 0; i < pointList.size(); i++) {
                     android.graphics.Point point = pointList.get(i);
@@ -151,6 +161,17 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             //在地图上添加多边形Option，用于显示
             baiduMap.addOverlay(polygonOption);
             initOverlay(mCity);
+            //展示画圈内的房源
+            isHuaQuan = true;
+            vertx = new double[latLngList.size()];
+            verty = new double[latLngList.size()];
+            for (int i = 0; i < latLngList.size(); i++) {
+                double latitude = latLngList.get(i).latitude;
+                double longitude = latLngList.get(i).longitude;
+                vertx[i] = latitude;
+                verty[i] = longitude;
+            }
+            loadAllXiaoQu(curr_northeast, curr_southwest);
         }
     }
 
@@ -203,8 +224,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,  getResources().getString(R.string.buxian));
+                        oneCheckBeanList1.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -219,7 +240,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -245,7 +266,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -272,7 +293,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false,  getResources().getString(R.string.buxian)));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -289,7 +310,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                          * */
                         zujin = shaiXuanBeanDatas.getZujin();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false,  getResources().getString(R.string.buxian)));
+                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (zujin != null && zujin.size() > 0) {
                             for (int i = 0; i < zujin.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.ZujinEntity shoujiaEntity = zujin.get(i);
@@ -304,9 +325,9 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                          * 第四个界面
                          * */
                         List<MoreCheckBean> moreCheckBeanList = new ArrayList<MoreCheckBean>();
-                        MoreCheckBean huaquanBean=new MoreCheckBean(false,getResources().getString(R.string.quyu));
+                        MoreCheckBean huaquanBean = new MoreCheckBean(false, getResources().getString(R.string.quyu));
                         List<OneCheckBean> itemBean = new ArrayList<>();
-                        itemBean.add(new OneCheckBean(false,getResources().getString(R.string.huaquanzhaofang)));
+                        itemBean.add(new OneCheckBean(false, getResources().getString(R.string.huaquanzhaofang)));
                         huaquanBean.setCheckBeanList(itemBean);
                         moreCheckBeanList.add(huaquanBean);
                         List<ZuHouseShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();
@@ -331,11 +352,12 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         }
                         MoreView fourView = new MoreView(mContext);
                         popupViews.add(fourView.secView());
-                        fourView.insertData(moreCheckBeanList, dropDownMenu,"zuhouse");
+                        fourView.insertData(moreCheckBeanList, dropDownMenu, "zuhouse");
                         fourView.setListener(MapZuhouseFragment.this);
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
+                        Log.e("xxx","22222222222222222222222222222");
                         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                     }
                 });
@@ -487,16 +509,20 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                     //                    LatLng target = mapStatus.target;
                     //                    allupdate(target.latitude + "", target.longitude + "");
                     LatLngBounds bound = mapStatus.bound;
-                    LatLng northeast = bound.northeast;
-                    LatLng southwest = bound.southwest;
-                    loadAllXiaoQu(northeast, southwest);
+                    curr_northeast = bound.northeast;
+                    curr_southwest = bound.southwest;
+                    loadAllXiaoQu(curr_northeast, curr_southwest);
                 }
             }
         });
     }
 
     private void loadAllXiaoQu(LatLng northeast, LatLng southwest) {
-        baiduMap.clear();
+        if (isHuaQuan) {
+
+        } else {
+            baiduMap.clear();
+        }
         HttpParams params = new HttpParams();
         params.put("hType", 2);
         params.put("starJd", southwest.longitude);
@@ -548,17 +574,37 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                             List<OverlayOptions> overlayOptionsList = new ArrayList<>();
                             for (int i = 0; i < datas.size(); i++) {
                                 MapHouseDetailBean.DatasEntity datasEntity = datas.get(i);
-                                markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
-                                View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
-                                TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                        : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
-                                MarkerOptions markerOptions = new MarkerOptions()
-                                        .icon(BitmapDescriptorFactory.fromView(markView))
-                                        .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
-                                        .zIndex(12)
-                                        .draggable(true);
-                                overlayOptionsList.add(markerOptions);
+                                if (isHuaQuan) {
+                                    if (latLngList == null || latLngList.size() == 0) {
+                                        return;
+                                    }
+                                    boolean pnpoly = pnpoly(latLngList.size(), vertx, verty, datasEntity.getLatiude(), datasEntity.getLongitude());
+                                    if (pnpoly) {
+                                        markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
+                                        View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
+                                        TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
+                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
+                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                        MarkerOptions markerOptions = new MarkerOptions()
+                                                .icon(BitmapDescriptorFactory.fromView(markView))
+                                                .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                                                .zIndex(12)
+                                                .draggable(true);
+                                        overlayOptionsList.add(markerOptions);
+                                    }
+                                } else {
+                                    markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
+                                    View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
+                                    TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
+                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
+                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                    MarkerOptions markerOptions = new MarkerOptions()
+                                            .icon(BitmapDescriptorFactory.fromView(markView))
+                                            .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                                            .zIndex(12)
+                                            .draggable(true);
+                                    overlayOptionsList.add(markerOptions);
+                                }
                             }
                             baiduMap.addOverlays(overlayOptionsList);
                         }
@@ -575,28 +621,30 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     @Override
     public void onResume() {
         super.onResume();
+        Log.e("xxx","fragment222"+" onResume()");
         mapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.e("xxx","fragment222"+" onPause()");
         mapView.onPause();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.e("xxx","fragment222"+" onDestroyView()");
         mapView.onDestroy();
-        unbinder.unbind();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_clear:
-                baiduMap.clear();
-                initOverlay(mCity);
+                isHuaQuan=false;
+                loadAllXiaoQu(curr_northeast,curr_southwest);
                 break;
         }
     }
@@ -656,5 +704,17 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
         initOverlay(mCity);
+    }
+
+    /*判断某个经纬度点是否在多边形内部*/
+    private boolean pnpoly(int nvert, double[] vertx, double[] verty, double testx, double testy) {
+        int i, j = 0;
+        boolean c = false;
+        for (i = 0, j = nvert - 1; i < nvert; j = i++) {
+            if (((verty[i] > testy) != (verty[j] > testy)) &&
+                    (testx < (vertx[j] - vertx[i]) * (testy - verty[i]) / (verty[j] - verty[i]) + vertx[i]))
+                c = !c;
+        }
+        return c;
     }
 }

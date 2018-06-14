@@ -3191,6 +3191,10 @@ public class ShenDengRuleBean {
              */
             private List<HuxingEntity> huxing;
             private List<ZujinEntity> zujin;
+            /**
+             * qy : [{"isDeleted":"0","createTime":1527756338000,"threeAdministrativeId":3,"areaNameCn":"公主坟","areaNameJpn":"公主坟","updateTime":1527756339000,"id":1},{"isDeleted":"0","createTime":1527756356000,"threeAdministrativeId":3,"areaNameCn":"中关村","areaNameJpn":"中关村","updateTime":1527756358000,"id":2},{"isDeleted":"0","createTime":1527756377000,"threeAdministrativeId":3,"areaNameCn":"蓟门桥","areaNameJpn":"蓟门桥","updateTime":1527756379000,"id":3},{"isDeleted":"0","createTime":1527756398000,"threeAdministrativeId":3,"areaNameCn":"上地","areaNameJpn":"上地","updateTime":1527756400000,"id":4}]
+             */
+            private List<QyEntity> qy;
 
             public void setHuxing(List<HuxingEntity> huxing) {
                 this.huxing = huxing;
@@ -3206,6 +3210,14 @@ public class ShenDengRuleBean {
 
             public List<ZujinEntity> getZujin() {
                 return zujin;
+            }
+
+            public void setQy(List<QyEntity> qy) {
+                this.qy = qy;
+            }
+
+            public List<QyEntity> getQy() {
+                return qy;
             }
 
             public static class HuxingEntity {
@@ -3455,6 +3467,81 @@ public class ShenDengRuleBean {
 
                 public String getSdzfType() {
                     return sdzfType;
+                }
+            }
+
+            public static class QyEntity {
+                /**
+                 * isDeleted : 0
+                 * createTime : 1527756338000
+                 * threeAdministrativeId : 3
+                 * areaNameCn : 公主坟
+                 * areaNameJpn : 公主坟
+                 * updateTime : 1527756339000
+                 * id : 1
+                 */
+                private String isDeleted;
+                private long createTime;
+                private int threeAdministrativeId;
+                private String areaNameCn;
+                private String areaNameJpn;
+                private long updateTime;
+                private int id;
+
+                public void setIsDeleted(String isDeleted) {
+                    this.isDeleted = isDeleted;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public void setThreeAdministrativeId(int threeAdministrativeId) {
+                    this.threeAdministrativeId = threeAdministrativeId;
+                }
+
+                public void setAreaNameCn(String areaNameCn) {
+                    this.areaNameCn = areaNameCn;
+                }
+
+                public void setAreaNameJpn(String areaNameJpn) {
+                    this.areaNameJpn = areaNameJpn;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getIsDeleted() {
+                    return isDeleted;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public int getThreeAdministrativeId() {
+                    return threeAdministrativeId;
+                }
+
+                public String getAreaNameCn() {
+                    return areaNameCn;
+                }
+
+                public String getAreaNameJpn() {
+                    return areaNameJpn;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public int getId() {
+                    return id;
                 }
             }
         }

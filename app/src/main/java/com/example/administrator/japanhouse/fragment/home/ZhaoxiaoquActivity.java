@@ -30,6 +30,7 @@ import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivi
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -64,6 +65,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     private RecyclerView mrecycler;
     private LiebiaoAdapter liebiaoAdapter;
     private SpringView springview;
+    private TextView tvNoContent;
     private boolean isLoadMore;
     private int page=1;
     private boolean isJa;
@@ -131,6 +133,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         springview = (SpringView) fifthView.findViewById(R.id.springview);
+        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
         headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.zujin), getString(R.string.gengduo)};
         HttpParams params = new HttpParams();
@@ -304,6 +307,12 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)){
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         HttpParams params = new HttpParams();
         if (isJa) {
             params.put("languageType", 1);
@@ -351,9 +360,12 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                             return;
                         }
                         List<OldHouseListBean.DatasBean> datas = oldHouseListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ZhaoxiaoquActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -364,12 +376,12 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ZhaoxiaoquActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ZhaoxiaoquActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(ZhaoxiaoquActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ZhaoxiaoquActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
                             } else {
                                 mDatas.addAll(datas);
                             }

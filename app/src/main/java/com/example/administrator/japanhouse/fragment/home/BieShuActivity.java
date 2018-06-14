@@ -30,6 +30,7 @@ import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -61,6 +62,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     TextView searchTv;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
+    private TextView tvNoContent;
     private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
@@ -138,6 +140,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) inflate.findViewById(R.id.springview);
+        tvNoContent= (TextView) inflate.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 3);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -308,6 +311,12 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)){
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         HttpParams params = new HttpParams();
         params.put("pageNo", page);
         if (isJa) {
@@ -358,9 +367,12 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                             return;
                         }
                         List<BieShuListBean.DatasEntity> datas = bieShuListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(BieShuActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -371,12 +383,12 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(BieShuActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BieShuActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(BieShuActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BieShuActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
                             } else {
                                 mDatas.addAll(datas);
                             }

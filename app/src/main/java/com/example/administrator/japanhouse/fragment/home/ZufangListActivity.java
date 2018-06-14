@@ -32,6 +32,7 @@ import com.example.administrator.japanhouse.fragment.mine.fragment.LiShiJiLu2Act
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -80,7 +81,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     private List<ZuHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<ZuHouseShaiXuanBean.DatasEntity.ZujinEntity> zujin;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
-
+    private TextView tvNoContent;
     private String searchText = "";
     private String[] headers;
     private View fifthView;
@@ -120,12 +121,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         } else if (mType == 5) {
             mType2 = 0;
         }
-
         searchText = getIntent().getStringExtra("searchText");
         if (!TextUtils.isEmpty(searchText)) {
             searchTv.setText(searchText);
         }
-
         initView();
         initData();
         initListener();
@@ -166,6 +165,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         TextView tongqinTv = (TextView) fifthView.findViewById(R.id.tongqin_tv);
         TextView jiluTv = (TextView) fifthView.findViewById(R.id.jilu_tv);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
+        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
         shipinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -363,6 +363,12 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)){
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         if (!TextUtils.isEmpty(getIntent().getStringExtra("edt_hint"))) {
             searchTv.setHint(getIntent().getStringExtra("edt_hint"));
         }
@@ -406,14 +412,17 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                     @Override
                     public void onSuccess(Response<ZufangListBean> response) {
                         int code = response.code();
-                        ZufangListBean oldHouseListBean = response.body();
-                        if (oldHouseListBean == null) {
+                        ZufangListBean zufangListBean = response.body();
+                        if (zufangListBean == null) {
                             return;
                         }
-                        List<ZufangListBean.DatasEntity> datas = oldHouseListBean.getDatas();
+                        List<ZufangListBean.DatasEntity> datas = zufangListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ZufangListActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -424,12 +433,12 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(ZufangListActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ZufangListActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(ZufangListActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ZufangListActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
                             } else {
                                 mDatas.addAll(datas);
                             }

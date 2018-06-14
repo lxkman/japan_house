@@ -37,5 +37,4 @@ public class SpUtils {
         mSharedPreferences=MyApplication.getGloableContext().getSharedPreferences(MyUrls.FILENAME,Context.MODE_PRIVATE);
         return mSharedPreferences.getInt(key,defValue);
     }
-
 }

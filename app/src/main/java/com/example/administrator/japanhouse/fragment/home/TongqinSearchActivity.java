@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -65,6 +64,8 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
     RecyclerView searchListRecycler;
     @BindView(R.id.nestScroll)
     NestedScrollView nestScroll;
+    @BindView(R.id.tv_noContent)
+    TextView tvNoContent;
     private List<TongQinHistroyBean> mHistoryList = new ArrayList<>();
     private HistoryAdapter historyAdapter;
     private LocationClient mLocClient;
@@ -99,24 +100,7 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
 
             @Override
             public void onTextChanged(CharSequence cs, int start, int before, int count) {
-                if (cs.length() <= 0) {
-                    if (allSuggestions != null) {
-                        allSuggestions.clear();
-                    }
-                    if (searchListAdapter != null) {
-                        searchListAdapter.notifyDataSetChanged();
-                    }
-                    return;
-                }
-                if (TextUtils.isEmpty(city)) {
-                    return;
-                }
-                /**
-                 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-                 */
-                mSuggestionSearch
-                        .requestSuggestion((new SuggestionSearchOption())
-                                .keyword(cs.toString()).city(city));
+
             }
 
             @Override
@@ -133,6 +117,31 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
                 //                    addressList.clear();
                 //                    searchListAdapter.notifyDataSetChanged();
                 //                }
+                if (allSuggestions != null) {
+                    allSuggestions.clear();
+                }
+                if (searchListAdapter != null) {
+                    searchListAdapter.notifyDataSetChanged();
+                }
+                if (s.length() > 0) {
+                    nestScroll.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.VISIBLE);
+                    tvNoContent.setVisibility(View.GONE);
+                } else {
+                    nestScroll.setVisibility(View.VISIBLE);
+                    searchListRecycler.setVisibility(View.GONE);
+                    tvNoContent.setVisibility(View.GONE);
+                    return;
+                }
+                if (TextUtils.isEmpty(city)) {
+                    return;
+                }
+                /**
+                 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+                 */
+                mSuggestionSearch
+                        .requestSuggestion((new SuggestionSearchOption())
+                                .keyword(searchEt.getText().toString().toString()).city(city));
             }
         });
     }
@@ -207,6 +216,7 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
     public void onGetSuggestionResult(SuggestionResult suggestionResult) {
         allSuggestions = suggestionResult.getAllSuggestions();
         if (allSuggestions != null && allSuggestions.size() > 0) {
+            tvNoContent.setVisibility(View.GONE);
             nestScroll.setVisibility(View.GONE);
             searchListRecycler.setVisibility(View.VISIBLE);
             searchListAdapter = new SearchListAdapter(R.layout.search_list_item, allSuggestions);
@@ -227,7 +237,9 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
                 }
             });
         } else {
-            Toast.makeText(mContext, "查询不到此地址", Toast.LENGTH_SHORT).show();
+            tvNoContent.setVisibility(View.VISIBLE);
+            nestScroll.setVisibility(View.GONE);
+            searchListRecycler.setVisibility(View.GONE);
         }
     }
 

@@ -31,6 +31,7 @@ import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -61,7 +62,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     DropDownMenu dropDownMenu;
     @BindView(R.id.search_tv)
     TextView searchTv;
-
+    private TextView tvNoContent;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private LiebiaoAdapter liebiaoAdapter;
@@ -136,6 +137,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
+        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 2);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -306,6 +308,12 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)){
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         HttpParams params = new HttpParams();
         params.put("pageNo", page);
         if (isJa) {
@@ -348,9 +356,12 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                             return;
                         }
                         List<TudiListBean.DatasEntity> datas = tudiListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(TudiActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -361,12 +372,12 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(TudiActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TudiActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(TudiActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TudiActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
                             } else {
                                 mDatas.addAll(datas);
                             }

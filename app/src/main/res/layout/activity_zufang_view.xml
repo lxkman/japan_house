@@ -65,5 +65,14 @@
             android:textColor="@color/text_black"
             android:textSize="14sp"/>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tv_noContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/zanwugengduoshuju"
+        android:textColor="@color/text_black"
+        android:visibility="gone"/>
 </FrameLayout>

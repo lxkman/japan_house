@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
     <LinearLayout
-        android:background="@color/shihuangse"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dip">
+        android:layout_height="40dip"
+        android:background="@color/shihuangse"
+        android:orientation="horizontal">
         <ImageView
             android:id="@+id/back_img"
-            android:src="@drawable/back"
-            android:padding="10dp"
             android:layout_width="40dip"
-            android:layout_height="40dip" />
+            android:layout_height="40dip"
+            android:padding="10dp"
+            android:src="@drawable/back"/>
         <LinearLayout
-            android:background="@drawable/round_white"
-            android:layout_gravity="center_vertical"
             android:layout_width="0dip"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp"
+            android:layout_height="30dip"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:layout_height="30dip">
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_white">
             <ImageView
-                android:layout_marginLeft="15dip"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/home_search_icon_iv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dip"
+                android:src="@drawable/home_search_icon_iv"/>
             <TextView
                 android:id="@+id/search_tv"
-                android:background="@null"
-                android:paddingLeft="10dip"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:textSize="14sp"
-                android:hint="@string/home_tiaohf"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/home_tiaohf"
+                android:paddingLeft="10dip"
+                android:textSize="14sp"/>
         </LinearLayout>
         <ImageView
             android:id="@+id/img_dingwei"
-            android:src="@drawable/dituzhaofang"
-            android:padding="10dp"
             android:layout_width="40dip"
-            android:layout_height="40dip" />
+            android:layout_height="40dip"
+            android:padding="10dp"
+            android:src="@drawable/dituzhaofang"/>
         <ImageView
             android:id="@+id/img_message"
-            android:src="@drawable/message"
-            android:padding="10dp"
             android:layout_width="40dip"
-            android:layout_height="40dip" />
+            android:layout_height="40dip"
+            android:padding="10dp"
+            android:src="@drawable/message"/>
     </LinearLayout>
     <com.yyydjk.library.DropDownMenu
         android:id="@+id/dropDownMenu"
@@ -66,5 +66,5 @@
         app:ddtextSelectedColor="@color/shihuangse"
         app:ddtextUnselectedColor="@color/drop_down_unselected"
         app:ddunderlineColor="#F8F9F8"
-        />
+    />
 </LinearLayout>

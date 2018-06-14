@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,7 @@ import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivi
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -46,7 +48,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HaiwaiListActivity extends BaseActivity implements MyItemClickListener{
+public class HaiwaiListActivity extends BaseActivity implements MyItemClickListener {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -56,11 +58,12 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     DropDownMenu dropDownMenu;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
+    private TextView tvNoContent;
     private LiebiaoAdapter liebiaoAdapter;
     private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
-    private int page=1;
+    private int page = 1;
     private boolean isJa;
     private List<TudiListBean.DatasEntity> mDatas;
     private String sjId = "-2";
@@ -69,7 +72,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     private List<ChinaShaiXuanBean.DatasEntity.HuxingEntity> huxing;
     private List<ChinaShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
-    private List<String> hxsList=new ArrayList<>();
+    private List<String> hxsList = new ArrayList<>();
     private String searchText;
 
     @Override
@@ -121,6 +124,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 5);
         OkGo.<ChinaShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -221,12 +225,18 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initData() {
+        if (!NetWorkUtils.isNetworkConnected(this)) {
+            tvNoContent.setVisibility(View.VISIBLE);
+            tvNoContent.setText(R.string.wangluoshiqulianjie);
+            springview.setVisibility(View.GONE);
+            return;
+        }
         final String id = getIntent().getStringExtra("id");
         HttpParams params = new HttpParams();
         params.put("pageNo", page);
         if (isJa) {
             params.put("languageType", 1);
-        }else {
+        } else {
             params.put("languageType", 0);
         }
         params.put("hType", 0);
@@ -258,9 +268,12 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                             return;
                         }
                         List<TudiListBean.DatasEntity> datas = tudiListBean.getDatas();
+                        tvNoContent.setVisibility(View.GONE);
+                        springview.setVisibility(View.VISIBLE);
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(HaiwaiListActivity.this, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNoContent.setVisibility(View.VISIBLE);
+                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -271,12 +284,12 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(HaiwaiListActivity.this, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HaiwaiListActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(HaiwaiListActivity.this, "刷新成功~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HaiwaiListActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
                             } else {
                                 mDatas.addAll(datas);
                             }
@@ -286,7 +299,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent intent = new Intent(HaiwaiListActivity.this, HaiWaiDetailsActivity.class);
-                                intent.putExtra("houseId", mDatas.get(position).getId()+"");
+                                intent.putExtra("houseId", mDatas.get(position).getId() + "");
                                 startActivity(intent);
                             }
                         });
@@ -323,7 +336,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                     sjId = "-2";
                 } else {
                     if (shoujia != null && shoujia.size() > 0) {
-                        sjId=shoujia.get(itemPosition-1).getId()+"";
+                        sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
                 mDatas.clear();
@@ -367,7 +380,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn(): item.getSellingPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
         }
     }
 

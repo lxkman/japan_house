@@ -13,6 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/iv_tupian"
                 android:layout_width="110dp"
                 android:layout_height="85dp"
                 android:layout_margin="10dp"
@@ -36,7 +37,7 @@
             </LinearLayout>
         </FrameLayout>
         <TextView
-            android:id="@+id/item_name_tv"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -44,34 +45,36 @@
             android:text="泰和·金府大厦"
             android:textColor="@color/text_black"/>
         <TextView
-            android:id="@+id/item_address_tv"
+            android:id="@+id/tv_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_name_tv"
+            android:layout_below="@+id/tv_title"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/frame"
             android:drawableLeft="@drawable/home_map_like_iv"
             android:drawablePadding="5dp"
             android:text="东京"/>
         <TextView
-            android:id="@+id/item_ting_tv"
+            android:id="@+id/tv_ting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_address_tv"
+            android:layout_below="@+id/tv_area"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/frame"
             android:text="2室一厅"
             android:textColor="@color/gray"/>
         <TextView
+            android:id="@+id/tv_mianji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_address_tv"
+            android:layout_below="@+id/tv_area"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/item_ting_tv"
+            android:layout_toRightOf="@+id/tv_ting"
             android:text="175㎡"
             android:textColor="@color/gray"/>
         <TextView
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

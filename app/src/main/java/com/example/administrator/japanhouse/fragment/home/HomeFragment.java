@@ -175,6 +175,9 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data==null){
+            return;
+        }
         String cityName = data.getStringExtra("cityName");
         int cityId = data.getIntExtra("cityId",0);
         SpUtils.putInt("cityId",cityId);

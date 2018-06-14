@@ -590,4 +590,9 @@
     <string name="xiangyao">探したい</string>
     <string name="buxiangyao">要らない</string>
     <string name="meiyousousuojieguo">検索結果なし</string>
+    <string name="zanwugengduoshuju">データはこれ以上ありません</string>
+    <string name="meiyougengduoshujule">データはこれ以上ありません</string>
+    <string name="shuaxinchenggong">リフレッシュにできました</string>
+    <string name="wangluoshiqulianjie">ネットワークが切断され、ネットワークを確認します</string>
+    <string name="gengduoweizhi">もっと見る</string>
 </resources>

@@ -100,6 +100,8 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
             isJa = false;
         }
 
+
+
         searchText = getIntent().getStringExtra("searchText");
         if (!TextUtils.isEmpty(searchText)) {
             searchTv.setText(searchText);

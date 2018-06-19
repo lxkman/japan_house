@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -21,6 +22,7 @@ import com.example.administrator.japanhouse.fragment.home.HomeFragment;
 import com.example.administrator.japanhouse.fragment.mine.MineFragment;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -68,6 +70,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ButterKnife.bind(this);
         mViewPager = (NoScrollViewPager) findViewById(R.id.act_main_vp);
         mViewPager.setNoScroll(true);
+        String umpushid = SharedPreferencesUtils.getInstace(this).getStringPreference("UMPUSHID", "");
+        Log.d("MainActivity", umpushid+"-------------");
         initView();
     }
 

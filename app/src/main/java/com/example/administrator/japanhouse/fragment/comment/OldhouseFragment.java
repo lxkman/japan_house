@@ -113,12 +113,12 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
             mrecycler.setAdapter(mLiebiaoAdapter);
         } else {
             if (datas == null || datas.size() == 0) {
-                Toast.makeText(mContext, "没有更多数据了~", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
                 return;
             }
             if (!isLoadMore) {
                 mRefreshData = datas;
-                Toast.makeText(mContext, "刷新成功~", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
             } else {
                 mRefreshData.addAll(datas);
             }

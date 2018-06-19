@@ -60,6 +60,9 @@ import com.example.administrator.japanhouse.view.CircleImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.umeng.message.PushAgent;
+import com.umeng.message.common.inter.ITagManager;
+import com.umeng.message.tag.TagManager;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -135,6 +138,10 @@ public class NewHousedetailsActivity extends BaseActivity {
     RelativeLayout activityLishiNewHouse;
     @BindView(R.id.tv_details_phone)
     TextView tvDetailsPhone;
+    @BindView(R.id.tv_details_bianjia)
+    TextView tvDetailsBianjia;
+    @BindView(R.id.tv_details_kaipan)
+    TextView tvDetailsKaipan;
 
     private int mDistanceY;
     private LoveAdapter loveAdapter;
@@ -190,7 +197,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
-        new HouseLogPresenter(this).setHouseLog("1",houseId,"");
+        new HouseLogPresenter(this).setHouseLog("1", houseId, "");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -219,7 +226,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
-                        tvDetailsPhone.setText(datas.getKpPhone()+"");
+                        tvDetailsPhone.setText(datas.getKpPhone() + "");
                         isSc = datas.getIsSc();
                         if (isSc == 0) {//收藏
                             isStart = true;
@@ -391,10 +398,6 @@ public class NewHousedetailsActivity extends BaseActivity {
             public void onPageSelected(final int position) {
 
                 tvToNum.setText((position + 1) + "");
-                if (position == 1) {
-
-                } else if (position == 0) {
-                }
 
             }
 
@@ -404,6 +407,7 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
     }
+
 
     //需要给ViewPager设置适配器
     PagerAdapter adapter = new PagerAdapter() {
@@ -581,12 +585,20 @@ public class NewHousedetailsActivity extends BaseActivity {
 
     }
 
-
-    @OnClick({R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone})
+    private int noticeType;
+    @OnClick({R.id.tv_details_bianjia,R.id.tv_details_kaipan,R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                break;
+            case R.id.tv_details_bianjia:
+                noticeType=0;
+                initHuoDong(noticeType);
+                break;
+            case R.id.tv_details_kaipan:
+                noticeType=1;
+                initHuoDong(noticeType);
                 break;
             case R.id.tv_details_manager_phone:
                 ShowCallDialog(hwdcBroker.getPhone() + "");
@@ -604,7 +616,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                     Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
-
                 break;
             case R.id.tv_See_More:
                 Intent intent1 = new Intent(NewHousedetailsActivity.this, NewHouseMoreActivity.class);
@@ -647,6 +658,61 @@ public class NewHousedetailsActivity extends BaseActivity {
                     Toast.makeText(NewHousedetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+    private void initHuoDong(final int noticeType) {
+        if (MyUtils.isLogin(this)) {
+        HttpParams params = new HttpParams();
+        params.put("noticeType", noticeType);
+        params.put("token", token);//用户登录标识
+        params.put("hId", houseId);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/usernotice/insert")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(NewHousedetailsActivity.this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        final SuccessBean oldHouseListBean = response.body();
+                        String code1 = oldHouseListBean.getCode();
+                        if (code1.equals("200")) {
+
+                            PushAgent mPushAgent = PushAgent.getInstance(NewHousedetailsActivity.this);
+                            if (noticeType==0){//变价
+                                Toast.makeText(NewHousedetailsActivity.this, "变价通知订阅成功，此房源价格发生变化，我们将以消息提醒您，请您注意查收~", Toast.LENGTH_SHORT).show();
+                                mPushAgent.getTagManager().add(new TagManager.TCallBack() {
+                                    @Override
+                                    public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
+                                        //isSuccess表示操作是否成功
+                                        if (!isSuccess){
+                                            Log.d("MyApplication", "失败"+"-----------");
+                                        }else {
+                                            Log.d("MyApplication", "成功"+"-----------");
+                                        }
+                                        String jsonString = result.jsonString;
+                                    }
+                                }, "xfjgid"+houseId);
+                            }else {//开盘
+                                Toast.makeText(NewHousedetailsActivity.this, "开盘通知订阅成功，此房源一旦开盘，我们将以消息提醒您，请您注意查收~", Toast.LENGTH_SHORT).show();
+                                mPushAgent.getTagManager().add(new TagManager.TCallBack() {
+                                    @Override
+                                    public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
+
+                                    }
+                                }, "xfkpid"+houseId);
+                            }
+
+                        }else if (code1.equals("205")){
+                            Toast.makeText(NewHousedetailsActivity.this, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        } else {
+            Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+            MyUtils.StartLoginActivity(this);
         }
     }
 

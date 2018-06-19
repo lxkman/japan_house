@@ -105,7 +105,11 @@ public class ShendengFirstStepActivity extends BaseActivity {
                         if (zujin != null && zujin.size() > 0) {
                             yusuanList = new ArrayList<>();
                             for (int i = 0; i < zujin.size(); i++) {
-                                yusuanList.add(new OneCheckBean(false, isJa ? zujin.get(i).getScreeValJpn() : zujin.get(i).getScreeValCn()));
+                                if (i == 0) {
+                                    yusuanList.add(new OneCheckBean(true, isJa ? zujin.get(i).getScreeValJpn() : zujin.get(i).getScreeValCn()));
+                                } else {
+                                    yusuanList.add(new OneCheckBean(false, isJa ? zujin.get(i).getScreeValJpn() : zujin.get(i).getScreeValCn()));
+                                }
                             }
                             final YusuanAdapter yusuanAdapter = new YusuanAdapter(R.layout.item_shendeng_yusuan, yusuanList);
                             yusuanRecycler.setAdapter(yusuanAdapter);
@@ -126,7 +130,11 @@ public class ShendengFirstStepActivity extends BaseActivity {
                         if (huxing != null && huxing.size() > 0) {
                             huxingList = new ArrayList<>();
                             for (int i = 0; i < huxing.size(); i++) {
-                                huxingList.add(new OneCheckBean(false, isJa ? huxing.get(i).getScreeValJpn() : huxing.get(i).getScreeValCn()));
+                                if (i == 0) {
+                                    huxingList.add(new OneCheckBean(true, isJa ? huxing.get(i).getScreeValJpn() : huxing.get(i).getScreeValCn()));
+                                } else {
+                                    huxingList.add(new OneCheckBean(false, isJa ? huxing.get(i).getScreeValJpn() : huxing.get(i).getScreeValCn()));
+                                }
                             }
                             final HuxingAdapter huxingAdapter = new HuxingAdapter(R.layout.item_shendeng_yusuan, huxingList);
                             huxingRecycler.setAdapter(huxingAdapter);
@@ -135,11 +143,9 @@ public class ShendengFirstStepActivity extends BaseActivity {
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                     for (int i = 0; i < huxingList.size(); i++) {
                                         if (i == position) {
-                                            if (huxingList.get(i).isChecked()) {
-                                                huxingList.get(i).setChecked(false);
-                                            } else {
-                                                huxingList.get(i).setChecked(true);
-                                            }
+                                            huxingList.get(i).setChecked(true);
+                                        } else {
+                                            huxingList.get(i).setChecked(false);
                                         }
                                     }
                                     huxingAdapter.notifyDataSetChanged();
@@ -149,7 +155,11 @@ public class ShendengFirstStepActivity extends BaseActivity {
                         if (qy != null && qy.size() > 0) {
                             weizhiList = new ArrayList<>();
                             for (int i = 0; i < qy.size(); i++) {
-                                weizhiList.add(new OneCheckBean(false, isJa ? qy.get(i).getAreaNameJpn() : qy.get(i).getAreaNameCn()));
+                                if (i == 0) {
+                                    weizhiList.add(new OneCheckBean(true, isJa ? qy.get(i).getAreaNameJpn() : qy.get(i).getAreaNameCn()));
+                                } else {
+                                    weizhiList.add(new OneCheckBean(false, isJa ? qy.get(i).getAreaNameJpn() : qy.get(i).getAreaNameCn()));
+                                }
                             }
                             final WeizhiAdapter weizhiAdapter = new WeizhiAdapter(R.layout.item_shendeng_yusuan, weizhiList);
                             View footerView = LayoutInflater.from(ShendengFirstStepActivity.this).inflate(R.layout.item_footer_shendeng, weizhiRecycler, false);
@@ -181,27 +191,38 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 });
     }
 
-    private boolean isYuSuanChecked() {
-        if (yusuanList != null && yusuanList.size() > 0) {
-            for (int i = 0; i < yusuanList.size(); i++) {
-                if (yusuanList.get(i).isChecked()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+    //    private boolean isYuSuanChecked() {
+    //        if (yusuanList != null && yusuanList.size() > 0) {
+    //            for (int i = 0; i < yusuanList.size(); i++) {
+    //                if (yusuanList.get(i).isChecked()) {
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //        return false;
+    //    }
 
-    private boolean isWeizhiChecked() {
-        if (weizhiList != null && weizhiList.size() > 0) {
-            for (int i = 0; i < weizhiList.size(); i++) {
-                if (weizhiList.get(i).isChecked()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+    //    private boolean isWeizhiChecked() {
+    //        if (weizhiList != null && weizhiList.size() > 0) {
+    //            for (int i = 0; i < weizhiList.size(); i++) {
+    //                if (weizhiList.get(i).isChecked()) {
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //        return false;
+    //    }
+
+    //    private boolean isHuxingChecked() {
+    //        if (huxingList != null && huxingList.size() > 0) {
+    //            for (int i = 0; i < huxingList.size(); i++) {
+    //                if (huxingList.get(i).isChecked()) {
+    //                    return true;
+    //                }
+    //            }
+    //        }
+    //        return false;
+    //    }
 
     private List<String> getAllWeizhiChecked() {
         List<String> weizhi = new ArrayList<>();
@@ -214,6 +235,25 @@ public class ShendengFirstStepActivity extends BaseActivity {
             }
         }
         return weizhi;
+    }
+
+    private List<String> getAllMoreWeizhiCheckedItem(int adapterPosition2) {
+        List<String> list = new ArrayList<>();
+        if (mQuyuListBean != null && mQuyuListBean.size() > 0) {
+            List<OneCheckBean> checkBeanList = mQuyuListBean.get(adapterPosition2).getCheckBeanList();
+            if (checkBeanList != null && checkBeanList.size() > 0) {
+                for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
+                    if (checkBeanList.get(0).isChecked()) {
+                        list.add(checkBeanList.get(i1).getId() + "");
+                        allCheckedTextList.add(checkBeanList.get(i1).getName());
+                    } else if (i1 != 0 && checkBeanList.get(i1).isChecked()) {
+                        list.add(checkBeanList.get(i1).getId() + "");
+                        allCheckedTextList.add(checkBeanList.get(i1).getName());
+                    }
+                }
+            }
+        }
+        return list;
     }
 
     private String getAllYuSuanChecked() {
@@ -242,16 +282,6 @@ public class ShendengFirstStepActivity extends BaseActivity {
         return huxingid;
     }
 
-    private boolean isHuxingChecked() {
-        if (huxingList != null && huxingList.size() > 0) {
-            for (int i = 0; i < huxingList.size(); i++) {
-                if (huxingList.get(i).isChecked()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     private void initquyu() {
         HttpParams params = new HttpParams();
@@ -324,13 +354,15 @@ public class ShendengFirstStepActivity extends BaseActivity {
         mDialog.getView(R.id.btn_sure).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isYuSuanChecked()) {
-                    return;
-                }
-                if (!isHuxingChecked()) {
-                    return;
-                }
+                Intent intent = new Intent(mContext, ShendengSecondStepActivity.class);
+                intent.putExtra("hxs", getAllHuxingChecked());
+                intent.putExtra("zjId", getAllYuSuanChecked());
+                List<String> allWeizhiChecked = getAllMoreWeizhiCheckedItem(adapterPosition2);
+                intent.putExtra("qys", (Serializable) allWeizhiChecked);
+                intent.putExtra("checkedcontent", (Serializable) allCheckedTextList);
+                startActivity(intent);
                 mDialog.dismiss();
+                finish();
             }
         });
         mrecycler2 = mDialog.getView(R.id.Mrecycler2);
@@ -419,21 +451,10 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.next_tv:
-                if (!isYuSuanChecked()) {
-                    return;
-                }
-                if (!isHuxingChecked()) {
-                    return;
-                }
-                if (!isWeizhiChecked()) {
-                    return;
-                }
                 Intent intent = new Intent(mContext, ShendengSecondStepActivity.class);
                 intent.putExtra("hxs", getAllHuxingChecked());
                 intent.putExtra("zjId", getAllYuSuanChecked());
                 List<String> allWeizhiChecked = getAllWeizhiChecked();
-                List<String> allMoreWeizhiCheckedItem = getAllMoreWeizhiCheckedItem(adapterPosition2);
-                allWeizhiChecked.addAll(allMoreWeizhiCheckedItem);
                 intent.putExtra("qys", (Serializable) allWeizhiChecked);
                 intent.putExtra("checkedcontent", (Serializable) allCheckedTextList);
                 startActivity(intent);
@@ -442,25 +463,6 @@ public class ShendengFirstStepActivity extends BaseActivity {
         }
     }
 
-    private List<String> getAllMoreWeizhiCheckedItem(int adapterPosition2) {
-        List<String> list = new ArrayList<>();
-        if (mQuyuListBean != null && mQuyuListBean.size() > 0) {
-            if (adapterPosition2 == 0) {
-                return list;
-            }
-            List<OneCheckBean> checkBeanList = mQuyuListBean.get(adapterPosition2).getCheckBeanList();
-            if (checkBeanList != null && checkBeanList.size() > 0) {
-                for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
-                    if (checkBeanList.get(0).isChecked()) {
-                        list.add(checkBeanList.get(i1).getId() + "");
-                    } else if (i1 != 0 && checkBeanList.get(i1).isChecked()) {
-                        list.add(checkBeanList.get(i1).getId() + "");
-                    }
-                }
-            }
-        }
-        return list;
-    }
 
     class QuYuAdapter extends BaseQuickAdapter<MoreCheckBean, BaseViewHolder> {
 

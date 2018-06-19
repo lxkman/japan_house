@@ -54,7 +54,6 @@ import com.example.administrator.japanhouse.utils.BannerUtils;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
-import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -180,7 +179,7 @@ public class HomeFragment extends BaseFragment {
         }
         String cityName = data.getStringExtra("cityName");
         int cityId = data.getIntExtra("cityId",0);
-        SpUtils.putInt("cityId",cityId);
+        CacheUtils.put("cityId",cityId);
         if (cityName != null && cityName.length() <= 3) {
             locationTv.setText(cityName);
         } else if (cityName != null && cityName.length() > 3) {

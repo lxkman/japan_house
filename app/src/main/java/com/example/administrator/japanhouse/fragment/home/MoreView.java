@@ -169,9 +169,10 @@ class MoreView implements View.OnClickListener {
                                 EventBus.getDefault().postSticky(new EventBean("drawcirclefindhouse_zu"));
                             }
                         }
+                    } else {
+                        item.setChecked(!item.isChecked());
+                        liebiaoAdapter.notifyDataSetChanged();
                     }
-                    item.setChecked(!item.isChecked());
-                    liebiaoAdapter.notifyDataSetChanged();
                 }
             });
         }
@@ -188,7 +189,7 @@ class MoreView implements View.OnClickListener {
             helper.setText(R.id.rb_title, item.getName());
             RecyclerView recycler_item = helper.getView(R.id.recycler_item);
             recycler_item.setNestedScrollingEnabled(false);
-//            recycler_item.setLayoutManager(new FlowLayoutManager());
+            //            recycler_item.setLayoutManager(new FlowLayoutManager());
             recycler_item.setLayoutManager(new GridLayoutManager(mContext, 4));
             recycler_item.setAdapter(new ItemAdapter(R.layout.more_item_item, item.getCheckBeanList()));
         }

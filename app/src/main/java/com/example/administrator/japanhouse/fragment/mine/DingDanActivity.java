@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.OrderAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.OrderBean;
 import com.example.administrator.japanhouse.presenter.OrderPresenter;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -120,6 +122,11 @@ public class DingDanActivity extends BaseActivity implements OrderPresenter.Orde
 
     @Override
     public void getOrderList(Response<OrderBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+        }
+
         if (isRefresh) {
             TUtils.showFail(this, getString(R.string.refresh_success));
         }

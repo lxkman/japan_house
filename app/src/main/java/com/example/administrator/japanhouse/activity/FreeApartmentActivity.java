@@ -25,6 +25,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.FreeApartmentAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.FreeApartmentBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.FreeApartmentPresenter;
@@ -239,6 +240,12 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
 
     @Override
     public void getFreeApartmentList(Response<FreeApartmentBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (isRefresh) {
             TUtils.showFail(this, getString(R.string.refresh_success));
         }
@@ -278,6 +285,12 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
 
     @Override
     public void getSignUp(Response<NoDataBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (response != null && response.body() != null && !TextUtils.isEmpty(response.body().getCode())) {
             if (TextUtils.equals(response.body().getCode(), "200")) {
                 Toast.makeText(this, "报名成功", Toast.LENGTH_SHORT).show();

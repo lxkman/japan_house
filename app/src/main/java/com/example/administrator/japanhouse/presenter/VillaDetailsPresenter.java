@@ -41,12 +41,7 @@ public class VillaDetailsPresenter {
                 .execute(new DialogCallback<VillaDetailsBean>(activity, VillaDetailsBean.class) {
                     @Override
                     public void onSuccess(Response<VillaDetailsBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
                             callBack.getVillaDetails(response);
-                        }
                     }
                 });
     }

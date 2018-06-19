@@ -46,12 +46,7 @@ public class OrderPresenter {
                 .execute(new JsonCallback<OrderBean>(OrderBean.class) {
                     @Override
                     public void onSuccess(Response<OrderBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
-                            callBack.getOrderList(response);
-                        }
+                        callBack.getOrderList(response);
                     }
 
                     @Override

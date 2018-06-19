@@ -46,12 +46,7 @@ public class HouseRecordPresenter {
                 .execute(new DialogCallback<HouseRecordListBean>(activity, HouseRecordListBean.class) {
                     @Override
                     public void onSuccess(Response<HouseRecordListBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
                             callBack.getHouseRecordList(response);
-                        }
                     }
 
                     @Override
@@ -79,10 +74,7 @@ public class HouseRecordPresenter {
                 .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        }
+
                     }
 
                 });

@@ -35,6 +35,7 @@ import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.more.GaoErFuMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -189,23 +190,6 @@ public class GaoerfuDetailsActivity extends BaseActivity {
                     }
 
                 });
-    }
-
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
-            }
-        }
     }
 
     private void initScroll() {
@@ -368,11 +352,8 @@ public class GaoerfuDetailsActivity extends BaseActivity {
         findViewById(R.id.gaoerfu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(GaoerfuDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(GaoerfuDetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(GaoerfuDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
             }
         });

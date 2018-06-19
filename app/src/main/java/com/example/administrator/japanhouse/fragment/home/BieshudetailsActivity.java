@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -29,14 +30,18 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.BieShuListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.BannerDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.VideoDetailsActivity;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.im.ImManager;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.more.BieSuMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
@@ -150,7 +155,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         villaDetailsPresenter = new VillaDetailsPresenter(this, this);
         villaDetailsPresenter.getVillaDetails(houseId, token);
-        new HouseLogPresenter(this).setHouseLog("4",houseId,"");
+        new HouseLogPresenter(this).setHouseLog("4", houseId, "");
 
         //户型图
         initData();
@@ -160,11 +165,8 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         findViewById(R.id.xiezilou_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(BieshudetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(BieshudetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(BieshudetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
             }
         });
@@ -173,6 +175,12 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
 
     @Override
     public void getVillaDetails(Response<VillaDetailsBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (response != null && response.body() != null) {
             villaDetailsBean = response.body().getDatas();
             hwdcBroker = villaDetailsBean.getHwdcBroker();
@@ -199,23 +207,6 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         } else {//未收藏
             isStart = false;
             imgStart.setImageResource(R.drawable.shoucang);
-        }
-    }
-
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
-            }
         }
     }
 

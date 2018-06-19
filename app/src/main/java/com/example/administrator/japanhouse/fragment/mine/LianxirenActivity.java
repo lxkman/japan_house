@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +22,8 @@ import com.example.administrator.japanhouse.activity.adapter.LinkmanAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.chat.SearchManagerActivity;
 import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
+import com.example.administrator.japanhouse.im.ImManager;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.LinkmanBean;
 import com.example.administrator.japanhouse.presenter.LinkmanPresenter;
 import com.lzy.okgo.model.Response;
@@ -89,6 +92,12 @@ public class LianxirenActivity extends BaseActivity implements LinkmanPresenter.
 
     @Override
     public void getLinkmanList(Response<LinkmanBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         mList.clear();
 
         if (response != null && response.body() != null && response.body().getDatas() != null) {
@@ -123,10 +132,7 @@ public class LianxirenActivity extends BaseActivity implements LinkmanPresenter.
 
     @Override
     public void onItemClickListener(LinkmanBean.DatasBean.ListBean bean) {
-        if (RongIM.getInstance() != null) {
-            Log.e("MainActivity", "创建单聊");
-            RongIM.getInstance().startPrivateChat(this, bean.getId() + "", bean.getBrokerName());
-        }
+        ImManager.enterChat(this, bean.getId() + "", bean.getBrokerName(), bean.getPic());
     }
 
     @Override

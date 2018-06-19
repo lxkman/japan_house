@@ -71,7 +71,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="0/140"
+                android:text="140/140"
                 android:textSize="14sp"
                 android:textColor="#666"
                 android:layout_marginRight="15dp"

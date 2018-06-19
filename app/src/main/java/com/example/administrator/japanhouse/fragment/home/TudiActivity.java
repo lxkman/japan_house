@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -32,6 +31,7 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.NetWorkUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -372,12 +372,12 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                             mrecycler.setAdapter(liebiaoAdapter);
                         } else {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(TudiActivity.this, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.meiyougengduoshujule));
                                 return;
                             }
                             if (!isLoadMore) {
                                 mDatas = datas;
-                                Toast.makeText(TudiActivity.this, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.shuaxinchenggong));
                             } else {
                                 mDatas.addAll(datas);
                             }

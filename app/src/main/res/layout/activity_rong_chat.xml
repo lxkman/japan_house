@@ -35,7 +35,7 @@
             android:visibility="gone" />
 
         <CheckBox
-            android:background="@drawable/chat_collect_flase"
+            android:background="@drawable/radiobutton_selector"
             android:button="@null"
             android:id="@+id/activity_chat_star"
             android:layout_width="22dp"
@@ -43,7 +43,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:src="@drawable/chat_collect_flase"
          />
     </RelativeLayout>
 

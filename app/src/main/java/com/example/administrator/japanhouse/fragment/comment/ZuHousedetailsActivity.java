@@ -38,6 +38,7 @@ import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.more.ZuBanGongMoreActivity;
 import com.example.administrator.japanhouse.more.ZuBieSuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuDuoCengMoreActivity;
@@ -216,23 +217,6 @@ public class ZuHousedetailsActivity extends BaseActivity {
                         initData();
                     }
                 });
-    }
-
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
-            }
-        }
     }
 
     private void initScroll() {
@@ -450,11 +434,8 @@ public class ZuHousedetailsActivity extends BaseActivity {
         findViewById(R.id.lishi_zu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(ZuHousedetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(ZuHousedetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                if (hwdcBroker != null) {
+                    ImManager.enterChatDetails(ZuHousedetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
             }
         });

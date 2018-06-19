@@ -37,6 +37,7 @@ import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.ZhongGuoDetailsBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.DetailsExtensionModule;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -203,23 +204,6 @@ public class HaiWaiDetailsActivity extends BaseActivity {
                         initViewPager();
                     }
                 });
-    }
-
-    public void setMyExtensionModule() {
-        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-        IExtensionModule defaultModule = null;
-        if (moduleList != null) {
-            for (IExtensionModule module : moduleList) {
-                if (module instanceof DefaultExtensionModule) {
-                    defaultModule = module;
-                    break;
-                }
-            }
-            if (defaultModule != null) {
-                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new DetailsExtensionModule());
-            }
-        }
     }
 
     private void initScroll() {
@@ -436,11 +420,8 @@ public class HaiWaiDetailsActivity extends BaseActivity {
         findViewById(R.id.haiwai_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.getInstace(HaiWaiDetailsActivity.this).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
-                setMyExtensionModule();
-                if (RongIM.getInstance() != null) {
-                    Log.e("MainActivity", "创建单聊");
-                    RongIM.getInstance().startPrivateChat(HaiWaiDetailsActivity.this, "123456", getString(R.string.act_chat_title));
+                if (hwdcBroker != null){
+                    ImManager.enterChatDetails(HaiWaiDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
             }
         });

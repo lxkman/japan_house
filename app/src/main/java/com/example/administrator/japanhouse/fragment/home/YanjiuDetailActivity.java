@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.fragment.home;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,14 @@ public class YanjiuDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_yanjiu_detail);
         ButterKnife.bind(this);
         String yjType = getIntent().getStringExtra("yjType");
+        if (TextUtils.isEmpty(yjType)) {
+            titleTv.setText(getIntent().getStringExtra("title"));
+            contentTv.setText(getIntent().getStringExtra("content"));
+            long createTime = getIntent().getLongExtra("time",0);
+            String s = MyUtils.longtoStringDate(createTime);
+            dateTv.setText(s);
+            return;
+        }
         HttpParams params = new HttpParams();
         params.put("yjType", yjType);
         OkGo.<YanJiuDetailBean>post(MyUrls.BASEURL + "/app/zfyjs/topzfyjsinfo")

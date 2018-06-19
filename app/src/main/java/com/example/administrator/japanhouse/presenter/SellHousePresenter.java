@@ -49,12 +49,7 @@ public class SellHousePresenter {
                 .execute(new DialogCallback<SellHouseBean>(activity, SellHouseBean.class) {
                     @Override
                     public void onSuccess(Response<SellHouseBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        } else {
-                            callBack.getSellHouseList(response);
-                        }
+                        callBack.getSellHouseList(response);
                     }
 
                     @Override
@@ -80,10 +75,6 @@ public class SellHousePresenter {
                 .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
-                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            MyApplication.logOut();
-                        }
                     }
                 });
     }

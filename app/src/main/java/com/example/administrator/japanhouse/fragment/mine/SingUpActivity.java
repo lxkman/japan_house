@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.SingUpAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.SingUpBean;
 import com.example.administrator.japanhouse.presenter.SingUpPresenter;
@@ -107,6 +109,12 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
 
     @Override
     public void getSingUpList(Response<SingUpBean> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         if (isRefresh) {
             TUtils.showFail(this, getString(R.string.refresh_success));
         }
@@ -135,7 +143,11 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
 
     @Override
     public void deteleSingUp(Response<NoDataBean> response) {
-
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
     }
 
     @Override

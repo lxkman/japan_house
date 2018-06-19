@@ -45,7 +45,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                     etMsg.setSelection(140);
                     return;
                 }
-                tvTextNum.setText(s.length() + "/140");
+                tvTextNum.setText((140 - s.length()) + "/140");
             }
 
             @Override

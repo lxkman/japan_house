@@ -22,7 +22,7 @@ import com.example.administrator.japanhouse.base.UMLoginActivity;
 import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.bean.LoginParmeter;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.im.RcConect;
+import com.example.administrator.japanhouse.im.RcConnect;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -189,7 +189,7 @@ public class LoginActivity extends UMLoginActivity {
                                     SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid",loginBean.getDatas().getId()+"");
                                     SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("token",loginBean.getDatas().getToken()+"");
 
-                                    RcConect.rongCloudConection(loginBean.getDatas().getRongCloudToken());
+                                    RcConnect.rongCloudConection(loginBean.getDatas().getRongCloudToken());
 
                                     CacheUtils.put(Constants.USERINFO, loginBean.getDatas());
 

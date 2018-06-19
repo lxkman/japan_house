@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserInfo;
 import com.example.administrator.japanhouse.presenter.UserPresenter;
@@ -378,6 +379,12 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void getUserInfo(Response<UserInfo> response) {
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
         UserInfo.DatasBean datasBean = response.body().getDatas();
         if (datasBean == null)
             return;
@@ -422,6 +429,10 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void updateUserInfo(Response<NoDataBean> response) {
-
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(this, LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
     }
 }

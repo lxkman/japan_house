@@ -186,7 +186,7 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
 
         RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
         ratingBarView.setRatingCount(5);
-        ratingBarView.setSelectedCount(1);
+        ratingBarView.setSelectedCount(0);
         ratingBarView.setSelectedIconResId(R.drawable.start_check);
         ratingBarView.setNormalIconResId(R.drawable.start_nocheck);
         ratingBarView.setClickable(true);
@@ -228,7 +228,7 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
 
         RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
         ratingBarView.setRatingCount(5);
-        ratingBarView.setSelectedCount(1);
+        ratingBarView.setSelectedCount(0);
         ratingBarView.setSelectedIconResId(R.drawable.start_check);
         ratingBarView.setNormalIconResId(R.drawable.start_nocheck);
         ratingBarView.setClickable(true);

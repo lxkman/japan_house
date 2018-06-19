@@ -22,6 +22,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.FreeApartmentActivity;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.model.SingUpBean;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
@@ -165,7 +166,7 @@ public class SingUpDetailsActivity extends BaseActivity {
                 break;
             case R.id.act_singUp_details_wChat:
                 if (datasBean != null && datasBean.getHwdcBroker() != null) {
-                    RongIM.getInstance().startPrivateChat(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName());
+                    ImManager.enterChatDetails(this, datasBean.getHwdcBroker().getId() + "", datasBean.getHwdcBroker().getBrokerName(), datasBean.getHwdcBroker().getPic());
                 }
                 break;
             case R.id.act_singUp_details_managerPhone:

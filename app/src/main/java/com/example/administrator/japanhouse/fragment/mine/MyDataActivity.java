@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -48,6 +49,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.rong.imkit.RongIM;
 
 public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack {
 
@@ -85,6 +87,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     private int mSex;
     private String mBirthday;
+
+    private UserInfo.DatasBean datasBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -385,7 +389,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             return;
         }
 
-        UserInfo.DatasBean datasBean = response.body().getDatas();
+        datasBean = response.body().getDatas();
         if (datasBean == null)
             return;
 
@@ -424,6 +428,9 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void finish() {
         presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday);
+        if (datasBean != null) {
+            RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(datasBean.getId() + "", datasBean.getNickname(), Uri.parse(datasBean.getPic())));
+        }
         super.finish();
     }
 

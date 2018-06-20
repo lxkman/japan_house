@@ -35,7 +35,7 @@
             android:visibility="gone" />
 
         <CheckBox
-            android:background="@drawable/radiobutton_selector"
+            android:background="@drawable/dialog_chat_radiobutton"
             android:button="@null"
             android:id="@+id/activity_chat_star"
             android:layout_width="22dp"

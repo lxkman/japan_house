@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -29,6 +30,8 @@ import io.rong.imkit.DefaultExtensionModule;
 import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Message;
+import io.rong.imlib.model.MessageContent;
 import io.rong.imlib.model.UserInfo;
 
 
@@ -114,10 +117,12 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (star.isChecked()) {
+                if (state == 1) {
                     presenter.deteleLinkman(targetId);
+                    state = 0;
                 } else {
                     presenter.addLinkman(targetId);
+                    state = 1;
                 }
             }
         });
@@ -132,6 +137,22 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
                 } else {
                     showZhDialog();
                 }
+            }
+        });
+
+        RongIM.getInstance().setSendMessageListener(new RongIM.OnSendMessageListener() {
+            @Override
+            public Message onSend(Message message) {
+                /**
+                 * getTargetId   接受者id
+                 * 如果不使用的话将此方法删除
+                  */
+                return message;
+            }
+
+            @Override
+            public boolean onSent(Message message, RongIM.SentMessageErrorCode sentMessageErrorCode) {
+                return false;
             }
         });
     }
@@ -249,12 +270,6 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
             }
         });
         dialog.show();
-        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
-            @Override
-            public UserInfo getUserInfo(String s) {
-                return null;
-            }
-        }, true);
     }
 
     @Override

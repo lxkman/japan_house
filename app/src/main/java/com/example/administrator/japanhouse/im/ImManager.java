@@ -202,6 +202,14 @@ public class ImManager {
         return uri;
     }
 
+    /**
+     * 图文消息   项目中作为分享发送
+     * @param userId    用户id
+     * @param title     分享标题
+     * @param content   分享内容
+     * @param imgUrl    分享图片
+     * @param jumpUrl   跳转h5链接
+     */
     public static void sendImgAndText(String userId, String title, String content, String imgUrl, String jumpUrl) {
         RichContentMessage richContentMessage = RichContentMessage.obtain(title, content, imgUrl);
         richContentMessage.setUrl(jumpUrl);

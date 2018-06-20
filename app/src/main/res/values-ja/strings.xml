@@ -595,4 +595,6 @@
     <string name="shuaxinchenggong">リフレッシュにできました</string>
     <string name="wangluoshiqulianjie">ネットワークが切断され、ネットワークを確認します</string>
     <string name="gengduoweizhi">もっと見る</string>
+    <string name="wantao">万件</string>
+    <string name="tao">件）</string>
 </resources>

@@ -82,15 +82,15 @@ public class HomeMapActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 ((RadioButton) rgLook.getChildAt(position)).setChecked(true);
-                if (position==0){
+                if (position == 0) {
                     viewErshoufang.setVisibility(View.VISIBLE);
                     viewZufang.setVisibility(View.INVISIBLE);
                     viewXinfang.setVisibility(View.INVISIBLE);
-                }else if (position==1){
+                } else if (position == 1) {
                     viewErshoufang.setVisibility(View.INVISIBLE);
                     viewZufang.setVisibility(View.VISIBLE);
                     viewXinfang.setVisibility(View.INVISIBLE);
-                }else if (position==2){
+                } else if (position == 2) {
                     viewErshoufang.setVisibility(View.INVISIBLE);
                     viewZufang.setVisibility(View.INVISIBLE);
                     viewXinfang.setVisibility(View.VISIBLE);
@@ -122,8 +122,6 @@ public class HomeMapActivity extends BaseActivity {
                 }
             }
         });
-
-
         fm = getSupportFragmentManager();
         myAdapter = new MyAdapter(fm);
         vpLook.setAdapter(myAdapter);
@@ -148,21 +146,21 @@ public class HomeMapActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-//        mBaiduMap.onDestroy();
+        //        mBaiduMap.onDestroy();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-//        mBaiduMap.onResume();
+        //        mBaiduMap.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
-//        mBaiduMap.onPause();
+        //        mBaiduMap.onPause();
     }
 
     @OnClick({R.id.title_back_iv, R.id.title_search_iv, R.id.title_message_iv})
@@ -172,7 +170,9 @@ public class HomeMapActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.title_search_iv:
-                startActivity(new Intent(mContext,MapSearchActivity.class));
+                Intent intent = new Intent(mContext, MapSearchActivity.class);
+                intent.putExtra("state", vpLook.getCurrentItem());
+                startActivityForResult(intent, 0);
                 break;
             case R.id.title_message_iv:
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -180,4 +180,6 @@ public class HomeMapActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }

@@ -146,7 +146,6 @@ public class SydcBigLiebiaoActivity extends BaseActivity implements MyItemClickL
 
         HttpParams params = new HttpParams();
         params.put("hType", 1);
-        params.put("shType", 10);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/twoscreening/selectallscree")
                 .tag(this)
                 .params(params)
@@ -327,7 +326,8 @@ public class SydcBigLiebiaoActivity extends BaseActivity implements MyItemClickL
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
@@ -414,62 +414,30 @@ public class SydcBigLiebiaoActivity extends BaseActivity implements MyItemClickL
     }
 
     private void initMoreParams(HttpParams params) {
-        /*switch (type) {
-            case 3://商铺买卖
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("smlxs", mMoreSelectedBeanList.get(0));//售卖类型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(1));//车站距离
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("yylxs", mMoreSelectedBeanList.get(2));//营业类型
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("jznfs", mMoreSelectedBeanList.get(3));//建筑年份
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(4));//建筑构造
-                if (mMoreSelectedBeanList.size() > 5)
-                    params.putUrlParams("tzs", mMoreSelectedBeanList.get(5));//特征
-                if (mMoreSelectedBeanList.size() > 6)
-                    params.putUrlParams("tjs", mMoreSelectedBeanList.get(6));//条件
-                if (mMoreSelectedBeanList.size() > 7)
-                    params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
-                if (mMoreSelectedBeanList.size() > 8)
-                    params.putUrlParams("xzs", mMoreSelectedBeanList.get(8));//现状
-                break;
-            case 2://写字楼买卖
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("smlxs", mMoreSelectedBeanList.get(0));//售卖类型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(1));//车站距离
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(3));//人气选择
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("syqs", mMoreSelectedBeanList.get(4));//所有权
-                if (mMoreSelectedBeanList.size() > 5)
-                    params.putUrlParams("xzs", mMoreSelectedBeanList.get(5));//现状
-                break;
-            case 1://高尔夫球场
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(0));//车站距离
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("syqs", mMoreSelectedBeanList.get(1));//所有权
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("xzs", mMoreSelectedBeanList.get(2));//现状
-                break;
-            case 0://酒店
-                if (mMoreSelectedBeanList.size() > 0)
-                    params.putUrlParams("jdlxs", mMoreSelectedBeanList.get(0));//酒店类型
-                if (mMoreSelectedBeanList.size() > 1)
-                    params.putUrlParams("czjls", mMoreSelectedBeanList.get(1));//车站距离
-                if (mMoreSelectedBeanList.size() > 2)
-                    params.putUrlParams("jdlcs", mMoreSelectedBeanList.get(2));//酒店楼层数
-                if (mMoreSelectedBeanList.size() > 3)
-                    params.putUrlParams("syqs", mMoreSelectedBeanList.get(3));//所有权
-                if (mMoreSelectedBeanList.size() > 4)
-                    params.putUrlParams("xzs", mMoreSelectedBeanList.get(4));//现状
-                break;
-        }*/
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("smlxs", mMoreSelectedBeanList.get(0));//售卖类型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(1));//车站距离
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("yylxs", mMoreSelectedBeanList.get(2));//营业类型
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(3));//建筑年份
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(4));//建筑构造
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("tzs", mMoreSelectedBeanList.get(5));//特征
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("tjs", mMoreSelectedBeanList.get(6));//条件
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("xzs", mMoreSelectedBeanList.get(8));//现状
+        if (mMoreSelectedBeanList.size() > 9)
+        params.putUrlParams("rqxzs", mMoreSelectedBeanList.get(9));//人气选择
+        if (mMoreSelectedBeanList.size() > 10)
+            params.putUrlParams("jdlxs", mMoreSelectedBeanList.get(10));//酒店类型
+        if (mMoreSelectedBeanList.size() > 11)
+            params.putUrlParams("jdlcs", mMoreSelectedBeanList.get(11));//酒店楼层数
     }
 
     @Override

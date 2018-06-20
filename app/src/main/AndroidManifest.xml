@@ -216,7 +216,8 @@
         <activity android:name=".fragment.home.ZufangActivity"/>
         <activity android:name=".fragment.home.HaiwaiListActivity"/>
         <activity android:name=".fragment.home.HomeMapActivity"/>
-        <activity android:name=".fragment.home.MapSearchActivity"/>
+        <activity android:name=".fragment.home.MapSearchActivity"
+                  android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".fragment.home.FangjiadituActivity"/>
         <activity android:name=".fragment.home.YanjiuListActivity"/>
         <activity android:name=".fragment.home.ShendengFirstStepActivity"/>

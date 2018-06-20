@@ -321,7 +321,8 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
         params.put("searchText", searchText);
@@ -487,8 +488,19 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.tudi));
                 intent.putExtra("state", 3);
-                startActivity(intent);
+                startActivityForResult(intent,0);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
         }
     }
 }

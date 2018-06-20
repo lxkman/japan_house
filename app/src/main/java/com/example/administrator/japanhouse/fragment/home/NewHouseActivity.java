@@ -64,9 +64,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     TextView searchTv;
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
-    private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
     private int page = 1;
@@ -99,14 +97,10 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         } else {
             isJa = false;
         }
-
-
-
         searchText = getIntent().getStringExtra("searchText");
         if (!TextUtils.isEmpty(searchText)) {
             searchTv.setText(searchText);
         }
-
         initView();
         initData();
         initListener();
@@ -331,6 +325,10 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
         params.put("searchText", searchText);
+        String communityId = getIntent().getStringExtra("communityId");
+        if (!TextUtils.isEmpty(communityId)) {
+            params.put("communityId", communityId);//地图点击小区跳转过来传递的小区id
+        }
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
@@ -512,7 +510,18 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.new_house));
                 intent.putExtra("state", 0);
-                startActivity(intent);
+                startActivityForResult(intent,0);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
         }
     }
 }

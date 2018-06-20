@@ -319,7 +319,8 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("pageNo", page);
         params.put("hType", 6);
         params.put("mjId", mjId);//面积

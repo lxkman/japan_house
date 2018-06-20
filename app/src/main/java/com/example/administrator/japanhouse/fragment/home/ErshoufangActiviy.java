@@ -78,7 +78,6 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
-
     private String searchText = "";
     private OldHouseShaiXuanBean.DatasEntity shaiXuanBeanDatas;
     private String[] headers;
@@ -139,7 +138,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         mrecycler.setLayoutManager(new LinearLayoutManager(ErshoufangActiviy.this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 0);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -309,7 +308,7 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
     }
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -321,12 +320,17 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("hType", 0);
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
         params.put("searchText", searchText);
+        String communityId = getIntent().getStringExtra("communityId");
+        if (!TextUtils.isEmpty(communityId)) {
+            params.put("communityId", communityId);//地图点击小区跳转过来传递的小区id
+        }
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
@@ -509,8 +513,18 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.old_house));
                 intent.putExtra("state", 2);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
+            page = 1;
+            mDatas.clear();
+            initData();
+        }
+    }
 }

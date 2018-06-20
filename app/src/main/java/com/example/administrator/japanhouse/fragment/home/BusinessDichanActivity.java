@@ -105,7 +105,8 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("pageNo", 1);
         OkGo.<SydcListBean>post(MyUrls.BASEURL + "/app/realestate/searchlist")
                 .tag(this)

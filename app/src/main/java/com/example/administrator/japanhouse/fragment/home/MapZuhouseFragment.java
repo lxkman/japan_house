@@ -92,6 +92,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     private LatLng curr_northeast;
     private LatLng curr_southwest;
     private boolean isevent;
+    private String searchText = "";
+    private float zoom = 11;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -409,6 +411,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             params.put("starZj", zidingyiPriceList.get(0));//租金最低价
             params.put("endZj", zidingyiPriceList.get(1));//租金最高价
         }
+        params.put("searchText", searchText);
         if (isDitie) {
             params.putUrlParams("dtzs", ditieList);//地铁站
         } else {
@@ -454,7 +457,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                 ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
                                 TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
                                 content.setText(isJa ? datasEntity.getAdministrationNameJpn() : datasEntity.getAdministrationNameCn());
-                                title.setText(datasEntity.getHouseNum() + "万套");
+                                title.setText(datasEntity.getHouseNum() + getString(R.string.wantao));
                                 iv.setVisibility(View.GONE);
                                 MarkerOptions markerOptions = new MarkerOptions()
                                         .icon(BitmapDescriptorFactory.fromView(markView))
@@ -479,7 +482,9 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                     baiduMap.animateMapStatus(u);
                     //                    loadAllXiaoQu(northeast, southwest);
                 } else {
-                    startActivity(new Intent(mContext, ErshoufangActiviy.class));
+                    Intent intent = new Intent(mContext, ZufangBigListActivity.class);
+                    intent.putExtra("communityId",marker.getTitle());
+                    startActivity(intent);
                 }
                 return false;
             }
@@ -503,6 +508,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 Logger.e("xxxx", "百度地图状态改变结束");
+                zoom = mapStatus.zoom;
                 if (mapStatus.zoom < 12) {
                     initOverlay(mCity);
                 } else if (mapStatus.zoom >= 12) {
@@ -535,6 +541,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             params.put("starZj", zidingyiPriceList.get(0));//租金最低价
             params.put("endZj", zidingyiPriceList.get(1));//租金最高价
         }
+        params.put("searchText", searchText);
         if (isDitie) {
             params.putUrlParams("dtzs", ditieList);//地铁站
         } else {
@@ -583,12 +590,13 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                         markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
                                         View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
                                         TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao)
+                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao));
                                         MarkerOptions markerOptions = new MarkerOptions()
                                                 .icon(BitmapDescriptorFactory.fromView(markView))
                                                 .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                                 .zIndex(12)
+                                                .title(datasEntity.getId()+"")//做个标记，点击事件时候用到
                                                 .draggable(true);
                                         overlayOptionsList.add(markerOptions);
                                     }
@@ -596,12 +604,13 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                                     markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
                                     View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
                                     TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao)
+                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao));
                                     MarkerOptions markerOptions = new MarkerOptions()
                                             .icon(BitmapDescriptorFactory.fromView(markView))
                                             .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                             .zIndex(12)
+                                            .title(datasEntity.getId()+"")//做个标记，点击事件时候用到
                                             .draggable(true);
                                     overlayOptionsList.add(markerOptions);
                                 }
@@ -664,7 +673,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         mjId = mianjiEntity.getId() + "";
                     }
                 }
-                initOverlay(mCity);
+                refreshMap();
                 break;
             case 3://租金
                 isZiDingyiPrice = false;
@@ -676,7 +685,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         zjId = zujin.get(itemPosition - 1).getId() + "";
                     }
                 }
-                initOverlay(mCity);
+                refreshMap();
                 break;
         }
     }
@@ -695,7 +704,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                 zjId = "-1";
                 zidingyiPriceList.clear();
                 zidingyiPriceList = priceRegin;
-                initOverlay(mCity);
+                refreshMap();
             }
         }
     }
@@ -704,7 +713,24 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        initOverlay(mCity);
+        refreshMap();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1){
+            searchText=data.getStringExtra("searchText");
+            refreshMap();
+        }
+    }
+
+    private void refreshMap(){
+        if (zoom < 12) {
+            initOverlay(mCity);
+        } else if (zoom >= 12) {
+            loadAllXiaoQu(curr_northeast, curr_southwest);
+        }
     }
 
     /*判断某个经纬度点是否在多边形内部*/

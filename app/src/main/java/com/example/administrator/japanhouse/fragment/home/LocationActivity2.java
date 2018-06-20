@@ -45,11 +45,10 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
     private TextView tvSideBarHint;
     private RecyclerView recyclerView;
     private CityAdapter adapter;
-    private List<String> hotList = new ArrayList<>();
     private RecyclerView hot_recycler;
     private RecyclerView recycler_search_result;
     private EditText et_search;
-    private List<CityListBean.DatasEntity> citysList;
+    private List<CityListBean.DatasEntity.CitysEntity> citysList;
     private RelativeLayout rl_root;
     private SuspensionDecoration mDecoration;
     private boolean isJa;
@@ -70,7 +69,7 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
         } else {
             isJa = false;
         }
-        iv_back= (ImageView) findViewById(R.id.item_title_back);
+        iv_back = (ImageView) findViewById(R.id.item_title_back);
         iv_back.setOnClickListener(this);
         myletterview = (MyLetterListView) findViewById(R.id.myletterview);
         tvSideBarHint = (TextView) findViewById(R.id.tvSideBarHint);
@@ -81,26 +80,14 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recycler_search_result.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        initLocation();
-        initHot();
-        initData();
-        initListener();
-    }
-
-    private void initHot() {
         headerView = View.inflate(LocationActivity2.this, R.layout.location_recycler_header, null);
-        tv_mylocation= (TextView) headerView.findViewById(R.id.tv_mylocation);
+        tv_mylocation = (TextView) headerView.findViewById(R.id.tv_mylocation);
+        tv_mylocation.setOnClickListener(this);
         hot_recycler = (RecyclerView) headerView.findViewById(R.id.hot_recycler);
         hot_recycler.setLayoutManager(new GridLayoutManager(LocationActivity2.this, 3));
-        hotList.add("");
-        hotList.add("");
-        hotList.add("");
-        hotList.add("");
-        hotList.add("");
-        hotList.add("");
-        hotList.add("");
-        HotAdapter hotAdapter = new HotAdapter(R.layout.item_hotcity_layout, hotList);
-        hot_recycler.setAdapter(hotAdapter);
+        initLocation();
+        initData();
+        initListener();
     }
 
     private void initLocation() {
@@ -127,7 +114,11 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
 
     private void initData() {
         HttpParams params = new HttpParams();
-        params.put("languageType", 0);
+        if (isJa) {
+            params.put("languageType", 1);
+        } else {
+            params.put("languageType", 0);
+        }
         OkGo.<CityListBean>post(MyUrls.BASEURL + "/app/city/getcity")
                 .tag(this)
                 .params(params)
@@ -136,8 +127,9 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                     public void onSuccess(Response<CityListBean> response) {
                         int code = response.code();
                         CityListBean body = response.body();
-                        List<CityListBean.DatasEntity> datas = body.getDatas();
-                        citysList = datas;
+                        CityListBean.DatasEntity datas = body.getDatas();
+                        List<CityListBean.DatasEntity.CitysEntity> citys = datas.getCitys();
+                        citysList = citys;
                         myletterview.setKeyword(getAllKeys());
                         if (adapter == null) {
                             adapter = new CityAdapter(R.layout.item_city, citysList);
@@ -146,6 +138,22 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                         recyclerView.setAdapter(adapter);
                         //设置recyclerview悬停
                         recyclerView.addItemDecoration(mDecoration = new SuspensionDecoration(LocationActivity2.this, citysList).setHeaderViewCount(1));
+                        //热门城市
+                        final List<CityListBean.DatasEntity.HotcitesEntity> hotcites = datas.getHotcites();
+                        if (hotcites != null && hotcites.size() > 0) {
+                            HotAdapter hotAdapter = new HotAdapter(R.layout.item_hotcity_layout, hotcites);
+                            hot_recycler.setAdapter(hotAdapter);
+                            hotAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                    Intent intent = new Intent();
+                                    intent.putExtra("cityId", hotcites.get(position).getId());
+                                    intent.putExtra("cityName", isJa?hotcites.get(position).getAdministrationNameJpn():hotcites.get(position).getAdministrationNameCn());
+                                    setResult(1, intent);
+                                    finish();
+                                }
+                            });
+                        }
                     }
                 });
     }
@@ -169,29 +177,51 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                 SoftKeyboardTool.closeKeyboard(this);
                 finish();
                 break;
+            case R.id.tv_mylocation:
+                SoftKeyboardTool.closeKeyboard(this);
+                if (citysList != null && citysList.size() > 0) {
+                    for (int i = 0; i < citysList.size(); i++) {
+                        CityListBean.DatasEntity.CitysEntity datasEntity = citysList.get(i);
+                        String cityName = tv_mylocation.getText().toString();
+                        List<CityListBean.DatasEntity.CitysEntity.CityListEntity> cityList = datasEntity.getCityList();
+                        if (cityList != null && cityList.size() > 0) {
+                            for (int i1 = 0; i1 < cityList.size(); i1++) {
+                                String administrationNameCn = cityList.get(i1).getAdministrationNameCn();
+                                if (!TextUtils.isEmpty(cityName) && cityName.equals(administrationNameCn)) {
+                                    Intent intent = new Intent();
+                                    intent.putExtra("cityId", cityList.get(i1).getId());
+                                    intent.putExtra("cityName", isJa?cityList.get(i1).getAdministrationNameJpn():cityList.get(i1).getAdministrationNameCn());
+                                    setResult(1, intent);
+                                    finish();
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
         }
     }
 
-    private class HotAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    private class HotAdapter extends BaseQuickAdapter<CityListBean.DatasEntity.HotcitesEntity, BaseViewHolder> {
 
-        public HotAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public HotAdapter(@LayoutRes int layoutResId, @Nullable List<CityListBean.DatasEntity.HotcitesEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
-
+        protected void convert(BaseViewHolder helper, CityListBean.DatasEntity.HotcitesEntity item) {
+            helper.setText(R.id.tv_name,isJa?item.getAdministrationNameJpn():item.getAdministrationNameCn());
         }
     }
 
-    private class CityAdapter extends BaseQuickAdapter<CityListBean.DatasEntity, BaseViewHolder> {
+    private class CityAdapter extends BaseQuickAdapter<CityListBean.DatasEntity.CitysEntity, BaseViewHolder> {
 
-        public CityAdapter(@LayoutRes int layoutResId, @Nullable List<CityListBean.DatasEntity> data) {
+        public CityAdapter(@LayoutRes int layoutResId, @Nullable List<CityListBean.DatasEntity.CitysEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, final CityListBean.DatasEntity item) {
+        protected void convert(BaseViewHolder helper, final CityListBean.DatasEntity.CitysEntity item) {
             RecyclerView recyclerView_city = helper.getView(R.id.recyclerView_city);
             recyclerView_city.setLayoutManager(new LinearLayoutManager(LocationActivity2.this));
             ItemCityAdapter itemCityAdapter = new ItemCityAdapter(R.layout.item_city_item, item.getCityList(), item.getCityList().size());
@@ -199,27 +229,27 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
             itemCityAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Intent intent=new Intent();
-                    intent.putExtra("cityId",item.getCityList().get(position).getId());
-                    intent.putExtra("cityName",isJa?item.getCityList().get(position).getAdministrationNameJpn()
-                            :item.getCityList().get(position).getAdministrationNameCn());
-                    setResult(1,intent);
+                    Intent intent = new Intent();
+                    intent.putExtra("cityId", item.getCityList().get(position).getId());
+                    intent.putExtra("cityName", isJa ? item.getCityList().get(position).getAdministrationNameJpn()
+                            : item.getCityList().get(position).getAdministrationNameCn());
+                    setResult(1, intent);
                     finish();
                 }
             });
         }
     }
 
-    private class ItemCityAdapter extends BaseQuickAdapter<CityListBean.DatasEntity.CityListEntity, BaseViewHolder> {
+    private class ItemCityAdapter extends BaseQuickAdapter<CityListBean.DatasEntity.CitysEntity.CityListEntity, BaseViewHolder> {
         int lastsize;
 
-        public ItemCityAdapter(@LayoutRes int layoutResId, @Nullable List<CityListBean.DatasEntity.CityListEntity> data, int size) {
+        public ItemCityAdapter(@LayoutRes int layoutResId, @Nullable List<CityListBean.DatasEntity.CitysEntity.CityListEntity> data, int size) {
             super(layoutResId, data);
             lastsize = size;
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, CityListBean.DatasEntity.CityListEntity item) {
+        protected void convert(BaseViewHolder helper, CityListBean.DatasEntity.CitysEntity.CityListEntity item) {
             helper.setText(R.id.tv_city_item, isJa ? item.getAdministrationNameJpn() : item.getAdministrationNameCn());
             if (helper.getAdapterPosition() == lastsize - 1) {
                 helper.setVisible(R.id.view_line, false);
@@ -292,10 +322,10 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                     searchResultAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                            Intent intent=new Intent();
-                            intent.putExtra("cityId",searchResult.get(position).getId());
-                            intent.putExtra("cityName",searchResult.get(position).getName());
-                            setResult(1,intent);
+                            Intent intent = new Intent();
+                            intent.putExtra("cityId", searchResult.get(position).getId());
+                            intent.putExtra("cityName", searchResult.get(position).getName());
+                            setResult(1, intent);
                             finish();
                         }
                     });
@@ -311,7 +341,7 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
         List<SearchPositonBean> list = new ArrayList<>();
         if (citysList != null && citysList.size() > 0) {
             for (int i = 0; i < citysList.size(); i++) {
-                List<CityListBean.DatasEntity.CityListEntity> cityList = citysList.get(i).getCityList();
+                List<CityListBean.DatasEntity.CitysEntity.CityListEntity> cityList = citysList.get(i).getCityList();
                 if (cityList != null && cityList.size() > 0) {
                     for (int i1 = 0; i1 < cityList.size(); i1++) {
                         String xxx = "";

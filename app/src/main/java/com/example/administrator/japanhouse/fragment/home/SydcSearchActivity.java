@@ -20,9 +20,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HotSearchBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
 import com.lzy.okgo.model.Response;
 
@@ -50,6 +50,7 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
     private MainSearchPresenter searchPresenter;
     private int state;
     private int state2 = 100;
+    private int state3;
     private SearchListAdapter searchListAdapter;
     private List<String> SearchList = new ArrayList<>();
 
@@ -64,7 +65,7 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
             searchEt.setHint(getIntent().getStringExtra("edt_hint"));
         }
         state = getIntent().getIntExtra("state", 0);
-        state2 = getIntent().getIntExtra("state2", 0);
+        state2 = getIntent().getIntExtra("state2", 100);
         initHot();
         initListener();
     }
@@ -151,31 +152,15 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
     }
 
     private void initHot() {
-        fluidlayout.removeAllViews();
-        final List<String> hotNameList = new ArrayList<>();
-        hotNameList.add("朝阳");
-        hotNameList.add("青森县");
-        hotNameList.add("采光");
-        hotNameList.add("南向");
-        hotNameList.add("秋田县");
-        hotNameList.add("山形县");
-        for (int i = 0; i < hotNameList.size(); i++) {
-            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
-            tv.setText(hotNameList.get(i));
-            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(12, 12, 12, 12);
-            fluidlayout.addView(tv, params);
-            final int finalI = i;
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    TUtils.showShort(mContext, "点击了---" + hotNameList.get(finalI));
-                }
-            });
+        switch (state) {
+            case 6:
+                state3 = 4;
+                break;
+            case 7:
+                state3 = 5;
+                break;
         }
+        searchPresenter.getHotSearchData(1,state3);
     }
 
     @Override
@@ -236,6 +221,36 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
             tvNoContent.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
             searchListRecycler.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void getHotSearchData(Response<HotSearchBean> response) {
+        HotSearchBean body = response.body();
+        List<HotSearchBean.DatasEntity> datas = body.getDatas();
+        final List<String> hotNameList = new ArrayList<>();
+        if (datas != null && datas.size() > 0) {
+            for (int i = 0; i < datas.size(); i++) {
+                String tagText = datas.get(i).getTagText();
+                hotNameList.add(tagText);
+            }
+        }
+        fluidlayout.removeAllViews();
+        for (int i = 0; i < hotNameList.size(); i++) {
+            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
+            tv.setText(hotNameList.get(i));
+            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            fluidlayout.addView(tv, params);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tiaozhuan(tv.getText().toString());
+                }
+            });
         }
     }
 }

@@ -63,9 +63,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private TextView tvNoContent;
-    private List<String> mList = new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
     private int page = 1;
@@ -78,7 +76,6 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     private List<OldHouseShaiXuanBean.DatasEntity.MianjiEntity> mianji;
     private List<OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity> shoujia;
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
-
     private String searchText = "";
     private View inflate;
     private String[] headers;
@@ -98,12 +95,10 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
         } else {
             isJa = false;
         }
-
         searchText = getIntent().getStringExtra("searchText");
         if (!TextUtils.isEmpty(searchText)) {
             searchTv.setText(searchText);
         }
-
         initView();
         initData();
         initListener();
@@ -324,7 +319,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("mjId", mjId);//面积
         params.put("sjId", sjId);//售价
         params.put("searchText", searchText);
@@ -510,7 +506,18 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.bieshu));
                 intent.putExtra("state", 1);
-                startActivity(intent);
+                startActivityForResult(intent,0);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==11){
+            searchText=data.getStringExtra("searchText");
+            page=1;
+            mDatas.clear();
+            initData();
         }
     }
 }

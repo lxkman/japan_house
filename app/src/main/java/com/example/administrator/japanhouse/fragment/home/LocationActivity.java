@@ -86,17 +86,17 @@ public class LocationActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<CityListBean> response) {
                         int code = response.code();
-                        CityListBean body = response.body();
-                        List<CityListBean.DatasEntity> datas = body.getDatas();
-                        List<String> citysList = new ArrayList<String>();
-                        if (datas != null && datas.size() > 0) {
-                            for (int i = 0; i < datas.size(); i++) {
-                                CityListBean.DatasEntity datasEntity = datas.get(i);
-//                                String administrationNameCn = datasEntity.getAdministrationNameCn();
-//                                citysList.add(administrationNameCn);
-                            }
-                        }
-                        initDatas(citysList);
+//                        CityListBean body = response.body();
+//                        List<CityListBean.DatasEntity> datas = body.getDatas();
+//                        List<String> citysList = new ArrayList<String>();
+//                        if (datas != null && datas.size() > 0) {
+//                            for (int i = 0; i < datas.size(); i++) {
+//                                CityListBean.DatasEntity datasEntity = datas.get(i);
+////                                String administrationNameCn = datasEntity.getAdministrationNameCn();
+////                                citysList.add(administrationNameCn);
+//                            }
+//                        }
+//                        initDatas(citysList);
                     }
                 });
     }

@@ -91,11 +91,13 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     private LatLng curr_northeast;
     private LatLng curr_southwest;
     private boolean isevent;
+    private String searchText = "";
+    private float zoom = 11;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_old, null, false);
-        dropDownMenu= (DropDownMenu) view.findViewById(R.id.dropDownMenu);
+        dropDownMenu = (DropDownMenu) view.findViewById(R.id.dropDownMenu);
         //防止eventbus重复注册错误，因为fragment结合viewpager的时候，从第一个跳到第三个，再点第一个还是会走initView方法
         if (!isevent) {
             EventBus.getDefault().register(this);
@@ -107,7 +109,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         } else {
             isJa = false;
         }
-        Log.e("xxx","fragment111"+" oncreateView()");
+        Log.e("xxx", "fragment111" + " oncreateView()");
         return view;
     }
 
@@ -115,7 +117,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        Log.e("xxx","fragment111"+" onDestroy()");
+        Log.e("xxx", "fragment111" + " onDestroy()");
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -169,7 +171,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e("xxx","fragment111"+" onActivityCreated()");
+        Log.e("xxx", "fragment111" + " onActivityCreated()");
         initData();
         initLocation();
         initListener();
@@ -356,7 +358,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        Log.e("xxx","1111111111111111111111111111");
+                        Log.e("xxx", "1111111111111111111111111111");
                         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                     }
                 });
@@ -414,6 +416,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         } else {
             params.putUrlParams("qys", quyuList);//区域
         }
+        params.put("searchText", searchText);
         if (mMoreSelectedBeanList.size() > 0)
             params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
         if (mMoreSelectedBeanList.size() > 1)
@@ -452,7 +455,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                                 ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
                                 TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
                                 content.setText(isJa ? datasEntity.getAdministrationNameJpn() : datasEntity.getAdministrationNameCn());
-                                title.setText(datasEntity.getHouseNum() + "万套");
+                                title.setText(datasEntity.getHouseNum() + getString(R.string.wantao));
                                 iv.setVisibility(View.GONE);
                                 MarkerOptions markerOptions = new MarkerOptions()
                                         .icon(BitmapDescriptorFactory.fromView(markView))
@@ -477,7 +480,9 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                     baiduMap.animateMapStatus(u);
                     //                    loadAllXiaoQu(northeast, southwest);
                 } else {
-                    startActivity(new Intent(mContext, ErshoufangActiviy.class));
+                    Intent intent = new Intent(mContext, ErshoufangActiviy.class);
+                    intent.putExtra("communityId", marker.getTitle());
+                    startActivity(intent);
                 }
                 return false;
             }
@@ -501,6 +506,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 Log.e("xxxx", "百度地图状态改变结束");
+                zoom = mapStatus.zoom;
                 if (mapStatus.zoom < 12) {
                     initOverlay(mCity);
                 } else if (mapStatus.zoom >= 12) {
@@ -533,6 +539,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
         }
+        params.put("searchText", searchText);
         if (isDitie) {
             params.putUrlParams("dtzs", ditieList);//地铁站
         } else {
@@ -579,12 +586,13 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                                         markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
                                         View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
                                         TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao)
+                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao));
                                         MarkerOptions markerOptions = new MarkerOptions()
                                                 .icon(BitmapDescriptorFactory.fromView(markView))
                                                 .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                                 .zIndex(12)
+                                                .title(datasEntity.getId() + "")//做个标记，点击事件时候用到
                                                 .draggable(true);
                                         overlayOptionsList.add(markerOptions);
                                     }
@@ -592,12 +600,13 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                                     markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
                                     View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
                                     TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao)
+                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao));
                                     MarkerOptions markerOptions = new MarkerOptions()
                                             .icon(BitmapDescriptorFactory.fromView(markView))
                                             .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                             .zIndex(12)
+                                            .title(datasEntity.getId() + "")//做个标记，点击事件时候用到
                                             .draggable(true);
                                     overlayOptionsList.add(markerOptions);
                                 }
@@ -617,21 +626,21 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("xxx","fragment111"+" onResume()");
+        Log.e("xxx", "fragment111" + " onResume()");
         mapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.e("xxx","fragment111"+" onPause()");
+        Log.e("xxx", "fragment111" + " onPause()");
         mapView.onPause();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.e("xxx","fragment111"+" onDestroyView()");
+        Log.e("xxx", "fragment111" + " onDestroyView()");
         mapView.onDestroy();
     }
 
@@ -660,7 +669,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         mjId = mianjiEntity.getId() + "";
                     }
                 }
-                initOverlay(mCity);
+                refreshMap();
                 break;
             case 3://售价
                 isZiDingyiPrice = false;
@@ -672,7 +681,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
-                initOverlay(mCity);
+                refreshMap();
                 break;
         }
     }
@@ -691,7 +700,7 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                 sjId = "-1";
                 zidingyiPriceList.clear();
                 zidingyiPriceList = priceRegin;
-                initOverlay(mCity);
+                refreshMap();
             }
         }
     }
@@ -700,7 +709,24 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        initOverlay(mCity);
+        refreshMap();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            searchText=data.getStringExtra("searchText");
+            refreshMap();
+        }
+    }
+
+    private void refreshMap(){
+        if (zoom < 12) {
+            initOverlay(mCity);
+        } else if (zoom >= 12) {
+            loadAllXiaoQu(curr_northeast, curr_southwest);
+        }
     }
 
     /*判断某个经纬度点是否在多边形内部*/

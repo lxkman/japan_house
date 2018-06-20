@@ -3,6 +3,7 @@ package com.example.administrator.japanhouse.presenter;
 import android.app.Activity;
 
 import com.example.administrator.japanhouse.MyApplication;
+import com.example.administrator.japanhouse.bean.HotSearchBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -34,7 +35,6 @@ public class MainSearchPresenter {
         if (MyApplication.isJapanese()) {
             languageType = "1";
         }
-
         HttpParams params = new HttpParams();
         params.put("searchType", searchType);
         params.put("searchText", searchText);
@@ -51,7 +51,7 @@ public class MainSearchPresenter {
     }
 
     /**
-     * 首页顶部搜索-提示语
+     * 首页顶部搜索-提示语--二级的
      *
      * @param searchType
      * @param searchText
@@ -61,7 +61,6 @@ public class MainSearchPresenter {
         if (MyApplication.isJapanese()) {
             languageType = "1";
         }
-
         HttpParams params = new HttpParams();
         params.put("searchType", searchType);
         params.put("searchsType", searchsType);
@@ -78,7 +77,27 @@ public class MainSearchPresenter {
                 });
     }
 
+    /**
+     * 热门搜索
+     */
+    public void getHotSearchData(int pageNo, int type) {
+        HttpParams params = new HttpParams();
+        params.put("pageNo", pageNo);
+        params.put("type", type);
+        OkGo.<HotSearchBean>post(MyUrls.BASEURL + "/app/searchtag/hotsearchtag")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<HotSearchBean>(HotSearchBean.class) {
+                    @Override
+                    public void onSuccess(Response<HotSearchBean> response) {
+                        callBack.getHotSearchData(response);
+                    }
+                });
+    }
+
     public interface MainSearchCallBack {
         void getSearchHint(Response<TopSearchHintBean> response);
+
+        void getHotSearchData(Response<HotSearchBean> response);
     }
 }

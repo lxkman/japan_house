@@ -20,9 +20,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HotSearchBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.FluidLayout;
 import com.lzy.okgo.model.Response;
 
@@ -50,6 +50,7 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
     private MainSearchPresenter searchPresenter;
     private SearchListAdapter searchListAdapter;
     private List<String> SearchList = new ArrayList<>();
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,31 +121,7 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
     }
 
     private void initHot() {
-        fluidlayout.removeAllViews();
-        final List<String> hotNameList = new ArrayList<>();
-        hotNameList.add("朝阳");
-        hotNameList.add("青森县");
-        hotNameList.add("采光");
-        hotNameList.add("南向");
-        hotNameList.add("秋田县");
-        hotNameList.add("山形县");
-        for (int i = 0; i < hotNameList.size(); i++) {
-            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
-            tv.setText(hotNameList.get(i));
-            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(12, 12, 12, 12);
-            fluidlayout.addView(tv, params);
-            final int finalI = i;
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    TUtils.showShort(mContext, "点击了---" + hotNameList.get(finalI));
-                }
-            });
-        }
+        searchPresenter.getHotSearchData(page,2);
     }
 
     @Override
@@ -208,6 +185,39 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
             tvNoContent.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
             searchListRecycler.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void getHotSearchData(Response<HotSearchBean> response) {
+        HotSearchBean body = response.body();
+        List<HotSearchBean.DatasEntity> datas = body.getDatas();
+        final List<String> hotNameList = new ArrayList<>();
+        if (datas != null && datas.size() > 0) {
+            for (int i = 0; i < datas.size(); i++) {
+                String tagText = datas.get(i).getTagText();
+                hotNameList.add(tagText);
+            }
+        }
+        fluidlayout.removeAllViews();
+        for (int i = 0; i < hotNameList.size(); i++) {
+            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
+            tv.setText(hotNameList.get(i));
+            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            fluidlayout.addView(tv, params);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent();
+                    intent.putExtra("searchText", tv.getText().toString());
+                    setResult(11, intent);
+                    finish();
+                }
+            });
         }
     }
 }

@@ -593,4 +593,6 @@
     <string name="shuaxinchenggong">刷新成功</string>
     <string name="wangluoshiqulianjie">网络失去连接，请检查您的网络~</string>
     <string name="gengduoweizhi">更多位置</string>
+    <string name="wantao">万套</string>
+    <string name="tao">套）</string>
 </resources>

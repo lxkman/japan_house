@@ -92,6 +92,8 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     private LatLng curr_northeast;
     private LatLng curr_southwest;
     private boolean isevent;
+    private String searchText = "";
+    private float zoom = 11;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -398,6 +400,76 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         });
     }
 
+    private void initOverlay(String city) {
+        baiduMap.clear();
+        HttpParams params = new HttpParams();
+        params.put("cityName", city);
+        params.put("hType", 1);
+        params.put("mjId", mjId);//面积
+        params.put("sjId", sjId);//售价
+        if (isZiDingyiPrice) {
+            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+        }
+        if (isDitie) {
+            params.putUrlParams("dtzs", ditieList);//地铁站
+        } else {
+            params.putUrlParams("qys", quyuList);//区域
+        }
+        params.put("searchText", searchText);
+        if (mMoreSelectedBeanList.size() > 0)
+            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
+        if (mMoreSelectedBeanList.size() > 1)
+            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
+        if (mMoreSelectedBeanList.size() > 2)
+            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
+        if (mMoreSelectedBeanList.size() > 3)
+            params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(3));//建筑构造
+        if (mMoreSelectedBeanList.size() > 4)
+            params.putUrlParams("dds", mMoreSelectedBeanList.get(4));//地段
+        if (mMoreSelectedBeanList.size() > 5)
+            params.putUrlParams("cxs", mMoreSelectedBeanList.get(5));//朝向
+        if (mMoreSelectedBeanList.size() > 6)
+            params.putUrlParams("czjls", mMoreSelectedBeanList.get(6));//车站距离
+        if (mMoreSelectedBeanList.size() > 7)
+            params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
+        if (mMoreSelectedBeanList.size() > 8)
+            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
+        OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<MapHouseBean>(MapHouseBean.class) {
+                    @Override
+                    public void onSuccess(Response<MapHouseBean> response) {
+                        int code = response.code();
+                        MapHouseBean body = response.body();
+                        List<MapHouseBean.DatasEntity> datas = body.getDatas();
+                        if (datas != null && datas.size() > 0) {
+                            List<MarkerBean> markerBeanList = new ArrayList<>();
+                            List<OverlayOptions> overlayOptionsList = new ArrayList<>();
+                            for (int i = 0; i < datas.size(); i++) {
+                                MapHouseBean.DatasEntity datasEntity = datas.get(i);
+                                markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatitude()));
+                                View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
+                                TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
+                                ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
+                                TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
+                                content.setText(isJa ? datasEntity.getAdministrationNameJpn() : datasEntity.getAdministrationNameCn());
+                                title.setText(datasEntity.getHouseNum() + getString(R.string.wantao));
+                                iv.setVisibility(View.GONE);
+                                MarkerOptions markerOptions = new MarkerOptions()
+                                        .icon(BitmapDescriptorFactory.fromView(markView))
+                                        .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
+                                        .zIndex(11)
+                                        .draggable(true);
+                                overlayOptionsList.add(markerOptions);
+                            }
+                            baiduMap.addOverlays(overlayOptionsList);
+                        }
+                    }
+                });
+    }
+
     private void initListener() {
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
@@ -408,7 +480,9 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                     baiduMap.animateMapStatus(u);
                     //                    loadAllXiaoQu(northeast, southwest);
                 } else {
-                    startActivity(new Intent(mContext, ErshoufangActiviy.class));
+                    Intent intent = new Intent(mContext, NewHouseActivity.class);
+                    intent.putExtra("communityId",marker.getTitle());
+                    startActivity(intent);
                 }
                 return false;
             }
@@ -432,6 +506,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 Logger.e("xxxx", "百度地图状态改变结束");
+                zoom = mapStatus.zoom;
                 if (mapStatus.zoom < 12) {
                     initOverlay(mCity);
                 } else if (mapStatus.zoom >= 12) {
@@ -464,6 +539,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
         }
+        params.put("searchText", searchText);
         if (isDitie) {
             params.putUrlParams("dtzs", ditieList);//地铁站
         } else {
@@ -510,12 +586,13 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                                         markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
                                         View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
                                         TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                        content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao)
+                                                : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao));
                                         MarkerOptions markerOptions = new MarkerOptions()
                                                 .icon(BitmapDescriptorFactory.fromView(markView))
                                                 .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                                 .zIndex(12)
+                                                .title(datasEntity.getId()+"")//做个标记，点击事件时候用到
                                                 .draggable(true);
                                         overlayOptionsList.add(markerOptions);
                                     }
@@ -523,12 +600,13 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                                     markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatiude()));
                                     View markView = LayoutInflater.from(mContext).inflate(R.layout.map_item_xiaoqu, null);
                                     TextView content = (TextView) markView.findViewById(R.id.tv_xiaoqu);
-                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + "套）"
-                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + "套）");
+                                    content.setText(isJa ? datasEntity.getCommunityNameJpn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao)
+                                            : datasEntity.getCommunityNameCn() + "（" + datasEntity.getHouseNum() + getString(R.string.tao));
                                     MarkerOptions markerOptions = new MarkerOptions()
                                             .icon(BitmapDescriptorFactory.fromView(markView))
                                             .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                             .zIndex(12)
+                                            .title(datasEntity.getId()+"")//做个标记，点击事件时候用到
                                             .draggable(true);
                                     overlayOptionsList.add(markerOptions);
                                 }
@@ -539,75 +617,6 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                 });
     }
 
-
-    private void initOverlay(String city) {
-        baiduMap.clear();
-        HttpParams params = new HttpParams();
-        params.put("cityName", city);
-        params.put("hType", 1);
-        params.put("mjId", mjId);//面积
-        params.put("sjId", sjId);//售价
-        if (isZiDingyiPrice) {
-            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
-            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
-        }
-        if (isDitie) {
-            params.putUrlParams("dtzs", ditieList);//地铁站
-        } else {
-            params.putUrlParams("qys", quyuList);//区域
-        }
-        if (mMoreSelectedBeanList.size() > 0)
-            params.putUrlParams("hxs", mMoreSelectedBeanList.get(0));//户型
-        if (mMoreSelectedBeanList.size() > 1)
-            params.putUrlParams("lcs", mMoreSelectedBeanList.get(1));//楼层
-        if (mMoreSelectedBeanList.size() > 2)
-            params.putUrlParams("jznfs", mMoreSelectedBeanList.get(2));//建筑年份
-        if (mMoreSelectedBeanList.size() > 3)
-            params.putUrlParams("jzgzs", mMoreSelectedBeanList.get(3));//建筑构造
-        if (mMoreSelectedBeanList.size() > 4)
-            params.putUrlParams("dds", mMoreSelectedBeanList.get(4));//地段
-        if (mMoreSelectedBeanList.size() > 5)
-            params.putUrlParams("cxs", mMoreSelectedBeanList.get(5));//朝向
-        if (mMoreSelectedBeanList.size() > 6)
-            params.putUrlParams("czjls", mMoreSelectedBeanList.get(6));//车站距离
-        if (mMoreSelectedBeanList.size() > 7)
-            params.putUrlParams("syqs", mMoreSelectedBeanList.get(7));//所有权
-        if (mMoreSelectedBeanList.size() > 8)
-            params.putUrlParams("rzrqs", mMoreSelectedBeanList.get(8));//入居日期
-        OkGo.<MapHouseBean>post(MyUrls.BASEURL + "/app/city/selectbycity")
-                .tag(this)
-                .params(params)
-                .execute(new JsonCallback<MapHouseBean>(MapHouseBean.class) {
-                    @Override
-                    public void onSuccess(Response<MapHouseBean> response) {
-                        int code = response.code();
-                        MapHouseBean body = response.body();
-                        List<MapHouseBean.DatasEntity> datas = body.getDatas();
-                        if (datas != null && datas.size() > 0) {
-                            List<MarkerBean> markerBeanList = new ArrayList<>();
-                            List<OverlayOptions> overlayOptionsList = new ArrayList<>();
-                            for (int i = 0; i < datas.size(); i++) {
-                                MapHouseBean.DatasEntity datasEntity = datas.get(i);
-                                markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatitude()));
-                                View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
-                                TextView title = (TextView) markView.findViewById(R.id.item_title_tv);
-                                ImageView iv = (ImageView) markView.findViewById(R.id.iv_topordown);
-                                TextView content = (TextView) markView.findViewById(R.id.item_content_tv);
-                                content.setText(isJa ? datasEntity.getAdministrationNameJpn() : datasEntity.getAdministrationNameCn());
-                                title.setText(datasEntity.getHouseNum() + "万套");
-                                iv.setVisibility(View.GONE);
-                                MarkerOptions markerOptions = new MarkerOptions()
-                                        .icon(BitmapDescriptorFactory.fromView(markView))
-                                        .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
-                                        .zIndex(11)
-                                        .draggable(true);
-                                overlayOptionsList.add(markerOptions);
-                            }
-                            baiduMap.addOverlays(overlayOptionsList);
-                        }
-                    }
-                });
-    }
 
 
     @Override
@@ -661,7 +670,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                         mjId = mianjiEntity.getId() + "";
                     }
                 }
-                initOverlay(mCity);
+                refreshMap();
                 break;
             case 3://售价
                 isZiDingyiPrice = false;
@@ -673,7 +682,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                         sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
-                initOverlay(mCity);
+                refreshMap();
                 break;
         }
     }
@@ -692,7 +701,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                 sjId = "-1";
                 zidingyiPriceList.clear();
                 zidingyiPriceList = priceRegin;
-                initOverlay(mCity);
+                refreshMap();
             }
         }
     }
@@ -701,7 +710,24 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     public void onMoreItemClick(View view, List<List<String>> moreSelectedBeanList) {
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        initOverlay(mCity);
+        refreshMap();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==2){
+            searchText=data.getStringExtra("searchText");
+            refreshMap();
+        }
+    }
+
+    private void refreshMap(){
+        if (zoom < 12) {
+            initOverlay(mCity);
+        } else if (zoom >= 12) {
+            loadAllXiaoQu(curr_northeast, curr_southwest);
+        }
     }
 
     /*判断某个经纬度点是否在多边形内部*/

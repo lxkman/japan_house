@@ -20,6 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -31,9 +35,11 @@ import com.example.administrator.japanhouse.activity.OwnerActivity;
 import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.CityListBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.bean.HomePageBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
@@ -134,7 +140,7 @@ public class HomeFragment extends BaseFragment {
     private List<HomeItemBean> homeItemBeanList;//总的数据源
     private List<View> viewPagerList;//GridView作为一个View对象添加到ViewPager集合中
     private boolean isJa;
-
+    private LocationClient mLocClient;
     private int[] itemPic = {
             R.drawable.home_xinfang_iv,
             R.drawable.home_bieshu_iv,
@@ -160,31 +166,94 @@ public class HomeFragment extends BaseFragment {
         } else {
             isJa = false;
         }
+        initLocation();
         initViewData(view);
-        initData();
         initScroll();
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    private void initLocation() {
+        mLocClient = new LocationClient(mContext);
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式
+        option.setNeedDeviceDirect(true);// 设置返回结果包含手机的方向
+        option.setOpenGps(true);
+        option.setAddrType("all");// 返回的定位结果包含地址信息
+        option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+        option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
+        option.setIsNeedLocationPoiList(true);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                double longitude = bdLocation.getLongitude();
+                double latitude = bdLocation.getLatitude();
+                String city = bdLocation.getCity();
+                initLocationData(city);
+            }
+        });
+    }
+
+    private void initLocationData(final String city) {
+        HttpParams params = new HttpParams();
+        params.put("languageType", 0);
+        OkGo.<CityListBean>post(MyUrls.BASEURL + "/app/city/getcity")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<CityListBean>(CityListBean.class) {
+                    @Override
+                    public void onSuccess(Response<CityListBean> response) {
+                        int code = response.code();
+                        CityListBean body = response.body();
+                        CityListBean.DatasEntity datas = body.getDatas();
+                        List<CityListBean.DatasEntity.CitysEntity> citysList = datas.getCitys();
+                        if (citysList != null && citysList.size() > 0) {
+                            for (int i = 0; i < citysList.size(); i++) {
+                                CityListBean.DatasEntity.CitysEntity datasEntity = citysList.get(i);
+                                List<CityListBean.DatasEntity.CitysEntity.CityListEntity> cityList = datasEntity.getCityList();
+                                if (cityList != null && cityList.size() > 0) {
+                                    for (int i1 = 0; i1 < cityList.size(); i1++) {
+                                        String administrationNameCn = cityList.get(i1).getAdministrationNameCn();
+                                        if (!TextUtils.isEmpty(city) && city.equals(administrationNameCn)) {
+                                            CacheUtils.put("cityId", cityList.get(i1).getId());
+                                            CacheUtils.put("cityName", cityList.get(i1).getAdministrationNameCn());
+                                            String cityName = cityList.get(i1).getAdministrationNameCn();
+                                            if (cityName != null && cityName.length() <= 3) {
+                                                locationTv.setText(cityName);
+                                            } else if (cityName != null && cityName.length() > 3) {
+                                                locationTv.setText(cityName.substring(0, 2) + "...");
+                                            }
+                                            //不放在这会报空指针，cityId获取到后才能initData
+                                            initData();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data==null){
+        if (data == null) {
             return;
         }
+        int cityId = data.getIntExtra("cityId", 0);
+        int cityId2 = CacheUtils.get("cityId");
+        if (cityId == cityId2) {
+            return;
+        }
+        CacheUtils.put("cityId", cityId);
         String cityName = data.getStringExtra("cityName");
-        int cityId = data.getIntExtra("cityId",0);
-        CacheUtils.put("cityId",cityId);
         if (cityName != null && cityName.length() <= 3) {
             locationTv.setText(cityName);
         } else if (cityName != null && cityName.length() > 3) {
             locationTv.setText(cityName.substring(0, 2) + "...");
         }
+        initData();
     }
 
     private void initViewData(View view) {
@@ -325,7 +394,8 @@ public class HomeFragment extends BaseFragment {
 
     private void initData() {
         HttpParams params = new HttpParams();
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         if (isJa) {
             params.put("languageType", 1);
         } else {
@@ -738,7 +808,7 @@ public class HomeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.location_tv:
-                startActivityForResult(new Intent(mContext, LocationActivity2.class),0);
+                startActivityForResult(new Intent(mContext, LocationActivity2.class), 0);
                 break;
             case R.id.search_tv:
                 Intent intent1 = new Intent(mContext, HomeSearchActivity.class);

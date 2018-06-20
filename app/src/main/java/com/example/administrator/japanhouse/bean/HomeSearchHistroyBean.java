@@ -14,6 +14,11 @@ public class HomeSearchHistroyBean {
         this.content = content;
     }
 
+    public HomeSearchHistroyBean(int state, String content) {
+        this.state = state;
+        this.content = content;
+    }
+
     public int getState() {
         return state;
     }

@@ -156,7 +156,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         tuijianRecycler.setNestedScrollingEnabled(false);
         tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         HttpParams params = new HttpParams();
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         OkGo.<ZufangListBean>post(MyUrls.BASEURL + "/app/houseresourse/jrtj")
                 .tag(this)
                 .params(params)

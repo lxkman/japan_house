@@ -67,7 +67,6 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     private List<View> popupViews = new ArrayList<>();
     private RecyclerView mrecycler;
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
     private SpringView springview;
     private boolean isLoadMore;
     private int page = 1;
@@ -136,7 +135,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 4);
         OkGo.<ChinaShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -172,7 +171,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
+                        oneCheckBeanList1.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                         MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
@@ -214,7 +213,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -241,7 +240,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                          * */
                         shoujia = shaiXuanBeanDatas.getShoujia();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
                                 ChinaShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
@@ -307,7 +306,7 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
 
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -499,18 +498,20 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 Intent intent = new Intent(mContext, SydcSearchActivity.class);
                 intent.putExtra("edt_hint", getResources().getString(R.string.qsrdcmchqy));
                 intent.putExtra("state", 7);
-                intent.putExtra("cityId",cityId);
-                startActivityForResult(intent,0);
+                intent.putExtra("state2", Integer.parseInt(cityId));
+                startActivityForResult(intent, 0);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==11){
-            searchText=data.getStringExtra("searchText");
-            page=1;
-            mDatas.clear();
+        if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
+            page = 1;
+            if (mDatas != null) {
+                mDatas.clear();
+            }
             initData();
         }
     }

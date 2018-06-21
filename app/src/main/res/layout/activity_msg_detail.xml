@@ -31,12 +31,38 @@
             android:padding="13dp"/>
     </LinearLayout>
     <TextView
+        android:id="@+id/tv_msg_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:lineSpacingExtra="2dp"
         android:padding="15dp"
         android:layout_marginTop="10dp"
-        android:text="萨芬军多扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩扩"
+        android:text="尊敬的用户"
         android:textColor="@color/text_black"/>
+    <LinearLayout
+        android:paddingBottom="30dip"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:paddingLeft="15dip"
+            android:text="推送时间："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_msg_time"
+            android:text=""
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

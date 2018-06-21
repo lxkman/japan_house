@@ -5,18 +5,30 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.MsgBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.MyFooter;
+import com.example.administrator.japanhouse.view.MyHeader;
+import com.liaoinstan.springview.widget.SpringView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -39,40 +51,93 @@ public class DingYueActivity extends BaseActivity {
     SwipeMenuRecyclerView mrecycler;
     private List<String> mList=new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
+    private String token;
+    private SpringView springView;
+    private int pageNo = 1;
+    private boolean isLoadMore;
+    private List<MsgBean.DatasBean> mRefreshData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ding_yue);
         ButterKnife.bind(this);
-        initData();
+        token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
+        getMsg();
+        initRefresh();
     }
-
-    private void initData() {
-        if (mList.size()<=0){
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-        liebiaoAdapter = new LiebiaoAdapter(R.layout.item_dingyue,mList);
-        mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
-        // 设置监听器。
-        mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
-
-        mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+    private void initRefresh() {
+        springView = (SpringView) findViewById(R.id.act_history_springView);
+        springView.setHeader(new MyHeader(mContext));
+        springView.setFooter(new MyFooter(mContext));
+        springView.setListener(new SpringView.OnFreshListener() {
             @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                menuBridge.closeMenu();
+            public void onRefresh() {
+                isLoadMore = false;
+                pageNo = 1;
+                getMsg();
+                springView.onFinishFreshAndLoad();
+            }
 
-
-                shumaDialog(Gravity.CENTER,R.style.Alpah_aniamtion, menuBridge.getAdapterPosition());
+            @Override
+            public void onLoadmore() {
+                isLoadMore = true;
+                pageNo++;
+                getMsg();
+                springView.onFinishFreshAndLoad();
             }
         });
-        mrecycler.setAdapter(liebiaoAdapter);
+    }
 
+    private void getMsg() {
+        HttpParams params = new HttpParams();
+        params.put("pageNo", pageNo);
+        params.put("token", token);//用户登录标识
+        params.put("noticeType", "0");
+        OkGo.<MsgBean>post(MyUrls.BASEURL + "/app/noticeinfo/msglist")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<MsgBean>(this, MsgBean.class) {
+                    @Override
+                    public void onSuccess(Response<MsgBean> response) {
+                        int code = response.code();
+                        final MsgBean msgBean = response.body();
+                        String code1 = msgBean.getCode();
+                        List<MsgBean.DatasBean> datas = msgBean.getDatas();
+                        if (mRefreshData == null || mRefreshData.size() == 0) {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            mRefreshData = datas;
+                            liebiaoAdapter = new LiebiaoAdapter(R.layout.item_dingyue,mRefreshData);
+                            mrecycler.setNestedScrollingEnabled(false);
+                            mrecycler.setLayoutManager(new LinearLayoutManager(DingYueActivity.this,LinearLayoutManager.VERTICAL,false));
+                            // 设置监听器。
+                            mrecycler.setSwipeMenuCreator(mSwipeMenuCreator);
+
+                            mrecycler.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+                                @Override
+                                public void onItemClick(SwipeMenuBridge menuBridge) {
+                                    menuBridge.closeMenu();
+                                    shumaDialog(Gravity.CENTER,R.style.Alpah_aniamtion, menuBridge.getAdapterPosition());
+                                }
+                            });
+                            mrecycler.setAdapter(liebiaoAdapter);
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(mContext, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (!isLoadMore) {
+                                mRefreshData = datas;
+                                Toast.makeText(mContext, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
+                            } else {
+                                mRefreshData.addAll(datas);
+                            }
+                            liebiaoAdapter.notifyDataSetChanged();
+
+                        }
+                    }
+                });
     }
 
 
@@ -96,14 +161,17 @@ public class DingYueActivity extends BaseActivity {
 
 
 
-    class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    class LiebiaoAdapter extends BaseQuickAdapter<MsgBean.DatasBean, BaseViewHolder> {
 
-        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
+        public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<MsgBean.DatasBean> data) {
             super(layoutResId,data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper,String item) {
+        protected void convert(BaseViewHolder helper,MsgBean.DatasBean item) {
+            helper.setText(R.id.text_title,item.getTitle());
+            helper.setText(R.id.text_time,MyUtils.getDateToStringY(item.getCreateTime()+""));
+            helper.setText(R.id.text_neirong,item.getContent());
         }
     }
 
@@ -137,7 +205,7 @@ public class DingYueActivity extends BaseActivity {
         text_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mList.remove( postion);
+                RemoveMsg(mRefreshData.get(postion).getId());
                 liebiaoAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -150,5 +218,27 @@ public class DingYueActivity extends BaseActivity {
             }
         });
         dialog.show();
+    }
+    private void RemoveMsg(int id) {
+        HttpParams params = new HttpParams();
+        params.put("id", id);
+        OkGo.<MsgBean>post(MyUrls.BASEURL + "/app/usernotice/deletenotice")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<MsgBean>(this, MsgBean.class) {
+                    @Override
+                    public void onSuccess(Response<MsgBean> response) {
+                        int code = response.code();
+                        final MsgBean msgBean = response.body();
+                        String code1 = msgBean.getCode();
+                        mRefreshData = msgBean.getDatas();
+                        if (code1.equals("200")) {
+                            getMsg();
+                            Log.d("MineMsgActivity", "取消订阅成功-----------");
+                        } else {
+                            Toast.makeText(DingYueActivity.this, code1, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

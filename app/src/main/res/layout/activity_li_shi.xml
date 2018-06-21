@@ -49,6 +49,7 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
+                android:nestedScrollingEnabled="false"
                 android:background="#fff"
                 android:layout_marginTop="10dip"
                 android:id="@+id/mrecycler"

@@ -122,6 +122,13 @@ public class MyUtils {
         String format = sdf.format(new Date(lcc_time * 1000L));
         return format;
     }
+    //  时间戳转为日期
+    public static String getDateToStringY(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lcc_time = Long.valueOf(time);
+        String format = sdf.format(new Date(lcc_time * 1000L));
+        return format;
+    }
 
     public static String stampToDate(String s) {
         String res;

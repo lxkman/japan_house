@@ -30,6 +30,10 @@
             android:layout_height="50dip"
             android:padding="13dp"/>
     </LinearLayout>
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/act_history_springView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_msg"
         android:layout_width="match_parent"
@@ -37,4 +41,5 @@
         android:layout_marginTop="10dip"
         android:background="#fff"
     />
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

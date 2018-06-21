@@ -1,6 +1,8 @@
 package com.example.administrator.japanhouse.fragment.comment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
@@ -11,10 +13,12 @@ import butterknife.ButterKnife;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
-public class VideoDetailsActivity extends BaseActivity {
+public class VideoDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.videoplayer)
     JZVideoPlayerStandard videoplayer;
+    @BindView(R.id.img_back)
+    ImageView img_back;
     private String videoUrl,VideoImg;
 
     @Override
@@ -24,6 +28,7 @@ public class VideoDetailsActivity extends BaseActivity {
         ButterKnife.bind(this);
         videoUrl = getIntent().getStringExtra("VideoUrl");
         VideoImg = getIntent().getStringExtra("VideoImg");
+        img_back.setOnClickListener(this);
         initView();
     }
 
@@ -51,4 +56,8 @@ public class VideoDetailsActivity extends BaseActivity {
         JZVideoPlayer.releaseAllVideos();
     }
 
+    @Override
+    public void onClick(View view) {
+        finish();
+    }
 }

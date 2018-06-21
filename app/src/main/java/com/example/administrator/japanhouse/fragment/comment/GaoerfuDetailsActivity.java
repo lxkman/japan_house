@@ -15,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import com.example.administrator.japanhouse.bean.ShangYeDetailsBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.more.GaoErFuMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
@@ -60,10 +58,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
-import io.rong.imkit.DefaultExtensionModule;
-import io.rong.imkit.IExtensionModule;
-import io.rong.imkit.RongExtensionManager;
-import io.rong.imkit.RongIM;
 
 import static com.example.administrator.japanhouse.R.id.tv_price;
 
@@ -169,8 +163,17 @@ public class GaoerfuDetailsActivity extends BaseActivity {
                     public void onSuccess(Response<ShangYeDetailsBean> response) {
                         int code = response.code();
                         ShangYeDetailsBean SydcListBean = response.body();
+                        if (SydcListBean == null) {
+                            return;
+                        }
                         datas = SydcListBean.getDatas();
+                        if (datas == null) {
+                            return;
+                        }
                         hwdcBroker = datas.getHwdcBroker();
+                        if (hwdcBroker==null){
+                            return;
+                        }
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
@@ -219,6 +222,9 @@ public class GaoerfuDetailsActivity extends BaseActivity {
     }
 
     private void initViewPager() {
+        if (datas.getRealEstateImgs().equals("")){
+            return;
+        }
         realEstateImgs = datas.getRealEstateImgs();
         String str2 = realEstateImgs.replace("", "");//去掉所用空格
         bannerlist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中

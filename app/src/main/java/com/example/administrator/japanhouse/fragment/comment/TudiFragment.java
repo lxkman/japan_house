@@ -62,7 +62,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
 
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
-        tv_refresh_time.setText(currentDate+"更新");
+        tv_refresh_time.setText(currentDate+R.string.gengxin);
         tjNewHousePresenter.getLand(page);
     }
     private void initListener() {

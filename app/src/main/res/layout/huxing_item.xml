@@ -3,8 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <ImageView
+    android:scaleType="fitXY"
     android:id="@+id/img_huxing"
-    android:layout_margin="15dip"
+    android:layout_margin="10dip"
     android:src="@drawable/huxingtu"
     android:layout_width="match_parent"
     android:layout_height="115dip" />

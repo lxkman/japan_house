@@ -50,17 +50,17 @@ public class FangjiaMapBean {
          * qys : [{"latitude":39.53,"avgMoney":5.698113,"priceStete":2,"parentId":0,"administrationNameCn":"海淀区","isDeleted":0,"createTime":1528709038968,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","houseNum":0,"status":"0","longitude":116.03},{"latitude":39.83,"avgMoney":3,"priceStete":2,"parentId":0,"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1528709038969,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","houseNum":0,"status":"0","longitude":116.46},{"latitude":39.53,"avgMoney":0,"priceStete":2,"parentId":0,"administrationNameCn":"大兴区","isDeleted":0,"createTime":1528709038969,"citylevel":"3","id":32,"administrationNameJpn":"大兴区","houseNum":0,"status":"0","longitude":116.03}]
          * cityzxt : [{"avgPrice":2,"days":1526572800000},{"avgPrice":5,"days":1528300800000},{"avgPrice":2,"days":1528646400000}]
          */
-        private String yeaybfb;
-        private String monthbfb;
+        private Float yeaybfb;
+        private Float monthbfb;
         private CityEntity city;
         private List<QysEntity> qys;
         private List<CityzxtEntity> cityzxt;
 
-        public void setYeaybfb(String yeaybfb) {
+        public void setYeaybfb(Float yeaybfb) {
             this.yeaybfb = yeaybfb;
         }
 
-        public void setMonthbfb(String monthbfb) {
+        public void setMonthbfb(Float monthbfb) {
             this.monthbfb = monthbfb;
         }
 
@@ -76,11 +76,11 @@ public class FangjiaMapBean {
             this.cityzxt = cityzxt;
         }
 
-        public String getYeaybfb() {
+        public Float getYeaybfb() {
             return yeaybfb;
         }
 
-        public String getMonthbfb() {
+        public Float getMonthbfb() {
             return monthbfb;
         }
 

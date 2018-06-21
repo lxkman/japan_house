@@ -74,6 +74,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
 
+import static com.example.administrator.japanhouse.R.id.tv_details_bianjia;
+
 public class NewHousedetailsActivity extends BaseActivity {
 
     @BindView(R.id.vp_vidio)
@@ -134,7 +136,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     RelativeLayout activityLishiNewHouse;
     @BindView(R.id.tv_details_phone)
     TextView tvDetailsPhone;
-    @BindView(R.id.tv_details_bianjia)
+    @BindView(tv_details_bianjia)
     TextView tvDetailsBianjia;
     @BindView(R.id.tv_details_kaipan)
     TextView tvDetailsKaipan;
@@ -188,7 +190,6 @@ public class NewHousedetailsActivity extends BaseActivity {
 
     }
 
-
     //详情字段接口
     private void initDetailsNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
@@ -212,7 +213,13 @@ public class NewHousedetailsActivity extends BaseActivity {
                     public void onSuccess(Response<HouseDetailsBean> response) {
                         int code = response.code();
                         HouseDetailsBean oldHouseListBean = response.body();
+                        if (oldHouseListBean == null) {
+                            return;
+                        }
                         datas = oldHouseListBean.getDatas();
+                        if (datas == null) {
+                            return;
+                        }
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
@@ -331,6 +338,9 @@ public class NewHousedetailsActivity extends BaseActivity {
 
 
     private void initViewPager() {
+        if (bannerlist==null&&bannerlist.size()<=0){
+            return;
+        }
         if (mBannerList.size() <= 0) {
             if (datas.getVideoUrls() != null) {
                 if (datas.getVideoUrls().equals("")) {
@@ -466,19 +476,21 @@ public class NewHousedetailsActivity extends BaseActivity {
             }
         });
 
-
-        if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, hxtlist);
-        }
-        HuxingRecycler.setLayoutManager(new GridLayoutManager(NewHousedetailsActivity.this, 3));
-        HuxingRecycler.setNestedScrollingEnabled(false);
-        HuxingRecycler.setAdapter(mLiebiaoAdapter);
-        mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showHuxingDialog(position);
+        if (datas.getHxtlist()!=null&&datas.getHxtlist().size()>0){
+            if (mLiebiaoAdapter == null) {
+                mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, hxtlist);
             }
-        });
+            HuxingRecycler.setLayoutManager(new GridLayoutManager(NewHousedetailsActivity.this, 3));
+            HuxingRecycler.setNestedScrollingEnabled(false);
+            HuxingRecycler.setAdapter(mLiebiaoAdapter);
+            mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    showHuxingDialog(position);
+                }
+            });
+        }
+
     }
 
 
@@ -579,19 +591,22 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
     private int noticeType;
-    @OnClick({R.id.tv_details_bianjia,R.id.tv_details_kaipan,R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone})
+    @OnClick({tv_details_bianjia,R.id.tv_details_kaipan,R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
-            case R.id.tv_details_bianjia:
+            case tv_details_bianjia:
                 noticeType=0;
                 initHuoDong(noticeType);
+                tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
                 break;
             case R.id.tv_details_kaipan:
                 noticeType=1;
                 initHuoDong(noticeType);
+
+                tvDetailsKaipan.setBackground(getResources().getDrawable(R.drawable.border_shihuangse));
                 break;
             case R.id.tv_details_manager_phone:
                 ShowCallDialog(hwdcBroker.getPhone() + "");

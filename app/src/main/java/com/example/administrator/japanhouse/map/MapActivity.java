@@ -1,7 +1,11 @@
 package com.example.administrator.japanhouse.map;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -20,6 +25,7 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
@@ -75,6 +81,17 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
     private String lat;
     private String log;
     private String tag;
+    //头部 添加相应地区
+    private final static String BAIDU_HEAD = "baidumap://map/direction?region=0";
+    //起点的经纬度
+    private final static String BAIDU_ORIGIN = "&origin=";
+    //终点的经纬度
+    private final static String BAIDU_DESTINATION = "&destination=";
+    //路线规划方式
+    private final static String BAIDU_MODE = "&mode=walking";
+    //百度地图的包名
+    private final static String BAIDU_PKG = "com.baidu.BaiduMap";
+    private View markView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +124,7 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                         mBaiduMap.clear();
                     } else {
                         //路线弹窗
-                        View markView = View.inflate(MapActivity.this, R.layout.location_layout, null);
+                      View  markView = View.inflate(MapActivity.this, R.layout.location_layout, null);
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromView(markView))
                                 .position(new LatLng(Double.valueOf(lat),Double.valueOf(log)))
@@ -115,6 +132,23 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                                 .draggable(true);
                         mBaiduMap.addOverlay(markerOptions);
                         mBaiduMap.addOverlays(overlayOptions);
+                        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker marker) {
+                                //检测地图是否安装和唤起
+                                if (checkMapAppsIsExist(MapActivity.this, BAIDU_PKG)) {
+                                    Toast.makeText(MapActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent();
+                                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
+                                            + "," + "139.75" + BAIDU_DESTINATION + lat + "," + log
+                                            + BAIDU_MODE));
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(MapActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
+                                }
+                                return false;
+                            }
+                        });
                     }
                     return;
                 }
@@ -150,6 +184,27 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
             }
         }
     }
+    /**
+     * 检测地图应用是否安装
+     *
+     * @param context
+     * @param packagename
+     * @return
+     */
+    public boolean checkMapAppsIsExist(Context context, String packagename) {
+        PackageInfo packageInfo;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
+        } catch (Exception e) {
+            packageInfo = null;
+            e.printStackTrace();
+        }
+        if (packageInfo == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     private void initmap() {
         mBaiduMap = permapview.getMap();
@@ -179,6 +234,8 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
     }
 
     private void initView() {
+
+
         lat = getIntent().getStringExtra("lat");
         log = getIntent().getStringExtra("log");
         tag = getIntent().getStringExtra("TAG");

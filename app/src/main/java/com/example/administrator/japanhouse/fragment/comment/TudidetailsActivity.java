@@ -33,11 +33,9 @@ import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.TudiDetailsBean;
 import com.example.administrator.japanhouse.bean.TudiListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.more.TudiMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
-import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -58,10 +56,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
-import io.rong.imkit.DefaultExtensionModule;
-import io.rong.imkit.IExtensionModule;
-import io.rong.imkit.RongExtensionManager;
-import io.rong.imkit.RongIM;
 
 public class TudidetailsActivity extends BaseActivity {
 
@@ -165,7 +159,13 @@ public class TudidetailsActivity extends BaseActivity {
                     public void onSuccess(Response<TudiDetailsBean> response) {
                         int code = response.code();
                         TudiDetailsBean tudiDetailsBean = response.body();
+                        if (tudiDetailsBean == null) {
+                            return;
+                        }
                         datas = tudiDetailsBean.getDatas();
+                        if (datas == null) {
+                            return;
+                        }
                         landImgs = datas.getLandImgs();//轮播图
                         Log.d("TudidetailsActivity", landImgs);
                         hwdcBroker = datas.getHwdcBroker();
@@ -222,6 +222,9 @@ public class TudidetailsActivity extends BaseActivity {
     }
 
     private void initViewPager() {
+        if (landImgs.equals("")){
+            return;
+        }
         String str2 = landImgs.replace("", "");//去掉所用空格
         bannerlist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
         if (mBannerList.size() <= 0) {

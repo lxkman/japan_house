@@ -12,7 +12,7 @@ public class ChartBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"monthbfb":"0.0%","yearbfb":"200.0%","zxtlist":[{"days":1526572800000,"avgPrice":2},{"days":1528646400000,"avgPrice":2}],"bigandsmallval":{"endVal":2,"bigVal":2}}
+     * datas : {"monthbfb":0,"yearbfb":0,"zxtlist":[{"days":1526572800000,"avgPrice":1},{"days":1528300800000,"avgPrice":1},{"days":1528646400000,"avgPrice":1},{"days":1528992000000,"avgPrice":1},{"days":1529424000000,"avgPrice":1}],"bigandsmallval":{"endVal":1.0E-4,"bigVal":1.0E-4}}
      */
 
     private String msg;
@@ -45,30 +45,30 @@ public class ChartBean {
 
     public static class DatasBean {
         /**
-         * monthbfb : 0.0%
-         * yearbfb : 200.0%
-         * zxtlist : [{"days":1526572800000,"avgPrice":2},{"days":1528646400000,"avgPrice":2}]
-         * bigandsmallval : {"endVal":2,"bigVal":2}
+         * monthbfb : 0
+         * yearbfb : 0
+         * zxtlist : [{"days":1526572800000,"avgPrice":1},{"days":1528300800000,"avgPrice":1},{"days":1528646400000,"avgPrice":1},{"days":1528992000000,"avgPrice":1},{"days":1529424000000,"avgPrice":1}]
+         * bigandsmallval : {"endVal":1.0E-4,"bigVal":1.0E-4}
          */
 
-        private Float monthbfb;
-        private Float yearbfb;
+        private int monthbfb;
+        private int yearbfb;
         private BigandsmallvalBean bigandsmallval;
         private List<ZxtlistBean> zxtlist;
 
-        public Float getMonthbfb() {
+        public float getMonthbfb() {
             return monthbfb;
         }
 
-        public void setMonthbfb(Float monthbfb) {
+        public void setMonthbfb(int monthbfb) {
             this.monthbfb = monthbfb;
         }
 
-        public Float getYearbfb() {
+        public float getYearbfb() {
             return yearbfb;
         }
 
-        public void setYearbfb(Float yearbfb) {
+        public void setYearbfb(int yearbfb) {
             this.yearbfb = yearbfb;
         }
 
@@ -90,26 +90,26 @@ public class ChartBean {
 
         public static class BigandsmallvalBean {
             /**
-             * endVal : 2
-             * bigVal : 2
+             * endVal : 1.0E-4
+             * bigVal : 1.0E-4
              */
 
-            private int endVal;
-            private int bigVal;
+            private double endVal;
+            private double bigVal;
 
-            public int getEndVal() {
+            public double getEndVal() {
                 return endVal;
             }
 
-            public void setEndVal(int endVal) {
+            public void setEndVal(double endVal) {
                 this.endVal = endVal;
             }
 
-            public int getBigVal() {
+            public double getBigVal() {
                 return bigVal;
             }
 
-            public void setBigVal(int bigVal) {
+            public void setBigVal(double bigVal) {
                 this.bigVal = bigVal;
             }
         }
@@ -117,11 +117,11 @@ public class ChartBean {
         public static class ZxtlistBean {
             /**
              * days : 1526572800000
-             * avgPrice : 2
+             * avgPrice : 1
              */
 
             private long days;
-            private int avgPrice;
+            private double avgPrice;
 
             public long getDays() {
                 return days;
@@ -131,11 +131,11 @@ public class ChartBean {
                 this.days = days;
             }
 
-            public int getAvgPrice() {
+            public double getAvgPrice() {
                 return avgPrice;
             }
 
-            public void setAvgPrice(int avgPrice) {
+            public void setAvgPrice(double avgPrice) {
                 this.avgPrice = avgPrice;
             }
         }

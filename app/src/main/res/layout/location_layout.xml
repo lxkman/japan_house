@@ -43,6 +43,7 @@
 
         </View>
         <ImageView
+            android:id="@+id/img_open_location"
             android:layout_gravity="center_vertical"
             android:src="@drawable/luxian"
             android:layout_width="wrap_content"

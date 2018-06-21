@@ -599,4 +599,6 @@
     <string name="tao">件）</string>
     <string name="duoxuan">多選</string>
     <string name="dongjing">東京</string>
+    <string name="house_details">物件情報</string>
+    <string name="gengxin">更新する</string>
 </resources>

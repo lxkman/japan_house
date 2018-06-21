@@ -21,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -95,7 +96,15 @@ public class MyUtils {
         context.startActivity(intent);
     }
 
-
+    /**
+     * double转String,保留小数点后两位
+     * @param num
+     * @return
+     */
+    public static float floatToString(float num){
+        //使用0.00不足位补0，#.##仅保留有效位
+        return Float.parseFloat(new DecimalFormat("0.00").format(num));
+    }
     /*将日期转为时间戳*/
     public static long getStringToDate(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
@@ -163,7 +172,7 @@ public class MyUtils {
 
     // 获取当前时间
     public static String getCurrentDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String date = sdf.format(curDate);
         return date;

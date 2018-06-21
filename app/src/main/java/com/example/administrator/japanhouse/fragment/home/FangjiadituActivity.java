@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.home;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,9 +81,13 @@ public class FangjiadituActivity extends BaseActivity {
     private Float monthbfb;
     private Float yearbfb;
     private List<ChartBean.DatasBean.ZxtlistBean> zxtlist;
-    private int bigVal;
-    private int endVal;
+    private double bigVal;
+    private double endVal;
     private int avgMoney;
+    private String Tag;
+    private Float monthbfboneline;
+    private Float yeaybfboneline;
+    private int avgMoneyoneline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,9 @@ public class FangjiadituActivity extends BaseActivity {
                         ChartBean.DatasBean.BigandsmallvalBean bigandsmallval = datas.getBigandsmallval();
                         bigVal = bigandsmallval.getBigVal();
                         endVal = bigandsmallval.getEndVal();
+                        if (Tag.equals("2")){
+                            showMPChart(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                        }
                     }
                 });
     }
@@ -136,16 +144,28 @@ public class FangjiadituActivity extends BaseActivity {
             xValue.add(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())));
             value.put(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())), mlist.get(i));
         }
-        for (int i = 0; i < zxtlist.size(); i++) {
-            mlist1.add((float) zxtlist.get(i).getAvgPrice());
-            value1.put(MyUtils.getDateToStringM(String.valueOf(zxtlist.get(i).getDays())), mlist1.get(i));
+        if (zxtlist!=null&&zxtlist.size()>0){
+            for (int i = 0; i < zxtlist.size(); i++) {
+                mlist1.add((float) zxtlist.get(i).getAvgPrice());
+                value1.put(MyUtils.getDateToStringM(String.valueOf(zxtlist.get(i).getDays())), mlist1.get(i));
+            }
         }
-       int num = (bigVal-endVal)/3;
+
+       double num = (bigVal-endVal)/4;
         yValue.add((float) endVal);
-        yValue.add((float) endVal+num);
-        yValue.add((float) endVal+num*2);
-        yValue.add((float) endVal+num*3);
+        yValue.add(MyUtils.floatToString((float) ((float) endVal+num)));
+        yValue.add(MyUtils.floatToString((float) ((float) endVal+num*2)));
+        yValue.add(MyUtils.floatToString((float) ((float) endVal+num*3)));
         yValue.add((float) bigVal);
+        for (int i = 0; i < yValue.size(); i++) {
+            Log.d("FangjiadituActivity", "yValue.get(i):" + yValue.get(i)+"-----------");
+        }
+        for (int i = 0; i < mlist.size(); i++) {
+            Log.d("FangjiadituActivity", "mlist.get(i):" + mlist.get(i)+"-------");
+        }
+        for (int i = 0; i < mlist1.size(); i++) {
+            Log.d("FangjiadituActivity", "mlist1.get(i):" + mlist1.get(i)+"-------");
+        }
     }
 
 
@@ -155,6 +175,7 @@ public class FangjiadituActivity extends BaseActivity {
             case R.id.btn_location:
                 break;
             case R.id.layout_pop:
+                Tag="1";
                 //一条折线
                 showMPChartOneLine(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
@@ -226,21 +247,21 @@ public class FangjiadituActivity extends BaseActivity {
         TextView tv_mouth = (TextView) dialog.findViewById(R.id.tv_mouth);
         TextView tv_years = (TextView) dialog.findViewById(R.id.tv_years);
         TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
-        tv_dialog_price.setText(avgMoney+"元/平");
+        tv_dialog_price.setText(avgMoneyoneline+"元/平");
         Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
         //一定要加这行！！！！！！！！！！！
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        if (monthbfb>=0){//上月增长
-            tv_mouth.setText(monthbfb+"");
+        if (monthbfboneline>=0){//上月增长
+            tv_mouth.setText(monthbfboneline+"");
         }else {//下降
-            tv_mouth.setText(monthbfb*(-1)+"");
+            tv_mouth.setText(monthbfboneline*(-1)+"");
             tv_mouth.setCompoundDrawables(drawable,null,null,null);
         }
-        if (yearbfb>=0){//去年增长
-            tv_years.setText(yearbfb+"");
+        if (yeaybfboneline>=0){//去年增长
+            tv_years.setText(yeaybfboneline+"");
         }else {//下降
             tv_years.setCompoundDrawables(drawable,null,null,null);
-            tv_years.setText(yearbfb*(-1)+"");
+            tv_years.setText(yeaybfboneline*(-1)+"");
         }
         //绘制折线图
         initLineChartOneLine(dialog);
@@ -308,8 +329,11 @@ public class FangjiadituActivity extends BaseActivity {
                         FangjiaMapBean body = response.body();
                         FangjiaMapBean.DatasEntity datas = body.getDatas();
                         FangjiaMapBean.DatasEntity.CityEntity city = datas.getCity();
-                        avgMoney = city.getAvgMoney();
+                        avgMoneyoneline = city.getAvgMoney();
+                        FangjiadituActivity.this.avgMoney = city.getAvgMoney();
                         cityzxt = datas.getCityzxt();
+                        monthbfboneline = datas.getMonthbfb();
+                        yeaybfboneline = datas.getYeaybfb();
                         List<FangjiaMapBean.DatasEntity.QysEntity> qys = datas.getQys();
                         if (datas != null && qys.size() > 0) {
                             List<MarkerBean> markerBeanList = new ArrayList<>();
@@ -336,15 +360,17 @@ public class FangjiadituActivity extends BaseActivity {
                                         .icon(BitmapDescriptorFactory.fromView(markView))
                                         .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                         .zIndex(11)
+                                        .title(qys.get(i).getId()+"")
                                         .draggable(true);
                                 overlayOptionsList.add(markerOptions);
-                                initChartNet(qys.get(i).getId());
+
                             }
                             baiduMap.addOverlays(overlayOptionsList);
                             baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(Marker marker) {
-                                    showMPChart(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
+                                    Tag="2";
+                                    initChartNet(Integer.parseInt(marker.getTitle()));
                                     return false;
                                 }
                             });

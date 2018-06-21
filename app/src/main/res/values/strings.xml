@@ -226,7 +226,7 @@
     <string name="shangpu_diduan">地段：</string>
     <string name="shangpu_qingyinsh">轻饮食：</string>
     <string name="tudi_shifoujiejiao">是否街角：</string>
-    <string name="tudi_nengfou">能否高建筑：</string>
+    <string name="tudi_nengfou">能否高层建筑：</string>
     <string name="tudi_zhouwei">周围采光：</string>
     <string name="tudi_fengjing">周围风景：</string>
     <string name="tudi_chezhanjuli">车站距离：</string>
@@ -597,4 +597,6 @@
     <string name="tao">套）</string>
     <string name="duoxuan">多选</string>
     <string name="dongjing">东京</string>
+    <string name="house_details">房源详情</string>
+    <string name="gengxin">更新</string>
 </resources>

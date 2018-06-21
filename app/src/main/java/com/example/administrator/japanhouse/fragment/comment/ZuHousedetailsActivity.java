@@ -18,7 +18,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,6 @@ import com.example.administrator.japanhouse.bean.HouseDetailsBean;
 import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.more.ZuBanGongMoreActivity;
 import com.example.administrator.japanhouse.more.ZuBieSuMoreActivity;
@@ -46,7 +44,6 @@ import com.example.administrator.japanhouse.more.ZuErCengMoreActivity;
 import com.example.administrator.japanhouse.more.ZuShangPuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuXueShengMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
-import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -65,10 +62,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
-import io.rong.imkit.DefaultExtensionModule;
-import io.rong.imkit.IExtensionModule;
-import io.rong.imkit.RongExtensionManager;
-import io.rong.imkit.RongIM;
 
 public class ZuHousedetailsActivity extends BaseActivity {
 
@@ -194,7 +187,13 @@ public class ZuHousedetailsActivity extends BaseActivity {
                     public void onSuccess(Response<HouseDetailsBean> response) {
                         int code = response.code();
                         HouseDetailsBean oldHouseListBean = response.body();
+                        if (oldHouseListBean==null){
+                            return;
+                        }
                         datas = oldHouseListBean.getDatas();
+                        if (datas==null){
+                            return;
+                        }
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
@@ -305,6 +304,9 @@ public class ZuHousedetailsActivity extends BaseActivity {
     }
 
     private void initViewPager() {
+        if (bannerlist==null&&bannerlist.size()<=0){
+            return;
+        }
         if (mBannerList.size() <= 0) {
             if (datas.getVideoUrls() != null) {
                 if (datas.getVideoUrls().equals("")) {

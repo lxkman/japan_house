@@ -47,7 +47,6 @@ import com.example.administrator.japanhouse.bean.HouseDetailsBean;
 import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
@@ -73,10 +72,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
-import io.rong.imkit.DefaultExtensionModule;
-import io.rong.imkit.IExtensionModule;
-import io.rong.imkit.RongExtensionManager;
-import io.rong.imkit.RongIM;
 
 public class OldHousedetailsActivity extends BaseActivity {
 
@@ -208,7 +203,13 @@ public class OldHousedetailsActivity extends BaseActivity {
                     public void onSuccess(Response<HouseDetailsBean> response) {
                         int code = response.code();
                         HouseDetailsBean oldHouseListBean = response.body();
+                        if (oldHouseListBean==null){
+                            return;
+                        }
                         datas = oldHouseListBean.getDatas();
+                        if (datas==null){
+                            return;
+                        }
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
@@ -501,6 +502,9 @@ public class OldHousedetailsActivity extends BaseActivity {
     }
 
     private void initViewPager() {
+        if (bannerlist==null&&bannerlist.size()<=0){
+            return;
+        }
         if (mBannerList.size() <= 0) {
             if (datas.getVideoUrls() != null) {
                 if (datas.getVideoUrls().equals("")) {

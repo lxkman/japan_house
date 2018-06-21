@@ -28,6 +28,7 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.fragment.mine.fragment.LiShiJiLu2Activity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -165,7 +166,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         TextView tongqinTv = (TextView) fifthView.findViewById(R.id.tongqin_tv);
         TextView jiluTv = (TextView) fifthView.findViewById(R.id.jilu_tv);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         shipinTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,6 +186,10 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         jiluTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                    return;
+                }
                 Intent intent = new Intent(mContext, LiShiJiLu2Activity.class);
                 intent.putExtra("houseType", mType2);
                 startActivity(intent);
@@ -228,8 +233,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,getResources().getString(R.string.buxian));
+                        oneCheckBeanList1.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -298,7 +303,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -315,7 +320,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                          * */
                         zujin = shaiXuanBeanDatas.getZujin();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (zujin != null && zujin.size() > 0) {
                             for (int i = 0; i < zujin.size(); i++) {
                                 ZuHouseShaiXuanBean.DatasEntity.ZujinEntity shoujiaEntity = zujin.get(i);
@@ -363,7 +368,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -423,7 +428,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 tvNoContent.setVisibility(View.VISIBLE);
-                                springview.setVisibility(View.GONE);
+//                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -618,7 +623,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 
@@ -648,7 +654,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 intent.putExtra("popcontent", getResources().getString(R.string.zu_house));
                 intent.putExtra("state", 4);
                 intent.putExtra("state2", mType2);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
         }
     }
 
@@ -660,13 +666,16 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             endJd = data.getDoubleExtra("endJd", 0);
             starWd = data.getDoubleExtra("starWd", 0);
             endWd = data.getDoubleExtra("endWd", 0);
-            page=1;
+            page = 1;
             mDatas.clear();
             initData();
             Log.e("xxx", "开始经度:" + starJd + "\n" + "结束经度:" + endJd + "\n" + "开始纬度:" + starWd + "\n" + "结束纬度:" + endWd);
-        }else if (resultCode==11){
-            searchText=data.getStringExtra("searchText");
-            page=1;
+        } else if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
+            if (!TextUtils.isEmpty(searchText)) {
+                searchTv.setText(searchText);
+            }
+            page = 1;
             mDatas.clear();
             initData();
         }

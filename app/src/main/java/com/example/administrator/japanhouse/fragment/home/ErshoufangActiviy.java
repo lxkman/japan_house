@@ -489,7 +489,8 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 
@@ -522,6 +523,9 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 11) {
             searchText = data.getStringExtra("searchText");
+            if (!TextUtils.isEmpty(searchText)) {
+                searchTv.setText(searchText);
+            }
             page = 1;
             mDatas.clear();
             initData();

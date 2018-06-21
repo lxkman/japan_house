@@ -133,6 +133,8 @@ public class HomeFragment extends BaseFragment {
     NestedScrollView scrollView;
     @BindView(re_top_bg)
     RelativeLayout reTopBg;
+    @BindView(R.id.iv_tantan)
+    ImageView ivTantan;
     private int mDistanceY;
     private int totalPage; //总的页数
     private int mPageSize = 10; //每页显示的最大的数量
@@ -189,6 +191,15 @@ public class HomeFragment extends BaseFragment {
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
+//                String country = bdLocation.getCountry();
+//                if (!country.equals("日本")) {
+//                    String cityName = getResources().getString(R.string.dongjing);
+//                    CacheUtils.put("cityId", "");
+//                    CacheUtils.put("cityName", cityName);
+//                    locationTv.setText(cityName);
+//                    initData();
+//                    return;
+//                }
                 String city = bdLocation.getCity();
                 initLocationData(city);
             }
@@ -390,6 +401,11 @@ public class HomeFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(mContext);
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         tjtdRecycler.setLayoutManager(linearLayoutManager3);
+        if (isJa) {
+            ivTantan.setImageResource(R.drawable.tatan_ja);
+        } else {
+            ivTantan.setImageResource(R.drawable.home_paoma_iv);
+        }
     }
 
     private void initData() {
@@ -640,7 +656,6 @@ public class HomeFragment extends BaseFragment {
         //        tantanTv.requestFocus();//解决切换fragment之后回来不滚动的问题
     }
 
-
     private class TjxfAdapter extends BaseQuickAdapter<HomePageBean.DatasEntity.TjxfEntity, BaseViewHolder> {
 
         public TjxfAdapter(int layoutResId, @Nullable List<HomePageBean.DatasEntity.TjxfEntity> data) {
@@ -774,7 +789,8 @@ public class HomeFragment extends BaseFragment {
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 

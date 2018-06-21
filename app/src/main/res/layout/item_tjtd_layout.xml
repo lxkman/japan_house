@@ -19,6 +19,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/test_tjtd_iv"/>
             <ImageView
+                android:id="@+id/iv_isplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

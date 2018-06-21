@@ -135,7 +135,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) inflate.findViewById(R.id.springview);
-        tvNoContent= (TextView) inflate.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) inflate.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 3);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -171,8 +171,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                         List<MoreCheckBean> quyuListBean = new ArrayList<MoreCheckBean>();
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
-                        oneCheckBeanList1.add(new OneCheckBean(true,  getResources().getString(R.string.buxian)));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,  getResources().getString(R.string.buxian));
+                        oneCheckBeanList1.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -241,7 +241,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false,  getResources().getString(R.string.buxian)));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -306,7 +306,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     }
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -482,7 +482,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getCoveredAreaJpn() : item.getCoveredAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 
@@ -506,16 +507,19 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.bieshu));
                 intent.putExtra("state", 1);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==11){
-            searchText=data.getStringExtra("searchText");
-            page=1;
+        if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
+            if (!TextUtils.isEmpty(searchText)) {
+                searchTv.setText(searchText);
+            }
+            page = 1;
             mDatas.clear();
             initData();
         }

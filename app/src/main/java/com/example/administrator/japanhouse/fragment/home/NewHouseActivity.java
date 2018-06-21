@@ -137,7 +137,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 1);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -189,7 +189,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -215,7 +215,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -307,7 +307,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
     }
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -486,7 +486,8 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn()  : item.getPriceCn() );
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 
@@ -510,16 +511,19 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.new_house));
                 intent.putExtra("state", 0);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==11){
-            searchText=data.getStringExtra("searchText");
-            page=1;
+        if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
+            if (!TextUtils.isEmpty(searchText)) {
+                searchTv.setText(searchText);
+            }
+            page = 1;
             mDatas.clear();
             initData();
         }

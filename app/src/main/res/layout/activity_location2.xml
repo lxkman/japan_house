@@ -29,7 +29,7 @@
             android:background="@drawable/bg_search"
             android:drawableLeft="@drawable/home_search_icon_iv"
             android:drawablePadding="10dp"
-            android:hint="请输入城市名"
+            android:hint="@string/home_location_search"
             android:imeOptions="actionSearch"
             android:paddingBottom="8dp"
             android:paddingLeft="10dp"

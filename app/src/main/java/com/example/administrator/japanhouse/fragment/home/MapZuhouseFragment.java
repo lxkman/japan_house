@@ -162,7 +162,6 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
 
             //在地图上添加多边形Option，用于显示
             baiduMap.addOverlay(polygonOption);
-            initOverlay(mCity);
             //展示画圈内的房源
             isHuaQuan = true;
             vertx = new double[latLngList.size()];

@@ -2,7 +2,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="@color/white"
              android:orientation="vertical"
 >
     <com.liaoinstan.springview.widget.SpringView
@@ -15,7 +14,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/mrecycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
         >
         </android.support.v7.widget.RecyclerView>
     </com.liaoinstan.springview.widget.SpringView>
@@ -67,10 +67,9 @@
     </LinearLayout>
     <TextView
         android:id="@+id/tv_noContent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:gravity="center"
         android:text="@string/zanwugengduoshuju"
         android:textColor="@color/text_black"

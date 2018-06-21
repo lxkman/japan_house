@@ -121,6 +121,11 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                     doSavehistory2(mHistoryList.get(position));
                 }
             });
+        }else {
+            mHistoryList.clear();
+            if (historyAdapter!=null){
+                historyAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -146,6 +151,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                     scrollView.setVisibility(View.VISIBLE);
                     searchListRecycler.setVisibility(View.GONE);
                     tvNoContent.setVisibility(View.GONE);
+                    initHistroy();
                     return;
                 }
                 if (state == 4) {
@@ -172,16 +178,13 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH && searchEt.getText().length() > 0) {
                     ((InputMethodManager) searchEt.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
-                            .hideSoftInputFromWindow(
-                                    getCurrentFocus()
-                                            .getWindowToken(),
-                                    InputMethodManager.HIDE_NOT_ALWAYS);
-                    if (SearchList == null || SearchList.size() == 0) {
-                        tvNoContent.setVisibility(View.VISIBLE);
-                        scrollView.setVisibility(View.GONE);
-                        searchListRecycler.setVisibility(View.GONE);
-                        return false;
-                    }
+                            .hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+//                    if (SearchList == null || SearchList.size() == 0) {
+//                        tvNoContent.setVisibility(View.VISIBLE);
+//                        scrollView.setVisibility(View.GONE);
+//                        searchListRecycler.setVisibility(View.GONE);
+//                        return false;
+//                    }
                     tvNoContent.setVisibility(View.GONE);
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
@@ -340,8 +343,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
+                                if (state==2){
+                                    return;
+                                }
                                 locationTv.setText(getResources().getString(R.string.old_house));
                                 state = 2;
+                                page=1;
+                                initHot();
+                                initHistroy();
                             }
                         });
                         TextView xinfangTv = (TextView) view.findViewById(R.id.xinfang_tv);
@@ -349,8 +358,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
+                                if (state==0){
+                                    return;
+                                }
                                 locationTv.setText(getResources().getString(R.string.new_house));
                                 state = 0;
+                                page=1;
+                                initHot();
+                                initHistroy();
                             }
                         });
                         TextView zufangTv = (TextView) view.findViewById(R.id.zufang_tv);
@@ -358,8 +373,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
+                                if (state==4){
+                                    return;
+                                }
                                 locationTv.setText(getResources().getString(R.string.zu_house));
                                 state = 4;
+                                page=1;
+                                initHot();
+                                initHistroy();
                             }
                         });
                         TextView maishangpuTv = (TextView) view.findViewById(R.id.bieshu_tv);
@@ -367,8 +388,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
+                                if (state==1){
+                                    return;
+                                }
                                 locationTv.setText(getResources().getString(R.string.bieshu));
                                 state = 1;
+                                page=1;
+                                initHot();
+                                initHistroy();
                             }
                         });
                         TextView maixiezilouTv = (TextView) view.findViewById(R.id.tudi_tv);
@@ -376,8 +403,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
+                                if (state==3){
+                                    return;
+                                }
                                 locationTv.setText(getResources().getString(R.string.tudi));
                                 state = 3;
+                                page=1;
+                                initHot();
+                                initHistroy();
                             }
                         });
                         TextView zuxiezilouTv = (TextView) view.findViewById(R.id.sydc_tv);
@@ -385,8 +418,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
+                                if (state==5){
+                                    return;
+                                }
                                 locationTv.setText(getResources().getString(R.string.shangyedichan));
                                 state = 5;
+                                page=1;
+                                initHot();
+                                initHistroy();
                             }
                         });
                     }
@@ -462,6 +501,8 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                     }
                 });
             }
+        }else {
+            fluidlayout.removeAllViews();
         }
     }
 

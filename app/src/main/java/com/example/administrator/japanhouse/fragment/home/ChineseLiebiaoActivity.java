@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -508,6 +509,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 11) {
             searchText = data.getStringExtra("searchText");
+            if (!TextUtils.isEmpty(searchText)) {
+                searchTv.setText(searchText);
+            }
             page = 1;
             if (mDatas != null) {
                 mDatas.clear();

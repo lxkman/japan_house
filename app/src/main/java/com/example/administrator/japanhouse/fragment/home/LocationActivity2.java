@@ -107,6 +107,15 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
+//                String country = bdLocation.getCountry();
+//                if (!country.equals("日本")) {
+//                    String cityName = getResources().getString(R.string.dongjing);
+//                    CacheUtils.put("cityId", "");
+//                    CacheUtils.put("cityName", cityName);
+//                    tv_mylocation.setText(cityName);
+//                    initData();
+//                    return;
+//                }
                 tv_mylocation.setText(bdLocation.getCity());
             }
         });

@@ -371,10 +371,10 @@ public class FangjiaMapBean {
              * avgPrice : 2
              * days : 1526572800000
              */
-            private int avgPrice;
+            private double avgPrice;
             private long days;
 
-            public void setAvgPrice(int avgPrice) {
+            public void setAvgPrice(double avgPrice) {
                 this.avgPrice = avgPrice;
             }
 
@@ -382,7 +382,7 @@ public class FangjiaMapBean {
                 this.days = days;
             }
 
-            public int getAvgPrice() {
+            public double getAvgPrice() {
                 return avgPrice;
             }
 

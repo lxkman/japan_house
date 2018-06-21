@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -24,6 +23,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.utils.MapUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +137,7 @@ public class TongqinActivity extends BaseActivity {
     private void go() {
         int position = getCheckedTypePosition();
         if (TextUtils.isEmpty(lastTime)){
-            Toast.makeText(this, getResources().getString(R.string.qingxuanzeshijian), Toast.LENGTH_SHORT).show();
+            TUtils.showFail(mContext, getString(R.string.qingxuanzeshijian));
             return;
         }
         int time = Integer.parseInt(lastTime);

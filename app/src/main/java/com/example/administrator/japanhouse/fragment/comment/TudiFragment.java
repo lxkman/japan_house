@@ -36,7 +36,7 @@ import java.util.List;
 public class TudiFragment extends BaseFragment implements TJNewHousePresenter.HouseCallBack {
 
     private RecyclerView mrecycler;
-    private TextView tv_refresh_time;
+    private TextView tv_refresh_time,tv_wushuju;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList=new ArrayList();
     private TJNewHousePresenter tjNewHousePresenter;
@@ -50,6 +50,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
         mrecycler= (RecyclerView) view.findViewById(R.id.Mrecycler);
         springview= (SpringView) view.findViewById(R.id.springview);
         tv_refresh_time= (TextView) view.findViewById(R.id.tv_refresh_time);
+        tv_wushuju= (TextView) view.findViewById(R.id.tv_wushuju);
         tjNewHousePresenter=new TJNewHousePresenter(mActivity,this);
         return view;
     }
@@ -108,7 +109,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
          List<LandBean.DatasBean>  datas = body.getDatas();
         if (mRefreshData == null || mRefreshData.size() == 0) {
             if (datas == null || datas.size() == 0) {
-                Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                tv_wushuju.setVisibility(View.VISIBLE);
                 return;
             }
             mRefreshData = datas;

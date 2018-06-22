@@ -100,14 +100,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         state = getIntent().getIntExtra("state", 0);
         state2 = getIntent().getIntExtra("state2", 100);
         searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        historyRecycler.setNestedScrollingEnabled(false);
+        historyRecycler.setLayoutManager(new LinearLayoutManager(this));
         initHot();
         initHistroy();
         initListener();
     }
 
     private void initHistroy() {
-        historyRecycler.setNestedScrollingEnabled(false);
-        historyRecycler.setLayoutManager(new LinearLayoutManager(this));
         if (getHistory() != null && getHistory().size() > 0) {
             mHistoryList = getHistory();
             historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
@@ -115,8 +115,6 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    state = mHistoryList.get(position).getState();
-                    state2 = mHistoryList.get(position).getState2();
                     tiaozhuan(mHistoryList.get(position).getContent(),true);
                     doSavehistory2(mHistoryList.get(position));
                 }

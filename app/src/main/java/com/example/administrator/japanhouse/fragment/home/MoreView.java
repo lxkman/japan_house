@@ -94,11 +94,13 @@ class MoreView implements View.OnClickListener {
             case R.id.btn_sure:
                 if (getSelectedData() != null && getSelectedData().size() > 0) {
                     dropDownMenu.setTabText(context.getString(R.string.duoxuan));
-                }else {
+                } else {
                     dropDownMenu.setTabText(context.getString(R.string.gengduo));
                 }
                 dropDownMenu.closeMenu();
-                listener.onMoreItemClick(v, getSelectedData());
+                if (listener != null) {
+                    listener.onMoreItemClick(v, getSelectedData());
+                }
                 break;
         }
     }
@@ -116,7 +118,9 @@ class MoreView implements View.OnClickListener {
             }
             if (liebiaoAdapter != null) {
                 liebiaoAdapter.notifyDataSetChanged();
-                listener.onMoreItemClick(null, new ArrayList<List<String>>());
+                if (listener != null) {
+                    listener.onMoreItemClick(null, new ArrayList<List<String>>());
+                }
                 dropDownMenu.setTabText(context.getString(R.string.gengduo));
             }
         }

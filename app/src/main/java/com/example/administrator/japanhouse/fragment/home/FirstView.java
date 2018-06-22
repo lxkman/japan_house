@@ -115,9 +115,13 @@ public class FirstView implements View.OnClickListener {
                 }
                 dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                 if (adapterPosition == 0) {
-                    listener.onItemClick(v, 1, getAllCheckedItem(adapterPosition2));
+                    if (listener != null) {
+                        listener.onItemClick(v, 1, getAllCheckedItem(adapterPosition2));
+                    }
                 } else {
-                    listener.onItemClick(v, 2, getAllCheckedItem(adapterPosition2));
+                    if (listener != null) {
+                        listener.onItemClick(v, 2, getAllCheckedItem(adapterPosition2));
+                    }
                 }
                 break;
         }

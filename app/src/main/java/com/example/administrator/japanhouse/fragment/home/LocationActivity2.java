@@ -107,16 +107,13 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
-//                String country = bdLocation.getCountry();
-//                if (!country.equals("日本")) {
-//                    String cityName = getResources().getString(R.string.dongjing);
-//                    CacheUtils.put("cityId", "");
-//                    CacheUtils.put("cityName", cityName);
-//                    tv_mylocation.setText(cityName);
-//                    initData();
-//                    return;
-//                }
-                tv_mylocation.setText(bdLocation.getCity());
+                String country = bdLocation.getCountry();
+                if (!country.equals("日本")) {
+                    String cityName = getResources().getString(R.string.dongjing);
+                    tv_mylocation.setText(cityName);
+                } else {
+                    tv_mylocation.setText(bdLocation.getCity());
+                }
             }
         });
     }
@@ -157,7 +154,7 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                     Intent intent = new Intent();
                                     intent.putExtra("cityId", hotcites.get(position).getId());
-                                    intent.putExtra("cityName", isJa?hotcites.get(position).getAdministrationNameJpn():hotcites.get(position).getAdministrationNameCn());
+                                    intent.putExtra("cityName", isJa ? hotcites.get(position).getAdministrationNameJpn() : hotcites.get(position).getAdministrationNameCn());
                                     setResult(1, intent);
                                     finish();
                                 }
@@ -188,27 +185,39 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.tv_mylocation:
                 SoftKeyboardTool.closeKeyboard(this);
-                if (citysList != null && citysList.size() > 0) {
-                    for (int i = 0; i < citysList.size(); i++) {
-                        CityListBean.DatasEntity.CitysEntity datasEntity = citysList.get(i);
-                        String cityName = tv_mylocation.getText().toString();
-                        List<CityListBean.DatasEntity.CitysEntity.CityListEntity> cityList = datasEntity.getCityList();
-                        if (cityList != null && cityList.size() > 0) {
-                            for (int i1 = 0; i1 < cityList.size(); i1++) {
-                                String administrationNameCn = cityList.get(i1).getAdministrationNameCn();
-                                if (!TextUtils.isEmpty(cityName) && cityName.equals(administrationNameCn)) {
-                                    Intent intent = new Intent();
-                                    intent.putExtra("cityId", cityList.get(i1).getId());
-                                    intent.putExtra("cityName", isJa?cityList.get(i1).getAdministrationNameJpn():cityList.get(i1).getAdministrationNameCn());
-                                    setResult(1, intent);
-                                    finish();
-                                }
-                            }
-                        }
-                    }
+                if (!isHasThisCity()){
+                    Intent intent = new Intent();
+                    intent.putExtra("cityId", 2);
+                    intent.putExtra("cityName", getResources().getString(R.string.dongjing));
+                    setResult(1, intent);
+                    finish();
                 }
                 break;
         }
+    }
+
+    private boolean isHasThisCity(){
+        if (citysList != null && citysList.size() > 0) {
+            for (int i = 0; i < citysList.size(); i++) {
+                CityListBean.DatasEntity.CitysEntity datasEntity = citysList.get(i);
+                String cityName = tv_mylocation.getText().toString();
+                List<CityListBean.DatasEntity.CitysEntity.CityListEntity> cityList = datasEntity.getCityList();
+                if (cityList != null && cityList.size() > 0) {
+                    for (int i1 = 0; i1 < cityList.size(); i1++) {
+                        String administrationNameCn = cityList.get(i1).getAdministrationNameCn();
+                        if (!TextUtils.isEmpty(cityName) && cityName.equals(administrationNameCn)) {
+                            Intent intent = new Intent();
+                            intent.putExtra("cityId", cityList.get(i1).getId());
+                            intent.putExtra("cityName", isJa ? cityList.get(i1).getAdministrationNameJpn() : cityList.get(i1).getAdministrationNameCn());
+                            setResult(1, intent);
+                            finish();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private class HotAdapter extends BaseQuickAdapter<CityListBean.DatasEntity.HotcitesEntity, BaseViewHolder> {
@@ -219,7 +228,7 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
 
         @Override
         protected void convert(BaseViewHolder helper, CityListBean.DatasEntity.HotcitesEntity item) {
-            helper.setText(R.id.tv_name,isJa?item.getAdministrationNameJpn():item.getAdministrationNameCn());
+            helper.setText(R.id.tv_name, isJa ? item.getAdministrationNameJpn() : item.getAdministrationNameCn());
         }
     }
 

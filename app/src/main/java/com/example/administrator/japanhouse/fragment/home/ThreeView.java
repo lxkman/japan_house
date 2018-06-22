@@ -20,11 +20,14 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.utils.MyUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.taobao.accs.ACCSManager.mContext;
 
 class ThreeView implements View.OnClickListener {
 
@@ -108,12 +111,14 @@ class ThreeView implements View.OnClickListener {
                         price.add(Integer.parseInt(zuidijia) * 10000 + "");
                         price.add(Integer.parseInt(zuigaojia) * 10000 + "");
                     } catch (NumberFormatException e) {
-                        Toast.makeText(context, "请输入数字~", Toast.LENGTH_SHORT).show();
+                        TUtils.showFail(context,context.getResources().getString(R.string.qingshurushuzi));
                         return;
                     }
                 }
                 dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
-                listener.onItemClick(v, 4, price);
+                if (listener != null) {
+                    listener.onItemClick(v, 4, price);
+                }
                 break;
         }
     }
@@ -146,7 +151,9 @@ class ThreeView implements View.OnClickListener {
                         dropDownMenu.setTabText(getCheckeditemText());
                     }
                     dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
-                    listener.onItemClick(v, 3, position);
+                    if (listener != null) {
+                        listener.onItemClick(v, 3, position);
+                    }
                     et_zuidijia.setText("");
                     et_zuigaojia.setText("");
                 }

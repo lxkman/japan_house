@@ -75,9 +75,18 @@ public class ZufangListBean {
         private String titleJpn;
         private String areaJpn;
         private int id;
+        private int zfType;
         private String doorModelCn;
         private List<ImageListEntity> imageList;
         private String doorModelJpn;
+
+        public int getZfType() {
+            return zfType;
+        }
+
+        public void setZfType(int zfType) {
+            this.zfType = zfType;
+        }
 
         public void setSpecificLocationCn(String specificLocationCn) {
             this.specificLocationCn = specificLocationCn;

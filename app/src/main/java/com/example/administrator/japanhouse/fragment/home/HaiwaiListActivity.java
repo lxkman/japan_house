@@ -326,7 +326,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                         hxsList.add(huxingEntity.getId() + "");
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null) {
+                    mDatas.clear();
+                }
                 initData();
                 break;
             case 3://售价
@@ -340,7 +342,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                         sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null) {
+                    mDatas.clear();
+                }
                 initData();
                 break;
         }
@@ -354,7 +358,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
             sjId = "-1";
             zidingyiPriceList.clear();
             zidingyiPriceList = priceRegin;
-            mDatas.clear();
+            if (mDatas != null) {
+                mDatas.clear();
+            }
             initData();
         }
     }
@@ -364,7 +370,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         page = 1;
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        mDatas.clear();
+        if (mDatas != null) {
+            mDatas.clear();
+        }
         initData();
     }
 

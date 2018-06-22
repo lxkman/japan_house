@@ -42,9 +42,9 @@ class SecView implements View.OnClickListener {
 
     View secView() {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_sec, null);
-        ll_root= (LinearLayout) view.findViewById(R.id.ll_root);
+        ll_root = (LinearLayout) view.findViewById(R.id.ll_root);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ll_root.getLayoutParams();
-        layoutParams.height= MyUtils.getScreenHeight(context)/2;
+        layoutParams.height = MyUtils.getScreenHeight(context) / 2;
         ll_root.setLayoutParams(layoutParams);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         btn_sure = (Button) view.findViewById(R.id.btn_sure);
@@ -110,13 +110,15 @@ class SecView implements View.OnClickListener {
                             mList.get(i).setChecked(false);
                         }
                     }
-                    int position=helper.getAdapterPosition();//notify之后再取这个值就变成-1了，不知为何
+                    int position = helper.getAdapterPosition();//notify之后再取这个值就变成-1了，不知为何
                     mLiebiaoAdapter.notifyDataSetChanged();
                     if (!getCheckeditemText().equals("")) {
                         dropDownMenu.setTabText(getCheckeditemText());
                     }
                     dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
-                    listener.onItemClick(v, 2, position);
+                    if (listener != null) {
+                        listener.onItemClick(v, 2, position);
+                    }
                 }
 
             });

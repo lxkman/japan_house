@@ -74,15 +74,19 @@ public class ZhaoTuanDiSearchActivity extends BaseActivity implements MainSearch
                     //                SoftKeyboardTool.closeKeyboard(mSearchEt);//关闭软键盘
                     searchEt.setFocusable(true);
                     searchEt.setFocusableInTouchMode(true);
-                    if (SearchList == null || SearchList.size() == 0) {
-                        tvNoContent.setVisibility(View.VISIBLE);
-                        scrollView.setVisibility(View.GONE);
-                        searchListRecycler.setVisibility(View.GONE);
-                        return false;
-                    }
+//                    if (SearchList == null || SearchList.size() == 0) {
+//                        tvNoContent.setVisibility(View.VISIBLE);
+//                        scrollView.setVisibility(View.GONE);
+//                        searchListRecycler.setVisibility(View.GONE);
+//                        return false;
+//                    }
                     tvNoContent.setVisibility(View.GONE);
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent();
+                    intent.putExtra("searchText", searchEt.getText().toString());
+                    setResult(11, intent);
+                    finish();
                     return true;
                 }
                 return false;

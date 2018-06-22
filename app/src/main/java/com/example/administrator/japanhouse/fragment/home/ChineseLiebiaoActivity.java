@@ -101,6 +101,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
             isJa = false;
         }
         searchText = getIntent().getStringExtra("searchText");
+        if (!TextUtils.isEmpty(searchText)) {
+            searchTv.setText(searchText);
+        }
         initView();
         initData();
         initListener();
@@ -412,7 +415,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         hxsList.add(huxingEntity.getId() + "");
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null) {
+                    mDatas.clear();
+                }
                 initData();
                 break;
             case 3://售价
@@ -426,7 +431,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null) {
+                    mDatas.clear();
+                }
                 initData();
                 break;
         }
@@ -447,7 +454,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                 sjId = "-1";
                 zidingyiPriceList.clear();
                 zidingyiPriceList = priceRegin;
-                mDatas.clear();
+                if (mDatas != null) {
+                    mDatas.clear();
+                }
                 initData();
             }
         }
@@ -458,7 +467,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         page = 1;
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        mDatas.clear();
+        if (mDatas != null) {
+            mDatas.clear();
+        }
         initData();
     }
 

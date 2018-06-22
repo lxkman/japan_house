@@ -177,7 +177,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                         }
                     }
                 });
-        if (!TextUtils.isEmpty((String)CacheUtils.get("shendeng_hxs"))) {
+        if (!TextUtils.isEmpty((String) CacheUtils.get("shendeng_hxs"))) {
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
             goShendeng();
@@ -232,7 +232,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (!TextUtils.isEmpty((String)CacheUtils.get("shendeng_hxs"))) {
+        if (!TextUtils.isEmpty((String) CacheUtils.get("shendeng_hxs"))) {
             notShendengLl.setVisibility(View.GONE);
             alreadyShendengLl.setVisibility(View.VISIBLE);
             goShendeng();
@@ -318,8 +318,10 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
-            if (helper.getAdapterPosition() == shendengDatas.size()-1) {
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
+                    .setText(R.id.tv_rent_type,item.getZfType()==0?
+                            getResources().getString(R.string.zhengzu):getResources().getString(R.string.hezu));
+            if (helper.getAdapterPosition() == shendengDatas.size() - 1) {
                 helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
                     @Override

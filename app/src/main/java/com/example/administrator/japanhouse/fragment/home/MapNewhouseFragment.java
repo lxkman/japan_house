@@ -98,7 +98,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_old, null, false);
-        dropDownMenu= (DropDownMenu) view.findViewById(R.id.dropDownMenu);
+        dropDownMenu = (DropDownMenu) view.findViewById(R.id.dropDownMenu);
         if (!isevent) {
             EventBus.getDefault().register(this);
             isevent = true;
@@ -109,7 +109,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         } else {
             isJa = false;
         }
-        Log.e("xxx","fragment333"+" oncreateView()");
+        Log.e("xxx", "fragment333" + " oncreateView()");
         return view;
     }
 
@@ -117,13 +117,13 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        Log.e("xxx","fragment333"+" onDestroy()");
+        Log.e("xxx", "fragment333" + " onDestroy()");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e("xxx","fragment333"+" onActivityCreated()");
+        Log.e("xxx", "fragment333" + " onActivityCreated()");
         initData();
         initLocation();
         initListener();
@@ -358,7 +358,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        Log.e("xxx","33333333333333333333333");
+                        Log.e("xxx", "33333333333333333333333");
                         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                     }
                 });
@@ -390,6 +390,21 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
+                String country = bdLocation.getCountry();
+                //                if (!country.equals("日本")) {
+                //                    // 默认 东京
+                //                    mCity = "东京市";
+                //                    double longitude = 139.75;
+                //                    double latitude = 35.68;
+                //                    initMap(latitude, longitude);
+                //                    initOverlay(mCity);
+                //                } else {
+                //                    double longitude = bdLocation.getLongitude();
+                //                    double latitude = bdLocation.getLatitude();
+                //                    mCity = bdLocation.getCity();
+                //                    initMap(latitude, longitude);
+                //                    initOverlay(mCity);
+                //                }
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
                 mCity = bdLocation.getCity();
@@ -480,7 +495,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                     //                    loadAllXiaoQu(northeast, southwest);
                 } else {
                     Intent intent = new Intent(mContext, NewHouseActivity.class);
-                    intent.putExtra("communityId",marker.getTitle());
+                    intent.putExtra("communityId", marker.getTitle());
                     startActivity(intent);
                 }
                 return false;
@@ -591,7 +606,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                                                 .icon(BitmapDescriptorFactory.fromView(markView))
                                                 .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                                 .zIndex(12)
-                                                .title(datasEntity.getId()+"")//做个标记，点击事件时候用到
+                                                .title(datasEntity.getId() + "")//做个标记，点击事件时候用到
                                                 .draggable(true);
                                         overlayOptionsList.add(markerOptions);
                                     }
@@ -605,7 +620,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                                             .icon(BitmapDescriptorFactory.fromView(markView))
                                             .position(new LatLng(markerBeanList.get(i).getWei(), markerBeanList.get(i).getJing()))
                                             .zIndex(12)
-                                            .title(datasEntity.getId()+"")//做个标记，点击事件时候用到
+                                            .title(datasEntity.getId() + "")//做个标记，点击事件时候用到
                                             .draggable(true);
                                     overlayOptionsList.add(markerOptions);
                                 }
@@ -617,7 +632,6 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     }
 
 
-
     @Override
     protected void initLazyData() {
 
@@ -626,21 +640,21 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("xxx","fragment333"+" onResume()");
+        Log.e("xxx", "fragment333" + " onResume()");
         mapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.e("xxx","fragment333"+" onPause()");
+        Log.e("xxx", "fragment333" + " onPause()");
         mapView.onPause();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.e("xxx","fragment333"+" onDestroyView()");
+        Log.e("xxx", "fragment333" + " onDestroyView()");
         mapView.onDestroy();
     }
 
@@ -648,8 +662,8 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_clear:
-                isHuaQuan=false;
-                loadAllXiaoQu(curr_northeast,curr_southwest);
+                isHuaQuan = false;
+                loadAllXiaoQu(curr_northeast, curr_southwest);
                 ll_clear.setVisibility(View.GONE);
                 break;
         }
@@ -715,13 +729,13 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==2){
-            searchText=data.getStringExtra("searchText");
+        if (requestCode == 2) {
+            searchText = data.getStringExtra("searchText");
             refreshMap();
         }
     }
 
-    private void refreshMap(){
+    private void refreshMap() {
         if (zoom < 12) {
             initOverlay(mCity);
         } else if (zoom >= 12) {

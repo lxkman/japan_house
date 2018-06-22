@@ -10,10 +10,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.example.administrator.japanhouse.activity.adapter.FragPagerAdapter;
 import com.example.administrator.japanhouse.activity.NoScrollViewPager;
+import com.example.administrator.japanhouse.activity.adapter.FragPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.chat.ChatFragment;
@@ -23,6 +22,7 @@ import com.example.administrator.japanhouse.fragment.mine.MineFragment;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,7 +36,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.administrator.japanhouse.R.id.rb_chat;
-import static com.example.administrator.japanhouse.R.id.swipe_content;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.rb_home)
@@ -204,7 +203,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() > preTime + 2000) {
-            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(this,getResources().getString(R.string.zaianyicituichu));
             preTime = System.currentTimeMillis();
         } else {
             super.onBackPressed();//相当于finish()

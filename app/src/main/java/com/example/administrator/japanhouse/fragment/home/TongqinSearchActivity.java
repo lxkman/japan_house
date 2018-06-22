@@ -308,14 +308,16 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
                 break;
             case R.id.history_clear:
                 mHistoryList.clear();
-                historyAdapter.notifyDataSetChanged();
+                if (historyAdapter != null) {
+                    historyAdapter.notifyDataSetChanged();
+                }
                 saveHistory();
                 break;
             case R.id.location_rl:
-                finish();
                 Intent intent = new Intent();
                 intent.putExtra("address", "");
                 setResult(1, intent);
+                finish();
                 break;
         }
     }
@@ -352,7 +354,7 @@ public class TongqinSearchActivity extends BaseActivity implements OnGetSuggesti
             mHistoryList.remove(position);
         }
         //后来搜索的文字放在集合中的第一个位置
-        mHistoryList.add(0, new TongQinHistroyBean(suggestionInfo.key, suggestionInfo.pt.latitude, suggestionInfo.pt.longitude));
+        mHistoryList.add(0, new TongQinHistroyBean(suggestionInfo.key+"(" + suggestionInfo.district + ")", suggestionInfo.pt.latitude, suggestionInfo.pt.longitude));
 
         if (mHistoryList.size() == 11) {//实现本地历史搜索记录最多不超过10个
             mHistoryList.remove(10);

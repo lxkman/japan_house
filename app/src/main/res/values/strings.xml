@@ -597,6 +597,12 @@
     <string name="tao">套）</string>
     <string name="duoxuan">多选</string>
     <string name="dongjing">东京</string>
+    <string name="zhengzu">整租</string>
+    <string name="hezu">合租</string>
     <string name="house_details">房源详情</string>
     <string name="gengxin">更新</string>
+    <string name="zaianyicituichu">再按一次退出</string>
+    <string name="shoucangchenggong">收藏成功</string>
+    <string name="quxiaoshoucangchenggong">取消收藏成功</string>
+    <string name="qingshurushuzi">请输入数字</string>
 </resources>

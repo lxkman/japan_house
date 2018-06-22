@@ -599,6 +599,12 @@
     <string name="tao">件）</string>
     <string name="duoxuan">多選</string>
     <string name="dongjing">東京</string>
+    <string name="zhengzu">賃貸</string>
+    <string name="hezu">シェア</string>
     <string name="house_details">物件情報</string>
     <string name="gengxin">更新する</string>
+    <string name="zaianyicituichu">もう一回で退く</string>
+    <string name="shoucangchenggong">コレクション成功</string>
+    <string name="quxiaoshoucangchenggong">コレクションの成功を取り消す</string>
+    <string name="qingshurushuzi">数字を入力してください</string>
 </resources>

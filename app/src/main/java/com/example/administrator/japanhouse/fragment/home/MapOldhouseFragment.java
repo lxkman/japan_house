@@ -367,7 +367,6 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
 
     private void initMap(double weidu, double jingdu) {
         LatLng center = new LatLng(weidu, jingdu);
-        //        LatLng center = new LatLng(35.68, 139.75); // 默认 东京
         float zoom = 11.0f; // 默认 11级
         MapStatus mMapStatus = new MapStatus.Builder().target(
                 center).zoom(zoom).build();
@@ -391,6 +390,21 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
+                String country = bdLocation.getCountry();
+                //                if (!country.equals("日本")) {
+                //                    // 默认 东京
+                //                    mCity = "东京市";
+                //                    double longitude = 139.75;
+                //                    double latitude = 35.68;
+                //                    initMap(latitude, longitude);
+                //                    initOverlay(mCity);
+                //                } else {
+                //                    double longitude = bdLocation.getLongitude();
+                //                    double latitude = bdLocation.getLatitude();
+                //                    mCity = bdLocation.getCity();
+                //                    initMap(latitude, longitude);
+                //                    initOverlay(mCity);
+                //                }
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
                 mCity = bdLocation.getCity();
@@ -716,12 +730,12 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
-            searchText=data.getStringExtra("searchText");
+            searchText = data.getStringExtra("searchText");
             refreshMap();
         }
     }
 
-    private void refreshMap(){
+    private void refreshMap() {
         if (zoom < 12) {
             initOverlay(mCity);
         } else if (zoom >= 12) {

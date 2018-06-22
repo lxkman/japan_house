@@ -105,7 +105,7 @@ public class LiShiJiLu2Activity extends BaseActivity implements ZuHistroyPresent
             //            SwipeMenuItem deleteItem = new SwipeMenuItem(mContext); // 各种文字和图标属性设置。
             //            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
             SwipeMenuItem deleteItem = new SwipeMenuItem(LiShiJiLu2Activity.this); // 各种文字和图标属性设置。
-            deleteItem.setWeight(100);
+            deleteItem.setWidth(150);
             deleteItem.setHeight(380);
             deleteItem.setText(getResources().getString(R.string.shanchu));
             deleteItem.setTextSize(14);

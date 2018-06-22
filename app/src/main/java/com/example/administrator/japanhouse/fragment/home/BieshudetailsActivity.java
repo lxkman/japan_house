@@ -17,7 +17,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,19 +36,17 @@ import com.example.administrator.japanhouse.bean.BieShuListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.BannerDetailsActivity;
-import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.VideoDetailsActivity;
-import com.example.administrator.japanhouse.im.DetailsExtensionModule;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.more.BieSuMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.presenter.VillaDetailsPresenter;
-import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.CircleImageView;
 import com.lzy.okgo.OkGo;
@@ -67,10 +64,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
-import io.rong.imkit.DefaultExtensionModule;
-import io.rong.imkit.IExtensionModule;
-import io.rong.imkit.RongExtensionManager;
-import io.rong.imkit.RongIM;
 
 public class BieshudetailsActivity extends BaseActivity implements VillaDetailsPresenter.VillaDetailsCallBack {
 
@@ -575,7 +568,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            Toast.makeText(BieshudetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(mContext,getResources().getString(R.string.shoucangchenggong));
                         } else {
                             Toast.makeText(BieshudetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -602,7 +595,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
-                            Toast.makeText(BieshudetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(mContext,getResources().getString(R.string.quxiaoshoucangchenggong));
                         } else {
                             Toast.makeText(BieshudetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }

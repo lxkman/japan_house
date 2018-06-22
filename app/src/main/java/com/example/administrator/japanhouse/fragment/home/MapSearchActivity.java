@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,6 +52,8 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
     NestedScrollView scrollView;
     @BindView(R.id.tv_noContent)
     TextView tvNoContent;
+    @BindView(R.id.iv_delete)
+    ImageView ivDelete;
     private MainSearchPresenter searchPresenter;
     private List<HomeSearchHistroyBean> mHistoryList = new ArrayList<>();
     private HistoryAdapter historyAdapter;
@@ -111,12 +114,12 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
                                     getCurrentFocus()
                                             .getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
-                    if (SearchList == null || SearchList.size() == 0) {
-                        tvNoContent.setVisibility(View.VISIBLE);
-                        scrollView.setVisibility(View.GONE);
-                        searchListRecycler.setVisibility(View.GONE);
-                        return false;
-                    }
+                    //                    if (SearchList == null || SearchList.size() == 0) {
+                    //                        tvNoContent.setVisibility(View.VISIBLE);
+                    //                        scrollView.setVisibility(View.GONE);
+                    //                        searchListRecycler.setVisibility(View.GONE);
+                    //                        return false;
+                    //                    }
                     tvNoContent.setVisibility(View.GONE);
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
@@ -124,6 +127,7 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
                     intent.putExtra("searchText", searchEt.getText().toString());
                     setResult(state, intent);
                     finish();
+                    doSavehistory(state, searchEt.getText().toString());
                     return true;
                 }
                 return false;
@@ -141,7 +145,6 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
             historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    state = mHistoryList.get(position).getState();
                     Intent intent = new Intent();
                     intent.putExtra("searchText", mHistoryList.get(position).getContent());
                     setResult(state, intent);
@@ -287,8 +290,19 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
         return CacheUtils.get("mapsearchhistory" + state);
     }
 
-    @OnClick(R.id.cancle_tv)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.cancle_tv, R.id.iv_delete})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.cancle_tv:
+                finish();
+                break;
+            case R.id.iv_delete:
+                mHistoryList.clear();
+                if (historyAdapter != null) {
+                    historyAdapter.notifyDataSetChanged();
+                }
+                saveHistory();
+                break;
+        }
     }
 }

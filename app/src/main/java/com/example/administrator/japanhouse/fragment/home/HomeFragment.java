@@ -169,7 +169,7 @@ public class HomeFragment extends BaseFragment {
             isJa = false;
         }
         initLocation();
-        initViewData(view);
+        initViewData();
         initScroll();
         return view;
     }
@@ -191,15 +191,15 @@ public class HomeFragment extends BaseFragment {
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
                 double latitude = bdLocation.getLatitude();
-//                String country = bdLocation.getCountry();
-//                if (!country.equals("日本")) {
-//                    String cityName = getResources().getString(R.string.dongjing);
-//                    CacheUtils.put("cityId", "");
-//                    CacheUtils.put("cityName", cityName);
-//                    locationTv.setText(cityName);
-//                    initData();
-//                    return;
-//                }
+                String country = bdLocation.getCountry();
+                if (!country.equals("日本")) {
+                    String cityName = getResources().getString(R.string.dongjing);
+                    CacheUtils.put("cityId", 2);
+                    CacheUtils.put("cityName", cityName);
+                    locationTv.setText(cityName);
+                    initData();
+                    return;
+                }
                 String city = bdLocation.getCity();
                 initLocationData(city);
             }
@@ -267,7 +267,7 @@ public class HomeFragment extends BaseFragment {
         initData();
     }
 
-    private void initViewData(View view) {
+    private void initViewData() {
         String[] itemName = {
                 mActivity.getResources().getString(R.string.new_house),
                 mActivity.getResources().getString(R.string.bieshu),

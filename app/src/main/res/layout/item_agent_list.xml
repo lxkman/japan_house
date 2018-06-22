@@ -19,7 +19,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/agent" />
+            android:src="@drawable/deful_touxiang" />
 
         <RelativeLayout
             android:layout_width="0dp"

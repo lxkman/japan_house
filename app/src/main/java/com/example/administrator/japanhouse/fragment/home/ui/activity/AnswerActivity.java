@@ -12,13 +12,17 @@ import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HuiDaBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class AnswerActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,6 +71,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
                         HuiDaBean body = response.body();
                         String code = body.getCode();
                         if(code.equals("200")){
+                            EventBus.getDefault().post(new EventBean(Constants.EVENT_D));
                             finish();
                             ToastUtils.getToast(AnswerActivity.this,body.getMsg());
                         }else if(code.equals("201")){

@@ -43,6 +43,7 @@
             android:layout_width="50dip"
             android:layout_height="50dip" />
         <EditText
+            android:id="@+id/manager_search_content"
             android:background="@null"
             android:textSize="15dip"
             android:hint="@string/manager_number"
@@ -52,6 +53,7 @@
             android:imeOptions="actionSearch"
             android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/manager_search_submit"
             android:textColor="@color/shihuangse"
             android:gravity="center"
             android:layout_gravity="center"

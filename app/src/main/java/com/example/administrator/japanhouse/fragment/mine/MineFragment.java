@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.MineRecordAdapter;
@@ -27,7 +28,10 @@ import com.example.administrator.japanhouse.fragment.home.ui.activity.WendaItemA
 import com.example.administrator.japanhouse.im.FeedBackExtensionModule;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.HouseRecordListBean;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.model.UserInfo;
 import com.example.administrator.japanhouse.presenter.MinePresenter;
+import com.example.administrator.japanhouse.presenter.UserPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.view.CircleImageView;
@@ -54,7 +58,7 @@ import io.rong.imkit.RongExtensionManager;
  * Created by Administrator on 2018/4/8.
  */
 
-public class MineFragment extends BaseFragment implements View.OnClickListener, MinePresenter.MineCallBack {
+public class MineFragment extends BaseFragment implements View.OnClickListener, MinePresenter.MineCallBack, UserPresenter.UserCallBack {
     @BindView(R.id.iv_msg)
     ImageView ivMsg;
     @BindView(R.id.iv_setting)
@@ -137,6 +141,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private List<HouseRecordListBean.DatasBean> list = new ArrayList<>();
     private MineRecordAdapter adapter;
 
+    private UserPresenter userPresenter;
+
+    private TextView managerNum;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
@@ -144,6 +152,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
         presenter = new MinePresenter(getActivity(), this);
         presenter.getHouseRecordList(MyApplication.getUserToken(), page);
+
+        userPresenter = new UserPresenter(getActivity(), this);
+        userPresenter.getUserInfo(MyApplication.getUserToken());
+
+        managerNum = (TextView) rootView.findViewById(R.id.mine_manager_num);
 
         initScroll();
         EventBus.getDefault().register(this);
@@ -169,6 +182,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     public void scrollToTop(EventBean eventBean) {
         if (TextUtils.equals(eventBean.getMsg(), "minescrolltotop")) {
             nestScroll.scrollTo(0, 0);
+        }
+
+        if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_MINE)) {
+            userPresenter.getUserInfo(MyApplication.getUserToken());
         }
     }
 
@@ -328,5 +345,38 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void getUserInfo(Response<UserInfo> response) {
+
+        if (TextUtils.equals(response.body().getCode(), "201")) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            MyApplication.logOut();
+            return;
+        }
+
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().getUser() != null) {
+                CacheUtils.put(Constants.P_USERINFO, response.body().getDatas().getUser());
+
+                if (response.body().getDatas().getUser().getPic() != null) {
+                    Glide.with(getActivity()).load(response.body().getDatas().getUser().getPic()).into(ivHead);
+                }
+
+                tvName.setText(response.body().getDatas().getUser().getNickname());
+            }
+
+            tvPlatformTime.setText(response.body().getDatas().getDaynum() + "");
+            tvCollectCount.setText(response.body().getDatas().getScnum() + "");
+            tvSubscriptionCount.setText(response.body().getDatas().getDynum() + "");
+            managerNum.setText(response.body().getDatas().getLxrnum() + "");
+            tvHistroyCount.setText(response.body().getDatas().getLsjlnum() + "");
+        }
+    }
+
+    @Override
+    public void updateUserInfo(Response<NoDataBean> response) {
+
     }
 }

@@ -41,7 +41,7 @@ public class RentalPresenter {
      * @param entrustType           委托类型 0出租 1出售
      */
     public void requestRental(String userName, String userContact, String housingLocation, String stationDistance, String floor, String area,
-                              String pattern, String bathroomTogether, String toward, String surroundingFacilities, String entrustType) {
+                              String pattern, String bathroomTogether, String toward, String surroundingFacilities, String entrustType, String imageUrls, String videoUrls) {
 
         HttpParams params = new HttpParams();
         params.put("userName", userName);
@@ -56,6 +56,8 @@ public class RentalPresenter {
         params.put("surroundingFacilities", surroundingFacilities);
         params.put("entrustType", entrustType);
         params.put("token", MyApplication.getUserToken());
+        params.put("imageUrls", imageUrls);
+        params.put("videoUrls", videoUrls);
         OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/landlordrental/entrust")
                 .tag(this)
                 .params(params)

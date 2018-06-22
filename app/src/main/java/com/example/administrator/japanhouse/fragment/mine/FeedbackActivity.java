@@ -12,12 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.presenter.FeedBackPresenter;
+import com.lzy.okgo.model.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
+public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener, FeedBackPresenter.FeedBackCallBack {
 
     @BindView(R.id.act_feedback_et)
     EditText etMsg;
@@ -27,12 +30,16 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     TextView tvSubmit;
     private ImageView back_img;
 
+    private FeedBackPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         ButterKnife.bind(this);
         initView();
+
+        presenter = new FeedBackPresenter(this, this);
 
         etMsg.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,8 +82,15 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.act_feedback_submit:
-
+                presenter.requestFeedBack(etMsg.getText().toString());
                 break;
+        }
+    }
+
+    @Override
+    public void requestFeedBack(Response<NoDataBean> response) {
+        if (response != null && response.body() != null && response.body().getCode() != null && response.body().getCode().equals("200")) {
+            finish();
         }
     }
 }

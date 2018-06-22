@@ -41,7 +41,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:text="小豆子"
                         android:textColor="@color/white" />
 
                     <LinearLayout
@@ -63,7 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="100"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
 
@@ -105,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="2dp"
-                            android:text="22"
+                            android:text="0"
                             android:textColor="@color/text_gray"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -131,7 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="2dp"
-                            android:text="22"
+                            android:text="0"
                             android:textColor="@color/text_gray"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -241,6 +240,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/mine_manager_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

@@ -27,10 +27,29 @@
             />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/act_agentList_recyclerView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        />
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/no_more_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            />
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/act_singUp_springView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/act_agentList_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                />
+        </com.liaoinstan.springview.widget.SpringView>
+    </RelativeLayout>
 </LinearLayout>

@@ -51,7 +51,7 @@ public class OwnerWikipediaAdapter extends RecyclerView.Adapter{
             OwnerWikipediaViewHolder holder = (OwnerWikipediaViewHolder) viewHolder;
 
             holder.tvTitle.setText(MyApplication.isJapanese() ? datas.get(i).getTitleJpn() : datas.get(i).getTitleCn());
-            holder.tvNum.setText(datas.get(i).getReadNum() + "");
+            holder.tvNum.setText(MyApplication.isJapanese() ? datas.get(i).getReadNum() + "人が見ました" : datas.get(i).getReadNum() + "人查看");
             Glide.with(activity)
                     .load(datas.get(i).getImageUrl())
                     .into(holder.ivShow);

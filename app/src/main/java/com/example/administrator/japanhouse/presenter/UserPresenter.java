@@ -38,7 +38,7 @@ public class UserPresenter {
         OkGo.<UserInfo>post(MyUrls.BASEURL + "/app/user/getmyinfo")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<UserInfo>(activity, UserInfo.class) {
+                .execute(new JsonCallback<UserInfo>(UserInfo.class) {
                     @Override
                     public void onSuccess(Response<UserInfo> response) {
                             callBack.getUserInfo(response);
@@ -54,12 +54,13 @@ public class UserPresenter {
      * @param sex
      * @param age
      */
-    public void updateUserInfo(String token, String nickName, int sex, String age) {
+    public void updateUserInfo(String token, String nickName, int sex, String age, String picUrl) {
         HttpParams params = new HttpParams();
         params.put("token", token);
         params.put("nickName", nickName);
         params.put("sex", sex);
         params.put("age", age);
+        params.put("picUrl", picUrl);
         OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/user/updateinfo")
                 .tag(this)
                 .params(params)

@@ -14,7 +14,12 @@ public class Constants {
     public static final String SYSTEM_TIME = "SYSTEM_TIME"; //系统时间缓存
     public static final String SEARCH_MAIN_HISTORY = "SEARCH_MAIN_HISTORY";   //首页搜索历史记录
     public static final String SEARCH_WD_HISTORY = "SEARCH_WD_HISTORY";   //问答搜索历史记录
+    public static final String P_USERINFO = "P_USERINFO";
 
     //event
     public static final String EVENT_CHAT = "EVENT_CHAT"; //跳转到首页CHAT
+    public static final String EVENT_MINE = "EVENT_MINE"; //
+    public static final String EVENT_USERINFO = "EVENT_USERINFO"; //
+    public static final String EVENT_W = "EVENT_W"; //
+    public static final String EVENT_D = "EVENT_D"; //
 }

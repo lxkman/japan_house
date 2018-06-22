@@ -25,6 +25,7 @@ import io.rong.imlib.IRongCallback;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
+import io.rong.imlib.model.UserInfo;
 import io.rong.message.ImageMessage;
 import io.rong.message.RichContentMessage;
 import io.rong.message.TextMessage;
@@ -204,11 +205,12 @@ public class ImManager {
 
     /**
      * 图文消息   项目中作为分享发送
-     * @param userId    用户id
-     * @param title     分享标题
-     * @param content   分享内容
-     * @param imgUrl    分享图片
-     * @param jumpUrl   跳转h5链接
+     *
+     * @param userId  用户id
+     * @param title   分享标题
+     * @param content 分享内容
+     * @param imgUrl  分享图片
+     * @param jumpUrl 跳转h5链接
      */
     public static void sendImgAndText(String userId, String title, String content, String imgUrl, String jumpUrl) {
         RichContentMessage richContentMessage = RichContentMessage.obtain(title, content, imgUrl);
@@ -288,20 +290,35 @@ public class ImManager {
 
     }
 
-    public static void enterChatDetails(Context context, String userId, String chatName, String avatar) {
+    public static void enterChatDetails(Context context, final String userId, final String chatName, final String avatar) {
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
         setMyExtensionModule();
         if (RongIM.getInstance() != null) {
             RongIM.getInstance().startPrivateChat(context, userId, chatName);
+
+            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+                @Override
+                public UserInfo getUserInfo(String s) {
+                    return new UserInfo(userId + "", chatName, Uri.parse(avatar));
+                }
+            }, true);
         }
     }
 
-    public static void enterChat(Context context, String userId, String chatName, String avatar) {
+    public static void enterChat(Context context, final String userId, final String chatName, final String avatar) {
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_TALK);
         if (RongIM.getInstance() != null) {
             RongIM.getInstance().startPrivateChat(context, userId, chatName);
+
+            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+                @Override
+                public UserInfo getUserInfo(String s) {
+                    return new UserInfo(userId + "", chatName, Uri.parse(avatar));
+                }
+            }, true);
         }
     }
+
 
     public static void setMyExtensionModule() {
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();

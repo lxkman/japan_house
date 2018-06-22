@@ -194,6 +194,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     return;
                 }
 
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
                 page = 4;
                 mViewPager.setCurrentItem(3);
                 break;

@@ -119,6 +119,10 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.shenqing:
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
                 shumaDialog(Gravity.CENTER, R.style.Alpah_aniamtion);
                 break;
             case R.id.img_beak:

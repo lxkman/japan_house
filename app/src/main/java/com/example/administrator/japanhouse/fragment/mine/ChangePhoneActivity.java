@@ -12,8 +12,12 @@ import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.model.UserInfo;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
@@ -21,6 +25,8 @@ import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +82,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
 
     private void initNet() {
       String  token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
+
         HttpParams params = new HttpParams();
         params.put("token", token);
         params.put("newPhone",edtPhone.getText().toString());
@@ -93,6 +100,13 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
                         }
                         if (SuccessBean.getCode().equals("200")){
                             Toast.makeText(ChangePhoneActivity.this, "换绑成功", Toast.LENGTH_SHORT).show();
+
+                            UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
+                            userBean.setPhone(edtPhone.getText().toString());
+                            CacheUtils.put(Constants.P_USERINFO, userBean);
+
+                            EventBus.getDefault().post(new EventBean(Constants.EVENT_USERINFO));
+
                             finish();
                         }else {
                             Toast.makeText(ChangePhoneActivity.this, SuccessBean.getMsg()+"", Toast.LENGTH_SHORT).show();

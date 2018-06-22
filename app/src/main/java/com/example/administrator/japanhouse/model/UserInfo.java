@@ -8,7 +8,7 @@ public class UserInfo {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"id":3,"phone":"13463109341","nickname":"FCL用户","pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","sex":"1","birthday":1527156729000,"status":"1","isDeleted":0,"createTime":1527156773000,"updateTime":1526958309000,"password":"123","token":"74880cc6e0b1658f5467ccc1b3b41e3a","lastLoginTime":1526958309000,"wxId":null,"qqId":null,"lineId":null,"wbId":null}
+     * datas : {"scnum":2,"dynum":0,"lxrnum":3,"lsjlnum":6,"user":{"id":22,"phone":"88888888888","nickname":"FCL用户","pic":"http://hwdc.oss-ap-northeast-1.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621115832.jpg","sex":"1","birthday":185126400000,"status":"1","isDeleted":0,"createTime":1528790248000,"updateTime":1529647792000,"password":"a12345","token":"2c44a8504bef4b1800f126f5279c5789","lastLoginTime":1529647792000,"wxId":null,"qqId":null,"lineId":null,"wbId":null,"rongCloudToken":"Q9h8Vbw/8Zqnt998LQY1NG7tnvnoFRHtvRSk65MeRaWjhNUpICiAMcn3YV6eKD5/uLIiCll71gD5a0EWCC4laA=="},"daynum":9}
      */
 
     private String msg;
@@ -41,177 +41,253 @@ public class UserInfo {
 
     public static class DatasBean {
         /**
-         * id : 3
-         * phone : 13463109341
-         * nickname : FCL用户
-         * pic : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg
-         * sex : 1
-         * birthday : 1527156729000
-         * status : 1
-         * isDeleted : 0
-         * createTime : 1527156773000
-         * updateTime : 1526958309000
-         * password : 123
-         * token : 74880cc6e0b1658f5467ccc1b3b41e3a
-         * lastLoginTime : 1526958309000
-         * wxId : null
-         * qqId : null
-         * lineId : null
-         * wbId : null
+         * scnum : 2
+         * dynum : 0
+         * lxrnum : 3
+         * lsjlnum : 6
+         * user : {"id":22,"phone":"88888888888","nickname":"FCL用户","pic":"http://hwdc.oss-ap-northeast-1.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621115832.jpg","sex":"1","birthday":185126400000,"status":"1","isDeleted":0,"createTime":1528790248000,"updateTime":1529647792000,"password":"a12345","token":"2c44a8504bef4b1800f126f5279c5789","lastLoginTime":1529647792000,"wxId":null,"qqId":null,"lineId":null,"wbId":null,"rongCloudToken":"Q9h8Vbw/8Zqnt998LQY1NG7tnvnoFRHtvRSk65MeRaWjhNUpICiAMcn3YV6eKD5/uLIiCll71gD5a0EWCC4laA=="}
+         * daynum : 9
          */
 
-        private int id;
-        private String phone;
-        private String nickname;
-        private String pic;
-        private String sex;
-        private long birthday;
-        private String status;
-        private int isDeleted;
-        private long createTime;
-        private long updateTime;
-        private String password;
-        private String token;
-        private long lastLoginTime;
-        private String wxId;
-        private String qqId;
-        private String lineId;
-        private String wbId;
+        private int scnum;
+        private int dynum;
+        private int lxrnum;
+        private int lsjlnum;
+        private UserBean user;
+        private int daynum;
 
-        public int getId() {
-            return id;
+        public int getScnum() {
+            return scnum;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setScnum(int scnum) {
+            this.scnum = scnum;
         }
 
-        public String getPhone() {
-            return phone;
+        public int getDynum() {
+            return dynum;
         }
 
-        public void setPhone(String phone) {
-            this.phone = phone;
+        public void setDynum(int dynum) {
+            this.dynum = dynum;
         }
 
-        public String getNickname() {
-            return nickname;
+        public int getLxrnum() {
+            return lxrnum;
         }
 
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
+        public void setLxrnum(int lxrnum) {
+            this.lxrnum = lxrnum;
         }
 
-        public String getPic() {
-            return pic;
+        public int getLsjlnum() {
+            return lsjlnum;
         }
 
-        public void setPic(String pic) {
-            this.pic = pic;
+        public void setLsjlnum(int lsjlnum) {
+            this.lsjlnum = lsjlnum;
         }
 
-        public String getSex() {
-            return sex;
+        public UserBean getUser() {
+            return user;
         }
 
-        public void setSex(String sex) {
-            this.sex = sex;
+        public void setUser(UserBean user) {
+            this.user = user;
         }
 
-        public long getBirthday() {
-            return birthday;
+        public int getDaynum() {
+            return daynum;
         }
 
-        public void setBirthday(long birthday) {
-            this.birthday = birthday;
+        public void setDaynum(int daynum) {
+            this.daynum = daynum;
         }
 
-        public String getStatus() {
-            return status;
-        }
+        public static class UserBean {
+            /**
+             * id : 22
+             * phone : 88888888888
+             * nickname : FCL用户
+             * pic : http://hwdc.oss-ap-northeast-1.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621115832.jpg
+             * sex : 1
+             * birthday : 185126400000
+             * status : 1
+             * isDeleted : 0
+             * createTime : 1528790248000
+             * updateTime : 1529647792000
+             * password : a12345
+             * token : 2c44a8504bef4b1800f126f5279c5789
+             * lastLoginTime : 1529647792000
+             * wxId : null
+             * qqId : null
+             * lineId : null
+             * wbId : null
+             * rongCloudToken : Q9h8Vbw/8Zqnt998LQY1NG7tnvnoFRHtvRSk65MeRaWjhNUpICiAMcn3YV6eKD5/uLIiCll71gD5a0EWCC4laA==
+             */
 
-        public void setStatus(String status) {
-            this.status = status;
-        }
+            private int id;
+            private String phone;
+            private String nickname;
+            private String pic;
+            private String sex;
+            private long birthday;
+            private String status;
+            private int isDeleted;
+            private long createTime;
+            private long updateTime;
+            private String password;
+            private String token;
+            private long lastLoginTime;
+            private Object wxId;
+            private Object qqId;
+            private Object lineId;
+            private Object wbId;
+            private String rongCloudToken;
 
-        public int getIsDeleted() {
-            return isDeleted;
-        }
+            public int getId() {
+                return id;
+            }
 
-        public void setIsDeleted(int isDeleted) {
-            this.isDeleted = isDeleted;
-        }
+            public void setId(int id) {
+                this.id = id;
+            }
 
-        public long getCreateTime() {
-            return createTime;
-        }
+            public String getPhone() {
+                return phone;
+            }
 
-        public void setCreateTime(long createTime) {
-            this.createTime = createTime;
-        }
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
 
-        public long getUpdateTime() {
-            return updateTime;
-        }
+            public String getNickname() {
+                return nickname;
+            }
 
-        public void setUpdateTime(long updateTime) {
-            this.updateTime = updateTime;
-        }
+            public void setNickname(String nickname) {
+                this.nickname = nickname;
+            }
 
-        public String getPassword() {
-            return password;
-        }
+            public String getPic() {
+                return pic;
+            }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
 
-        public String getToken() {
-            return token;
-        }
+            public String getSex() {
+                return sex;
+            }
 
-        public void setToken(String token) {
-            this.token = token;
-        }
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
 
-        public long getLastLoginTime() {
-            return lastLoginTime;
-        }
+            public long getBirthday() {
+                return birthday;
+            }
 
-        public void setLastLoginTime(long lastLoginTime) {
-            this.lastLoginTime = lastLoginTime;
-        }
+            public void setBirthday(long birthday) {
+                this.birthday = birthday;
+            }
 
-        public String getWxId() {
-            return wxId;
-        }
+            public String getStatus() {
+                return status;
+            }
 
-        public void setWxId(String wxId) {
-            this.wxId = wxId;
-        }
+            public void setStatus(String status) {
+                this.status = status;
+            }
 
-        public String getQqId() {
-            return qqId;
-        }
+            public int getIsDeleted() {
+                return isDeleted;
+            }
 
-        public void setQqId(String qqId) {
-            this.qqId = qqId;
-        }
+            public void setIsDeleted(int isDeleted) {
+                this.isDeleted = isDeleted;
+            }
 
-        public String getLineId() {
-            return lineId;
-        }
+            public long getCreateTime() {
+                return createTime;
+            }
 
-        public void setLineId(String lineId) {
-            this.lineId = lineId;
-        }
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
 
-        public String getWbId() {
-            return wbId;
-        }
+            public long getUpdateTime() {
+                return updateTime;
+            }
 
-        public void setWbId(String wbId) {
-            this.wbId = wbId;
+            public void setUpdateTime(long updateTime) {
+                this.updateTime = updateTime;
+            }
+
+            public String getPassword() {
+                return password;
+            }
+
+            public void setPassword(String password) {
+                this.password = password;
+            }
+
+            public String getToken() {
+                return token;
+            }
+
+            public void setToken(String token) {
+                this.token = token;
+            }
+
+            public long getLastLoginTime() {
+                return lastLoginTime;
+            }
+
+            public void setLastLoginTime(long lastLoginTime) {
+                this.lastLoginTime = lastLoginTime;
+            }
+
+            public Object getWxId() {
+                return wxId;
+            }
+
+            public void setWxId(Object wxId) {
+                this.wxId = wxId;
+            }
+
+            public Object getQqId() {
+                return qqId;
+            }
+
+            public void setQqId(Object qqId) {
+                this.qqId = qqId;
+            }
+
+            public Object getLineId() {
+                return lineId;
+            }
+
+            public void setLineId(Object lineId) {
+                this.lineId = lineId;
+            }
+
+            public Object getWbId() {
+                return wbId;
+            }
+
+            public void setWbId(Object wbId) {
+                this.wbId = wbId;
+            }
+
+            public String getRongCloudToken() {
+                return rongCloudToken;
+            }
+
+            public void setRongCloudToken(String rongCloudToken) {
+                this.rongCloudToken = rongCloudToken;
+            }
         }
     }
 }

@@ -3,19 +3,27 @@ package com.example.administrator.japanhouse.activity.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.im.ImManager;
+import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.model.AgentListBean;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
+
+import java.util.List;
 
 import io.rong.imkit.RongIM;
 
@@ -26,9 +34,11 @@ import io.rong.imkit.RongIM;
 public class AgentListAdapter extends RecyclerView.Adapter {
 
     private Activity activity;
+    private List<AgentListBean.DatasBean> datas;
 
-    public AgentListAdapter(Activity activity) {
+    public AgentListAdapter(Activity activity, List<AgentListBean.DatasBean> datas) {
         this.activity = activity;
+        this.datas = datas;
     }
 
     @Override
@@ -38,34 +48,62 @@ public class AgentListAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         AgentViewHolder viewHolder = (AgentViewHolder) holder;
+
+        Glide.with(activity)
+                .load(datas.get(position).getPic())
+                .into(viewHolder.icon);
+
+        viewHolder.name.setText(datas.get(position).getBrokerName());
+
+        viewHolder.main.setText(MyApplication.isJapanese() ? datas.get(position).getAreaNameJpn() : datas.get(position).getAreaNameCn());
+
+//        viewHolder.ratingBarView.setSelectedCount(datas.get(position).getAvgStar());
+
         viewHolder.wChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImManager.enterChat(activity, "userid", "name", "pic");
+                if (!MyApplication.isLogin()) {
+                    activity.startActivity(new Intent(activity, LoginActivity.class));
+                    return;
+                }
+
+                ImManager.enterChat(activity, datas.get(position).getId() + "", datas.get(position).getBrokerName(), datas.get(position).getPic());
             }
         });
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.startActivity(new Intent(activity, ManagerActivity.class));
+                Intent intent = new Intent(activity, ManagerActivity.class);
+                intent.putExtra("brokerId", datas.get(position).getId());
+                activity.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     class AgentViewHolder extends RecyclerView.ViewHolder {
         TextView wChat;
         LinearLayout layout;
         RatingBarView ratingBarView;
+
+        ImageView icon;
+        TextView name;
+        TextView main;
+
         public AgentViewHolder(View itemView) {
             super(itemView);
+
+            icon = (ImageView) itemView.findViewById(R.id.item_agent_list_icon);
+            name = (TextView) itemView.findViewById(R.id.item_agent_list_name);
+            main = (TextView) itemView.findViewById(R.id.item_agent_list_main);
+
             wChat = (TextView) itemView.findViewById(R.id.item_agent_list_chat);
             layout = (LinearLayout) itemView.findViewById(R.id.item_agent_list_item);
             ratingBarView = (RatingBarView) itemView.findViewById(R.id.item_agent_list_ratingbar);

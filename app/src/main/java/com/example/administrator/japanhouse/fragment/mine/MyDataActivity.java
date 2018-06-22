@@ -23,10 +23,15 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.model.FileBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserInfo;
+import com.example.administrator.japanhouse.presenter.UpFilePresenter;
 import com.example.administrator.japanhouse.presenter.UserPresenter;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.BaseSelectPopupWindow;
@@ -40,6 +45,10 @@ import com.lzy.okgo.model.Response;
 import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +60,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.rong.imkit.RongIM;
 
-public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack {
+public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack, UpFilePresenter.UpFileCallBack {
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -85,16 +94,24 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     private UserPresenter presenter;
 
+    private UserInfo.DatasBean.UserBean userBean;
+
     private int mSex;
     private String mBirthday;
 
-    private UserInfo.DatasBean datasBean;
+    private UpFilePresenter filePresenter;
+
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
         ButterKnife.bind(this);
+
+        filePresenter = new UpFilePresenter(this, this);
+
+        initData();
 
         presenter = new UserPresenter(this, this);
 
@@ -107,7 +124,46 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         initLunarPicker();//初始化时间选择器
         initListener();
 
-        presenter.getUserInfo(MyApplication.getUserToken());
+        EventBus.getDefault().register(this);
+    }
+
+    private void initData() {
+        userBean = CacheUtils.get(Constants.P_USERINFO);
+
+        if (userBean != null) {
+            if (!TextUtils.isEmpty(userBean.getSex())) {
+                if (TextUtils.equals(userBean.getSex(), "1")) {
+                    cbWoman.setChecked(true);
+                    cbMan.setChecked(false);
+                    mSex = 1;
+                } else {
+                    cbMan.setChecked(true);
+                    cbWoman.setChecked(false);
+                    mSex = 0;
+                }
+            }
+
+            if (!TextUtils.isEmpty(userBean.getPic())) {
+                Glide.with(this)
+                        .load(userBean.getPic())
+                        .into(ivHead);
+            }
+
+            if (!TextUtils.isEmpty(userBean.getNickname())) {
+                et_name.setText(userBean.getNickname());
+            }
+
+            if (userBean.getBirthday() != 0) {
+                tvBirthday.setText(getTime(new Date(userBean.getBirthday())));
+                mBirthday = tvBirthday.getText().toString();
+            }
+
+            if (!TextUtils.isEmpty(userBean.getPhone())) {
+                tvPhone.setText(userBean.getPhone());
+            }
+
+            path = userBean.getPic();
+        }
     }
 
     private void initListener() {
@@ -216,10 +272,10 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     @Override
                     public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
                         switch (position) {
-                            case 0://从相册选择
+                            case 1://从相册选择
                                 requestPhoto();
                                 break;
-                            case 1://拍照
+                            case 0://拍照
                                 requestCamera();
                                 break;
                         }
@@ -308,6 +364,9 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     //                    cutPath = selectList.get(0).getPath();
                     //                    Glide.with(this).load(cutPath).into(faceIv);
                     File file = new File(cutPath);
+                    List<File> files = new ArrayList<>();
+                    files.add(file);
+                    filePresenter.upFileRequest(files);
                     //                    requestUploadAvatar(file);
                     break;
             }
@@ -383,55 +442,29 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void getUserInfo(Response<UserInfo> response) {
-        if (TextUtils.equals(response.body().getCode(), "201")) {
-            startActivity(new Intent(this, LoginActivity.class));
-            MyApplication.logOut();
-            return;
-        }
 
-        datasBean = response.body().getDatas();
-        if (datasBean == null)
-            return;
-
-        if (!TextUtils.isEmpty(datasBean.getSex())) {
-            if (TextUtils.equals(datasBean.getSex(), "1")) {
-                cbWoman.setChecked(true);
-                cbMan.setChecked(false);
-                mSex = 1;
-            } else {
-                cbMan.setChecked(true);
-                cbWoman.setChecked(false);
-                mSex = 0;
-            }
-        }
-
-        if (!TextUtils.isEmpty(datasBean.getPic())) {
-            Glide.with(this)
-                    .load(datasBean.getPic())
-                    .into(ivHead);
-        }
-
-        if (!TextUtils.isEmpty(datasBean.getNickname())) {
-            et_name.setText(datasBean.getNickname());
-        }
-
-        if (datasBean.getBirthday() != 0) {
-            tvBirthday.setText(getTime(new Date(datasBean.getBirthday())));
-            mBirthday = tvBirthday.getText().toString();
-        }
-
-        if (!TextUtils.isEmpty(datasBean.getPhone())) {
-            tvPhone.setText(datasBean.getPhone());
-        }
     }
 
     @Override
     public void finish() {
-        presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday);
-        if (datasBean != null) {
-            RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(datasBean.getId() + "", datasBean.getNickname(), Uri.parse(datasBean.getPic())));
+        presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday, path);
+        if (userBean != null) {
+            if (userBean.getPic() != null && !userBean.getPic().equals("")) {
+                RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(userBean.getId() + "",
+                        userBean.getNickname(), Uri.parse(userBean.getPic())));
+            }
         }
+
+        EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
+
         super.finish();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventUserInfos(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_USERINFO)) {
+            initData();
+        }
     }
 
     @Override
@@ -441,5 +474,19 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             MyApplication.logOut();
             return;
         }
+    }
+
+    @Override
+    public void upFileRequest(Response<FileBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            path = response.body().getDatas();
+            Glide.with(this).load(path).into(ivHead);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

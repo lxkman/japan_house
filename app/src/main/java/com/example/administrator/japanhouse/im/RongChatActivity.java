@@ -9,13 +9,16 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserBean;
+import com.example.administrator.japanhouse.presenter.AppraiseManagerPresenter;
 import com.example.administrator.japanhouse.presenter.FromPhonePresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -39,7 +42,7 @@ import io.rong.imlib.model.UserInfo;
  * Created by   admin on 2018/4/25.
  */
 
-public class RongChatActivity extends BaseActivity implements FromPhonePresenter.PhoneCallBack {
+public class RongChatActivity extends BaseActivity implements FromPhonePresenter.PhoneCallBack, AppraiseManagerPresenter.AppraiseCallBack {
     private TextView title;
     private ImageView back;
     private ImageView phone;
@@ -48,8 +51,11 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
     private TextView tvAppraise;
 
     private FromPhonePresenter presenter;
+    private AppraiseManagerPresenter managerPresenter;
 
     private String strPhone = "";
+
+    private String targetId;
 
     private int state = 0; //0否 1是
 
@@ -65,9 +71,11 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         tvAppraise = (TextView) findViewById(R.id.act_rongChat_appraise);
 
         //会话界面 对方id
-        final String targetId = getIntent().getData().getQueryParameter("targetId");
+        targetId = getIntent().getData().getQueryParameter("targetId");
         presenter = new FromPhonePresenter(this, this);
         presenter.getUserPhone(targetId);
+
+        managerPresenter = new AppraiseManagerPresenter(this, this);
 
         //对方 昵称
         String title = getIntent().getData().getQueryParameter("title");
@@ -205,7 +213,9 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         CheckBox rbColdness = dialog.getView(R.id.dialog_chat_lengdan);
         CheckBox rbMsgPartial = dialog.getView(R.id.dialog_chat_buquan);
 
-        RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
+        final EditText editText = dialog.getView(R.id.dialog_chat_content);
+
+        final RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
         ratingBarView.setRatingCount(5);
         ratingBarView.setSelectedCount(0);
         ratingBarView.setSelectedIconResId(R.drawable.start_check);
@@ -225,6 +235,7 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         dialog.getView(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                managerPresenter.appraiseManagerRequest(targetId, editText.getText().toString(), ratingBarView.getSelectedCount());
                 dialog.dismiss();
             }
         });
@@ -247,7 +258,9 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         CheckBox rbColdness = dialog.getView(R.id.dialog_chat_lengdan);
         CheckBox rbMsgPartial = dialog.getView(R.id.dialog_chat_buquan);
 
-        RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
+        final EditText editText = dialog.getView(R.id.dialog_chat_content);
+
+        final RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
         ratingBarView.setRatingCount(5);
         ratingBarView.setSelectedCount(0);
         ratingBarView.setSelectedIconResId(R.drawable.start_check);
@@ -266,6 +279,7 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         dialog.getView(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                managerPresenter.appraiseManagerRequest(targetId, editText.getText().toString(), ratingBarView.getSelectedCount());
                 dialog.dismiss();
             }
         });
@@ -305,5 +319,10 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
                 star.setChecked(false);
             }
         }
+    }
+
+    @Override
+    public void appraiseManagerRequest(Response<NoDataBean> response) {
+
     }
 }

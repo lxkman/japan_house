@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,13 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.Bay_baike_Bean;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HuiFu_Bean;
 import com.example.administrator.japanhouse.bean.TiwenBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.Buyhouse_Baike_Activity;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Tiwen_Adapter;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
@@ -29,6 +32,9 @@ import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -56,6 +62,8 @@ public class Tiwen_Itme_Fragment extends BaseFragment {
         state = (TextView) view.findViewById(R.id.no_more_data);
         buy_recyclwe = (RecyclerView) view.findViewById(R.id.Buy_recycler);
         intdata();
+
+        EventBus.getDefault().register(this);
         return view;
     }
 
@@ -158,5 +166,18 @@ public class Tiwen_Itme_Fragment extends BaseFragment {
                         TUtils.showFail(getContext(), getString(R.string.refresh_fail));
                     }
                 });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventUserInfos(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_W)) {
+            intdata();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }

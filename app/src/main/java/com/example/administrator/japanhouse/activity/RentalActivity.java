@@ -27,8 +27,11 @@ import com.example.administrator.japanhouse.adapter.PicRentalAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.RentalDetailsBean;
 import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.model.FileBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.RentalPresenter;
+import com.example.administrator.japanhouse.presenter.UpFilePresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -38,6 +41,7 @@ import com.lzy.okgo.model.Response;
 import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +54,7 @@ import butterknife.OnClick;
  * Created by   admin on 2018/4/17.
  */
 
-public class RentalActivity extends BaseActivity implements PicRentalAdapter.onItemClickListener, RentalPresenter.RentalCallBack {
+public class RentalActivity extends BaseActivity implements PicRentalAdapter.onItemClickListener, RentalPresenter.RentalCallBack, UpFilePresenter.UpFileCallBack {
 
     @BindView(R.id.act_rental_back)
     ImageView back;
@@ -97,6 +101,8 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
     private boolean rentOrSell = true;
 
+    private boolean isHaveVideo = false;
+
     //相册，拍照
     private List<String> cameraList;
     private List<String> cameraListvideo;
@@ -112,11 +118,15 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
     private RentalPresenter presenter;
 
+    private UpFilePresenter filePresenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rental);
         ButterKnife.bind(this);
+
+        filePresenter = new UpFilePresenter(this, this);
 
         nestedScrollView = (NestedScrollView) findViewById(R.id.act_rental_scrollView);
 
@@ -232,53 +242,26 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
             case R.id.act_rental_entrust:
                 if (!TextUtils.isEmpty(etCall.getText().toString()) && !TextUtils.isEmpty(etContact.getText().toString())) {
 
-                    String isbathRoom;
-                    String strRentSell;
-                    if (isBathroom) {
-                        isbathRoom = "0";
-                    } else {
-                        isbathRoom = "1";
+                    if (imgPathList != null && imgPathList.size() > 0) {
+                        List<File> files = new ArrayList<>();
+                        for (int i = 0; i < imgPathList.size(); i++) {
+                            files.add(new File(imgPathList.get(i)));
+                        }
+
+                        if (videoPath != null && !"".equals(videoPath)) {
+                            files.add(new File(videoPath));
+                            isHaveVideo = true;
+                        } else {
+                            isHaveVideo = false;
+                        }
+
+                        filePresenter.upFileRequest(files);
                     }
 
-                    if (rentOrSell) {
-                        strRentSell = getString(R.string.rent_details);
-                    } else {
-                        strRentSell = getString(R.string.sell_details);
-                    }
-
-                    RentalDetailsBean bean = new RentalDetailsBean(strRentSell,
-                            "0",
-                            null,
-                            etCall.getText().toString(),
-                            etContact.getText().toString(),
-                            etLocation.getText().toString(),
-                            etDistance.getText().toString(),
-                            etFloor.getText().toString(),
-                            etArea.getText().toString(),
-                            etPattern.getText().toString(),
-                            isbathRoom,
-                            etToward.getText().toString(),
-                            etEquipment.getText().toString(),
-                            imgPathList,
-                            videoPath,
-                            null);
-
-                    Intent intent = new Intent(this, RentalDetailsActivity.class);
-                    intent.putExtra("detailsBean", bean);
-                    startActivityForResult(intent, 101);
-
-
-                    presenter.requestRental(etCall.getText().toString(),
-                            etContact.getText().toString(),
-                            etLocation.getText().toString(),
-                            etDistance.getText().toString(),
-                            etFloor.getText().toString(),
-                            etArea.getText().toString(),
-                            etPattern.getText().toString(),
-                            isBathroom ? "0" : "1",
-                            etToward.getText().toString(),
-                            etEquipment.getText().toString(),
-                            rentOrSell ? "1" : "0");
+                } else if (TextUtils.isEmpty(etCall.getText().toString())) {
+                    TUtils.showFail(RentalActivity.this, getString(R.string.activity_rental_call_hint));
+                } else if (TextUtils.isEmpty(etContact.getText().toString())) {
+                    TUtils.showFail(RentalActivity.this, getString(R.string.activity_rental_contact_hint));
                 }
                 break;
         }
@@ -528,5 +511,87 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
             MyApplication.logOut();
             return;
         }
+
+        String isbathRoom;
+        String strRentSell;
+        if (isBathroom) {
+            isbathRoom = "0";
+        } else {
+            isbathRoom = "1";
+        }
+
+        if (rentOrSell) {
+            strRentSell = getString(R.string.rent_details);
+        } else {
+            strRentSell = getString(R.string.sell_details);
+        }
+
+        RentalDetailsBean bean = new RentalDetailsBean(strRentSell,
+                "0",
+                null,
+                etCall.getText().toString(),
+                etContact.getText().toString(),
+                etLocation.getText().toString(),
+                etDistance.getText().toString(),
+                etFloor.getText().toString(),
+                etArea.getText().toString(),
+                etPattern.getText().toString(),
+                isbathRoom,
+                etToward.getText().toString(),
+                etEquipment.getText().toString(),
+                imgPathList,
+                videoPath,
+                null);
+
+        Intent intent = new Intent(this, RentalDetailsActivity.class);
+        intent.putExtra("detailsBean", bean);
+        startActivityForResult(intent, 101);
+    }
+
+    @Override
+    public void upFileRequest(Response<FileBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (isHaveVideo) {
+                List<String> paths = getList(response.body().getDatas());
+
+                String videoPath = "";
+
+                StringBuilder builder = new StringBuilder();
+
+                for (int i = 0; i < paths.size(); i++) {
+                    if (i == paths.size() - 1) {
+                        videoPath = paths.get(i);
+                    } else if (i == paths.size() - 2) {
+                        builder.append(paths.get(i));
+                    } else {
+                        builder.append(paths.get(i) + ",");
+                    }
+                }
+
+                presenter.requestRental(etCall.getText().toString(),
+                        etContact.getText().toString(),
+                        etLocation.getText().toString(),
+                        etDistance.getText().toString(),
+                        etFloor.getText().toString(),
+                        etArea.getText().toString(),
+                        etPattern.getText().toString(),
+                        isBathroom ? "0" : "1",
+                        etToward.getText().toString(),
+                        etEquipment.getText().toString(),
+                        rentOrSell ? "1" : "0",
+                        builder.toString(),
+                        videoPath);
+            }
+        }
+    }
+
+    private List<String> getList(String pic) {
+        String d[] = pic.split(",");
+        List<String> picList = new ArrayList();
+
+        for (int i = 0; i < d.length; i++) {
+            picList.add(d[i]);
+        }
+        return picList;
     }
 }

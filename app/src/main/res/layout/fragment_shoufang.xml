@@ -34,7 +34,7 @@
                     android:background="#f5f5f5"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dip"
-                    android:text="2017.01.05  17:15更新" />
+                    />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/Mrecycler"

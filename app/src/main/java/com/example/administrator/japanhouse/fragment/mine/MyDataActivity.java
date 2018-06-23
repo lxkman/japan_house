@@ -253,6 +253,23 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 //设置监听事件
                 .builder();
         dialog.show();
+
+        TextView textView = dialog.getView(R.id.tv_content);
+
+        if(!TextUtils.isEmpty(tvPhone.getText().toString())){
+            StringBuilder sb  =new StringBuilder();
+            for (int i = 0; i < tvPhone.getText().toString().length(); i++) {
+                char c = tvPhone.getText().toString().charAt(i);
+                if (i >= 3 && i <= 6) {
+                    sb.append('*');
+                } else {
+                    sb.append(c);
+                }
+            }
+
+            textView.setText("当前绑定手机号为" + sb.toString());
+        }
+
         dialog.getView(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

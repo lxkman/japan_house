@@ -22,6 +22,7 @@ import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -241,9 +242,10 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
                                 .execute(new DialogCallback<NoDataBean>(DaikuanDetilsActivity.this, NoDataBean.class) {
                                     @Override
                                     public void onSuccess(Response<NoDataBean> response) {
-                                        if (TextUtils.equals(response.body().getCode(), "201")) {
-                                            startActivity(new Intent(DaikuanDetilsActivity.this, LoginActivity.class));
-                                            MyApplication.logOut();
+                                        if (!TextUtils.equals(response.body().getCode(), "200")) {
+                                            TUtils.showFail(DaikuanDetilsActivity.this, getString(R.string.fail_sq));
+                                        } else {
+                                            TUtils.showFail(DaikuanDetilsActivity.this, getString(R.string.success_sq));
                                         }
                                     }
                                 });

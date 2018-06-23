@@ -88,6 +88,7 @@
             android:cursorVisible="false"
             android:minWidth="100dp"
             android:text="sense"
+            android:maxLength="20"
             android:textSize="15dip"/>
     </LinearLayout>
     <View
@@ -186,7 +187,6 @@
             android:layout_height="match_parent"
             android:layout_marginRight="10dip"
             android:gravity="center"
-            android:text="1982.02.21"
             android:textSize="15dip"/>
     </LinearLayout>
     <View

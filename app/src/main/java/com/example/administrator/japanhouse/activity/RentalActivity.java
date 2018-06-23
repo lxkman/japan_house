@@ -314,7 +314,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
                 .enableCrop(false)// 是否裁剪
                 .compress(true)// 是否压缩
-                .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
 //                .glideOverride(200, 200)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
                 //                .withAspectRatio(aspect_ratio_x, aspect_ratio_y)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
@@ -347,7 +347,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles
                 .enableCrop(false)// 是否裁剪
                 .compress(true)// 是否压缩
-                .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                 .circleDimmedLayer(true)// 是否圆形裁剪
                 .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
@@ -406,7 +406,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
                 .enableCrop(false)// 是否裁剪
                 .compress(true)// 是否压缩
-                .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
 //                .glideOverride(200, 200)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
                 //                .withAspectRatio(aspect_ratio_x, aspect_ratio_y)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
@@ -439,7 +439,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles
                 .enableCrop(false)// 是否裁剪
                 .compress(true)// 是否压缩
-                .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                 .circleDimmedLayer(true)// 是否圆形裁剪
                 .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false

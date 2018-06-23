@@ -13,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.home.ui.fragment.Buyhouse_Fragment;
 import com.example.administrator.japanhouse.fragment.home.ui.fragment.Sellhouse_Fragment;
+import com.example.administrator.japanhouse.login.LoginActivity;
 
 public class QuestionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -121,11 +123,21 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 //转换页面
                 break;
             case R.id.liner3:
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
                 Intent intent = new Intent(QuestionActivity.this, QuizActivity.class);
                 intent.putExtra("type", type);
                 startActivity(intent);
                 break;
             case R.id.liner4:
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
                 //转换页面
                 Intent wenda = new Intent(QuestionActivity.this, WendaItemActivity.class);
                 startActivity(wenda);

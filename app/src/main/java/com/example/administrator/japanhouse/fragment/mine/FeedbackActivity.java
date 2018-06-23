@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.FeedBackPresenter;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.model.Response;
 
 import butterknife.BindView;
@@ -90,6 +91,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void requestFeedBack(Response<NoDataBean> response) {
         if (response != null && response.body() != null && response.body().getCode() != null && response.body().getCode().equals("200")) {
+            TUtils.showFail(this, response.body().getMsg().toString());
             finish();
         }
     }

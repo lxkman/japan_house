@@ -6,16 +6,21 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.WenDa_Details_Bean;
 import com.example.administrator.japanhouse.bean.WenDa_Details_Pinglun_Bean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.WenDa_Detil_Adapter;
+import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
@@ -24,6 +29,10 @@ import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +65,8 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_wen_da__detils_);
         initView();
         intdaview();
+
+        EventBus.getDefault().register(this);
     }
     private void initView() {
         askid = getIntent().getIntExtra("askid", 0);
@@ -237,10 +248,20 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                 finish();
                 break;
             case R.id.liner3:
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
                 Intent intent = new Intent(WenDa_Detils_Activity.this, QuizActivity.class);
                 startActivity(intent);
                 break;
             case R.id.liner4:
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
                 Intent intent1 = new Intent(WenDa_Detils_Activity.this, AnswerActivity.class);
                 intent1.putExtra("title",title1);
                 intent1.putExtra("askid", askid);
@@ -258,4 +279,18 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
         return format;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventUserInfos(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_W) || TextUtils.equals(eventBean.getMsg(), Constants.EVENT_D)) {
+            list.clear();
+            pageNo = 1;
+            intdata();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

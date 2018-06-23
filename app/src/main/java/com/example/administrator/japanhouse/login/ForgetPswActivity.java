@@ -22,6 +22,8 @@ import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
+import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -72,6 +74,11 @@ public class ForgetPswActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_get_code:
+                if (!TextUtils.isEmpty(edtPhone.getText().toString())) {
+                    SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
+                } else {
+                    TUtils.showFail(this, getString(R.string.get_code_fail));
+                }
                 break;
             case R.id.btn_find_pass:
                 initNet();

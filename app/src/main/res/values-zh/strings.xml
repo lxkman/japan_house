@@ -604,4 +604,5 @@
     <string name="shoucangchenggong">收藏成功</string>
     <string name="quxiaoshoucangchenggong">取消收藏成功</string>
     <string name="qingshurushuzi">请输入数字</string>
+    <string name="get_code_fail">将来看产品提示什么</string>
 </resources>

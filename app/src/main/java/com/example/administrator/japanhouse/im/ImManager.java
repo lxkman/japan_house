@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.im;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -10,6 +11,7 @@ import android.util.Log;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -291,6 +293,11 @@ public class ImManager {
     }
 
     public static void enterChatDetails(Context context, final String userId, final String chatName, final String avatar) {
+        if (!MyApplication.isLogin()) {
+            context.startActivity(new Intent(context, LoginActivity.class));
+            return;
+        }
+
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
         setMyExtensionModule();
         if (RongIM.getInstance() != null) {

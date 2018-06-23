@@ -103,6 +103,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     private String path;
 
+    private List<File> files = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,7 +213,14 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.back_img:
                 SoftKeyboardTool.closeKeyboard(this);
-                finish();
+                filePresenter.upFileRequest(files);
+
+                if (userBean != null) {
+                    if (userBean.getPic() != null && !userBean.getPic().equals("")) {
+                        RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(userBean.getId() + "",
+                                userBean.getNickname(), Uri.parse(userBean.getPic())));
+                    }
+                }
                 break;
             case R.id.tv_phone:
                 showChangePhoneDialog();
@@ -364,9 +373,9 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     //                    cutPath = selectList.get(0).getPath();
                     //                    Glide.with(this).load(cutPath).into(faceIv);
                     File file = new File(cutPath);
-                    List<File> files = new ArrayList<>();
+
                     files.add(file);
-                    filePresenter.upFileRequest(files);
+
                     //                    requestUploadAvatar(file);
                     break;
             }
@@ -445,21 +454,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     }
 
-    @Override
-    public void finish() {
-        presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday, path);
-        if (userBean != null) {
-            if (userBean.getPic() != null && !userBean.getPic().equals("")) {
-                RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(userBean.getId() + "",
-                        userBean.getNickname(), Uri.parse(userBean.getPic())));
-            }
-        }
-
-        EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
-
-        super.finish();
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void eventUserInfos(EventBean eventBean) {
         if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_USERINFO)) {
@@ -474,6 +468,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             MyApplication.logOut();
             return;
         }
+        EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
+        finish();
     }
 
     @Override
@@ -481,6 +477,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             path = response.body().getDatas();
             Glide.with(this).load(path).into(ivHead);
+            presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday, path);
         }
     }
 

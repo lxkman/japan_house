@@ -3,8 +3,10 @@ package com.example.administrator.japanhouse.login;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -18,11 +20,17 @@ import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.LoginParmeter;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
+import com.linecorp.linesdk.LineCredential;
+import com.linecorp.linesdk.LineProfile;
+import com.linecorp.linesdk.auth.LineLoginApi;
+import com.linecorp.linesdk.auth.LineLoginResult;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -34,6 +42,8 @@ import butterknife.OnClick;
 import static com.example.administrator.japanhouse.R.id.edt_phone;
 
 public class RegisterActivity extends BaseActivity {
+
+    private static final int LINE_REQUEST_CODE = 123;
 
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -94,7 +104,11 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
             case R.id.tv_get_code:
-                SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
+                if (!TextUtils.isEmpty(edtPhone.getText().toString())) {
+                    SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
+                } else {
+                    TUtils.showFail(this, getString(R.string.get_code_fail));
+                }
                 break;
             case R.id.btn_login:
                 initNet();
@@ -109,7 +123,14 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.img_line:
-                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
+                try {
+                    // App to App loginline
+                    Intent LoginIntent = LineLoginApi.getLoginIntent(this, getResources().getString(R.string.line_channel_id));
+                    startActivityForResult(LoginIntent, LINE_REQUEST_CODE);
+                } catch (Exception e) {
+                    Log.e("ERROR", "33:" + e.toString());
+                }
+//                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
                 break;
             case R.id.people_xieyi:
                 startActivity(new Intent(RegisterActivity.this, PeopleXieyiActivity.class));
@@ -224,5 +245,42 @@ public class RegisterActivity extends BaseActivity {
                 getWindow().setAttributes(lp);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == LINE_REQUEST_CODE) {
+            LineLoginResult result = LineLoginApi.getLoginResultFromIntent(data);
+            switch (result.getResponseCode()) {
+                case SUCCESS:
+                    LoginParmeter loginParmeter = new LoginParmeter();
+                    LineProfile lineProfile = result.getLineProfile();
+                    LineCredential credential = result.getLineCredential();
+                    loginParmeter.id = lineProfile.getUserId();
+                    loginParmeter.age = "";
+                    loginParmeter.accessToken = credential.getAccessToken().getAccessToken();
+
+                    Uri facebookUri = lineProfile.getPictureUrl();
+                    if (facebookUri != null) {
+                        loginParmeter.avatar = facebookUri.toString();
+                        Log.e("======>>avatar", "" + facebookUri.toString());
+                    } else {
+                        loginParmeter.avatar = "";
+                    }
+                    loginParmeter.nickname = lineProfile.getDisplayName();
+                    Log.e("======>>id", "" + lineProfile.getUserId());
+                    Log.e("======>>accessToken", "" + credential.getAccessToken().getAccessToken());
+
+                    Log.e("======>>nickname", "" + lineProfile.getDisplayName());
+                    break;
+                case CANCEL:
+                    Log.e("======>>", "LINE login  Canceled by user!!");
+                    break;
+                default:
+                    Log.e("======>>", "login LINE FAILED!");
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

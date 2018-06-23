@@ -423,6 +423,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         params.put("zjId", zjId);//租金
         if (isZiDingyiPrice) {
             params.put("starZj", zidingyiPriceList.get(0));//租金最低价
+            if (zidingyiPriceList.size()>1)
             params.put("endZj", zidingyiPriceList.get(1));//租金最高价
         }
         params.put("searchText", searchText);
@@ -553,6 +554,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         params.put("zjId", zjId);//租金
         if (isZiDingyiPrice) {
             params.put("starZj", zidingyiPriceList.get(0));//租金最低价
+            if (zidingyiPriceList.size()>1)
             params.put("endZj", zidingyiPriceList.get(1));//租金最高价
         }
         params.put("searchText", searchText);

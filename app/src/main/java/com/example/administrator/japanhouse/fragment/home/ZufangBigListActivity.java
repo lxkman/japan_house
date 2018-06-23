@@ -347,6 +347,7 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
         }
         if (isZiDingyiPrice) {
             params.put("starZj", zidingyiPriceList.get(0));//租金最低价
+            if (zidingyiPriceList.size()>1)
             params.put("endZj", zidingyiPriceList.get(1));//租金最高价
         }
         if (isDitie) {

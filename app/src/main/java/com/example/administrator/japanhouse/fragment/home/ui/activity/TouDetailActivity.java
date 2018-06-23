@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,11 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.TouListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdapter;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.presenter.TopLinePresenter;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -75,7 +78,15 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
         time.setText(timeValue+"");
         neirong.setText(contentValue);
 
-
+        ed_pinglun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(TouDetailActivity.this, LoginActivity.class));
+                    ed_pinglun.clearFocus();
+                }
+            }
+        });
 
     }
 

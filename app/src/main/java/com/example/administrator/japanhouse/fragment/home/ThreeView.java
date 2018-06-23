@@ -104,14 +104,22 @@ class ThreeView implements View.OnClickListener {
                 String zuidijia = et_zuidijia.getText().toString();
                 String zuigaojia = et_zuigaojia.getText().toString();
                 if (isYuan) {
-                    price.add(zuidijia);
-                    price.add(zuigaojia);
+                    if (!TextUtils.isEmpty(zuidijia)) {
+                        price.add(zuidijia);
+                    }
+                    if (!TextUtils.isEmpty(zuigaojia)) {
+                        price.add(zuigaojia);
+                    }
                 } else {
                     try {
-                        price.add(Integer.parseInt(zuidijia) * 10000 + "");
-                        price.add(Integer.parseInt(zuigaojia) * 10000 + "");
+                        if (!TextUtils.isEmpty(zuidijia)) {
+                            price.add(Integer.parseInt(zuidijia) * 10000 + "");
+                        }
+                        if (!TextUtils.isEmpty(zuigaojia)) {
+                            price.add(Integer.parseInt(zuigaojia) * 10000 + "");
+                        }
                     } catch (NumberFormatException e) {
-                        TUtils.showFail(context,context.getResources().getString(R.string.qingshurushuzi));
+                        TUtils.showFail(context, context.getResources().getString(R.string.qingshurushuzi));
                         return;
                     }
                 }

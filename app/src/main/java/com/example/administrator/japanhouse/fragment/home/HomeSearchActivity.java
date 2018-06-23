@@ -109,6 +109,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
     private void initHistroy() {
         if (getHistory() != null && getHistory().size() > 0) {
+            historyClear.setVisibility(View.VISIBLE);
             mHistoryList = getHistory();
             historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
             historyRecycler.setAdapter(historyAdapter);
@@ -120,6 +121,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 }
             });
         }else {
+            historyClear.setVisibility(View.GONE);
             mHistoryList.clear();
             if (historyAdapter!=null){
                 historyAdapter.notifyDataSetChanged();

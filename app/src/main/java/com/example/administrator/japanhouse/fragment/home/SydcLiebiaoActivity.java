@@ -352,6 +352,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         params.put("searchText", searchText);
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            if (zidingyiPriceList.size()>1)
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
         }
         if (isDitie) {

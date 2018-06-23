@@ -157,6 +157,7 @@
         <activity android:name=".fragment.chat.MyZxingActivity"/>
         <activity
             android:name=".fragment.home.HomeSearchActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".fragment.home.ui.activity.QuestionActivity"

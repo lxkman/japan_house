@@ -247,6 +247,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         params.put("searchText", searchText);//搜索
         if (isZiDingyiPrice) {
             params.put("starSj", zidingyiPriceList.get(0));//售价最低价
+            if (zidingyiPriceList.size()>1)
             params.put("endSj", zidingyiPriceList.get(1));//售价最高价
         }
         if (mMoreSelectedBeanList.size() > 0)

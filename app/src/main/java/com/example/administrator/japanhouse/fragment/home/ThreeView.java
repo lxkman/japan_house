@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -25,9 +24,6 @@ import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static com.taobao.accs.ACCSManager.mContext;
 
 class ThreeView implements View.OnClickListener {
 
@@ -105,18 +101,18 @@ class ThreeView implements View.OnClickListener {
                 String zuigaojia = et_zuigaojia.getText().toString();
                 if (isYuan) {
                     if (!TextUtils.isEmpty(zuidijia)) {
-                        price.add(zuidijia);
+                        price.add("below,"+zuidijia);
                     }
                     if (!TextUtils.isEmpty(zuigaojia)) {
-                        price.add(zuigaojia);
+                        price.add("high,"+zuigaojia);
                     }
                 } else {
                     try {
                         if (!TextUtils.isEmpty(zuidijia)) {
-                            price.add(Integer.parseInt(zuidijia) * 10000 + "");
+                            price.add("below,"+Integer.parseInt(zuidijia) * 10000 + "");
                         }
                         if (!TextUtils.isEmpty(zuigaojia)) {
-                            price.add(Integer.parseInt(zuigaojia) * 10000 + "");
+                            price.add("high,"+Integer.parseInt(zuigaojia) * 10000 + "");
                         }
                     } catch (NumberFormatException e) {
                         TUtils.showFail(context, context.getResources().getString(R.string.qingshurushuzi));

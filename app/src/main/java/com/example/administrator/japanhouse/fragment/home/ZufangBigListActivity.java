@@ -346,9 +346,19 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
             params.put("communityId", communityId);//地图点击小区跳转过来传递的小区id
         }
         if (isZiDingyiPrice) {
-            params.put("starZj", zidingyiPriceList.get(0));//租金最低价
-            if (zidingyiPriceList.size()>1)
-            params.put("endZj", zidingyiPriceList.get(1));//租金最高价
+            if (zidingyiPriceList.size() == 1) {
+                String s = zidingyiPriceList.get(0);
+                if (s.contains("below")) {
+                    String[] split = s.split(",");
+                    params.put("starZj", split[1]);//售价最低价
+                } else if (s.contains("high")) {
+                    String[] split = s.split(",");
+                    params.put("endZj", split[1]);//售价最高价
+                }
+            } else if (zidingyiPriceList.size() == 2) {
+                params.put("starZj", zidingyiPriceList.get(0).split(",")[1]);//售价最低价
+                params.put("endZj", zidingyiPriceList.get(1).split(",")[1]);//售价最高价
+            }
         }
         if (isDitie) {
             params.putUrlParams("dtzs", ditieList);//地铁站

@@ -332,9 +332,19 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
             params.put("communityId", communityId);//地图点击小区跳转过来传递的小区id
         }
         if (isZiDingyiPrice) {
-            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
-            if (zidingyiPriceList.size()>1)
-            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+            if (zidingyiPriceList.size() == 1) {
+                String s = zidingyiPriceList.get(0);
+                if (s.contains("below")) {
+                    String[] split = s.split(",");
+                    params.put("starSj", split[1]);//售价最低价
+                } else if (s.contains("high")) {
+                    String[] split = s.split(",");
+                    params.put("endSj", split[1]);//售价最高价
+                }
+            } else if (zidingyiPriceList.size() == 2) {
+                params.put("starSj", zidingyiPriceList.get(0).split(",")[1]);//售价最低价
+                params.put("endSj", zidingyiPriceList.get(1).split(",")[1]);//售价最高价
+            }
         }
         if (isDitie) {
             params.putUrlParams("dtzs", ditieList);//地铁站

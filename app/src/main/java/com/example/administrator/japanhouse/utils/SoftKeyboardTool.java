@@ -24,4 +24,13 @@ public class SoftKeyboardTool {
                         InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+    //关闭软键盘---上面那个有时候会崩溃
+    public static void closeKeyboard2(Activity context) {
+        View view = context.getWindow().peekDecorView();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 }

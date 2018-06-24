@@ -246,9 +246,19 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         params.putUrlParams("hxs", hxsList);//户型
         params.put("searchText", searchText);//搜索
         if (isZiDingyiPrice) {
-            params.put("starSj", zidingyiPriceList.get(0));//售价最低价
-            if (zidingyiPriceList.size()>1)
-            params.put("endSj", zidingyiPriceList.get(1));//售价最高价
+            if (zidingyiPriceList.size() == 1) {
+                String s = zidingyiPriceList.get(0);
+                if (s.contains("below")) {
+                    String[] split = s.split(",");
+                    params.put("starSj", split[1]);//售价最低价
+                } else if (s.contains("high")) {
+                    String[] split = s.split(",");
+                    params.put("endSj", split[1]);//售价最高价
+                }
+            } else if (zidingyiPriceList.size() == 2) {
+                params.put("starSj", zidingyiPriceList.get(0).split(",")[1]);//售价最低价
+                params.put("endSj", zidingyiPriceList.get(1).split(",")[1]);//售价最高价
+            }
         }
         if (mMoreSelectedBeanList.size() > 0)
             params.putUrlParams("mjs", mMoreSelectedBeanList.get(0));//面积

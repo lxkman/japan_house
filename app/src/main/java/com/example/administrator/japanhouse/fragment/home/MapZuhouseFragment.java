@@ -43,6 +43,7 @@ import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.view.MyDrawCircleView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -422,9 +423,19 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         params.put("mjId", mjId);//面积
         params.put("zjId", zjId);//租金
         if (isZiDingyiPrice) {
-            params.put("starZj", zidingyiPriceList.get(0));//租金最低价
-            if (zidingyiPriceList.size()>1)
-            params.put("endZj", zidingyiPriceList.get(1));//租金最高价
+            if (zidingyiPriceList.size() == 1) {
+                String s = zidingyiPriceList.get(0);
+                if (s.contains("below")) {
+                    String[] split = s.split(",");
+                    params.put("starZj", split[1]);//售价最低价
+                } else if (s.contains("high")) {
+                    String[] split = s.split(",");
+                    params.put("endZj", split[1]);//售价最高价
+                }
+            } else if (zidingyiPriceList.size() == 2) {
+                params.put("starZj", zidingyiPriceList.get(0).split(",")[1]);//售价最低价
+                params.put("endZj", zidingyiPriceList.get(1).split(",")[1]);//售价最高价
+            }
         }
         params.put("searchText", searchText);
         if (isDitie) {
@@ -553,9 +564,19 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         params.put("mjId", mjId);//面积
         params.put("zjId", zjId);//租金
         if (isZiDingyiPrice) {
-            params.put("starZj", zidingyiPriceList.get(0));//租金最低价
-            if (zidingyiPriceList.size()>1)
-            params.put("endZj", zidingyiPriceList.get(1));//租金最高价
+            if (zidingyiPriceList.size() == 1) {
+                String s = zidingyiPriceList.get(0);
+                if (s.contains("below")) {
+                    String[] split = s.split(",");
+                    params.put("starZj", split[1]);//售价最低价
+                } else if (s.contains("high")) {
+                    String[] split = s.split(",");
+                    params.put("endZj", split[1]);//售价最高价
+                }
+            } else if (zidingyiPriceList.size() == 2) {
+                params.put("starZj", zidingyiPriceList.get(0).split(",")[1]);//售价最低价
+                params.put("endZj", zidingyiPriceList.get(1).split(",")[1]);//售价最高价
+            }
         }
         params.put("searchText", searchText);
         if (isDitie) {
@@ -716,6 +737,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
             ditieList = priceRegin;
         } else {//自定义价格
             if (zujin != null && zujin.size() > 0) {
+                SoftKeyboardTool.closeKeyboard2(mActivity);
                 isZiDingyiPrice = true;
                 zjId = "-1";
                 zidingyiPriceList.clear();

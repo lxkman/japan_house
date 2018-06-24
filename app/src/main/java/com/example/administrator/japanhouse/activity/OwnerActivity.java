@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.adapter.OwnerAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.home.FangjiadituActivity;
+import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.OwnerDetailsBean;
 import com.example.administrator.japanhouse.model.OwnerListBean;
 import com.example.administrator.japanhouse.presenter.OwnerPresenter;
@@ -112,6 +114,11 @@ public class OwnerActivity extends BaseActivity implements OwnerAdapter.onClickI
                 break;
 
             case R.id.act_owner_rental:
+                if (!MyApplication.isLogin()) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
+
                 Intent intent1 = new Intent(this, RentalActivity.class);
                 startActivityForResult(intent1, 10);
                 break;

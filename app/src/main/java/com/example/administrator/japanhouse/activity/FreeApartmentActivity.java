@@ -70,6 +70,8 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
     private TextView state;
     private boolean isRefresh = true;
 
+    private boolean refresh = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -246,9 +248,12 @@ public class  FreeApartmentActivity extends BaseActivity implements FreeApartmen
             return;
         }
 
-        if (isRefresh) {
+        if (isRefresh && refresh) {
             TUtils.showFail(this, getString(R.string.refresh_success));
         }
+
+        refresh = true;
+
         state.setText(getString(R.string.no_more_data));
 
         if (response != null && response.body() != null && response.body().getDatas() != null) {

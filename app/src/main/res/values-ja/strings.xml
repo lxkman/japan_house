@@ -607,7 +607,7 @@
     <string name="shoucangchenggong">コレクション成功</string>
     <string name="quxiaoshoucangchenggong">コレクションの成功を取り消す</string>
     <string name="qingshurushuzi">数字を入力してください</string>
-    <string name="get_code_fail">将来看产品提示什么</string>
+    <string name="get_code_fail">请输入手机号</string>
     <string name="success_sq">申请成功</string>
     <string name="fail_sq">申请失败</string>
 </resources>

@@ -149,7 +149,9 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                             time.setText(dateToString);
                             title.setText(datas.getTitle());
                             neirong.setText(datas.getDescription());
-
+                            if (body.getDatas().getHwdcUser() != null) {
+                                ti_name.setText(body.getDatas().getHwdcUser().getNickname());
+                            }
                         }else if(code.equals("201")){
                             ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
                         }else if(code.equals("500")){

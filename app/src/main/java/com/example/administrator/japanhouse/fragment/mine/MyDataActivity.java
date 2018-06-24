@@ -58,6 +58,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import io.rong.imkit.RongIM;
 
 public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack, UpFilePresenter.UpFileCallBack {
@@ -102,8 +106,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     private UpFilePresenter filePresenter;
 
     private String path;
-
-    private List<File> files = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,14 +215,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.back_img:
                 SoftKeyboardTool.closeKeyboard(this);
-                filePresenter.upFileRequest(files);
-
-                if (userBean != null) {
-                    if (userBean.getPic() != null && !userBean.getPic().equals("")) {
-                        RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(userBean.getId() + "",
-                                userBean.getNickname(), Uri.parse(userBean.getPic())));
-                    }
-                }
+                finish();
                 break;
             case R.id.tv_phone:
                 showChangePhoneDialog();
@@ -253,23 +248,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 //设置监听事件
                 .builder();
         dialog.show();
-
-        TextView textView = dialog.getView(R.id.tv_content);
-
-        if(!TextUtils.isEmpty(tvPhone.getText().toString())){
-            StringBuilder sb  =new StringBuilder();
-            for (int i = 0; i < tvPhone.getText().toString().length(); i++) {
-                char c = tvPhone.getText().toString().charAt(i);
-                if (i >= 3 && i <= 6) {
-                    sb.append('*');
-                } else {
-                    sb.append(c);
-                }
-            }
-
-            textView.setText("当前绑定手机号为" + sb.toString());
-        }
-
         dialog.getView(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -324,15 +302,15 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 .imageSpanCount(4)// 每行显示个数
                 .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.SINGLE
                 .previewImage(true)// 是否可预览图片
-                .previewVideo(false)// 是否可预览视频
-                .enablePreviewAudio(false) // 是否可播放音频
+                .previewVideo(true)// 是否可预览视频
+                .enablePreviewAudio(true) // 是否可播放音频
                 .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
                 .isCamera(true)// 是否显示拍照按钮
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                 //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
                 .enableCrop(true)// 是否裁剪
                 .compress(true)// 是否压缩
-                .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
                 .glideOverride(200, 200)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
                 //                .withAspectRatio(aspect_ratio_x, aspect_ratio_y)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
@@ -365,7 +343,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles
                 .enableCrop(true)// 是否裁剪
                 .compress(true)// 是否压缩
-                .compressMode(PictureConfig.SYSTEM_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                 .circleDimmedLayer(true)// 是否圆形裁剪
                 .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
@@ -390,8 +368,9 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     //                    cutPath = selectList.get(0).getPath();
                     //                    Glide.with(this).load(cutPath).into(faceIv);
                     File file = new File(cutPath);
-
+                    List<File> files = new ArrayList<>();
                     files.add(file);
+                    filePresenter.upFileRequest(files);
 
                     //                    requestUploadAvatar(file);
                     break;
@@ -471,6 +450,19 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
 
     }
 
+    @Override
+    public void finish() {
+        presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday, path);
+        if (userBean != null) {
+            if (userBean.getPic() != null && !userBean.getPic().equals("")) {
+                RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(userBean.getId() + "",
+                        userBean.getNickname(), Uri.parse(userBean.getPic())));
+            }
+        }
+
+        super.finish();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void eventUserInfos(EventBean eventBean) {
         if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_USERINFO)) {
@@ -485,8 +477,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             MyApplication.logOut();
             return;
         }
+
         EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
-        finish();
     }
 
     @Override
@@ -494,7 +486,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             path = response.body().getDatas();
             Glide.with(this).load(path).into(ivHead);
-            presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday, path);
         }
     }
 

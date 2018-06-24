@@ -1,82 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.Daikuan_Activity">
+
     <RelativeLayout
         android:id="@+id/liner"
-        android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
+
         <ImageView
-            android:layout_margin="15dp"
-            android:layout_centerVertical="true"
             android:id="@+id/img_beak"
-            android:src="@drawable/img_beak"
             android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:src="@drawable/img_beak" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/jinrongdaikuan"
             android:layout_centerInParent="true"
-            android:textSize="16sp"
+            android:text="@string/jinrongdaikuan"
             android:textColor="@color/white"
-            />
+            android:textSize="16sp" />
+
         <ImageView
             android:id="@+id/xinxi"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/message"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            />
+            android:src="@drawable/message" />
     </RelativeLayout>
+
     <View
         android:id="@+id/view_09"
-        android:layout_below="@id/liner"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/gray1"/>
+        android:background="@color/gray1" />
 
-   <com.liaoinstan.springview.widget.SpringView
-       android:id="@+id/sp_view"
-       android:layout_below="@+id/view_09"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-       <android.support.v7.widget.RecyclerView
-           android:paddingBottom="50dip"
-           android:id="@+id/toutiao_recycler"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-   </com.liaoinstan.springview.widget.SpringView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/sp_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/toutiao_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+          ></android.support.v7.widget.RecyclerView>
+        </com.liaoinstan.springview.widget.SpringView>
+
+        <ImageView
+            android:id="@+id/kefu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="50dip"
+            android:layout_marginRight="15dip"
+            android:clickable="true"
+            android:src="@drawable/kefu" />
+    </RelativeLayout>
 
 
     <TextView
         android:id="@+id/tv_call"
-        android:textSize="16sp"
-        android:textColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@color/shihuangse"
         android:gravity="center"
         android:text="カスタマーサービス"
-        android:background="@color/shihuangse"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="50dip"/>
-    <ImageView
-        android:layout_marginRight="15dip"
-        android:id="@+id/kefu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/kefu"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dip"
-        android:clickable="true"
-    />
+        android:textColor="#fff"
+        android:textSize="16sp" />
 
 
-</RelativeLayout>
+</LinearLayout>

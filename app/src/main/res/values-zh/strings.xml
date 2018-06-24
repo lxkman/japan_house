@@ -607,4 +607,5 @@
     <string name="get_code_fail">请输入手机号</string>
     <string name="success_sq">申请成功</string>
     <string name="fail_sq">申请失败</string>
+    <string name="manager_main">主营:</string>
 </resources>

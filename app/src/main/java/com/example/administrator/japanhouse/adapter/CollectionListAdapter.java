@@ -48,7 +48,7 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
             CollectionViewHolder viewHolder = (CollectionViewHolder) holder;
 
             Glide.with(context)
-                    .load(datas.get(position))
+                    .load(datas.get(position).getImageUrl())
                     .into(viewHolder.icon);
 
             viewHolder.name.setText(MyApplication.isJapanese() ? datas.get(position).getTitleJpn() : datas.get(position).getTitleCn());
@@ -79,6 +79,7 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
 
     class CollectionViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
+        ImageView start;
         TextView name;
         TextView address;
         TextView price;
@@ -91,6 +92,7 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
         public CollectionViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView) itemView.findViewById(R.id.img_house);
+            start = (ImageView) itemView.findViewById(R.id.img_video_logo);
             name = (TextView) itemView.findViewById(R.id.tv_house_name);
             address = (TextView) itemView.findViewById(R.id.tv_house_address);
             price = (TextView) itemView.findViewById(R.id.tv_price);

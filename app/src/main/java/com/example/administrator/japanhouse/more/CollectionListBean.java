@@ -11,7 +11,7 @@ public class CollectionListBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : [{"id":3,"titleCn":"房屋标题中文（租房）","titleJpn":"房屋标题日文（租房）","addressCn":"1","addressJpn":"1","doorModelCn":"户型","doorModelJpn":"户型","areaCn":"100","areaJpn":"100","priceCn":"10100","priceJpn":"10000","hType":"2","shType":"0"}]
+     * datas : [{"id":184,"titleCn":"","titleJpn":"","addressCn":"9","addressJpn":"9","doorModelCn":"9","doorModelJpn":"9","areaCn":"9.00平方米","areaJpn":"9.00平方メートル","priceCn":"1000.00","priceJpn":"1000.00","hType":"1","shType":"","imageUrl":"https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg","videoImageUrl":"https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg","createTime":null},{"id":1,"titleCn":"别墅标题","titleJpn":"别墅标题","addressCn":"具体位置","addressJpn":"具体位置","doorModelCn":"","doorModelJpn":"","areaCn":"","areaJpn":"","priceCn":"10.00","priceJpn":"10.00","hType":"4","shType":"","imageUrl":"https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg","videoImageUrl":"https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg","createTime":null}]
      */
 
     private String msg;
@@ -44,19 +44,22 @@ public class CollectionListBean {
 
     public static class DatasBean {
         /**
-         * id : 3
-         * titleCn : 房屋标题中文（租房）
-         * titleJpn : 房屋标题日文（租房）
-         * addressCn : 1
-         * addressJpn : 1
-         * doorModelCn : 户型
-         * doorModelJpn : 户型
-         * areaCn : 100
-         * areaJpn : 100
-         * priceCn : 10100
-         * priceJpn : 10000
-         * hType : 2
-         * shType : 0
+         * id : 184
+         * titleCn :
+         * titleJpn :
+         * addressCn : 9
+         * addressJpn : 9
+         * doorModelCn : 9
+         * doorModelJpn : 9
+         * areaCn : 9.00平方米
+         * areaJpn : 9.00平方メートル
+         * priceCn : 1000.00
+         * priceJpn : 1000.00
+         * hType : 1
+         * shType :
+         * imageUrl : https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg
+         * videoImageUrl : https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg
+         * createTime : null
          */
 
         private int id;
@@ -72,6 +75,9 @@ public class CollectionListBean {
         private String priceJpn;
         private String hType;
         private String shType;
+        private String imageUrl;
+        private String videoImageUrl;
+        private Object createTime;
 
         public int getId() {
             return id;
@@ -175,6 +181,30 @@ public class CollectionListBean {
 
         public void setShType(String shType) {
             this.shType = shType;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
+
+        public String getVideoImageUrl() {
+            return videoImageUrl;
+        }
+
+        public void setVideoImageUrl(String videoImageUrl) {
+            this.videoImageUrl = videoImageUrl;
+        }
+
+        public Object getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(Object createTime) {
+            this.createTime = createTime;
         }
     }
 }

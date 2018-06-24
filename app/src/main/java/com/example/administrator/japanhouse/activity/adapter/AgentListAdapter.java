@@ -57,7 +57,7 @@ public class AgentListAdapter extends RecyclerView.Adapter {
 
         viewHolder.name.setText(datas.get(position).getBrokerName());
 
-        viewHolder.main.setText(MyApplication.isJapanese() ? datas.get(position).getAreaNameJpn() : datas.get(position).getAreaNameCn());
+        viewHolder.main.setText(MyApplication.isJapanese() ? activity.getString(R.string.manager_main) + datas.get(position).getAreaNameJpn() : activity.getString(R.string.manager_main) + datas.get(position).getAreaNameCn());
 
 //        viewHolder.ratingBarView.setSelectedCount(datas.get(position).getAvgStar());
 

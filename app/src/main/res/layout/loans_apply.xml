@@ -76,7 +76,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="7dp"
-        android:textColor="#999999"
+        android:textColor="#444"
         android:textSize="14sp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -98,7 +98,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="7dp"
-        android:textColor="#999999"
+        android:textColor="#444"
         android:textSize="14sp"
     />
     <LinearLayout

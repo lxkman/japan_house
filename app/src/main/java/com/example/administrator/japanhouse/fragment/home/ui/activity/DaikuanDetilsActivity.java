@@ -228,9 +228,6 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
                     Toast.makeText(DaikuanDetilsActivity.this, "输入框为空", Toast.LENGTH_SHORT).show();
                 } else {
                     if (flag) {
-                        uname.setText("");
-                        utel.setText("");
-
                         HttpParams params = new HttpParams();
                         params.put("token", MyApplication.getUserToken());
                         params.put("applicationName", uname.getText().toString());

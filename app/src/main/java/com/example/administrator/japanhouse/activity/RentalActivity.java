@@ -248,6 +248,12 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                             files.add(new File(imgPathList.get(i)));
                         }
 
+
+
+
+
+
+
                         if (videoPath != null && !"".equals(videoPath)) {
                             files.add(new File(videoPath));
                             isHaveVideo = true;

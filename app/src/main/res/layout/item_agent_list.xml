@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_agent_list_item"
     android:layout_width="match_parent"
     android:layout_height="81dp"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:id="@+id/item_agent_list_item"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,79 +23,46 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/item_agent_list_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/agent_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="杨金晶"
-                android:textColor="#444444"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/item_agent_list_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/item_agent_list_name"
-                android:layout_below="@id/item_agent_list_name"
-                android:layout_marginTop="2dp"
-                android:text="主营:昌平-沙河"
-                android:textColor="#999999"
-                android:textSize="14sp" />
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!---->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_marginBottom="2dp">-->
+                <TextView
+                    android:id="@+id/item_agent_list_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#444444"
+                    android:textSize="16sp" />
 
                 <com.example.administrator.japanhouse.view.RatingBarView
                     android:id="@+id/item_agent_list_ratingbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/item_agent_list_name"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/item_agent_list_name"
-                    />
-                <!--<ImageView-->
-                    <!--android:layout_width="18dp"-->
-                    <!--android:layout_height="18dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/star_border_show" />-->
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
 
-                <!--<ImageView-->
-                    <!--android:layout_width="18dp"-->
-                    <!--android:layout_height="18dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/star_border_show"-->
-                    <!--android:layout_marginLeft="5dp"/>-->
 
-                <!--<ImageView-->
-                    <!--android:layout_width="18dp"-->
-                    <!--android:layout_height="18dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/star_border_hide"-->
-                    <!--android:layout_marginLeft="5dp" />-->
+            <TextView
+                android:id="@+id/item_agent_list_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/agent_layout"
+                android:layout_below="@id/agent_layout"
+                android:layout_marginTop="2dp"
+                android:textColor="#999999"
+                android:textSize="14sp" />
 
-                <!--<ImageView-->
-                    <!--android:layout_width="18dp"-->
-                    <!--android:layout_height="18dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/star_border_hide"-->
-                    <!--android:layout_marginLeft="5dp"/>-->
 
-                <!--<ImageView-->
-                    <!--android:layout_width="18dp"-->
-                    <!--android:layout_height="18dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/star_border_hide"-->
-                    <!--android:layout_marginLeft="5dp"/>-->
-            <!--</LinearLayout>-->
         </RelativeLayout>
 
         <TextView

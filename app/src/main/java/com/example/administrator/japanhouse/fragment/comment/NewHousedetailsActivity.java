@@ -45,6 +45,7 @@ import com.example.administrator.japanhouse.bean.HouseDetailsBean;
 import com.example.administrator.japanhouse.bean.OldHouseListBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.map.MapActivity;
 import com.example.administrator.japanhouse.map.MyLocationListenner;
@@ -173,6 +174,8 @@ public class NewHousedetailsActivity extends BaseActivity {
     //百度地图的包名
     private final static String BAIDU_PKG = "com.baidu.BaiduMap";
     private HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker;
+    private int isJgdy;
+    private int isKpdy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,6 +240,18 @@ public class NewHousedetailsActivity extends BaseActivity {
                         } else {//未收藏
                             isStart = false;
                             imgStart.setImageResource(R.drawable.shoucang);
+                        }
+                        isJgdy = datas.getIsJgdy();
+                        if (isJgdy ==0){//已订阅价格变动
+                            tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
+                        }else {//未订阅
+                            tvDetailsBianjia.setBackground(getResources().getDrawable(R.drawable.border_shihuangse));
+                        }
+                        isKpdy = datas.getIsKpdy();
+                        if (isKpdy ==0){//已订阅开盘通知
+                            tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
+                        }else {//未订阅
+                            tvDetailsKaipan.setBackground(getResources().getDrawable(R.drawable.border_shihuangse));
                         }
                         initViewPager();
                         initLocation();
@@ -591,22 +606,34 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
     private int noticeType;
-    @OnClick({tv_details_bianjia,R.id.tv_details_kaipan,R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone})
+    @OnClick({tv_details_bianjia,R.id.tv_details_kaipan,R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone,R.id.manager_data})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.manager_data:
+                Intent Managerintent = new Intent(NewHousedetailsActivity.this, ManagerActivity.class);
+                Managerintent.putExtra("ManagerId",datas.getHwdcBroker().getId()+"");
+                startActivity(Managerintent);
+            break;
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case tv_details_bianjia:
                 noticeType=0;
-                initHuoDong(noticeType);
-                tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
+                if (isJgdy==0){
+                    Toast.makeText(mContext, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+                }else {
+                    initHuoDong(noticeType);
+                    tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
+                }
                 break;
             case R.id.tv_details_kaipan:
                 noticeType=1;
-                initHuoDong(noticeType);
-
-                tvDetailsKaipan.setBackground(getResources().getDrawable(R.drawable.border_shihuangse));
+                if (isKpdy==0){
+                    Toast.makeText(mContext, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+                }else {
+                    initHuoDong(noticeType);
+                    tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
+                }
                 break;
             case R.id.tv_details_manager_phone:
                 ShowCallDialog(hwdcBroker.getPhone() + "");
@@ -698,7 +725,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                                         }else {
                                             Log.d("MyApplication", "成功"+"-----------");
                                         }
-                                        String jsonString = result.jsonString;
                                     }
                                 }, "xfjgid"+houseId);
                             }else {//开盘

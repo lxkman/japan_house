@@ -1,14 +1,11 @@
 package com.example.administrator.japanhouse.fragment.chat;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -17,15 +14,23 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.bean.ManagerBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
 import com.example.administrator.japanhouse.view.NoCacheViewPager;
 import com.example.administrator.japanhouse.view.RatingBarView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +45,6 @@ public class ManagerActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.ratingBarView)
     RatingBarView ratingBarView;
-    @BindView(R.id.Mrecycler)
-    RecyclerView mrecycler;
-    private LiebiaoAdapter mLiebiaoAdapter;
-    private List<String> mList=new ArrayList();
     @BindView(R.id.all_shop)
     RadioButton allShop;
     @BindView(R.id.rb_pifu)
@@ -56,27 +57,88 @@ public class ManagerActivity extends BaseActivity {
     View viewZufang;
     @BindView(R.id.vp_look)
     NoCacheViewPager vpLook;
+    @BindView(R.id.img_share)
+    ImageView imgShare;
+    @BindView(R.id.manager_head_img)
+    CircleImageView managerHeadImg;
+    @BindView(R.id.manager_name)
+    TextView managerName;
+    @BindView(R.id.manager_huifulv)
+    TextView managerHuifulv;
+    @BindView(R.id.bg_layout)
+    LinearLayout bgLayout;
+    @BindView(R.id.manager_years)
+    TextView managerYears;
+    @BindView(R.id.manager_count)
+    TextView managerCount;
+    @BindView(R.id.activity_zui_jin)
+    LinearLayout activityZuiJin;
+    @BindView(R.id.manager_location)
+    TextView managerLocation;
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
     private MyAdapter myAdapter;
+    private int avgStar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
         ButterKnife.bind(this);
+        initManager();
         initRatingBar();
-        //第一种样式
-        initRecycler();
-        //第二种样式
         initData();
         initListener();
     }
+
+    private void initManager() {
+        String managerId = getIntent().getStringExtra("ManagerId");
+        HttpParams params = new HttpParams();
+        params.put("brokerId", managerId);
+        OkGo.<ManagerBean>post(MyUrls.BASEURL + "/app/broker/getbrokerinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<ManagerBean>(ManagerActivity.this, ManagerBean.class) {
+                    @Override
+                    public void onSuccess(Response<ManagerBean> response) {
+                        int code = response.code();
+                        final ManagerBean ManagerBean = response.body();
+                        if (ManagerBean==null){
+                            return;
+                        }
+                        String code1 = ManagerBean.getCode();
+                        com.example.administrator.japanhouse.bean.ManagerBean.DatasBean datas = ManagerBean.getDatas();
+                        if (datas==null){
+                            return;
+                        }
+                        if (datas.getBrokerinfo()==null){
+                            return;
+                        }
+                        avgStar = datas.getBrokerinfo().getAvgStar();
+                        if (code1.equals("200")) {
+                            Glide.with(ManagerActivity.this).load(datas.getBrokerinfo().getPic()).into(managerHeadImg);
+                            managerName.setText(datas.getBrokerinfo().getNickname() + "");
+                            managerHuifulv.setText(datas.getBrokerinfo().getTurnover() + "%");
+                            managerYears.setText(datas.getDaynum() + "");
+                            managerCount.setText(datas.getFwrs() + "");
+                            managerLocation.setText("："+datas.getBrokerinfo().getIntimacyCn() + "");
+                        } else {
+                            Toast.makeText(ManagerActivity.this, ManagerBean.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                });
+
+    }
+
     private void initData() {
         if (mBaseFragmentList.size() <= 0) {
             mBaseFragmentList.add(new ShoufangFragment());
             mBaseFragmentList.add(new ZufangFragment());
         }
     }
+
     private void initListener() {
         vpLook.setOnPageChangeListener(new NoCacheViewPager.OnPageChangeListener() {
             @Override
@@ -86,10 +148,10 @@ public class ManagerActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 ((RadioButton) rgLook.getChildAt(position)).setChecked(true);
-                if (position==0){
+                if (position == 0) {
                     viewZufang.setVisibility(View.INVISIBLE);
                     viewShoufang.setVisibility(View.VISIBLE);
-                }else if (position==1){
+                } else if (position == 1) {
                     viewZufang.setVisibility(View.VISIBLE);
                     viewShoufang.setVisibility(View.INVISIBLE);
                 }
@@ -107,7 +169,6 @@ public class ManagerActivity extends BaseActivity {
                 switch (i) {
                     case R.id.all_shop:
                         vpLook.setCurrentItem(0);
-//                        vp_look.removeAllViews();
                         break;
                     case R.id.rb_pifu:
                         vpLook.setCurrentItem(1);
@@ -126,7 +187,6 @@ public class ManagerActivity extends BaseActivity {
     }
 
 
-
     class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -143,44 +203,21 @@ public class ManagerActivity extends BaseActivity {
         }
     }
 
-    private void initRecycler() {
-        if (mList.size()<=0){
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-            mList.add("");
-        }
-        if (mLiebiaoAdapter == null) {
-            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,mList);
-        }
-        mrecycler.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
-        mrecycler.setNestedScrollingEnabled(false);
-        mrecycler.setAdapter(mLiebiaoAdapter);
-        mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(mContext,NewHousedetailsActivity.class);
-                startActivity(intent);
-//                Toast.makeText(mContext, "点击了第" + position+"条", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     class LiebiaoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
-            super(layoutResId,data);
+            super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper,String item) {
+        protected void convert(BaseViewHolder helper, String item) {
         }
     }
 
     private void initRatingBar() {
         ratingBarView = (RatingBarView) findViewById(R.id.ratingBarView);
         ratingBarView.setRatingCount(5);//设置RatingBarView总数
-        ratingBarView.setSelectedCount(2);//设置RatingBarView选中数
+        ratingBarView.setSelectedCount(avgStar);//设置RatingBarView选中数
         ratingBarView.setSelectedIconResId(R.drawable.start_check);//设置RatingBarView选中的图片id
         ratingBarView.setNormalIconResId(R.drawable.start_nocheck);//设置RatingBarView正常图片id
         ratingBarView.setClickable(false);//设置RatingBarView是否可点击
@@ -195,7 +232,7 @@ public class ManagerActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.back_img, R.id.bg_layout,R.id.img_share})
+    @OnClick({R.id.back_img, R.id.bg_layout, R.id.img_share})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
@@ -207,6 +244,7 @@ public class ManagerActivity extends BaseActivity {
 
         }
     }
+
     private void showDialog(int grary, int animationStyle) {
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
@@ -265,8 +303,5 @@ public class ManagerActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
-    }
-    @OnClick(R.id.Mrecycler)
-    public void onClick() {
     }
 }

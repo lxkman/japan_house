@@ -77,7 +77,7 @@ public class FangjiadituActivity extends BaseActivity {
     private boolean isJa;
     private LocationClient mLocClient;
     private String mCity;
-    private List<FangjiaMapBean.DatasEntity.CityzxtEntity> cityzxt;
+    private List<FangjiaMapBean.DatasBean.CityzxtBean> cityzxt;
     private Float monthbfb;
     private Float yearbfb;
     private List<ChartBean.DatasBean.ZxtlistBean> zxtlist;
@@ -88,6 +88,8 @@ public class FangjiadituActivity extends BaseActivity {
     private Float monthbfboneline;
     private Float yeaybfboneline;
     private int avgMoneyoneline;
+    private double bigValoneline;
+    private double endValoneline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,12 +153,13 @@ public class FangjiadituActivity extends BaseActivity {
             }
         }
 
-       double num = (bigVal-endVal)/4;
-        yValue.add((float) endVal);
-        yValue.add(MyUtils.floatToString((float) ((float) endVal+num)));
-        yValue.add(MyUtils.floatToString((float) ((float) endVal+num*2)));
-        yValue.add(MyUtils.floatToString((float) ((float) endVal+num*3)));
-        yValue.add((float) bigVal);
+       double num = (bigValoneline-endValoneline)/4;
+        yValue.add((float) endValoneline);
+        yValue.add(MyUtils.floatToString((float) ((float) endValoneline+num)));
+        yValue.add(MyUtils.floatToString((float) ((float) endValoneline+num*2)));
+        yValue.add(MyUtils.floatToString((float) ((float) endValoneline+num*3)));
+        yValue.add((float) bigValoneline);
+        Log.d("FangjiadituActivity", "bigValoneline:" + bigValoneline+"---------");
         for (int i = 0; i < yValue.size(); i++) {
             Log.d("FangjiadituActivity", "yValue.get(i):" + yValue.get(i)+"-----------");
         }
@@ -327,19 +330,21 @@ public class FangjiadituActivity extends BaseActivity {
                     public void onSuccess(Response<FangjiaMapBean> response) {
                         int code = response.code();
                         FangjiaMapBean body = response.body();
-                        FangjiaMapBean.DatasEntity datas = body.getDatas();
-                        FangjiaMapBean.DatasEntity.CityEntity city = datas.getCity();
+                        FangjiaMapBean.DatasBean datas = body.getDatas();
+                        bigValoneline = datas.getBigandsmallval().getBigVal();
+                        endValoneline = datas.getBigandsmallval().getEndVal();
+                        FangjiaMapBean.DatasBean.CityBean city = datas.getCity();
                         avgMoneyoneline = city.getAvgMoney();
                         FangjiadituActivity.this.avgMoney = city.getAvgMoney();
                         cityzxt = datas.getCityzxt();
                         monthbfboneline = datas.getMonthbfb();
                         yeaybfboneline = datas.getYeaybfb();
-                        List<FangjiaMapBean.DatasEntity.QysEntity> qys = datas.getQys();
+                        List<FangjiaMapBean.DatasBean.QysBean> qys = datas.getQys();
                         if (datas != null && qys.size() > 0) {
                             List<MarkerBean> markerBeanList = new ArrayList<>();
                             List<OverlayOptions> overlayOptionsList = new ArrayList<>();
                             for (int i = 0; i < qys.size(); i++) {
-                                FangjiaMapBean.DatasEntity.QysEntity datasEntity = qys.get(i);
+                                FangjiaMapBean.DatasBean.QysBean datasEntity = qys.get(i);
                                 markerBeanList.add(new MarkerBean(datasEntity.getLongitude(), datasEntity.getLatitude()));
                                 View markView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_view, null);
                                 TextView title = (TextView) markView.findViewById(R.id.item_title_tv);

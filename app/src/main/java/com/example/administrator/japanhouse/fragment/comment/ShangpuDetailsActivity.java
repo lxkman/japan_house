@@ -34,6 +34,7 @@ import com.example.administrator.japanhouse.bean.ShangYeDetailsBean;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.bean.SydcListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.more.ShangPuMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
@@ -508,9 +509,14 @@ public class ShangpuDetailsActivity extends BaseActivity {
             return true;
         }
     }
-    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More,R.id.tv_details_location,R.id.tv_details_manager_phone})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More,R.id.tv_details_location,R.id.tv_details_manager_phone,R.id.manager_data})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.manager_data:
+                Intent Managerintent = new Intent(ShangpuDetailsActivity.this, ManagerActivity.class);
+                Managerintent.putExtra("ManagerId",datas.getHwdcBroker().getId()+"");
+                startActivity(Managerintent);
+                break;
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;

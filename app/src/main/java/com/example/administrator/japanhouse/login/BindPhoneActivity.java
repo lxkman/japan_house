@@ -1,9 +1,9 @@
 package com.example.administrator.japanhouse.login;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -13,11 +13,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import java.util.HashMap;
 
@@ -49,6 +56,7 @@ public class BindPhoneActivity extends BaseActivity {
     LinearLayout activityRegister;
     private View popupView;
     private PopupWindow basePopupWindow;
+    private String QuNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +71,30 @@ public class BindPhoneActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_get_code:
-                SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
+                if (TextUtils.isEmpty(edtPhone.getText().toString())) {
+                    Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
+                    Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())) {
+                    String phone = edtPhone.getText().toString();
+                    String substring = phone.substring(0, 3);
+                    if (substring.equals("050") || substring.equals("060") || substring.equals("070") || substring.equals("080") || substring.equals("090")) {
+                        QuNumber = "1";//国际
+                        if (checkQuyu.getText().equals("+86")) {
+                            Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    } else {
+                        QuNumber = "2";//国内
+                        if (checkQuyu.getText().equals("+81")) {
+                            Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                    getCode();//验证码接口
+                }
                 break;
             case R.id.btn_find_pass:
 //                startActivity(new Intent(BindPhoneActivity.this, MainActivity.class));
@@ -79,6 +110,35 @@ public class BindPhoneActivity extends BaseActivity {
                 basePopupWindow.showAsDropDown(view);
                 break;
         }
+    }
+    private void getCode() {
+        HttpParams params = new HttpParams();
+        String quhao;
+        if (checkQuyu.getText().equals("+81")){
+            quhao="81";
+        }else {
+            quhao="86";
+        }
+        params.put("phone", "00"+quhao+edtPhone.getText().toString());
+        params.put("sendType",QuNumber);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        SuccessBean successBean = response.body();
+                        if (successBean.getCode().equals("200")){
+                            SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
+                            Toast.makeText(BindPhoneActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                        }else if (successBean.getCode().equals("-1")){
+                            Toast.makeText(BindPhoneActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                        }else if (successBean.getCode().equals("500")){
+                            Toast.makeText(BindPhoneActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
     private void initPop() {
         //屏幕变暗

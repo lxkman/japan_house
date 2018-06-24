@@ -26,7 +26,6 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
-import com.example.administrator.japanhouse.utils.TUtils;
 import com.linecorp.linesdk.LineCredential;
 import com.linecorp.linesdk.LineProfile;
 import com.linecorp.linesdk.auth.LineLoginApi;
@@ -79,6 +78,8 @@ public class RegisterActivity extends BaseActivity {
     TextView checkQuyu;
     private View popupView;
     private PopupWindow basePopupWindow;
+    private String QuNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,11 +105,30 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
             case R.id.tv_get_code:
-                if (!TextUtils.isEmpty(edtPhone.getText().toString())) {
-                    SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
-                } else {
-                    TUtils.showFail(this, getString(R.string.get_code_fail));
-                }
+                    if (TextUtils.isEmpty(edtPhone.getText().toString())) {
+                        Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
+                        Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())) {
+                        String phone = edtPhone.getText().toString();
+                        String substring = phone.substring(0, 3);
+                        if (substring.equals("050") || substring.equals("060") || substring.equals("070") || substring.equals("080") || substring.equals("090")) {
+                            QuNumber = "1";//国际
+                            if (checkQuyu.getText().equals("+86")) {
+                                Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } else {
+                            QuNumber = "2";//国内
+                            if (checkQuyu.getText().equals("+81")) {
+                                Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                        getCode();//验证码接口
+                    }
                 break;
             case R.id.btn_login:
                 initNet();
@@ -144,6 +164,37 @@ public class RegisterActivity extends BaseActivity {
                 break;
         }
     }
+
+    private void getCode() {
+        HttpParams params = new HttpParams();
+        String quhao;
+        if (checkQuyu.getText().equals("+81")){
+            quhao="81";
+        }else {
+            quhao="86";
+        }
+        params.put("phone", "00"+quhao+edtPhone.getText().toString());
+        params.put("sendType",QuNumber);
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        SuccessBean successBean = response.body();
+                        if (successBean.getCode().equals("200")){
+                            SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
+                            Toast.makeText(RegisterActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                        }else if (successBean.getCode().equals("-1")){
+                            Toast.makeText(RegisterActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                        }else if (successBean.getCode().equals("500")){
+                            Toast.makeText(RegisterActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     private void initNet() {
         if (TextUtils.isEmpty(edtPhone.getText().toString())) {
             Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();

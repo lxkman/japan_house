@@ -64,7 +64,7 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
 
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
-        tv_refresh_time.setText(currentDate+R.string.gengxin);
+        tv_refresh_time.setText(currentDate+"更新");
         tjNewHousePresenter.getHouseList(page,"0");
     }
     private void initListener() {

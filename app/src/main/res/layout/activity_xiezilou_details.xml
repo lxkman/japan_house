@@ -301,6 +301,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dip">
         <LinearLayout
+            android:id="@+id/manager_data"
             android:paddingLeft="10dip"
             android:orientation="horizontal"
             android:layout_weight="0.7"

@@ -3,8 +3,6 @@ package com.example.administrator.japanhouse.activity.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,9 @@ import com.example.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.AgentListBean;
-import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.RatingBarView;
 
 import java.util.List;
-
-import io.rong.imkit.RongIM;
 
 /**
  * Created by   admin on 2018/4/26.
@@ -77,7 +71,7 @@ public class AgentListAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ManagerActivity.class);
-                intent.putExtra("brokerId", datas.get(position).getId());
+                intent.putExtra("ManagerId", datas.get(position).getId());
                 activity.startActivity(intent);
             }
         });

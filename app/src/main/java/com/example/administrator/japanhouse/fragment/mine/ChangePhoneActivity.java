@@ -72,7 +72,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_next:
                 if (!MyUtils.isMobileNO(edtPhone.getText().toString())){
-                    Toast.makeText(mContext, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请输入需要绑定的手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }else if (TextUtils.isEmpty(edtCode.getText().toString())){
                     Toast.makeText(mContext, "请输入正确的验证码", Toast.LENGTH_SHORT).show();

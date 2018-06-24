@@ -12,166 +12,201 @@ public class FangjiaMapBean {
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"yeaybfb":"217.6471%","monthbfb":"75.0%","city":{"latitude":0,"avgMoney":2,"priceStete":1,"parentId":0,"administrationNameCn":"北京市","isDeleted":0,"createTime":1528709039046,"citylevel":"","id":0,"administrationNameJpn":"北京市","houseNum":0,"status":"","longitude":0},"qys":[{"latitude":39.53,"avgMoney":5.698113,"priceStete":2,"parentId":0,"administrationNameCn":"海淀区","isDeleted":0,"createTime":1528709038968,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","houseNum":0,"status":"0","longitude":116.03},{"latitude":39.83,"avgMoney":3,"priceStete":2,"parentId":0,"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1528709038969,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","houseNum":0,"status":"0","longitude":116.46},{"latitude":39.53,"avgMoney":0,"priceStete":2,"parentId":0,"administrationNameCn":"大兴区","isDeleted":0,"createTime":1528709038969,"citylevel":"3","id":32,"administrationNameJpn":"大兴区","houseNum":0,"status":"0","longitude":116.03}],"cityzxt":[{"avgPrice":2,"days":1526572800000},{"avgPrice":5,"days":1528300800000},{"avgPrice":2,"days":1528646400000}]}
+     * datas : {"yeaybfb":1149155.5555999998,"monthbfb":848.6371403689386,"city":{"id":0,"administrationNameCn":"北京市","administrationNameJpn":"北京市","parentId":0,"createTime":1529824100718,"isDeleted":0,"citylevel":"","status":"","longitude":0,"latitude":0,"houseNum":0,"avgMoney":0,"priceStete":2,"hwdcAreaManages":[]},"bigandsmallval":{"endVal":"0.10","bigVal":"11.11"},"qys":[{"id":3,"administrationNameCn":"2222","administrationNameJpn":"2222","parentId":0,"createTime":1529824100662,"isDeleted":0,"citylevel":"3","status":"0","longitude":116.03,"latitude":39.53,"houseNum":0,"avgMoney":18998.448052,"priceStete":2,"hwdcAreaManages":[]},{"id":27,"administrationNameCn":"朝阳区","administrationNameJpn":"朝阳区","parentId":0,"createTime":1529824100663,"isDeleted":0,"citylevel":"3","status":"0","longitude":116.46,"latitude":39.83,"houseNum":0,"avgMoney":12171.5,"priceStete":2,"hwdcAreaManages":[]},{"id":32,"administrationNameCn":"大兴区","administrationNameJpn":"大兴区","parentId":0,"createTime":1529824100663,"isDeleted":0,"citylevel":"3","status":"0","longitude":116.03,"latitude":39.53,"houseNum":0,"avgMoney":0,"priceStete":2,"hwdcAreaManages":[]}],"cityzxt":[{"days":1526572800000,"avgPrice":0.47596000000000005},{"days":1528300800000,"avgPrice":2.3343},{"days":1528646400000,"avgPrice":11.1111},{"days":1528992000000,"avgPrice":0.1}]}
      */
+
     private String msg;
     private String code;
-    private DatasEntity datas;
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDatas(DatasEntity datas) {
-        this.datas = datas;
-    }
+    private DatasBean datas;
 
     public String getMsg() {
         return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getCode() {
         return code;
     }
 
-    public DatasEntity getDatas() {
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public DatasBean getDatas() {
         return datas;
     }
 
-    public static class DatasEntity {
+    public void setDatas(DatasBean datas) {
+        this.datas = datas;
+    }
+
+    public static class DatasBean {
         /**
-         * yeaybfb : 217.6471%
-         * monthbfb : 75.0%
-         * city : {"latitude":0,"avgMoney":2,"priceStete":1,"parentId":0,"administrationNameCn":"北京市","isDeleted":0,"createTime":1528709039046,"citylevel":"","id":0,"administrationNameJpn":"北京市","houseNum":0,"status":"","longitude":0}
-         * qys : [{"latitude":39.53,"avgMoney":5.698113,"priceStete":2,"parentId":0,"administrationNameCn":"海淀区","isDeleted":0,"createTime":1528709038968,"citylevel":"3","id":3,"administrationNameJpn":"海淀区","houseNum":0,"status":"0","longitude":116.03},{"latitude":39.83,"avgMoney":3,"priceStete":2,"parentId":0,"administrationNameCn":"朝阳区","isDeleted":0,"createTime":1528709038969,"citylevel":"3","id":27,"administrationNameJpn":"朝阳区","houseNum":0,"status":"0","longitude":116.46},{"latitude":39.53,"avgMoney":0,"priceStete":2,"parentId":0,"administrationNameCn":"大兴区","isDeleted":0,"createTime":1528709038969,"citylevel":"3","id":32,"administrationNameJpn":"大兴区","houseNum":0,"status":"0","longitude":116.03}]
-         * cityzxt : [{"avgPrice":2,"days":1526572800000},{"avgPrice":5,"days":1528300800000},{"avgPrice":2,"days":1528646400000}]
+         * yeaybfb : 1149155.5555999998
+         * monthbfb : 848.6371403689386
+         * city : {"id":0,"administrationNameCn":"北京市","administrationNameJpn":"北京市","parentId":0,"createTime":1529824100718,"isDeleted":0,"citylevel":"","status":"","longitude":0,"latitude":0,"houseNum":0,"avgMoney":0,"priceStete":2,"hwdcAreaManages":[]}
+         * bigandsmallval : {"endVal":"0.10","bigVal":"11.11"}
+         * qys : [{"id":3,"administrationNameCn":"2222","administrationNameJpn":"2222","parentId":0,"createTime":1529824100662,"isDeleted":0,"citylevel":"3","status":"0","longitude":116.03,"latitude":39.53,"houseNum":0,"avgMoney":18998.448052,"priceStete":2,"hwdcAreaManages":[]},{"id":27,"administrationNameCn":"朝阳区","administrationNameJpn":"朝阳区","parentId":0,"createTime":1529824100663,"isDeleted":0,"citylevel":"3","status":"0","longitude":116.46,"latitude":39.83,"houseNum":0,"avgMoney":12171.5,"priceStete":2,"hwdcAreaManages":[]},{"id":32,"administrationNameCn":"大兴区","administrationNameJpn":"大兴区","parentId":0,"createTime":1529824100663,"isDeleted":0,"citylevel":"3","status":"0","longitude":116.03,"latitude":39.53,"houseNum":0,"avgMoney":0,"priceStete":2,"hwdcAreaManages":[]}]
+         * cityzxt : [{"days":1526572800000,"avgPrice":0.47596000000000005},{"days":1528300800000,"avgPrice":2.3343},{"days":1528646400000,"avgPrice":11.1111},{"days":1528992000000,"avgPrice":0.1}]
          */
-        private Float yeaybfb;
-        private Float monthbfb;
-        private CityEntity city;
-        private List<QysEntity> qys;
-        private List<CityzxtEntity> cityzxt;
 
-        public void setYeaybfb(Float yeaybfb) {
-            this.yeaybfb = yeaybfb;
-        }
+        private float yeaybfb;
+        private float monthbfb;
+        private CityBean city;
+        private BigandsmallvalBean bigandsmallval;
+        private List<QysBean> qys;
+        private List<CityzxtBean> cityzxt;
 
-        public void setMonthbfb(Float monthbfb) {
-            this.monthbfb = monthbfb;
-        }
-
-        public void setCity(CityEntity city) {
-            this.city = city;
-        }
-
-        public void setQys(List<QysEntity> qys) {
-            this.qys = qys;
-        }
-
-        public void setCityzxt(List<CityzxtEntity> cityzxt) {
-            this.cityzxt = cityzxt;
-        }
-
-        public Float getYeaybfb() {
+        public float getYeaybfb() {
             return yeaybfb;
         }
 
-        public Float getMonthbfb() {
+        public void setYeaybfb(float yeaybfb) {
+            this.yeaybfb = yeaybfb;
+        }
+
+        public float getMonthbfb() {
             return monthbfb;
         }
 
-        public CityEntity getCity() {
+        public void setMonthbfb(float monthbfb) {
+            this.monthbfb = monthbfb;
+        }
+
+        public CityBean getCity() {
             return city;
         }
 
-        public List<QysEntity> getQys() {
+        public void setCity(CityBean city) {
+            this.city = city;
+        }
+
+        public BigandsmallvalBean getBigandsmallval() {
+            return bigandsmallval;
+        }
+
+        public void setBigandsmallval(BigandsmallvalBean bigandsmallval) {
+            this.bigandsmallval = bigandsmallval;
+        }
+
+        public List<QysBean> getQys() {
             return qys;
         }
 
-        public List<CityzxtEntity> getCityzxt() {
+        public void setQys(List<QysBean> qys) {
+            this.qys = qys;
+        }
+
+        public List<CityzxtBean> getCityzxt() {
             return cityzxt;
         }
 
-        public static class CityEntity {
+        public void setCityzxt(List<CityzxtBean> cityzxt) {
+            this.cityzxt = cityzxt;
+        }
+
+        public static class CityBean {
             /**
-             * latitude : 0
-             * avgMoney : 2
-             * priceStete : 1
-             * parentId : 0
-             * administrationNameCn : 北京市
-             * isDeleted : 0
-             * createTime : 1528709039046
-             * citylevel :
              * id : 0
+             * administrationNameCn : 北京市
              * administrationNameJpn : 北京市
-             * houseNum : 0
+             * parentId : 0
+             * createTime : 1529824100718
+             * isDeleted : 0
+             * citylevel :
              * status :
              * longitude : 0
+             * latitude : 0
+             * houseNum : 0
+             * avgMoney : 0
+             * priceStete : 2
+             * hwdcAreaManages : []
              */
-            private int latitude;
-            private int avgMoney;
-            private int priceStete;
-            private int parentId;
-            private String administrationNameCn;
-            private int isDeleted;
-            private long createTime;
-            private String citylevel;
+
             private int id;
+            private String administrationNameCn;
             private String administrationNameJpn;
-            private int houseNum;
+            private int parentId;
+            private long createTime;
+            private int isDeleted;
+            private String citylevel;
             private String status;
             private int longitude;
+            private int latitude;
+            private int houseNum;
+            private int avgMoney;
+            private int priceStete;
+            private List<?> hwdcAreaManages;
 
-            public void setLatitude(int latitude) {
-                this.latitude = latitude;
-            }
-
-            public void setAvgMoney(int avgMoney) {
-                this.avgMoney = avgMoney;
-            }
-
-            public void setPriceStete(int priceStete) {
-                this.priceStete = priceStete;
-            }
-
-            public void setParentId(int parentId) {
-                this.parentId = parentId;
-            }
-
-            public void setAdministrationNameCn(String administrationNameCn) {
-                this.administrationNameCn = administrationNameCn;
-            }
-
-            public void setIsDeleted(int isDeleted) {
-                this.isDeleted = isDeleted;
-            }
-
-            public void setCreateTime(long createTime) {
-                this.createTime = createTime;
-            }
-
-            public void setCitylevel(String citylevel) {
-                this.citylevel = citylevel;
+            public int getId() {
+                return id;
             }
 
             public void setId(int id) {
                 this.id = id;
             }
 
+            public String getAdministrationNameCn() {
+                return administrationNameCn;
+            }
+
+            public void setAdministrationNameCn(String administrationNameCn) {
+                this.administrationNameCn = administrationNameCn;
+            }
+
+            public String getAdministrationNameJpn() {
+                return administrationNameJpn;
+            }
+
             public void setAdministrationNameJpn(String administrationNameJpn) {
                 this.administrationNameJpn = administrationNameJpn;
             }
 
-            public void setHouseNum(int houseNum) {
-                this.houseNum = houseNum;
+            public int getParentId() {
+                return parentId;
+            }
+
+            public void setParentId(int parentId) {
+                this.parentId = parentId;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
+
+            public int getIsDeleted() {
+                return isDeleted;
+            }
+
+            public void setIsDeleted(int isDeleted) {
+                this.isDeleted = isDeleted;
+            }
+
+            public String getCitylevel() {
+                return citylevel;
+            }
+
+            public void setCitylevel(String citylevel) {
+                this.citylevel = citylevel;
+            }
+
+            public String getStatus() {
+                return status;
             }
 
             public void setStatus(String status) {
                 this.status = status;
+            }
+
+            public int getLongitude() {
+                return longitude;
             }
 
             public void setLongitude(int longitude) {
@@ -182,131 +217,168 @@ public class FangjiaMapBean {
                 return latitude;
             }
 
-            public int getAvgMoney() {
-                return avgMoney;
-            }
-
-            public int getPriceStete() {
-                return priceStete;
-            }
-
-            public int getParentId() {
-                return parentId;
-            }
-
-            public String getAdministrationNameCn() {
-                return administrationNameCn;
-            }
-
-            public int getIsDeleted() {
-                return isDeleted;
-            }
-
-            public long getCreateTime() {
-                return createTime;
-            }
-
-            public String getCitylevel() {
-                return citylevel;
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public String getAdministrationNameJpn() {
-                return administrationNameJpn;
+            public void setLatitude(int latitude) {
+                this.latitude = latitude;
             }
 
             public int getHouseNum() {
                 return houseNum;
             }
 
-            public String getStatus() {
-                return status;
+            public void setHouseNum(int houseNum) {
+                this.houseNum = houseNum;
             }
 
-            public int getLongitude() {
-                return longitude;
-            }
-        }
-
-        public static class QysEntity {
-            /**
-             * latitude : 39.53
-             * avgMoney : 5.698113
-             * priceStete : 2
-             * parentId : 0
-             * administrationNameCn : 海淀区
-             * isDeleted : 0
-             * createTime : 1528709038968
-             * citylevel : 3
-             * id : 3
-             * administrationNameJpn : 海淀区
-             * houseNum : 0
-             * status : 0
-             * longitude : 116.03
-             */
-            private double latitude;
-            private double avgMoney;
-            private int priceStete;
-            private int parentId;
-            private String administrationNameCn;
-            private int isDeleted;
-            private long createTime;
-            private String citylevel;
-            private int id;
-            private String administrationNameJpn;
-            private int houseNum;
-            private String status;
-            private double longitude;
-
-            public void setLatitude(double latitude) {
-                this.latitude = latitude;
+            public int getAvgMoney() {
+                return avgMoney;
             }
 
-            public void setAvgMoney(double avgMoney) {
+            public void setAvgMoney(int avgMoney) {
                 this.avgMoney = avgMoney;
+            }
+
+            public int getPriceStete() {
+                return priceStete;
             }
 
             public void setPriceStete(int priceStete) {
                 this.priceStete = priceStete;
             }
 
-            public void setParentId(int parentId) {
-                this.parentId = parentId;
+            public List<?> getHwdcAreaManages() {
+                return hwdcAreaManages;
             }
 
-            public void setAdministrationNameCn(String administrationNameCn) {
-                this.administrationNameCn = administrationNameCn;
+            public void setHwdcAreaManages(List<?> hwdcAreaManages) {
+                this.hwdcAreaManages = hwdcAreaManages;
+            }
+        }
+
+        public static class BigandsmallvalBean {
+            /**
+             * endVal : 0.10
+             * bigVal : 11.11
+             */
+
+            private double endVal;
+            private double bigVal;
+
+            public double getEndVal() {
+                return endVal;
             }
 
-            public void setIsDeleted(int isDeleted) {
-                this.isDeleted = isDeleted;
+            public void setEndVal(double endVal) {
+                this.endVal = endVal;
             }
 
-            public void setCreateTime(long createTime) {
-                this.createTime = createTime;
+            public double getBigVal() {
+                return bigVal;
             }
 
-            public void setCitylevel(String citylevel) {
-                this.citylevel = citylevel;
+            public void setBigVal(double bigVal) {
+                this.bigVal = bigVal;
+            }
+        }
+
+        public static class QysBean {
+            /**
+             * id : 3
+             * administrationNameCn : 2222
+             * administrationNameJpn : 2222
+             * parentId : 0
+             * createTime : 1529824100662
+             * isDeleted : 0
+             * citylevel : 3
+             * status : 0
+             * longitude : 116.03
+             * latitude : 39.53
+             * houseNum : 0
+             * avgMoney : 18998.448052
+             * priceStete : 2
+             * hwdcAreaManages : []
+             */
+
+            private int id;
+            private String administrationNameCn;
+            private String administrationNameJpn;
+            private int parentId;
+            private long createTime;
+            private int isDeleted;
+            private String citylevel;
+            private String status;
+            private double longitude;
+            private double latitude;
+            private int houseNum;
+            private double avgMoney;
+            private int priceStete;
+            private List<?> hwdcAreaManages;
+
+            public int getId() {
+                return id;
             }
 
             public void setId(int id) {
                 this.id = id;
             }
 
+            public String getAdministrationNameCn() {
+                return administrationNameCn;
+            }
+
+            public void setAdministrationNameCn(String administrationNameCn) {
+                this.administrationNameCn = administrationNameCn;
+            }
+
+            public String getAdministrationNameJpn() {
+                return administrationNameJpn;
+            }
+
             public void setAdministrationNameJpn(String administrationNameJpn) {
                 this.administrationNameJpn = administrationNameJpn;
             }
 
-            public void setHouseNum(int houseNum) {
-                this.houseNum = houseNum;
+            public int getParentId() {
+                return parentId;
+            }
+
+            public void setParentId(int parentId) {
+                this.parentId = parentId;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
+
+            public int getIsDeleted() {
+                return isDeleted;
+            }
+
+            public void setIsDeleted(int isDeleted) {
+                this.isDeleted = isDeleted;
+            }
+
+            public String getCitylevel() {
+                return citylevel;
+            }
+
+            public void setCitylevel(String citylevel) {
+                this.citylevel = citylevel;
+            }
+
+            public String getStatus() {
+                return status;
             }
 
             public void setStatus(String status) {
                 this.status = status;
+            }
+
+            public double getLongitude() {
+                return longitude;
             }
 
             public void setLongitude(double longitude) {
@@ -317,65 +389,54 @@ public class FangjiaMapBean {
                 return latitude;
             }
 
-            public double getAvgMoney() {
-                return avgMoney;
-            }
-
-            public int getPriceStete() {
-                return priceStete;
-            }
-
-            public int getParentId() {
-                return parentId;
-            }
-
-            public String getAdministrationNameCn() {
-                return administrationNameCn;
-            }
-
-            public int getIsDeleted() {
-                return isDeleted;
-            }
-
-            public long getCreateTime() {
-                return createTime;
-            }
-
-            public String getCitylevel() {
-                return citylevel;
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public String getAdministrationNameJpn() {
-                return administrationNameJpn;
+            public void setLatitude(double latitude) {
+                this.latitude = latitude;
             }
 
             public int getHouseNum() {
                 return houseNum;
             }
 
-            public String getStatus() {
-                return status;
+            public void setHouseNum(int houseNum) {
+                this.houseNum = houseNum;
             }
 
-            public double getLongitude() {
-                return longitude;
+            public double getAvgMoney() {
+                return avgMoney;
+            }
+
+            public void setAvgMoney(double avgMoney) {
+                this.avgMoney = avgMoney;
+            }
+
+            public int getPriceStete() {
+                return priceStete;
+            }
+
+            public void setPriceStete(int priceStete) {
+                this.priceStete = priceStete;
+            }
+
+            public List<?> getHwdcAreaManages() {
+                return hwdcAreaManages;
+            }
+
+            public void setHwdcAreaManages(List<?> hwdcAreaManages) {
+                this.hwdcAreaManages = hwdcAreaManages;
             }
         }
 
-        public static class CityzxtEntity {
+        public static class CityzxtBean {
             /**
-             * avgPrice : 2
              * days : 1526572800000
+             * avgPrice : 0.47596000000000005
              */
-            private double avgPrice;
-            private long days;
 
-            public void setAvgPrice(double avgPrice) {
-                this.avgPrice = avgPrice;
+            private long days;
+            private double avgPrice;
+
+            public long getDays() {
+                return days;
             }
 
             public void setDays(long days) {
@@ -386,8 +447,8 @@ public class FangjiaMapBean {
                 return avgPrice;
             }
 
-            public long getDays() {
-                return days;
+            public void setAvgPrice(double avgPrice) {
+                this.avgPrice = avgPrice;
             }
         }
     }

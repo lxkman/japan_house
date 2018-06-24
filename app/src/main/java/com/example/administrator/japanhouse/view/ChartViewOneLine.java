@@ -433,6 +433,9 @@ public class ChartViewOneLine extends HorizontalScrollView {
                 case 4:
                     canvas.drawText(text, 0, text.length(), widthPixels - rect.width() - dpToPx(9), yOri - yLength * i + rect.height() / 2 , xyTextPaint);
                     break;
+                case 5:
+                    canvas.drawText(text, 0, text.length(), widthPixels - rect.width() - dpToPx(7), yOri - yLength * i + rect.height() / 2 , xyTextPaint);
+                    break;
             }
 
 

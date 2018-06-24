@@ -22,6 +22,7 @@ import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdap
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.presenter.TopLinePresenter;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -98,13 +99,19 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.send:
-                //获取输入框信息
-                pinglun = ed_pinglun.getText().toString();
-                if(!TextUtils.isEmpty(pinglun)){
-                    initNet();
-                }else{
-                    Toast.makeText(this,"请输入评论内容",Toast.LENGTH_SHORT).show();
+                if (MyUtils.isLogin(this)) {
+                    //获取输入框信息
+                    pinglun = ed_pinglun.getText().toString();
+                    if(!TextUtils.isEmpty(pinglun)){
+                        initNet();
+                    }else{
+                        Toast.makeText(this,"请输入评论内容",Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(TouDetailActivity.this, "登录后可进行评论", Toast.LENGTH_SHORT).show();
+                    MyUtils.StartLoginActivity(this);
                 }
+
                 break;
             case R.id.biaoqing:
                 Toast.makeText(this,"表情",Toast.LENGTH_SHORT).show();

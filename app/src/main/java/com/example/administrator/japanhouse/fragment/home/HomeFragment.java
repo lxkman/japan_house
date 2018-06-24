@@ -424,11 +424,11 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Response<HomePageBean> response) {
                         HomePageBean body = response.body();
-                        HomePageBean.DatasEntity datas = body.getDatas();
+                        final HomePageBean.DatasEntity datas = body.getDatas();
                         final List<HomePageBean.DatasEntity.CnxhEntity> cnxh = datas.getCnxh();//猜你喜欢
                         final List<HomePageBean.DatasEntity.ImagesEntity> images = datas.getImages();//banner
                         final List<HomePageBean.DatasEntity.TjesfEntity> tjesf = datas.getTjesf();//推荐二手房
-                        List<HomePageBean.DatasEntity.TjjjrEntity> tjjjr = datas.getTjjjr();//推荐经纪人
+                        final List<HomePageBean.DatasEntity.TjjjrEntity> tjjjr = datas.getTjjjr();//推荐经纪人
                         final List<HomePageBean.DatasEntity.TjtdEntity> tjtd = datas.getTjtd();//推荐土地
                         final List<HomePageBean.DatasEntity.TjxfEntity> tjxf = datas.getTjxf();//推荐新房
                         final List<HomePageBean.DatasEntity.TjzfEntity> tjzf = datas.getTjzf();//推荐租房
@@ -532,7 +532,9 @@ public class HomeFragment extends BaseFragment {
                         tjyxjjrAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(mContext, ManagerActivity.class));
+                                Intent Managerintent = new Intent(mContext, ManagerActivity.class);
+                                Managerintent.putExtra("ManagerId",tjjjr.get(position).getId()+"");
+                                startActivity(Managerintent);
                             }
                         });
                         //-----推荐租房-----

@@ -44,6 +44,7 @@ import com.example.administrator.japanhouse.model.VillaDetailsBean;
 import com.example.administrator.japanhouse.more.BieSuMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.example.administrator.japanhouse.presenter.VillaDetailsPresenter;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -467,7 +468,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
                         isStart = false;
                     }
                 } else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -475,16 +476,18 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
                 finish();
                 break;
             case R.id.tv_details_location:
+                double mylatitude = CacheUtils.get("mylatitude");
+                double mylongitude = CacheUtils.get("mylongitude");
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(BieshudetailsActivity.this, BAIDU_PKG)) {
-                    Toast.makeText(BieshudetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
-                            + "," + "139.75" + BAIDU_DESTINATION + villaDetailsBean.getLatitude() + "," + villaDetailsBean.getLongitude()
+                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mylatitude
+                            + "," + mylongitude + BAIDU_DESTINATION + villaDetailsBean.getLatitude() + "," + villaDetailsBean.getLongitude()
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {
-                    Toast.makeText(BieshudetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.tv_See_More:

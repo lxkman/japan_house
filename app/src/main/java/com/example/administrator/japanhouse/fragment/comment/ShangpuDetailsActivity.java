@@ -525,14 +525,14 @@ public class ShangpuDetailsActivity extends BaseActivity {
                 double mylongitude = CacheUtils.get("mylongitude");
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(ShangpuDetailsActivity.this, BAIDU_PKG)) {
-                    Toast.makeText(ShangpuDetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mylatitude
                             + "," + mylongitude + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {
-                    Toast.makeText(ShangpuDetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.tv_details_manager_phone:
@@ -548,7 +548,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         isStart = false;
                     }
                 } else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -581,7 +581,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            Toast.makeText(ShangpuDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,getResources().getString(R.string.shoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ShangpuDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -608,7 +608,7 @@ public class ShangpuDetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
-                            Toast.makeText(ShangpuDetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,getResources().getString(R.string.quxiaoshoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ShangpuDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }

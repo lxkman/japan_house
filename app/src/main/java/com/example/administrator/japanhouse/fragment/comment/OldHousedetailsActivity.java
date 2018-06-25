@@ -296,7 +296,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                         isStart = false;
                     }
                 }else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -331,14 +331,14 @@ public class OldHousedetailsActivity extends BaseActivity {
             case R.id.bdMap_layout:
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(OldHousedetailsActivity.this,BAIDU_PKG)){
-                    Toast.makeText(OldHousedetailsActivity.this,"百度地图已经安装",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent();
                     intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+mlatitude
                             +","+mlongitude+BAIDU_DESTINATION+datas.getLatitude()+","+datas.getLongitude()
                             +BAIDU_MODE));
                     startActivity(intent);
                 }else {
-                    Toast.makeText(OldHousedetailsActivity.this,"百度地图未安装",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -363,7 +363,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")){
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            Toast.makeText(OldHousedetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,getResources().getString(R.string.shoucangchenggong), Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(OldHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -391,7 +391,7 @@ public class OldHousedetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")){
                             imgStart.setImageResource(R.drawable.shoucang);
-                            Toast.makeText(OldHousedetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,getResources().getString(R.string.quxiaoshoucangchenggong), Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(OldHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }

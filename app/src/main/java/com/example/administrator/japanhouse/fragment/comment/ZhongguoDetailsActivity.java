@@ -549,7 +549,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                 if (checkMapAppsIsExist(ZhongguoDetailsActivity.this, BAIDU_PKG)) {
                     double mylatitude = CacheUtils.get("mylatitude");
                     double mylongitude = CacheUtils.get("mylongitude");
-//                    Toast.makeText(ZhongguoDetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(mContext,getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Toast.makeText(ZhongguoDetailsActivity.this, "后台没给经纬度", Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent();
 //                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
@@ -557,7 +557,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
 //                            + BAIDU_MODE));
 //                    startActivity(intent);
                 } else {
-                    Toast.makeText(ZhongguoDetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.img_start:
@@ -570,7 +570,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                         isStart = false;
                     }
                 } else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -598,7 +598,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            Toast.makeText(ZhongguoDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,getResources().getString(R.string.shoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ZhongguoDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -625,7 +625,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
-                            Toast.makeText(ZhongguoDetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,getResources().getString(R.string.quxiaoshoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ZhongguoDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }

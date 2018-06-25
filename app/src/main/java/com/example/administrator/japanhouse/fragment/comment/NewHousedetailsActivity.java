@@ -642,13 +642,13 @@ public class NewHousedetailsActivity extends BaseActivity {
                 if (MyUtils.isLogin(this)) {
                 noticeType=0;
                 if (isJgdy==0){
-                    Toast.makeText(mContext, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
                 }else {
                     initHuoDong(noticeType);
                     tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
                 }
         } else {
-            Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
             MyUtils.StartLoginActivity(this);
         }
                 break;
@@ -656,13 +656,13 @@ public class NewHousedetailsActivity extends BaseActivity {
                 if (MyUtils.isLogin(this)) {
                 noticeType=1;
                 if (isKpdy==0){
-                    Toast.makeText(mContext, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
                 }else {
                     initHuoDong(noticeType);
                     tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
                 }
                 } else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -713,14 +713,14 @@ public class NewHousedetailsActivity extends BaseActivity {
             case R.id.bdMap_layout:
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(NewHousedetailsActivity.this, BAIDU_PKG)) {
-                    Toast.makeText(NewHousedetailsActivity.this, "正在打开百度地图", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mlatitude
                             + "," + mlongitude + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {
-                    Toast.makeText(NewHousedetailsActivity.this, "百度地图未安装或版本过低", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -745,7 +745,7 @@ public class NewHousedetailsActivity extends BaseActivity {
 
                             PushAgent mPushAgent = PushAgent.getInstance(NewHousedetailsActivity.this);
                             if (noticeType==0){//变价
-                                Toast.makeText(NewHousedetailsActivity.this, "变价通知订阅成功，此房源价格发生变化，我们将以消息提醒您，请您注意查收~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.bianjiatongzhidingyuechenggong), Toast.LENGTH_SHORT).show();
                                 mPushAgent.getTagManager().add(new TagManager.TCallBack() {
                                     @Override
                                     public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
@@ -758,7 +758,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                                     }
                                 }, "xfjgid"+houseId);
                             }else {//开盘
-                                Toast.makeText(NewHousedetailsActivity.this, "开盘通知订阅成功，此房源一旦开盘，我们将以消息提醒您，请您注意查收~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.kaipamtongzhidingyuechenggong), Toast.LENGTH_SHORT).show();
                                 mPushAgent.getTagManager().add(new TagManager.TCallBack() {
                                     @Override
                                     public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
@@ -768,7 +768,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                             }
 
                         }else if (code1.equals("205")){
-                            Toast.makeText(NewHousedetailsActivity.this, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -818,7 +818,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            Toast.makeText(NewHousedetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.shoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -847,7 +847,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
-                            Toast.makeText(NewHousedetailsActivity.this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.quxiaoshoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }

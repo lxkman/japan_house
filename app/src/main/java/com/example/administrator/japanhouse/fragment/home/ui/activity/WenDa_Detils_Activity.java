@@ -186,7 +186,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                             }else{
                                 list.addAll(datas);
                             }
-                            huida.setText("共"+datas.size()+"个回答");
+                            huida.setText("共"+list.size()+"个回答");
                             toutiaoAdapter.notifyDataSetChanged();
                         }else if(code.equals("201")){
                             ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
@@ -226,7 +226,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                             }else{
                                 list.addAll(datas);
                             }
-                           huida.setText("共"+datas.size()+"个回答");
+                           huida.setText("共"+list.size()+"个回答");
                             toutiaoAdapter.notifyDataSetChanged();
                         }else if(code.equals("201")){
                             ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());

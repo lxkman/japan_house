@@ -58,8 +58,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import id.zelory.compressor.Compressor;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.rong.imkit.RongIM;
@@ -367,10 +369,27 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                     Log.d("MyDataActivity", "selectList.get(0):" + selectList.get(0));
                     //                    cutPath = selectList.get(0).getPath();
                     //                    Glide.with(this).load(cutPath).into(faceIv);
-                    File file = new File(cutPath);
-                    List<File> files = new ArrayList<>();
-                    files.add(file);
-                    filePresenter.upFileRequest(files);
+                    final List<File> files = new ArrayList<>();
+
+
+                    new Compressor(this)
+                            .compressToFileAsFlowable(new File(cutPath))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<File>() {
+                                @Override
+                                public void accept(File file) {
+                                    filePresenter.upFilePicRequest(file);
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) {
+                                    throwable.printStackTrace();
+
+                                }
+                            });
+
+
 
                     //                    requestUploadAvatar(file);
                     break;
@@ -453,13 +472,6 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void finish() {
         presenter.updateUserInfo(MyApplication.getUserToken(), et_name.getText().toString(), mSex, mBirthday, path);
-        if (userBean != null) {
-            if (userBean.getPic() != null && !userBean.getPic().equals("")) {
-                RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(userBean.getId() + "",
-                        userBean.getNickname(), Uri.parse(userBean.getPic())));
-            }
-        }
-
         super.finish();
     }
 

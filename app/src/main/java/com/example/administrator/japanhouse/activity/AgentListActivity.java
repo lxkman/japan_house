@@ -19,6 +19,7 @@ import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.AgentListBean;
 import com.example.administrator.japanhouse.presenter.AgentPresenter;
 import com.example.administrator.japanhouse.presenter.SingUpPresenter;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
@@ -54,17 +55,21 @@ public class AgentListActivity extends BaseActivity implements AgentPresenter.Ag
 
     private List<AgentListBean.DatasBean> mList;
 
+    private int cityId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agentlist);
         ButterKnife.bind(this);
 
+        cityId = CacheUtils.get("cityId");
+
         mList = new ArrayList<>();
 
         presenter = new AgentPresenter(this, this);
 
-        presenter.getAgentList(2, page);
+        presenter.getAgentList(cityId, page);
         state = (TextView) findViewById(R.id.no_more_data);
 
         springView = (SpringView) findViewById(R.id.act_singUp_springView);
@@ -79,7 +84,7 @@ public class AgentListActivity extends BaseActivity implements AgentPresenter.Ag
                         isRefresh = true;
                         mList.clear();
                         page = 1;
-                        presenter.getAgentList(2, page);
+                        presenter.getAgentList(cityId, page);
                     }
                 }, 0);
                 springView.onFinishFreshAndLoad();
@@ -92,7 +97,7 @@ public class AgentListActivity extends BaseActivity implements AgentPresenter.Ag
                     public void run() {
                         isRefresh = false;
                         page++;
-                        presenter.getAgentList(2, page);
+                        presenter.getAgentList(cityId, page);
                     }
                 }, 0);
                 springView.onFinishFreshAndLoad();

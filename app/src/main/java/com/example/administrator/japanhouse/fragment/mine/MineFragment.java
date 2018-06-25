@@ -1,10 +1,12 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -52,6 +54,7 @@ import butterknife.Unbinder;
 import io.rong.imkit.DefaultExtensionModule;
 import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
 
 
 /**
@@ -136,6 +139,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     LinearLayout llDingyue2;
     private int mDistanceY;
 
+    private RelativeLayout layout;
+
     private int page = 1;
     private MinePresenter presenter;
     private List<HouseRecordListBean.DatasBean> list = new ArrayList<>();
@@ -149,6 +154,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, rootView);
+
+        ((DefaultItemAnimator) recyclerFoot.getItemAnimator()).setSupportsChangeAnimations(false);
+
+        layout = (RelativeLayout) rootView.findViewById(R.id.recyclerView_layout);
 
         presenter = new MinePresenter(getActivity(), this);
         presenter.getHouseRecordList(MyApplication.getUserToken(), page);
@@ -170,8 +179,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     /*
-    * 由于MainActivity的布局换成了不能滑动的viewpager，没用FragmentTransaction管理，所以这个方法直接就失效了
-    * */
+     * 由于MainActivity的布局换成了不能滑动的viewpager，没用FragmentTransaction管理，所以这个方法直接就失效了
+     * */
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -185,7 +194,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
 
         if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_MINE)) {
+            list.clear();
             userPresenter.getUserInfo(MyApplication.getUserToken());
+            presenter.getHouseRecordList(MyApplication.getUserToken(), page);
         }
     }
 
@@ -336,8 +347,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 list.addAll(response.body().getDatas());
+                adapter = new MineRecordAdapter(mContext, list);
+                recyclerFoot.setAdapter(adapter);
+                layout.setVisibility(View.VISIBLE);
+            } else {
+                layout.setVisibility(View.GONE);
             }
-            adapter.notifyDataSetChanged();
         }
     }
 
@@ -359,6 +374,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().getUser() != null) {
                 CacheUtils.put(Constants.P_USERINFO, response.body().getDatas().getUser());
+
+
+                if (response.body().getDatas().getUser().getPic() != null && !response.body().getDatas().getUser().getPic().equals("")) {
+                    RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo(response.body().getDatas().getUser().getId() + "",
+                            response.body().getDatas().getUser().getNickname(), Uri.parse(response.body().getDatas().getUser().getPic())));
+                }
+
 
                 if (response.body().getDatas().getUser().getPic() != null) {
                     Glide.with(getActivity()).load(response.body().getDatas().getUser().getPic()).into(ivHead);

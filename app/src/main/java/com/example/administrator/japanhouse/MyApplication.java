@@ -303,6 +303,17 @@ public class MyApplication extends Application {
                 Log.e("=============>>", "清除成功");
             }
 
+            RongIM.getInstance().clearConversations(new RongIMClient.ResultCallback() {
+                @Override
+                public void onSuccess(Object o) {
+
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            }, Conversation.ConversationType.PRIVATE);
             RongIM.getInstance().logout();
         }
     }

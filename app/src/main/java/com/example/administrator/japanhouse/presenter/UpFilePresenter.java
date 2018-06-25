@@ -46,7 +46,7 @@ public class UpFilePresenter {
      * oss
      * @param file
      */
-    public void upFileVideoRequest(File file) {
+    public void upFilePicRequest(File file) {
         OkGo.<FileBean>post(MyUrls.BASEURL + "/app/oss/upload")
                 .tag(this)
                 .isMultipart(true)

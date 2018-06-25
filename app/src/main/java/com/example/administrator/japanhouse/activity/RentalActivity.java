@@ -2,8 +2,11 @@ package com.example.administrator.japanhouse.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.text.SpannableString;
@@ -31,6 +34,8 @@ import com.example.administrator.japanhouse.model.FileBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.presenter.RentalPresenter;
 import com.example.administrator.japanhouse.presenter.UpFilePresenter;
+import com.example.administrator.japanhouse.utils.BitmapUtil;
+import com.example.administrator.japanhouse.utils.CompressPhotoUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
@@ -42,12 +47,22 @@ import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 出租/出售
@@ -109,7 +124,9 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
     private List<String> imgPathList = new ArrayList<>();
     private List<String> videoPathList = new ArrayList<>();
 
-    private String videoPath;
+    private String videoPath = "";
+
+    private List<File> files = new ArrayList<>();
 
     GridViewAddImgesAdpter adapter;
     GridViewAddVideoAdapter videoAdapter;
@@ -241,18 +258,13 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 break;
             case R.id.act_rental_entrust:
                 if (!TextUtils.isEmpty(etCall.getText().toString()) && !TextUtils.isEmpty(etContact.getText().toString())) {
+                    if (imgPathList.size() > 0 || !videoPath.equals("")) {
 
-                    if (imgPathList != null && imgPathList.size() > 0) {
-                        List<File> files = new ArrayList<>();
-                        for (int i = 0; i < imgPathList.size(); i++) {
-                            files.add(new File(imgPathList.get(i)));
+                        if (imgPathList != null && imgPathList.size() > 0) {
+                            for (int i = 0; i < imgPathList.size(); i++) {
+                                files.add(new File(BitmapUtil.compressImage(imgPathList.get(i), 100)));
+                            }
                         }
-
-
-
-
-
-
 
                         if (videoPath != null && !"".equals(videoPath)) {
                             files.add(new File(videoPath));
@@ -262,8 +274,23 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                         }
 
                         filePresenter.upFileRequest(files);
-                    }
 
+
+                    } else {
+                        presenter.requestRental(etCall.getText().toString(),
+                                etContact.getText().toString(),
+                                etLocation.getText().toString(),
+                                etDistance.getText().toString(),
+                                etFloor.getText().toString(),
+                                etArea.getText().toString(),
+                                etPattern.getText().toString(),
+                                isBathroom ? "0" : "1",
+                                etToward.getText().toString(),
+                                etEquipment.getText().toString(),
+                                rentOrSell ? "1" : "0",
+                                "",
+                                "");
+                    }
                 } else if (TextUtils.isEmpty(etCall.getText().toString())) {
                     TUtils.showFail(RentalActivity.this, getString(R.string.activity_rental_call_hint));
                 } else if (TextUtils.isEmpty(etContact.getText().toString())) {
@@ -319,7 +346,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                 //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
                 .enableCrop(false)// 是否裁剪
-                .compress(true)// 是否压缩
+                .compress(false)// 是否压缩
                 .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
 //                .glideOverride(200, 200)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
@@ -352,7 +379,7 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                 .openCamera(PictureMimeType.ofImage())// 单独拍照，也可录像或也可音频 看你传入的类型是图片or视频
                 .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles
                 .enableCrop(false)// 是否裁剪
-                .compress(true)// 是否压缩
+                .compress(false)// 是否压缩
                 .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                 .circleDimmedLayer(true)// 是否圆形裁剪
@@ -473,13 +500,11 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                     // 图片选择结果回调
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     for (int i = 0; i < selectList.size(); i++) {
-                        imgPathList.add(selectList.get(i).getPath());
-                    }
-                    if (imgPathList.size() > 9) {
-                        for (int i = 0; i < imgPathList.size() - 9; i++) {
-                            imgPathList.remove(9 + i);
+                        if (imgPathList.size() < 9) {
+                            imgPathList.add(selectList.get(i).getPath());
                         }
                     }
+
                     adapter.notifyDataSetChanged();
                     break;
 
@@ -587,6 +612,20 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                         rentOrSell ? "1" : "0",
                         builder.toString(),
                         videoPath);
+            } else {
+                presenter.requestRental(etCall.getText().toString(),
+                        etContact.getText().toString(),
+                        etLocation.getText().toString(),
+                        etDistance.getText().toString(),
+                        etFloor.getText().toString(),
+                        etArea.getText().toString(),
+                        etPattern.getText().toString(),
+                        isBathroom ? "0" : "1",
+                        etToward.getText().toString(),
+                        etEquipment.getText().toString(),
+                        rentOrSell ? "1" : "0",
+                        response.body().getDatas(),
+                        "");
             }
         }
     }

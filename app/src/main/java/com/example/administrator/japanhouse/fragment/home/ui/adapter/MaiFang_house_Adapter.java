@@ -96,6 +96,11 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<String> pics = new  ArrayList<>();
+                if (list.get(position).getImgs() != null && !"".equals(list.get(position).getImgs())) {
+                    pics = getList(list.get(position).getImgs());
+                }
+
                 //跳转
                 onItemClickListener.onClickListener(position, new RentalDetailsBean(
                         context.getString(R.string.sell_details),
@@ -111,7 +116,7 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
                         list.get(position).getBathroomTogether() + "",
                         list.get(position).getToward(),
                         list.get(position).getSurroundingFacilities(),
-                        getList(list.get(position).getImgs()),
+                        pics,
                         list.get(position).getVideoUrl(),
                         list.get(position).getVideoImageUrl()));
             }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -40,12 +41,15 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
     RecyclerView recyclerMsg;
     @BindView(R.id.activity_zui_jin)
     LinearLayout activityZuiJin;
+    @BindView(R.id.tv_Nodata)
+    TextView tvNodata;
     private String token;
     private MsgAdapter msgAdapter;
     private SpringView springView;
     private int pageNo = 1;
     private boolean isLoadMore;
     private List<MsgBean.DatasBean> mRefreshData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,12 +102,12 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
                         List<MsgBean.DatasBean> datas = msgBean.getDatas();
                         if (mRefreshData == null || mRefreshData.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                                tvNodata.setVisibility(View.VISIBLE);
                                 return;
                             }
                             mRefreshData = datas;
                             msgAdapter = new MsgAdapter(R.layout.item_msg, mRefreshData);
-                            recyclerMsg.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+                            recyclerMsg.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             recyclerMsg.setNestedScrollingEnabled(false);
                             recyclerMsg.setAdapter(msgAdapter);
                             if (datas == null || datas.size() == 0) {
@@ -125,7 +129,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back_img:
                 finish();
                 break;
@@ -141,20 +145,20 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         @Override
         protected void convert(final BaseViewHolder helper, final MsgBean.DatasBean item) {
             ImageView img_isread = helper.getView(R.id.img_isread);
-            if (item.getIsRead().equals("0")){//已读
+            if (item.getIsRead().equals("0")) {//已读
                 img_isread.setVisibility(View.INVISIBLE);
-            }else {//未读
+            } else {//未读
                 img_isread.setVisibility(View.VISIBLE);
             }
-            helper.setText(R.id.tv_content,item.getContent());
+            helper.setText(R.id.tv_content, item.getContent());
             helper.getView(R.id.content).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MineMsgActivity.this,MsgDetailActivity.class);
-                    intent.putExtra("content",item.getContent()+"");
-                    intent.putExtra("time",item.getCreateTime()+"");
-                    intent.putExtra("msgid",item.getId()+"");
-                    startActivityForResult(intent,1);
+                    Intent intent = new Intent(MineMsgActivity.this, MsgDetailActivity.class);
+                    intent.putExtra("content", item.getContent() + "");
+                    intent.putExtra("time", item.getCreateTime() + "");
+                    intent.putExtra("msgid", item.getId() + "");
+                    startActivityForResult(intent, 1);
                 }
             });
             helper.getView(R.id.right).setOnClickListener(new View.OnClickListener() {
@@ -167,6 +171,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
 
         }
     }
+
     private void RemoveMsg(int id) {
         HttpParams params = new HttpParams();
         params.put("id", id);
@@ -193,7 +198,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1&&resultCode==1){
+        if (requestCode == 1 && resultCode == 1) {
             getMsg();
         }
     }

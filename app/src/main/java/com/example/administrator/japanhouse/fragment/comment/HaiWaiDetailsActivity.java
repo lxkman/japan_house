@@ -565,6 +565,8 @@ public class HaiWaiDetailsActivity extends BaseActivity {
                 startActivity(Managerintent);
                 break;
             case R.id.img_share:
+
+
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.tv_details_manager_phone:

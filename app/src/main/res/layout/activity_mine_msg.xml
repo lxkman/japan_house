@@ -30,6 +30,14 @@
             android:layout_height="50dip"
             android:padding="13dp"/>
     </LinearLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_Nodata"
+        android:gravity="center"
+        android:text="暂无更多数据"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <com.liaoinstan.springview.widget.SpringView
         android:id="@+id/act_history_springView"
         android:layout_width="match_parent"

@@ -163,6 +163,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                         SuccessBean successBean = response.body();
                         if (code==200&&successBean.getCode().equals("200")){
                             Toast.makeText(TouDetailActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
+                            initplNet();
                         }
                     }
                 });

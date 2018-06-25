@@ -177,6 +177,9 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
 
         if (response != null && response.body() != null) {
             villaDetailsBean = response.body().getDatas();
+            if (villaDetailsBean.getHwdcBroker()==null){
+                return;
+            }
             hwdcBroker = villaDetailsBean.getHwdcBroker();
             roomImgs = villaDetailsBean.getRoomImgs();
             setData();
@@ -185,6 +188,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     }
 
     private void setData() {
+
         isja = MyUtils.isJa();
         tvHouseName.setText(isja ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn());
         tvPrice.setText(isja ? villaDetailsBean.getSellingPriceJpn() : villaDetailsBean.getSellingPriceCn());

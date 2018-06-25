@@ -101,6 +101,9 @@ public class FangjiadituActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fangjiaditu);
         ButterKnife.bind(this);
+        mapview.removeViewAt(1);//隐藏logo
+        mapview.removeViewAt(2);//隐藏比例尺
+        mapview.showZoomControls(false);// 隐藏缩放控件
         baiduMap=mapview.getMap();
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {

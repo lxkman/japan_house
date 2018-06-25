@@ -31,6 +31,7 @@ class SecView implements View.OnClickListener {
     private Button btn_sure;
     private DropDownMenu dropDownMenu;
     private LinearLayout ll_root;
+    private boolean isHaiwai;
 
     SecView(Context context) {
         this.context = context;
@@ -55,6 +56,13 @@ class SecView implements View.OnClickListener {
     void insertData(List<OneCheckBean> list, DropDownMenu dropDownMenu) {
         this.mList = list;
         this.dropDownMenu = dropDownMenu;
+        initData();
+    }
+
+    void insertData2(List<OneCheckBean> list, DropDownMenu dropDownMenu, boolean ishaiwai) {
+        this.mList = list;
+        this.dropDownMenu = dropDownMenu;
+        isHaiwai = ishaiwai;
         initData();
     }
 
@@ -117,7 +125,11 @@ class SecView implements View.OnClickListener {
                     }
                     dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                     if (listener != null) {
-                        listener.onItemClick(v, 2, position);
+                        if (isHaiwai) {
+                            listener.onItemClick(v, 1, position);
+                        }else {
+                            listener.onItemClick(v, 2, position);
+                        }
                     }
                 }
 

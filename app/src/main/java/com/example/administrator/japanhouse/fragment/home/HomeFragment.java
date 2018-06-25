@@ -190,7 +190,9 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
+                CacheUtils.put("mylongitude",longitude);
                 double latitude = bdLocation.getLatitude();
+                CacheUtils.put("mylatitude",latitude);
                 String country = bdLocation.getCountry();
                 if (!country.equals("日本")) {
                     String cityName = getResources().getString(R.string.dongjing);

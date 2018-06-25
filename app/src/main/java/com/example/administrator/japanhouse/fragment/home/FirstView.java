@@ -110,8 +110,11 @@ public class FirstView implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sure:
-                if (!getCheckeditemText().equals("")) {
-                    dropDownMenu.setTabText(getCheckeditemText());
+                List<String> allCheckedItem = isCheckedItemOne(adapterPosition2);
+                if (allCheckedItem != null && allCheckedItem.size() == 1) {
+                    dropDownMenu.setTabText(allCheckedItem.get(0));
+                } else if (allCheckedItem != null && allCheckedItem.size() > 1) {
+                    dropDownMenu.setTabText(context.getResources().getString(R.string.duoxuan));
                 }
                 dropDownMenu.closeMenu();//这个要放在最后，不然文字不会改变
                 if (adapterPosition == 0) {
@@ -234,6 +237,44 @@ public class FirstView implements View.OnClickListener {
         return list;
     }
 
+    private List<String> isCheckedItemOne(int adapterPosition2) {
+        List<String> list = new ArrayList<>();
+        if (adapterPosition == 0) {
+            if (mQuyuListBean != null && mQuyuListBean.size() > 0) {
+                if (adapterPosition2 == 0) {
+                    return list;
+                }
+                List<OneCheckBean> checkBeanList = mQuyuListBean.get(adapterPosition2).getCheckBeanList();
+                if (checkBeanList != null && checkBeanList.size() > 0) {
+                    for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
+                        if (checkBeanList.get(0).isChecked()) {
+                            list.add(checkBeanList.get(i1).getName() + "");
+                        } else if (i1 != 0 && checkBeanList.get(i1).isChecked()) {
+                            list.add(checkBeanList.get(i1).getName() + "");
+                        }
+                    }
+                }
+            }
+        } else {
+            if (mDitieListBean != null && mDitieListBean.size() > 0) {
+                if (adapterPosition2 == 0) {
+                    return list;
+                }
+                List<OneCheckBean> checkBeanList = mDitieListBean.get(adapterPosition2).getCheckBeanList();
+                if (checkBeanList != null && checkBeanList.size() > 0) {
+                    for (int i1 = 0; i1 < checkBeanList.size(); i1++) {
+                        if (checkBeanList.get(0).isChecked()) {
+                            list.add(checkBeanList.get(i1).getName() + "");
+                        } else if (i1 != 0 && checkBeanList.get(i1).isChecked()) {
+                            list.add(checkBeanList.get(i1).getName() + "");
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
     private void setFirstChecked(List<MoreCheckBean> list) {
         if (list != null && list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
@@ -347,15 +388,6 @@ public class FirstView implements View.OnClickListener {
                 }
             });
         }
-    }
-
-    private String getCheckeditemText() {
-        for (int i = 0; i < mList1.size(); i++) {
-            if (mList1.get(i).isChecked()) {
-                return mList1.get(i).getName();
-            }
-        }
-        return "";
     }
 
     private boolean getList3Checked() {

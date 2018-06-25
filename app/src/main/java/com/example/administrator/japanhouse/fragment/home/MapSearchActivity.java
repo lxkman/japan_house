@@ -139,6 +139,7 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
         historyRecycler.setNestedScrollingEnabled(false);
         historyRecycler.setLayoutManager(new LinearLayoutManager(this));
         if (getHistory() != null && getHistory().size() > 0) {
+            ivDelete.setVisibility(View.VISIBLE);
             mHistoryList = getHistory();
             historyAdapter = new HistoryAdapter(R.layout.item_history_search, mHistoryList);
             historyRecycler.setAdapter(historyAdapter);
@@ -152,6 +153,8 @@ public class MapSearchActivity extends BaseActivity implements MainSearchPresent
                     doSavehistory2(mHistoryList.get(position));
                 }
             });
+        }else {
+            ivDelete.setVisibility(View.GONE);
         }
     }
 

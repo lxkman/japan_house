@@ -45,6 +45,7 @@ import com.example.administrator.japanhouse.more.ZuErCengMoreActivity;
 import com.example.administrator.japanhouse.more.ZuShangPuMoreActivity;
 import com.example.administrator.japanhouse.more.ZuXueShengMoreActivity;
 import com.example.administrator.japanhouse.presenter.HouseLogPresenter;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -577,12 +578,14 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 ShowCallDialog(hwdcBroker.getPhone() + "");
                 break;
             case R.id.tv_details_location:
+                double mylatitude = CacheUtils.get("mylatitude");
+                double mylongitude = CacheUtils.get("mylongitude");
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(ZuHousedetailsActivity.this, BAIDU_PKG)) {
                     Toast.makeText(ZuHousedetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
-                            + "," + "139.75" + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
+                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mylatitude
+                            + "," + mylongitude + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {

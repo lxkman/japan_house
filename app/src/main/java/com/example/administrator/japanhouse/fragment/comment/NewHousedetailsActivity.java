@@ -500,6 +500,9 @@ public class NewHousedetailsActivity extends BaseActivity {
         intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
         intent.putExtra("lat", datas.getLatitude() + "");
         intent.putExtra("log", datas.getLongitude() + "");
+        intent.putExtra("subwayStationNum", subwayStationNum+"");
+        intent.putExtra("stationNameCn", stationNameCn+"");
+        intent.putExtra("HouseName", datas.getTitleCn()+"");
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -636,6 +639,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case tv_details_bianjia:
+                if (MyUtils.isLogin(this)) {
                 noticeType=0;
                 if (isJgdy==0){
                     Toast.makeText(mContext, "您已经订阅过了", Toast.LENGTH_SHORT).show();
@@ -643,14 +647,23 @@ public class NewHousedetailsActivity extends BaseActivity {
                     initHuoDong(noticeType);
                     tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
                 }
+        } else {
+            Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+            MyUtils.StartLoginActivity(this);
+        }
                 break;
             case R.id.tv_details_kaipan:
+                if (MyUtils.isLogin(this)) {
                 noticeType=1;
                 if (isKpdy==0){
                     Toast.makeText(mContext, "您已经订阅过了", Toast.LENGTH_SHORT).show();
                 }else {
                     initHuoDong(noticeType);
                     tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
+                }
+                } else {
+                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyUtils.StartLoginActivity(this);
                 }
                 break;
             case R.id.tv_details_manager_phone:
@@ -714,7 +727,7 @@ public class NewHousedetailsActivity extends BaseActivity {
     }
 
     private void initHuoDong(final int noticeType) {
-        if (MyUtils.isLogin(this)) {
+
         HttpParams params = new HttpParams();
         params.put("noticeType", noticeType);
         params.put("token", token);//用户登录标识
@@ -761,10 +774,7 @@ public class NewHousedetailsActivity extends BaseActivity {
                         }
                     }
                 });
-        } else {
-            Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
-            MyUtils.StartLoginActivity(this);
-        }
+
     }
 
     /**

@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
-import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.base.UMLoginActivity;
 import com.example.administrator.japanhouse.bean.LoginParmeter;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
@@ -40,7 +40,7 @@ import butterknife.OnClick;
 
 import static com.example.administrator.japanhouse.R.id.edt_phone;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends UMLoginActivity {
 
     private static final int LINE_REQUEST_CODE = 123;
 
@@ -117,13 +117,13 @@ public class RegisterActivity extends BaseActivity {
                         if (substring.equals("050") || substring.equals("060") || substring.equals("070") || substring.equals("080") || substring.equals("090")) {
                             QuNumber = "1";//国际
                             if (checkQuyu.getText().equals("+86")) {
-                                Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         } else {
                             QuNumber = "2";//国内
                             if (checkQuyu.getText().equals("+81")) {
-                                Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -134,13 +134,15 @@ public class RegisterActivity extends BaseActivity {
                 initNet();
                 break;
             case R.id.img_weixin:
-                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
+                loginByWeiXin(this);
                 break;
             case R.id.img_weibo:
-                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
+//                startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
+                loginBySina(this);
                 break;
             case R.id.img_qq:
-                startActivity(new Intent(RegisterActivity.this, BindPhoneActivity.class));
+//                startActivity(new Intent(LoginActivity.this, BindPhoneActivity.class));
+                loginByQQ(this);
                 break;
             case R.id.img_line:
                 try {
@@ -211,12 +213,12 @@ public class RegisterActivity extends BaseActivity {
             String substring = phone.substring(0, 3);
             if (substring.equals("050")||substring.equals("060")||substring.equals("070")||substring.equals("080")||substring.equals("090")){
                 if (checkQuyu.getText().equals("+86")){
-                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }else {
                 if (checkQuyu.getText().equals("+81")){
-                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -270,7 +272,7 @@ public class RegisterActivity extends BaseActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setAttributes(lp);
 
-        popupView = View.inflate(mContext,R.layout.layout_check_popupwindow, null);
+        popupView = View.inflate(this,R.layout.layout_check_popupwindow, null);
         popupView.findViewById(R.id.tv_saoyisao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

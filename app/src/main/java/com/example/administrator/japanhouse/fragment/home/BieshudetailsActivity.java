@@ -151,8 +151,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         villaDetailsPresenter.getVillaDetails(houseId, token);
         new HouseLogPresenter(this).setHouseLog("4", houseId, "");
 
-        //户型图
-        initData();
+
         //猜你喜欢
         initLoveRecycler();
         initScroll();
@@ -358,10 +357,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         JZVideoPlayer.releaseAllVideos();
     }
 
-    private void initData() {
 
-
-    }
 
     private void initLoveRecycler() {
         HttpParams params = new HttpParams();

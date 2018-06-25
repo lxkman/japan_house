@@ -571,6 +571,8 @@ public class HaiWaiDetailsActivity extends BaseActivity {
                 ShowCallDialog(hwdcBroker.getPhone() + "");
                 break;
             case R.id.tv_details_location:
+                double mylatitude = CacheUtils.get("mylatitude");
+                double mylongitude = CacheUtils.get("mylongitude");
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(HaiWaiDetailsActivity.this, BAIDU_PKG)) {
 //                    Toast.makeText(ZhongguoDetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();

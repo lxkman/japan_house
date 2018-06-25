@@ -482,6 +482,9 @@ public class OldHousedetailsActivity extends BaseActivity {
                 intent.putExtra("lat", String.valueOf(datas.getLatitude()));
                 intent.putExtra("log", String.valueOf(datas.getLongitude()));
                 intent.putExtra("TAG", "1");
+                intent.putExtra("subwayStationNum", datas.getSubwayStationNum()+"");
+                intent.putExtra("stationNameCn", datas.getHwdcSubwayStation().getStationNameCn()+"");
+                intent.putExtra("HouseName", datas.getTitleCn()+"");
                 startActivity(intent);
             }
 
@@ -651,6 +654,9 @@ public class OldHousedetailsActivity extends BaseActivity {
         intent = new Intent(OldHousedetailsActivity.this, MapActivity.class);
         intent.putExtra("lat", datas.getLatitude()+"");
         intent.putExtra("log", datas.getLongitude()+"");
+        intent.putExtra("subwayStationNum", datas.getSubwayStationNum()+"");
+        intent.putExtra("stationNameCn", datas.getHwdcSubwayStation().getStationNameCn()+"");
+        intent.putExtra("HouseName", datas.getTitleCn()+"");
         findViewById(R.id.lishi_old_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

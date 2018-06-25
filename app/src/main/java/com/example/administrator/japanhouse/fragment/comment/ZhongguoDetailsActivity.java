@@ -547,6 +547,8 @@ public class ZhongguoDetailsActivity extends BaseActivity {
             case R.id.tv_details_location:
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(ZhongguoDetailsActivity.this, BAIDU_PKG)) {
+                    double mylatitude = CacheUtils.get("mylatitude");
+                    double mylongitude = CacheUtils.get("mylongitude");
 //                    Toast.makeText(ZhongguoDetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
                     Toast.makeText(ZhongguoDetailsActivity.this, "后台没给经纬度", Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent();

@@ -58,13 +58,13 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initNet();
         initListener();
+        initNet();
     }
 
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
-        tv_refresh_time.setText(currentDate+"更新");
+        tv_refresh_time.setText(currentDate+getResources().getString(R.string.gengxin));
         tjNewHousePresenter.getHouseList(page,"0");
     }
     private void initListener() {
@@ -78,7 +78,7 @@ public class OldhouseFragment extends BaseFragment implements TJNewHousePresente
                 page = 1;
                 tjNewHousePresenter.getHouseList(page,"0");
                 String currentDate = MyUtils.getCurrentDate();
-                tv_refresh_time.setText(currentDate+"更新");
+                tv_refresh_time.setText(currentDate+getResources().getString(R.string.gengxin));
                 springview.onFinishFreshAndLoad();
             }
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
@@ -64,23 +65,29 @@ public class ToutiaoAdapter extends RecyclerView.Adapter<ToutiaoAdapter.ViewHold
         holder.zan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (datas.get(position).getIsZan() == 1) {
-                    Drawable drawable = context.getResources().getDrawable(R.drawable.up_praise);
-                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                    holder.zan.setCompoundDrawables(drawable, null, null, null);
-                    datas.get(position).setIsZan(0);
-                    datas.get(position).setZanNum(datas.get(position).getZanNum() - 1);
-                    holder.zan.setText(datas.get(position).getZanNum() + "");
-                    onItemPraiseListener.onItemDwonListener(datas.get(position).getId());
+                if (MyUtils.isLogin(context)) {
+                    if (datas.get(position).getIsZan() == 1) {
+                        Drawable drawable = context.getResources().getDrawable(R.drawable.up_praise);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        holder.zan.setCompoundDrawables(drawable, null, null, null);
+                        datas.get(position).setIsZan(0);
+                        datas.get(position).setZanNum(datas.get(position).getZanNum() - 1);
+                        holder.zan.setText(datas.get(position).getZanNum() + "");
+                        onItemPraiseListener.onItemDwonListener(datas.get(position).getId());
+                    } else {
+                        Drawable drawable = context.getResources().getDrawable(R.drawable.dwon_praise);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        holder.zan.setCompoundDrawables(drawable, null, null, null);
+                        datas.get(position).setIsZan(1);
+                        datas.get(position).setZanNum(datas.get(position).getZanNum() + 1);
+                        holder.zan.setText(datas.get(position).getZanNum() + "");
+                        onItemPraiseListener.onItemUpListener(datas.get(position).getId());
+                    }
                 } else {
-                    Drawable drawable = context.getResources().getDrawable(R.drawable.dwon_praise);
-                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                    holder.zan.setCompoundDrawables(drawable, null, null, null);
-                    datas.get(position).setIsZan(1);
-                    datas.get(position).setZanNum(datas.get(position).getZanNum() + 1);
-                    holder.zan.setText(datas.get(position).getZanNum() + "");
-                    onItemPraiseListener.onItemUpListener(datas.get(position).getId());
+                    Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show();
+                    MyUtils.StartLoginActivity(context);
                 }
+
             }
         });
     }

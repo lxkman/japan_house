@@ -63,7 +63,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
 
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
-        tv_refresh_time.setText(currentDate+R.string.gengxin);
+        tv_refresh_time.setText(currentDate+getResources().getString(R.string.gengxin));
         tjNewHousePresenter.getLand(page);
     }
     private void initListener() {
@@ -77,7 +77,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
                 page = 1;
                 tjNewHousePresenter.getLand(page);
                 String currentDate = MyUtils.getCurrentDate();
-                tv_refresh_time.setText(currentDate+"更新");
+                tv_refresh_time.setText(currentDate+getResources().getString(R.string.gengxin));
                 springview.onFinishFreshAndLoad();
             }
 

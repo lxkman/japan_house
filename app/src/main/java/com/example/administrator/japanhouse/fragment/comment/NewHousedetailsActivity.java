@@ -26,6 +26,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
@@ -176,7 +178,10 @@ public class NewHousedetailsActivity extends BaseActivity {
     private HouseDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker;
     private int isJgdy;
     private int isKpdy;
-
+    private String subwayStationNum;
+    private String stationNameCn;
+    private double mlongitude;
+    private double mlatitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -226,6 +231,9 @@ public class NewHousedetailsActivity extends BaseActivity {
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
+                        subwayStationNum = datas.getSubwayStationNum();
+                        HouseDetailsBean.DatasBean.HwdcSubwayStationBean hwdcSubwayStation = datas.getHwdcSubwayStation();
+                        stationNameCn = hwdcSubwayStation.getStationNameCn();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
@@ -277,6 +285,13 @@ public class NewHousedetailsActivity extends BaseActivity {
 
         mLocClient.setLocOption(option);
         mLocClient.start();
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                mlongitude = bdLocation.getLongitude();
+                mlatitude = bdLocation.getLatitude();
+            }
+        });
     }
 
     private void initMap() {
@@ -314,6 +329,9 @@ public class NewHousedetailsActivity extends BaseActivity {
                 Intent intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
                 intent.putExtra("lat", String.valueOf(datas.getLatitude()));
                 intent.putExtra("log", String.valueOf(datas.getLongitude()));
+                intent.putExtra("subwayStationNum", subwayStationNum+"");
+                intent.putExtra("stationNameCn", stationNameCn+"");
+                intent.putExtra("HouseName", datas.getTitleCn()+"");
                 intent.putExtra("TAG", "1");
                 startActivity(intent);
             }
@@ -648,7 +666,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                         isStart = false;
                     }
                 } else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -683,10 +700,10 @@ public class NewHousedetailsActivity extends BaseActivity {
             case R.id.bdMap_layout:
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(NewHousedetailsActivity.this, BAIDU_PKG)) {
-                    Toast.makeText(NewHousedetailsActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewHousedetailsActivity.this, "正在打开百度地图", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
-                            + "," + "139.75" + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
+                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mlatitude
+                            + "," + mlongitude + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {

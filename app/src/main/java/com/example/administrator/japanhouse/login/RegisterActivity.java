@@ -173,6 +173,7 @@ public class RegisterActivity extends BaseActivity {
         }else {
             quhao="86";
         }
+        Log.d("RegisterActivity", QuNumber+"---------"+quhao);
         params.put("phone", "00"+quhao+edtPhone.getText().toString());
         params.put("sendType",QuNumber);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
@@ -183,6 +184,7 @@ public class RegisterActivity extends BaseActivity {
                     public void onSuccess(Response<SuccessBean> response) {
                         int code = response.code();
                         SuccessBean successBean = response.body();
+                        Toast.makeText(RegisterActivity.this, successBean.getMsg(), Toast.LENGTH_SHORT).show();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                             Toast.makeText(RegisterActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
@@ -190,6 +192,8 @@ public class RegisterActivity extends BaseActivity {
                             Toast.makeText(RegisterActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
                         }else if (successBean.getCode().equals("500")){
                             Toast.makeText(RegisterActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(RegisterActivity.this, successBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

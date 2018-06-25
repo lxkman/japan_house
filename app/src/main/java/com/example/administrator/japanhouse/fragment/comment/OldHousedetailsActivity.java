@@ -28,6 +28,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
@@ -327,13 +329,12 @@ public class OldHousedetailsActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.bdMap_layout:
-
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(OldHousedetailsActivity.this,BAIDU_PKG)){
                     Toast.makeText(OldHousedetailsActivity.this,"百度地图已经安装",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent();
-                    intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+"35.68"
-                            +","+"139.75"+BAIDU_DESTINATION+"40.05"+","+"116.30"
+                    intent.setData(Uri.parse(BAIDU_HEAD+BAIDU_ORIGIN+mlatitude
+                            +","+mlongitude+BAIDU_DESTINATION+datas.getLatitude()+","+datas.getLongitude()
                             +BAIDU_MODE));
                     startActivity(intent);
                 }else {
@@ -418,7 +419,8 @@ public class OldHousedetailsActivity extends BaseActivity {
             return true;
         }
     }
-
+    private double mlongitude;
+    private double mlatitude;
     private void initLocation() {
         mLocClient = new LocationClient(this);
         mLocClient.registerLocationListener(myListener);
@@ -434,6 +436,14 @@ public class OldHousedetailsActivity extends BaseActivity {
 
         mLocClient.setLocOption(option);
         mLocClient.start();
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                mlongitude = bdLocation.getLongitude();
+                mlatitude = bdLocation.getLatitude();
+            }
+        });
+
     }
 
     private void initMap() {

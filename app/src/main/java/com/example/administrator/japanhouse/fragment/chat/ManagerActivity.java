@@ -24,6 +24,7 @@ import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ManagerBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.CircleImageView;
 import com.example.administrator.japanhouse.view.NoCacheViewPager;
@@ -93,6 +94,7 @@ public class ManagerActivity extends BaseActivity {
 
     private void initManager() {
         String managerId = getIntent().getStringExtra("ManagerId");
+        SharedPreferencesUtils.getInstace(this).setStringPreference("brokerId",managerId);
         HttpParams params = new HttpParams();
         params.put("brokerId", managerId);
         OkGo.<ManagerBean>post(MyUrls.BASEURL + "/app/broker/getbrokerinfo")

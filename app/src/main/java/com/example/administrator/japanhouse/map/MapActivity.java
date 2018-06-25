@@ -92,6 +92,11 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
     //百度地图的包名
     private final static String BAIDU_PKG = "com.baidu.BaiduMap";
     private View markView;
+    private String houseName;
+    private String stationNameCn;
+    private String subwayStationNum;
+    private double mlongitude;
+    private double mlatitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +108,46 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
 
     }
 
+    private void initView() {
+
+
+        lat = getIntent().getStringExtra("lat");
+        log = getIntent().getStringExtra("log");
+        tag = getIntent().getStringExtra("TAG");
+        subwayStationNum = getIntent().getStringExtra("subwayStationNum");
+        stationNameCn = getIntent().getStringExtra("stationNameCn");
+        houseName = getIntent().getStringExtra("HouseName");
+        Log.d("MapActivity", lat + "------------------");
+        Log.d("MapActivity", log + "------------------");
+        Log.d("MapActivity", tag + "------------------");
+
+        permapview = (MapView) findViewById(R.id.permapview);
+        permapview.removeViewAt(1);//隐藏logo
+        permapview.removeViewAt(2);//隐藏比例尺
+        permapview.showZoomControls(false);// 隐藏缩放控件
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+        radioGroup.setOnCheckedChangeListener(this);
+
+        initmap();
+        // 定位初始化
+        initLocation();
+
+
+        if (tag.equals("1")){
+            radioGroup.check(R.id.radiobank);
+            poiserch("商场", R.drawable.shop_logo);
+        }else if (tag.equals("2")){
+            radioGroup.check(R.id.radiobus);
+            poiserch("学校", R.drawable.school_logo);
+        }else if (tag.equals("3")){
+            radioGroup.check(R.id.radiosubw);
+            poiserch("幼儿园", R.drawable.youeryuan_logo);
+        }else if (tag.equals("4")){
+            radioGroup.check(R.id.radioedut);
+            poiserch("医院", R.drawable.yiyuan_logo);
+        }
+
+    }
 
     private void poiserch(String str, final int dra) {
         mPoiSearch = PoiSearch.newInstance();
@@ -125,6 +170,10 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                     } else {
                         //路线弹窗
                       View  markView = View.inflate(MapActivity.this, R.layout.location_layout, null);
+                        TextView map_title = (TextView) markView.findViewById(R.id.map_title);
+                        TextView map_station = (TextView) markView.findViewById(R.id.map_station);
+                        map_title.setText(houseName);
+                        map_station.setText("距"+stationNameCn+subwayStationNum+"米");
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromView(markView))
                                 .position(new LatLng(Double.valueOf(lat),Double.valueOf(log)))
@@ -139,8 +188,8 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
                                 if (checkMapAppsIsExist(MapActivity.this, BAIDU_PKG)) {
                                     Toast.makeText(MapActivity.this, "百度地图已经安装", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent();
-                                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
-                                            + "," + "139.75" + BAIDU_DESTINATION + lat + "," + log
+                                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mlatitude
+                                            + "," + mlongitude + BAIDU_DESTINATION + lat + "," + log
                                             + BAIDU_MODE));
                                     startActivity(intent);
                                 } else {
@@ -233,43 +282,6 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
 
     }
 
-    private void initView() {
-
-
-        lat = getIntent().getStringExtra("lat");
-        log = getIntent().getStringExtra("log");
-        tag = getIntent().getStringExtra("TAG");
-        Log.d("MapActivity", lat + "------------------");
-        Log.d("MapActivity", log + "------------------");
-        Log.d("MapActivity", tag + "------------------");
-
-        permapview = (MapView) findViewById(R.id.permapview);
-        permapview.removeViewAt(1);//隐藏logo
-        permapview.removeViewAt(2);//隐藏比例尺
-        permapview.showZoomControls(false);// 隐藏缩放控件
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
-        radioGroup.setOnCheckedChangeListener(this);
-
-        initmap();
-        // 定位初始化
-        initLocation();
-
-
-        if (tag.equals("1")){
-            radioGroup.check(R.id.radiobank);
-            poiserch("商场", R.drawable.shop_logo);
-        }else if (tag.equals("2")){
-            radioGroup.check(R.id.radiobus);
-            poiserch("学校", R.drawable.school_logo);
-        }else if (tag.equals("3")){
-            radioGroup.check(R.id.radiosubw);
-            poiserch("幼儿园", R.drawable.youeryuan_logo);
-        }else if (tag.equals("4")){
-            radioGroup.check(R.id.radioedut);
-            poiserch("医院", R.drawable.yiyuan_logo);
-        }
-
-    }
 
     private void initLocation() {
         mLocClient = new LocationClient(this);
@@ -287,6 +299,13 @@ public class MapActivity extends BaseActivity implements RadioGroup.OnCheckedCha
 
         mLocClient.setLocOption(option);
         mLocClient.start();
+        mLocClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                mlongitude = bdLocation.getLongitude();
+                mlatitude = bdLocation.getLatitude();
+            }
+        });
     }
 
     @Override

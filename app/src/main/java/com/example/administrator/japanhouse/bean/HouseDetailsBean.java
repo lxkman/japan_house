@@ -316,7 +316,7 @@ public class HouseDetailsBean implements Serializable{
         private String conditionsCn;
         private String conditionsJpn;
         private String kpPhone;
-        private int subwayStationNum;
+        private String subwayStationNum;
         private HwdcBrokerBean hwdcBroker;
         private int isSc;
         private int isJgdy;
@@ -1365,11 +1365,11 @@ public class HouseDetailsBean implements Serializable{
             this.kpPhone = kpPhone;
         }
 
-        public int getSubwayStationNum() {
+        public String getSubwayStationNum() {
             return subwayStationNum;
         }
 
-        public void setSubwayStationNum(int subwayStationNum) {
+        public void setSubwayStationNum(String subwayStationNum) {
             this.subwayStationNum = subwayStationNum;
         }
 

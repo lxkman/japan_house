@@ -16,6 +16,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
@@ -23,6 +24,8 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.japanhouse.R;
@@ -90,6 +93,8 @@ public class FangjiadituActivity extends BaseActivity {
     private int avgMoneyoneline;
     private double bigValoneline;
     private double endValoneline;
+    private double longitude;
+    private double latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +181,27 @@ public class FangjiadituActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_location:
+                // 开启定位图层
+                baiduMap.setMyLocationEnabled(true);
+                MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+                //添加定位信息
+                baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(14).build()));   // 设置级别
+                LatLng ll = new LatLng(latitude,
+                        longitude);
+                baiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(ll));
+                MyLocationData.Builder builder = new MyLocationData.Builder();
+                builder.latitude(latitude);
+                builder.longitude(longitude);
+                MyLocationData data = builder.build();
+                //设置定位的小图标
+                BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+                        .fromResource(R.drawable.dingwei_logo1);
+                baiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+                        mCurrentMode, true, mCurrentMarker,
+                        0, 0));
+
+                //设置定位数据
+                baiduMap.setMyLocationData(data);
                 break;
             case R.id.layout_pop:
                 Tag="1";
@@ -297,8 +323,8 @@ public class FangjiadituActivity extends BaseActivity {
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                double longitude = bdLocation.getLongitude();
-                double latitude = bdLocation.getLatitude();
+                longitude = bdLocation.getLongitude();
+                latitude = bdLocation.getLatitude();
                 mCity = bdLocation.getCity();
                 initMap(latitude, longitude);
                 initOverlay();

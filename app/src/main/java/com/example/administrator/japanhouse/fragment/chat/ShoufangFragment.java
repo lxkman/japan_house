@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -36,12 +37,15 @@ import java.util.List;
 public class ShoufangFragment extends BaseFragment {
 
     private RecyclerView mrecycler;
+    private TextView tv_refresh_time;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList=new ArrayList();
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_shoufang, null);
         mrecycler= (RecyclerView) view.findViewById(R.id.Mrecycler);
+        tv_refresh_time= (TextView) view.findViewById(R.id.tv_refresh_time);
+        tv_refresh_time.setVisibility(View.GONE);
         return view;
     }
     @Override

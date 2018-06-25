@@ -20,6 +20,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ChinaShaiXuanBean;
 import com.example.administrator.japanhouse.bean.EventBean;
+import com.example.administrator.japanhouse.bean.HaiwaiCityListBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.bean.TudiListBean;
@@ -61,7 +62,7 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     private RecyclerView mrecycler;
     private TextView tvNoContent;
     private LiebiaoAdapter liebiaoAdapter;
-    private List<OneCheckBean> list;
+    private List<OneCheckBean> citylist;
     private SpringView springview;
     private boolean isLoadMore;
     private int page = 1;
@@ -75,6 +76,10 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     private List<List<String>> mMoreSelectedBeanList = new ArrayList<>();
     private List<String> hxsList = new ArrayList<>();
     private String searchText;
+    private View fifthView;
+    private String[] headers;
+    private String cityId;
+    private List<HaiwaiCityListBean.DatasEntity> citysdatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,16 +121,54 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     }
 
     private void initView() {
-        final String headers[] = {getString(R.string.lxk_chengshi),
+        headers = new String[]{getString(R.string.lxk_chengshi),
                 getString(R.string.shoujia),
                 getString(R.string.huxing), getString(R.string.gengduo)};
-
-        final View fifthView = LayoutInflater.from(this).inflate(R.layout.activity_main_view, null);
+        fifthView = LayoutInflater.from(this).inflate(R.layout.activity_main_view, null);
         mrecycler = (RecyclerView) fifthView.findViewById(R.id.mrecycler);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
         tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
+        initCity();
+    }
+
+    private void initCity() {
+        HttpParams params = new HttpParams();
+        String id = getIntent().getStringExtra("id");
+        params.put("csId", id);
+        OkGo.<HaiwaiCityListBean>post(MyUrls.BASEURL + "/app/city/hwdccity")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<HaiwaiCityListBean>(HaiwaiCityListBean.class) {
+                    @Override
+                    public void onSuccess(Response<HaiwaiCityListBean> response) {
+                        int code = response.code();
+                        HaiwaiCityListBean haiwaiCityListBean = response.body();
+                        if (haiwaiCityListBean == null) {
+                            return;
+                        }
+                        citysdatas = haiwaiCityListBean.getDatas();
+                        citylist = new ArrayList<>();
+                        citylist.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                        if (citysdatas != null && citysdatas.size() > 0) {
+                            /**
+                             * 第一个界面
+                             * */
+                            for (int i = 0; i < citysdatas.size(); i++) {
+                                citylist.add(new OneCheckBean(false, isJa ? citysdatas.get(i).getAdministrationNameJpn() : citysdatas.get(i).getAdministrationNameCn()));
+                            }
+                        }
+                        SecView firstView = new SecView(HaiwaiListActivity.this);
+                        popupViews.add(firstView.secView());
+                        firstView.insertData2(citylist, dropDownMenu, true);
+                        firstView.setListener(HaiwaiListActivity.this);
+                        initShaiXuan();
+                    }
+                });
+    }
+
+    private void initShaiXuan() {
         HttpParams params = new HttpParams();
         params.put("hType", 5);
         OkGo.<ChinaShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -140,22 +183,6 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                             return;
                         }
                         ChinaShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
-
-                        /**
-                         * 第一个界面
-                         * */
-                        list = new ArrayList<>();
-                        list.add(new OneCheckBean(false, "不限"));
-                        list.add(new OneCheckBean(false, "奥克兰"));
-                        list.add(new OneCheckBean(false, "皇后镇"));
-                        list.add(new OneCheckBean(false, "基督城"));
-                        list.add(new OneCheckBean(false, "曼努考"));
-                        list.add(new OneCheckBean(false, "威灵顿"));
-                        SecView firstView = new SecView(HaiwaiListActivity.this);
-                        popupViews.add(firstView.secView());
-                        firstView.insertData(list, dropDownMenu);
-                        firstView.setListener(HaiwaiListActivity.this);
-
                         /**
                          * 第二个界面
                          * */
@@ -241,10 +268,13 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
             params.put("languageType", 0);
         }
         params.put("hType", 0);
-        params.put("cityId", id);//城市id
+        params.put("cityId", id);//国家id
         params.put("sjId", sjId);//售价
         params.putUrlParams("hxs", hxsList);//户型
         params.put("searchText", searchText);//搜索
+        if (!TextUtils.isEmpty(cityId)) {
+            params.put("hwcId", cityId);//城市id
+        }
         if (isZiDingyiPrice) {
             if (zidingyiPriceList.size() == 1) {
                 String s = zidingyiPriceList.get(0);
@@ -323,7 +353,20 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     @Override
     public void onItemClick(View view, int postion, int itemPosition) {
         switch (postion) {
-            case 1:
+            case 1://城市
+                page = 1;
+                if (itemPosition == 0) {//说明是点击的不限
+                    cityId = "";
+                } else {
+                    if (citysdatas != null && citysdatas.size() > 0) {
+                        HaiwaiCityListBean.DatasEntity datasEntity = citysdatas.get(itemPosition - 1);
+                        cityId = datasEntity.getId() + "";
+                    }
+                }
+                if (mDatas != null) {
+                    mDatas.clear();
+                }
+                initData();
                 break;
             case 2://户型
                 page = 1;

@@ -490,7 +490,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 finish();
                 break;
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext, HomeMapActivity.class));
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
                 break;
             case R.id.img_message:
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -516,6 +516,8 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
             page=1;
             mDatas.clear();
             initData();
+        }else if (resultCode==100){
+            finish();
         }
     }
 }

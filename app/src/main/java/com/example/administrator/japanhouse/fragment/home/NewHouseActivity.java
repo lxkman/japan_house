@@ -319,7 +319,8 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         } else {
             params.put("languageType", 0);
         }
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         params.put("hType", 1);
         params.put("pageNo", page);
         params.put("mjId", mjId);//面积
@@ -511,7 +512,7 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext, HomeMapActivity.class));
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
                 break;
             //消息
             case R.id.img_message:
@@ -539,6 +540,8 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                 mDatas.clear();
             }
             initData();
+        }else if (resultCode==100){
+            finish();
         }
     }
 }

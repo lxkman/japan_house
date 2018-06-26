@@ -505,7 +505,7 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext,HomeMapActivity.class));
+                startActivityForResult(new Intent(mContext,HomeMapActivity.class),0);
                 break;
             //消息
             case R.id.img_message:
@@ -529,6 +529,8 @@ public class ZhaoxiaoquActivity extends BaseActivity implements MyItemClickListe
             page=1;
             mDatas.clear();
             initData();
+        }else if (resultCode==100){
+            finish();
         }
     }
 

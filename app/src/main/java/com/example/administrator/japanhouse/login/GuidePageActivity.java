@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ public class GuidePageActivity extends BaseActivity {
     private List<LancherBean.DatasBean> datas;
     private String location;
     private int languageType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +55,9 @@ public class GuidePageActivity extends BaseActivity {
         location = CacheUtils.get(Constants.COUNTRY);
         if (location.equals("ja")) {
 //                iv_launcher.setBackground(getResources().getDrawable(R.drawable.start_bg));
-            languageType=1;
-        }else {
-            languageType=0;
+            languageType = 1;
+        } else {
+            languageType = 0;
         }
         initGuideNet();
 
@@ -76,6 +78,16 @@ public class GuidePageActivity extends BaseActivity {
                         if (LancherBean != null) {
                             if (LancherBean.getCode().equals("200")) {
                                 datas = LancherBean.getDatas();
+                                if (datas.size() <= 0) {
+                                    SharedPreferencesUtils.getInstace(GuidePageActivity.this).setBooleanPreference("guide", true);
+                                    HashMap<String, Boolean> hashMap = new HashMap<>();
+                                    //会话类型 以及是否聚合显示
+                                    hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                                    RongIM.getInstance().startConversationList(GuidePageActivity.this, hashMap);
+                                    finish();
+                                }
                                 if (mGuidePagerAdapter == null) {
                                     mGuidePagerAdapter = new GuidePagerAdapter();
                                 }
@@ -94,7 +106,8 @@ public class GuidePageActivity extends BaseActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = View.inflate(GuidePageActivity.this, R.layout.item_guide, null);
             TextView tv_jinru = (TextView) view.findViewById(R.id.tv_jinru);
-            if (position == datas.size()-1) {
+            Log.d("GuidePagerAdapter", "datas.size():" + datas.size()+"---------");
+           if (position == datas.size() - 1) {
                 tv_jinru.setVisibility(View.VISIBLE);
             } else {
                 tv_jinru.setVisibility(View.GONE);

@@ -16,6 +16,7 @@ public class Constants {
     public static final String SEARCH_WD_HISTORY = "SEARCH_WD_HISTORY";   //问答搜索历史记录
     public static final String P_USERINFO = "P_USERINFO";
     public static final String MANAGER_T = "MANAGER_T";
+    public static final String RENTALMSG = "RENTALMSG";
 
     //event
     public static final String EVENT_CHAT = "EVENT_CHAT"; //跳转到首页CHAT

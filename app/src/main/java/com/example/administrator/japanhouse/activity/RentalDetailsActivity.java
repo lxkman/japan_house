@@ -141,12 +141,13 @@ public class RentalDetailsActivity extends BaseActivity implements RentDetailsVi
 //0审核中 1已拒绝 2已通过
         if (TextUtils.equals(detailsBean.getRoomState(), "0")) {
             tvRentalState.setText(getString(R.string.activity_rental_details_audit));
-            tvRentalState.setTextColor(Color.GREEN);
+            tvRentalState.setTextColor(Color.BLACK);
         } else if (TextUtils.equals(detailsBean.getRoomState(), "1")) {
             tvRentalState.setText(getString(R.string.activity_rental_details_refused));
             tvRentalState.setTextColor(Color.RED);
         } else if (TextUtils.equals(detailsBean.getRoomState(), "2")) {
-
+            tvRentalState.setText(getString(R.string.activity_rental_details_success));
+            tvRentalState.setTextColor(Color.GREEN);
         }
 
         if (!TextUtils.isEmpty(detailsBean.getRefuseReason())) {

@@ -67,12 +67,13 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
             holder.stateZh.setVisibility(View.VISIBLE);
             if (TextUtils.equals(list.get(position).getAuditState(), "0")) {
                 holder.stateZh.setText(context.getString(R.string.activity_rental_details_audit));
-                holder.stateZh.setTextColor(Color.GREEN);
+                holder.stateZh.setTextColor(Color.BLACK);
             } else if (TextUtils.equals(list.get(position).getAuditState(), "1")) {
                 holder.stateZh.setText(context.getString(R.string.activity_rental_details_refused));
                 holder.stateZh.setTextColor(Color.RED);
             } else if (TextUtils.equals(list.get(position).getAuditState(), "2")) {
-
+                holder.stateZh.setText(context.getString(R.string.activity_rental_details_success));
+                holder.stateZh.setTextColor(Color.GREEN);
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.WebActivity;
 import com.example.administrator.japanhouse.activity.adapter.MineRecordAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.EventBean;
@@ -277,7 +279,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.tv_qustion:
             case R.id.tv_wenjuan:
-                startActivity(new Intent(mContext, WenJuanActivity.class));
+                UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
+
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("title", getString(R.string.wenjuan));
+                if (MyApplication.isJapanese()) {
+                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/questionnaire.html?userId=" + userBean.getId());
+                } else {
+                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/questionnaireCn.html?userId=" + userBean.getId());
+                }
+
+                startActivity(intent);
                 break;
             //联系人
             case R.id.rel_lianxiren_layout:
@@ -320,7 +332,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.tv_calculator:
             case R.id.tv_calculator1:
-                startActivity(new Intent(mContext, CalculatorActivity.class));
+//                startActivity(new Intent(mContext, CalculatorActivity.class));
+
+                Intent intent1 = new Intent(getActivity(), WebActivity.class);
+                intent1.putExtra("title", getString(R.string.calc_fangdai));
+                if (MyApplication.isJapanese()) {
+                    intent1.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/Agreement.html?type=3");
+                } else {
+                    intent1.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/AgreementCn.html?type=3");
+                }
+
+                startActivity(intent1);
                 break;
             case R.id.tv_feedback:
             case R.id.tv_feedback1:

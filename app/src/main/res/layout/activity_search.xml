@@ -67,20 +67,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <com.liaoinstan.springview.widget.SpringView
-            android:id="@+id/act_singUp_springView"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            >
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/search_list_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </com.liaoinstan.springview.widget.SpringView>
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_noContent"

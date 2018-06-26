@@ -182,6 +182,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             if (userBean.getBirthday() != 0) {
                 tvBirthday.setText(getTime(new Date(userBean.getBirthday())));
                 mBirthday = tvBirthday.getText().toString();
+            } else {
+                tvBirthday.setText(getString(R.string.input_select));
             }
 
             if (!TextUtils.isEmpty(userBean.getPhone())) {

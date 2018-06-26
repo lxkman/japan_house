@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.example.administrator.japanhouse.bean.QueandansBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -102,7 +104,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.tijiao:
-                intdaview();
+                if (!TextUtils.isEmpty(ed_wen_title.getText().toString()) && !TextUtils.isEmpty(ed_wen_content.getText().toString())) {
+                    intdaview();
+                } else if (TextUtils.isEmpty(ed_wen_title.getText().toString())) {
+                    TUtils.showFail(this, getString(R.string.input_title));
+                } else if (TextUtils.isEmpty(ed_wen_content.getText().toString())) {
+                    TUtils.showFail(this, getString(R.string.input_content));
+                }
                 break;
         }
     }

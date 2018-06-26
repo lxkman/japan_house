@@ -42,7 +42,6 @@ public class SearchActivity extends BaseActivity implements CharSearchPresenter.
     private List<ChatSearchBean.DatasBean> mList = new ArrayList();
     private SearchListAdapter adapter;
 
-    private SpringView springView;
     private int page = 1;
 
     private CharSearchPresenter presenter;
@@ -59,40 +58,6 @@ public class SearchActivity extends BaseActivity implements CharSearchPresenter.
         adapter = new SearchListAdapter(this, mList);
         searchListRecycler.setAdapter(adapter);
 
-        springView = (SpringView) findViewById(R.id.act_singUp_springView);
-
-        springView.setType(SpringView.Type.FOLLOW);
-        springView.setListener(new SpringView.OnFreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mList.clear();
-                        page = 1;
-                        adapter.setSearchContent(actSearchManager.getText().toString());
-                        presenter.getSearchList(page, actSearchManager.getText().toString());
-                    }
-                }, 0);
-                springView.onFinishFreshAndLoad();
-            }
-
-            @Override
-            public void onLoadmore() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        page++;
-                        adapter.setSearchContent(actSearchManager.getText().toString());
-                        presenter.getSearchList(page, actSearchManager.getText().toString());
-                    }
-                }, 0);
-                springView.onFinishFreshAndLoad();
-            }
-        });
-        springView.setFooter(new DefaultFooter(this));
-        springView.setHeader(new DefaultHeader(this));
-
         actSearchManager.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -103,14 +68,12 @@ public class SearchActivity extends BaseActivity implements CharSearchPresenter.
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (s.length() > 0) {
+                    mList.clear();
                     adapter.setSearchContent(actSearchManager.getText().toString());
                     presenter.getSearchList(page, actSearchManager.getText().toString());
-                    springView.setVisibility(View.VISIBLE);
-                    searchListRecycler.setVisibility(View.VISIBLE);
-                    tvNoContent.setVisibility(View.GONE);
                 } else {
-                    searchListRecycler.setVisibility(View.GONE);
                     tvNoContent.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.GONE);
                 }
             }
 
@@ -136,9 +99,11 @@ public class SearchActivity extends BaseActivity implements CharSearchPresenter.
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (response.body().getDatas().size() > 0) {
                 mList.addAll(response.body().getDatas());
+                searchListRecycler.setVisibility(View.VISIBLE);
+                tvNoContent.setVisibility(View.GONE);
             } else {
-                springView.setVisibility(View.GONE);
                 tvNoContent.setVisibility(View.VISIBLE);
+                searchListRecycler.setVisibility(View.GONE);
             }
             adapter.notifyDataSetChanged();
         }

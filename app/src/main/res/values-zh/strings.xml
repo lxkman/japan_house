@@ -621,4 +621,9 @@
     <string name="dengluhoukejingxingpinlun">登录后可进行评论</string>
     <string name="name_max_char">昵称最多输入20字</string>
     <string name="activity_rental_details_success">已通过</string>
+    <string name="input_content">请输入内容</string>
+    <string name="user_agreement">请阅读用户协议</string>
+    <string name="input_select">请选择</string>
+    <string name="input_title">请输入问题标题</string>
+    <string name="input_qppraise_content">请输入评价内容</string>
 </resources>

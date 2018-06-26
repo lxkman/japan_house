@@ -58,6 +58,7 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
                   intent.putExtra("huji",datasBean.getCensusRegisterJpn());
                   intent.putExtra("cailiao",datasBean.getMaterialsJpn());
                   intent.putExtra("age",datasBean.getAdmissionRequirementsJpn());
+                  intent.putExtra("phone",datasBean.getHotLineJpn());
               }else{
                   intent.putExtra("id",datasBean.getId());
                   intent.putExtra("name",datasBean.getNameCn());
@@ -68,6 +69,7 @@ public class Daikuan_Adapter extends RecyclerView.Adapter<Daikuan_Adapter.ViewHo
                   intent.putExtra("shijian",datasBean.getPaymentScheduleCn());
                   intent.putExtra("huji",datasBean.getCensusRegisterCn());
                   intent.putExtra("age",datasBean.getAdmissionRequirementsCn());
+                  intent.putExtra("phone",datasBean.getHotLineCn());
               }
 
               context.startActivity(intent);

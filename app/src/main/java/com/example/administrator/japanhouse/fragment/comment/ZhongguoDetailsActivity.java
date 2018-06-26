@@ -452,7 +452,7 @@ public class ZhongguoDetailsActivity extends BaseActivity {
                 //设置动画
                 .setAnimation(R.style.Alpah_aniamtion)
                 //设置dialog的宽高
-                .setWidthHeightpx(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .setWidthHeightpx(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 //设置触摸dialog外围是否关闭
                 .isOnTouchCanceled(true)
                 //设置监听事件

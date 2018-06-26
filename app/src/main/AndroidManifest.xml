@@ -161,10 +161,12 @@
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".fragment.home.ui.activity.QuestionActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".fragment.home.ui.activity.QuizActivity"/>
         <activity android:name=".fragment.home.ui.activity.WendaItemActivity"/>
-        <activity android:name=".fragment.home.ui.activity.SearchActivity"/>
+        <activity android:name=".fragment.home.ui.activity.SearchActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".fragment.home.ui.activity.ZhinengActivity"/>
         <activity android:name=".fragment.home.ui.activity.ToutiaoActivity"/>
         <activity android:name=".fragment.home.ui.activity.TouDetailActivity"/>

@@ -17,20 +17,20 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.SimpleBaseAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.HotSearchBean;
 import com.example.administrator.japanhouse.fragment.home.ui.utils.flow;
+import com.example.administrator.japanhouse.model.TopSearchHintBean;
+import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
 import com.example.administrator.japanhouse.view.FluidLayout;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends BaseActivity implements View.OnClickListener {
-    private String mNames[] = {
-            "房价", "群租房", "买房",
-            "卖房", "北京房", "南京房"
-    };
+public class SearchActivity extends BaseActivity implements View.OnClickListener, MainSearchPresenter.MainSearchCallBack {
     private EditText sou;
     private TextView beak;
     private flow flowLayout;
@@ -43,46 +43,20 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private SimpleBaseAdapter adapter;
     private List<String> historyDatas;
 
+    private MainSearchPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search2);
 
+        presenter = new MainSearchPresenter(this, this);
+        presenter.getHotSearchData(1, 8);
+
         initView();
     }
 
     private void initView() {
-
-        fff = (FluidLayout) findViewById(R.id.search_recycler);
-        fff.removeAllViews();
-        for (int i = 0; i < mNames.length; i++) {
-            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
-            tv.setText(mNames[i]);
-            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(12, 12, 12, 12);
-            fff.addView(tv, params);
-            final int finalI = i;
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(SearchActivity.this, QuestionActivity.class);
-                    intent.putExtra("searchText", mNames[finalI]);
-                    startActivity(intent);
-
-                    if (historyDatas != null) {
-                        historyDatas.add(0, mNames[finalI]);
-                    } else {
-                        List<String> arrayList = new ArrayList();
-                        arrayList.add(mNames[finalI]);
-                        CacheUtils.put(Constants.SEARCH_WD_HISTORY, arrayList);
-                    }
-                    queryList();
-                }
-            });
-        }
 
         sou = (EditText) findViewById(R.id.sou);
         beak = (TextView) findViewById(R.id.beak);
@@ -147,6 +121,39 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         adapter.notifyDataSetChanged();
     }
 
+    private void hotTag(final List<HotSearchBean.DatasEntity> bean){
+        fff = (FluidLayout) findViewById(R.id.search_recycler);
+        fff.removeAllViews();
+        for (int i = 0; i < bean.size(); i++) {
+            final TextView tv = (TextView) View.inflate(mContext, R.layout.item_hot_search, null);
+            tv.setText(bean.get(i).getTagText());
+            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            fff.addView(tv, params);
+            final int finalI = i;
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(SearchActivity.this, QuestionActivity.class);
+                    intent.putExtra("searchText", bean.get(finalI).getTagText());
+                    startActivity(intent);
+
+                    if (historyDatas != null) {
+                        historyDatas.add(0, bean.get(finalI).getTagText());
+                    } else {
+                        List<String> arrayList = new ArrayList();
+                        arrayList.add(bean.get(finalI).getTagText());
+                        CacheUtils.put(Constants.SEARCH_WD_HISTORY, arrayList);
+                    }
+                    queryList();
+                }
+            });
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -162,4 +169,17 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    @Override
+    public void getSearchHint(Response<TopSearchHintBean> response) {
+
+    }
+
+    @Override
+    public void getHotSearchData(Response<HotSearchBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                hotTag(response.body().getDatas());
+            }
+        }
+    }
 }

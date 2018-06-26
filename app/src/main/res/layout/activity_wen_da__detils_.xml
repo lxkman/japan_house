@@ -58,7 +58,6 @@
                     android:layout_marginRight="15dp"
                     android:textSize="15sp"
                     android:id="@+id/title"
-                    android:text="动态标题内容，标题，标题"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -78,7 +77,6 @@
                     <TextView
                         android:layout_marginLeft="10dp"
                         android:textSize="14sp"
-                        android:text="2018.01.11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/time"
@@ -95,7 +93,7 @@
                         android:layout_toLeftOf="@+id/ti_name"
                         android:layout_marginLeft="10dp"
                         android:textSize="14sp"
-                        android:text="提问人："
+                        android:text="@string/string_tiwenren"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         />
@@ -110,7 +108,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:text="北京搜狐焦点网为购房者提供北京房产信息、家居装修资讯，北京房产楼盘详情、买房流程、业主论坛、家居装修等全面内容信息，北京搜狐焦点网互联网的购房平台"
                         />
                 </LinearLayout>
 

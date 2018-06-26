@@ -627,4 +627,5 @@
     <string name="input_select">请选择</string>
     <string name="input_title">请输入问题标题</string>
     <string name="input_qppraise_content">请输入评价内容</string>
+    <string name="string_tiwenren">提问人：</string>
 </resources>

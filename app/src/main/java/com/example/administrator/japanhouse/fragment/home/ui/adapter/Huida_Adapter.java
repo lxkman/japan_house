@@ -43,7 +43,7 @@ public class Huida_Adapter extends RecyclerView.Adapter<Huida_Adapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context, WenDa_Detils_Activity.class);
-                intent.putExtra("askid",list.get(position).getId());
+                intent.putExtra("askid",list.get(position).getAskId());
                 intent.putExtra("title",list.get(position).getDescription());
                 context.startActivity(intent);
             }

@@ -615,4 +615,7 @@
     <string name="kaipamtongzhidingyuechenggong">开盘通知订阅成功，此房源一旦开盘，我们将以消息提醒您，请您注意查收~</string>
     <string name="ninyijingdingyueguole">您已经订阅过了</string>
     <string name="qingxiandenglu">请先登录</string>
+    <string name="renchakan">人查看</string>
+    <string name="qingshurupinlunneirong">请输入评论内容</string>
+    <string name="dengluhoukejingxingpinlun">登录后可进行评论</string>
 </resources>

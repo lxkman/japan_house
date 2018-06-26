@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.bean.TouDetailsBean;
 import com.example.administrator.japanhouse.bean.TouListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.ToutiaoAdapter;
@@ -30,7 +31,7 @@ import com.lzy.okgo.model.Response;
 
 import java.util.List;
 
-public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener,ToutiaoAdapter.OnItemPraiseListener {
+public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener, ToutiaoAdapter.OnItemPraiseListener {
 
     private ImageView img_beak;
     private TextView title;
@@ -45,6 +46,11 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
     private String token;
 
     private TopLinePresenter presenter;
+    private String contentCn;
+    private String contentJpn;
+    private String createTime;
+    private String titleCn;
+    private String titleJpn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +58,38 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_tou_detail);
 
         presenter = new TopLinePresenter();
-
         initView();
+        initTouNet();
         initplNet();
     }
 
+    private void initTouNet() {
+        HttpParams params = new HttpParams();
+        params.put("tId", tid + "");
+        OkGo.<TouDetailsBean>post(MyUrls.BASEURL + "/app/topline/toplineinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<TouDetailsBean>(this, TouDetailsBean.class) {
+                    @Override
+                    public void onSuccess(Response<TouDetailsBean> response) {
+                        int code = response.code();
+                        TouDetailsBean TouDetailsBean = response.body();
+                        if (code == 200 && TouDetailsBean.getCode().equals("200")) {
+                            contentCn = TouDetailsBean.getDatas().getContentCn();
+                            contentJpn = TouDetailsBean.getDatas().getContentJpn();
+                            createTime = TouDetailsBean.getDatas().getCreateTime();
+                            titleCn = TouDetailsBean.getDatas().getTitleCn();
+                            titleJpn = TouDetailsBean.getDatas().getTitleJpn();
+                            boolean ja = MyUtils.isJa();
+                            title.setText(ja?titleCn:titleJpn);
+                            time.setText(MyUtils.getDateToStringH(createTime+""));
+                            neirong.setText(ja?contentCn:contentJpn);
+                        }
+                    }
+                });
+    }
+
     private void initView() {
-        String titleValue = getIntent().getStringExtra("title");
-        String timeValue = getIntent().getStringExtra("time");
-        String contentValue = getIntent().getStringExtra("content");
         tid = getIntent().getStringExtra("Tid");
 
         img_beak = (ImageView) findViewById(R.id.img_beak);
@@ -75,9 +104,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
         send.setOnClickListener(this);
         biaoqing.setOnClickListener(this);
 
-        title.setText(titleValue);
-        time.setText(timeValue+"");
-        neirong.setText(contentValue);
+
 
         ed_pinglun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +121,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.img_beak:
                 finish();
                 break;
@@ -102,30 +129,31 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                 if (MyUtils.isLogin(this)) {
                     //获取输入框信息
                     pinglun = ed_pinglun.getText().toString();
-                    if(!TextUtils.isEmpty(pinglun)){
+                    if (!TextUtils.isEmpty(pinglun)) {
                         initNet();
-                    }else{
-                        Toast.makeText(this,"请输入评论内容",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this,getResources().getString(R.string.qingshurupinlunneirong) , Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(TouDetailActivity.this, "登录后可进行评论", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TouDetailActivity.this,getResources().getString(R.string.dengluhoukejingxingpinlun), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
 
                 break;
             case R.id.biaoqing:
-                Toast.makeText(this,"表情",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "表情", Toast.LENGTH_SHORT).show();
                 break;
 
         }
     }
+
     //评论列表
     private void initplNet() {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         HttpParams params = new HttpParams();
         params.put("token", token);
-        params.put("tId", tid+"");
-        params.put("pageNo","1");
+        params.put("tId", tid + "");
+        params.put("pageNo", "1");
         OkGo.<TouListBean>post(MyUrls.BASEURL + "/app/topline/commentslist")
                 .tag(this)
                 .params(params)
@@ -134,25 +162,26 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                     public void onSuccess(Response<TouListBean> response) {
                         int code = response.code();
                         TouListBean TouListBean = response.body();
-                        if (code==200&&TouListBean.getCode().equals("200")){
+                        if (code == 200 && TouListBean.getCode().equals("200")) {
                             List<com.example.administrator.japanhouse.bean.TouListBean.DatasBean> datas = TouListBean.getDatas();
                             //加载适配器
                             detail_recy.setLayoutManager(new LinearLayoutManager(TouDetailActivity.this));
-                            detail_recy.addItemDecoration(new DividerItemDecoration(TouDetailActivity.this,DividerItemDecoration.VERTICAL));
+                            detail_recy.addItemDecoration(new DividerItemDecoration(TouDetailActivity.this, DividerItemDecoration.VERTICAL));
                             detail_recy.setNestedScrollingEnabled(false);
-                            ToutiaoAdapter touAdapter = new ToutiaoAdapter(TouDetailActivity.this,datas);
+                            ToutiaoAdapter touAdapter = new ToutiaoAdapter(TouDetailActivity.this, datas);
                             touAdapter.setOnItemPraiseListener(TouDetailActivity.this);
                             detail_recy.setAdapter(touAdapter);
                         }
                     }
                 });
     }
+
     //发表评论
     private void initNet() {
         HttpParams params = new HttpParams();
         params.put("token", token);
-        params.put("tId", tid+"");
-        params.put("tContent",pinglun);
+        params.put("tId", tid + "");
+        params.put("tContent", pinglun);
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/topline/insertcomments")
                 .tag(this)
                 .params(params)
@@ -161,7 +190,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                     public void onSuccess(Response<SuccessBean> response) {
                         int code = response.code();
                         SuccessBean successBean = response.body();
-                        if (code==200&&successBean.getCode().equals("200")){
+                        if (code == 200 && successBean.getCode().equals("200")) {
                             Toast.makeText(TouDetailActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
                             initplNet();
                         }

@@ -47,7 +47,7 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
         ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.neirong.setText(isJa ? list.get(viewType).getTitleJpn() : list.get(viewType).getTitleCn());
         viewHolder.time.setText(MyUtils.getDateToStringH(list.get(viewType).getCreateTime()+""));
-        viewHolder.person.setText(list.get(viewType).getReadNum()+"人查看");
+        viewHolder.person.setText(list.get(viewType).getReadNum()+context.getResources().getString(R.string.renchakan));
         return viewHolder;
     }
 
@@ -57,9 +57,6 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
          @Override
          public void onClick(View view) {
              Intent intent = new Intent(context, TouDetailActivity.class);
-             intent.putExtra("title",isJa ? list.get(position).getTitleJpn() : list.get(position).getTitleCn());
-             intent.putExtra("time",MyUtils.getDateToStringH(""+list.get(position).getCreateTime()));
-             intent.putExtra("content",isJa ? list.get(position).getContentJpn() : list.get(position).getContentCn());
              intent.putExtra("Tid",list.get(position).getId()+"");
               context.startActivity(intent);
          }

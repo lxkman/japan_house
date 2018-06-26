@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,6 +65,11 @@ public class ToutiaoActivity extends BaseActivity implements View.OnClickListene
         xinxi.setOnClickListener(this);
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

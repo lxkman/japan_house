@@ -186,7 +186,6 @@ public class RegisterActivity extends UMLoginActivity {
                     public void onSuccess(Response<SuccessBean> response) {
                         int code = response.code();
                         SuccessBean successBean = response.body();
-                        Toast.makeText(RegisterActivity.this, successBean.getMsg(), Toast.LENGTH_SHORT).show();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                             Toast.makeText(RegisterActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
@@ -239,7 +238,7 @@ public class RegisterActivity extends UMLoginActivity {
             }else {
                 HttpParams params = new HttpParams();
                 params.put("tPhone", edtPhone.getText().toString());
-                params.put("code","1234");
+                params.put("code",edtYanzhengCode.getText().toString());
                 params.put("passWord", edtPass.getText().toString());
                 OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/user/registered")
                         .tag(this)
@@ -253,10 +252,16 @@ public class RegisterActivity extends UMLoginActivity {
                                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                    finish();
+                                    return;
                                 }else if (successBean.getCode().equals("-1")){
                                     Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }else if (successBean.getCode().equals("207")){
                                     Toast.makeText(RegisterActivity.this, "此号码已被注册", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }else {
+                                    Toast.makeText(RegisterActivity.this, successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }
                             }
                         });

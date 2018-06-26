@@ -617,4 +617,7 @@
     <string name="kaipamtongzhidingyuechenggong">販売が開始の知らせをご購読の成功，販売が始まるとメッセージでお知らせしますのでご注意ください~</string>
     <string name="ninyijingdingyueguole">ご既に購読しています</string>
     <string name="qingxiandenglu">先に登録してください</string>
+    <string name="renchakan"> 人の読書</string>
+    <string name="qingshurupinlunneirong">コメントの内容を入力してください</string>
+    <string name="dengluhoukejingxingpinlun">コメントにログイン</string>
 </resources>

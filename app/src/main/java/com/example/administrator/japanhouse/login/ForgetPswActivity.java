@@ -129,7 +129,6 @@ public class ForgetPswActivity extends BaseActivity {
                     public void onSuccess(Response<SuccessBean> response) {
                         int code = response.code();
                         SuccessBean successBean = response.body();
-                        Toast.makeText(ForgetPswActivity.this, successBean.getMsg(), Toast.LENGTH_SHORT).show();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                             Toast.makeText(ForgetPswActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
@@ -138,6 +137,7 @@ public class ForgetPswActivity extends BaseActivity {
                         }else if (successBean.getCode().equals("500")){
                             Toast.makeText(ForgetPswActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
                         }else {
+                            Toast.makeText(ForgetPswActivity.this,successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -218,7 +218,7 @@ public class ForgetPswActivity extends BaseActivity {
             }else {
                 HttpParams params = new HttpParams();
                 params.put("phone", edtPhone.getText().toString());
-                params.put("msg","1234");
+                params.put("msg",edtYanzhengCode.getText().toString());
                 params.put("newPassword", edtPass.getText().toString());
                 OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/user/forgotpassword")
                         .tag(this)
@@ -232,10 +232,16 @@ public class ForgetPswActivity extends BaseActivity {
                                     Toast.makeText(ForgetPswActivity.this, successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
                                     finish();
                                     startActivity(new Intent(ForgetPswActivity.this, LoginActivity.class));
+                                    return;
                                 }else if (successBean.getCode().equals("-1")){
                                     Toast.makeText(ForgetPswActivity.this,successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }else if (successBean.getCode().equals("207")){
                                     Toast.makeText(ForgetPswActivity.this, successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }else {
+                                    Toast.makeText(ForgetPswActivity.this, successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }
                             }
                         });

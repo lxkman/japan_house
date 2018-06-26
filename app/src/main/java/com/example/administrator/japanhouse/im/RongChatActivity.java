@@ -266,8 +266,6 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
     }
 
     private void showZhDialog() {
-        ImManager.sendImgAndText(targetId, "标题", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容","https://hwdc-huabei.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180621161322.jpg", "");
-
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         final BaseDialog
                 dialog = builder.setViewId(R.layout.dialog_chat_details_zh)

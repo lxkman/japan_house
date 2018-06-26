@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.login;
 
 import android.os.Bundle;
+import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.example.administrator.japanhouse.R;
@@ -14,6 +15,7 @@ public class PrivateActivity extends BaseActivity {
 
     @BindView(R.id.back_img)
     ImageView backImg;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

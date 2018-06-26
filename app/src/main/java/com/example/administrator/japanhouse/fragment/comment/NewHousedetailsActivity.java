@@ -190,7 +190,6 @@ public class NewHousedetailsActivity extends BaseActivity {
         ultimateBar.setImmersionBar(false);
         setContentView(R.layout.activity_lishi_new_house);
         ButterKnife.bind(this);
-
         initDetailsNet();
         //猜你喜欢
         initLoveRecycler();

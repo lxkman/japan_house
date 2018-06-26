@@ -42,7 +42,6 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     private Button shenqing;
     private ImageView kefu;
     private boolean flag=true;
-    String tel="17600000000";
     private TextView yuexi;
     private TextView price;
     private TextView nianxian;
@@ -51,6 +50,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
     private TextView sx_cailiao;
     private TextView nl_yaoyiu;
 
+    private String phone;
 
     private int id;
 
@@ -77,6 +77,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
         String huji = getIntent().getStringExtra("huji");
         String cailiao = getIntent().getStringExtra("cailiao");
         String age = getIntent().getStringExtra("age");
+        phone = getIntent().getStringExtra("phone");
 
 
         img_beak = (ImageView) findViewById(R.id.img_beak);
@@ -164,7 +165,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
             public void onClick(View view) {
                 dialog.dismiss();
                 Intent dialIntent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:" + tel));//跳转到拨号界面，同时传递电话号码
+                        Uri.parse("tel:" + phone));//跳转到拨号界面，同时传递电话号码
                 startActivity(dialIntent);
             }
         });
@@ -225,7 +226,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
                 String name = uname.getText().toString();
                 String tel = utel.getText().toString();
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(tel)) {
-                    Toast.makeText(DaikuanDetilsActivity.this, "输入框为空", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(DaikuanDetilsActivity.this, getString(R.string.input_content));
                 } else {
                     if (flag) {
                         HttpParams params = new HttpParams();
@@ -249,7 +250,7 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
 
                         dialog.dismiss();
                     } else {
-                        Toast.makeText(DaikuanDetilsActivity.this, "请阅读用户协议", Toast.LENGTH_SHORT).show();
+                        TUtils.showFail(DaikuanDetilsActivity.this, getString(R.string.user_agreement));
                     }
                 }
 

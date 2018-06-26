@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.example.administrator.japanhouse"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
@@ -218,7 +218,7 @@
         <activity android:name=".fragment.home.HaiwaiListActivity"/>
         <activity android:name=".fragment.home.HomeMapActivity"/>
         <activity android:name=".fragment.home.MapSearchActivity"
-                  android:windowSoftInputMode="stateHidden|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".fragment.home.FangjiadituActivity"/>
         <activity android:name=".fragment.home.YanjiuListActivity"/>
         <activity android:name=".fragment.home.ShendengFirstStepActivity"/>
@@ -415,7 +415,7 @@
         <activity android:name=".activity.FreeApartmentDetailsActivity"/>
         <activity android:name=".fragment.home.ZhaoTuanDiSearchActivity"/>
         <activity android:name=".fragment.home.LocationActivity2"
-                  android:windowSoftInputMode="stateHidden|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".fragment.home.SydcBigLiebiaoActivity"/>
         <activity android:name=".fragment.home.ZufangBigListActivity"/>
         <activity android:name=".activity.WebActivity"/>

@@ -230,11 +230,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         rbMine.setChecked(true);
                         break;
                 }
-
                 startActivity(new Intent(this, LoginActivity.class));
                 return;
             }
-
             mViewPager.setCurrentItem(1);
         }
     }

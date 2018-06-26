@@ -254,18 +254,18 @@ public class HomeFragment extends BaseFragment {
         if (data == null) {
             return;
         }
-        int cityId = data.getIntExtra("cityId", 0);
-        int cityId2 = CacheUtils.get("cityId");
-        if (cityId == cityId2) {
-            return;
-        }
-        CacheUtils.put("cityId", cityId);
         String cityName = data.getStringExtra("cityName");
         if (cityName != null && cityName.length() <= 3) {
             locationTv.setText(cityName);
         } else if (cityName != null && cityName.length() > 3) {
             locationTv.setText(cityName.substring(0, 2) + "...");
         }
+        int cityId = data.getIntExtra("cityId", 0);
+        int cityId2 = CacheUtils.get("cityId");
+        if (cityId == cityId2) {
+            return;
+        }
+        CacheUtils.put("cityId", cityId);
         initData();
     }
 

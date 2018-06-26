@@ -176,6 +176,9 @@ public class HomeMapActivity extends BaseActivity {
                 break;
             case R.id.title_message_iv:
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                Intent intent1=new Intent();
+                intent1.putExtra("data","finish");
+                setResult(100,intent1);
                 finish();
                 break;
         }

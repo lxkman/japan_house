@@ -347,7 +347,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 startActivity(intent);
                 break;
             case R.id.img_dingwei:
-                startActivity(new Intent(mContext, HomeMapActivity.class));
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
                 break;
             case R.id.img_message:
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -362,6 +362,14 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             case R.id.shendeng_more_tv:
                 startActivity(new Intent(mContext, ShendengListActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==100){
+            finish();
         }
     }
 }

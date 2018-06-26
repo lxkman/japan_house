@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,18 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.ManShouBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.TudidetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
+import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
+import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -71,7 +83,7 @@ public class ShoufangFragment extends BaseFragment {
                             return;
                         }
                         String code1 = ManShouBean.getCode();
-                        List<com.example.administrator.japanhouse.bean.ManShouBean.DatasBean> datas = ManShouBean.getDatas();
+                        final List<com.example.administrator.japanhouse.bean.ManShouBean.DatasBean> datas = ManShouBean.getDatas();
                         if (datas==null){
                             return;
                         }
@@ -85,8 +97,79 @@ public class ShoufangFragment extends BaseFragment {
                             mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                    Intent intent=new Intent(mContext,NewHousedetailsActivity.class);
-                                    startActivity(intent);
+                                    if (!TextUtils.isEmpty(datas.get(position).getHType())) {
+                                        if (TextUtils.equals(datas.get(position).getHType(), "0")) { //二手房
+                                            Intent intent = new Intent(mContext, OldHousedetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "1")) { //新房
+                                            Intent intent = new Intent(mContext, NewHousedetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "2")) { //租房
+                                            Intent intent = new Intent(mContext, ZuHousedetailsActivity.class);
+
+                                            if (TextUtils.equals(datas.get(position).getShType() + "", "0")) { //办公室出租
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                intent.putExtra("houseType", "bangongshi");
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "1")) { //商铺出租
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                intent.putExtra("houseType", "shangpu");
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "2")) { //别墅
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                intent.putExtra("houseType", "bieshu");
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "3")) { //二层公寓
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                intent.putExtra("houseType", "erceng");
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "4")) { //学生公寓
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                intent.putExtra("houseType", "xuesheng");
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "5")) { //多层公寓
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                intent.putExtra("houseType", "duoceng");
+                                            }
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "3")) {  //土地
+                                            Intent intent = new Intent(mContext, TudidetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "4")) {  //别墅
+                                            Intent intent = new Intent(mContext, BieshudetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "5")) {  //商业地产
+                                            if (TextUtils.equals(datas.get(position).getShType() + "", "0")) {    //酒店
+                                                Intent intent = new Intent(mContext, JiudianDetailsActivity.class);
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                startActivity(intent);
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "1")) { //高尔夫球场
+                                                Intent intent = new Intent(mContext, GaoerfuDetailsActivity.class);
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                startActivity(intent);
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "2")) { //写字楼
+                                                Intent intent = new Intent(mContext, XiezilouDetailsActivity.class);
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                startActivity(intent);
+                                            } else if (TextUtils.equals(datas.get(position).getShType() + "", "3")) { //商铺
+                                                Intent intent = new Intent(mContext, ShangpuDetailsActivity.class);
+                                                intent.putExtra("houseId", datas.get(position).getId() + "");
+                                                startActivity(intent);
+                                            }
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "6")) { //中国房源
+                                            Intent intent = new Intent(mContext, ZhongguoDetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "7")) {  //海外房源
+                                            Intent intent = new Intent(mContext, HaiWaiDetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        } else if (TextUtils.equals(datas.get(position).getHType(), "8")) {  //找团地
+                                            Intent intent = new Intent(mContext, XiaoQuDetailsActivity.class);
+                                            intent.putExtra("houseId", datas.get(position).getId() + "");
+                                            startActivity(intent);
+                                        }
+
+                                    }
                                 }
                             });
                         } else {

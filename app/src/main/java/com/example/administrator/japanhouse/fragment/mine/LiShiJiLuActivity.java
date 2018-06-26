@@ -18,6 +18,7 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.HouseHistoryAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity;
 import com.example.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
@@ -33,11 +34,14 @@ import com.example.administrator.japanhouse.fragment.home.BieshudetailsActivity;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.HouseRecordListBean;
 import com.example.administrator.japanhouse.presenter.HouseRecordPresenter;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -258,6 +262,12 @@ public class LiShiJiLuActivity extends BaseActivity implements HouseRecordPresen
                 }
             });
         }
+    }
+
+    @Override
+    public void finish() {
+        EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
+        super.finish();
     }
 
     @OnClick(R.id.back_img)

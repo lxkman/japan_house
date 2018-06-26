@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -47,8 +48,7 @@ import com.wevey.selector.dialog.DialogInterface;
 import com.wevey.selector.dialog.NormalSelectionDialog;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -58,11 +58,7 @@ import java.util.Queue;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
+import id.zelory.compressor.Compressor;
 
 /**
  * 出租/出售
@@ -262,11 +258,29 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
 
                         if (imgPathList != null && imgPathList.size() > 0) {
                             for (int i = 0; i < imgPathList.size(); i++) {
-                                files.add(new File(BitmapUtil.compressImage(imgPathList.get(i), 100)));
+//                                files.add(new File(BitmapUtil.compressImage(imgPathList.get(i), 100)));
+                                try {
+                                    files.add(new Compressor(this)
+                                            .setMaxWidth(640)
+                                            .setMaxHeight(480)
+                                            .setQuality(75)
+                                            .compressToFile(new File(imgPathList.get(i))));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
 
                         if (videoPath != null && !"".equals(videoPath)) {
+
+//                            final LocalMediaConfig config = new LocalMediaConfig.Buidler()
+//                                    .setVideoPath(videoPath)
+//                                    .captureThumbnailsTime(1)
+//                                    .doH264Compress(new AutoVBRMode(18))
+//                                    .setFramerate(15)
+//                                    .build();
+//                            OnlyCompressOverBean onlyCompressOverBean = new LocalMediaCompress(config).startCompress();
+
                             files.add(new File(videoPath));
                             isHaveVideo = true;
                         } else {
@@ -274,7 +288,6 @@ public class RentalActivity extends BaseActivity implements PicRentalAdapter.onI
                         }
 
                         filePresenter.upFileRequest(files);
-
 
                     } else {
                         presenter.requestRental(etCall.getText().toString(),

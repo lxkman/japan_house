@@ -33,6 +33,7 @@ import com.example.administrator.japanhouse.presenter.UserPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SoftKeyboardTool;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.example.administrator.japanhouse.view.BaseSelectPopupWindow;
 import com.example.administrator.japanhouse.view.CircleImageView;
@@ -129,6 +130,25 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
         tvBirthday.setOnClickListener(this);
         initLunarPicker();//初始化时间选择器
         initListener();
+
+        et_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() >= 20) {
+                    TUtils.showFail(MyDataActivity.this, getString(R.string.name_max_char));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         EventBus.getDefault().register(this);
     }
@@ -229,6 +249,7 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 showCamera();
                 break;
             case R.id.tv_birthday:
+                SoftKeyboardTool.closeKeyboard2(this);
                 pvCustomLunar.show();
                 break;
         }

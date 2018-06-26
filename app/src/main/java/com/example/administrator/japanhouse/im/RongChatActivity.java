@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.model.AgentInfoBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserBean;
 import com.example.administrator.japanhouse.presenter.AppraiseManagerPresenter;
@@ -23,7 +25,9 @@ import com.example.administrator.japanhouse.presenter.FromPhonePresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.example.administrator.japanhouse.view.CircleImageView;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.lzy.okgo.model.Response;
 
@@ -59,6 +63,10 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
 
     private int state = 0; //0否 1是
 
+    private String avatar = "";
+
+    private String name;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,32 +82,33 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         targetId = getIntent().getData().getQueryParameter("targetId");
         presenter = new FromPhonePresenter(this, this);
         presenter.getUserPhone(targetId);
+        presenter.getManagerInfo(targetId);
 
         managerPresenter = new AppraiseManagerPresenter(this, this);
 
         //对方 昵称
-        String title = getIntent().getData().getQueryParameter("title");
+        name = getIntent().getData().getQueryParameter("title");
 
         String chat = SharedPreferencesUtils.getInstace(this).getStringPreference(Constants.CHAT, "");
         if (!TextUtils.isEmpty(chat)) {
             if (chat.equals(Constants.CHAT_DETAILS)) {
-                if (!TextUtils.isEmpty(title)) {
-                    this.title.setText(title);
+                if (!TextUtils.isEmpty(name)) {
+                    this.title.setText(name);
                 }
                 phone.setVisibility(View.GONE);
                 star.setVisibility(View.VISIBLE);
                 tvAppraise.setVisibility(View.VISIBLE);
             } else {
-                if (!TextUtils.isEmpty(title)) {
-                    this.title.setText(title);
+                if (!TextUtils.isEmpty(name)) {
+                    this.title.setText(name);
                 }
                 phone.setVisibility(View.VISIBLE);
                 star.setVisibility(View.GONE);
                 tvAppraise.setVisibility(View.GONE);
             }
         } else {
-            if (!TextUtils.isEmpty(title)) {
-                this.title.setText(title);
+            if (!TextUtils.isEmpty(name)) {
+                this.title.setText(name);
             }
             phone.setVisibility(View.VISIBLE);
             star.setVisibility(View.GONE);
@@ -213,6 +222,14 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         CheckBox rbColdness = dialog.getView(R.id.dialog_chat_lengdan);
         CheckBox rbMsgPartial = dialog.getView(R.id.dialog_chat_buquan);
 
+        TextView tvName = dialog.getView(R.id.dialog_chat_name);
+        tvName.setText("＜" + name + "＞のサービスが評価してください");
+
+        CircleImageView circleImageView = dialog.getView(R.id.dialog_chat_avatar);
+        Glide.with(this)
+                .load(avatar)
+                .into(circleImageView);
+
         final EditText editText = dialog.getView(R.id.dialog_chat_content);
 
         final RatingBarView ratingBarView = dialog.getView(R.id.dialog_chat_tatingbar);
@@ -257,6 +274,14 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         CheckBox rbNoMajor = dialog.getView(R.id.dialog_chat_zuanye);
         CheckBox rbColdness = dialog.getView(R.id.dialog_chat_lengdan);
         CheckBox rbMsgPartial = dialog.getView(R.id.dialog_chat_buquan);
+
+        TextView tvName = dialog.getView(R.id.dialog_chat_name);
+        tvName.setText("请对" + name + "对微聊服务作出评价");
+
+        CircleImageView circleImageView = dialog.getView(R.id.dialog_chat_avatar);
+        Glide.with(this)
+                .load(avatar)
+                .into(circleImageView);
 
         final EditText editText = dialog.getView(R.id.dialog_chat_content);
 
@@ -322,7 +347,22 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
     }
 
     @Override
-    public void appraiseManagerRequest(Response<NoDataBean> response) {
+    public void getManagerInfo(Response<AgentInfoBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().getBrokerinfo() != null) {
+                avatar = response.body().getDatas().getBrokerinfo().getPic();
+            }
+        }
+    }
 
+    @Override
+    public void appraiseManagerRequest(Response<NoDataBean> response) {
+        if (response != null && response.body() != null && response.body().getCode() != null) {
+            if (response.body().getCode().equals("200")) {
+                TUtils.showFail(this, getString(R.string.appraise_manager_success));
+            } else {
+                TUtils.showFail(this, getString(R.string.appraise_manager_fail));
+            }
+        }
     }
 }

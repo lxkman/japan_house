@@ -615,8 +615,8 @@
     <string name="appraise_manager_fail">评价失败</string>
     <string name="zhengzaidakaibaiduditu">百度地図を開いています</string>
     <string name="baidudituweianzhuang">百度地図はまだインストールさせていないまたはバージョンが低すぎます</string>
-    <string name="bianjiatongzhidingyuechenggong">価格変更のお知らせをご購読の成功，この物件の価格を変更するとメッセージでお知らせしますのでご注意ください~</string>
-    <string name="kaipamtongzhidingyuechenggong">販売が開始の知らせをご購読の成功，販売が始まるとメッセージでお知らせしますのでご注意ください~</string>
+    <string name="bianjiatongzhidingyuechenggong">価格変更のお知らせをご購読の成功~</string>
+    <string name="kaipamtongzhidingyuechenggong">販売が開始の知らせをご購読の成功~</string>
     <string name="ninyijingdingyueguole">ご既に購読しています</string>
     <string name="qingxiandenglu">先に登録してください</string>
     <string name="renchakan"> 人の読書</string>

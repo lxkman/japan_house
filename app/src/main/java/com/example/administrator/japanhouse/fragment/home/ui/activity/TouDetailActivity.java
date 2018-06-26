@@ -123,6 +123,8 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_beak:
+                Intent intent=getIntent();
+                setResult(1,intent);
                 finish();
                 break;
             case R.id.send:
@@ -145,6 +147,14 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent=getIntent();
+        setResult(1,intent);
+        finish();
     }
 
     //评论列表

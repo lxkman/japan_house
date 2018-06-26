@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.bean.TouTiaoListBean;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.TouDetailActivity;
+import com.example.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUtils;
@@ -58,7 +59,8 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
          public void onClick(View view) {
              Intent intent = new Intent(context, TouDetailActivity.class);
              intent.putExtra("Tid",list.get(position).getId()+"");
-              context.startActivity(intent);
+             ToutiaoActivity activity = (ToutiaoActivity) context;
+             activity.startActivityForResult(intent,1);
          }
      });
     }

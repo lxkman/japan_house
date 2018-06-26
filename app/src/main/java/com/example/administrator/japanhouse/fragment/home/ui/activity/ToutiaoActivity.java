@@ -56,6 +56,7 @@ public class ToutiaoActivity extends BaseActivity implements View.OnClickListene
                     });
     }
 
+
     private void initView() {
         img_beak = (ImageView) findViewById(R.id.img_beak);
         xinxi = (ImageView) findViewById(R.id.xinxi);
@@ -70,6 +71,9 @@ public class ToutiaoActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==1){
+            initNet();
+        }
     }
 
     @Override

@@ -106,8 +106,8 @@ public class GuidePageActivity extends BaseActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = View.inflate(GuidePageActivity.this, R.layout.item_guide, null);
             TextView tv_jinru = (TextView) view.findViewById(R.id.tv_jinru);
-            Log.d("GuidePagerAdapter", "datas.size():" + datas.size()+"---------");
-           if (position == datas.size() - 1) {
+            Log.d("GuidePagerAdapter", "datas.size():" + datas.size() + "---------");
+            if (position == datas.size() - 1) {
                 tv_jinru.setVisibility(View.VISIBLE);
             } else {
                 tv_jinru.setVisibility(View.GONE);

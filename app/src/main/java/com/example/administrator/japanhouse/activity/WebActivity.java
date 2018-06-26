@@ -26,6 +26,8 @@ public class WebActivity extends BaseActivity {
     TextView webTitle;
     private WebView webView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

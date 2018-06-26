@@ -418,6 +418,7 @@
                   android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".fragment.home.SydcBigLiebiaoActivity"/>
         <activity android:name=".fragment.home.ZufangBigListActivity"/>
+        <activity android:name=".activity.WebActivity"/>
     </application>
 
 </manifest>

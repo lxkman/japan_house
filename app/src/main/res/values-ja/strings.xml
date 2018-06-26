@@ -610,7 +610,7 @@
     <string name="get_code_fail">请输入手机号</string>
     <string name="success_sq">申请成功</string>
     <string name="fail_sq">申请失败</string>
-    <string name="manager_main">主营:</string>
+    <string name="manager_main">主要な経営:</string>
     <string name="appraise_manager_success">评价成功</string>
     <string name="appraise_manager_fail">评价失败</string>
     <string name="zhengzaidakaibaiduditu">百度地図を開いています</string>
@@ -624,4 +624,9 @@
     <string name="dengluhoukejingxingpinlun">コメントにログイン</string>
     <string name="name_max_char">昵称最多输入20字</string>
     <string name="activity_rental_details_success">已通过</string>
+    <string name="input_content">请输入内容</string>
+    <string name="user_agreement">请阅读用户协议</string>
+    <string name="input_select">请选择</string>
+    <string name="input_title">请输入问题标题</string>
+    <string name="input_qppraise_content">请输入评价内容</string>
 </resources>

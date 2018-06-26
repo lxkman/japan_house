@@ -9,9 +9,11 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.model.ChatSearchBean;
 
 import java.util.List;
@@ -22,14 +24,14 @@ import java.util.List;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     private Context context;
-    List<ChatSearchBean.DatasBean>list;
-    private  Boolean isJa;
+    List<ChatSearchBean.DatasBean> list;
     private String searchContent;
 
     public SearchListAdapter(Context context, List<ChatSearchBean.DatasBean> list) {
         this.context = context;
         this.list = list;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.search_list_item, parent, false);
@@ -37,12 +39,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         return viewHolder;
     }
 
-    public void setSearchContent(String searchContent){
+    public void setSearchContent(String searchContent) {
         this.searchContent = searchContent;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         if (list != null && list.size() > 0 && searchContent != null) {
             int indexOf = list.get(position).getBrokerName().indexOf(searchContent);
@@ -56,22 +58,31 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 holder.tv_Search_list.setText(list.get(position).getBrokerName());
             }
 
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImManager.enterChat(context, list.get(position).getId() + "", list.get(position).getBrokerName(), list.get(position).getPic());
+                }
+            });
         }
-
-
     }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public View view;
         public TextView tv_Search_list;
+        public LinearLayout layout;
+
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             tv_Search_list = (TextView) itemView.findViewById(R.id.tv_Search_list);
+            layout = (LinearLayout) itemView.findViewById(R.id.layout_Search_list);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.home.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.example.administrator.japanhouse.bean.HuiDaBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -41,8 +43,6 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         initView();
 
     }
-
-
 
     private void initView() {
         askid = getIntent().getIntExtra("askid", 0);
@@ -99,7 +99,13 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.tijiao:
-                intdataview();
+                if (!TextUtils.isEmpty(ed_wen_title.getText().toString()) && !TextUtils.isEmpty(ed_wen_content.getText().toString())) {
+                    intdataview();
+                } else if (TextUtils.isEmpty(ed_wen_title.getText().toString())) {
+                    TUtils.showFail(this, getString(R.string.input_title));
+                } else if (TextUtils.isEmpty(ed_wen_content.getText().toString())) {
+                    TUtils.showFail(this, getString(R.string.input_content));
+                }
                 break;
         }
     }

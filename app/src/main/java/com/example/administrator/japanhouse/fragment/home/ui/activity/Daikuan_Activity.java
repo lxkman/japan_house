@@ -54,7 +54,7 @@ public class Daikuan_Activity extends BaseActivity implements View.OnClickListen
     private RelativeLayout liner;
     private RecyclerView toutiao_recycler;
     private Daikuan_Adapter daikuan_adapter;
-    String tel="17600000000";
+    String tel="";
     private int pageNo=1;
     List<LoansBean.DatasBean>list=new ArrayList<>();
     @Override
@@ -65,8 +65,6 @@ public class Daikuan_Activity extends BaseActivity implements View.OnClickListen
         initView();
         intdata();
     }
-
-
 
     private void initView() {
         img_beak = (ImageView) findViewById(R.id.img_beak);
@@ -203,7 +201,7 @@ public class Daikuan_Activity extends BaseActivity implements View.OnClickListen
         dialog.show();
         TextView text_sure = dialog.getView(R.id.text_sure);
         final TextView tv_content = dialog.getView(R.id.tv_content);
-
+        tv_content.setText(tel);
         TextView text_pause = dialog.getView(R.id.text_pause);
         //知道了
         text_sure.setOnClickListener(new View.OnClickListener() {

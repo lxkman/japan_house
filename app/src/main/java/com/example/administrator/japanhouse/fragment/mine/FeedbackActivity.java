@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -83,7 +84,11 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.act_feedback_submit:
-                presenter.requestFeedBack(etMsg.getText().toString());
+                if (!TextUtils.isEmpty(etMsg.getText().toString())) {
+                    presenter.requestFeedBack(etMsg.getText().toString());
+                } else {
+                    TUtils.showFail(this, getString(R.string.input_content));
+                }
                 break;
         }
     }

@@ -87,7 +87,7 @@ public class LoansBean {
         private String censusRegisterJpn;
         private String materialsCn;
         private String materialsJpn;
-        private Object hotLineCn;
+        private String hotLineCn;
         private String hotLineJpn;
         private int isDeleted;
 
@@ -243,11 +243,11 @@ public class LoansBean {
             this.materialsJpn = materialsJpn;
         }
 
-        public Object getHotLineCn() {
+        public String getHotLineCn() {
             return hotLineCn;
         }
 
-        public void setHotLineCn(Object hotLineCn) {
+        public void setHotLineCn(String hotLineCn) {
             this.hotLineCn = hotLineCn;
         }
 

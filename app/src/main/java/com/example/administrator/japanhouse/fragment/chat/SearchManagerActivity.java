@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.model.ManagerBean;
 import com.example.administrator.japanhouse.presenter.SearchManagerPresenter;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -148,7 +149,11 @@ public class SearchManagerActivity extends BaseActivity implements SearchManager
             }
 
             //做搜索到的操作
-
+            if (response.body().getDatas() != null && response.body().getDatas().getBrokerinfo() != null) {
+            }
+            ImManager.enterChat(this, response.body().getDatas().getBrokerinfo().getId() + "",
+                    response.body().getDatas().getBrokerinfo().getBrokerName(),
+                    response.body().getDatas().getBrokerinfo().getPic());
         }
     }
 }

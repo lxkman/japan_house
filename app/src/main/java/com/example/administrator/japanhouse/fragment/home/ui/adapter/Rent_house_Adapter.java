@@ -62,7 +62,7 @@ public class Rent_house_Adapter extends RecyclerView.Adapter<Rent_house_Adapter.
             } else if (TextUtils.equals(list.get(position).getAuditState(), "1")) {
                 holder.stateJa.setText(context.getString(R.string.activity_rental_details_refused));
             } else if (TextUtils.equals(list.get(position).getAuditState(), "2")) {
-
+                holder.stateJa.setText(context.getString(R.string.activity_rental_details_success));
             }
         } else {
             holder.stateJa.setVisibility(View.GONE);

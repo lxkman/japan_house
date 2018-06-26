@@ -12,6 +12,8 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 
@@ -34,13 +36,28 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     Button btnLoginout;
     @BindView(R.id.activity_zui_jin)
     LinearLayout activityZuiJin;
-    private boolean isClose;
+    private String isClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
         ButterKnife.bind(this);
+
+        if (CacheUtils.get(Constants.MANAGER_T) == null) {
+            isClose = "0";
+            CacheUtils.put(Constants.MANAGER_T, isClose);
+        } else {
+            isClose = CacheUtils.get(Constants.MANAGER_T);
+        }
+
+        if (isClose.equals("1")) {
+            ivSwitch.setImageResource(R.drawable.button_green);
+        } else {
+            ivSwitch.setImageResource(R.drawable.button_normal);
+        }
+
         backImg.setOnClickListener(this);
         btnLoginout.setOnClickListener(this);
         ivSwitch.setOnClickListener(this);
@@ -102,12 +119,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.iv_switch:
-                if (isClose) {
-                    ivSwitch.setImageResource(R.drawable.button_green);
-                } else {
+                if (isClose.equals("1")) {
                     ivSwitch.setImageResource(R.drawable.button_normal);
+                    isClose = "0";
+                } else {
+                    ivSwitch.setImageResource(R.drawable.button_green);
+                    isClose = "1";
                 }
-                isClose = !isClose;
+                CacheUtils.put(Constants.MANAGER_T, isClose);
                 break;
             case R.id.ll_language:
                 startActivity(new Intent(this,LanguageActivity.class));

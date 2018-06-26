@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.model.AgentInfoBean;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -39,6 +40,20 @@ public class FromPhonePresenter {
                     @Override
                     public void onSuccess(Response<UserBean> response) {
                         callBack.getUserPhone(response);
+                    }
+                });
+    }
+
+    public void getManagerInfo(String brokerId){
+        HttpParams params = new HttpParams();
+        params.put("brokerId", brokerId);
+        OkGo.<AgentInfoBean>post(MyUrls.BASEURL + "/app/broker/getbrokerinfo")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<AgentInfoBean>(AgentInfoBean.class) {
+                    @Override
+                    public void onSuccess(Response<AgentInfoBean> response) {
+                        callBack.getManagerInfo(response);
                     }
                 });
     }
@@ -85,5 +100,6 @@ public class FromPhonePresenter {
 
     public interface PhoneCallBack {
         void getUserPhone(Response<UserBean> response);
+        void getManagerInfo(Response<AgentInfoBean> response);
     }
 }

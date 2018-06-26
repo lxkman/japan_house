@@ -609,12 +609,16 @@
     <string name="success_sq">申请成功</string>
     <string name="fail_sq">申请失败</string>
     <string name="manager_main">主营:</string>
+    <string name="appraise_manager_success">评价成功</string>
+    <string name="appraise_manager_fail">评价失败</string>
     <string name="zhengzaidakaibaiduditu">正在打开百度地图</string>
     <string name="baidudituweianzhuang">百度地图未安装或版本过低</string>
     <string name="bianjiatongzhidingyuechenggong">变价通知订阅成功，此房源价格发生变化，我们将以消息提醒您，请您注意查收~</string>
     <string name="kaipamtongzhidingyuechenggong">开盘通知订阅成功，此房源一旦开盘，我们将以消息提醒您，请您注意查收~</string>
     <string name="ninyijingdingyueguole">您已经订阅过了</string>
     <string name="qingxiandenglu">请先登录</string>
+    <string name="name_max_char">昵称最多输入20字</string>
+    <string name="activity_rental_details_success">已通过</string>
     <string name="renchakan">人查看</string>
     <string name="qingshurupinlunneirong">请输入评论内容</string>
     <string name="dengluhoukejingxingpinlun">登录后可进行评论</string>

@@ -18,10 +18,11 @@
             android:layout_marginTop="20dp">
 
             <com.example.administrator.japanhouse.view.CircleImageView
+                android:id="@+id/dialog_chat_avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/touxiang" />
+                android:src="@drawable/deful_touxiang" />
 
             <ImageView
                 android:id="@+id/iv_cancel"
@@ -34,11 +35,11 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/dialog_chat_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="请对****对微聊服务作出评价"
             android:textColor="#444444"
             android:textSize="14sp" />
 

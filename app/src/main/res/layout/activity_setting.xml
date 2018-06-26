@@ -54,7 +54,7 @@
             android:layout_marginLeft="10dip"
             android:layout_marginRight="15dip"
             android:clickable="false"
-            android:src="@drawable/button_normal"/>
+            android:src="@drawable/button_green"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

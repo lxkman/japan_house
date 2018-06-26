@@ -46,7 +46,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         ButterKnife.bind(this);
 
         if (CacheUtils.get(Constants.MANAGER_T) == null) {
-            isClose = "0";
+            isClose = "1";
             CacheUtils.put(Constants.MANAGER_T, isClose);
         } else {
             isClose = CacheUtils.get(Constants.MANAGER_T);

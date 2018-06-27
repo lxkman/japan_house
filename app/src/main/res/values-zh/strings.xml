@@ -395,7 +395,7 @@
     <string name="suoxuecailiao">所需材料</string>
     <string name="lijishenqing">立即申请</string>
     <string name="wendaxiangqing">问答详情</string>
-    <string name="gongjigehjugid">共10个回答</string>
+    <string name="gongjigehjugid">共%1$d个回答</string>
     <string name="tiwen">提问</string>
     <string name="wendabiaotineirong">问答标题内容</string>
     <string name="qingshruunigndewenti">请输入您的问题</string>

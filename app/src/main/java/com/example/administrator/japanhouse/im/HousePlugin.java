@@ -32,6 +32,7 @@ public class HousePlugin implements IPluginModule {
     public void onClick(Fragment fragment, RongExtension rongExtension) {
         Intent intent = new Intent(fragment.getActivity(), ManagerActivity.class);
         String id = fragment.getActivity().getIntent().getData().getQueryParameter("targetId");
+        intent.putExtra("ManagerId", id);
         rongExtension.startActivityForPluginResult(intent, 23, this);
     }
 

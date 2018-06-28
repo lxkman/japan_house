@@ -98,6 +98,24 @@ public class FromPhonePresenter {
                 });
     }
 
+    /**
+     * @param brokerId
+     */
+    public void recordReply(String brokerId) {
+        HttpParams params = new HttpParams();
+        params.put("userId", MyApplication.getUserId(activity));
+        params.put("brokerId", brokerId);
+        OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/brokerrevler/insertbrokerrevler")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
+                    @Override
+                    public void onSuccess(Response<NoDataBean> response) {
+
+                    }
+                });
+    }
+
     public interface PhoneCallBack {
         void getUserPhone(Response<UserBean> response);
         void getManagerInfo(Response<AgentInfoBean> response);

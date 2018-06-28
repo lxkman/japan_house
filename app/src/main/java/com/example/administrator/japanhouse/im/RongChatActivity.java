@@ -164,6 +164,7 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
                  * getTargetId   接受者id
                  * 如果不使用的话将此方法删除
                  */
+                presenter.recordReply(targetId);
                 return message;
             }
 

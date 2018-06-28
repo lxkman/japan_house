@@ -301,12 +301,12 @@ public class ImManager {
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_DETAILS);
         setMyExtensionModule();
         if (RongIM.getInstance() != null) {
-            RongIM.getInstance().startPrivateChat(context, userId, chatName);
+            RongIM.getInstance().startPrivateChat(context, "broker" + userId, chatName);
 
             RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
                 @Override
                 public UserInfo getUserInfo(String s) {
-                    return new UserInfo(userId + "", chatName, Uri.parse(avatar));
+                    return new UserInfo("broker" + userId, chatName, Uri.parse(avatar));
                 }
             }, true);
         }
@@ -315,12 +315,12 @@ public class ImManager {
     public static void enterChat(Context context, final String userId, final String chatName, final String avatar) {
         SharedPreferencesUtils.getInstace(context).setStringPreference(Constants.CHAT, Constants.CHAT_TALK);
         if (RongIM.getInstance() != null) {
-            RongIM.getInstance().startPrivateChat(context, userId, chatName);
+            RongIM.getInstance().startPrivateChat(context, "broker" + userId, chatName);
 
             RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
                 @Override
                 public UserInfo getUserInfo(String s) {
-                    return new UserInfo(userId + "", chatName, Uri.parse(avatar));
+                    return new UserInfo("broker" + userId, chatName, Uri.parse(avatar));
                 }
             }, true);
         }

@@ -8,7 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/daikuanmingc"
-        android:textSize="16sp"
+        android:textSize="15sp"
+        android:textColor="#444444"
         android:layout_margin="10dp"
         />
     <View
@@ -28,8 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yuexi"
-                android:textColor="@color/colorAccent"
-                android:textSize="14sp"
+                android:textColor="#FE972A"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
             <TextView
@@ -39,8 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/daikuanlilv"
+                android:textColor="#999999"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 />
         </RelativeLayout>
         <RelativeLayout
@@ -59,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/edufanwei"
                     android:textSize="14sp"
+                    android:textColor="#999999"
                     />
 
                 <TextView
@@ -82,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/daikuanzhouqi"
                     android:textSize="14sp"
+                    android:textColor="#999999"
                     />
 
                 <TextView

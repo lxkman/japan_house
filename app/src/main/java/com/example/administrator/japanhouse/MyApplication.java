@@ -110,36 +110,53 @@ public class MyApplication extends Application {
     private void initRc() {
         RongIM.init(this);
         RongIM.getInstance().setMessageAttachedUserInfo(true);
-        /**
-         *
-         * jEOJtiOxmPTyb2CdFT7a0m7tnvnoFRHtvRSk65MeRaWjhNUpICiAMXNDGqU1IaYQIzUdPu/qnOp8M7h4kf7iUj1PG9N7Nuem         123456789
-         *
-         * f2+AlWV8zuooyGsXatiiuZtacAbWKJAKs7xt/96ZapGfFyCIuQAUQ6GvccmqXXIgyZaVJawFDNQXfFYeg33Oyw==111111
-         * zZpOAITWWL4fpEnEryMT6W7tnvnoFRHtvRSk65MeRaWjhNUpICiAMeAsdWqpv9eZkCcfaLVPfU4emRfjS8IkRA==123456
-         * yX1H7qaDlNpvL6rQWVenj5tacAbWKJAKs7xt/96ZapGfFyCIuQAUQ02TzGZx9B3ZHSPOvW5317G0rTlvfACy9w==12345
-         */
 
-        final LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
+        if (CacheUtils.get(Constants.MANAGER_T) != null) {
+            String switchBtn = CacheUtils.get(Constants.MANAGER_T);
+            if (switchBtn.equals("1")) {
+                final LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
 
-        if (bean != null && bean.getRongCloudToken() != null) {
-            RongIM.connect(bean.getRongCloudToken(), new RongIMClient.ConnectCallback() {
-                @Override
-                public void onSuccess(String s) {
-                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse(bean.getPic())));
+                if (bean != null && bean.getRongCloudToken() != null) {
+                    RongIM.connect(bean.getRongCloudToken(), new RongIMClient.ConnectCallback() {
+                        @Override
+                        public void onSuccess(String s) {
+                            RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse(bean.getPic())));
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+                        }
+
+                        @Override
+                        public void onTokenIncorrect() {
+                            //Connect Token 失效的状态处理，需要重新获取 Token
+                        }
+                    });
                 }
+            }
+        } else {
+            CacheUtils.put(Constants.MANAGER_T, "1");
 
-                @Override
-                public void onError(RongIMClient.ErrorCode errorCode) {
-                }
+            final LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
 
-                @Override
-                public void onTokenIncorrect() {
-                    //Connect Token 失效的状态处理，需要重新获取 Token
-                }
-            });
+            if (bean != null && bean.getRongCloudToken() != null) {
+                RongIM.connect(bean.getRongCloudToken(), new RongIMClient.ConnectCallback() {
+                    @Override
+                    public void onSuccess(String s) {
+                        RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse(bean.getPic())));
+                    }
+
+                    @Override
+                    public void onError(RongIMClient.ErrorCode errorCode) {
+                    }
+
+                    @Override
+                    public void onTokenIncorrect() {
+                        //Connect Token 失效的状态处理，需要重新获取 Token
+                    }
+                });
+            }
         }
-
-        setMyExtensionModule();
     }
 
     @Override

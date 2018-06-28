@@ -150,10 +150,10 @@ public class SearchManagerActivity extends BaseActivity implements SearchManager
 
             //做搜索到的操作
             if (response.body().getDatas() != null && response.body().getDatas().getBrokerinfo() != null) {
+                Intent intent = new Intent(this, ManagerActivity.class);
+                intent.putExtra("ManagerId", response.body().getDatas().getBrokerinfo().getId() + "");
+                startActivity(intent);
             }
-            ImManager.enterChat(this, response.body().getDatas().getBrokerinfo().getId() + "",
-                    response.body().getDatas().getBrokerinfo().getBrokerName(),
-                    response.body().getDatas().getBrokerinfo().getPic());
         }
     }
 }

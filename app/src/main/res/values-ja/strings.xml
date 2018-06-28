@@ -134,8 +134,8 @@
     <string name="calcul_yuegong">月の償還：</string>
     <string name="calcul_cxjs">再計算</string>
     <string name="shanchu">削除</string>
-    <string name="activity_about_grade">**に評価する</string>
-    <string name="activity_about_refe">**が紹介</string>
+    <string name="activity_about_grade">给FLC评分</string>
+    <string name="activity_about_refe">FLC介绍</string>
     <string name="dialog_checkRoom_apply">イベントを申し込み</string>
     <string name="dialog_checkRoom_action">イベント名称表示</string>
     <string name="dialog_checkRoom_name">お名前を記入してください</string>
@@ -385,7 +385,7 @@
     <string name="daikuanzhouqi">額の範囲：</string>
     <string name="daikuanxiangqing">ロ-ン情報</string>
     <string name="fanweiedu">範囲の限度</string>
-    <string name="zuigaonianxian">最高の年数</string>
+    <string name="zuigaonianxian">ローン周期</string>
     <string name="fangkuanfangshi">支払い方式：</string>
     <string name="haikuanshijian">返済時期：</string>
     <string name="banliliuchhengg">プロセス</string>
@@ -630,4 +630,5 @@
     <string name="input_title">問題のタイトルを入力して下さい</string>
     <string name="input_qppraise_content">評価内容を入力して下さい</string>
     <string name="string_tiwenren">質問者：</string>
+    <string name="no_apk">您的手机上没有安装应用市场</string>
 </resources>

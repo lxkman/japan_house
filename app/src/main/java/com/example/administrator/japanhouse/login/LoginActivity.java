@@ -23,6 +23,8 @@ import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.bean.LoginParmeter;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.RcConnect;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.presenter.ThirdLoginPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -49,7 +51,7 @@ import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 
-public class LoginActivity extends UMLoginActivity {
+public class LoginActivity extends UMLoginActivity implements ThirdLoginPresenter.ThirdLoginCallBack{
     private static final int LINE_REQUEST_CODE = 123;
 
     @BindView(R.id.back_img)
@@ -77,6 +79,10 @@ public class LoginActivity extends UMLoginActivity {
     private View popupView;
     private PopupWindow basePopupWindow;
 
+    private ThirdLoginPresenter loginPresenter;
+
+    private String lineId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +97,8 @@ public class LoginActivity extends UMLoginActivity {
         }else {
             tvShowPop.setText("+81");
         }
+
+        loginPresenter = new ThirdLoginPresenter(this, this);
     }
 
     @OnClick({R.id.back_img, R.id.tv_register, R.id.tv_forget_pass, R.id.btn_login, R.id.img_weixin, R.id.img_weibo, R.id.img_qq, R.id.img_line, R.id.tv_show_pop})
@@ -262,18 +270,9 @@ public class LoginActivity extends UMLoginActivity {
                     LoginParmeter loginParmeter = new LoginParmeter();
                     LineProfile lineProfile = result.getLineProfile();
                     LineCredential credential = result.getLineCredential();
-                    loginParmeter.id = lineProfile.getUserId();
-                    loginParmeter.age = "";
-                    loginParmeter.accessToken = credential.getAccessToken().getAccessToken();
+                    lineId = lineProfile.getUserId();
+                    loginPresenter.setThirdLogin(3, lineProfile.getUserId());
 
-                    Uri facebookUri = lineProfile.getPictureUrl();
-                    if (facebookUri != null) {
-                        loginParmeter.avatar = facebookUri.toString();
-                        Log.e("======>>avatar", "" + facebookUri.toString());
-                    } else {
-                        loginParmeter.avatar = "";
-                    }
-                    loginParmeter.nickname = lineProfile.getDisplayName();
                     Log.e("======>>id", "" + lineProfile.getUserId());
                     Log.e("======>>accessToken", "" + credential.getAccessToken().getAccessToken());
 
@@ -288,5 +287,24 @@ public class LoginActivity extends UMLoginActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void getThirdLogin(Response<NoDataBean> response) {
+        if (response != null && response.body() != null && response.body().getCode() != null) {
+            if (TextUtils.equals(response.body().getCode(), "200")) {
+
+            } else if (TextUtils.equals(response.body().getCode(), "-1")) {
+                Intent intent = new Intent(LoginActivity.this, BindPhoneActivity.class);
+                intent.putExtra("uId", lineId);
+                intent.putExtra("loginType", 3);
+                startActivity(intent);
+            }
+        }
+    }
+
+    @Override
+    public void bindThirdLogin(Response<NoDataBean> response) {
+
     }
 }

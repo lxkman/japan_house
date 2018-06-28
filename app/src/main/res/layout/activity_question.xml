@@ -3,153 +3,181 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.QuestionActivity">
-      <LinearLayout
-          android:id="@+id/liner"
-          android:background="@color/colorAccent"
-          android:orientation="horizontal"
-          android:layout_width="match_parent"
-          android:layout_height="40dp">
-            <ImageView
-                android:layout_margin="15dp"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/img_beak"
-                  android:src="@drawable/img_beak"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
-               <LinearLayout
-                   android:id="@+id/search"
-                   android:gravity="center_vertical"
-                   android:layout_marginRight="20dp"
-                   android:layout_gravity="center"
-                   android:background="@color/white"
-                   android:layout_width="match_parent"
-                   android:layout_height="30dp">
-                   <TextView
-                       android:layout_marginLeft="10dp"
-                       android:gravity="center|left"
-                       android:drawablePadding="10dp"
-                       android:drawableLeft="@drawable/seach_img"
-                       android:background="@null"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:hint="@string/qingshuruwenti"
-                       android:textSize="14sp"
-                       />
 
-               </LinearLayout>
-      </LinearLayout>
+    <LinearLayout
+        android:id="@+id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_beak"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="15dp"
+            android:src="@drawable/img_beak" />
+
+        <LinearLayout
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/seach_img"
+                android:drawablePadding="10dp"
+                android:gravity="center|left"
+                android:hint="@string/qingshuruwenti"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/liners"
-        android:layout_below="@+id/liner"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp"
+        android:layout_below="@+id/liner"
+        android:orientation="horizontal">
+
         <RelativeLayout
-            android:padding="5dp"
             android:id="@+id/liner1"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp">
+
             <TextView
-                android:textColor="@color/colorAccent"
                 android:id="@+id/text_buyfang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_margin="5dp"
                 android:text="@string/mf"
-                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/xian1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/text_sell"
+                android:background="@color/colorAccent"
+                android:visibility="visible" />
         </RelativeLayout>
+
         <View
-            android:layout_margin="10dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="0.01"
-            android:background="#cfc8c8"
-            ></View>
+            android:background="#cfc8c8"></View>
+
         <RelativeLayout
-            android:padding="5dp"
             android:id="@+id/liner2"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp">
+
             <TextView
-                android:textColor="@color/text_black"
                 android:id="@+id/text_sellfang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_margin="5dp"
                 android:text="@string/maifang"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
 
+            <View
+                android:id="@+id/xian2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/text_sell"
+                android:background="@color/colorAccent"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>
+
     <View
         android:id="@+id/xian"
-        android:layout_below="@+id/liners"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/gray1"
-        ></View>
-        <FrameLayout
-            android:id="@+id/fl"
-            android:layout_below="@+id/xian"
-            android:layout_above="@+id/liner5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></FrameLayout>
+        android:layout_below="@+id/liners"
+        android:background="@color/gray1"></View>
 
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/liner5"
+        android:layout_below="@+id/xian"></FrameLayout>
 
 
     <LinearLayout
         android:id="@+id/liner5"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
         <RelativeLayout
-            android:background="#c79881"
-            android:padding="5dp"
             android:id="@+id/liner3"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#c79881"
+            android:padding="5dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:id="@+id/text_tiwen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_margin="5dp"
                 android:text="@string/woyaotiwen"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:background="#d79369"
-            android:padding="5dp"
             android:id="@+id/liner4"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#d79369"
+            android:padding="5dp">
+
             <TextView
                 android:id="@+id/text_huida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
                 android:text="@string/mine_wohd"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
 
         </RelativeLayout>

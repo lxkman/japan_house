@@ -98,6 +98,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             case R.id.liner1:
                 text_buyfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 text_sellfang.setTextColor(getResources().getColor(R.color.black));
+                findViewById(R.id.xian1).setVisibility(View.VISIBLE);
+                findViewById(R.id.xian2).setVisibility(View.GONE);
                 if (buyhouse_fragment == null) {
                     buyhouse_fragment = new Buyhouse_Fragment();
                     Bundle bundle = new Bundle();
@@ -112,6 +114,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             case R.id.liner2:
                 text_sellfang.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 text_buyfang.setTextColor(getResources().getColor(R.color.black));
+                findViewById(R.id.xian2).setVisibility(View.VISIBLE);
+                findViewById(R.id.xian1).setVisibility(View.GONE);
                 if (sellhouse_fragment == null) {
                     sellhouse_fragment = new Sellhouse_Fragment();
                     Bundle bundle = new Bundle();
@@ -149,8 +153,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
 
     /*
-    * 动态添加fragment方法
-    * */
+     * 动态添加fragment方法
+     * */
     public void AddFragment(Fragment f) {
 
         FragmentManager supportFragmentManager = getSupportFragmentManager();

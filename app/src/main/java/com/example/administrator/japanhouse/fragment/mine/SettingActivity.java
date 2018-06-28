@@ -1,24 +1,36 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.LoginBean;
+import com.example.administrator.japanhouse.im.RcConnect;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.rong.imkit.RongIM;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -63,6 +75,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         ivSwitch.setOnClickListener(this);
         llLanguage.setOnClickListener(this);
         llAbout.setOnClickListener(this);
+        llVersion.setOnClickListener(this);
     }
 
     private void showcallDialog() {
@@ -96,7 +109,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 dialog.dismiss();
                 MyApplication.logOut();
                 removeAllActivitys();
-                SharedPreferencesUtils.getInstace(SettingActivity.this).setStringPreference("token","");
+                SharedPreferencesUtils.getInstace(SettingActivity.this).setStringPreference("token", "");
                 startActivity(new Intent(SettingActivity.this, LoginActivity.class));
             }
         });
@@ -121,18 +134,36 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.iv_switch:
                 if (isClose.equals("1")) {
                     ivSwitch.setImageResource(R.drawable.button_normal);
+                    RongIM.getInstance().logout();
                     isClose = "0";
                 } else {
                     ivSwitch.setImageResource(R.drawable.button_green);
+
+                    final LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
+                    if (bean != null && bean.getRongCloudToken() != null) {
+                        RcConnect.rongCloudConection(bean.getRongCloudToken());
+                    }
+
                     isClose = "1";
                 }
                 CacheUtils.put(Constants.MANAGER_T, isClose);
                 break;
             case R.id.ll_language:
-                startActivity(new Intent(this,LanguageActivity.class));
+                startActivity(new Intent(this, LanguageActivity.class));
                 break;
             case R.id.ll_about:
-                startActivity(new Intent(this,AboutUsActivity.class));
+                startActivity(new Intent(this, AboutUsActivity.class));
+                break;
+            case R.id.ll_version:
+
+                String mAddress = "market://details?id=" + getPackageName();
+                Intent marketIntent = new Intent("android.intent.action.VIEW");
+                marketIntent.setData(Uri.parse(mAddress));
+                if (marketIntent.resolveActivity(getPackageManager()) != null) { //可以接收
+                    startActivity(marketIntent);
+                } else {
+                    TUtils.showFail(this, getString(R.string.no_apk));
+                }
                 break;
         }
     }

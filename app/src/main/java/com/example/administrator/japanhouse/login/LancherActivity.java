@@ -66,6 +66,10 @@ public class LancherActivity extends BaseActivity {
         iv_launcher = (ImageView) findViewById(R.id.iv_launcher);
 //        String location = SharedPreferencesUtils.getInstace(this).getStringPreference("city", "");
 
+        if (CacheUtils.get(Constants.MANAGER_T) == null) {
+            CacheUtils.put(Constants.MANAGER_T, "1");
+        }
+
         location = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(location)) {
             Resources resources = getResources();

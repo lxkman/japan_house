@@ -105,12 +105,12 @@ public class BindPhoneActivity extends BaseActivity {
             case R.id.btn_find_pass:
                 BindPhone();
 //                startActivity(new Intent(BindPhoneActivity.this, MainActivity.class));
-                HashMap<String, Boolean> hashMap = new HashMap<>();
-                //会话类型 以及是否聚合显示
-                hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
-//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                RongIM.getInstance().startConversationList(this, hashMap);
+//                HashMap<String, Boolean> hashMap = new HashMap<>();
+//                //会话类型 以及是否聚合显示
+//                hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+////        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+////        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+//                RongIM.getInstance().startConversationList(this, hashMap);
                 break;
             case R.id.check_quyu:
                 initPop();

@@ -135,8 +135,8 @@
     <string name="calcul_yuegong">月 供：</string>
     <string name="calcul_cxjs">重新计算</string>
     <string name="shanchu">删除</string>
-    <string name="activity_about_grade">给他评分</string>
-    <string name="activity_about_refe">APP介绍</string>
+    <string name="activity_about_grade">给FLC评分</string>
+    <string name="activity_about_refe">FLC介绍</string>
     <string name="dialog_checkRoom_apply">报名活动</string>
     <string name="dialog_checkRoom_action">活动名称展示</string>
     <string name="dialog_checkRoom_name">请输入您的姓名</string>
@@ -384,8 +384,8 @@
     <string name="edufanwei">额度范围：</string>
     <string name="daikuanzhouqi">贷款周期：</string>
     <string name="daikuanxiangqing">贷款详情</string>
-    <string name="fanweiedu">范围额度</string>
-    <string name="zuigaonianxian">最高年限</string>
+    <string name="fanweiedu">额度范围</string>
+    <string name="zuigaonianxian">贷款期限</string>
     <string name="fangkuanfangshi">放款方式：</string>
     <string name="haikuanshijian">还款时间：</string>
     <string name="banliliuchhengg">办理流程</string>
@@ -627,4 +627,5 @@
     <string name="input_title">请输入问题标题</string>
     <string name="input_qppraise_content">请输入评价内容</string>
     <string name="string_tiwenren">提问人：</string>
+    <string name="no_apk">您的手机上没有安装应用市场</string>
 </resources>

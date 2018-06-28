@@ -3,120 +3,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sell_house"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.administrator.japanhouse.fragment.mine.SellHouseActivity">
+
     <LinearLayout
-        android:background="@color/shihuangse"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dip">
+        android:layout_height="50dip"
+        android:background="@color/shihuangse"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/back_img"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
             android:padding="15dp"
-            android:src="@drawable/back"
-            android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:src="@drawable/back" />
+
         <TextView
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:text="@string/sell_house"
             android:layout_width="0dip"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
-        <TextView
-            android:visibility="invisible"
-            android:id="@+id/tv_register"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:text="@string/zhuce"
             android:gravity="center"
+            android:text="@string/sell_house"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_register"
             android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:layout_height="50dip"
+            android:gravity="center"
+            android:text="@string/zhuce"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:visibility="invisible" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/liners"
-        android:layout_below="@+id/liner"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_below="@+id/liner"
+        android:orientation="horizontal">
+
         <RelativeLayout
-            android:padding="5dp"
             android:id="@+id/liner1"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp">
+
             <TextView
 
-                android:textColor="@color/colorAccent"
                 android:id="@+id/text_sell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:gravity="center"
                 android:padding="3dp"
-                android:textStyle="bold"
-                android:layout_margin="5dp"
                 android:text="@string/sell_house_mine"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/xian1"
-                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorAccent"
                 android:layout_below="@+id/text_sell"
+                android:background="@color/colorAccent"
+                android:visibility="visible"
 
                 />
         </RelativeLayout>
 
         <View
-            android:layout_margin="10dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="0.01"
-            android:background="#cfc8c8"
-            ></View>
+            android:background="#cfc8c8"></View>
+
         <RelativeLayout
-            android:padding="5dp"
             android:id="@+id/liner2"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp">
+
             <TextView
-                android:textColor="@color/text_black"
                 android:id="@+id/text_rent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:gravity="center"
                 android:padding="3dp"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
                 android:text="@string/zu_house_mine"
+                android:textColor="@color/text_black"
                 android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
+
             <View
                 android:id="@+id/xian2"
-                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorAccent"
                 android:layout_below="@+id/text_rent"
+                android:background="@color/colorAccent"
+                android:visibility="invisible"
 
                 />
         </RelativeLayout>
 
     </LinearLayout>
+
     <View
-        android:layout_below="@+id/liners"
+        android:id="@+id/xian"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/gray1"
-        ></View>
+        android:layout_below="@+id/liners"
+        android:background="@color/gray1"></View>
 
-        <FrameLayout
-            android:id="@+id/frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </FrameLayout>
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 </LinearLayout>

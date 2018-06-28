@@ -395,7 +395,7 @@
     <string name="suoxuecailiao">必要書類</string>
     <string name="lijishenqing">すぐに申請</string>
     <string name="wendaxiangqing">答えの情報</string>
-    <string name="gongjigehjugid">合計で5つの回答</string>
+    <string name="gongjigehjugid">合計で%1$dつの回答</string>
     <string name="tiwen">質問</string>
     <string name="wendabiaotineirong">答えタイトル内容</string>
     <string name="qingshruunigndewenti">質問を記入してください</string>
@@ -555,7 +555,7 @@
     <string name="qingshurudizhi">住所を記入してください</string>
     <string name="camera_pic">写真を撮る</string>
     <string name="chooise_camera">アルバムの中から選択</string>
-    <string name="camera_video">拍摄视频</string>
+    <string name="camera_video">撮影ビデオ</string>
     <string name="cancel">キャンセル</string>
     <string name="linitRange_max">最高%1$s万</string>
     <string name="ageLimit_max">%1$sヶ月</string>
@@ -585,8 +585,8 @@
     <string name="refresh_no_data">データはこれ以上ありません</string>
     <string name="no_more_answer_data">回答記録無し</string>
     <string name="no_more_ask_data">質問記録無し</string>
-    <string name="not_repeat_singUp">请勿重复报名</string>
-    <string name="no_more_linkman">暂无联系人</string>
+    <string name="not_repeat_singUp">申し込みはご遠慮下さい</string>
+    <string name="no_more_linkman">連絡先がない</string>
     <string name="xiangyao">探したい</string>
     <string name="buxiangyao">要らない</string>
     <string name="meiyousousuojieguo">検索結果なし</string>
@@ -607,12 +607,12 @@
     <string name="shoucangchenggong">コレクション成功</string>
     <string name="quxiaoshoucangchenggong">コレクションの成功を取り消す</string>
     <string name="qingshurushuzi">数字を入力してください</string>
-    <string name="get_code_fail">请输入手机号</string>
-    <string name="success_sq">申请成功</string>
-    <string name="fail_sq">申请失败</string>
+    <string name="get_code_fail">携帯番号を記入してください</string>
+    <string name="success_sq">成功を申し込む</string>
+    <string name="fail_sq">失敗を申し込む</string>
     <string name="manager_main">主要な経営:</string>
-    <string name="appraise_manager_success">评价成功</string>
-    <string name="appraise_manager_fail">评价失败</string>
+    <string name="appraise_manager_success">評価に成功する</string>
+    <string name="appraise_manager_fail">評価に失敗する</string>
     <string name="zhengzaidakaibaiduditu">百度地図を開いています</string>
     <string name="baidudituweianzhuang">百度地図はまだインストールさせていないまたはバージョンが低すぎます</string>
     <string name="bianjiatongzhidingyuechenggong">価格変更のお知らせをご購読の成功~</string>
@@ -622,12 +622,12 @@
     <string name="renchakan"> 人の読書</string>
     <string name="qingshurupinlunneirong">コメントの内容を入力してください</string>
     <string name="dengluhoukejingxingpinlun">コメントにログイン</string>
-    <string name="name_max_char">昵称最多输入20字</string>
+    <string name="name_max_char">愛称は最大20字</string>
     <string name="activity_rental_details_success">已通过</string>
-    <string name="input_content">请输入内容</string>
-    <string name="user_agreement">请阅读用户协议</string>
-    <string name="input_select">请选择</string>
-    <string name="input_title">请输入问题标题</string>
-    <string name="input_qppraise_content">请输入评价内容</string>
-    <string name="string_tiwenren">提问人：</string>
+    <string name="input_content">内容を入力してください</string>
+    <string name="user_agreement">ユーザー合意をお読み下さい</string>
+    <string name="input_select">選択してください</string>
+    <string name="input_title">問題のタイトルを入力して下さい</string>
+    <string name="input_qppraise_content">評価内容を入力して下さい</string>
+    <string name="string_tiwenren">質問者：</string>
 </resources>

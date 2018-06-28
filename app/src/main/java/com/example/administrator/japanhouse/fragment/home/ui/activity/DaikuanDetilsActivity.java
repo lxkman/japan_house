@@ -54,11 +54,30 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
 
     private int id;
 
+    private LinearLayout zh_lc;
+    private LinearLayout ja_lc_1;
+    private LinearLayout ja_lc_2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daikuan_detils);
         ButterKnife.bind(this);
+
+        zh_lc = (LinearLayout) findViewById(R.id.zh_liucheng);
+        ja_lc_1 = (LinearLayout) findViewById(R.id.ja_liucheng_1);
+        ja_lc_2 = (LinearLayout) findViewById(R.id.ja_liucheng_2);
+
+        if (MyApplication.isJapanese()) {
+            zh_lc.setVisibility(View.GONE);
+            ja_lc_1.setVisibility(View.VISIBLE);
+            ja_lc_2.setVisibility(View.VISIBLE);
+        } else {
+            zh_lc.setVisibility(View.VISIBLE);
+            ja_lc_1.setVisibility(View.GONE);
+            ja_lc_2.setVisibility(View.GONE);
+        }
+
         initView();
 
 

@@ -53,7 +53,7 @@ public class AgentListAdapter extends RecyclerView.Adapter {
 
         viewHolder.main.setText(MyApplication.isJapanese() ? activity.getString(R.string.manager_main) + datas.get(position).getAreaNameJpn() : activity.getString(R.string.manager_main) + datas.get(position).getAreaNameCn());
 
-//        viewHolder.ratingBarView.setSelectedCount(datas.get(position).getAvgStar());
+        viewHolder.ratingBarView.setSelectedCount(Math.round(datas.get(position).getAvgStar()));
 
         viewHolder.wChat.setOnClickListener(new View.OnClickListener() {
             @Override

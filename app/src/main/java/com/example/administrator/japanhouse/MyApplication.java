@@ -286,8 +286,18 @@ public class MyApplication extends Application {
     }
 
     public static void logOut(){
+        String language = CacheUtils.get(Constants.COUNTRY);
+
+        String setting = "";
+        if (CacheUtils.get(Constants.MANAGER_T) == null) {
+            setting = "1";
+        } else {
+            setting = CacheUtils.get(Constants.MANAGER_T);
+        }
+
         CacheUtils.removeAll();
-//        CacheUtils.remove(Constants.USERINFO);
+        CacheUtils.put(Constants.COUNTRY, language);
+        CacheUtils.put(Constants.MANAGER_T, setting);
 
         if (RongIM.getInstance() != null) {
 

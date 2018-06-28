@@ -53,10 +53,10 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
     private TextView ti_name;
     private TextView huida;
     private int askid;
-    private int pageNo=1;
+    private int pageNo = 1;
     private SpringView sp_view;
     private WenDa_Detil_Adapter toutiaoAdapter;
-    List<WenDa_Details_Pinglun_Bean.DatasBean>list=new ArrayList<>();
+    List<WenDa_Details_Pinglun_Bean.DatasBean> list = new ArrayList<>();
     private String title1;
 
     @Override
@@ -68,6 +68,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
 
         EventBus.getDefault().register(this);
     }
+
     private void initView() {
         askid = getIntent().getIntExtra("askid", 0);
         title1 = getIntent().getStringExtra("title");
@@ -98,11 +99,11 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                     @Override
                     public void run() {
                         list.clear();
-                        pageNo=1;
+                        pageNo = 1;
                         intdata();
                         toutiaoAdapter.notifyDataSetChanged();
                     }
-                },0);
+                }, 0);
                 sp_view.onFinishFreshAndLoad();
             }
 
@@ -116,7 +117,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                         intdata();
                         toutiaoAdapter.notifyDataSetChanged();
                     }
-                },0);
+                }, 0);
                 sp_view.onFinishFreshAndLoad();
             }
         });
@@ -127,22 +128,23 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
         wenda_recy.setLayoutManager(new LinearLayoutManager(this));
 //        wenda_recy.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         wenda_recy.setNestedScrollingEnabled(false);
-        toutiaoAdapter = new WenDa_Detil_Adapter(this,list);
+        toutiaoAdapter = new WenDa_Detil_Adapter(this, list);
         wenda_recy.setAdapter(toutiaoAdapter);
 
     }
+
     private void intdaview() {
         HttpParams params = new HttpParams();
-        params.put("askId",askid);
+        params.put("askId", askid);
         OkGo.<WenDa_Details_Bean>post(MyUrls.BASEURL + "/app/askinfo/askinfo")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<WenDa_Details_Bean>(WenDa_Detils_Activity.this,WenDa_Details_Bean.class){
+                .execute(new DialogCallback<WenDa_Details_Bean>(WenDa_Detils_Activity.this, WenDa_Details_Bean.class) {
                     @Override
                     public void onSuccess(Response<WenDa_Details_Bean> response) {
                         WenDa_Details_Bean body = response.body();
                         String code = body.getCode();
-                        if(code.equals("200")){
+                        if (code.equals("200")) {
                             WenDa_Details_Bean.DatasBean datas = body.getDatas();
                             long updateTime = datas.getUpdateTime();
                             String dateToString = getDateToString(String.valueOf(updateTime / 1000));
@@ -152,52 +154,58 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                             if (body.getDatas().getHwdcUser() != null) {
                                 ti_name.setText(body.getDatas().getHwdcUser().getNickname());
                             }
-                        }else if(code.equals("201")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("500")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("404")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("203")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("204")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
+                        } else if (code.equals("201")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("500")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("404")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("203")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("204")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
                         }
                     }
 
                 });
         HttpParams params1 = new HttpParams();
-        params1.put("askId",askid);
-        params1.put("pageNo",pageNo);
+        params1.put("askId", askid);
+        params1.put("pageNo", pageNo);
         OkGo.<WenDa_Details_Pinglun_Bean>post(MyUrls.BASEURL + "/app/revert/revertbyaskid")
                 .tag(this)
                 .params(params1)
-                .execute(new DialogCallback<WenDa_Details_Pinglun_Bean>(WenDa_Detils_Activity.this,WenDa_Details_Pinglun_Bean.class){
+                .execute(new DialogCallback<WenDa_Details_Pinglun_Bean>(WenDa_Detils_Activity.this, WenDa_Details_Pinglun_Bean.class) {
                     @Override
                     public void onSuccess(Response<WenDa_Details_Pinglun_Bean> response) {
                         WenDa_Details_Pinglun_Bean body = response.body();
                         String code = body.getCode();
-                        if(code.equals("200")){
+                        if (code.equals("200")) {
                             List<WenDa_Details_Pinglun_Bean.DatasBean> datas = body.getDatas();
-                            if(pageNo>1){
-                                if(datas.size()>0){
+                            if (pageNo > 1) {
+                                if (datas.size() > 0) {
                                     list.addAll(datas);
                                 }
-                            }else{
+                            } else {
                                 list.addAll(datas);
                             }
-                            huida.setText("共"+list.size()+"个回答");
+
+                            if (datas.size() > 0) {
+                                huida.setText(String.format(activity.getString(R.string.gongjigehjugid), datas.get(0).getAnswerNum()));
+                            } else {
+                                huida.setText(String.format(activity.getString(R.string.gongjigehjugid), 0));
+                            }
+
                             toutiaoAdapter.notifyDataSetChanged();
-                        }else if(code.equals("201")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("500")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("404")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("203")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("204")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
+                        } else if (code.equals("201")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("500")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("404")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("203")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("204")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
                         }
                     }
 
@@ -207,42 +215,47 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
 
     private void intdata() {
         HttpParams params = new HttpParams();
-        params.put("askId",askid);
-        params.put("pageNo",pageNo);
+        params.put("askId", askid);
+        params.put("pageNo", pageNo);
         OkGo.<WenDa_Details_Pinglun_Bean>post(MyUrls.BASEURL + "/app/revert/revertbyaskid")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<WenDa_Details_Pinglun_Bean>(WenDa_Detils_Activity.this,WenDa_Details_Pinglun_Bean.class){
+                .execute(new DialogCallback<WenDa_Details_Pinglun_Bean>(WenDa_Detils_Activity.this, WenDa_Details_Pinglun_Bean.class) {
                     @Override
                     public void onSuccess(Response<WenDa_Details_Pinglun_Bean> response) {
                         WenDa_Details_Pinglun_Bean body = response.body();
                         String code = body.getCode();
-                        if(code.equals("200")){
+                        if (code.equals("200")) {
                             List<WenDa_Details_Pinglun_Bean.DatasBean> datas = body.getDatas();
-                            if(pageNo>1){
-                                if(datas.size()>0){
+                            if (pageNo > 1) {
+                                if (datas.size() > 0) {
                                     list.addAll(datas);
                                 }
-                            }else{
+                            } else {
                                 list.addAll(datas);
                             }
-                           huida.setText("共"+list.size()+"个回答");
+                            if (datas.size() > 0) {
+                                huida.setText(String.format(activity.getString(R.string.gongjigehjugid), datas.get(0).getAnswerNum()));
+                            } else {
+                                huida.setText(String.format(activity.getString(R.string.gongjigehjugid), 0));
+                            }
                             toutiaoAdapter.notifyDataSetChanged();
-                        }else if(code.equals("201")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("500")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("404")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("203")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
-                        }else if(code.equals("204")){
-                            ToastUtils.getToast(WenDa_Detils_Activity.this,body.getMsg());
+                        } else if (code.equals("201")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("500")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("404")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("203")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
+                        } else if (code.equals("204")) {
+                            ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
                         }
                     }
 
                 });
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -265,7 +278,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                 }
 
                 Intent intent1 = new Intent(WenDa_Detils_Activity.this, AnswerActivity.class);
-                intent1.putExtra("title",title1);
+                intent1.putExtra("title", title1);
                 intent1.putExtra("askid", askid);
                 startActivity(intent1);
                 break;

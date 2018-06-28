@@ -120,7 +120,12 @@ public class MyApplication extends Application {
                     RongIM.connect(bean.getRongCloudToken(), new RongIMClient.ConnectCallback() {
                         @Override
                         public void onSuccess(String s) {
-                            RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse(bean.getPic())));
+                            if (bean.getPic() == null || bean.getPic().equals("")) {
+                                RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse("")));
+
+                            } else {
+                                RongIM.getInstance().setCurrentUserInfo(new UserInfo(bean.getId() + "", bean.getNickname(), Uri.parse(bean.getPic())));
+                            }
                         }
 
                         @Override

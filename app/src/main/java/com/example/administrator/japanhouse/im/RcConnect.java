@@ -39,18 +39,30 @@ public class RcConnect {
     }
 
     public static void setUserInfo(){
-        LoginBean.DatasBean loginBean = CacheUtils.get(Constants.USERINFO);
+        final LoginBean.DatasBean loginBean = CacheUtils.get(Constants.USERINFO);
 
         if (loginBean == null)
             return;
 
-        RongIM.getInstance().setCurrentUserInfo(new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic())));
-//        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
-//            @Override
-//            public UserInfo getUserInfo(String s) {
-//                return new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic()));
-//            }
-//        }, true);
+        if (loginBean.getPic() == null || loginBean.getPic().equals("")) {
+            RongIM.getInstance().setCurrentUserInfo(new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse("")));
+            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+                @Override
+                public UserInfo getUserInfo(String s) {
+                    return new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(""));
+                }
+            }, true);
+
+        } else {
+            RongIM.getInstance().setCurrentUserInfo(new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic())));
+
+            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+                @Override
+                public UserInfo getUserInfo(String s) {
+                    return new UserInfo(loginBean.getId() + "", loginBean.getNickname(), Uri.parse(loginBean.getPic()));
+                }
+            }, true);
+        }
     }
 
     public static void setUserInfo1(){

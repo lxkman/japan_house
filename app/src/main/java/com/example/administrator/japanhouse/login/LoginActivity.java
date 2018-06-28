@@ -267,16 +267,9 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
             LineLoginResult result = LineLoginApi.getLoginResultFromIntent(data);
             switch (result.getResponseCode()) {
                 case SUCCESS:
-                    LoginParmeter loginParmeter = new LoginParmeter();
                     LineProfile lineProfile = result.getLineProfile();
-                    LineCredential credential = result.getLineCredential();
                     lineId = lineProfile.getUserId();
                     loginPresenter.setThirdLogin(3, lineProfile.getUserId());
-
-                    Log.e("======>>id", "" + lineProfile.getUserId());
-                    Log.e("======>>accessToken", "" + credential.getAccessToken().getAccessToken());
-
-                    Log.e("======>>nickname", "" + lineProfile.getDisplayName());
                     break;
                 case CANCEL:
                     Log.e("======>>", "LINE login  Canceled by user!!");

@@ -476,6 +476,12 @@ public class ZuHousedetailsActivity extends BaseActivity {
                 .builder();
         dialog.show();
         ImageView img_dialog_huxing = (ImageView) dialog.findViewById(R.id.img_dialog_huxing);
+        img_dialog_huxing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         Glide.with(ZuHousedetailsActivity.this).load(hxtlist.get(position).getVal()).into(img_dialog_huxing);
     }
 

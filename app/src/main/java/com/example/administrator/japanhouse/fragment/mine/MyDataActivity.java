@@ -2,7 +2,6 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -60,12 +59,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.zelory.compressor.Compressor;
-import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import io.rong.imkit.RongIM;
 
 public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack, UpFilePresenter.UpFileCallBack {
 
@@ -273,6 +269,8 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
                 //设置监听事件
                 .builder();
         dialog.show();
+        TextView tv_content = dialog.getView(R.id.tv_content);
+        tv_content.setText("当前绑定手机号为"+tvPhone.getText().toString());
         dialog.getView(R.id.tv_yes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

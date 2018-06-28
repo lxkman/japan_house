@@ -43,6 +43,8 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.administrator.japanhouse.R.id.tv_wushuju;
+
 /**
  * Created by Administrator on 2018/1/18.
  */
@@ -50,6 +52,7 @@ public class ShoufangFragment extends BaseFragment {
 
     private RecyclerView mrecycler;
     private TextView tv_refresh_time;
+    private TextView tvNoData;
     private LiebiaoAdapter mLiebiaoAdapter;
     private List<String> mList=new ArrayList();
     @Override
@@ -57,6 +60,7 @@ public class ShoufangFragment extends BaseFragment {
         View view = View.inflate(mContext, R.layout.fragment_shoufang, null);
         mrecycler= (RecyclerView) view.findViewById(R.id.Mrecycler);
         tv_refresh_time= (TextView) view.findViewById(R.id.tv_refresh_time);
+        tvNoData= (TextView) view.findViewById(tv_wushuju);
         tv_refresh_time.setVisibility(View.GONE);
         return view;
     }
@@ -80,11 +84,13 @@ public class ShoufangFragment extends BaseFragment {
                         int code = response.code();
                         final ManShouBean ManShouBean = response.body();
                         if (ManShouBean==null){
+                            tvNoData.setVisibility(View.VISIBLE);
                             return;
                         }
                         String code1 = ManShouBean.getCode();
                         final List<com.example.administrator.japanhouse.bean.ManShouBean.DatasBean> datas = ManShouBean.getDatas();
                         if (datas==null){
+                            tvNoData.setVisibility(View.VISIBLE);
                             return;
                         }
                         if (code1.equals("200")) {

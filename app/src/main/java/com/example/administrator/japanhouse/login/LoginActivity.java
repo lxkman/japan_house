@@ -28,6 +28,7 @@ import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.linecorp.linesdk.LineCredential;
 import com.linecorp.linesdk.LineProfile;
 import com.linecorp.linesdk.auth.LineLoginApi;
@@ -192,8 +193,7 @@ public class LoginActivity extends UMLoginActivity {
                                     RcConnect.rongCloudConection(loginBean.getDatas().getRongCloudToken());
 
                                     CacheUtils.put(Constants.USERINFO, loginBean.getDatas());
-
-                                    Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(LoginActivity.this,"登陆成功");
 
                                     HashMap<String, Boolean> hm = new HashMap<>();
                                     //会话类型 以及是否聚合显示
@@ -203,9 +203,9 @@ public class LoginActivity extends UMLoginActivity {
                                     RongIM.getInstance().startConversationList(LoginActivity.this, hm);
                                     finish();
                                 }else if (loginBean.getCode().equals("-1")){
-                                    Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(LoginActivity.this,"登陆失败");
                                 }else if (loginBean.getCode().equals("206")){
-                                    Toast.makeText(LoginActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(LoginActivity.this,"用户名或者密码错误");
                                 }
                             }
                         });

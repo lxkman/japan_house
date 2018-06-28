@@ -15,10 +15,10 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.SuccessBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.login.BindPhoneActivity;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -79,14 +79,43 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.btn_next:
                 if (!TextUtils.isEmpty(edtCode.getText().toString())){
-                    startActivity(new Intent(this,ChangePhoneActivity.class));
-                    finish();
+                    initIsCode();
+
                 }else {
                     Toast.makeText(mContext, "请输入正确的验证码", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
+
+    private void initIsCode() {
+        HttpParams params = new HttpParams();
+        params.put("msgcode",edtCode.getText().toString());
+        params.put("phone",edtPhone.getText().toString());
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/user/verificationcode")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        SuccessBean successBean = response.body();
+                        TUtils.showFail(MineBindPhoneActivity.this,successBean.getMsg());
+                        if (successBean.getCode().equals("200")){
+                            Intent intent = new Intent(MineBindPhoneActivity.this,ChangePhoneActivity.class);
+                            intent.putExtra("oldphone",edtPhone.getText().toString());
+                            startActivity(intent);
+                            finish();
+                            TUtils.showFail(MineBindPhoneActivity.this,successBean.getMsg());
+                            return;
+                        }else {
+                            TUtils.showFail(MineBindPhoneActivity.this,successBean.getMsg());
+                            return;
+                        }
+                    }
+                });
+    }
+
     private void getCode() {
         HttpParams params = new HttpParams();
         String quhao;
@@ -97,6 +126,7 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
         }
         params.put("phone", "00"+quhao+edtPhone.getText().toString());
         params.put("sendType",QuNumber);
+        params.put("vPhone",edtPhone.getText().toString());
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
                 .tag(this)
                 .params(params)
@@ -107,11 +137,14 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
                         SuccessBean successBean = response.body();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetcode, R.color.shihuangse, R.color.shihuangse);
-                            Toast.makeText(MineBindPhoneActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(MineBindPhoneActivity.this,successBean.getMsg());
+                            return;
                         }else if (successBean.getCode().equals("-1")){
-                            Toast.makeText(MineBindPhoneActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(MineBindPhoneActivity.this,successBean.getMsg());
+                            return;
                         }else if (successBean.getCode().equals("500")){
-                            Toast.makeText(MineBindPhoneActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(MineBindPhoneActivity.this,successBean.getMsg());
+                            return;
                         }
                     }
                 });

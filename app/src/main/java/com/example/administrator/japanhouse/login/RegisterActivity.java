@@ -26,6 +26,7 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
 import com.example.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.linecorp.linesdk.LineCredential;
 import com.linecorp.linesdk.LineProfile;
 import com.linecorp.linesdk.auth.LineLoginApi;
@@ -178,6 +179,7 @@ public class RegisterActivity extends UMLoginActivity {
         Log.d("RegisterActivity", QuNumber+"---------"+quhao);
         params.put("phone", "00"+quhao+edtPhone.getText().toString());
         params.put("sendType",QuNumber);
+        params.put("vPhone",edtPhone.getText().toString());
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
                 .tag(this)
                 .params(params)
@@ -188,13 +190,13 @@ public class RegisterActivity extends UMLoginActivity {
                         SuccessBean successBean = response.body();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
-                            Toast.makeText(RegisterActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(RegisterActivity.this,"发送成功");
                         }else if (successBean.getCode().equals("-1")){
-                            Toast.makeText(RegisterActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(RegisterActivity.this,"发送失败");
                         }else if (successBean.getCode().equals("500")){
-                            Toast.makeText(RegisterActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(RegisterActivity.this,"内部服务器错误");
                         }else {
-                            Toast.makeText(RegisterActivity.this, successBean.getMsg(), Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(RegisterActivity.this,successBean.getMsg());
                         }
                     }
                 });
@@ -249,18 +251,18 @@ public class RegisterActivity extends UMLoginActivity {
                                 int code = response.code();
                                 SuccessBean successBean = response.body();
                                 if (successBean.getCode().equals("200")){
-                                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(RegisterActivity.this,"注册成功");
                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                    finish();
                                     return;
                                 }else if (successBean.getCode().equals("-1")){
-                                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(RegisterActivity.this,"注册失败");
                                     return;
                                 }else if (successBean.getCode().equals("207")){
-                                    Toast.makeText(RegisterActivity.this, "此号码已被注册", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(RegisterActivity.this,"此号码已被注册");
                                     return;
                                 }else {
-                                    Toast.makeText(RegisterActivity.this, successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
+                                    TUtils.showFail(RegisterActivity.this,successBean.getMsg()+"");
                                     return;
                                 }
                             }

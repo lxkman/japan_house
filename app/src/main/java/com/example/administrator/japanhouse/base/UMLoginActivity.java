@@ -7,11 +7,23 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
+import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.login.BindPhoneActivity;
+import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.TUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by lxk on 2017/7/3.
@@ -61,32 +73,63 @@ public class UMLoginActivity extends BaseActivity {
         * 因此为了便于开发者使用，我们将一些常用的字段做了统一封装，开发者可以直接获取，
         * 不再需要对不同平台的不同字段名做转换，这里列出我们封装的字段及含义
         * */
-            Toast.makeText(MyApplication.getGloableContext(), "登录成功", Toast.LENGTH_SHORT).show();
+
             final String username = data.get("name");
             final String userhead = data.get("iconurl");
             final String uid = data.get("uid");
 
              String type = "";
             if (platform.equals(SHARE_MEDIA.QQ)) {
-                type = "qq";
+                type = "1";
             } else if (platform.equals(SHARE_MEDIA.WEIXIN)) {
-                type = "weixin";
+                type = "0";
             } else if (platform.equals(SHARE_MEDIA.SINA)) {
-                type = "weibo";
+                type = "2";
+            }else if (platform.equals(SHARE_MEDIA.LINE)){
+                type = "3";
             }
-//            String url = MyContants.BASEURL + "Login/nt_login/";
             final String finalType = type;
+            HttpParams params = new HttpParams();
+            params.put("loginType",finalType);
+            params.put("uId",uid);
+            OkGo.<SuccessBean>post(MyUrls.BASEURL + "app/user/specialogin")
+                    .tag(this)
+                    .params(params)
+                    .execute(new DialogCallback<SuccessBean>(mContext, SuccessBean.class) {
+                        @Override
+                        public void onSuccess(Response<SuccessBean> response) {
+                            int code = response.code();
+                            SuccessBean successBean = response.body();
+                            if (successBean.getCode().equals("200")){
+                                TUtils.showFail(MyApplication.getGloableContext(),"登录成功");
+                                HashMap<String, Boolean> hm = new HashMap<>();
+                                //会话类型 以及是否聚合显示
+                                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
+                                //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+                                //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                                RongIM.getInstance().startConversationList(mContext, hm);
+                            }else if (successBean.getCode().equals("-1")){
+                                Intent intent=new Intent(mContext, BindPhoneActivity.class);
+                                intent.putExtra("loginType",finalType);
+                                intent.putExtra("uId",uid);
+                                mContext.startActivity(intent);
+                                Toast.makeText(mContext, successBean.getMsg(), Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(mContext, successBean.getMsg(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            Toast.makeText(MyApplication.getGloableContext(), "登陆失败", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(MyApplication.getGloableContext(),"登陆失败");
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText(MyApplication.getGloableContext(), "取消登录", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(MyApplication.getGloableContext(),"取消登录");
         }
     };
 

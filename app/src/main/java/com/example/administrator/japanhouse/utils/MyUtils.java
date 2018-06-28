@@ -172,7 +172,7 @@ public class MyUtils {
 
     // 获取当前时间
     public static String getCurrentDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   hh:mm");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String date = sdf.format(curDate);
         return date;

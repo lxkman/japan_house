@@ -23,6 +23,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ManagerBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
@@ -109,7 +110,7 @@ public class ManagerActivity extends BaseActivity {
                             return;
                         }
                         String code1 = ManagerBean.getCode();
-                        com.example.administrator.japanhouse.bean.ManagerBean.DatasBean datas = ManagerBean.getDatas();
+                        final com.example.administrator.japanhouse.bean.ManagerBean.DatasBean datas = ManagerBean.getDatas();
                         if (datas==null){
                             return;
                         }
@@ -124,6 +125,12 @@ public class ManagerActivity extends BaseActivity {
                             managerYears.setText(datas.getDaynum() + "");
                             managerCount.setText(datas.getFwrs() + "");
                             managerLocation.setText("："+datas.getBrokerinfo().getIntimacyCn() + "");
+                            managerHeadImg.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ImManager.enterChat(ManagerActivity.this,datas.getBrokerinfo().getId()+"",datas.getBrokerinfo().getBrokerName(),datas.getBrokerinfo().getPic());
+                                }
+                            });
                         } else {
                             Toast.makeText(ManagerActivity.this, ManagerBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -139,6 +146,7 @@ public class ManagerActivity extends BaseActivity {
             mBaseFragmentList.add(new ShoufangFragment());
             mBaseFragmentList.add(new ZufangFragment());
         }
+
     }
 
     private void initListener() {

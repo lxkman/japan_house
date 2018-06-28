@@ -1,5 +1,6 @@
 package com.example.administrator.japanhouse.login;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -57,11 +58,16 @@ public class BindPhoneActivity extends BaseActivity {
     private View popupView;
     private PopupWindow basePopupWindow;
     private String QuNumber;
+    private String loginType;
+    private String uId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_phone);
         ButterKnife.bind(this);
+        loginType = getIntent().getStringExtra("loginType");
+        uId = getIntent().getStringExtra("uId");
     }
 
     @OnClick({R.id.back_img, R.id.tv_get_code, R.id.btn_find_pass,R.id.check_quyu})
@@ -97,6 +103,7 @@ public class BindPhoneActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_find_pass:
+                BindPhone();
 //                startActivity(new Intent(BindPhoneActivity.this, MainActivity.class));
                 HashMap<String, Boolean> hashMap = new HashMap<>();
                 //会话类型 以及是否聚合显示
@@ -111,6 +118,33 @@ public class BindPhoneActivity extends BaseActivity {
                 break;
         }
     }
+
+    private void BindPhone() {
+        HttpParams params = new HttpParams();
+        params.put("loginType",loginType);
+        params.put("uId",uId);
+        params.put("phone",edtPhone.getText().toString());
+        params.put("msg",edtYanzhengCode.getText().toString());
+        params.put("newPassword",edtPassSure.getText().toString());
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/user/bingdingphone")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {
+                    @Override
+                    public void onSuccess(Response<SuccessBean> response) {
+                        int code = response.code();
+                        SuccessBean successBean = response.body();
+                        if (successBean.getCode().equals("200")){
+                            startActivity(new Intent(BindPhoneActivity.this,LoginActivity.class));
+                            finish();
+                            Toast.makeText(BindPhoneActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(BindPhoneActivity.this, successBean.getCode(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     private void getCode() {
         HttpParams params = new HttpParams();
         String quhao;
@@ -132,10 +166,8 @@ public class BindPhoneActivity extends BaseActivity {
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
                             Toast.makeText(BindPhoneActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
-                        }else if (successBean.getCode().equals("-1")){
-                            Toast.makeText(BindPhoneActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
-                        }else if (successBean.getCode().equals("500")){
-                            Toast.makeText(BindPhoneActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(BindPhoneActivity.this, successBean.getCode(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

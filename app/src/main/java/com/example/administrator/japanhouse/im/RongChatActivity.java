@@ -79,7 +79,9 @@ public class RongChatActivity extends BaseActivity implements FromPhonePresenter
         tvAppraise = (TextView) findViewById(R.id.act_rongChat_appraise);
 
         //会话界面 对方id
-        targetId = getIntent().getData().getQueryParameter("targetId");
+        String id = getIntent().getData().getQueryParameter("targetId");
+        targetId = id.replace("broker", "");
+
         presenter = new FromPhonePresenter(this, this);
         presenter.getUserPhone(targetId);
         presenter.getManagerInfo(targetId);

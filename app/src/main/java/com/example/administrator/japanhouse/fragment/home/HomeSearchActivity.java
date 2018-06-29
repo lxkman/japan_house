@@ -29,6 +29,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HomeSearchHistroyBean;
 import com.example.administrator.japanhouse.bean.HotSearchBean;
+import com.example.administrator.japanhouse.model.SimpleBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -508,6 +509,11 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             fluidlayout.removeAllViews();
             page=0;
         }
+    }
+
+    @Override
+    public void getWdSearchHint(Response<SimpleBean> response) {
+
     }
 
     @Override

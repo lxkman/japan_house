@@ -630,5 +630,6 @@
     <string name="input_title">問題のタイトルを入力して下さい</string>
     <string name="input_qppraise_content">評価内容を入力して下さい</string>
     <string name="string_tiwenren">質問者：</string>
-    <string name="no_apk">您的手机上没有安装应用市场</string>
+    <string name="no_apk">あなたの携帯電話にはアプリケーション市場がインストールされていません</string>
+    <string name="max_version">最新バージョン</string>
 </resources>

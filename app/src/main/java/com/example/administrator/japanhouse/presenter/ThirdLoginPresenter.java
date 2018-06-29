@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.presenter;
 
 import android.app.Activity;
 
+import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
@@ -31,12 +32,12 @@ public class ThirdLoginPresenter {
         HttpParams params = new HttpParams();
         params.put("loginType", loginType);
         params.put("uId", uId);
-        OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/user/specialogin")
+        OkGo.<LoginBean>post(MyUrls.BASEURL + "/app/user/specialogin")
                 .tag(this)
                 .params(params)
-                .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
+                .execute(new JsonCallback<LoginBean>(LoginBean.class) {
                     @Override
-                    public void onSuccess(Response< NoDataBean > response) {
+                    public void onSuccess(Response< LoginBean > response) {
                         callBack.getThirdLogin(response);
                     }
                 });
@@ -66,7 +67,7 @@ public class ThirdLoginPresenter {
     }
 
     public interface ThirdLoginCallBack{
-        void getThirdLogin(Response<NoDataBean> response);
+        void getThirdLogin(Response<LoginBean> response);
         void bindThirdLogin(Response<NoDataBean> response);
     }
 }

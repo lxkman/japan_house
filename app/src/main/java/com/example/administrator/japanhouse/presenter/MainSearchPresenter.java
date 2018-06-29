@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.bean.HotSearchBean;
 import com.example.administrator.japanhouse.callback.JsonCallback;
+import com.example.administrator.japanhouse.model.SimpleBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
@@ -95,9 +96,25 @@ public class MainSearchPresenter {
                 });
     }
 
+    public void getWdSearchHint(String searchText) {
+        HttpParams params = new HttpParams();
+        params.put("searchText", searchText);
+        OkGo.<SimpleBean>post(MyUrls.BASEURL + "/app/askinfo/theclues")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<SimpleBean>(SimpleBean.class) {
+                    @Override
+                    public void onSuccess(Response<SimpleBean> response) {
+                        callBack.getWdSearchHint(response);
+                    }
+                });
+    }
+
     public interface MainSearchCallBack {
         void getSearchHint(Response<TopSearchHintBean> response);
 
         void getHotSearchData(Response<HotSearchBean> response);
+
+        void getWdSearchHint(Response<SimpleBean> response);
     }
 }

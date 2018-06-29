@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -18,13 +19,20 @@ import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.LoginBean;
+import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.RcConnect;
 import com.example.administrator.japanhouse.login.LoginActivity;
+import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.model.VersionBean;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import java.util.List;
 
@@ -155,16 +163,39 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(this, AboutUsActivity.class));
                 break;
             case R.id.ll_version:
-
-                String mAddress = "market://details?id=" + getPackageName();
-                Intent marketIntent = new Intent("android.intent.action.VIEW");
-                marketIntent.setData(Uri.parse(mAddress));
-                if (marketIntent.resolveActivity(getPackageManager()) != null) { //可以接收
-                    startActivity(marketIntent);
-                } else {
-                    TUtils.showFail(this, getString(R.string.no_apk));
-                }
+                getVersiion();
                 break;
         }
+    }
+
+    private void getVersiion() {
+        OkGo.<VersionBean>post(MyUrls.BASEURL + "/app/version/getVersion")
+                .tag(this)
+                .execute(new DialogCallback<VersionBean>(SettingActivity.this, VersionBean.class) {
+                    @Override
+                    public void onSuccess(Response<VersionBean> response) {
+                        if (response != null && response.body() != null && response.body().getDatas() != null && response.body().getDatas().getVersionNumber() != null) {
+                            try {
+                                String verName = getPackageManager().
+                                        getPackageInfo(getPackageName(), 0).versionName;
+
+                                if (TextUtils.equals(verName, response.body().getDatas().getVersionNumber())) {
+                                    TUtils.showFail(SettingActivity.this, getString(R.string.max_version));
+                                } else{
+                                    String mAddress = "market://details?id=" + getPackageName();
+                                    Intent marketIntent = new Intent("android.intent.action.VIEW");
+                                    marketIntent.setData(Uri.parse(mAddress));
+                                    if (marketIntent.resolveActivity(getPackageManager()) != null) { //可以接收
+                                        startActivity(marketIntent);
+                                    } else {
+                                        TUtils.showFail(SettingActivity.this, getString(R.string.no_apk));
+                                    }
+                                }
+                            } catch (PackageManager.NameNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
     }
 }

@@ -283,10 +283,26 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
     }
 
     @Override
-    public void getThirdLogin(Response<NoDataBean> response) {
+    public void getThirdLogin(Response<LoginBean> response) {
         if (response != null && response.body() != null && response.body().getCode() != null) {
             if (TextUtils.equals(response.body().getCode(), "200")) {
+                if (response.body().getDatas() != null) {
+                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("uid", response.body().getDatas().getId() + "");
+                    SharedPreferencesUtils.getInstace(LoginActivity.this).setStringPreference("token", response.body().getDatas().getToken() + "");
 
+                    RcConnect.rongCloudConection(response.body().getDatas().getRongCloudToken());
+
+                    CacheUtils.put(Constants.USERINFO, response.body().getDatas());
+                    TUtils.showFail(LoginActivity.this, "登陆成功");
+
+                    HashMap<String, Boolean> hm = new HashMap<>();
+                    //会话类型 以及是否聚合显示
+                    hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
+                    //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
+                    //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                    RongIM.getInstance().startConversationList(LoginActivity.this, hm);
+                    finish();
+                }
             } else if (TextUtils.equals(response.body().getCode(), "-1")) {
                 Intent intent = new Intent(LoginActivity.this, BindPhoneActivity.class);
                 intent.putExtra("uId", lineId);

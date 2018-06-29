@@ -628,4 +628,5 @@
     <string name="input_qppraise_content">请输入评价内容</string>
     <string name="string_tiwenren">提问人：</string>
     <string name="no_apk">您的手机上没有安装应用市场</string>
+    <string name="max_version">最新版本</string>
 </resources>

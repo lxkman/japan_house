@@ -84,6 +84,11 @@ public class SearchManagerActivity extends BaseActivity implements SearchManager
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     Log.d("ChatFragment", result);
+
+                    Intent intent = new Intent(this, ManagerActivity.class);
+                    intent.putExtra("ManagerId", result);
+                    startActivity(intent);
+
 //                    Intent intent=new Intent(mContext,WebActivity.class);
 //                    intent.putExtra("result",result);
 //                    startActivity(intent);

@@ -3,6 +3,11 @@ package com.example.administrator.japanhouse.fragment.home.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +17,17 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.activity.adapter.SimpleBaseAdapter;
+import com.example.administrator.japanhouse.adapter.SearchListAdapter;
+import com.example.administrator.japanhouse.adapter.WDSearchAdapter;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HotSearchBean;
 import com.example.administrator.japanhouse.fragment.home.ui.utils.flow;
+import com.example.administrator.japanhouse.model.SimpleBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -45,10 +54,30 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     private MainSearchPresenter presenter;
 
+    private NestedScrollView scrollView;
+
+    private RelativeLayout listLayout;
+
+    private RecyclerView searchListRecycler;
+    private TextView tvNoContent;
+
+    private WDSearchAdapter wdAdapter;
+    private List<SimpleBean.DatasBean> mList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search2);
+
+        scrollView = (NestedScrollView) findViewById(R.id.act_wd_scrollView);
+        listLayout = (RelativeLayout) findViewById(R.id.act_wd_searchList);
+        searchListRecycler = (RecyclerView) findViewById(R.id.search_list_recycler);
+        tvNoContent = (TextView) findViewById(R.id.tv_noContent);
+
+        mList = new ArrayList<>();
+        searchListRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        wdAdapter = new WDSearchAdapter(this, mList);
+        searchListRecycler.setAdapter(wdAdapter);
 
         presenter = new MainSearchPresenter(this, this);
         presenter.getHotSearchData(1, 8);
@@ -104,6 +133,34 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     return true;
                 }
                 return false;
+            }
+        });
+
+        sou.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    mList.clear();
+                    wdAdapter.setSearchContent(sou.getText().toString());
+                    presenter.getWdSearchHint(sou.getText().toString());
+                    scrollView.setVisibility(View.GONE);
+                    listLayout.setVisibility(View.VISIBLE);
+                } else {
+                    scrollView.setVisibility(View.VISIBLE);
+                    listLayout.setVisibility(View.GONE);
+                    tvNoContent.setVisibility(View.GONE);
+                    searchListRecycler.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -180,6 +237,21 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             if (response.body().getDatas().size() > 0) {
                 hotTag(response.body().getDatas());
             }
+        }
+    }
+
+    @Override
+    public void getWdSearchHint(Response<SimpleBean> response) {
+        if (response != null && response.body() != null && response.body().getDatas() != null) {
+            if (response.body().getDatas().size() > 0) {
+                mList.addAll(response.body().getDatas());
+                searchListRecycler.setVisibility(View.VISIBLE);
+                tvNoContent.setVisibility(View.GONE);
+            } else {
+                tvNoContent.setVisibility(View.VISIBLE);
+                searchListRecycler.setVisibility(View.GONE);
+            }
+            wdAdapter.notifyDataSetChanged();
         }
     }
 }

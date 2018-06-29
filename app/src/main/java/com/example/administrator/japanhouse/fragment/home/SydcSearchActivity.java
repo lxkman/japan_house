@@ -24,6 +24,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.HotSearchBean;
+import com.example.administrator.japanhouse.model.SimpleBean;
 import com.example.administrator.japanhouse.model.TopSearchHintBean;
 import com.example.administrator.japanhouse.presenter.MainSearchPresenter;
 import com.example.administrator.japanhouse.view.FluidLayout;
@@ -270,5 +271,10 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
                 }
             });
         }
+    }
+
+    @Override
+    public void getWdSearchHint(Response<SimpleBean> response) {
+
     }
 }

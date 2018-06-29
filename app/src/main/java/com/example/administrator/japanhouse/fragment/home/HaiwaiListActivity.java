@@ -183,6 +183,9 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                             return;
                         }
                         ChinaShaiXuanBean.DatasEntity shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

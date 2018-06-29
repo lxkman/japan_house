@@ -237,7 +237,9 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(TudiActivity.this);
-
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

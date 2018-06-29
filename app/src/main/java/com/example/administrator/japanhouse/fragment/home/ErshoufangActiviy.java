@@ -238,6 +238,9 @@ public class ErshoufangActiviy extends BaseActivity implements MyItemClickListen
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(ErshoufangActiviy.this);
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

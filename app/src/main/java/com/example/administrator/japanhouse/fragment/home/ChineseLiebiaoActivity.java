@@ -239,6 +239,9 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(ChineseLiebiaoActivity.this);
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

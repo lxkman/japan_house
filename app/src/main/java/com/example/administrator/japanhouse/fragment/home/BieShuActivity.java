@@ -235,7 +235,9 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(BieShuActivity.this);
-
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

@@ -237,6 +237,9 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(NewHouseActivity.this);
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

@@ -105,9 +105,10 @@ public class YanjiuListActivity extends BaseActivity {
                                      @Override
                                      public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                          Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
-                                         intent.putExtra("title", datas.get(position).getYjTitle() + "");
-                                         intent.putExtra("content", datas.get(position).getYjContent() + "");
-                                         intent.putExtra("time", datas.get(position).getCreateTime());
+                                         intent.putExtra("id", datas.get(position).getId());
+//                                         intent.putExtra("title", datas.get(position).getYjTitle() + "");
+//                                         intent.putExtra("content", datas.get(position).getYjContent() + "");
+//                                         intent.putExtra("time", datas.get(position).getCreateTime());
                                          startActivity(intent);
                                      }
                                  });

@@ -297,7 +297,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(ZufangListActivity.this);
-
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

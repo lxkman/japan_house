@@ -243,7 +243,9 @@ public class SydcBigLiebiaoActivity extends BaseActivity implements MyItemClickL
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(SydcBigLiebiaoActivity.this);
-
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

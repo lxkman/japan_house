@@ -45,6 +45,9 @@ public class MyLetterListView extends View {
         super.onDraw(canvas);
         int height = getHeight();
         int width = getWidth();
+        if (keyword.length==0){
+            return;
+        }
         int singleheight = height / keyword.length;//获取单个字母的高度
         /*
         * 每次调用onDraw方法，都要遍历一遍所有的字母并重新drawText，因为遍历的时候会判断点击的item的position，并且绘制颜色

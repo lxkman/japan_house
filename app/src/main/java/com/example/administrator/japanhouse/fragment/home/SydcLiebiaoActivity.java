@@ -261,7 +261,9 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(SydcLiebiaoActivity.this);
-
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

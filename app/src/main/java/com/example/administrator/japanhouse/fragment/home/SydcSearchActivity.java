@@ -7,8 +7,11 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,7 +179,22 @@ public class SydcSearchActivity extends BaseActivity implements MainSearchPresen
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-            helper.setText(R.id.tv_Search_list, item);
+            SpannableString spannableString = new SpannableString(item);
+            if (item.equals(searchEt.getText().toString())) {
+                helper.setText(R.id.tv_Search_list, item);
+                helper.setTextColor(R.id.tv_Search_list, getResources().getColor(R.color.colorPrimary));
+            } else {
+                boolean contains = item.contains(searchEt.getText().toString());
+                if (contains) {
+                    String[] split = item.split(searchEt.getText().toString());
+                    String xxx = split[0] + searchEt.getText().toString();
+                    ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+                    spannableString.setSpan(colorSpan, split[0].length(), xxx.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    helper.setText(R.id.tv_Search_list, item);
+                } else {
+                    helper.setText(R.id.tv_Search_list, item);
+                }
+            }
         }
     }
 

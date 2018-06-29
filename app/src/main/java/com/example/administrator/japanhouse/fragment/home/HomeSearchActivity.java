@@ -8,8 +8,11 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,14 +119,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
             historyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    tiaozhuan(mHistoryList.get(position).getContent(),true);
+                    tiaozhuan(mHistoryList.get(position).getContent(), true);
                     doSavehistory2(mHistoryList.get(position));
                 }
             });
-        }else {
+        } else {
             historyClear.setVisibility(View.GONE);
             mHistoryList.clear();
-            if (historyAdapter!=null){
+            if (historyAdapter != null) {
                 historyAdapter.notifyDataSetChanged();
             }
         }
@@ -179,16 +182,16 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 if (actionId == EditorInfo.IME_ACTION_SEARCH && searchEt.getText().length() > 0) {
                     ((InputMethodManager) searchEt.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//                    if (SearchList == null || SearchList.size() == 0) {
-//                        tvNoContent.setVisibility(View.VISIBLE);
-//                        scrollView.setVisibility(View.GONE);
-//                        searchListRecycler.setVisibility(View.GONE);
-//                        return false;
-//                    }
+                    //                    if (SearchList == null || SearchList.size() == 0) {
+                    //                        tvNoContent.setVisibility(View.VISIBLE);
+                    //                        scrollView.setVisibility(View.GONE);
+                    //                        searchListRecycler.setVisibility(View.GONE);
+                    //                        return false;
+                    //                    }
                     tvNoContent.setVisibility(View.GONE);
                     scrollView.setVisibility(View.GONE);
                     searchListRecycler.setVisibility(View.VISIBLE);
-                    tiaozhuan(searchEt.getText().toString(),true);
+                    tiaozhuan(searchEt.getText().toString(), true);
                     return true;
                 }
                 return false;
@@ -343,12 +346,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                if (state==2){
+                                if (state == 2) {
                                     return;
                                 }
                                 locationTv.setText(getResources().getString(R.string.old_house));
                                 state = 2;
-                                page=1;
+                                page = 1;
                                 initHot();
                                 initHistroy();
                             }
@@ -358,12 +361,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                if (state==0){
+                                if (state == 0) {
                                     return;
                                 }
                                 locationTv.setText(getResources().getString(R.string.new_house));
                                 state = 0;
-                                page=1;
+                                page = 1;
                                 initHot();
                                 initHistroy();
                             }
@@ -373,12 +376,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                if (state==4){
+                                if (state == 4) {
                                     return;
                                 }
                                 locationTv.setText(getResources().getString(R.string.zu_house));
                                 state = 4;
-                                page=1;
+                                page = 1;
                                 initHot();
                                 initHistroy();
                             }
@@ -388,12 +391,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                if (state==1){
+                                if (state == 1) {
                                     return;
                                 }
                                 locationTv.setText(getResources().getString(R.string.bieshu));
                                 state = 1;
-                                page=1;
+                                page = 1;
                                 initHot();
                                 initHistroy();
                             }
@@ -403,12 +406,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                if (state==3){
+                                if (state == 3) {
                                     return;
                                 }
                                 locationTv.setText(getResources().getString(R.string.tudi));
                                 state = 3;
-                                page=1;
+                                page = 1;
                                 initHot();
                                 initHistroy();
                             }
@@ -418,12 +421,12 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                             @Override
                             public void onClick(View view) {
                                 popupWindow.dismiss();
-                                if (state==5){
+                                if (state == 5) {
                                     return;
                                 }
                                 locationTv.setText(getResources().getString(R.string.shangyedichan));
                                 state = 5;
-                                page=1;
+                                page = 1;
                                 initHot();
                                 initHistroy();
                             }
@@ -497,18 +500,19 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        tiaozhuan(tv.getText().toString(),false);
+                        tiaozhuan(tv.getText().toString(), false);
                     }
                 });
             }
-        }else {
+        } else {
             fluidlayout.removeAllViews();
+            page=0;
         }
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        tiaozhuan(SearchList.get(position),true);
+        tiaozhuan(SearchList.get(position), true);
     }
 
     private class HistoryAdapter extends BaseQuickAdapter<HomeSearchHistroyBean, BaseViewHolder> {
@@ -531,7 +535,22 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
 
         @Override
         protected void convert(BaseViewHolder helper, String item) {
-            helper.setText(R.id.tv_Search_list, item);
+            SpannableString spannableString = new SpannableString(item);
+            if (item.equals(searchEt.getText().toString())) {
+                helper.setText(R.id.tv_Search_list, item);
+                helper.setTextColor(R.id.tv_Search_list, getResources().getColor(R.color.colorPrimary));
+            } else {
+                boolean contains = item.contains(searchEt.getText().toString());
+                if (contains) {
+                    String[] split = item.split(searchEt.getText().toString());
+                    String xxx = split[0] + searchEt.getText().toString();
+                    ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+                    spannableString.setSpan(colorSpan, split[0].length(), xxx.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    helper.setText(R.id.tv_Search_list, item);
+                } else {
+                    helper.setText(R.id.tv_Search_list, item);
+                }
+            }
         }
     }
 

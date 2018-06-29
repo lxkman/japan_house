@@ -290,6 +290,9 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(MapOldhouseFragment.this);
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
                         /**
                          * 第二个界面
                          * */

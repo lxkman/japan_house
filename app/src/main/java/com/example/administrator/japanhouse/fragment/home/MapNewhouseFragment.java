@@ -289,6 +289,9 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(MapNewhouseFragment.this);
+                        if (shaiXuanBeanDatas==null){
+                            return;
+                        }
 
                         /**
                          * 第二个界面

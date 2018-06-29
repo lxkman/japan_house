@@ -36,6 +36,8 @@ public class RcConnect {
                 //Connect Token 失效的状态处理，需要重新获取 Token
             }
         });
+
+
     }
 
     public static void setUserInfo(){

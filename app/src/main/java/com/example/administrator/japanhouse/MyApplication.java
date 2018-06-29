@@ -162,6 +162,8 @@ public class MyApplication extends Application {
                 });
             }
         }
+
+        setMyExtensionModule();
     }
 
     @Override

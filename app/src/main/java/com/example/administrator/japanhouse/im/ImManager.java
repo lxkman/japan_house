@@ -220,7 +220,7 @@ public class ImManager {
 
         //"9517" 为目标 Id。根据不同的 conversationType，可能是用户 Id、讨论组 Id、群组 Id 或聊天室 Id。
         //Conversation.ConversationType.PRIVATE 为会话类型。
-        Message myMessage = Message.obtain(userId, Conversation.ConversationType.PRIVATE, richContentMessage);
+        Message myMessage = Message.obtain("broker" + userId, Conversation.ConversationType.PRIVATE, richContentMessage);
 
         /**
          * <p>发送消息。
@@ -259,7 +259,7 @@ public class ImManager {
      * @param userId 用户 Id。
      */
     public static void addToBlack(String userId, final Context context) {
-        RongIM.getInstance().addToBlacklist(userId, new RongIMClient.OperationCallback() {
+        RongIM.getInstance().addToBlacklist("broker" + userId, new RongIMClient.OperationCallback() {
             @Override
             public void onSuccess() {
                 TUtils.showFail(context, "拉黑成功");
@@ -278,7 +278,7 @@ public class ImManager {
      * @param userId 用户 Id。
      */
     public static void removeFromBlack(String userId, final Context context) {
-        RongIM.getInstance().removeFromBlacklist(userId, new RongIMClient.OperationCallback() {
+        RongIM.getInstance().removeFromBlacklist("broker" + userId, new RongIMClient.OperationCallback() {
             @Override
             public void onSuccess() {
                 TUtils.showFail(context, "移除成功");

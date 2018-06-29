@@ -581,7 +581,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="50dip"
+        android:layout_marginBottom="56dip"
         android:layout_marginRight="15dip"
         android:src="@drawable/kefu" />
 </RelativeLayout>

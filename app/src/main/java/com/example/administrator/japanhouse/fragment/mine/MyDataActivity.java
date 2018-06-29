@@ -2,6 +2,7 @@ package com.example.administrator.japanhouse.fragment.mine;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -62,6 +63,7 @@ import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import io.rong.imkit.RongIM;
 
 public class MyDataActivity extends BaseActivity implements View.OnClickListener, UserPresenter.UserCallBack, UpFilePresenter.UpFileCallBack {
 
@@ -509,6 +511,12 @@ public class MyDataActivity extends BaseActivity implements View.OnClickListener
             startActivity(new Intent(this, LoginActivity.class));
             MyApplication.logOut();
             return;
+        }
+
+        if (path == null || path.equals("")) {
+            RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo("" + userBean.getId(), et_name.getText().toString(), Uri.parse("")));
+        } else {
+            RongIM.getInstance().setCurrentUserInfo(new io.rong.imlib.model.UserInfo("" + userBean.getId(), et_name.getText().toString(), Uri.parse(path)));
         }
 
         EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));

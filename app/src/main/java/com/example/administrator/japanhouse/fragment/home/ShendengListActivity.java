@@ -234,6 +234,9 @@ public class ShendengListActivity extends BaseActivity {
             }
         } else {
             allCheckedTextList = CacheUtils.get("allCheckedTextList");
+            if (allCheckedTextList==null || allCheckedTextList.size()==0){
+                return;
+            }
             for (int i = 0; i < allCheckedTextList.size(); i++) {
                 final TextView tv = (TextView) View.inflate(mContext, R.layout.item_shendeng_result, null);
                 tv.setText(allCheckedTextList.get(i));

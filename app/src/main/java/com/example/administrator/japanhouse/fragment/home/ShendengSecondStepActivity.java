@@ -77,7 +77,8 @@ public class ShendengSecondStepActivity extends BaseActivity {
                         ShenDengRuleBean.DatasEntity.XytjEntity xytj = datas.getXytj();
                         ShenDengRuleBean.DatasEntity.BxytjEntity bxytj = datas.getBxytj();
                         wantList = getxiangyao(xytj);
-                        wantList.get(0).setChecked(true);
+                        if (wantList.size() > 0)
+                            wantList.get(0).setChecked(true);
                         for (int i = 0; i < wantList.size(); i++) {
                             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_shendeng_second, null);
                             tv.setText(wantList.get(i).getName());
@@ -109,7 +110,8 @@ public class ShendengSecondStepActivity extends BaseActivity {
                         }
                         notwantFluidlayout.removeAllViews();
                         final List<OneCheckBean> nowantList = getbuxiangyao(bxytj);
-                        nowantList.get(0).setChecked(true);
+                        if (nowantList.size() > 0)
+                            nowantList.get(0).setChecked(true);
                         for (int i = 0; i < nowantList.size(); i++) {
                             final TextView tv = (TextView) View.inflate(mContext, R.layout.item_shendeng_second, null);
                             tv.setText(nowantList.get(i).getName());

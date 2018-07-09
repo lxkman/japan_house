@@ -171,7 +171,8 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
 
     private void initShaiXuan() {
         HttpParams params = new HttpParams();
-        params.put("cId", 2);
+        int cityId = CacheUtils.get("cityId");
+        params.put("cId", cityId);
         OkGo.<QuYuBean>post(MyUrls.BASEURL + "/app/areamanage/selectareaandsubway")
                 .tag(this)
                 .params(params)

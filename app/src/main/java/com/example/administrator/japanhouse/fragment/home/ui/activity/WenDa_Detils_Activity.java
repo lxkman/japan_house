@@ -59,6 +59,8 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
     List<WenDa_Details_Pinglun_Bean.DatasBean> list = new ArrayList<>();
     private String title1;
 
+    private int type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
 
     private void initView() {
         askid = getIntent().getIntExtra("askid", 0);
+        type = getIntent().getIntExtra("type", 0);
         title1 = getIntent().getStringExtra("title");
         img_beak = (ImageView) findViewById(R.id.img_beak);
         this.title = (TextView) findViewById(R.id.title);
@@ -100,7 +103,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                     public void run() {
                         list.clear();
                         pageNo = 1;
-                        intdata();
+                        intdaview();
                         toutiaoAdapter.notifyDataSetChanged();
                     }
                 }, 0);
@@ -114,7 +117,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                     @Override
                     public void run() {
                         pageNo++;
-                        intdata();
+                        intdaview();
                         toutiaoAdapter.notifyDataSetChanged();
                     }
                 }, 0);
@@ -154,6 +157,10 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                             if (body.getDatas().getHwdcUser() != null) {
                                 ti_name.setText(body.getDatas().getHwdcUser().getNickname());
                             }
+
+
+                            huida.setText(String.format(activity.getString(R.string.gongjigehjugid), datas.getAnswerNum()));
+
                         } else if (code.equals("201")) {
                             ToastUtils.getToast(WenDa_Detils_Activity.this, body.getMsg());
                         } else if (code.equals("500")) {
@@ -187,12 +194,6 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                                 }
                             } else {
                                 list.addAll(datas);
-                            }
-
-                            if (datas.size() > 0) {
-                                huida.setText(String.format(activity.getString(R.string.gongjigehjugid), datas.get(0).getAnswerNum()));
-                            } else {
-                                huida.setText(String.format(activity.getString(R.string.gongjigehjugid), 0));
                             }
 
                             toutiaoAdapter.notifyDataSetChanged();
@@ -269,6 +270,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
                 }
 
                 Intent intent = new Intent(WenDa_Detils_Activity.this, QuizActivity.class);
+                intent.putExtra("type", type);
                 startActivity(intent);
                 break;
             case R.id.liner4:
@@ -299,7 +301,7 @@ public class WenDa_Detils_Activity extends AppCompatActivity implements View.OnC
         if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_W) || TextUtils.equals(eventBean.getMsg(), Constants.EVENT_D)) {
             list.clear();
             pageNo = 1;
-            intdata();
+            intdaview();
         }
     }
 

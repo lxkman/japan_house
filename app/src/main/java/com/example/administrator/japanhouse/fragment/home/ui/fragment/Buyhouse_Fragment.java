@@ -45,6 +45,8 @@ public class Buyhouse_Fragment extends BaseFragment{
     private String searchText;
     List<QueandansBean.DatasBean>list=new ArrayList<>();
 
+    private int type;
+
     public Buyhouse_Fragment() {
     }
 
@@ -54,6 +56,7 @@ public class Buyhouse_Fragment extends BaseFragment{
         buy_recyclwe = (RecyclerView) view.findViewById(R.id.Buy_recycler);
         sp_view = (SpringView) view.findViewById(R.id.sp_view);
         searchText=getArguments().getString("searchText");
+        type = getArguments().getInt("type");
         intdata();
         EventBus.getDefault().register(this);
         return view;
@@ -100,6 +103,7 @@ public class Buyhouse_Fragment extends BaseFragment{
         //加载适配器
         buy_recyclwe.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         buyhouse_adapter = new Buyhouse_Adapter(getActivity(),list);
+        buyhouse_adapter.setType(type);
          buy_recyclwe.setAdapter(buyhouse_adapter);
 
     }

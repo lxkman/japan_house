@@ -43,6 +43,7 @@ public class Sellhouse_Fragment extends BaseFragment{
     private Buyhouse_Adapter buyhouse_adapter;
     private int pageNo=1;
     private String searchText;
+    private int type;
     List<QueandansBean.DatasBean> list=new ArrayList<>();
 
     public Sellhouse_Fragment() {
@@ -54,6 +55,7 @@ public class Sellhouse_Fragment extends BaseFragment{
         sp_view = (SpringView) view.findViewById(R.id.sp_view);
         buy_recyclwe = (RecyclerView) view.findViewById(R.id.Buy_recycler);
         searchText=getArguments().getString("searchText");
+        type = getArguments().getInt("type");
         intdata();
 
         EventBus.getDefault().register(this);
@@ -102,6 +104,7 @@ public class Sellhouse_Fragment extends BaseFragment{
         //加载适配器
         buy_recyclwe.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         buyhouse_adapter = new Buyhouse_Adapter(getActivity(),list);
+        buyhouse_adapter.setType(type);
         buy_recyclwe.setAdapter(buyhouse_adapter);
 
     }

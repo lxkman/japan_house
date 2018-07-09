@@ -16,9 +16,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.bean.QuYuBean;
@@ -42,16 +44,15 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.yyydjk.library.DropDownMenu;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 
 public class ZufangListActivity extends BaseActivity implements MyItemClickListener {
 
@@ -172,7 +173,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             public void onClick(View view) {
                 isMv = true;
                 page = 1;
-                mDatas.clear();
+                if (mDatas != null)
+                    mDatas.clear();
                 initData();
             }
         });
@@ -297,7 +299,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(ZufangListActivity.this);
-                        if (shaiXuanBeanDatas==null){
+                        if (shaiXuanBeanDatas == null) {
                             return;
                         }
                         /**
@@ -441,7 +443,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         if (mDatas == null || mDatas.size() == 0) {
                             if (datas == null || datas.size() == 0) {
                                 tvNoContent.setVisibility(View.VISIBLE);
-//                                springview.setVisibility(View.GONE);
+                                //                                springview.setVisibility(View.GONE);
                                 if (liebiaoAdapter != null) {
                                     liebiaoAdapter.notifyDataSetChanged();
                                 }
@@ -572,7 +574,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         mjId = mianjiEntity.getId() + "";
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null)
+                    mDatas.clear();
                 //            Toast.makeText(this, " "+mjId, Toast.LENGTH_SHORT).show();
                 initData();
                 break;
@@ -587,7 +590,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                         zjId = zujin.get(itemPosition - 1).getId() + "";
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null)
+                    mDatas.clear();
                 initData();
                 break;
         }
@@ -608,7 +612,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 zjId = "-1";
                 zidingyiPriceList.clear();
                 zidingyiPriceList = priceRegin;
-                mDatas.clear();
+                if (mDatas != null)
+                    mDatas.clear();
                 initData();
             }
         }
@@ -619,7 +624,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         page = 1;
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        mDatas.clear();
+        if (mDatas != null)
+            mDatas.clear();
         initData();
     }
 
@@ -649,18 +655,14 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class), 0);
                 break;
             //消息
             case R.id.img_message:
-                //                startActivity(new Intent(mContext, MainActivity.class));
-
-                //会话类型 以及是否聚合显示
-                HashMap<String, Boolean> hm = new HashMap<>();
-                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
-                //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-                //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                RongIM.getInstance().startConversationList(this, hm);
+                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
+                finish();
+                startActivity(new Intent(mContext, MainActivity.class));
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
@@ -680,7 +682,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             starWd = data.getDoubleExtra("starWd", 0);
             endWd = data.getDoubleExtra("endWd", 0);
             page = 1;
-            mDatas.clear();
+            if (mDatas != null)
+                mDatas.clear();
             initData();
             Log.e("xxx", "开始经度:" + starJd + "\n" + "结束经度:" + endJd + "\n" + "开始纬度:" + starWd + "\n" + "结束纬度:" + endWd);
         } else if (resultCode == 11) {
@@ -689,10 +692,9 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 searchTv.setText(searchText);
             }
             page = 1;
-            mDatas.clear();
+            if (mDatas != null)
+                mDatas.clear();
             initData();
-        }else if (resultCode==100){
-            finish();
         }
     }
 }

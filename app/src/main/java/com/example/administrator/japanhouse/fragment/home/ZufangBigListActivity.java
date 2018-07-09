@@ -16,9 +16,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.MoreCheckBean;
 import com.example.administrator.japanhouse.bean.OneCheckBean;
 import com.example.administrator.japanhouse.bean.QuYuBean;
@@ -40,16 +42,15 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.yyydjk.library.DropDownMenu;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 
 public class ZufangBigListActivity extends BaseActivity implements MyItemClickListener {
 
@@ -546,14 +547,10 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
                 break;
             //消息
             case R.id.img_message:
-                //                startActivity(new Intent(mContext, MainActivity.class));
-
-                //会话类型 以及是否聚合显示
-                HashMap<String, Boolean> hm = new HashMap<>();
-                hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
-                //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-                //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                RongIM.getInstance().startConversationList(this, hm);
+                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
+                finish();
+                startActivity(new Intent(mContext, MainActivity.class));
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
@@ -583,8 +580,6 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
             page=1;
             mDatas.clear();
             initData();
-        }else if (resultCode==100){
-            finish();
         }
     }
 }

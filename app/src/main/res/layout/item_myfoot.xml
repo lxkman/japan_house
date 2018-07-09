@@ -17,7 +17,7 @@
         android:background="@drawable/house" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dip"
@@ -31,7 +31,6 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:text="泰和·金府大厦"
             android:textColor="#333"
             android:textSize="14sp" />
 
@@ -41,7 +40,7 @@
             android:layout_marginTop="10dip">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -53,24 +52,25 @@
 
                 <TextView
                     android:id="@+id/frag_mineList_address"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginLeft="5dp"
                     android:gravity="center_vertical"
-                    android:text="东京"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="13sp"
+                    android:layout_marginRight="10dp"/>
 
-            <TextView
-                android:id="@+id/frag_mineList_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dip"
-                android:gravity="center"
-                android:text="15万/㎡"
-                android:textColor="@color/shihuangse"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/frag_mineList_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center"
+                    android:textColor="@color/shihuangse"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </RelativeLayout>
 
         <LinearLayout
@@ -91,7 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="03.12"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

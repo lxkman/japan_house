@@ -26,8 +26,11 @@
             android:textColor="#444444"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="简小姐"
             android:layout_marginLeft="12dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_gravity="center_vertical"
             />
 

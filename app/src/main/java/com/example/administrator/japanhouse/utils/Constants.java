@@ -24,4 +24,6 @@ public class Constants {
     public static final String EVENT_USERINFO = "EVENT_USERINFO"; //
     public static final String EVENT_W = "EVENT_W"; //
     public static final String EVENT_D = "EVENT_D"; //
+    public static final String EVENT_QUEST_W = "EVENT_QUEST_W"; //
+    public static final String EVENT_QUEST_D = "EVENT_QUEST_D"; //
 }

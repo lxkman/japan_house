@@ -46,7 +46,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     private void initView() {
         type = getIntent().getIntExtra("type", 0);
         img_beak = (ImageView) findViewById(R.id.img_beak);
@@ -63,31 +62,36 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         HttpParams params = new HttpParams();
         params.put("token", MyApplication.getUserToken());
-        params.put("qTitle",title);
-        params.put("qContext",content);
-        params.put("qType",type);
+        params.put("qTitle", title);
+        params.put("qContext", content);
+        params.put("qType", type);
         OkGo.<HuiDaBean>post(MyUrls.BASEURL + "/app/askinfo/askquestions")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<HuiDaBean>(QuizActivity.this,HuiDaBean.class){
+                .execute(new DialogCallback<HuiDaBean>(QuizActivity.this, HuiDaBean.class) {
                     @Override
                     public void onSuccess(Response<HuiDaBean> response) {
                         HuiDaBean body = response.body();
                         String code = body.getCode();
-                        if(code.equals("200")){
+                        if (code.equals("200")) {
                             EventBus.getDefault().post(new EventBean(Constants.EVENT_W));
+                            if (type == 1) {
+                                EventBus.getDefault().post(new EventBean(Constants.EVENT_QUEST_W));
+                            } else {
+                                EventBus.getDefault().post(new EventBean(Constants.EVENT_QUEST_D));
+                            }
                             finish();
-                            ToastUtils.getToast(QuizActivity.this,body.getMsg());
-                        }else if(code.equals("201")){
-                            ToastUtils.getToast(QuizActivity.this,body.getMsg());
-                        }else if(code.equals("500")){
-                            ToastUtils.getToast(QuizActivity.this,body.getMsg());
-                        }else if(code.equals("404")){
-                            ToastUtils.getToast(QuizActivity.this,body.getMsg());
-                        }else if(code.equals("203")){
-                            ToastUtils.getToast(QuizActivity.this,body.getMsg());
-                        }else if(code.equals("204")){
-                            ToastUtils.getToast(QuizActivity.this,body.getMsg());
+                            ToastUtils.getToast(QuizActivity.this, body.getMsg());
+                        } else if (code.equals("201")) {
+                            ToastUtils.getToast(QuizActivity.this, body.getMsg());
+                        } else if (code.equals("500")) {
+                            ToastUtils.getToast(QuizActivity.this, body.getMsg());
+                        } else if (code.equals("404")) {
+                            ToastUtils.getToast(QuizActivity.this, body.getMsg());
+                        } else if (code.equals("203")) {
+                            ToastUtils.getToast(QuizActivity.this, body.getMsg());
+                        } else if (code.equals("204")) {
+                            ToastUtils.getToast(QuizActivity.this, body.getMsg());
                         }
 
                     }

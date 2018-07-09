@@ -103,7 +103,7 @@
                 android:textSize="14sp" />
         </RelativeLayout>
 
-        <ImageView
+        <com.example.administrator.japanhouse.view.CircleImageView
             android:id="@+id/item_chat_text_right"
             android:layout_width="45dp"
             android:layout_height="45dp"

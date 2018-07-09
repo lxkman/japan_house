@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.QueandansBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Buyhouse_Adapter;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
@@ -21,6 +24,10 @@ import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +55,7 @@ public class Buyhouse_Fragment extends BaseFragment{
         sp_view = (SpringView) view.findViewById(R.id.sp_view);
         searchText=getArguments().getString("searchText");
         intdata();
-
+        EventBus.getDefault().register(this);
         return view;
 
     }
@@ -137,5 +144,18 @@ public class Buyhouse_Fragment extends BaseFragment{
                 });
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventUserInfos(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_QUEST_W)) {
+            list.clear();
+            pageNo = 1;
+            intdata();
+        }
+    }
 }

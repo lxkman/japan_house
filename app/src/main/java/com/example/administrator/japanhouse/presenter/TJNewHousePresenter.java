@@ -30,6 +30,9 @@ public class TJNewHousePresenter {
      * @param hType
      */
     public void getHouseList(int pageNo, String hType){
+        if (CacheUtils.get("cityId")==null){
+            return;
+        }
         int cityId = CacheUtils.get("cityId");
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
@@ -52,6 +55,9 @@ public class TJNewHousePresenter {
      * @param pageNo
      */
     public void getLand(int pageNo){
+        if (CacheUtils.get("cityId")==null){
+            return;
+        }
         int cityId = CacheUtils.get("cityId");
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);

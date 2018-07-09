@@ -161,6 +161,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
         layout = (RelativeLayout) rootView.findViewById(R.id.recyclerView_layout);
 
+        layout.setVisibility(View.GONE);
+
         presenter = new MinePresenter(getActivity(), this);
         presenter.getHouseRecordList(MyApplication.getUserToken(), page);
 
@@ -372,8 +374,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 adapter = new MineRecordAdapter(mContext, list);
                 recyclerFoot.setAdapter(adapter);
                 layout.setVisibility(View.VISIBLE);
+                nestScroll.scrollTo(0, 0);
             } else {
                 layout.setVisibility(View.GONE);
+                nestScroll.scrollTo(0, 0);
             }
         }
     }

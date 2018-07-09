@@ -110,7 +110,7 @@ public class ManagerActivity extends BaseActivity {
                             return;
                         }
                         String code1 = ManagerBean.getCode();
-                        final com.example.administrator.japanhouse.bean.ManagerBean.DatasBean datas = ManagerBean.getDatas();
+                        final ManagerBean.DatasBean datas = ManagerBean.getDatas();
                         if (datas==null){
                             return;
                         }

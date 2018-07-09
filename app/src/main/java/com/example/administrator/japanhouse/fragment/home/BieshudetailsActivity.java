@@ -177,6 +177,9 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
 
         if (response != null && response.body() != null) {
             villaDetailsBean = response.body().getDatas();
+            if (villaDetailsBean==null){
+                return;
+            }
             if (villaDetailsBean.getHwdcBroker()==null){
                 return;
             }

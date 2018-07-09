@@ -7,10 +7,11 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
-import com.example.administrator.japanhouse.bean.SuccessBean;
+import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.login.BindPhoneActivity;
 import com.example.administrator.japanhouse.utils.MyUrls;
+import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -92,15 +93,17 @@ public class UMLoginActivity extends BaseActivity {
             HttpParams params = new HttpParams();
             params.put("loginType",finalType);
             params.put("uId",uid);
-            OkGo.<SuccessBean>post(MyUrls.BASEURL + "app/user/specialogin")
+            OkGo.<LoginBean>post(MyUrls.BASEURL + "app/user/specialogin")
                     .tag(this)
                     .params(params)
-                    .execute(new DialogCallback<SuccessBean>(mContext, SuccessBean.class) {
+                    .execute(new DialogCallback<LoginBean>(mContext, LoginBean.class) {
                         @Override
-                        public void onSuccess(Response<SuccessBean> response) {
+                        public void onSuccess(Response<LoginBean> response) {
                             int code = response.code();
-                            SuccessBean successBean = response.body();
-                            if (successBean.getCode().equals("200")){
+                            LoginBean LoginBean = response.body();
+                            if (LoginBean.getCode().equals("200")){
+                                SharedPreferencesUtils.getInstace(mContext).setStringPreference("uid", response.body().getDatas().getId() + "");
+                                SharedPreferencesUtils.getInstace(mContext).setStringPreference("token", response.body().getDatas().getToken() + "");
                                 TUtils.showFail(MyApplication.getGloableContext(),"登录成功");
                                 HashMap<String, Boolean> hm = new HashMap<>();
                                 //会话类型 以及是否聚合显示
@@ -108,14 +111,14 @@ public class UMLoginActivity extends BaseActivity {
                                 //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
                                 //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
                                 RongIM.getInstance().startConversationList(mContext, hm);
-                            }else if (successBean.getCode().equals("-1")){
+                            }else if (LoginBean.getCode().equals("-1")){
                                 Intent intent=new Intent(mContext, BindPhoneActivity.class);
                                 intent.putExtra("loginType",finalType);
                                 intent.putExtra("uId",uid);
                                 mContext.startActivity(intent);
-                                Toast.makeText(mContext, successBean.getMsg(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, LoginBean.getMsg(), Toast.LENGTH_SHORT).show();
                             }else {
-                                Toast.makeText(mContext, successBean.getMsg(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, LoginBean.getMsg(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

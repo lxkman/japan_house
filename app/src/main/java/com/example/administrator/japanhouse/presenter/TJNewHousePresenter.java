@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.model.HouseListBean;
 import com.example.administrator.japanhouse.model.LandBean;
+import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -29,10 +30,11 @@ public class TJNewHousePresenter {
      * @param hType
      */
     public void getHouseList(int pageNo, String hType){
+        int cityId = CacheUtils.get("cityId");
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
         params.put("hType", hType);
-        params.put("cId", "2");
+        params.put("cId", cityId);
         OkGo.<HouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/recommendlist")
                 .tag(this)
                 .params(params)
@@ -49,9 +51,10 @@ public class TJNewHousePresenter {
      * @param pageNo
      */
     public void getLand(int pageNo){
+        int cityId = CacheUtils.get("cityId");
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
-        params.put("cId", "2");
+        params.put("cId", cityId);
         OkGo.<LandBean>post(MyUrls.BASEURL + "/app/land/recommendland")
                 .tag(this)
                 .params(params)

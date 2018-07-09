@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
@@ -175,11 +176,8 @@ public class HomeMapActivity extends BaseActivity {
                 startActivityForResult(intent, 0);
                 break;
             case R.id.title_message_iv:
+                startActivity(new Intent(mContext, MainActivity.class));
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
-                Intent intent1=new Intent();
-                intent1.putExtra("data","finish");
-                setResult(100,intent1);
-                finish();
                 break;
         }
     }

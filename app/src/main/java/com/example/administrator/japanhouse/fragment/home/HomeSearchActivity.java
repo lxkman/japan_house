@@ -211,7 +211,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 } else {
                     Intent newHouseIntent = new Intent(HomeSearchActivity.this, NewHouseActivity.class);
                     newHouseIntent.putExtra("searchText", searchText);
-                    startActivity(newHouseIntent);
+                    startActivityForResult(newHouseIntent,0);
                 }
                 break;
             case 1: //别墅
@@ -223,7 +223,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 } else {
                     Intent villaIntent = new Intent(HomeSearchActivity.this, BieShuActivity.class);
                     villaIntent.putExtra("searchText", searchText);
-                    startActivity(villaIntent);
+                    startActivityForResult(villaIntent,0);
                 }
                 break;
             case 2: //二手房
@@ -235,7 +235,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 } else {
                     Intent oldHouseIntent = new Intent(HomeSearchActivity.this, ErshoufangActiviy.class);
                     oldHouseIntent.putExtra("searchText", searchText);
-                    startActivity(oldHouseIntent);
+                    startActivityForResult(oldHouseIntent,0);
                 }
                 break;
             case 3: //土地
@@ -247,14 +247,14 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 } else {
                     Intent landIntent = new Intent(HomeSearchActivity.this, TudiActivity.class);
                     landIntent.putExtra("searchText", searchText);
-                    startActivity(landIntent);
+                    startActivityForResult(landIntent,0);
                 }
                 break;
             case 4: //租房
                 if (state2 == 100) {
                     Intent rentalIntent = new Intent(HomeSearchActivity.this, ZufangBigListActivity.class);
                     rentalIntent.putExtra("searchText", searchText);
-                    startActivity(rentalIntent);
+                    startActivityForResult(rentalIntent,0);
                 } else {
                     Intent intent = new Intent();
                     intent.putExtra("searchText", searchText);
@@ -266,7 +266,7 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 if (state2 == 100) {
                     Intent businessIntent = new Intent(HomeSearchActivity.this, SydcBigLiebiaoActivity.class);
                     businessIntent.putExtra("searchText", searchText);
-                    startActivity(businessIntent);
+                    startActivityForResult(businessIntent,0);
                 } else {
                     Intent intent = new Intent();
                     intent.putExtra("searchText", searchText);
@@ -280,6 +280,13 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==100){
+            finish();
+        }
+    }
 
     private void initHot() {
         switch (state) {

@@ -25,6 +25,12 @@ public class Buyhouse_Adapter extends RecyclerView.Adapter<Buyhouse_Adapter.View
     private Context context;
     List<QueandansBean.DatasBean>list;
 
+    private int type;
+
+    public void setType(int type){
+        this.type = type;
+    }
+
     public Buyhouse_Adapter(Context context, List<QueandansBean.DatasBean> list) {
         this.context = context;
         this.list = list;
@@ -47,6 +53,7 @@ public class Buyhouse_Adapter extends RecyclerView.Adapter<Buyhouse_Adapter.View
                 Intent intent = new Intent(context, WenDa_Detils_Activity.class);
                  intent.putExtra("askid", list.get(position).getId());
                 intent.putExtra("title",list.get(position).getTitle());
+                intent.putExtra("type", type);
                 context.startActivity(intent);
             }
         });

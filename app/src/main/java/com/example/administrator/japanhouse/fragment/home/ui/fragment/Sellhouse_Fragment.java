@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.QueandansBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.home.ui.adapter.Buyhouse_Adapter;
+import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.ToastUtils;
 import com.liaoinstan.springview.container.DefaultFooter;
@@ -21,6 +24,10 @@ import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +43,7 @@ public class Sellhouse_Fragment extends BaseFragment{
     private Buyhouse_Adapter buyhouse_adapter;
     private int pageNo=1;
     private String searchText;
+    private int type;
     List<QueandansBean.DatasBean> list=new ArrayList<>();
 
     public Sellhouse_Fragment() {
@@ -47,7 +55,10 @@ public class Sellhouse_Fragment extends BaseFragment{
         sp_view = (SpringView) view.findViewById(R.id.sp_view);
         buy_recyclwe = (RecyclerView) view.findViewById(R.id.Buy_recycler);
         searchText=getArguments().getString("searchText");
+        type = getArguments().getInt("type");
         intdata();
+
+        EventBus.getDefault().register(this);
         return view;
     }
 
@@ -93,6 +104,7 @@ public class Sellhouse_Fragment extends BaseFragment{
         //加载适配器
         buy_recyclwe.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         buyhouse_adapter = new Buyhouse_Adapter(getActivity(),list);
+        buyhouse_adapter.setType(type);
         buy_recyclwe.setAdapter(buyhouse_adapter);
 
     }
@@ -133,5 +145,20 @@ public class Sellhouse_Fragment extends BaseFragment{
                     }
 
                 });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void eventUserInfos(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_QUEST_D)) {
+            list.clear();
+            pageNo = 1;
+            intdata();
+        }
     }
 }

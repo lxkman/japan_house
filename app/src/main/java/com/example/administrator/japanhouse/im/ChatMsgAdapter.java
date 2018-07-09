@@ -9,7 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.bean.LoginBean;
+import com.example.administrator.japanhouse.model.UserInfo;
+import com.example.administrator.japanhouse.utils.CacheUtils;
+import com.example.administrator.japanhouse.utils.Constants;
 
 import java.util.List;
 
@@ -83,19 +88,18 @@ public class ChatMsgAdapter extends BaseAdapter {
                 vh.right.setVisibility(View.VISIBLE);
 
                 //读取缓存加载图片 rightPhoto
+                LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
 
                 vh.rightContent.setText(list.get(position));
 
-//                Glide.with(context)
-//                        .load()
-//                        .into(vh.rightPhoto);
-
+                if (bean != null) {
+                    Glide.with(context)
+                            .load(bean.getPic())
+                            .into(vh.rightPhoto);
+                }
             } else {
                 vh.left.setVisibility(View.VISIBLE);
                 vh.right.setVisibility(View.GONE);
-
-                //读取缓存加载图片 leftPhoto
-
                 vh.leftContent.setText(list.get(position));
             }
         }

@@ -63,7 +63,7 @@ public class WenDa_Details_Bean {
         private int isDeleted;
         private String description;
         private int descriptionType;
-        private Object answerNum;
+        private int answerNum;
         private HwdcUserBean hwdcUser;
 
         public int getId() {
@@ -130,11 +130,11 @@ public class WenDa_Details_Bean {
             this.descriptionType = descriptionType;
         }
 
-        public Object getAnswerNum() {
+        public int getAnswerNum() {
             return answerNum;
         }
 
-        public void setAnswerNum(Object answerNum) {
+        public void setAnswerNum(int answerNum) {
             this.answerNum = answerNum;
         }
 

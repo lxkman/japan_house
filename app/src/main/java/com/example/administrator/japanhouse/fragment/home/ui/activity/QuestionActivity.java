@@ -78,6 +78,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             buyhouse_fragment = new Buyhouse_Fragment();
             Bundle bundle = new Bundle();
             bundle.putString("searchText", searchText);
+            bundle.putInt("type", type);
             buyhouse_fragment.setArguments(bundle);
         }
         AddFragment(buyhouse_fragment);
@@ -104,6 +105,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                     buyhouse_fragment = new Buyhouse_Fragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("searchText", searchText);
+                    bundle.putInt("type", type);
                     buyhouse_fragment.setArguments(bundle);
                 }
                 AddFragment(buyhouse_fragment);
@@ -120,6 +122,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                     sellhouse_fragment = new Sellhouse_Fragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("searchText", searchText);
+                    bundle.putInt("type", type);
                     sellhouse_fragment.setArguments(bundle);
                 }
                 AddFragment(sellhouse_fragment);

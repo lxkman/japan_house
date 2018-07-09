@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     startActivity(new Intent(this, LoginActivity.class));
                     return;
                 }
-
+                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_MINE));
                 page = 4;
                 mViewPager.setCurrentItem(3);

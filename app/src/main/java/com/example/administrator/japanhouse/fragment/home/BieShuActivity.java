@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.administrator.japanhouse.MainActivity;
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
@@ -513,8 +514,10 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                 break;
             //消息
             case R.id.img_message:
-                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
+                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
                 finish();
+                startActivity(new Intent(mContext, MainActivity.class));
+                EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
                 break;
             case R.id.search_tv:
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
@@ -535,8 +538,6 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
             page = 1;
             mDatas.clear();
             initData();
-        }else if (resultCode==100){
-            finish();
         }
     }
 }

@@ -122,7 +122,7 @@ public class ManagerActivity extends BaseActivity {
                         avgStar = datas.getBrokerinfo().getAvgStar();
                         if (code1.equals("200")) {
                             Glide.with(ManagerActivity.this).load(datas.getBrokerinfo().getPic()).into(managerHeadImg);
-                            managerName.setText(datas.getBrokerinfo().getNickname() + "");
+                            managerName.setText(datas.getBrokerinfo().getBrokerName() + "");
                             managerHuifulv.setText(datas.getBrokerinfo().getTurnover() + "%");
                             managerYears.setText(datas.getDaynum() + "");
                             managerCount.setText(datas.getFwrs() + "");

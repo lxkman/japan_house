@@ -1,6 +1,7 @@
 package com.example.administrator.japanhouse.im;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,17 +88,22 @@ public class ChatMsgAdapter extends BaseAdapter {
             if (booleanList.get(position)) {
                 vh.left.setVisibility(View.GONE);
                 vh.right.setVisibility(View.VISIBLE);
-
-                //读取缓存加载图片 rightPhoto
-                LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
+                UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
+                if (userBean != null && !TextUtils.isEmpty(userBean.getPic())) {
+                    Glide.with(context)
+                            .load(userBean.getPic())
+                            .into(vh.rightPhoto);
+                } else {
+                    LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
+                    if (bean != null && !TextUtils.isEmpty(bean.getPic())) {
+                        Glide.with(context)
+                                .load(bean.getPic())
+                                .into(vh.rightPhoto);
+                    }
+                }
 
                 vh.rightContent.setText(list.get(position));
 
-                if (bean != null) {
-                    Glide.with(context)
-                            .load(bean.getPic())
-                            .into(vh.rightPhoto);
-                }
             } else {
                 vh.left.setVisibility(View.VISIBLE);
                 vh.right.setVisibility(View.GONE);

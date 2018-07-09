@@ -496,7 +496,7 @@ public class RentalFragment extends Fragment  implements PicRentalAdapter.onItem
         }
 
 
-        RentalDetailsBean bean = new RentalDetailsBean(getString(R.string.rent_details),
+        RentalDetailsBean bean = new RentalDetailsBean(getString(R.string.sell_details),
                 "0",
                 null,
                 etCall.getText().toString(),

@@ -495,7 +495,7 @@ public class SellFragment extends Fragment  implements PicRentalAdapter.onItemCl
             isbathRoom = "1";
         }
 
-        RentalDetailsBean bean = new RentalDetailsBean(getString(R.string.sell_details),
+        RentalDetailsBean bean = new RentalDetailsBean(getString(R.string.rent_details),
                 "0",
                 null,
                 etCall.getText().toString(),

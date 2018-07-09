@@ -111,6 +111,6 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/touxiang"
             android:clickable="true"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
     </LinearLayout>
 </LinearLayout>

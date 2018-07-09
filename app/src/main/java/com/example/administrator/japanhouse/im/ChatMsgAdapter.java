@@ -15,6 +15,7 @@ import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.model.UserInfo;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.view.CircleImageView;
 
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class ChatMsgAdapter extends BaseAdapter {
             vh.leftPhoto = (ImageView) convertView.findViewById(R.id.item_chat_text_left);
             vh.leftContent = (TextView) convertView.findViewById(R.id.item_chat_content_left);
             vh.right = (LinearLayout) convertView.findViewById(R.id.item_chat_qipao2);
-            vh.rightPhoto = (ImageView) convertView.findViewById(R.id.item_chat_text_right);
+            vh.rightPhoto = (CircleImageView) convertView.findViewById(R.id.item_chat_text_right);
             vh.rightContent = (TextView) convertView.findViewById(R.id.item_chat_content_right);
             convertView.setTag(vh);
         } else {
@@ -124,7 +125,7 @@ public class ChatMsgAdapter extends BaseAdapter {
         TextView leftContent;
 
         LinearLayout right;
-        ImageView rightPhoto;
+        CircleImageView rightPhoto;
         TextView rightContent;
     }
 

@@ -774,6 +774,9 @@ public class NewHousedetailsActivity extends BaseActivity {
 
                         }else if (code1.equals("205")){
                             Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
+                        }else if(code1.equals("201")){
+                            SharedPreferencesUtils.getInstace(NewHousedetailsActivity.this).setStringPreference("token", "");
+                            MyUtils.StartLoginActivity(NewHousedetailsActivity.this);
                         }else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }

@@ -165,7 +165,6 @@ public class HomeFragment extends BaseFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null);
         unbinder = ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {
             isJa = true;
@@ -178,11 +177,6 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 
     private void initLocation() {
         mLocClient = new LocationClient(mContext);

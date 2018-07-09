@@ -121,6 +121,7 @@ public class ForgetPswActivity extends BaseActivity {
         Log.d("RegisterActivity", QuNumber+"---------"+quhao);
         params.put("phone", "00"+quhao+edtPhone.getText().toString());
         params.put("sendType",QuNumber);
+        params.put("vPhone",edtPhone.getText().toString());
         OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
                 .tag(this)
                 .params(params)

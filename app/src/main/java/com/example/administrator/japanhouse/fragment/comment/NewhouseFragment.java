@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseFragment;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.model.HouseListBean;
 import com.example.administrator.japanhouse.model.LandBean;
 import com.example.administrator.japanhouse.presenter.TJNewHousePresenter;
@@ -26,6 +27,10 @@ import com.example.administrator.japanhouse.view.MyFooter;
 import com.example.administrator.japanhouse.view.MyHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +54,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_shoufang, null);
+        EventBus.getDefault().register(this);
         mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
         springview = (SpringView) view.findViewById(R.id.springview);
         tv_refresh_time = (TextView) view.findViewById(R.id.tv_refresh_time);
@@ -63,7 +69,14 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
         initNet();
         initListener();
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void mRefresh(EventBean eventBean) {
+        if (eventBean.getMsg().equals("refreshComment")){
+            tjNewHousePresenter.getHouseList(page,"0");
+            String currentDate = MyUtils.getCurrentDate();
+            tv_refresh_time.setText(currentDate+getResources().getString(R.string.gengxin));
+        }
+    }
     private void initNet() {
         String currentDate = MyUtils.getCurrentDate();
         tv_refresh_time.setText(currentDate+getResources().getString(R.string.gengxin));
@@ -127,7 +140,10 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             } else {
                 mRefreshData.addAll(datas);
             }
-            mLiebiaoAdapter.notifyDataSetChanged();
+            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,mRefreshData);
+            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+            mrecycler.setNestedScrollingEnabled(false);
+            mrecycler.setAdapter(mLiebiaoAdapter);
 
         }
         mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -171,7 +187,9 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
+
 
 
     @Override

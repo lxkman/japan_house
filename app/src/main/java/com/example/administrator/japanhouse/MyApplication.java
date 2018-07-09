@@ -322,7 +322,7 @@ public class MyApplication extends Application {
         CacheUtils.removeAll();
         CacheUtils.put(Constants.COUNTRY, language);
         CacheUtils.put(Constants.MANAGER_T, setting);
-
+        CacheUtils.put("cityId", 2);//如果int值没有put的话，就老是报错
         if (RongIM.getInstance() != null) {
 
             List<Conversation> conversationList = RongIM.getInstance().getRongIMClient().getConversationList();

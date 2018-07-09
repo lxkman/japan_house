@@ -36,6 +36,7 @@ import com.example.administrator.japanhouse.adapter.MyGridViewAdpter;
 import com.example.administrator.japanhouse.adapter.MyViewPagerAdapter;
 import com.example.administrator.japanhouse.base.BaseFragment;
 import com.example.administrator.japanhouse.bean.CityListBean;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
 import com.example.administrator.japanhouse.bean.HomePageBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
@@ -66,6 +67,8 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,6 +165,7 @@ public class HomeFragment extends BaseFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {
             isJa = true;
@@ -172,6 +176,12 @@ public class HomeFragment extends BaseFragment {
         initViewData();
         initScroll();
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initLocation() {
@@ -267,6 +277,7 @@ public class HomeFragment extends BaseFragment {
         }
         CacheUtils.put("cityId", cityId);
         initData();
+        EventBus.getDefault().postSticky(new EventBean("refreshComment"));//刷新推荐的数据
     }
 
     private void initViewData() {

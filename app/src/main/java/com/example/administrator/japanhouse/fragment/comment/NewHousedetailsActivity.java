@@ -650,7 +650,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                     Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
                 }else {
                     initHuoDong(noticeType);
-                    tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
                 }
         } else {
                     Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
@@ -664,7 +663,6 @@ public class NewHousedetailsActivity extends BaseActivity {
                     Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
                 }else {
                     initHuoDong(noticeType);
-                    tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
                 }
                 } else {
                     Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
@@ -747,7 +745,11 @@ public class NewHousedetailsActivity extends BaseActivity {
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
-
+                            if (noticeType==0){
+                                tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
+                            }else if (noticeType==1){
+                                tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
+                            }
                             PushAgent mPushAgent = PushAgent.getInstance(NewHousedetailsActivity.this);
                             if (noticeType==0){//变价
                                 Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.bianjiatongzhidingyuechenggong), Toast.LENGTH_SHORT).show();

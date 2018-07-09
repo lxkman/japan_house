@@ -53,9 +53,9 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
 
             viewHolder.name.setText(MyApplication.isJapanese() ? datas.get(position).getTitleJpn() : datas.get(position).getTitleCn());
             viewHolder.address.setText(MyApplication.isJapanese() ? datas.get(position).getAddressJpn() : datas.get(position).getAddressCn());
-            viewHolder.price.setText(MyApplication.isJapanese() ? datas.get(position).getPriceJpn() + "万" : datas.get(position).getPriceCn() + "万");
+            viewHolder.price.setText(MyApplication.isJapanese() ? datas.get(position).getPriceJpn() + "" : datas.get(position).getPriceCn() + "");
             viewHolder.room.setText(MyApplication.isJapanese() ? datas.get(position).getDoorModelJpn() : datas.get(position).getDoorModelCn());
-            viewHolder.area.setText(MyApplication.isJapanese() ? datas.get(position).getAreaJpn() + "㎡" : datas.get(position).getAreaCn() + "㎡");
+            viewHolder.area.setText(MyApplication.isJapanese() ? datas.get(position).getAreaJpn() + "" : datas.get(position).getAreaCn() + "");
             viewHolder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

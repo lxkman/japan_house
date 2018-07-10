@@ -21,6 +21,7 @@ public class Constants {
     //event
     public static final String EVENT_CHAT = "EVENT_CHAT"; //跳转到首页CHAT
     public static final String EVENT_MINE = "EVENT_MINE"; //
+    public static final String EVENT_MAIN = "EVENT_MAIN"; //
     public static final String EVENT_USERINFO = "EVENT_USERINFO"; //
     public static final String EVENT_W = "EVENT_W"; //
     public static final String EVENT_D = "EVENT_D"; //

@@ -365,6 +365,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         if (TextUtils.equals(response.body().getCode(), "201")) {
             getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
             MyApplication.logOut();
+            EventBus.getDefault().post(new EventBean(Constants.EVENT_MAIN));
             return;
         }
 
@@ -394,6 +395,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         if (TextUtils.equals(response.body().getCode(), "201")) {
             startActivity(new Intent(getActivity(), LoginActivity.class));
             MyApplication.logOut();
+            EventBus.getDefault().post(new EventBean(Constants.EVENT_MAIN));
             return;
         }
 

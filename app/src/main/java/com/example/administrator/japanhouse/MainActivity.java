@@ -141,7 +141,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rb_home:
                 page = 1;
                 mViewPager.setCurrentItem(0);
-                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case rb_chat:
                 if (!MyApplication.isLogin()) {
@@ -166,14 +165,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 page = 2;
                 mViewPager.setCurrentItem(1);
-                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case R.id.rb_comment:
                 page = 3;
                 mViewPager.setCurrentItem(2);
-                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 break;
             case R.id.rb_mine:
+                EventBus.getDefault().postSticky(new EventBean("minescrolltotop"));
                 if (!MyApplication.isLogin()) {
                     switch (page) {
                         case 1:
@@ -233,6 +231,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 return;
             }
             mViewPager.setCurrentItem(1);
+        } else if (TextUtils.equals(Constants.EVENT_MAIN, eventBean.getMsg())) {
+            mViewPager.setCurrentItem(0);
         }
     }
 

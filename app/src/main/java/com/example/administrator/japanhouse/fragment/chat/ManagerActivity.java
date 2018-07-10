@@ -23,7 +23,6 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.ManagerBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
-import com.example.administrator.japanhouse.im.ImManager;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
@@ -130,7 +129,7 @@ public class ManagerActivity extends BaseActivity {
                             managerHeadImg.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    ImManager.enterChat(ManagerActivity.this,datas.getBrokerinfo().getId()+"",datas.getBrokerinfo().getBrokerName(),datas.getBrokerinfo().getPic());
+//                                    ImManager.enterChat(ManagerActivity.this,datas.getBrokerinfo().getId()+"",datas.getBrokerinfo().getBrokerName(),datas.getBrokerinfo().getPic());
                                 }
                             });
                         } else {

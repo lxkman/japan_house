@@ -28,6 +28,7 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
     private Context context;
     List<TouTiaoListBean.DatasBean>list=new ArrayList<>();
     private boolean isJa;
+    private ViewHolder viewHolder;
 
     public TouAdapter(Context context, List<TouTiaoListBean.DatasBean>list) {
         this.context = context;
@@ -37,7 +38,6 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.touadapter, parent, false);
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
@@ -45,15 +45,15 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
         } else {
             isJa = false;
         }
-        ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.neirong.setText(isJa ? list.get(viewType).getTitleJpn() : list.get(viewType).getTitleCn());
-        viewHolder.time.setText(MyUtils.getDateToStringH(list.get(viewType).getCreateTime()+""));
-        viewHolder.person.setText(list.get(viewType).getReadNum()+context.getResources().getString(R.string.renchakan));
+      ViewHolder  viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.neirong.setText(isJa ? list.get(position).getTitleJpn() : list.get(position).getTitleCn());
+        holder.time.setText(MyUtils.getDateToStringH(list.get(position).getCreateTime()+""));
+        holder.person.setText(list.get(position).getReadNum()+context.getResources().getString(R.string.renchakan));
      holder.view.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {

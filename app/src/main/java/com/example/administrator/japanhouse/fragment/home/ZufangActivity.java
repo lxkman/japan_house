@@ -20,8 +20,10 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.bean.HomeItemBean;
+import com.example.administrator.japanhouse.bean.YanJiuListBean;
 import com.example.administrator.japanhouse.bean.ZufangListBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -92,9 +94,28 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
             isJa = false;
         }
         initView();
+        initTab();
+        initYanjiu();
+        initComment();
     }
 
     private void initView() {
+        yanjiuRecycler.setNestedScrollingEnabled(false);
+        yanjiuRecycler.setLayoutManager(new GridLayoutManager(mContext, 2));
+        fenleiRecycler.setNestedScrollingEnabled(false);
+        fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
+        shendengRecycler.setNestedScrollingEnabled(false);
+        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+        tuijianRecycler.setNestedScrollingEnabled(false);
+        tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+        if (!TextUtils.isEmpty((String) CacheUtils.get("shendeng_hxs"))) {
+            notShendengLl.setVisibility(View.GONE);
+            alreadyShendengLl.setVisibility(View.VISIBLE);
+            goShendeng();
+        }
+    }
+
+    private void initTab() {
         String[] itemName = {getString(R.string.zufang_dsgy),
                 getString(R.string.zufang_xsgy),
                 getString(R.string.zufang_ffzf),
@@ -106,10 +127,6 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         for (int i = 0; i < itemName.length; i++) {
             homeItemBeanList.add(new HomeItemBean(itemName[i], itemPic[i]));
         }
-        fenleiRecycler.setNestedScrollingEnabled(false);
-        fenleiRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
-        shendengRecycler.setNestedScrollingEnabled(false);
-        shendengRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         FenleiAdapter fenleiAdapter = new FenleiAdapter(R.layout.item_sydc_fenlei, homeItemBeanList);
         fenleiRecycler.setAdapter(fenleiAdapter);
         fenleiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -137,24 +154,9 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 startActivity(intent);
             }
         });
-        List<HomeItemBean> yanjiuItemBeanList = new ArrayList<>();
-        for (int i = 0; i < yanjiuitemPic.length; i++) {
-            yanjiuItemBeanList.add(new HomeItemBean(itemName[i], yanjiuitemPic[i]));
-        }
-        yanjiuRecycler.setNestedScrollingEnabled(false);
-        yanjiuRecycler.setLayoutManager(new GridLayoutManager(mContext, 2));
-        YanjiuAdapter yanjiuAdapter = new YanjiuAdapter(R.layout.item_yanjiu_layout, yanjiuItemBeanList);
-        yanjiuRecycler.setAdapter(yanjiuAdapter);
-        yanjiuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
-                intent.putExtra("yjType", position + "");
-                startActivity(intent);
-            }
-        });
-        tuijianRecycler.setNestedScrollingEnabled(false);
-        tuijianRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+    }
+
+    private void initComment() {
         HttpParams params = new HttpParams();
         int cityId = CacheUtils.get("cityId");
         params.put("cId", cityId);
@@ -177,11 +179,47 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                         }
                     }
                 });
-        if (!TextUtils.isEmpty((String) CacheUtils.get("shendeng_hxs"))) {
-            notShendengLl.setVisibility(View.GONE);
-            alreadyShendengLl.setVisibility(View.VISIBLE);
-            goShendeng();
-        }
+    }
+
+    private void initYanjiu() {
+        HttpParams params = new HttpParams();
+        params.put("pageNo", 1);
+        OkGo.<YanJiuListBean>post(MyUrls.BASEURL + "/app/zfyjs/selectlist")
+                .tag(this)
+                .params(params)
+                .execute(new JsonCallback<YanJiuListBean>(YanJiuListBean.class) {
+                    @Override
+                    public void onSuccess(Response<YanJiuListBean> response) {
+                        int code = response.code();
+                        YanJiuListBean yanJiuListBean = response.body();
+                        if (yanJiuListBean == null) {
+                            return;
+                        }
+                        final List<YanJiuListBean.DatasEntity> datas = yanJiuListBean.getDatas();
+                        final List<YanJiuListBean.DatasEntity> datas1 = yanJiuListBean.getDatas();
+                        if (datas != null && datas.size() > 3) {
+                            for (int i = 0; i < 4; i++) {
+                                datas1.add(datas.get(i));
+                            }
+                        } else {
+                            datas1.clear();
+                            datas1.add(new YanJiuListBean.DatasEntity());
+                            datas1.add(new YanJiuListBean.DatasEntity());
+                            datas1.add(new YanJiuListBean.DatasEntity());
+                            datas1.add(new YanJiuListBean.DatasEntity());
+                        }
+                        YanjiuAdapter yanjiuAdapter = new YanjiuAdapter(R.layout.item_yanjiu_layout, datas1);
+                        yanjiuRecycler.setAdapter(yanjiuAdapter);
+                        yanjiuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(mContext, YanjiuDetailActivity.class);
+                                intent.putExtra("yjType", position + "");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
     }
 
     private void goShendeng() {
@@ -273,17 +311,18 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         }
     }
 
-    private class YanjiuAdapter extends BaseQuickAdapter<HomeItemBean, BaseViewHolder> {
+    private class YanjiuAdapter extends BaseQuickAdapter<YanJiuListBean.DatasEntity, BaseViewHolder> {
 
-        public YanjiuAdapter(int layoutResId, @Nullable List<HomeItemBean> data) {
+        public YanjiuAdapter(int layoutResId, @Nullable List<YanJiuListBean.DatasEntity> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, HomeItemBean item) {
+        protected void convert(BaseViewHolder helper, YanJiuListBean.DatasEntity item) {
             ImageView imageView = helper.getView(R.id.item_pic_iv);
-            Glide.with(MyApplication.getGloableContext()).load(item.getImg()).into(imageView);
-            helper.setText(R.id.tv_content, item.getTitle());
+            if (!TextUtils.isEmpty(item.getImageUrl()))
+                Glide.with(MyApplication.getGloableContext()).load(item.getImageUrl()).into(imageView);
+            helper.setText(R.id.tv_content, item.getYjTitle());
         }
     }
 
@@ -319,8 +358,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
                     .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
-                    .setText(R.id.tv_rent_type,item.getZfType()==0?
-                            getResources().getString(R.string.zhengzu):getResources().getString(R.string.hezu));
+                    .setText(R.id.tv_rent_type, item.getZfType() == 0 ?
+                            getResources().getString(R.string.zhengzu) : getResources().getString(R.string.hezu));
             if (helper.getAdapterPosition() == shendengDatas.size() - 1) {
                 helper.getView(R.id.tv_lookmore).setVisibility(View.VISIBLE);
                 helper.getView(R.id.tv_lookmore).setOnClickListener(new View.OnClickListener() {
@@ -347,7 +386,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 startActivity(intent);
                 break;
             case R.id.img_dingwei:
-                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class), 0);
                 break;
             case R.id.img_message:
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -368,7 +407,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==100){
+        if (resultCode == 100) {
             finish();
         }
     }

@@ -78,8 +78,8 @@ public class MaiFang_house_Adapter extends RecyclerView.Adapter<MaiFang_house_Ad
         }
 
         holder.weizhi.setText(list.get(position).getHousingLocation());
-        holder.juli.setText(list.get(position).getStationDistance() + "m");
-        holder.mianji.setText(list.get(position).getArea() + "㎡");
+        holder.juli.setText(list.get(position).getStationDistance() + "");
+        holder.mianji.setText(list.get(position).getArea() + "");
         holder.chaoxiang.setText(list.get(position).getToward());
 
         if (!TextUtils.isEmpty(list.get(position).getVideoUrl())) {

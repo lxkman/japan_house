@@ -44,7 +44,11 @@ import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
+import io.rong.imlib.model.MessageContent;
 import io.rong.imlib.model.UserInfo;
+import io.rong.message.InformationNotificationMessage;
+import io.rong.message.TextMessage;
 import okhttp3.OkHttpClient;
 
 /**
@@ -83,7 +87,7 @@ public class MyApplication extends Application {
 //                Toast.makeText(getContext(), "友盟推送注册成功", Toast.LENGTH_SHORT).show();
 
                 System.out.println("友盟推送注册成功" + deviceToken);
-                SpUtils.putString( "UMPUSHID", deviceToken);
+                SpUtils.putString("UMPUSHID", deviceToken);
             }
 
             @Override
@@ -94,8 +98,6 @@ public class MyApplication extends Application {
 
 
     }
-
-
 
 
     private void initUMShare() {
@@ -110,6 +112,34 @@ public class MyApplication extends Application {
     private void initRc() {
         RongIM.init(this);
         RongIM.getInstance().setMessageAttachedUserInfo(true);
+
+        RongIM.getInstance().setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+            @Override
+            public boolean onReceived(Message message, int i) {
+                MessageContent messageContent = message.getContent();
+                String s = null;
+                if (messageContent instanceof InformationNotificationMessage) {
+                    InformationNotificationMessage message1 = (InformationNotificationMessage) message.getContent();
+                    s = message1.getMessage();
+                    if ("用户不允许经纪人发送消息".equals(s) || "ユーザーはメッセージを受信しない".equals(s)) {
+                        RongIM.getInstance().deleteMessages(new int[]{message.getMessageId()}, new RongIMClient.ResultCallback<Boolean>() {
+                            @Override
+                            public void onSuccess(Boolean aBoolean) {
+
+                            }
+
+                            @Override
+                            public void onError(RongIMClient.ErrorCode errorCode) {
+
+                            }
+                        });
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         if (CacheUtils.get(Constants.MANAGER_T) != null) {
             String switchBtn = CacheUtils.get(Constants.MANAGER_T);
@@ -263,7 +293,7 @@ public class MyApplication extends Application {
 
     }
 
-    public static boolean isJapanese(){
+    public static boolean isJapanese() {
         String language = CacheUtils.get(Constants.COUNTRY);
         if (!TextUtils.isEmpty(language) && TextUtils.equals(language, "ja")) {
             return true;
@@ -271,7 +301,7 @@ public class MyApplication extends Application {
         return false;
     }
 
-    public static String getUserToken(){
+    public static String getUserToken() {
         LoginBean.DatasBean datasBean = CacheUtils.get(Constants.USERINFO);
         if (datasBean != null) {
             return datasBean.getToken();
@@ -279,7 +309,7 @@ public class MyApplication extends Application {
         return null;
     }
 
-    public static String getUserId(Context context){
+    public static String getUserId(Context context) {
         LoginBean.DatasBean datasBean = CacheUtils.get(Constants.USERINFO);
         if (datasBean != null) {
             return datasBean.getId() + "";
@@ -287,12 +317,20 @@ public class MyApplication extends Application {
         return "";
     }
 
-    public static boolean isLogin(){
+    public static boolean isLogin() {
         LoginBean.DatasBean datasBean = CacheUtils.get(Constants.USERINFO);
         if (datasBean == null) {
             return false;
         }
         return true;
+    }
+
+    public static int getSwitchState() {
+        com.example.administrator.japanhouse.model.UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
+        if (userBean != null) {
+            return userBean.getIsBrokerSay();
+        }
+        return 0;
     }
 
     public static boolean isNetworkAvailable() {
@@ -309,19 +347,11 @@ public class MyApplication extends Application {
         return false;
     }
 
-    public static void logOut(){
+    public static void logOut() {
         String language = CacheUtils.get(Constants.COUNTRY);
-
-        String setting = "";
-        if (CacheUtils.get(Constants.MANAGER_T) == null) {
-            setting = "1";
-        } else {
-            setting = CacheUtils.get(Constants.MANAGER_T);
-        }
 
         CacheUtils.removeAll();
         CacheUtils.put(Constants.COUNTRY, language);
-        CacheUtils.put(Constants.MANAGER_T, setting);
         CacheUtils.put("cityId", 2);//如果int值没有put的话，就老是报错
         if (RongIM.getInstance() != null) {
 

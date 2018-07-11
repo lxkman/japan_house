@@ -61,6 +61,7 @@ public class UserPresenter {
         params.put("sex", sex);
         params.put("age", age);
         params.put("picUrl", picUrl);
+        params.put("isBrokerSay", MyApplication.getSwitchState());
         OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/user/updateinfo")
                 .tag(this)
                 .params(params)

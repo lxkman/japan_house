@@ -177,7 +177,6 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
-
     private void initLocation() {
         mLocClient = new LocationClient(mContext);
         LocationClientOption option = new LocationClientOption();

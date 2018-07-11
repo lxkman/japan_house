@@ -28,6 +28,7 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.MyUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.example.administrator.japanhouse.view.BaseDialog;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -191,38 +192,38 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 });
     }
 
-    //    private boolean isYuSuanChecked() {
-    //        if (yusuanList != null && yusuanList.size() > 0) {
-    //            for (int i = 0; i < yusuanList.size(); i++) {
-    //                if (yusuanList.get(i).isChecked()) {
-    //                    return true;
-    //                }
-    //            }
-    //        }
-    //        return false;
-    //    }
+    private boolean isYuSuanChecked() {
+        if (yusuanList != null && yusuanList.size() > 0) {
+            for (int i = 0; i < yusuanList.size(); i++) {
+                if (yusuanList.get(i).isChecked()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-    //    private boolean isWeizhiChecked() {
-    //        if (weizhiList != null && weizhiList.size() > 0) {
-    //            for (int i = 0; i < weizhiList.size(); i++) {
-    //                if (weizhiList.get(i).isChecked()) {
-    //                    return true;
-    //                }
-    //            }
-    //        }
-    //        return false;
-    //    }
+    private boolean isWeizhiChecked() {
+        if (weizhiList != null && weizhiList.size() > 0) {
+            for (int i = 0; i < weizhiList.size(); i++) {
+                if (weizhiList.get(i).isChecked()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-    //    private boolean isHuxingChecked() {
-    //        if (huxingList != null && huxingList.size() > 0) {
-    //            for (int i = 0; i < huxingList.size(); i++) {
-    //                if (huxingList.get(i).isChecked()) {
-    //                    return true;
-    //                }
-    //            }
-    //        }
-    //        return false;
-    //    }
+    private boolean isHuxingChecked() {
+        if (huxingList != null && huxingList.size() > 0) {
+            for (int i = 0; i < huxingList.size(); i++) {
+                if (huxingList.get(i).isChecked()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private List<String> getAllWeizhiChecked() {
         List<String> weizhi = new ArrayList<>();
@@ -451,6 +452,19 @@ public class ShendengFirstStepActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.next_tv:
+                //防止数据为空的情况
+                if (!isYuSuanChecked()){
+                    TUtils.showFail(this,getResources().getString(R.string.xinliyusuanyouduoshao));
+                    return;
+                }
+                if (!isHuxingChecked()){
+                    TUtils.showFail(this,getResources().getString(R.string.xihuanshenemhuxing));
+                    return;
+                }
+                if (!isWeizhiChecked()){
+                    TUtils.showFail(this,getResources().getString(R.string.xinyiweizhizaina));
+                    return;
+                }
                 Intent intent = new Intent(mContext, ShendengSecondStepActivity.class);
                 intent.putExtra("hxs", getAllHuxingChecked());
                 intent.putExtra("zjId", getAllYuSuanChecked());

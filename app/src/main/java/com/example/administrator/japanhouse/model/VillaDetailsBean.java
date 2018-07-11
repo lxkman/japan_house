@@ -6,13 +6,12 @@ import java.io.Serializable;
  * Created by   admin on 2018/5/23.
  */
 
-public class VillaDetailsBean {
-
+public class VillaDetailsBean  implements Serializable{
 
     /**
      * msg : 请求成功
      * code : 200
-     * datas : {"id":1,"brokerId":1,"houseType":"户型（汉语、日语通用）","titleCn":"别墅标题","titleJpn":"别墅标题","articleNameCn":"物件名称","articleNameJpn":"物件名称","homesLayerCn":"楼层","homesLayerJpn":"楼层","areaCn":"土地面积","areaJpn":"土地面积","ownershipCn":"所有权","ownershipJpn":"所有权","orientationCn":"朝向","orientationJpn":"朝向","architecturalCn":"建筑设计公司","architecturalJpn":"建筑设计公司","yearBuiltCn":"建筑年份","yearBuiltJpn":"建筑年份","districtCn":"地段","districtJpn":"地段","trainStationCn":"主要车站","trainStationJpn":"主要车站","specificLocationCn":"具体位置","specificLocationJpn":"具体位置","streetDistanceCn":"道路临街距离","streetDistanceJpn":"道路临街距离","landCn":"土地","landJpn":"土地","stationDistanceCn":"车站距离","stationDistanceJpn":"车站距离","indoorFacilityCn":"室内设施","indoorFacilityJpn":"室内设施","performanceCn":"性能","performanceJpn":"性能","testimonialCn":"证明书","testimonialJpn":"证明书","defectsEnsureCn":"瑕疵保证","defectsEnsureJpn":"瑕疵保证","coveredAreaCn":"建筑面积","coveredAreaJpn":"建筑面积","sellingPriceCn":"售价","sellingPriceJpn":"售价","buildingConstructionCn":"建筑构造","buildingConstructionJpn":"建筑构造","doichoIrinoDateCn":"入居日期","doichoIrinoDateJpn":"入居日期","parkCn":"停车场","parkJpn":"停车场","buildingWrap":"建筑覆盖（中文、日文共用）","plotRatio":"建筑覆盖（中文、日文共用）","currentSituationCn":"现状","currentSituationJpn":"现状","publicInformationDayCn":"公开情报日","publicInformationDayJpn":"公开情报日","kitchenCn":"厨房","kitchenJpn":"厨房","toiletCn":"卫生间","toiletJpn":"卫生间","showerRoomCn":"浴室","showerRoomJpn":"浴室","remarkCn":"备注","remarkJpn":"备注","villaTypeCn":"别墅类型","villaTypeJpn":"别墅类型","videoUrls":"","videoImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","roomImgs":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg","floorSearch":true,"areaSearch":10,"sellingPriceSearch":10,"yearBuiltSearch":10,"status":"","createTime":1527067561000,"updateTime":1527067564000,"isDeleted":0,"tableFlag":"4","longitude":1,"latitude":1,"locationLevel1Cn":"1","locationLevel2Cn":"2","locationLevel3Cn":"3","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","hwdcBroker":{"id":1,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1527067564000,"isDeleted":0,"status":""},"isSc":1}
+     * datas : {"id":10,"brokerId":15,"houseType":"1R","titleCn":"钟鑫的测试别墅","titleJpn":"测试别墅","articleNameCn":"测试的别墅","articleNameJpn":"测试的别墅","homesLayerCn":"10","homesLayerJpn":"10","areaCn":"44.00","areaJpn":"44.00","ownershipCn":"私人","ownershipJpn":"私人","orientationCn":"北","orientationJpn":"北","architecturalCn":"XXX公司","architecturalJpn":"XXX公司","yearBuiltCn":"50","yearBuiltJpn":"50","districtCn":"商业街","districtJpn":"商业街","trainStationCn":"655路","trainStationJpn":"655路","specificLocationCn":"上海","specificLocationJpn":"上海","streetDistanceCn":"20","streetDistanceJpn":"20","landCn":"90","landJpn":"90","stationDistanceCn":"100","stationDistanceJpn":"100","indoorFacilityCn":"冰箱、彩电、洗衣机","indoorFacilityJpn":"冰箱、彩电、洗衣机","performanceCn":"有","performanceJpn":"有","testimonialCn":"有","testimonialJpn":"有","defectsEnsureCn":"有","defectsEnsureJpn":"有","coveredAreaCn":"66","coveredAreaJpn":"66","sellingPriceCn":"5000000.00","sellingPriceJpn":"5000000.00","buildingConstructionCn":"建筑构造","buildingConstructionJpn":"建筑构造","doichoIrinoDateCn":"2018.6.28","doichoIrinoDateJpn":"2018.6.28","parkCn":"有","parkJpn":"有","buildingWrap":"30","plotRatio":"60","currentSituationCn":"完美","currentSituationJpn":"完美","publicInformationDayCn":"2018.6.28","publicInformationDayJpn":"2018.6.28","kitchenCn":"有","kitchenJpn":"有","toiletCn":"有","toiletJpn":"有","showerRoomCn":"有","showerRoomJpn":"有","remarkCn":"测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容","remarkJpn":"测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容","villaTypeCn":"","villaTypeJpn":"","videoUrls":"","videoImgs":"","roomImgs":"http://hwdchk.oss-cn-hongkong.aliyuncs.com/1530176246066timg (3).jpg,http://hwdchk.oss-cn-hongkong.aliyuncs.com/1530176254739timg (3).jpg,http://hwdchk.oss-cn-hongkong.aliyuncs.com/1530176259287timg (1).jpg","floorSearch":true,"areaSearch":44,"sellingPriceSearch":5000000,"yearBuiltSearch":50,"status":"","createTime":1530176267000,"updateTime":1531288611000,"isDeleted":0,"tableFlag":"4","longitude":39.41,"latitude":116.31,"locationLevel1Cn":"43","locationLevel2Cn":"45","locationLevel3Cn":"46","locationLevel4Cn":"","locationLevel1Jpn":"","locationLevel2Jpn":"","locationLevel3Jpn":"","locationLevel4Jpn":"","hwdcBroker":{"id":15,"brokerName":"FCL经纪人3477","phone":"18135697075","password":"abc123","telePhone":"111","shop":"111","turnover":11,"inYears":11,"period":11,"counts":111,"pic":"http://www.rongcloud.cn/images/logo.png","nickname":"测试经纪人","sex":"0","wechatId":"11","caeateTime":1530157401000,"updateTime":1531298247000,"isDeleted":0,"status":"","tagsCn":"111","tagsJpn":"211","intimacyCn":"","intimacyJpn":"","cityId":0,"areaManage":0,"rongCloudToken":"","token":"45c476f28c4a75ac5a00490494968500","lastTime":1531298247000,"birthday":null,"brokerId":0,"avgStar":0,"areaNameCn":"","areaNameJpn":""},"isSc":1}
      */
 
     private String msg;
@@ -45,94 +44,94 @@ public class VillaDetailsBean {
 
     public static class DatasBean implements Serializable{
         /**
-         * id : 1
-         * brokerId : 1
-         * houseType : 户型（汉语、日语通用）
-         * titleCn : 别墅标题
-         * titleJpn : 别墅标题
-         * articleNameCn : 物件名称
-         * articleNameJpn : 物件名称
-         * homesLayerCn : 楼层
-         * homesLayerJpn : 楼层
-         * areaCn : 土地面积
-         * areaJpn : 土地面积
-         * ownershipCn : 所有权
-         * ownershipJpn : 所有权
-         * orientationCn : 朝向
-         * orientationJpn : 朝向
-         * architecturalCn : 建筑设计公司
-         * architecturalJpn : 建筑设计公司
-         * yearBuiltCn : 建筑年份
-         * yearBuiltJpn : 建筑年份
-         * districtCn : 地段
-         * districtJpn : 地段
-         * trainStationCn : 主要车站
-         * trainStationJpn : 主要车站
-         * specificLocationCn : 具体位置
-         * specificLocationJpn : 具体位置
-         * streetDistanceCn : 道路临街距离
-         * streetDistanceJpn : 道路临街距离
-         * landCn : 土地
-         * landJpn : 土地
-         * stationDistanceCn : 车站距离
-         * stationDistanceJpn : 车站距离
-         * indoorFacilityCn : 室内设施
-         * indoorFacilityJpn : 室内设施
-         * performanceCn : 性能
-         * performanceJpn : 性能
-         * testimonialCn : 证明书
-         * testimonialJpn : 证明书
-         * defectsEnsureCn : 瑕疵保证
-         * defectsEnsureJpn : 瑕疵保证
-         * coveredAreaCn : 建筑面积
-         * coveredAreaJpn : 建筑面积
-         * sellingPriceCn : 售价
-         * sellingPriceJpn : 售价
+         * id : 10
+         * brokerId : 15
+         * houseType : 1R
+         * titleCn : 钟鑫的测试别墅
+         * titleJpn : 测试别墅
+         * articleNameCn : 测试的别墅
+         * articleNameJpn : 测试的别墅
+         * homesLayerCn : 10
+         * homesLayerJpn : 10
+         * areaCn : 44.00
+         * areaJpn : 44.00
+         * ownershipCn : 私人
+         * ownershipJpn : 私人
+         * orientationCn : 北
+         * orientationJpn : 北
+         * architecturalCn : XXX公司
+         * architecturalJpn : XXX公司
+         * yearBuiltCn : 50
+         * yearBuiltJpn : 50
+         * districtCn : 商业街
+         * districtJpn : 商业街
+         * trainStationCn : 655路
+         * trainStationJpn : 655路
+         * specificLocationCn : 上海
+         * specificLocationJpn : 上海
+         * streetDistanceCn : 20
+         * streetDistanceJpn : 20
+         * landCn : 90
+         * landJpn : 90
+         * stationDistanceCn : 100
+         * stationDistanceJpn : 100
+         * indoorFacilityCn : 冰箱、彩电、洗衣机
+         * indoorFacilityJpn : 冰箱、彩电、洗衣机
+         * performanceCn : 有
+         * performanceJpn : 有
+         * testimonialCn : 有
+         * testimonialJpn : 有
+         * defectsEnsureCn : 有
+         * defectsEnsureJpn : 有
+         * coveredAreaCn : 66
+         * coveredAreaJpn : 66
+         * sellingPriceCn : 5000000.00
+         * sellingPriceJpn : 5000000.00
          * buildingConstructionCn : 建筑构造
          * buildingConstructionJpn : 建筑构造
-         * doichoIrinoDateCn : 入居日期
-         * doichoIrinoDateJpn : 入居日期
-         * parkCn : 停车场
-         * parkJpn : 停车场
-         * buildingWrap : 建筑覆盖（中文、日文共用）
-         * plotRatio : 建筑覆盖（中文、日文共用）
-         * currentSituationCn : 现状
-         * currentSituationJpn : 现状
-         * publicInformationDayCn : 公开情报日
-         * publicInformationDayJpn : 公开情报日
-         * kitchenCn : 厨房
-         * kitchenJpn : 厨房
-         * toiletCn : 卫生间
-         * toiletJpn : 卫生间
-         * showerRoomCn : 浴室
-         * showerRoomJpn : 浴室
-         * remarkCn : 备注
-         * remarkJpn : 备注
-         * villaTypeCn : 别墅类型
-         * villaTypeJpn : 别墅类型
+         * doichoIrinoDateCn : 2018.6.28
+         * doichoIrinoDateJpn : 2018.6.28
+         * parkCn : 有
+         * parkJpn : 有
+         * buildingWrap : 30
+         * plotRatio : 60
+         * currentSituationCn : 完美
+         * currentSituationJpn : 完美
+         * publicInformationDayCn : 2018.6.28
+         * publicInformationDayJpn : 2018.6.28
+         * kitchenCn : 有
+         * kitchenJpn : 有
+         * toiletCn : 有
+         * toiletJpn : 有
+         * showerRoomCn : 有
+         * showerRoomJpn : 有
+         * remarkCn : 测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容
+         * remarkJpn : 测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容测试备注内容
+         * villaTypeCn :
+         * villaTypeJpn :
          * videoUrls :
-         * videoImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg
-         * roomImgs : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527165849795&di=83a34452110e5bf1f69c0881b5805cf1&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F12%2F10%2F28%2F85bOOOPIC81_1024.jpg
+         * videoImgs :
+         * roomImgs : http://hwdchk.oss-cn-hongkong.aliyuncs.com/1530176246066timg (3).jpg,http://hwdchk.oss-cn-hongkong.aliyuncs.com/1530176254739timg (3).jpg,http://hwdchk.oss-cn-hongkong.aliyuncs.com/1530176259287timg (1).jpg
          * floorSearch : true
-         * areaSearch : 10
-         * sellingPriceSearch : 10
-         * yearBuiltSearch : 10
+         * areaSearch : 44
+         * sellingPriceSearch : 5000000
+         * yearBuiltSearch : 50
          * status :
-         * createTime : 1527067561000
-         * updateTime : 1527067564000
+         * createTime : 1530176267000
+         * updateTime : 1531288611000
          * isDeleted : 0
          * tableFlag : 4
-         * longitude : 1
-         * latitude : 1
-         * locationLevel1Cn : 1
-         * locationLevel2Cn : 2
-         * locationLevel3Cn : 3
+         * longitude : 39.41
+         * latitude : 116.31
+         * locationLevel1Cn : 43
+         * locationLevel2Cn : 45
+         * locationLevel3Cn : 46
          * locationLevel4Cn :
          * locationLevel1Jpn :
          * locationLevel2Jpn :
          * locationLevel3Jpn :
          * locationLevel4Jpn :
-         * hwdcBroker : {"id":1,"brokerName":"姓名","phone":"1234","password":"1232132","telePhone":"123132","shop":"所属门店","turnover":100,"inYears":3,"period":1,"counts":60,"pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg","nickname":"昵称","sex":"0","wechatId":"123456","caeateTime":1525781849000,"updateTime":1527067564000,"isDeleted":0,"status":""}
+         * hwdcBroker : {"id":15,"brokerName":"FCL经纪人3477","phone":"18135697075","password":"abc123","telePhone":"111","shop":"111","turnover":11,"inYears":11,"period":11,"counts":111,"pic":"http://www.rongcloud.cn/images/logo.png","nickname":"测试经纪人","sex":"0","wechatId":"11","caeateTime":1530157401000,"updateTime":1531298247000,"isDeleted":0,"status":"","tagsCn":"111","tagsJpn":"211","intimacyCn":"","intimacyJpn":"","cityId":0,"areaManage":0,"rongCloudToken":"","token":"45c476f28c4a75ac5a00490494968500","lastTime":1531298247000,"birthday":null,"brokerId":0,"avgStar":0,"areaNameCn":"","areaNameJpn":""}
          * isSc : 1
          */
 
@@ -213,8 +212,8 @@ public class VillaDetailsBean {
         private long updateTime;
         private int isDeleted;
         private String tableFlag;
-        private int longitude;
-        private int latitude;
+        private double longitude;
+        private double latitude;
         private String locationLevel1Cn;
         private String locationLevel2Cn;
         private String locationLevel3Cn;
@@ -842,19 +841,19 @@ public class VillaDetailsBean {
             this.tableFlag = tableFlag;
         }
 
-        public int getLongitude() {
+        public double getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(int longitude) {
+        public void setLongitude(double longitude) {
             this.longitude = longitude;
         }
 
-        public int getLatitude() {
+        public double getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(int latitude) {
+        public void setLatitude(double latitude) {
             this.latitude = latitude;
         }
 
@@ -938,26 +937,40 @@ public class VillaDetailsBean {
             this.isSc = isSc;
         }
 
-        public static class HwdcBrokerBean implements Serializable{
+        public static class HwdcBrokerBean  implements Serializable{
             /**
-             * id : 1
-             * brokerName : 姓名
-             * phone : 1234
-             * password : 1232132
-             * telePhone : 123132
-             * shop : 所属门店
-             * turnover : 100
-             * inYears : 3
-             * period : 1
-             * counts : 60
-             * pic : https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527155765877&di=6b937ef9850ce295871cc7e3a9ef4393&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fa08b87d6277f9e2fd7e815091530e924b999f3d6.jpg
-             * nickname : 昵称
+             * id : 15
+             * brokerName : FCL经纪人3477
+             * phone : 18135697075
+             * password : abc123
+             * telePhone : 111
+             * shop : 111
+             * turnover : 11
+             * inYears : 11
+             * period : 11
+             * counts : 111
+             * pic : http://www.rongcloud.cn/images/logo.png
+             * nickname : 测试经纪人
              * sex : 0
-             * wechatId : 123456
-             * caeateTime : 1525781849000
-             * updateTime : 1527067564000
+             * wechatId : 11
+             * caeateTime : 1530157401000
+             * updateTime : 1531298247000
              * isDeleted : 0
              * status :
+             * tagsCn : 111
+             * tagsJpn : 211
+             * intimacyCn :
+             * intimacyJpn :
+             * cityId : 0
+             * areaManage : 0
+             * rongCloudToken :
+             * token : 45c476f28c4a75ac5a00490494968500
+             * lastTime : 1531298247000
+             * birthday : null
+             * brokerId : 0
+             * avgStar : 0
+             * areaNameCn :
+             * areaNameJpn :
              */
 
             private int id;
@@ -978,6 +991,20 @@ public class VillaDetailsBean {
             private long updateTime;
             private int isDeleted;
             private String status;
+            private String tagsCn;
+            private String tagsJpn;
+            private String intimacyCn;
+            private String intimacyJpn;
+            private int cityId;
+            private int areaManage;
+            private String rongCloudToken;
+            private String token;
+            private long lastTime;
+            private Object birthday;
+            private int brokerId;
+            private int avgStar;
+            private String areaNameCn;
+            private String areaNameJpn;
 
             public int getId() {
                 return id;
@@ -1121,6 +1148,118 @@ public class VillaDetailsBean {
 
             public void setStatus(String status) {
                 this.status = status;
+            }
+
+            public String getTagsCn() {
+                return tagsCn;
+            }
+
+            public void setTagsCn(String tagsCn) {
+                this.tagsCn = tagsCn;
+            }
+
+            public String getTagsJpn() {
+                return tagsJpn;
+            }
+
+            public void setTagsJpn(String tagsJpn) {
+                this.tagsJpn = tagsJpn;
+            }
+
+            public String getIntimacyCn() {
+                return intimacyCn;
+            }
+
+            public void setIntimacyCn(String intimacyCn) {
+                this.intimacyCn = intimacyCn;
+            }
+
+            public String getIntimacyJpn() {
+                return intimacyJpn;
+            }
+
+            public void setIntimacyJpn(String intimacyJpn) {
+                this.intimacyJpn = intimacyJpn;
+            }
+
+            public int getCityId() {
+                return cityId;
+            }
+
+            public void setCityId(int cityId) {
+                this.cityId = cityId;
+            }
+
+            public int getAreaManage() {
+                return areaManage;
+            }
+
+            public void setAreaManage(int areaManage) {
+                this.areaManage = areaManage;
+            }
+
+            public String getRongCloudToken() {
+                return rongCloudToken;
+            }
+
+            public void setRongCloudToken(String rongCloudToken) {
+                this.rongCloudToken = rongCloudToken;
+            }
+
+            public String getToken() {
+                return token;
+            }
+
+            public void setToken(String token) {
+                this.token = token;
+            }
+
+            public long getLastTime() {
+                return lastTime;
+            }
+
+            public void setLastTime(long lastTime) {
+                this.lastTime = lastTime;
+            }
+
+            public Object getBirthday() {
+                return birthday;
+            }
+
+            public void setBirthday(Object birthday) {
+                this.birthday = birthday;
+            }
+
+            public int getBrokerId() {
+                return brokerId;
+            }
+
+            public void setBrokerId(int brokerId) {
+                this.brokerId = brokerId;
+            }
+
+            public int getAvgStar() {
+                return avgStar;
+            }
+
+            public void setAvgStar(int avgStar) {
+                this.avgStar = avgStar;
+            }
+
+            public String getAreaNameCn() {
+                return areaNameCn;
+            }
+
+            public void setAreaNameCn(String areaNameCn) {
+                this.areaNameCn = areaNameCn;
+            }
+
+            public String getAreaNameJpn() {
+                return areaNameJpn;
+            }
+
+            public void setAreaNameJpn(String areaNameJpn) {
+                this.areaNameJpn = areaNameJpn;
             }
         }
     }

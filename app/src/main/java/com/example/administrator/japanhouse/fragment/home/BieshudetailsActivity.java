@@ -191,7 +191,6 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     }
 
     private void setData() {
-
         isja = MyUtils.isJa();
         tvHouseName.setText(isja ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn());
         tvPrice.setText(isja ? villaDetailsBean.getSellingPriceJpn() : villaDetailsBean.getSellingPriceCn());

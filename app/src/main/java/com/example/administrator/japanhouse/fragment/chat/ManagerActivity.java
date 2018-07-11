@@ -117,8 +117,6 @@ public class ManagerActivity extends BaseActivity {
                             return;
                         }
 
-
-
                         avgStar = datas.getBrokerinfo().getAvgStar();
                         if (code1.equals("200")) {
                             Glide.with(ManagerActivity.this).load(datas.getBrokerinfo().getPic()).into(managerHeadImg);

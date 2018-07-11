@@ -201,7 +201,7 @@ public class ZuHousedetailsActivity extends BaseActivity {
                         hwdcBroker = datas.getHwdcBroker();
                         boolean isJa = MyUtils.isJa();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
-                        tv_price.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tv_price.setText(isJa ? datas.getRentJpn() : datas.getRentCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());

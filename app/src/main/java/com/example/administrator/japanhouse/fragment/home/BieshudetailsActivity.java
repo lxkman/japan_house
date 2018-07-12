@@ -373,8 +373,12 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         } else {
             params.put("languageType", 0);
         }
+        if (CacheUtils.get("cityId")==null){
+            return;
+        }
+        int cityId = CacheUtils.get("cityId");
         params.put("pageNo", "1");
-        params.put("cId", "2");
+        params.put("cId",cityId);
         OkGo.<BieShuListBean>post(MyUrls.BASEURL + "/app/villadom/searchlist")
                 .tag(this)
                 .params(params)

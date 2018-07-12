@@ -169,7 +169,7 @@ public class XiaoQuDetailsActivity extends BaseActivity {
                         hwdcBroker = datas.getHwdcBroker();
                         boolean isJa = MyUtils.isJa();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
-                        tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
+                        tvDetailsPrice.setText(isJa ? datas.getRentJpn() : datas.getRentCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());

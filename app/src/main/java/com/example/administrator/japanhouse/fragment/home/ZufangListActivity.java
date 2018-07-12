@@ -678,6 +678,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
+            isTongQin=true;
             starJd = data.getDoubleExtra("starJd", 0);
             endJd = data.getDoubleExtra("endJd", 0);
             starWd = data.getDoubleExtra("starWd", 0);

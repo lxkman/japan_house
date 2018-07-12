@@ -23,6 +23,7 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.im.RcConnect;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
+import com.example.administrator.japanhouse.model.UserInfo;
 import com.example.administrator.japanhouse.model.VersionBean;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
@@ -34,6 +35,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,7 +59,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     Button btnLoginout;
     @BindView(R.id.activity_zui_jin)
     LinearLayout activityZuiJin;
-    private String isClose;
+    private int isClose = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +68,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
         ButterKnife.bind(this);
 
-        if (CacheUtils.get(Constants.MANAGER_T) == null) {
-            isClose = "1";
-            CacheUtils.put(Constants.MANAGER_T, isClose);
-        } else {
-            isClose = CacheUtils.get(Constants.MANAGER_T);
-        }
-
-        if (isClose.equals("1")) {
-            ivSwitch.setImageResource(R.drawable.button_green);
-        } else {
+        if (MyApplication.getSwitchState() == 1) {
             ivSwitch.setImageResource(R.drawable.button_normal);
+        } else {
+            ivSwitch.setImageResource(R.drawable.button_green);
         }
 
         backImg.setOnClickListener(this);
@@ -140,21 +136,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.iv_switch:
-                if (isClose.equals("1")) {
-                    ivSwitch.setImageResource(R.drawable.button_normal);
-                    RongIM.getInstance().logout();
-                    isClose = "0";
-                } else {
+                if (MyApplication.getSwitchState() == 1) {
                     ivSwitch.setImageResource(R.drawable.button_green);
-
-                    final LoginBean.DatasBean bean = CacheUtils.get(Constants.USERINFO);
-                    if (bean != null && bean.getRongCloudToken() != null) {
-                        RcConnect.rongCloudConection(bean.getRongCloudToken());
-                    }
-
-                    isClose = "1";
+                    isClose = 0;
+                } else {
+                    ivSwitch.setImageResource(R.drawable.button_normal);
+                    isClose = 1;
                 }
-                CacheUtils.put(Constants.MANAGER_T, isClose);
+                UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
+                userBean.setIsBrokerSay(isClose);
+                CacheUtils.put(Constants.P_USERINFO, userBean);
                 break;
             case R.id.ll_language:
                 startActivity(new Intent(this, LanguageActivity.class));
@@ -197,5 +188,33 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         }
                     }
                 });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
+        HttpParams params = new HttpParams();
+        params.put("token", userBean.getToken());
+        params.put("nickName", userBean.getNickname());
+        params.put("sex", userBean.getSex());
+        params.put("age", getTime(new Date(userBean.getBirthday())));
+        params.put("picUrl", userBean.getPic());
+        params.put("isBrokerSay", userBean.getIsBrokerSay());
+        OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/user/updateinfo")
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<NoDataBean>(this, NoDataBean.class) {
+                    @Override
+                    public void onSuccess(Response<NoDataBean> response) {
+
+                    }
+                });
+    }
+
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(date);
     }
 }

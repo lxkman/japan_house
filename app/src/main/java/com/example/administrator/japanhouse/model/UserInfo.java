@@ -144,6 +144,15 @@ public class UserInfo {
             private Object lineId;
             private Object wbId;
             private String rongCloudToken;
+            private int isBrokerSay;
+
+            public int getIsBrokerSay() {
+                return isBrokerSay;
+            }
+
+            public void setIsBrokerSay(int isBrokerSay) {
+                this.isBrokerSay = isBrokerSay;
+            }
 
             public int getId() {
                 return id;

@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
       <ImageView
-          android:scaleType="fitXY"
+          android:scaleType="centerCrop"
           android:layout_marginRight="5dip"
           android:layout_marginTop="5dip"
           android:id="@+id/img_dingdan"
-          android:src="@drawable/dingdan_details"
+          android:src="@drawable/house_pic"
           android:layout_width="match_parent"
           android:layout_height="75dip"/>
 </LinearLayout>

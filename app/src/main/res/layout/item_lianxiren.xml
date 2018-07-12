@@ -25,7 +25,7 @@
                 android:layout_height="40dip"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dip"
-                android:src="@drawable/deful_touxiang" />
+                android:src="@drawable/avatar" />
 
             <TextView
                 android:id="@+id/item_linkman_nickName"

@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="176dip"
                 android:scaleType="fitXY"
-                android:background="@drawable/singup_bg" />
+                android:background="@drawable/house_pic" />
             <!--日文-->
             <LinearLayout
                 android:id="@+id/act_singUp_details_layout_ja"

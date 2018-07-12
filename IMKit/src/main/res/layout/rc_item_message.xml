@@ -50,7 +50,7 @@
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         app:RCCornerRadius="23dp"
-        app:RCDefDrawable="@drawable/deful_touxiang" />
+        app:RCDefDrawable="@drawable/avatar" />
 
     <io.rong.imkit.widget.AsyncImageView
         android:id="@id/rc_right"
@@ -62,7 +62,7 @@
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         app:RCCornerRadius="23dp"
-        app:RCDefDrawable="@drawable/deful_touxiang" />
+        app:RCDefDrawable="@drawable/avatar" />
 
 
     <TextView

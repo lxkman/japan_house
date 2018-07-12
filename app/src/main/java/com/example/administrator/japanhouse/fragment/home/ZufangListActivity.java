@@ -638,7 +638,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
 
         @Override
         protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())

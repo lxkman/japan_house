@@ -237,7 +237,7 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(BieShuActivity.this);
-                        if (shaiXuanBeanDatas==null){
+                        if (shaiXuanBeanDatas == null) {
                             return;
                         }
                         /**
@@ -492,7 +492,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
 
         @Override
         protected void convert(BaseViewHolder helper, BieShuListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
@@ -511,11 +512,11 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class), 0);
                 break;
             //消息
             case R.id.img_message:
-                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
+                setResult(100, new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
                 finish();
                 startActivity(new Intent(mContext, MainActivity.class));
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));

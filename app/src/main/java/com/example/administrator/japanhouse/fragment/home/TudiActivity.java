@@ -477,7 +477,8 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
 
         @Override
         protected void convert(BaseViewHolder helper, TudiListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getLandImages())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())

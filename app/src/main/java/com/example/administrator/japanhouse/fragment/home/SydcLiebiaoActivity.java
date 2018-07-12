@@ -571,7 +571,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
 
         @Override
         protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRealEstateImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRealEstateImgs() : item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())

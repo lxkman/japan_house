@@ -780,7 +780,7 @@ public class HomeFragment extends BaseFragment {
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getRentJpn() : item.getRentCn());
         }
     }
 
@@ -812,11 +812,14 @@ public class HomeFragment extends BaseFragment {
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.CnxhEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
+            String status = item.getStatus();
+            String price=isJa ? item.getPriceJpn() : item.getPriceCn();
+            String rent=isJa ? item.getRentJpn() : item.getRentCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+                    .setText(R.id.tv_price, status.equals("2")?rent:price);
         }
     }
 

@@ -641,10 +641,19 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
+            String area;
+            if (isJa) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            if (area.length()>7){
+                area = area.substring(0, 7) + "...";
+            }
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_area, area)
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
+                    .setText(R.id.tv_price, isJa ? item.getRentJpn() : item.getRentCn())
                     .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
@@ -661,7 +670,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
                 break;
             //消息
             case R.id.img_message:
-                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
+                setResult(100, new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
                 finish();
                 startActivity(new Intent(mContext, MainActivity.class));
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -679,7 +688,7 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
-            isTongQin=true;
+            isTongQin = true;
             starJd = data.getDoubleExtra("starJd", 0);
             endJd = data.getDoubleExtra("endJd", 0);
             starWd = data.getDoubleExtra("starWd", 0);

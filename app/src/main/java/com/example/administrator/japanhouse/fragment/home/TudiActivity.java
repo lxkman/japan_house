@@ -480,8 +480,17 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
+            String area;
+            if (isJa) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            if (area.length()>7){
+                area = area.substring(0, 7) + "...";
+            }
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_area, area)
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()  : item.getSellingPriceCn())
                     .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));

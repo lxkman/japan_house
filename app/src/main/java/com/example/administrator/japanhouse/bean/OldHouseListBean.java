@@ -73,6 +73,24 @@ public class OldHouseListBean {
         private String roomImgs;
         private String doorModelCn;
         private String doorModelJpn;
+        private String rentJpn;
+        private String rentCn;
+
+        public String getRentCn() {
+            return rentCn;
+        }
+
+        public void setRentCn(String rentCn) {
+            this.rentCn = rentCn;
+        }
+
+        public String getRentJpn() {
+            return rentJpn;
+        }
+
+        public void setRentJpn(String rentJpn) {
+            this.rentJpn = rentJpn;
+        }
 
         public int getId() {
             return id;

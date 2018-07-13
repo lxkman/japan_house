@@ -192,7 +192,7 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
             helper.setText(R.id.tv_house_address,isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
             helper.setText(R.id.tv_house_room,isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area,isJa ? item.getAreaJpn() : item.getAreaCn());
-            helper.setText(R.id.tv_price,isJa ? item.getPriceJpn() : item.getPriceCn());
+            helper.setText(R.id.tv_price,isJa ? item.getRentJpn() : item.getRentCn());
 
         }
     }

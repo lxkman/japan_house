@@ -75,7 +75,24 @@ public class HouseListBean {
         private String doorModelCn;
         private String doorModelJpn;
         private String houseType;
+        private String rentCn;
+        private String rentJpn;
 
+        public String getRentCn() {
+            return rentCn;
+        }
+
+        public void setRentCn(String rentCn) {
+            this.rentCn = rentCn;
+        }
+
+        public String getRentJpn() {
+            return rentJpn;
+        }
+
+        public void setRentJpn(String rentJpn) {
+            this.rentJpn = rentJpn;
+        }
         public int getId() {
             return id;
         }

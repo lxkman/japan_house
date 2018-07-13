@@ -40,7 +40,7 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <io.rong.imkit.widget.AsyncImageView
+    <io.rong.imkit.CImageView
         android:id="@id/rc_left"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -49,10 +49,10 @@
         android:layout_toRightOf="@id/ll_message_check"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
-        app:RCCornerRadius="23dp"
+        app:RCShape="circle"
         app:RCDefDrawable="@drawable/avatar" />
 
-    <io.rong.imkit.widget.AsyncImageView
+    <io.rong.imkit.CImageView
         android:id="@id/rc_right"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -61,7 +61,7 @@
         android:layout_marginLeft="4dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
-        app:RCCornerRadius="23dp"
+        app:RCShape="circle"
         app:RCDefDrawable="@drawable/avatar" />
 
 

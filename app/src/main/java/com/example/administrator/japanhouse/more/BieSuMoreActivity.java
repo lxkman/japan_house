@@ -96,7 +96,7 @@ public class BieSuMoreActivity extends BaseActivity {
         setContentView(R.layout.activity_biesu_more);
         ButterKnife.bind(this);
 
-        datasBean = getIntent().getParcelableExtra("details");
+        datasBean = (VillaDetailsBean.DatasBean) getIntent().getSerializableExtra("details");
 
         String country = CacheUtils.get(Constants.COUNTRY);
 

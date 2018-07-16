@@ -94,7 +94,7 @@ public class TuanDiMoreActivity extends BaseActivity {
     }
     private void initData() {
         boolean ja = MyUtils.isJa();
-        actTuandiZujin.setText(ja?datas.getSellingPriceJpn():datas.getSellingPriceCn());/*售价*/
+        actTuandiZujin.setText(ja?datas.getRentJpn():datas.getRentCn());/*售价*/
         actTuandiMianji.setText(ja?datas.getAreaJpn():datas.getAreaCn());/*面积*/
         actTuandiChaoxiang.setText(ja?datas.getOrientationJpn():datas.getOrientationCn());/*朝向*/
         actTuandiJutiweizhi.setText(ja?datas.getSpecificLocationJpn():datas.getSpecificLocationCn());/*具体位置*/

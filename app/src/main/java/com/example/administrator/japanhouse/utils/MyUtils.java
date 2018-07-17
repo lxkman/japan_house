@@ -119,7 +119,7 @@ public class MyUtils {
 
     //  时间戳转为日期  /年/月/日/时/分
     public static String getDateToStringH(String time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
         long lcc_time = Long.valueOf(time);
         String format = sdf.format(new Date(lcc_time * 1000L));
         return format;

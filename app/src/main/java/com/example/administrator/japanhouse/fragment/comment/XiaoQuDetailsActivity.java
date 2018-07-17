@@ -171,6 +171,8 @@ public class XiaoQuDetailsActivity extends BaseActivity {
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getRentJpn() : datas.getRentCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
+                        tvDetailsHuxing.setText(datas.getHouseType());
+                        tvDetailsChaoxiang.setText(isJa ? datas.getOrientationJpn() : datas.getOrientationCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
                         tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
                         Glide.with(XiaoQuDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);

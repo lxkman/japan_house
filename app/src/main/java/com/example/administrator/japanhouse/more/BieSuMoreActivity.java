@@ -109,7 +109,7 @@ public class BieSuMoreActivity extends BaseActivity {
         if (datasBean != null) {
             tvWujianmingcheng.setText(MyApplication.isJapanese() ? datasBean.getArticleNameJpn() : datasBean.getArticleNameCn());
             tvShoujia.setText(MyApplication.isJapanese() ? datasBean.getSellingPriceJpn() : datasBean.getSellingPriceCn());
-            tvHuxing.setText(MyApplication.isJapanese() ? datasBean.getVillaTypeJpn() : datasBean.getVillaTypeCn());
+            tvHuxing.setText(MyApplication.isJapanese() ? datasBean.getHouseType() : datasBean.getHouseType());
             tvDongcengshu.setText(MyApplication.isJapanese() ? datasBean.getHomesLayerJpn() : datasBean.getHomesLayerCn());
             tvTudimianji.setText(MyApplication.isJapanese() ? datasBean.getAreaJpn() : datasBean.getAreaCn());
             tvJianzumianji.setText(MyApplication.isJapanese() ? datasBean.getCoveredAreaJpn() : datasBean.getCoveredAreaCn());

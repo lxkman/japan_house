@@ -52,7 +52,7 @@ public class TouAdapter extends RecyclerView.Adapter<TouAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.neirong.setText(isJa ? list.get(position).getTitleJpn() : list.get(position).getTitleCn());
-        holder.time.setText(MyUtils.getDateToStringH(list.get(position).getCreateTime()+""));
+        holder.time.setText(MyUtils.getTimeFromMillisecond(list.get(position).getCreateTime()));
         holder.person.setText(list.get(position).getReadNum()+context.getResources().getString(R.string.renchakan));
      holder.view.setOnClickListener(new View.OnClickListener() {
          @Override

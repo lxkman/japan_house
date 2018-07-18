@@ -58,7 +58,7 @@ public class TouDetailsBean {
         private String titleCn;
         private String titleJpn;
         private String status;
-        private String createTime;
+        private Long createTime;
         private int isDeleted;
         private int readNum;
         private Object imageUrl;
@@ -97,11 +97,11 @@ public class TouDetailsBean {
             this.status = status;
         }
 
-        public String getCreateTime() {
+        public Long getCreateTime() {
             return createTime;
         }
 
-        public void setCreateTime(String createTime) {
+        public void setCreateTime(Long createTime) {
             this.createTime = createTime;
         }
 

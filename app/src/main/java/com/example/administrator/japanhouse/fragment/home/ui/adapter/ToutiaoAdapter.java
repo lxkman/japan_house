@@ -48,7 +48,7 @@ public class ToutiaoAdapter extends RecyclerView.Adapter<ToutiaoAdapter.ViewHold
 
         Glide.with(context).load(datas.get(position).getHwdcUser().getPic()).into(holder.touxiang);
         holder.name.setText(datas.get(position).getHwdcUser().getNickname() + "");
-        holder.time.setText(MyUtils.getDateToStringH(datas.get(position).getHwdcUser().getCreateTime() + "") + "");
+        holder.time.setText(MyUtils.getTimeFromMillisecondYMD(datas.get(position).getHwdcUser().getCreateTime()) + "");
         holder.pinglun.setText(datas.get(position).getContent() + "");
 //        holder.zan.setParisView(datas.get(position).getIsZan(), datas.get(position).getZanNum(), datas.get(position).getId());
         holder.zan.setText(datas.get(position).getZanNum() + "");

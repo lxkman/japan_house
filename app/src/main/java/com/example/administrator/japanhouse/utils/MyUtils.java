@@ -74,6 +74,46 @@ public class MyUtils {
             return str;
         }
     }
+    /**
+     * 将毫秒转化成固定格式的时间
+     * 时间格式: yyyy-MM-dd HH:mm:ss
+     *
+     * @param millisecond
+     * @return
+     */
+    public static String getDateTimeFromMillisecond(Long millisecond){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        Date date = new Date(millisecond);
+        String dateStr = simpleDateFormat.format(date);
+        return dateStr;
+    }
+    /**
+     * 从时间(毫秒)中提取出时间(时:分)
+     * 时间格式:  时:分
+     *
+     * @param millisecond
+     * @return
+     */
+    public static String getTimeFromMillisecond(Long millisecond) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd");
+        Date date = new Date(millisecond);
+        String timeStr = simpleDateFormat.format(date);
+        return timeStr;
+    }
+
+    /**
+     * 从时间(毫秒)中提取出时间(年月日)
+     * 时间格式:  时:分
+     *
+     * @param millisecond
+     * @return
+     */
+    public static String getTimeFromMillisecondYMD(Long millisecond) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        Date date = new Date(millisecond);
+        String timeStr = simpleDateFormat.format(date);
+        return timeStr;
+    }
     public static boolean isJa() {
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {

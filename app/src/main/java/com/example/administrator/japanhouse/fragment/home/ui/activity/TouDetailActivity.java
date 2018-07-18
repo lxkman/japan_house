@@ -48,7 +48,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
     private TopLinePresenter presenter;
     private String contentCn;
     private String contentJpn;
-    private String createTime;
+    private Long createTime;
     private String titleCn;
     private String titleJpn;
 
@@ -82,7 +82,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                             titleJpn = TouDetailsBean.getDatas().getTitleJpn();
                             boolean ja = MyUtils.isJa();
                             title.setText(ja?titleCn:titleJpn);
-                            time.setText(MyUtils.getDateToStringH(createTime+""));
+                            time.setText(MyUtils.getDateTimeFromMillisecond(createTime));
                             neirong.setText(ja?contentCn:contentJpn);
                         }
                     }

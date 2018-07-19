@@ -122,7 +122,7 @@ public class TuanDiMoreActivity extends BaseActivity {
         actTuandiXingneng.setText(ja ? datas.getPerformanceJpn() : datas.getPerformanceCn());/*性能*/
         actTuandiZhengmingshu.setText(ja ? datas.getTestimonialJpn() : datas.getTestimonialCn());/*证明书*/
         actTuandiXiacibaozhang.setText(ja ? datas.getDefectsEnsureJpn() : datas.getDefectsEnsureCn());/*瑕疵保障*/
-        actTuandiShuidiandengfeiyong.setText(ja ? "接口没返回" : "接口没返回");/*水电等费用*/
+        actTuandiShuidiandengfeiyong.setText(ja ? datas.getUtilities_jpn() : datas.getUtilities_cn());/*水电等费用*/
     }
 
     @OnClick(R.id.back)

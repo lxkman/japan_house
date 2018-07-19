@@ -315,6 +315,8 @@ public class HouseDetailsBean implements Serializable{
         private String popularChoiceJpn;
         private String conditionsCn;
         private String conditionsJpn;
+        private String utilities_cn;
+        private String utilities_jpn;
         private String kpPhone;
         private String subwayStationNum;
         private HwdcBrokerBean hwdcBroker;
@@ -332,7 +334,20 @@ public class HouseDetailsBean implements Serializable{
         public void setId(int id) {
             this.id = id;
         }
+        public String getUtilities_cn() {
+            return utilities_cn;
+        }
 
+        public void setUtilities_cn(String utilities_cn) {
+            this.utilities_cn = utilities_cn;
+        }
+        public String getUtilities_jpn() {
+            return utilities_jpn;
+        }
+
+        public void setUtilities_jpn(String utilities_jpn) {
+            this.utilities_jpn = utilities_jpn;
+        }
         public String getLocationLevel1Cn() {
             return locationLevel1Cn;
         }

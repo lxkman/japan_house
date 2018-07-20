@@ -20,6 +20,7 @@ import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
 import com.example.administrator.japanhouse.bean.LoginBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
+import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.im.RcConnect;
 import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
@@ -204,7 +205,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         OkGo.<NoDataBean>post(MyUrls.BASEURL + "/app/user/updateinfo")
                 .tag(this)
                 .params(params)
-                .execute(new DialogCallback<NoDataBean>(this, NoDataBean.class) {
+                .execute(new JsonCallback<NoDataBean>(NoDataBean.class) {
                     @Override
                     public void onSuccess(Response<NoDataBean> response) {
 

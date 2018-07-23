@@ -222,13 +222,13 @@ public class CityListBean {
                 private String administrationNameCn;
                 private int isDeleted;
                 private long createTime;
-                private int latitude;
+                private long latitude;
                 private String citylevel;
                 private int id;
                 private String administrationNameJpn;
                 private int parentId;
                 private String status;
-                private int longitude;
+                private long longitude;
 
                 public void setAdministrationNameCn(String administrationNameCn) {
                     this.administrationNameCn = administrationNameCn;
@@ -282,7 +282,7 @@ public class CityListBean {
                     return createTime;
                 }
 
-                public int getLatitude() {
+                public long getLatitude() {
                     return latitude;
                 }
 
@@ -306,7 +306,7 @@ public class CityListBean {
                     return status;
                 }
 
-                public int getLongitude() {
+                public long getLongitude() {
                     return longitude;
                 }
             }

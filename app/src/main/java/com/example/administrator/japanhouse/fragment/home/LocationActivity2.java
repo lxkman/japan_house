@@ -185,7 +185,7 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.tv_mylocation:
                 SoftKeyboardTool.closeKeyboard(this);
-                if (!isHasThisCity()){
+                if (!isHasThisCity()) {
                     Intent intent = new Intent();
                     intent.putExtra("cityId", 2);
                     intent.putExtra("cityName", getResources().getString(R.string.dongjing));
@@ -196,7 +196,7 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private boolean isHasThisCity(){
+    private boolean isHasThisCity() {
         if (citysList != null && citysList.size() > 0) {
             for (int i = 0; i < citysList.size(); i++) {
                 CityListBean.DatasEntity.CitysEntity datasEntity = citysList.get(i);
@@ -251,6 +251,8 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                     intent.putExtra("cityId", item.getCityList().get(position).getId());
                     intent.putExtra("cityName", isJa ? item.getCityList().get(position).getAdministrationNameJpn()
                             : item.getCityList().get(position).getAdministrationNameCn());
+                    intent.putExtra("jingdu", item.getCityList().get(position).getLongitude());
+                    intent.putExtra("weidu", item.getCityList().get(position).getLatitude());
                     setResult(1, intent);
                     finish();
                 }

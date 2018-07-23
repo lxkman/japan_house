@@ -193,15 +193,17 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
                 double longitude = bdLocation.getLongitude();
-                CacheUtils.put("mylongitude",longitude);
+                CacheUtils.put("mylongitude", longitude);
                 double latitude = bdLocation.getLatitude();
-                CacheUtils.put("mylatitude",latitude);
+                CacheUtils.put("mylatitude", latitude);
                 String country = bdLocation.getCountry();
                 if (!country.equals("日本")) {
                     String cityName = getResources().getString(R.string.dongjing);
                     CacheUtils.put("cityId", 2);
                     CacheUtils.put("cityName", cityName);
                     locationTv.setText(cityName);
+                    CacheUtils.put("mylongitude", 139.46);
+                    CacheUtils.put("mylatitude", 35.42);
                     initData();
                     return;
                 }
@@ -269,6 +271,10 @@ public class HomeFragment extends BaseFragment {
             return;
         }
         CacheUtils.put("cityId", cityId);
+        long jingdu = data.getLongExtra("jingdu", 0);
+        long weidu = data.getLongExtra("weidu", 0);
+        CacheUtils.put("mylongitude", jingdu);
+        CacheUtils.put("mylatitude", weidu);
         initData();
         EventBus.getDefault().postSticky(new EventBean("refreshComment"));//刷新推荐的数据
     }
@@ -539,7 +545,7 @@ public class HomeFragment extends BaseFragment {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 Intent Managerintent = new Intent(mContext, ManagerActivity.class);
-                                Managerintent.putExtra("ManagerId",tjjjr.get(position).getId()+"");
+                                Managerintent.putExtra("ManagerId", tjjjr.get(position).getId() + "");
                                 startActivity(Managerintent);
                             }
                         });
@@ -813,13 +819,13 @@ public class HomeFragment extends BaseFragment {
             Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String status = item.getStatus();
-            String price=isJa ? item.getPriceJpn() : item.getPriceCn();
-            String rent=isJa ? item.getRentJpn() : item.getRentCn();
+            String price = isJa ? item.getPriceJpn() : item.getPriceCn();
+            String rent = isJa ? item.getRentJpn() : item.getRentCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
-                    .setText(R.id.tv_price, status.equals("2")?rent:price);
+                    .setText(R.id.tv_price, status.equals("2") ? rent : price);
         }
     }
 

@@ -291,7 +291,7 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(MapZuhouseFragment.this);
-                        if (shaiXuanBeanDatas==null){
+                        if (shaiXuanBeanDatas == null) {
                             return;
                         }
                         /**
@@ -395,23 +395,8 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                String country = bdLocation.getCountry();
-                //                if (!country.equals("日本")) {
-                //                    // 默认 东京
-                //                    mCity = "东京市";
-                //                    double longitude = 139.75;
-                //                    double latitude = 35.68;
-                //                    initMap(latitude, longitude);
-                //                    initOverlay(mCity);
-                //                } else {
-                //                    double longitude = bdLocation.getLongitude();
-                //                    double latitude = bdLocation.getLatitude();
-                //                    mCity = bdLocation.getCity();
-                //                    initMap(latitude, longitude);
-                //                    initOverlay(mCity);
-                //                }
-                double longitude = bdLocation.getLongitude();
-                double latitude = bdLocation.getLatitude();
+                double longitude = CacheUtils.get("mylongitude");
+                double latitude = CacheUtils.get("mylatitude");
                 mCity = bdLocation.getCity();
                 initMap(latitude, longitude);
                 initOverlay(mCity);
@@ -561,10 +546,14 @@ public class MapZuhouseFragment extends BaseFragment implements MyItemClickListe
         }
         HttpParams params = new HttpParams();
         params.put("hType", 2);
-        params.put("starJd", southwest.longitude);
-        params.put("endJd", northeast.longitude);
-        params.put("starWd", southwest.latitude);
-        params.put("endWd", northeast.latitude);
+        if (southwest != null) {
+            params.put("starJd", southwest.longitude);
+            params.put("starWd", southwest.latitude);
+        }
+        if (northeast != null) {
+            params.put("endJd", northeast.longitude);
+            params.put("endWd", northeast.latitude);
+        }
         params.put("mjId", mjId);//面积
         params.put("zjId", zjId);//租金
         if (isZiDingyiPrice) {

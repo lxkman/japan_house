@@ -59,12 +59,13 @@
         android:layout_height="50dip"
         android:background="@drawable/map_bg_kuang">
         <TextView
+            android:id="@+id/tv_cityname"
             android:clickable="false"
             android:paddingLeft="15dip"
             android:textSize="14sp"
             android:gravity="center_vertical"
             android:textColor="#333"
-            android:text="北京"
+            android:text=""
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />

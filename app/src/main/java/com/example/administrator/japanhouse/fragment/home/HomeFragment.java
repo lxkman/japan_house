@@ -192,10 +192,6 @@ public class HomeFragment extends BaseFragment {
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                double longitude = bdLocation.getLongitude();
-                CacheUtils.put("mylongitude", longitude);
-                double latitude = bdLocation.getLatitude();
-                CacheUtils.put("mylatitude", latitude);
                 String country = bdLocation.getCountry();
                 if (!country.equals("日本")) {
                     String cityName = getResources().getString(R.string.dongjing);
@@ -207,6 +203,10 @@ public class HomeFragment extends BaseFragment {
                     initData();
                     return;
                 }
+                double longitude = bdLocation.getLongitude();
+                CacheUtils.put("mylongitude", longitude);
+                double latitude = bdLocation.getLatitude();
+                CacheUtils.put("mylatitude", latitude);
                 String city = bdLocation.getCity();
                 initLocationData(city);
             }
@@ -271,8 +271,9 @@ public class HomeFragment extends BaseFragment {
             return;
         }
         CacheUtils.put("cityId", cityId);
-        long jingdu = data.getLongExtra("jingdu", 0);
-        long weidu = data.getLongExtra("weidu", 0);
+        CacheUtils.put("cityName", cityName);
+        double jingdu = data.getDoubleExtra("jingdu", 139.46);
+        double weidu = data.getDoubleExtra("weidu", 35.42);
         CacheUtils.put("mylongitude", jingdu);
         CacheUtils.put("mylatitude", weidu);
         initData();

@@ -9,6 +9,24 @@ public class SearchPositonBean {
     private int item_position;
     private String name;
     private int id;
+    private double jingdu;
+    private double weidu;
+
+    public double getJingdu() {
+        return jingdu;
+    }
+
+    public void setJingdu(double jingdu) {
+        this.jingdu = jingdu;
+    }
+
+    public double getWeidu() {
+        return weidu;
+    }
+
+    public void setWeidu(double weidu) {
+        this.weidu = weidu;
+    }
 
     public int getId() {
         return id;

@@ -155,6 +155,8 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                                     Intent intent = new Intent();
                                     intent.putExtra("cityId", hotcites.get(position).getId());
                                     intent.putExtra("cityName", isJa ? hotcites.get(position).getAdministrationNameJpn() : hotcites.get(position).getAdministrationNameCn());
+                                    intent.putExtra("jingdu", hotcites.get(position).getLongitude());
+                                    intent.putExtra("weidu", hotcites.get(position).getLatitude());
                                     setResult(1, intent);
                                     finish();
                                 }
@@ -209,6 +211,8 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                             Intent intent = new Intent();
                             intent.putExtra("cityId", cityList.get(i1).getId());
                             intent.putExtra("cityName", isJa ? cityList.get(i1).getAdministrationNameJpn() : cityList.get(i1).getAdministrationNameCn());
+                            intent.putExtra("jingdu", cityList.get(i1).getLongitude());
+                            intent.putExtra("weidu", cityList.get(i1).getLatitude());
                             setResult(1, intent);
                             finish();
                             return true;
@@ -345,6 +349,8 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                             Intent intent = new Intent();
                             intent.putExtra("cityId", searchResult.get(position).getId());
                             intent.putExtra("cityName", searchResult.get(position).getName());
+                            intent.putExtra("jingdu", searchResult.get(position).getJingdu());
+                            intent.putExtra("weidu", searchResult.get(position).getWeidu());
                             setResult(1, intent);
                             finish();
                         }
@@ -376,6 +382,8 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                             bean.setItem_position(i1);
                             bean.setId(cityList.get(i1).getId());
                             bean.setName(xxx);
+                            bean.setJingdu(cityList.get(i1).getLongitude());
+                            bean.setWeidu(cityList.get(i1).getLatitude());
                             list.add(bean);
                         }
                     }

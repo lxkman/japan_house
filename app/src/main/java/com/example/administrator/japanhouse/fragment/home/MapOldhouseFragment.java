@@ -395,11 +395,11 @@ public class MapOldhouseFragment extends BaseFragment implements MyItemClickList
         mLocClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                    double longitude = CacheUtils.get("mylongitude");
-                    double latitude = CacheUtils.get("mylatitude");
-                    mCity = bdLocation.getCity();
-                    initMap(latitude, longitude);
-                    initOverlay(mCity);
+                double longitude = CacheUtils.get("mylongitude");
+                double latitude = CacheUtils.get("mylatitude");
+                mCity = bdLocation.getCity();
+                initMap(latitude, longitude);
+                initOverlay(mCity);
             }
         });
     }

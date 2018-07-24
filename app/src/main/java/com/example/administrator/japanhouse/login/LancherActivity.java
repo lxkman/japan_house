@@ -17,17 +17,11 @@ import com.baidu.location.LocationClientOption;
 import com.bumptech.glide.Glide;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.LancherBean;
-import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
-import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.example.administrator.japanhouse.utils.SpUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.model.HttpParams;
-import com.lzy.okgo.model.Response;
 import com.orhanobut.logger.Logger;
 
 import org.zackratos.ultimatebar.UltimateBar;
@@ -103,27 +97,34 @@ public class LancherActivity extends BaseActivity {
     }
 
     private void initLancherNet() {
-        HttpParams params = new HttpParams();
-        params.put("imageType", "0");
-        params.put("languageType",languageType);
-        OkGo.<LancherBean>post(MyUrls.BASEURL + "/app/image/images")
-                .tag(this)
-                .params(params)
-                .execute(new DialogCallback<LancherBean>(this, LancherBean.class) {
-                    @Override
-                    public void onSuccess(Response<LancherBean> response) {
-                        int code = response.code();
-                        LancherBean LancherBean = response.body();
-                        String locale = Locale.getDefault().getLanguage();
-                        if (LancherBean != null) {
-                            if (LancherBean.getCode().equals("200")) {
-                                if (LancherBean.getDatas()!=null && LancherBean.getDatas().size()>0){
-                                    if (TextUtils.equals(locale, "ja")) {
-                                        Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
-                                    } else {
-                                        Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
-                                    }
-                                }
+        if (languageType==0){
+            Glide.with(mContext).load(R.drawable.launcher_zh).into(iv_launcher);
+        }else if (languageType==1){
+            Glide.with(mContext).load(R.drawable.start_bg).into(iv_launcher);
+        }
+//        HttpParams params = new HttpParams();
+//        params.put("imageType", "0");
+//        params.put("languageType",languageType);
+//        OkGo.<LancherBean>post(MyUrls.BASEURL + "/app/image/images")
+//                .tag(this)
+//                .params(params)
+//                .execute(new DialogCallback<LancherBean>(this, LancherBean.class) {
+//                    @Override
+//                    public void onSuccess(Response<LancherBean> response) {
+//                        int code = response.code();
+//                        LancherBean LancherBean = response.body();
+//                        String locale = Locale.getDefault().getLanguage();
+//                        if (LancherBean != null) {
+//                            if (LancherBean.getCode().equals("200")) {
+//                                if (LancherBean.getDatas()!=null && LancherBean.getDatas().size()>0){
+//                                    if (TextUtils.equals(locale, "ja")) {
+//                                        Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+//                                    } else {
+//                                        Glide.with(LancherActivity.this).load(LancherBean.getDatas().get(0).getImageUrl()).into(iv_launcher);
+//                                    }
+//                                }
+
+
                                 mHandler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -144,11 +145,11 @@ public class LancherActivity extends BaseActivity {
 
                                         }
                                     }
-                                }, 2000);
-                            }
-                        }
-                    }
-                });
+                                }, 3000);
+//                            }
+//                        }
+//                    }
+//                });
 
     }
 

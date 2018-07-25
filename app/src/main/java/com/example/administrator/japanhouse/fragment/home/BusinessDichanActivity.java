@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,6 +24,7 @@ import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.GlideReqUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -174,7 +176,9 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
 
         @Override
         protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRealEstateImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ?item.getRealEstateImgs(): item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
             if (isJa) {

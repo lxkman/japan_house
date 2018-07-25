@@ -33,6 +33,7 @@ import com.example.administrator.japanhouse.fragment.comment.ShangpuDetailsActiv
 import com.example.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.GlideReqUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -573,6 +574,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRealEstateImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
             if (isJa) {

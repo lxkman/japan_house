@@ -27,6 +27,7 @@ import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.GlideReqUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -336,6 +337,7 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
         protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
             if (isJa) {
@@ -361,7 +363,8 @@ public class ZufangActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs():item.getVideoImgs())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())

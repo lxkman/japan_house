@@ -60,6 +60,7 @@ import com.example.administrator.japanhouse.fragment.home.ui.activity.ZhinengAct
 import com.example.administrator.japanhouse.utils.BannerUtils;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.GlideReqUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.view.RatingBarView;
 import com.lzy.okgo.OkGo;
@@ -679,7 +680,9 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder helper, final HomePageBean.DatasEntity.TjxfEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
@@ -712,6 +715,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjxfEntity.ImageListEntity item) {
             Glide.with(MyApplication.getGloableContext()).load(item.getVal())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
         }
     }
@@ -724,7 +728,9 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjesfEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
@@ -781,7 +787,9 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjzfEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
@@ -799,7 +807,9 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjtdEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getLandImages())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getLandImages())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
@@ -817,7 +827,9 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.CnxhEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getRoomImgs())
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String status = item.getStatus();
             String price = isJa ? item.getPriceJpn() : item.getPriceCn();

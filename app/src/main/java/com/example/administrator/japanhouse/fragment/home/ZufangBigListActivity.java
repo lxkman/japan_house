@@ -31,6 +31,7 @@ import com.example.administrator.japanhouse.callback.JsonCallback;
 import com.example.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
+import com.example.administrator.japanhouse.utils.GlideReqUtils;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.NetWorkUtils;
 import com.example.administrator.japanhouse.utils.TUtils;
@@ -528,6 +529,7 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
         protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
             if (isJa) {

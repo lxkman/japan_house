@@ -109,8 +109,13 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
                 double latitude = bdLocation.getLatitude();
                 String country = bdLocation.getCountry();
                 if (!country.equals("日本")) {
-                    String cityName = getResources().getString(R.string.dongjing);
-                    tv_mylocation.setText(cityName);
+                    String cityName1 = CacheUtils.get("cityName");
+                    if (!TextUtils.isEmpty(cityName1)) {
+                        tv_mylocation.setText(cityName1);
+                    } else {
+                        String cityName = getResources().getString(R.string.dongjing);
+                        tv_mylocation.setText(cityName);
+                    }
                 } else {
                     tv_mylocation.setText(bdLocation.getCity());
                 }
@@ -275,9 +280,9 @@ public class LocationActivity2 extends BaseActivity implements View.OnClickListe
         @Override
         protected void convert(BaseViewHolder helper, CityListBean.DatasEntity.CitysEntity.CityListEntity item) {
             helper.setText(R.id.tv_city_item, isJa ? item.getAdministrationNameJpn() : item.getAdministrationNameCn());
-            if (helper.getAdapterPosition() == lastsize - 1) {
-                helper.setVisible(R.id.view_line, false);
-            }
+//            if (helper.getAdapterPosition() == lastsize - 1) {
+//                helper.setVisible(R.id.view_line, false);
+//            }
         }
     }
 

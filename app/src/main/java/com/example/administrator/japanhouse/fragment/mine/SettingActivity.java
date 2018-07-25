@@ -1,28 +1,22 @@
 package com.example.administrator.japanhouse.fragment.mine;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
 import com.example.administrator.japanhouse.base.BaseActivity;
-import com.example.administrator.japanhouse.bean.LoginBean;
+import com.example.administrator.japanhouse.bean.EventBean;
 import com.example.administrator.japanhouse.callback.DialogCallback;
 import com.example.administrator.japanhouse.callback.JsonCallback;
-import com.example.administrator.japanhouse.im.RcConnect;
-import com.example.administrator.japanhouse.login.LoginActivity;
 import com.example.administrator.japanhouse.model.NoDataBean;
 import com.example.administrator.japanhouse.model.UserInfo;
 import com.example.administrator.japanhouse.model.VersionBean;
@@ -36,13 +30,13 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.rong.imkit.RongIM;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -113,9 +107,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View view) {
                 dialog.dismiss();
                 MyApplication.logOut();
-                removeAllActivitys();
+                finish();
                 SharedPreferencesUtils.getInstace(SettingActivity.this).setStringPreference("token", "");
-                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+                EventBus.getDefault().postSticky(new EventBean(Constants.EVENT_MAIN));
             }
         });
         btndismiss.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +118,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 dialog.dismiss();
             }
         });
-
     }
 
     @Override
@@ -194,6 +187,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void finish() {
         super.finish();
+        if (CacheUtils.get(Constants.P_USERINFO) == null)
+            return;
         UserInfo.DatasBean.UserBean userBean = CacheUtils.get(Constants.P_USERINFO);
         HttpParams params = new HttpParams();
         params.put("token", userBean.getToken());

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/rela_layout">
 <ImageView
+    android:src="@drawable/default_img"
     android:clickable="false"
     android:id="@+id/img_banner"
     android:scaleType="fitXY"

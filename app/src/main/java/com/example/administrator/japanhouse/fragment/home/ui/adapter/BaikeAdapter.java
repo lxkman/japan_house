@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.administrator.japanhouse.MyApplication;
 import com.example.administrator.japanhouse.R;
+import com.example.administrator.japanhouse.activity.WebActivity;
 import com.example.administrator.japanhouse.bean.Bay_baike_Bean;
 import com.example.administrator.japanhouse.fragment.home.ui.activity.BaikeDetailActivity;
 import com.example.administrator.japanhouse.utils.CacheUtils;
@@ -48,8 +50,14 @@ public class BaikeAdapter extends RecyclerView.Adapter<BaikeAdapter.ViewHolder> 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, BaikeDetailActivity.class);
-                intent.putExtra("wid", datasBean.getId());
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("title", context.getString(R.string.details));
+                if (MyApplication.isJapanese()) {
+                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/paranText.html?id=" + datasBean.getId());
+                } else {
+                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/paranTextCn.html?id=" + datasBean.getId());
+                }
+
                 context.startActivity(intent);
             }
         });

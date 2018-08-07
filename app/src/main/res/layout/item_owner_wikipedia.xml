@@ -28,7 +28,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/apartment_icon"
+            android:background="@drawable/house_pic"
             />
 
         <RelativeLayout
@@ -48,7 +48,6 @@
                 android:textSize="14sp"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:text="百科标题内容百科标题内容百科标题内容百科标题内容百科标题丢…"
                 />
 
             <TextView
@@ -60,7 +59,6 @@
                 android:layout_alignParentBottom="true"
                 android:drawablePadding="7dp"
                 android:drawableLeft="@drawable/shijian"
-                android:text="01.22"
                 />
 
             <TextView
@@ -74,7 +72,6 @@
                 android:layout_marginLeft="25dp"
                 android:drawablePadding="7dp"
                 android:drawableLeft="@drawable/chakan"
-                android:text="1000人查看"
                 />
         </RelativeLayout>
     </LinearLayout>

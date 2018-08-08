@@ -60,7 +60,7 @@ public class WebActivity extends BaseActivity {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                Toast.makeText(WebActivity.this, "加载出错了", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(WebActivity.this, "加载出错了", Toast.LENGTH_SHORT).show();
             }
         });
         webView.loadUrl(result);

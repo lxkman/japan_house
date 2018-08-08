@@ -230,6 +230,9 @@ public class NewHousedetailsActivity extends BaseActivity {
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
+                        if (datas.getHwdcBroker()==null){
+                            return;
+                        }
                         subwayStationNum = datas.getSubwayStationNum();
                         HouseDetailsBean.DatasBean.HwdcSubwayStationBean hwdcSubwayStation = datas.getHwdcSubwayStation();
                         stationNameCn = hwdcSubwayStation.getStationNameCn();

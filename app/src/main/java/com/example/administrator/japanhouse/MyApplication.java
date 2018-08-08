@@ -106,7 +106,7 @@ public class MyApplication extends Application {
 
         PlatformConfig.setWeixin("wxdbbb1928fdfa069d", "69ad4ae853a60921d709dd3125d75351");
         PlatformConfig.setQQZone("1106733819", "ME4Of9bX0LUh8uz0");
-        PlatformConfig.setSinaWeibo("4004384953", "11a1e6053a816fb1636a739cb67ce667", "https://sns.whalecloud.com/sina2/callback");
+        PlatformConfig.setSinaWeibo("3051729109", "e0c269439ddb81a528e90dbb909012e9", "https://sns.whalecloud.com/sina2/callback");
     }
 
     private void initRc() {

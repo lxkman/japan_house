@@ -171,6 +171,9 @@ public class TudidetailsActivity extends BaseActivity {
                         landImgs = datas.getLandImgs();//轮播图
                         Log.d("TudidetailsActivity", landImgs);
                         hwdcBroker = datas.getHwdcBroker();
+                        if (datas.getHwdcBroker()==null){
+                            return;
+                        }
                         isJa = MyUtils.isJa();
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());

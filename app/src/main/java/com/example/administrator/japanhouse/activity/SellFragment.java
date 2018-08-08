@@ -422,6 +422,7 @@ public class SellFragment extends Fragment  implements PicRentalAdapter.onItemCl
                 .theme(R.style.picture_default_style)// 主题样式设置 具体参考 values/styles
                 .enableCrop(false)// 是否裁剪
                 .compress(true)// 是否压缩
+                .videoQuality(0)
                 .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                 .circleDimmedLayer(true)// 是否圆形裁剪

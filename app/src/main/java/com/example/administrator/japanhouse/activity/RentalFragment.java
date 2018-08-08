@@ -425,6 +425,7 @@ public class RentalFragment extends Fragment  implements PicRentalAdapter.onItem
                 .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                 .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                 .circleDimmedLayer(true)// 是否圆形裁剪
+                .videoQuality(0)
                 .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
                 .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false
                 .scaleEnabled(false)// 裁剪是否可放大缩小图片

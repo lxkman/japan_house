@@ -650,7 +650,7 @@ public class HomeFragment extends BaseFragment {
                 mDistanceY += scrollY - oldScrollY;
                 //toolbar的高度
                 int toolbarHeight = 300;//我写死的高度
-
+                Log.e("vvvvvvvvvv","scrollY:"+scrollY+"   "+"oldScrollY:"+oldScrollY);
                 //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
                 if (mDistanceY <= toolbarHeight) {
                     float scale = (float) mDistanceY / toolbarHeight;

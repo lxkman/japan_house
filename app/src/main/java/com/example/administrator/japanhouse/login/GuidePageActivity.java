@@ -1,7 +1,11 @@
 package com.example.administrator.japanhouse.login;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -19,6 +23,7 @@ import com.example.administrator.japanhouse.utils.CacheUtils;
 import com.example.administrator.japanhouse.utils.Constants;
 import com.example.administrator.japanhouse.utils.MyUrls;
 import com.example.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.example.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -43,6 +48,11 @@ public class GuidePageActivity extends BaseActivity {
     private List<LancherBean.DatasBean> datas;
     private String location;
     private int languageType;
+    private String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+            ,Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CAMERA
+    };
+    private static final int CODE_FOR_WRITE_PERMISSION =1001 ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +70,36 @@ public class GuidePageActivity extends BaseActivity {
             languageType = 0;
         }
         initGuideNet();
+        for (int i = 0; i < permissions.length; i++) {
+            checkPermission(permissions[i]);
+        }
+    }
 
+    private void checkPermission(String permission) {
+        //使用兼容库就无需判断系统版本
+        int hasWriteStoragePermission = ContextCompat.checkSelfPermission(getApplication(),
+                permission);
+        if (hasWriteStoragePermission == PackageManager.PERMISSION_GRANTED) {
+            //拥有权限，执行操作
+        }else{
+            //没有权限，向用户请求权限
+            ActivityCompat.requestPermissions(this, new String[]{permission}, CODE_FOR_WRITE_PERMISSION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        //通过requestCode来识别是否同一个请求
+        if (requestCode == CODE_FOR_WRITE_PERMISSION){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //用户同意，执行操作
+            }else{
+                //用户不同意，向用户展示该权限作用
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    TUtils.showFail(GuidePageActivity.this,"应用需要此权限");
+                }
+            }
+        }
     }
 
     private void initGuideNet() {

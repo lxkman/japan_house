@@ -25,8 +25,10 @@ import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+
     private static List<Activity> activityList = new ArrayList<>();
     protected Context mContext;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (activityList != null) {
             activityList.add(this);
         }
+
     }
 
     @Override

@@ -50,8 +50,7 @@ public class GuidePageActivity extends BaseActivity {
     private int languageType;
     private String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
             ,Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CAMERA
-    };
+            Manifest.permission.ACCESS_COARSE_LOCATION};
     private static final int CODE_FOR_WRITE_PERMISSION =1001 ;
 
     @Override

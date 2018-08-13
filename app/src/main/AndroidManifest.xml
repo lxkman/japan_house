@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.administrator.japanhouse"
+<manifest package="com.haiwai.administrator.japanhouse"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -39,13 +39,13 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
 
     <application
-        android:name=".MyApplication"
+        android:name="com.haiwai.administrator.japanhouse.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/flc_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LancherActivity">
+        <activity android:name="com.haiwai.administrator.japanhouse.login.LancherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -57,132 +57,132 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="naHsvnvB7DGQXUKTn3SOtlIBrEjm9wzg"/>
         <!-- 百度地图结束 -->
-        <activity android:name=".login.RegisterActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.RegisterActivity"/>
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.haiwai.administrator.japanhouse.login.LoginActivity"
             android:launchMode="singleTask"/>
-        <activity android:name=".login.ForgetPswActivity"/>
-        <activity android:name=".login.UserAgreementActivity"/>
-        <activity android:name=".login.BindPhoneActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.ForgetPswActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.UserAgreementActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.BindPhoneActivity"/>
         <!-- <activity android:name=".login.LauncherActivity"/> -->
-        <activity android:name=".login.GuidePageActivity"/>
-        <activity android:name=".fragment.chat.SearchActivity"/>
-        <activity android:name=".fragment.chat.StartWechatActivity"/>
-        <activity android:name=".fragment.chat.SearchManagerActivity"/>
-        <activity android:name=".fragment.chat.ManagerActivity"/>
-        <activity android:name=".fragment.comment.NewHousedetailsActivity"/>
-        <activity android:name=".fragment.comment.SeeMoreActivity"/>
-        <activity android:name=".fragment.comment.SeeMoreNewHouseActivity"/>
-        <activity android:name=".fragment.comment.SeeMoreZuHouseActivity"/>
-        <activity android:name=".fragment.comment.ZuHousedetailsActivity"/>
-        <activity android:name=".fragment.comment.OldHousedetailsActivity"/>
-        <activity android:name=".fragment.comment.TudidetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.GuidePageActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.chat.SearchActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.chat.StartWechatActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.chat.SearchManagerActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.chat.ManagerActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.NewHousedetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.SeeMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.SeeMoreNewHouseActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.SeeMoreZuHouseActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.OldHousedetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.TudidetailsActivity"/>
         <activity
-            android:name=".fragment.home.NewHouseActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.NewHouseActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name=".fragment.mine.MyDataActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.mine.MyDataActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".fragment.mine.SettingActivity"/>
-        <activity android:name=".fragment.mine.MineMsgActivity"/>
-        <activity android:name=".fragment.mine.WenJuanActivity"/>
-        <activity android:name=".fragment.mine.MsgDetailActivity"/>
-        <activity android:name=".fragment.mine.MineBindPhoneActivity"/>
-        <activity android:name=".fragment.mine.ChangePhoneActivity"/>
-        <activity android:name=".fragment.mine.LanguageActivity"/>
-        <activity android:name=".fragment.mine.AboutUsActivity"/>
-        <activity android:name=".fragment.mine.LianxirenActivity"/>
-        <activity android:name=".fragment.mine.LiShiJiLuActivity"/>
-        <activity android:name=".fragment.mine.fragment.LiShiJiLu2Activity"/>
-        <activity android:name=".fragment.mine.DingDanActivity"/>
-        <activity android:name=".fragment.mine.DingYueActivity"/>
-        <activity android:name=".fragment.mine.ShouCangActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.SettingActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.MineMsgActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.WenJuanActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.MsgDetailActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.MineBindPhoneActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.ChangePhoneActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.LanguageActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.AboutUsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.LianxirenActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.LiShiJiLuActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.fragment.LiShiJiLu2Activity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.DingDanActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.DingYueActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.ShouCangActivity"/>
         <activity
-            android:name=".fragment.home.LocationActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.LocationActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".login.PeopleXieyiActivity"/>
-        <activity android:name=".login.PrivateActivity"/>
-        <activity android:name=".fragment.chat.MyZxingActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.PeopleXieyiActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.login.PrivateActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.chat.MyZxingActivity"/>
         <activity
-            android:name=".fragment.home.HomeSearchActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.HomeSearchActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name=".fragment.home.ui.activity.QuestionActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.QuestionActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".fragment.home.ui.activity.QuizActivity"/>
-        <activity android:name=".fragment.home.ui.activity.WendaItemActivity"/>
-        <activity android:name=".fragment.home.ui.activity.SearchActivity"/>
-        <activity android:name=".fragment.home.ui.activity.ZhinengActivity"/>
-        <activity android:name=".fragment.home.ui.activity.ToutiaoActivity"/>
-        <activity android:name=".fragment.home.ui.activity.TouDetailActivity"/>
-        <activity android:name=".fragment.home.ui.activity.Buyhouse_Baike_Activity"/>
-        <activity android:name=".fragment.home.ui.activity.Daikuan_Activity"/>
-        <activity android:name=".fragment.home.ui.activity.DaikuanDetilsActivity"/>
-        <activity android:name=".fragment.home.ui.activity.WenDa_Detils_Activity"/>
-        <activity android:name=".fragment.home.ui.activity.AnswerActivity"/>
-        <activity android:name=".fragment.home.ui.activity.BaikeDetailActivity"/>
-        <activity android:name=".fragment.home.ui.activity.DealActivity"/>
-        <activity android:name=".fragment.mine.SingUpActivity"/>
-        <activity android:name=".fragment.mine.SingUpDetailsActivity"/>
-        <activity android:name=".fragment.mine.SellHouseActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.QuizActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.WendaItemActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.SearchActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.ZhinengActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.TouDetailActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.Buyhouse_Baike_Activity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.Daikuan_Activity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.DaikuanDetilsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.WenDa_Detils_Activity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.AnswerActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.BaikeDetailActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.DealActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.SingUpActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.SingUpDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.SellHouseActivity"/>
         <activity
-            android:name=".fragment.home.BusinessDichanActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.BusinessDichanActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".fragment.home.SydcSearchActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.SydcSearchActivity"/>
         <activity
-            android:name=".fragment.home.TudiActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.TudiActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".fragment.home.HaiWaiActivity"/>
-        <activity android:name=".fragment.home.ZhaoxiaoquActivity"/>
-        <activity android:name=".fragment.comment.GaoerfuDetailsActivity"/>
-        <activity android:name=".fragment.comment.JiudianDetailsActivity"/>
-        <activity android:name=".fragment.comment.XiezilouDetailsActivity"/>
-        <activity android:name=".fragment.comment.ShangpuDetailsActivity"/>
-        <activity android:name=".fragment.mine.Myhouse_price_Activity"/>
-        <activity android:name=".fragment.comment.HaiWaiDetailsActivity"/>
-        <activity android:name=".fragment.comment.XiaoQuDetailsActivity"/>
-        <activity android:name=".fragment.home.SydcLiebiaoActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.HaiWaiActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ZhaoxiaoquActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.JiudianDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.XiezilouDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.Myhouse_price_Activity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.SydcLiebiaoActivity"/>
         <activity
-            android:name=".fragment.home.ErshoufangActiviy"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.ErshoufangActiviy"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".fragment.home.ChineseFangyuanActivity"/>
-        <activity android:name=".fragment.home.WoshiyezhuActivity"/>
-        <activity android:name=".activity.OwnerActivity"/>
-        <activity android:name=".activity.OwnerWikipediaActivity"/>
-        <activity android:name=".activity.OwnerDetailsActivity"/>
-        <activity android:name=".activity.FreeApartmentActivity"/>
-        <activity android:name=".activity.RentalDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ChineseFangyuanActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.WoshiyezhuActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.OwnerActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.OwnerWikipediaActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.OwnerDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.FreeApartmentActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.RentalDetailsActivity"/>
         <activity
-            android:name=".activity.RentalActivity"
+            android:name="com.haiwai.administrator.japanhouse.activity.RentalActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".fragment.mine.CalculatorActivity"/>
-        <activity android:name=".fragment.mine.Calculator_DetilsActivity"/>
-        <activity android:name=".fragment.mine.FeedbackActivity"/>
-        <activity android:name=".fragment.mine.DingDan_DetilsActivity"/>
-        <activity android:name=".activity.FullScreenActivity"/>
-        <activity android:name=".fragment.home.JjrLiebiaoActivity"/>
-        <activity android:name=".fragment.home.ZufangActivity"/>
-        <activity android:name=".fragment.home.HaiwaiListActivity"/>
-        <activity android:name=".fragment.home.HomeMapActivity"/>
-        <activity android:name=".fragment.home.MapSearchActivity"
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.CalculatorActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.Calculator_DetilsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.FeedbackActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.mine.DingDan_DetilsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.FullScreenActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.JjrLiebiaoActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ZufangActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.HaiwaiListActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.HomeMapActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.MapSearchActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".fragment.home.FangjiadituActivity"/>
-        <activity android:name=".fragment.home.YanjiuListActivity"/>
-        <activity android:name=".fragment.home.ShendengFirstStepActivity"/>
-        <activity android:name=".fragment.home.ShendengSecondStepActivity"/>
-        <activity android:name=".fragment.home.ShendengListActivity"/>
-        <activity android:name=".fragment.home.YanjiuDetailActivity"/>
-        <activity android:name=".fragment.home.ChineseLiebiaoActivity"/>
-        <activity android:name=".fragment.home.ZufangListActivity"/>
-        <activity android:name=".fragment.comment.ZhongguoDetailsActivity"/>
-        <activity android:name=".fragment.home.TongqinActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.FangjiadituActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.YanjiuListActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ShendengFirstStepActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ShendengSecondStepActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ShendengListActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.YanjiuDetailActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ChineseLiebiaoActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ZufangListActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.TongqinActivity"/>
         <activity
-            android:name=".fragment.home.TongqinSearchActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.home.TongqinSearchActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".activity.AgentListActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.AgentListActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.haiwai.administrator.japanhouse.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -192,7 +192,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
-                    android:host="com.example.administrator.japanhouse"
+                    android:host="com.haiwai.administrator.japanhouse"
                     android:pathPrefix="/conversationlist"
                     android:scheme="rong"/>
             </intent-filter>
@@ -227,7 +227,7 @@
         </activity>
         <!-- 微信分享 -->
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.haiwai.administrator.japanhouse.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -262,21 +262,21 @@
         <!-- 会话界面 -->
         <!-- 添加配置信息 -->
 
-        <activity android:name=".im.RongChatActivity">
+        <activity android:name="com.haiwai.administrator.japanhouse.im.RongChatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
-                    android:host="com.example.administrator.japanhouse"
+                    android:host="com.haiwai.administrator.japanhouse"
                     android:pathPrefix="/conversation/"
                     android:scheme="rong"/>
             </intent-filter>
         </activity>
 
         <receiver
-            android:name=".im.RcNotificationReceiver"
+            android:name="com.haiwai.administrator.japanhouse.im.RcNotificationReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="io.rong.push.intent.MESSAGE_ARRIVED"/>
@@ -287,11 +287,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".map.MapActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.map.MapActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.administrator.japanhouse.FileProvider"
+            android:authorities="com.haiwai.administrator.japanhouse.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -299,7 +299,7 @@
                 android:resource="@xml/rc_file_path"/>
         </provider>
         <provider
-            android:name=".fileprovider.PicFileProvider"
+            android:name="com.haiwai.administrator.japanhouse.fileprovider.PicFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -308,7 +308,7 @@
                 android:resource="@xml/file_paths"/>
         </provider>
 
-        <activity android:name=".im.BaiDuLocationActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.im.BaiDuLocationActivity"/>
 
         <!-- LINE SDK Settings -->
         <activity
@@ -338,35 +338,35 @@
             android:name="jp.line.sdk.AuthScheme"
             android:value="@string/line_channel_id"/>
 
-        <activity android:name=".fragment.home.BieShuActivity"/>
-        <activity android:name=".more.NewHouseMoreActivity"/>
-        <activity android:name=".more.OldHouseMoreActivity"/>
-        <activity android:name=".more.ZuDuoCengMoreActivity"/>
-        <activity android:name=".more.ZuXueShengMoreActivity"/>
-        <activity android:name=".more.ZuErCengMoreActivity"/>
-        <activity android:name=".more.ZuBieSuMoreActivity"/>
-        <activity android:name=".more.ZuShangPuMoreActivity"/>
-        <activity android:name=".more.ZuBanGongMoreActivity"/>
-        <activity android:name=".fragment.home.BieshudetailsActivity"/>
-        <activity android:name=".more.BieSuMoreActivity"/>
-        <activity android:name=".more.GaoErFuMoreActivity"/>
-        <activity android:name=".more.JiuDianMoreActivity"/>
-        <activity android:name=".more.ShangPuMoreActivity"/>
-        <activity android:name=".more.TuanDiMoreActivity"/>
-        <activity android:name=".more.TudiMoreActivity"/>
-        <activity android:name=".more.XieZiLouMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.BieShuActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.NewHouseMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.OldHouseMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ZuDuoCengMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ZuXueShengMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ZuErCengMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ZuBieSuMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ZuShangPuMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ZuBanGongMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.BieshudetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.BieSuMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.GaoErFuMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.JiuDianMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.ShangPuMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.TuanDiMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.TudiMoreActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.more.XieZiLouMoreActivity"/>
         <activity
-            android:name=".fragment.comment.VideoDetailsActivity"
+            android:name="com.haiwai.administrator.japanhouse.fragment.comment.VideoDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
-        <activity android:name=".fragment.comment.BannerDetailsActivity"/>
-        <activity android:name=".activity.FreeApartmentDetailsActivity"/>
-        <activity android:name=".fragment.home.ZhaoTuanDiSearchActivity"/>
-        <activity android:name=".fragment.home.LocationActivity2"
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.comment.BannerDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.FreeApartmentDetailsActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ZhaoTuanDiSearchActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.LocationActivity2"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".fragment.home.SydcBigLiebiaoActivity"/>
-        <activity android:name=".fragment.home.ZufangBigListActivity"/>
-        <activity android:name=".activity.WebActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.SydcBigLiebiaoActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.fragment.home.ZufangBigListActivity"/>
+        <activity android:name="com.haiwai.administrator.japanhouse.activity.WebActivity"/>
     </application>
 
 </manifest>

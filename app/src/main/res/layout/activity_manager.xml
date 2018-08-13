@@ -43,7 +43,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="110dip">
-            <com.example.administrator.japanhouse.view.CircleImageView
+            <com.haiwai.administrator.japanhouse.view.CircleImageView
                 android:id="@+id/manager_head_img"
                 android:layout_marginTop="20dip"
                 android:layout_marginLeft="20dip"
@@ -105,12 +105,12 @@
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="match_parent">
-                <com.example.administrator.japanhouse.view.RatingBarView
+                <com.haiwai.administrator.japanhouse.view.RatingBarView
                     android:id="@+id/ratingBarView"
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
                     android:layout_weight="1">
-                </com.example.administrator.japanhouse.view.RatingBarView>
+                </com.haiwai.administrator.japanhouse.view.RatingBarView>
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -255,12 +255,12 @@
                     android:background="#eee"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"></View>
-                <com.example.administrator.japanhouse.view.NoCacheViewPager
+                <com.haiwai.administrator.japanhouse.view.NoCacheViewPager
                     android:id="@+id/vp_look"
                     android:background="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                </com.example.administrator.japanhouse.view.NoCacheViewPager>
+                </com.haiwai.administrator.japanhouse.view.NoCacheViewPager>
 
             </LinearLayout>
         </RelativeLayout>

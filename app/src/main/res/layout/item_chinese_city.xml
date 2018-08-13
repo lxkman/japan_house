@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center">
-        <com.example.administrator.japanhouse.view.CircleImageView
+        <com.haiwai.administrator.japanhouse.view.CircleImageView
             android:id="@+id/item_pic_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"

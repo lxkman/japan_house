@@ -14,7 +14,7 @@
         android:textSize="15sp"
         android:textColor="@color/text_black"
         />
-    <com.example.administrator.japanhouse.view.FluidLayout
+    <com.haiwai.administrator.japanhouse.view.FluidLayout
         android:id="@+id/result_fluidlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.ToutiaoActivity">
     <RelativeLayout
         android:id="@+id/liner"
         android:background="@color/colorAccent"

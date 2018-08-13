@@ -41,7 +41,7 @@
             android:text="清除"
             android:textColor="@color/shihuangse"/>
     </LinearLayout>
-    <com.example.administrator.japanhouse.view.MyDrawCircleView
+    <com.haiwai.administrator.japanhouse.view.MyDrawCircleView
         android:id="@+id/mydrawcircleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

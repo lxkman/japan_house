@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.DaikuanDetilsActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.DaikuanDetilsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

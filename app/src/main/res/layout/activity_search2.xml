@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.SearchActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.SearchActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 android:textColor="#444"
                 android:textStyle="bold" />
 
-            <com.example.administrator.japanhouse.view.FluidLayout
+            <com.haiwai.administrator.japanhouse.view.FluidLayout
                 android:id="@+id/search_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                     android:src="@drawable/shanchu" />
             </RelativeLayout>
 
-            <com.example.administrator.japanhouse.view.HeightListView
+            <com.haiwai.administrator.japanhouse.view.HeightListView
                 android:id="@+id/lv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

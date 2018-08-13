@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-        <com.example.administrator.japanhouse.view.MyLetterListView
+        <com.haiwai.administrator.japanhouse.view.MyLetterListView
             android:id="@+id/myletterview"
             android:layout_width="30dp"
             android:layout_height="match_parent"

@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical"
 >
-    <com.example.administrator.japanhouse.view.EasySwipeMenuLayout
+    <com.haiwai.administrator.japanhouse.view.EasySwipeMenuLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentView="@+id/content"
@@ -46,7 +46,7 @@
             android:padding="15dp"
             android:text="删除"
             android:textColor="@color/white"/>
-    </com.example.administrator.japanhouse.view.EasySwipeMenuLayout>
+    </com.haiwai.administrator.japanhouse.view.EasySwipeMenuLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

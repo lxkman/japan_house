@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#f5f5f5"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.ZhinengActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.ZhinengActivity">
 
     <RelativeLayout
         android:id="@+id/liner"
@@ -88,7 +88,7 @@
             android:text="@string/cainixiangwen"
             android:textSize="13sp" />
 
-        <com.example.administrator.japanhouse.view.FluidLayout
+        <com.haiwai.administrator.japanhouse.view.FluidLayout
             android:id="@+id/act_zn_FluidLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

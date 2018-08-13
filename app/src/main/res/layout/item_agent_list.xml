@@ -11,7 +11,7 @@
         android:layout_height="80dp"
         android:orientation="horizontal">
 
-        <com.example.administrator.japanhouse.view.CircleImageView
+        <com.haiwai.administrator.japanhouse.view.CircleImageView
             android:id="@+id/item_agent_list_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -44,7 +44,7 @@
                     android:textColor="#444444"
                     android:textSize="16sp" />
 
-                <com.example.administrator.japanhouse.view.RatingBarView
+                <com.haiwai.administrator.japanhouse.view.RatingBarView
                     android:id="@+id/item_agent_list_ratingbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

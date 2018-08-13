@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/huise"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ShendengListActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ShendengListActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dip"

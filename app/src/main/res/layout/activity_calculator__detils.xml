@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray1"
-    tools:context="com.example.administrator.japanhouse.fragment.mine.Calculator_DetilsActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.mine.Calculator_DetilsActivity">
     <LinearLayout
         android:background="@color/shihuangse"
         android:orientation="horizontal"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.mine.SellHouseActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.mine.SellHouseActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

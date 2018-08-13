@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     >
 
-    <com.example.administrator.japanhouse.view.SquareImageView
+    <com.haiwai.administrator.japanhouse.view.SquareImageView
         android:id="@+id/item_video_rental_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

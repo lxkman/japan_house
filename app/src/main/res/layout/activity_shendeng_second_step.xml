@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ShendengFirstStepActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ShendengFirstStepActivity">
     <RelativeLayout
         android:background="@color/shihuangse"
         android:orientation="horizontal"
@@ -60,7 +60,7 @@
                         android:textColor="@color/gray"
                         android:layout_marginLeft="10dp"/>
                 </LinearLayout>
-                <com.example.administrator.japanhouse.view.FluidLayout
+                <com.haiwai.administrator.japanhouse.view.FluidLayout
                     android:id="@+id/want_fluidlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                         android:textColor="@color/gray"
                         android:layout_marginLeft="10dp"/>
                 </LinearLayout>
-                <com.example.administrator.japanhouse.view.FluidLayout
+                <com.haiwai.administrator.japanhouse.view.FluidLayout
                     android:id="@+id/notwant_fluidlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

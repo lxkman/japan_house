@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.WoshiyezhuActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.WoshiyezhuActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

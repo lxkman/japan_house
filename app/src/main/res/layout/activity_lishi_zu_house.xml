@@ -281,7 +281,7 @@
             android:layout_weight="0.7"
             android:layout_width="0dip"
             android:layout_height="match_parent">
-            <com.example.administrator.japanhouse.view.CircleImageView
+            <com.haiwai.administrator.japanhouse.view.CircleImageView
                 android:id="@+id/tv_details_manager_head"
                 android:layout_gravity="center"
                 android:src="@drawable/deful_touxiang"

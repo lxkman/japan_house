@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.home.SydcSearchActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.SydcSearchActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:padding="10dp"
                     android:textColor="@color/text_black"/>
             </RelativeLayout>
-            <com.example.administrator.japanhouse.view.FluidLayout
+            <com.haiwai.administrator.japanhouse.view.FluidLayout
                 android:id="@+id/hotsearch_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

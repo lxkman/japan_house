@@ -6,7 +6,7 @@
     android:id="@+id/rent_house_layout"
     android:orientation="vertical">
 
-    <com.example.administrator.japanhouse.view.EasySwipeMenuLayout
+    <com.haiwai.administrator.japanhouse.view.EasySwipeMenuLayout
         android:id="@+id/es"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
             android:text="@string/shanchu"
             android:textColor="@color/white"
             android:textSize="15sp" />
-    </com.example.administrator.japanhouse.view.EasySwipeMenuLayout>
+    </com.haiwai.administrator.japanhouse.view.EasySwipeMenuLayout>
 
     <View
         android:layout_width="match_parent"

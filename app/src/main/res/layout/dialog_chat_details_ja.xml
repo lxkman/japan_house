@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="20dp">
 
-            <com.example.administrator.japanhouse.view.CircleImageView
+            <com.haiwai.administrator.japanhouse.view.CircleImageView
                 android:id="@+id/dialog_chat_avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -43,7 +43,7 @@
             android:textColor="#444444"
             android:textSize="14sp" />
 
-        <com.example.administrator.japanhouse.view.RatingBarView
+        <com.haiwai.administrator.japanhouse.view.RatingBarView
             android:id="@+id/dialog_chat_tatingbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

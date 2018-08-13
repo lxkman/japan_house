@@ -297,7 +297,7 @@
 
     <string name="act_chat_title">顾问姓名</string>
     <string name="activity_agentlist_title">经纪人列表</string>
-    <string name="home_jrdk">金融\n贷款</string>
+    <string name="home_jrdk">金融\n服务</string>
     <string name="home_gfbk">购房\n百科</string>
     <string name="home_fcwd">房产\n问答</string>
     <string name="home_znmf">智能\n买房</string>
@@ -371,7 +371,7 @@
     <string name="woyaotiwen">我要提问</string>
     <string name="wolaihuida">我来回答</string>
     <string name="goufangbaike">购房百科</string>
-    <string name="jinrongdaikuan">金融贷款</string>
+    <string name="jinrongdaikuan">金融服务</string>
     <string name="maishagnpu">买商铺</string>
     <string name="maixiezilou">买写字楼</string>
     <string name="zuxiezilou">租写字楼</string>
@@ -384,7 +384,7 @@
     <string name="daikuanlilv">贷款利率</string>
     <string name="edufanwei">额度范围：</string>
     <string name="daikuanzhouqi">贷款周期：</string>
-    <string name="daikuanxiangqing">贷款详情</string>
+    <string name="daikuanxiangqing">服务详情</string>
     <string name="fanweiedu">额度范围</string>
     <string name="zuigaonianxian">贷款期限</string>
     <string name="fangkuanfangshi">放款方式：</string>

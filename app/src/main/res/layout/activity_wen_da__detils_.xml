@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.japanhouse.fragment.home.ui.activity.WenDa_Detils_Activity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.home.ui.activity.WenDa_Detils_Activity">
     <RelativeLayout
         android:id="@+id/liner"
         android:background="@color/colorAccent"

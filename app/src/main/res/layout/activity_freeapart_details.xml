@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.example.administrator.japanhouse.fragment.mine.SingUpDetailsActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.mine.SingUpDetailsActivity">
 
 
     <LinearLayout
@@ -457,7 +457,7 @@
             android:orientation="horizontal"
             android:paddingLeft="10dip">
 
-            <com.example.administrator.japanhouse.view.CircleImageView
+            <com.haiwai.administrator.japanhouse.view.CircleImageView
                 android:id="@+id/act_freeApart_managerIcon"
                 android:layout_gravity="center"
                 android:layout_width="40dip"

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal">
-        <com.example.administrator.japanhouse.view.CircleImageView
+        <com.haiwai.administrator.japanhouse.view.CircleImageView
             android:id="@+id/touxiang"
             android:src="@drawable/deful_touxiang"
             android:layout_width="40dp"

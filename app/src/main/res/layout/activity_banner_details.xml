@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.japanhouse.fragment.comment.BannerDetailsActivity">
+    tools:context="com.haiwai.administrator.japanhouse.fragment.comment.BannerDetailsActivity">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

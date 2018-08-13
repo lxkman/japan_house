@@ -430,7 +430,7 @@
                 android:orientation="horizontal"
                 android:paddingLeft="10dip">
 
-                <com.example.administrator.japanhouse.view.CircleImageView
+                <com.haiwai.administrator.japanhouse.view.CircleImageView
                     android:id="@+id/tv_details_manager_head"
                     android:layout_gravity="center"
                     android:layout_width="40dip"

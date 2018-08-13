@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.haiwai.administrator.japanhouse.MyApplication;
@@ -64,7 +65,7 @@ public class UMLoginActivity extends BaseActivity {
         @Override
         public void onStart(SHARE_MEDIA platform) {
             //授权开始的回调
-                        Toast.makeText(MyApplication.getGloableContext(), "授权开始回调", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.getGloableContext(), "授权开始回调", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -79,21 +80,21 @@ public class UMLoginActivity extends BaseActivity {
             final String userhead = data.get("iconurl");
             final String uid = data.get("uid");
 
-             String type = "";
+            String type = "";
             if (platform.equals(SHARE_MEDIA.QQ)) {
                 type = "1";
             } else if (platform.equals(SHARE_MEDIA.WEIXIN)) {
                 type = "0";
             } else if (platform.equals(SHARE_MEDIA.SINA)) {
                 type = "2";
-            }else if (platform.equals(SHARE_MEDIA.LINE)){
+            } else if (platform.equals(SHARE_MEDIA.LINE)) {
                 type = "3";
             }
             final String finalType = type;
             HttpParams params = new HttpParams();
-            params.put("loginType",finalType);
-            params.put("uId",uid);
-            OkGo.<LoginBean>post(MyUrls.BASEURL + "app/user/specialogin")
+            params.put("loginType", finalType);
+            params.put("uId", uid);
+            OkGo.<LoginBean>post(MyUrls.BASEURL + "/app/user/specialogin")
                     .tag(this)
                     .params(params)
                     .execute(new DialogCallback<LoginBean>(mContext, LoginBean.class) {
@@ -101,25 +102,31 @@ public class UMLoginActivity extends BaseActivity {
                         public void onSuccess(Response<LoginBean> response) {
                             int code = response.code();
                             LoginBean LoginBean = response.body();
-                            if (LoginBean.getCode().equals("200")){
+                            if (LoginBean.getCode().equals("200")) {
                                 SharedPreferencesUtils.getInstace(mContext).setStringPreference("uid", response.body().getDatas().getId() + "");
                                 SharedPreferencesUtils.getInstace(mContext).setStringPreference("token", response.body().getDatas().getToken() + "");
-                                TUtils.showFail(MyApplication.getGloableContext(),"登录成功");
+                                TUtils.showFail(MyApplication.getGloableContext(), "登录成功");
                                 HashMap<String, Boolean> hm = new HashMap<>();
                                 //会话类型 以及是否聚合显示
                                 hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
                                 //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
                                 //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
                                 RongIM.getInstance().startConversationList(mContext, hm);
-                            }else if (LoginBean.getCode().equals("-1")){
-                                Intent intent=new Intent(mContext, BindPhoneActivity.class);
-                                intent.putExtra("loginType",finalType);
-                                intent.putExtra("uId",uid);
+                            } else if (LoginBean.getCode().equals("-1")) {
+                                Intent intent = new Intent(mContext, BindPhoneActivity.class);
+                                intent.putExtra("loginType", finalType);
+                                intent.putExtra("uId", uid);
                                 mContext.startActivity(intent);
                                 Toast.makeText(mContext, LoginBean.getMsg(), Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 Toast.makeText(mContext, LoginBean.getMsg(), Toast.LENGTH_SHORT).show();
                             }
+                        }
+
+                        @Override
+                        public void onError(Response<LoginBean> response) {
+                            super.onError(response);
+                            Log.e("xxxxxxxxxx","登陆失败,服务器出现问题"+response.getException().getMessage());
                         }
                     });
 
@@ -127,16 +134,14 @@ public class UMLoginActivity extends BaseActivity {
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            TUtils.showFail(MyApplication.getGloableContext(),"登陆失败");
+            TUtils.showFail(MyApplication.getGloableContext(), "登陆失败");
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            TUtils.showFail(MyApplication.getGloableContext(),"取消登录");
+            TUtils.showFail(MyApplication.getGloableContext(), "取消登录");
         }
     };
-
-
 
 
     /*

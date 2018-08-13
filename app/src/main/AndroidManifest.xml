@@ -202,7 +202,6 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5b04cda9f29d987702000155"/>
-        <!-- android:value="59b62fe05312dd89f80001f3" /> -->
         <!-- 友盟推送 -->
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"

@@ -649,8 +649,8 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length()>6){
-                area = area.substring(0, 6) + "...";
+            if (area.length()>5){
+                area = area.substring(0, 5) + "...";
             }
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, area)

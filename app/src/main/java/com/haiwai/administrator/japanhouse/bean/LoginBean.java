@@ -66,8 +66,8 @@ public class LoginBean {
         private String phone;
         private String nickname;
         private String pic;
-        private Object sex;
-        private Object birthday;
+        private String sex;
+        private long birthday;
         private String status;
         private int isDeleted;
         private long createTime;
@@ -75,10 +75,10 @@ public class LoginBean {
         private String password;
         private String token;
         private long lastLoginTime;
-        private Object wxId;
-        private Object qqId;
-        private Object lineId;
-        private Object wbId;
+        private String wxId;
+        private String qqId;
+        private String lineId;
+        private String wbId;
         private String rongCloudToken;
 
         public int getId() {
@@ -113,19 +113,19 @@ public class LoginBean {
             this.pic = pic;
         }
 
-        public Object getSex() {
+        public String getSex() {
             return sex;
         }
 
-        public void setSex(Object sex) {
+        public void setSex(String sex) {
             this.sex = sex;
         }
 
-        public Object getBirthday() {
+        public long getBirthday() {
             return birthday;
         }
 
-        public void setBirthday(Object birthday) {
+        public void setBirthday(long birthday) {
             this.birthday = birthday;
         }
 
@@ -185,35 +185,35 @@ public class LoginBean {
             this.lastLoginTime = lastLoginTime;
         }
 
-        public Object getWxId() {
+        public String getWxId() {
             return wxId;
         }
 
-        public void setWxId(Object wxId) {
+        public void setWxId(String wxId) {
             this.wxId = wxId;
         }
 
-        public Object getQqId() {
+        public String getQqId() {
             return qqId;
         }
 
-        public void setQqId(Object qqId) {
+        public void setQqId(String qqId) {
             this.qqId = qqId;
         }
 
-        public Object getLineId() {
+        public String getLineId() {
             return lineId;
         }
 
-        public void setLineId(Object lineId) {
+        public void setLineId(String lineId) {
             this.lineId = lineId;
         }
 
-        public Object getWbId() {
+        public String getWbId() {
             return wbId;
         }
 
-        public void setWbId(Object wbId) {
+        public void setWbId(String wbId) {
             this.wbId = wbId;
         }
 

@@ -196,20 +196,20 @@ public class HomeFragment extends BaseFragment {
                 String country = bdLocation.getCountry();
                 if (!country.equals("日本")) {
                     String cityName = getResources().getString(R.string.dongjing);
-                    CacheUtils.put("cityId", 2);
                     CacheUtils.put("cityName", cityName);
                     locationTv.setText(cityName);
+                    CacheUtils.put("cityId", 2);
                     CacheUtils.put("mylongitude", 139.46);
                     CacheUtils.put("mylatitude", 35.42);
                     initData();
-                    return;
+                } else {
+                    double longitude = bdLocation.getLongitude();
+                    CacheUtils.put("mylongitude", longitude);
+                    double latitude = bdLocation.getLatitude();
+                    CacheUtils.put("mylatitude", latitude);
+                    String city = bdLocation.getCity();
+                    initLocationData(city);
                 }
-                double longitude = bdLocation.getLongitude();
-                CacheUtils.put("mylongitude", longitude);
-                double latitude = bdLocation.getLatitude();
-                CacheUtils.put("mylatitude", latitude);
-                String city = bdLocation.getCity();
-                initLocationData(city);
             }
         });
     }
@@ -650,7 +650,7 @@ public class HomeFragment extends BaseFragment {
                 mDistanceY += scrollY - oldScrollY;
                 //toolbar的高度
                 int toolbarHeight = 300;//我写死的高度
-                Log.e("vvvvvvvvvv","scrollY:"+scrollY+"   "+"oldScrollY:"+oldScrollY);
+//                Log.e("vvvvvvvvvv", "scrollY:" + scrollY + "   " + "oldScrollY:" + oldScrollY);
                 //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
                 if (mDistanceY <= toolbarHeight) {
                     float scale = (float) mDistanceY / toolbarHeight;
@@ -808,7 +808,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjtdEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getLandImages())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
@@ -834,8 +834,17 @@ public class HomeFragment extends BaseFragment {
             String status = item.getStatus();
             String price = isJa ? item.getPriceJpn() : item.getPriceCn();
             String rent = isJa ? item.getRentJpn() : item.getRentCn();
+            String area;
+            if (isJa) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            if (area.length() > 5) {
+                area = area.substring(0, 5) + "...";
+            }
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
+                    .setText(R.id.tv_area, area)
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
                     .setText(R.id.tv_price, status.equals("2") ? rent : price);

@@ -158,7 +158,7 @@ public class TudiDetailsBean implements Serializable{
         private String actualityJpn;
         private String trainStationCn;
         private String trainStationJpn;
-        private int areaSearch;
+        private double areaSearch;
         private int sellingPriceSearch;
         private String landImgs;
         private HwdcBrokerBean hwdcBroker;
@@ -604,11 +604,11 @@ public class TudiDetailsBean implements Serializable{
             this.trainStationJpn = trainStationJpn;
         }
 
-        public int getAreaSearch() {
+        public double getAreaSearch() {
             return areaSearch;
         }
 
-        public void setAreaSearch(int areaSearch) {
+        public void setAreaSearch(double areaSearch) {
             this.areaSearch = areaSearch;
         }
 

@@ -222,7 +222,7 @@ public class ShangYeDetailsBean {
         private String characteristicJpn;
         private String conditionCn;
         private String conditionJpn;
-        private int areaSearch;
+        private double areaSearch;
         private int sellingPriceSearch;
         private int yearBuiltSearh;
         private String specificLocationCn;
@@ -917,11 +917,11 @@ public class ShangYeDetailsBean {
             this.conditionJpn = conditionJpn;
         }
 
-        public int getAreaSearch() {
+        public double getAreaSearch() {
             return areaSearch;
         }
 
-        public void setAreaSearch(int areaSearch) {
+        public void setAreaSearch(double areaSearch) {
             this.areaSearch = areaSearch;
         }
 

@@ -204,7 +204,7 @@ public class VillaDetailsBean  implements Serializable{
         private String videoImgs;
         private String roomImgs;
         private boolean floorSearch;
-        private int areaSearch;
+        private double areaSearch;
         private int sellingPriceSearch;
         private int yearBuiltSearch;
         private String status;
@@ -777,11 +777,11 @@ public class VillaDetailsBean  implements Serializable{
             this.floorSearch = floorSearch;
         }
 
-        public int getAreaSearch() {
+        public double getAreaSearch() {
             return areaSearch;
         }
 
-        public void setAreaSearch(int areaSearch) {
+        public void setAreaSearch(double areaSearch) {
             this.areaSearch = areaSearch;
         }
 

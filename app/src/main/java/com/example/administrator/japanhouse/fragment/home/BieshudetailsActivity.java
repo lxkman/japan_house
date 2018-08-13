@@ -417,8 +417,17 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
 
         @Override
         protected void convert(BaseViewHolder helper, BieShuListBean.DatasEntity item) {
+            String area;
+            if (isja) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            if (area.length()>5){
+                area = area.substring(0, 5) + "...";
+            }
+            helper.setText(R.id.tv_house_address,area);
             helper.setText(R.id.tv_house_name, isja ? item.getTitleJpn() : item.getTitleCn());
-            helper.setText(R.id.tv_house_address, isja ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
 //            helper.setText(R.id.tv_house_room,isja?item.getDoorModelJpn():item.getDoorModelCn());
             helper.setVisible(R.id.tv_house_room, false);
             helper.setText(R.id.tv_house_area, isja ? item.getCoveredAreaJpn() : item.getCoveredAreaCn());

@@ -296,8 +296,17 @@ public class ZuHousedetailsActivity extends BaseActivity {
 
         @Override
         protected void convert(BaseViewHolder helper, OldHouseListBean.DatasBean item) {
+            String area;
+            if (isJa) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            if (area.length()>5){
+                area = area.substring(0, 5) + "...";
+            }
+            helper.setText(R.id.tv_house_address,area);
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
-            helper.setText(R.id.tv_house_address, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
             helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());

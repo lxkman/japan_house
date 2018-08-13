@@ -304,7 +304,7 @@ public class HouseDetailsBean implements Serializable{
         private String videoImgs;
         private String roomImgs;
         private String doorModelImages;
-        private int areaSearch;
+        private double areaSearch;
         private int sellingPriceSearch;
         private int yearBuiltSearch;
         private int rentSearch;
@@ -1284,11 +1284,11 @@ public class HouseDetailsBean implements Serializable{
             this.doorModelImages = doorModelImages;
         }
 
-        public int getAreaSearch() {
+        public double getAreaSearch() {
             return areaSearch;
         }
 
-        public void setAreaSearch(int areaSearch) {
+        public void setAreaSearch(double areaSearch) {
             this.areaSearch = areaSearch;
         }
 

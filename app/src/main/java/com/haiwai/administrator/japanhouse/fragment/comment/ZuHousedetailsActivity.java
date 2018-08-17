@@ -31,7 +31,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.haiwai.administrator.japanhouse.R;
-import com.haiwai.administrator.japanhouse.base.BaseActivity;
+import com.haiwai.administrator.japanhouse.base.UMShareActivity;
 import com.haiwai.administrator.japanhouse.bean.HouseDetailsBean;
 import com.haiwai.administrator.japanhouse.bean.OldHouseListBean;
 import com.haiwai.administrator.japanhouse.bean.SuccessBean;
@@ -54,6 +54,7 @@ import com.haiwai.administrator.japanhouse.view.CircleImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -65,7 +66,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
 
-public class ZuHousedetailsActivity extends BaseActivity {
+public class ZuHousedetailsActivity extends UMShareActivity {
 
     @BindView(R.id.vp_vidio)
     ViewPager vpVidio;
@@ -715,10 +716,10 @@ public class ZuHousedetailsActivity extends BaseActivity {
                         }
                     }
                 });
-
     }
 
     private void showDialog(int grary, int animationStyle) {
+        final String url="http://www.flcjapan.com/hwdch5/info/retalDetails.html?id="+houseId;
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
@@ -752,21 +753,30 @@ public class ZuHousedetailsActivity extends BaseActivity {
         weixin_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getRoomImgs():datas.getVideoImgs()
+                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                        ZuHousedetailsActivity.this, SHARE_MEDIA.WEIXIN);
             }
         });
         //朋友圈分享
         pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getRoomImgs():datas.getVideoImgs()
+                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                        ZuHousedetailsActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE);
             }
         });
         //微博分享
         weibo_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getRoomImgs():datas.getVideoImgs()
+                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                        ZuHousedetailsActivity.this, SHARE_MEDIA.SINA);
             }
         });
         //取消

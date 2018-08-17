@@ -31,7 +31,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.haiwai.administrator.japanhouse.MyApplication;
 import com.haiwai.administrator.japanhouse.R;
-import com.haiwai.administrator.japanhouse.base.BaseActivity;
+import com.haiwai.administrator.japanhouse.base.UMShareActivity;
 import com.haiwai.administrator.japanhouse.bean.BieShuListBean;
 import com.haiwai.administrator.japanhouse.bean.SuccessBean;
 import com.haiwai.administrator.japanhouse.callback.DialogCallback;
@@ -45,6 +45,7 @@ import com.haiwai.administrator.japanhouse.more.BieSuMoreActivity;
 import com.haiwai.administrator.japanhouse.presenter.HouseLogPresenter;
 import com.haiwai.administrator.japanhouse.presenter.VillaDetailsPresenter;
 import com.haiwai.administrator.japanhouse.utils.CacheUtils;
+import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -54,6 +55,7 @@ import com.haiwai.administrator.japanhouse.view.CircleImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -67,7 +69,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
 
-public class BieshudetailsActivity extends BaseActivity implements VillaDetailsPresenter.VillaDetailsCallBack {
+public class BieshudetailsActivity extends UMShareActivity implements VillaDetailsPresenter.VillaDetailsCallBack {
 
     @BindView(R.id.vp_vidio)
     ViewPager vpVidio;
@@ -136,6 +138,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     private String landImgs;
     private String roomImgs;
     private VillaDetailsBean.DatasBean.HwdcBrokerBean hwdcBroker;
+    private boolean isJa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +154,12 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         villaDetailsPresenter = new VillaDetailsPresenter(this, this);
         villaDetailsPresenter.getVillaDetails(houseId, token);
         new HouseLogPresenter(this).setHouseLog("4", houseId, "");
-
+        String city = CacheUtils.get(Constants.COUNTRY);
+        if (city != null && city.equals("ja")) {
+            isJa = true;
+        } else {
+            isJa = false;
+        }
 
         //猜你喜欢
         initLoveRecycler();
@@ -629,6 +637,7 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
     }
 
     private void showDialog(int grary, int animationStyle) {
+        final String url="http://www.flcjapan.com/hwdch5/info/villaDetails.html?id="+houseId;
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
@@ -662,21 +671,30 @@ public class BieshudetailsActivity extends BaseActivity implements VillaDetailsP
         weixin_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                shareWebUrl(url, isJa?villaDetailsBean.getTitleJpn():villaDetailsBean.getTitleCn()
+                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs())?villaDetailsBean.getRoomImgs():villaDetailsBean.getVideoImgs()
+                        , isJa?villaDetailsBean.getAreaJpn():villaDetailsBean.getAreaCn(),
+                        BieshudetailsActivity.this, SHARE_MEDIA.WEIXIN);
             }
         });
         //朋友圈分享
         pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                shareWebUrl(url, isJa?villaDetailsBean.getTitleJpn():villaDetailsBean.getTitleCn()
+                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs())?villaDetailsBean.getRoomImgs():villaDetailsBean.getVideoImgs()
+                        , isJa?villaDetailsBean.getAreaJpn():villaDetailsBean.getAreaCn(),
+                        BieshudetailsActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE);
             }
         });
         //微博分享
         weibo_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                shareWebUrl(url, isJa?villaDetailsBean.getTitleJpn():villaDetailsBean.getTitleCn()
+                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs())?villaDetailsBean.getRoomImgs():villaDetailsBean.getVideoImgs()
+                        , isJa?villaDetailsBean.getAreaJpn():villaDetailsBean.getAreaCn(),
+                        BieshudetailsActivity.this, SHARE_MEDIA.SINA);
             }
         });
         //取消

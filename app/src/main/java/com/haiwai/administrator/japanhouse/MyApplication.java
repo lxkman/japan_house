@@ -94,17 +94,14 @@ public class MyApplication extends Application {
 //                Toast.makeText(getContext(), "友盟推送注册失败", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
 
     private void initUMShare() {
         Config.DEBUG = true;
         UMShareAPI.get(this);
-
-        PlatformConfig.setWeixin("wxdbbb1928fdfa069d", "69ad4ae853a60921d709dd3125d75351");
-        PlatformConfig.setQQZone("1106733819", "ME4Of9bX0LUh8uz0");
+        PlatformConfig.setWeixin("wxca521fc7f3d6651c", "77b9bc1be83185f84a4c7b3cf14d75ee");
+        PlatformConfig.setQQZone("1106973785", "yCBP1SDVMUbuLd4f");
         PlatformConfig.setSinaWeibo("3051729109", "e0c269439ddb81a528e90dbb909012e9", "https://sns.whalecloud.com/sina2/callback");
     }
 

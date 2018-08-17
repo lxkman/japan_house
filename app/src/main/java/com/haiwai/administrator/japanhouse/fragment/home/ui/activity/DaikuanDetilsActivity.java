@@ -140,7 +140,9 @@ public class DaikuanDetilsActivity extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.shenqing:
                 if (!MyApplication.isLogin()) {
-                    startActivity(new Intent(this, LoginActivity.class));
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.putExtra("type","daikuan");
+                    startActivity(intent);
                     return;
                 }
                 shumaDialog(Gravity.CENTER, R.style.Alpah_aniamtion);

@@ -201,6 +201,10 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
                                     hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
                             //        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
                             //        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
+                                    if (getIntent().getStringExtra("type").equals("daikuan")){
+                                        finish();
+                                        return;
+                                    }
                                     RongIM.getInstance().startConversationList(LoginActivity.this, hm);
                                     finish();
                                 }else if (loginBean.getCode().equals("-1")){

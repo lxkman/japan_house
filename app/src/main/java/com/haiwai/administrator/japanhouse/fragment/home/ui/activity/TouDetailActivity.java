@@ -128,7 +128,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.send:
-                if (MyUtils.isLogin(this)) {
+                if (MyApplication.isLogin()) {
                     //获取输入框信息
                     pinglun = ed_pinglun.getText().toString();
                     if (!TextUtils.isEmpty(pinglun)) {

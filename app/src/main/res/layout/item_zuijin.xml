@@ -54,7 +54,7 @@
                 />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dip"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:orientation="horizontal"
                 >
@@ -69,16 +69,18 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
                         android:text="东京"
                         android:textSize="13sp"/>
                     <TextView
                         android:id="@+id/tv_price"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="10dip"
                         android:text="17500万"
                         android:textColor="@color/shihuangse"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

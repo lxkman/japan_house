@@ -553,12 +553,10 @@ public class HomeSearchActivity extends BaseActivity implements MainSearchPresen
                 helper.setText(R.id.tv_Search_list, item);
                 helper.setTextColor(R.id.tv_Search_list, getResources().getColor(R.color.colorPrimary));
             } else {
-                boolean contains = item.contains(searchEt.getText().toString());
-                if (contains) {
-                    String[] split = item.split(searchEt.getText().toString());
-                    String xxx = split[0] + searchEt.getText().toString();
+                int indexOf = item.indexOf(searchEt.getText().toString().trim());
+                if (indexOf!=-1) {
                     ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-                    spannableString.setSpan(colorSpan, split[0].length(), xxx.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    spannableString.setSpan(colorSpan,indexOf, indexOf+searchEt.getText().toString().trim().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                     helper.setText(R.id.tv_Search_list, item);
                 } else {
                     helper.setText(R.id.tv_Search_list, item);

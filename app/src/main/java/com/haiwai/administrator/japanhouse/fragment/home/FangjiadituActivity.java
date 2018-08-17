@@ -64,6 +64,10 @@ public class FangjiadituActivity extends BaseActivity {
     LinearLayout layoutPop;
     @BindView(R.id.back_img)
     ImageView back_img;
+    @BindView(R.id.tv_junjia)
+    TextView tv_junjia;
+    @BindView(R.id.tv_cityname)
+    TextView tv_cityname;
     private BaiduMap baiduMap;
     //x轴坐标对应的数据
     private List<String> xValue = new ArrayList<>();
@@ -81,22 +85,21 @@ public class FangjiadituActivity extends BaseActivity {
     private LocationClient mLocClient;
     private String mCity;
     private List<FangjiaMapBean.DatasBean.CityzxtBean> cityzxt;
-    private Float monthbfb;
-    private Float yearbfb;
+    private float monthbfb;
+    private float yearbfb;
     private List<ChartBean.DatasBean.ZxtlistBean> zxtlist;
     private double bigVal;
     private double endVal;
     private int avgMoney;
     private String Tag;
-    private Float monthbfboneline;
-    private Float yeaybfboneline;
+    private float monthbfboneline;
+    private float yeaybfboneline;
     private int avgMoneyoneline;
     private double bigValoneline;
     private double endValoneline;
     private double longitude;
     private double latitude;
-    @BindView(R.id.tv_cityname)
-    TextView tv_cityname;
+    private String cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +152,9 @@ public class FangjiadituActivity extends BaseActivity {
         value.clear();
         value1.clear();
         yValue.clear();
-
+        if (cityzxt==null || cityzxt.size()==0){
+            return;
+        }
         for (int i = 0; i < cityzxt.size(); i++) {
             mlist.add((float) cityzxt.get(i).getAvgPrice());
             xValue.add(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())));
@@ -238,6 +243,8 @@ public class FangjiadituActivity extends BaseActivity {
         dialog.show();
         TextView tv_mouth = (TextView) dialog.findViewById(R.id.tv_mouth);
         TextView tv_years = (TextView) dialog.findViewById(R.id.tv_years);
+        TextView tv_cityname = (TextView) dialog.findViewById(R.id.tv_cityname);
+        tv_cityname.setText(cityName+"均价");
         TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
         tv_dialog_price.setText(avgMoney + "元/平");
         Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
@@ -279,6 +286,8 @@ public class FangjiadituActivity extends BaseActivity {
         dialog.show();
         TextView tv_mouth = (TextView) dialog.findViewById(R.id.tv_mouth);
         TextView tv_years = (TextView) dialog.findViewById(R.id.tv_years);
+        TextView tv_cityname = (TextView) dialog.findViewById(R.id.tv_cityname);
+        tv_cityname.setText(cityName+"均价");
         TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
         tv_dialog_price.setText(avgMoneyoneline + "元/平");
         Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
@@ -367,6 +376,8 @@ public class FangjiadituActivity extends BaseActivity {
                         FangjiaMapBean.DatasBean.CityBean city = datas.getCity();
                         avgMoneyoneline = city.getAvgMoney();
                         FangjiadituActivity.this.avgMoney = city.getAvgMoney();
+                        tv_junjia.setText(avgMoney+"元/㎡");
+                        cityName=isJa?city.getAdministrationNameJpn():city.getAdministrationNameCn();
                         cityzxt = datas.getCityzxt();
                         monthbfboneline = datas.getMonthbfb();
                         yeaybfboneline = datas.getYeaybfb();

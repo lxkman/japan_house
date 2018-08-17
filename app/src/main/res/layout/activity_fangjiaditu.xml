@@ -70,12 +70,13 @@
             android:layout_weight="1"
             android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/tv_junjia"
             android:clickable="false"
             android:paddingRight="5dip"
             android:textSize="14sp"
             android:gravity="center_vertical"
             android:textColor="@color/shihuangse"
-            android:text="17500元/㎡"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <ImageView

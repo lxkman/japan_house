@@ -121,6 +121,7 @@
                 android:layout_width="15dip"
                 android:layout_height="2dip"></View>
             <TextView
+                android:id="@+id/tv_cityname"
                 android:layout_marginLeft="5dip"
                 android:textSize="12sp"
                 android:gravity="center_vertical"

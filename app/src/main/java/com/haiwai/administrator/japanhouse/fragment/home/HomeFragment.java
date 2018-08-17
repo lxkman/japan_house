@@ -514,7 +514,7 @@ public class HomeFragment extends BaseFragment {
                                         intent = new Intent(mContext, HaiWaiDetailsActivity.class);
                                         break;
                                 }
-                                intent.putExtra("houseId", images.get(position).getId() + "");
+                                intent.putExtra("houseId", images.get(position).getHid() + "");
                                 startActivity(intent);
                             }
                         });

@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.haiwai.administrator.japanhouse.bean.EventBean;
 import com.haiwai.administrator.japanhouse.model.HouseListBean;
 import com.haiwai.administrator.japanhouse.model.LandBean;
 import com.haiwai.administrator.japanhouse.presenter.TJNewHousePresenter;
+import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.view.MyFooter;
 import com.haiwai.administrator.japanhouse.view.MyHeader;
@@ -187,9 +189,20 @@ public class ZuhouseFragment extends BaseFragment implements TJNewHousePresenter
         @Override
         protected void convert(BaseViewHolder helper, HouseListBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
-            Glide.with(mContext).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(mContext).load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRoomImgs() : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
+                    .into((ImageView) helper.getView(R.id.img_house));
             helper.setText(R.id.tv_house_name,isJa ? item.getTitleJpn() : item.getTitleCn());
-            helper.setText(R.id.tv_house_address,isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
+            String area;
+            if (isJa) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            if (area.length() > 5) {
+                area = area.substring(0, 5) + "...";
+            }
+            helper.setText(R.id.tv_house_address,area);
             helper.setText(R.id.tv_house_room,isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area,isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price,isJa ? item.getRentJpn() : item.getRentCn());

@@ -102,13 +102,9 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_img:
-//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                HashMap<String, Boolean> hashMap = new HashMap<>();
-                //会话类型 以及是否聚合显示
-                hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
-//        hashMap.put(Conversation.ConversationType.PUSH_SERVICE.getName(),true);
-//        hashMap.put(Conversation.ConversationType.SYSTEM.getName(),true);
-                RongIM.getInstance().startConversationList(this, hashMap);
+//                HashMap<String, Boolean> hashMap = new HashMap<>();
+//                hashMap.put(Conversation.ConversationType.PRIVATE.getName(), false);
+//                RongIM.getInstance().startConversationList(this, hashMap);
                 finish();
                 break;
             //注册
@@ -211,6 +207,8 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
                                     TUtils.showFail(LoginActivity.this,"登陆失败");
                                 }else if (loginBean.getCode().equals("206")){
                                     TUtils.showFail(LoginActivity.this,"用户名或者密码错误");
+                                }else {
+                                    TUtils.showFail(LoginActivity.this,loginBean.getMsg());
                                 }
                             }
                         });

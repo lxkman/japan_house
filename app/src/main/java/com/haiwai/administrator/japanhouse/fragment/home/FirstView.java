@@ -109,6 +109,12 @@ public class FirstView implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_reset:
+                setFirstChecked(mQuyuListBean);
+                setFirstChecked(mDitieListBean);
+                oneAdapter.notifyDataSetChanged();
+                initData();
+                break;
             case R.id.btn_sure:
                 List<String> allCheckedItem = isCheckedItemOne(adapterPosition2);
                 if (allCheckedItem != null && allCheckedItem.size() == 1) {

@@ -604,9 +604,11 @@ public class ZufangListActivity extends BaseActivity implements MyItemClickListe
         if (postion == 1) {//区域
             isDitie = false;
             quyuList = priceRegin;
+            initData();
         } else if (postion == 2) {//地铁
             isDitie = true;
             ditieList = priceRegin;
+            initData();
         } else {//自定义价格
             if (zujin != null && zujin.size() > 0) {
                 page = 1;

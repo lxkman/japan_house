@@ -105,6 +105,7 @@ public class AgentListActivity extends BaseActivity implements AgentPresenter.Ag
         springView.setFooter(new DefaultFooter(this));
         springView.setHeader(new DefaultHeader(this));
 
+
         adapter = new AgentListAdapter(this, mList);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);

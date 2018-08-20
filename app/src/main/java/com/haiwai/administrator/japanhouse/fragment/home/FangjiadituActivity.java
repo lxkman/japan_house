@@ -375,7 +375,7 @@ public class FangjiadituActivity extends BaseActivity {
                         endValoneline = datas.getBigandsmallval().getEndVal();
                         FangjiaMapBean.DatasBean.CityBean city = datas.getCity();
                         avgMoneyoneline = city.getAvgMoney();
-                        FangjiadituActivity.this.avgMoney = city.getAvgMoney();
+                        avgMoney = city.getAvgMoney();
                         tv_junjia.setText(avgMoney+"元/㎡");
                         cityName=isJa?city.getAdministrationNameJpn():city.getAdministrationNameCn();
                         cityzxt = datas.getCityzxt();

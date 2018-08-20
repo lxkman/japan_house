@@ -466,10 +466,12 @@ public class NewHouseActivity extends BaseActivity implements MyItemClickListene
         if (postion == 1) {//区域
             isDitie = false;
             quyuList = priceRegin;
+            mDatas.clear();
             initData();
         } else if (postion == 2) {//地铁
             isDitie = true;
             ditieList = priceRegin;
+            mDatas.clear();
             initData();
         } else {//自定义价格
             if (shoujia != null && shoujia.size() > 0) {

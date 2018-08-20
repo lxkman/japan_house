@@ -52,9 +52,9 @@ public class BaikeAdapter extends RecyclerView.Adapter<BaikeAdapter.ViewHolder> 
                 Intent intent = new Intent(context, WebActivity.class);
                 intent.putExtra("title", context.getString(R.string.details));
                 if (MyApplication.isJapanese()) {
-                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/paranText.html?id=" + datasBean.getId());
+                    intent.putExtra("result", "http://www.flcjapan.com/hwdch5/info/paranText.html?id=" + datasBean.getId());
                 } else {
-                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/paranTextCn.html?id=" + datasBean.getId());
+                    intent.putExtra("result", "http://www.flcjapan.com/hwdch5/info/paranTextCn.html?id=" + datasBean.getId());
                 }
 
                 context.startActivity(intent);

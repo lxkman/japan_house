@@ -166,12 +166,11 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             super(layoutResId,data);
         }
 
-
-
         @Override
         protected void convert(BaseViewHolder helper, LandBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
-            Glide.with(mContext).load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getVideoImgs())
+            Glide.with(mContext).load(TextUtils.isEmpty(item.getVideoImgs()) ?
+                    MyUtils.getSpiltText(item.getLandImages()) : MyUtils.getSpiltText(item.getVideoImgs()))
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.img_house));
             helper.setText(R.id.tv_house_name,isJa ? item.getTitleJpn() : item.getTitleCn());
@@ -192,6 +191,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
 
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

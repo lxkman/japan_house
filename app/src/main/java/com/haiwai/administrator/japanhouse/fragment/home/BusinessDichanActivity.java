@@ -26,6 +26,7 @@ import com.haiwai.administrator.japanhouse.utils.CacheUtils;
 import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -177,7 +178,8 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
         @Override
         protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ?item.getRealEstateImgs(): item.getVideoImgs())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRealEstateImgs()):
+                            MyUtils.getSpiltText(item.getVideoImgs()))
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;

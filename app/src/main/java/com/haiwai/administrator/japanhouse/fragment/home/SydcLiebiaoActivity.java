@@ -35,6 +35,7 @@ import com.haiwai.administrator.japanhouse.utils.CacheUtils;
 import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.NetWorkUtils;
 import com.haiwai.administrator.japanhouse.utils.TUtils;
 import com.haiwai.administrator.japanhouse.view.MyFooter;
@@ -573,7 +574,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         @Override
         protected void convert(BaseViewHolder helper, SydcListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getRealEstateImgs() : item.getVideoImgs())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRealEstateImgs())
+                            : MyUtils.getSpiltText(item.getVideoImgs()))
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;

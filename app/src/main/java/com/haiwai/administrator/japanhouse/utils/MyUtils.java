@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -74,6 +75,7 @@ public class MyUtils {
             return str;
         }
     }
+
     /**
      * 将毫秒转化成固定格式的时间
      * 时间格式: yyyy-MM-dd HH:mm:ss
@@ -81,12 +83,13 @@ public class MyUtils {
      * @param millisecond
      * @return
      */
-    public static String getDateTimeFromMillisecond(Long millisecond){
+    public static String getDateTimeFromMillisecond(Long millisecond) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         Date date = new Date(millisecond);
         String dateStr = simpleDateFormat.format(date);
         return dateStr;
     }
+
     /**
      * 从时间(毫秒)中提取出时间(时:分)
      * 时间格式:  时:分
@@ -114,6 +117,7 @@ public class MyUtils {
         String timeStr = simpleDateFormat.format(date);
         return timeStr;
     }
+
     public static boolean isJa() {
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {
@@ -123,7 +127,21 @@ public class MyUtils {
         }
     }
 
-    public static boolean isLogin(Context context){
+    public static String getSpiltText(String data) {
+        if (!TextUtils.isEmpty(data)) {
+            if (data.contains(",")) {
+                String[] split = data.split(",");
+                if (split != null && split.length > 1) {
+                    return split[0];
+                }
+            } else {
+                return data;
+            }
+        }
+        return "";
+    }
+
+    public static boolean isLogin(Context context) {
         String token = SharedPreferencesUtils.getInstace(context).getStringPreference("token", "");
         if (token != null && !token.equals("")) {
             return true;
@@ -131,20 +149,23 @@ public class MyUtils {
             return false;
         }
     }
-    public static void StartLoginActivity(Context context){
-        Intent intent=new Intent(context, LoginActivity.class);
+
+    public static void StartLoginActivity(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 
     /**
      * double转String,保留小数点后两位
+     *
      * @param num
      * @return
      */
-    public static float floatToString(float num){
+    public static float floatToString(float num) {
         //使用0.00不足位补0，#.##仅保留有效位
         return Float.parseFloat(new DecimalFormat("0.00").format(num));
     }
+
     /*将日期转为时间戳*/
     public static long getStringToDate(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
@@ -164,6 +185,7 @@ public class MyUtils {
         String format = sdf.format(new Date(lcc_time * 1000L));
         return format;
     }
+
     //  时间戳转为日期  月/日
     public static String getDateToStringM(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
@@ -171,6 +193,7 @@ public class MyUtils {
         String format = sdf.format(new Date(lcc_time * 1000L));
         return format;
     }
+
     //  时间戳转为日期
     public static String getDateToStringY(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -196,14 +219,14 @@ public class MyUtils {
         return format;
     }
 
-    public static String go(Long ttl){
-        Date nowTime = new Date(System.currentTimeMillis()+ttl);
+    public static String go(Long ttl) {
+        Date nowTime = new Date(System.currentTimeMillis() + ttl);
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String retStrFormatNowDate = sdFormatter.format(nowTime);
         return retStrFormatNowDate;
     }
 
-    public static String longtoStringDate(Long millis){
+    public static String longtoStringDate(Long millis) {
         Date nowTime = new Date(millis);
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy.MM.dd  hh:mm:ss");
         String retStrFormatNowDate = sdFormatter.format(nowTime);
@@ -228,11 +251,11 @@ public class MyUtils {
 
     //手机号判断逻辑
     public static boolean isMobileNO(String mobiles) {
-//        Pattern p = Pattern.compile("^(13[0-9]|14[57]|15[0-35-9]|17[6-8]|18[0-9])[0-9]{8}$");
-//        Matcher m = p.matcher(mobiles);
-//        return m.matches();
+        //        Pattern p = Pattern.compile("^(13[0-9]|14[57]|15[0-35-9]|17[6-8]|18[0-9])[0-9]{8}$");
+        //        Matcher m = p.matcher(mobiles);
+        //        return m.matches();
         //上面的验证会有些问题，手机号码格式不是固定的，所以就弄简单点
-        if (mobiles.length()==11){
+        if (mobiles.length() == 11) {
             return true;
         }
         return false;
@@ -329,7 +352,7 @@ public class MyUtils {
     }
 
 
-    public static void setMargins (View v, int l, int t, int r, int b) {
+    public static void setMargins(View v, int l, int t, int r, int b) {
         if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
             p.setMargins(l, t, r, b);

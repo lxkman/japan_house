@@ -31,6 +31,7 @@ import com.haiwai.administrator.japanhouse.utils.CacheUtils;
 import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.NetWorkUtils;
 import com.haiwai.administrator.japanhouse.utils.TUtils;
 import com.haiwai.administrator.japanhouse.view.MyFooter;
@@ -498,7 +499,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
         @Override
         protected void convert(BaseViewHolder helper, ChinaListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getHouseImgs() : item.getVideoImgs())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getHouseImgs())
+                            : MyUtils.getSpiltText(item.getVideoImgs()))
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;

@@ -94,12 +94,16 @@ public class FirstView implements View.OnClickListener {
             mrecycler1.setAdapter(oneAdapter);
         }
         if (adapterPosition == 0) {
-            quYuAdapter = new QuYuAdapter(R.layout.leixing_item2, mQuyuListBean);
-            mrecycler2.setAdapter(quYuAdapter);
+            if (quYuAdapter == null) {
+                quYuAdapter = new QuYuAdapter(R.layout.leixing_item2, mQuyuListBean);
+                mrecycler2.setAdapter(quYuAdapter);
+            }
             mList3 = mQuyuListBean.get(adapterPosition2).getCheckBeanList();
         } else if (adapterPosition == 1) {
-            diTieAdapter = new DiTieAdapter(R.layout.leixing_item2, mDitieListBean);
-            mrecycler2.setAdapter(diTieAdapter);
+            if (diTieAdapter == null) {
+                diTieAdapter = new DiTieAdapter(R.layout.leixing_item2, mDitieListBean);
+                mrecycler2.setAdapter(diTieAdapter);
+            }
             mList3 = mDitieListBean.get(adapterPosition2).getCheckBeanList();
         }
         threeAdapter = new ThreeAdapter(R.layout.leixing_item2, mList3);
@@ -188,6 +192,7 @@ public class FirstView implements View.OnClickListener {
                     if (adapterPosition2 == helper.getAdapterPosition()) {
                         return;
                     }
+                    quYuAdapter.notifyItemChanged(adapterPosition2);
                     adapterPosition2 = helper.getAdapterPosition();
                     for (int i = 0; i < mQuyuListBean.size(); i++) {
                         if (adapterPosition2 == i) {
@@ -197,7 +202,7 @@ public class FirstView implements View.OnClickListener {
                         }
                     }
                     setFirstCheckedItem(mQuyuListBean, adapterPosition2);
-                    quYuAdapter.notifyDataSetChanged();
+                    quYuAdapter.notifyItemChanged(adapterPosition2);
                     initData();
                 }
 
@@ -342,6 +347,7 @@ public class FirstView implements View.OnClickListener {
                     if (adapterPosition2 == helper.getAdapterPosition()) {
                         return;
                     }
+                    diTieAdapter.notifyItemChanged(adapterPosition2);
                     adapterPosition2 = helper.getAdapterPosition();
                     for (int i = 0; i < mDitieListBean.size(); i++) {
                         if (adapterPosition2 == i) {
@@ -351,7 +357,7 @@ public class FirstView implements View.OnClickListener {
                         }
                     }
                     setFirstCheckedItem(mDitieListBean, adapterPosition2);
-                    diTieAdapter.notifyDataSetChanged();
+                    diTieAdapter.notifyItemChanged(adapterPosition2);
                     initData();
                 }
             });

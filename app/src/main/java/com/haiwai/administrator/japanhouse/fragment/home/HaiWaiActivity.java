@@ -25,6 +25,7 @@ import com.haiwai.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivit
 import com.haiwai.administrator.japanhouse.utils.CacheUtils;
 import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -170,7 +171,7 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
         @Override
         protected void convert(BaseViewHolder helper, ChinaListBean.DatasEntity item) {
-            Glide.with(MyApplication.getGloableContext()).load(item.getHouseImgs())
+            Glide.with(MyApplication.getGloableContext()).load(MyUtils.getSpiltText(item.getHouseImgs()))
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
             if (isJa) {

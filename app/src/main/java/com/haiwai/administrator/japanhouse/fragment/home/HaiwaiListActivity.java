@@ -31,6 +31,7 @@ import com.haiwai.administrator.japanhouse.utils.CacheUtils;
 import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.NetWorkUtils;
 import com.haiwai.administrator.japanhouse.utils.TUtils;
 import com.haiwai.administrator.japanhouse.view.MyFooter;
@@ -443,7 +444,8 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
         @Override
         protected void convert(BaseViewHolder helper, TudiListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? item.getLandImages() : item.getVideoImgs())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getLandImages())
+                            : MyUtils.getSpiltText(item.getVideoImgs()))
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;

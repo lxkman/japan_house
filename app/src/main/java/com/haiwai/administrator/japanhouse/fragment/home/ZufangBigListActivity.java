@@ -530,7 +530,7 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
         protected void convert(BaseViewHolder helper, ZufangListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ?
-                            MyUtils.getSpiltText(item.getRoomImgs()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                            MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
@@ -539,13 +539,11 @@ public class ZufangBigListActivity extends BaseActivity implements MyItemClickLi
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length()>7){
-                area = area.substring(0, 7) + "...";
-            }
+            String price=isJa ?  item.getRentJpn() : item.getRentCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area, area)
+                    .setText(R.id.tv_area, MyUtils.getSubText(area, price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getRentJpn() : item.getRentCn())
+                    .setText(R.id.tv_price, price)
                     .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }

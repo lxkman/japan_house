@@ -693,7 +693,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, final HomePageBean.DatasEntity.TjxfEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ?  MyUtils.getSpiltText(item.getRoomImgs()) :item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
@@ -741,7 +741,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjesfEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
@@ -800,7 +800,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjzfEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
@@ -820,7 +820,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjtdEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getLandImages()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getLandImages()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
@@ -840,7 +840,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.CnxhEntity item) {
             Glide.with(MyApplication.getGloableContext())
-                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String status = item.getStatus();
@@ -852,11 +852,8 @@ public class HomeFragment extends BaseFragment {
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length() > 5) {
-                area = area.substring(0, 5) + "...";
-            }
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area, area)
+                    .setText(R.id.tv_area, MyUtils.getSubText(area,price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
                     .setText(R.id.tv_price, status.equals("2") ? rent : price);

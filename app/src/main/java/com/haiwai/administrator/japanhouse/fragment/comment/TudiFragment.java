@@ -170,7 +170,7 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
         protected void convert(BaseViewHolder helper, LandBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
             Glide.with(mContext).load(TextUtils.isEmpty(item.getVideoImgs()) ?
-                    MyUtils.getSpiltText(item.getLandImages()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    MyUtils.getSpiltText(item.getLandImages()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.img_house));
             helper.setText(R.id.tv_house_name,isJa ? item.getTitleJpn() : item.getTitleCn());

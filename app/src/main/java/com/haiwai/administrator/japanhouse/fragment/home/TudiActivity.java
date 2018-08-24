@@ -481,7 +481,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         protected void convert(BaseViewHolder helper, TudiListBean.DatasEntity item) {
             Glide.with(MyApplication.getGloableContext())
                     .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getLandImages())
-                            : MyUtils.getSpiltText(item.getVideoImgs()))
+                            : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.iv_tupian));
             String area;
@@ -490,13 +490,11 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length()>5){
-                area = area.substring(0, 5) + "...";
-            }
+            String price=isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area, area)
+                    .setText(R.id.tv_area, MyUtils.getSubText(area, price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn()  : item.getSellingPriceCn())
+                    .setText(R.id.tv_price, price)
                     .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }

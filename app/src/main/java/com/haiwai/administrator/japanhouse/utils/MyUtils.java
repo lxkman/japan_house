@@ -141,6 +141,16 @@ public class MyUtils {
         return "";
     }
 
+    public static String getSubText(String area, String price) {
+        if (TextUtils.isEmpty(price)) {
+            return area;
+        }
+        if (area.length() >= 13 - price.length()) {
+            area = area.substring(0, 13 - price.length()) + "...";
+        }
+        return area;
+    }
+
     public static boolean isLogin(Context context) {
         String token = SharedPreferencesUtils.getInstace(context).getStringPreference("token", "");
         if (token != null && !token.equals("")) {

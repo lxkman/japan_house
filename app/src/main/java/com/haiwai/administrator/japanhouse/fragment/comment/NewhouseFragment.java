@@ -175,7 +175,7 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
         protected void convert(BaseViewHolder helper, HouseListBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
             Glide.with(mContext).load(TextUtils.isEmpty(item.getVideoImgs()) ?
-                    MyUtils.getSpiltText(item.getRoomImgs()) : MyUtils.getSpiltText(item.getVideoImgs()))
+                    MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
                     .apply(GlideReqUtils.getReq())
                     .into((ImageView) helper.getView(R.id.img_house));
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());

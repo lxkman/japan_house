@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.widget.Toast;
 
 import com.haiwai.administrator.japanhouse.MyApplication;
+import com.haiwai.administrator.japanhouse.R;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -96,12 +97,12 @@ public class UMShareActivity extends BaseActivity {
         public void onResult(SHARE_MEDIA platform) {
             //            Log.d("plat", "platform" + platform);
 
-            Toast.makeText(MyApplication.getGloableContext(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.getGloableContext(), platform + MyApplication.getGloableContext().getString(R.string.sharesuccess), Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(MyApplication.getGloableContext(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.getGloableContext(), platform +  MyApplication.getGloableContext().getString(R.string.sharefail), Toast.LENGTH_SHORT).show();
             if (t != null) {
                 //                Log.d("throw", "throw:" + t.getMessage());
             }
@@ -109,7 +110,7 @@ public class UMShareActivity extends BaseActivity {
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(MyApplication.getGloableContext(), platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.getGloableContext(), platform +MyApplication.getGloableContext().getString(R.string.sharcancel), Toast.LENGTH_SHORT).show();
         }
     };
 

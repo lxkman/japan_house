@@ -305,9 +305,9 @@ public class HouseDetailsBean implements Serializable{
         private String roomImgs;
         private String doorModelImages;
         private double areaSearch;
-        private int sellingPriceSearch;
+        private double sellingPriceSearch;
         private int yearBuiltSearch;
-        private int rentSearch;
+        private double rentSearch;
         private int floorSearch;
         private int stationDistanceSearch;
         private int brokerId;
@@ -1292,11 +1292,11 @@ public class HouseDetailsBean implements Serializable{
             this.areaSearch = areaSearch;
         }
 
-        public int getSellingPriceSearch() {
+        public double getSellingPriceSearch() {
             return sellingPriceSearch;
         }
 
-        public void setSellingPriceSearch(int sellingPriceSearch) {
+        public void setSellingPriceSearch(double sellingPriceSearch) {
             this.sellingPriceSearch = sellingPriceSearch;
         }
 
@@ -1308,11 +1308,11 @@ public class HouseDetailsBean implements Serializable{
             this.yearBuiltSearch = yearBuiltSearch;
         }
 
-        public int getRentSearch() {
+        public double getRentSearch() {
             return rentSearch;
         }
 
-        public void setRentSearch(int rentSearch) {
+        public void setRentSearch(double rentSearch) {
             this.rentSearch = rentSearch;
         }
 

@@ -440,7 +440,8 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
             helper.setVisible(R.id.tv_house_room, false);
             helper.setText(R.id.tv_house_area, isja ? item.getCoveredAreaJpn() : item.getCoveredAreaCn());
             helper.setText(R.id.tv_price, isja ? item.getSellingPriceJpn() : item.getSellingPriceCn());
-            Glide.with(BieshudetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(BieshudetailsActivity.this).load(TextUtils.isEmpty(item.getVideoImgs()) ?
+                    MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 

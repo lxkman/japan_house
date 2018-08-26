@@ -18,6 +18,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -218,6 +219,12 @@ public class ZuHousedetailsActivity extends UMShareActivity {
                         initViewPager();
                         initData();
                     }
+
+                    @Override
+                    public void onError(Response<HouseDetailsBean> response) {
+                        super.onError(response);
+                        Log.e("xxx",response.getException().getMessage());
+                    }
                 });
     }
 
@@ -311,7 +318,8 @@ public class ZuHousedetailsActivity extends UMShareActivity {
             helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
-            Glide.with(ZuHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(ZuHousedetailsActivity.this).load(TextUtils.isEmpty(item.getVideoImgs()) ?
+                    MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 

@@ -632,4 +632,10 @@
     <string name="string_tiwenren">質問者：</string>
     <string name="no_apk">あなたの携帯電話にはアプリケーション市場がインストールされていません</string>
     <string name="max_version">最新バージョン</string>
+    <string name="dengluchenggong">ログインの成功</string>
+    <string name="denglushibai">ログインに失敗しました</string>
+    <string name="quxiaodenglu">ログインをキャンセルする</string>
+    <string name="sharesuccess">共有の成功</string>
+    <string name="sharefail">共有に失敗しました</string>
+    <string name="sharcancel">共有がキャンセルされました</string>
 </resources>

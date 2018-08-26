@@ -407,7 +407,8 @@ public class TudidetailsActivity extends UMShareActivity {
             helper.setVisible(R.id.tv_house_room, false);
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
-            Glide.with(TudidetailsActivity.this).load(item.getLandImages()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(TudidetailsActivity.this).load(TextUtils.isEmpty(item.getVideoImgs()) ?
+                    MyUtils.getSpiltText(item.getLandImages()) : item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 

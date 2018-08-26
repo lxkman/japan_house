@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.haiwai.administrator.japanhouse.MyApplication;
+import com.haiwai.administrator.japanhouse.R;
 import com.haiwai.administrator.japanhouse.bean.LoginBean;
 import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.login.BindPhoneActivity;
@@ -65,7 +66,7 @@ public class UMLoginActivity extends BaseActivity {
         @Override
         public void onStart(SHARE_MEDIA platform) {
             //授权开始的回调
-            Toast.makeText(MyApplication.getGloableContext(), "授权开始回调", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MyApplication.getGloableContext(), "授权开始回调", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -105,7 +106,7 @@ public class UMLoginActivity extends BaseActivity {
                             if (LoginBean.getCode().equals("200")) {
                                 SharedPreferencesUtils.getInstace(mContext).setStringPreference("uid", response.body().getDatas().getId() + "");
                                 SharedPreferencesUtils.getInstace(mContext).setStringPreference("token", response.body().getDatas().getToken() + "");
-                                TUtils.showFail(MyApplication.getGloableContext(), "登录成功");
+                                TUtils.showFail(MyApplication.getGloableContext(), mContext.getString(R.string.dengluchenggong));
                                 HashMap<String, Boolean> hm = new HashMap<>();
                                 //会话类型 以及是否聚合显示
                                 hm.put(Conversation.ConversationType.PRIVATE.getName(), false);
@@ -134,12 +135,12 @@ public class UMLoginActivity extends BaseActivity {
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            TUtils.showFail(MyApplication.getGloableContext(), "登陆失败");
+            TUtils.showFail(MyApplication.getGloableContext(), mContext.getString(R.string.denglushibai));
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            TUtils.showFail(MyApplication.getGloableContext(), "取消登录");
+            TUtils.showFail(MyApplication.getGloableContext(), mContext.getString(R.string.quxiaodenglu));
         }
     };
 

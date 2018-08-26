@@ -293,7 +293,8 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
 //            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
-            Glide.with(ZhongguoDetailsActivity.this).load(item.getHouseImgs()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(ZhongguoDetailsActivity.this).load(TextUtils.isEmpty(item.getVideoImgs()) ?
+                    MyUtils.getSpiltText(item.getHouseImgs()) : item.getVideoImgs()).into((ImageView) helper.getView(R.id.img_house));
         }
     }
 

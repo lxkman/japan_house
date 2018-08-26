@@ -985,7 +985,10 @@ public class NewHousedetailsActivity extends UMShareActivity {
             helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
-            Glide.with(NewHousedetailsActivity.this).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(NewHousedetailsActivity.this)
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ?
+                            MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
+                    .into((ImageView) helper.getView(R.id.img_house));
         }
     }
 }

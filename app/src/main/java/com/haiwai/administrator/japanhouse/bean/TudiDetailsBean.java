@@ -113,8 +113,8 @@ public class TudiDetailsBean implements Serializable{
         private String locationLevel2Jpn;
         private String locationLevel3Jpn;
         private String locationLevel4Jpn;
-        private int longitude;
-        private int latitude;
+        private double longitude;
+        private double latitude;
         private String titleCn;
         private String titleJpn;
         private String videoUrls;
@@ -244,19 +244,19 @@ public class TudiDetailsBean implements Serializable{
             this.locationLevel4Jpn = locationLevel4Jpn;
         }
 
-        public int getLongitude() {
+        public double getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(int longitude) {
+        public void setLongitude(double longitude) {
             this.longitude = longitude;
         }
 
-        public int getLatitude() {
+        public double getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(int latitude) {
+        public void setLatitude(double latitude) {
             this.latitude = latitude;
         }
 

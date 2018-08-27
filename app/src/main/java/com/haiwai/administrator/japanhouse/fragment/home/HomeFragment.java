@@ -856,7 +856,8 @@ public class HomeFragment extends BaseFragment {
                     .setText(R.id.tv_area, MyUtils.getSubText(area,price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
-                    .setText(R.id.tv_price, status.equals("2") ? rent : price);
+                    .setText(R.id.tv_price, status.equals("2") ? rent : price)
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));;
         }
     }
 

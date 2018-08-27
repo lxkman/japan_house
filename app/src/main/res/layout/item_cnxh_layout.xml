@@ -8,17 +8,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+        <FrameLayout
+            android:id="@+id/rl_xx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/iv_tupian"
             android:layout_width="132dip"
             android:layout_height="90dip"
             android:scaleType="fitXY"
             android:src="@drawable/test_cnxh_iv"/>
+        <ImageView
+            android:id="@+id/iv_isplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@drawable/home_vedio_icon_iv"/>
+        </FrameLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_toRightOf="@+id/iv_tupian"
+            android:layout_toRightOf="@+id/rl_xx"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_title"

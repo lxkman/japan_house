@@ -199,6 +199,12 @@ public class TudidetailsActivity extends UMShareActivity {
                         }
                         initViewPager();
                     }
+
+                    @Override
+                    public void onError(Response<TudiDetailsBean> response) {
+                        super.onError(response);
+                        Log.d("TudidetailsActivity", response.getException().getMessage()+"-------");
+                    }
                 });
     }
 

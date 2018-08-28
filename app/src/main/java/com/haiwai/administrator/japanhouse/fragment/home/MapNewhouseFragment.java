@@ -28,6 +28,7 @@ import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
+import com.haiwai.administrator.japanhouse.MyApplication;
 import com.haiwai.administrator.japanhouse.R;
 import com.haiwai.administrator.japanhouse.base.BaseFragment;
 import com.haiwai.administrator.japanhouse.bean.DrawMapBean;
@@ -158,8 +159,8 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
             //构建用户绘制多边形的Option对象
             OverlayOptions polygonOption = new PolygonOptions()
                     .points(latLngList)
-                    .stroke(new Stroke(5, getResources().getColor(R.color.mapcirclestroke)))
-                    .fillColor(getResources().getColor(R.color.mapcirclesfill));
+                    .stroke(new Stroke(5, MyApplication.getGloableContext().getResources().getColor(R.color.mapcirclestroke)))
+                    .fillColor(MyApplication.getGloableContext().getResources().getColor(R.color.mapcirclesfill));
 
             //在地图上添加多边形Option，用于显示
             baiduMap.addOverlay(polygonOption);
@@ -227,7 +228,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
                         oneCheckBeanList1.add(new OneCheckBean(true, getString(R.string.buxian)));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, MyApplication.getGloableContext().getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -242,7 +243,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, MyApplication.getGloableContext().getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -268,7 +269,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, MyApplication.getGloableContext().getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -299,7 +300,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
+                        list1.add(new OneCheckBean(false, MyApplication.getGloableContext().getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -316,7 +317,7 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                          * */
                         shoujia = shaiXuanBeanDatas.getShoujia();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
+                        list2.add(new OneCheckBean(false, MyApplication.getGloableContext().getResources().getString(R.string.buxian)));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
@@ -331,9 +332,9 @@ public class MapNewhouseFragment extends BaseFragment implements MyItemClickList
                          * 第四个界面
                          * */
                         List<MoreCheckBean> moreCheckBeanList = new ArrayList<MoreCheckBean>();
-                        MoreCheckBean huaquanBean = new MoreCheckBean(false, getResources().getString(R.string.quyu));
+                        MoreCheckBean huaquanBean = new MoreCheckBean(false, MyApplication.getGloableContext().getResources().getString(R.string.quyu));
                         List<OneCheckBean> itemBean = new ArrayList<>();
-                        itemBean.add(new OneCheckBean(false, getResources().getString(R.string.huaquanzhaofang)));
+                        itemBean.add(new OneCheckBean(false, MyApplication.getGloableContext().getResources().getString(R.string.huaquanzhaofang)));
                         huaquanBean.setCheckBeanList(itemBean);
                         moreCheckBeanList.add(huaquanBean);
                         List<OldHouseShaiXuanBean.DatasEntity.MoreEntity> more = shaiXuanBeanDatas.getMore();

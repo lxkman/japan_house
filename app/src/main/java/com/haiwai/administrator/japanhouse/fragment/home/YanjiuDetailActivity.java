@@ -121,9 +121,9 @@ public class YanjiuDetailActivity extends BaseActivity {
         });
         String url;
         if (isJa) {
-            url = "http://39.106.131.61:8080/hwdch5/info/research.html?id=" + id;
+            url = "http://www.flcjapan.com/hwdch5/info/research.html?id=" + id;
         } else {
-            url = "http://39.106.131.61:8080/hwdch5/info/researchCn.html?id=" + id;
+            url = "http://www.flcjapan.com/hwdch5/info/researchCn.html?id=" + id;
         }
         webView.loadUrl(url);
     }

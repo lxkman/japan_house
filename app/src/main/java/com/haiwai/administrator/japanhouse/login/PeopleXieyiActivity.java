@@ -59,7 +59,7 @@ public class PeopleXieyiActivity extends BaseActivity {
                 Toast.makeText(PeopleXieyiActivity.this, "加载出错了", Toast.LENGTH_SHORT).show();
             }
         });
-        webView.loadUrl("http://39.106.131.61:8080/hwdch5/info/AgreementCn.html?type=0");
+        webView.loadUrl("http://www.flcjapan.com/hwdch5/info/AgreementCn.html?type=0");
 
 
     }

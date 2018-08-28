@@ -63,7 +63,10 @@ import com.haiwai.administrator.japanhouse.utils.Constants;
 import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
+import com.haiwai.administrator.japanhouse.view.MyFooter;
+import com.haiwai.administrator.japanhouse.view.MyHeader;
 import com.haiwai.administrator.japanhouse.view.RatingBarView;
+import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -140,6 +143,8 @@ public class HomeFragment extends BaseFragment {
     RelativeLayout reTopBg;
     @BindView(R.id.iv_tantan)
     ImageView ivTantan;
+//    @BindView(R.id.springview)
+//    SpringView springview;
     private int mDistanceY;
     private int totalPage; //总的页数
     private int mPageSize = 10; //每页显示的最大的数量
@@ -177,7 +182,24 @@ public class HomeFragment extends BaseFragment {
         initLocation2();
         initViewData();
         initScroll();
+        initListener();
         return view;
+    }
+
+    private void initListener() {
+//        springview.setHeader(new MyHeader(mContext));
+//        springview.setListener(new SpringView.OnFreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                initData();
+//                springview.onFinishFreshAndLoad();
+//            }
+//
+//            @Override
+//            public void onLoadmore() {
+//                springview.onFinishFreshAndLoad();
+//            }
+//        });
     }
 
     private void initLocation2() {
@@ -748,7 +770,8 @@ public class HomeFragment extends BaseFragment {
                     .setText(R.id.tv_area, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn())
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
-                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 
@@ -857,7 +880,7 @@ public class HomeFragment extends BaseFragment {
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_ting, isJa ? item.getDoorModelJpn() : item.getDoorModelCn())
                     .setText(R.id.tv_price, status.equals("2") ? rent : price)
-                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));;
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 

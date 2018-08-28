@@ -114,10 +114,7 @@ public class FirstView implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_reset:
-                setFirstChecked(mQuyuListBean);
-                setFirstChecked(mDitieListBean);
-                oneAdapter.notifyDataSetChanged();
-                initData();
+                reset();
                 break;
             case R.id.btn_sure:
                 List<String> allCheckedItem = isCheckedItemOne(adapterPosition2);
@@ -246,6 +243,23 @@ public class FirstView implements View.OnClickListener {
             }
         }
         return list;
+    }
+
+
+    private void reset() {
+        dropDownMenu.setTabText(context.getResources().getString(R.string.quyu));
+        adapterPosition = 0;
+        adapterPosition2 = 0;
+        setFirstChecked(mQuyuListBean);
+        setFirstChecked(mDitieListBean);
+        oneAdapter.notifyDataSetChanged();
+        if (quYuAdapter != null) {
+            quYuAdapter.notifyDataSetChanged();
+        }
+        if (diTieAdapter != null) {
+            diTieAdapter.notifyDataSetChanged();
+        }
+        initData();
     }
 
     private List<String> isCheckedItemOne(int adapterPosition2) {

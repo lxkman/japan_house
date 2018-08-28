@@ -114,9 +114,9 @@ public class OwnerWikipediaActivity extends BaseActivity implements OwnerWikiped
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra("title", getString(R.string.details));
         if (MyApplication.isJapanese()) {
-            intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/paranText.html?id=" + itemId);
+            intent.putExtra("result", "http://www.flcjapan.com/hwdch5/info/paranText.html?id=" + itemId);
         } else {
-            intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/paranTextCn.html?id=" + itemId);
+            intent.putExtra("result", "http://www.flcjapan.com/hwdch5/info/paranTextCn.html?id=" + itemId);
         }
 
         startActivity(intent);

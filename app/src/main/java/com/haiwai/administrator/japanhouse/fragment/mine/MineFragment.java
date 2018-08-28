@@ -279,9 +279,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("title", getString(R.string.wenjuan));
                 if (MyApplication.isJapanese()) {
-                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/questionnaire.html?userId=" + userBean.getId());
+                    intent.putExtra("result", "http://www.flcjapan.com/hwdch5/info/questionnaire.html?userId=" + userBean.getId());
                 } else {
-                    intent.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/questionnaireCn.html?userId=" + userBean.getId());
+                    intent.putExtra("result", "http://www.flcjapan.com/hwdch5/info/questionnaireCn.html?userId=" + userBean.getId());
                 }
 
                 startActivity(intent);
@@ -332,9 +332,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 Intent intent1 = new Intent(getActivity(), WebActivity.class);
                 intent1.putExtra("title", getString(R.string.calc_fangdai));
                 if (MyApplication.isJapanese()) {
-                    intent1.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/Agreement.html?type=3");
+                    intent1.putExtra("result", "http://www.flcjapan.com/hwdch5/info/Agreement.html?type=3");
                 } else {
-                    intent1.putExtra("result", "http://39.106.131.61:8080/hwdch5/info/AgreementCn.html?type=3");
+                    intent1.putExtra("result", "http://www.flcjapan.com/hwdch5/info/AgreementCn.html?type=3");
                 }
 
                 startActivity(intent1);

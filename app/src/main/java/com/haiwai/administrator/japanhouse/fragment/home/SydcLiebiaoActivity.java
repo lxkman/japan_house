@@ -159,7 +159,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         mrecycler.setNestedScrollingEnabled(false);
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         headers = new String[]{getString(R.string.quyu), getString(R.string.lxkmianji),
                 getString(R.string.shoujia), getString(R.string.gengduo)};
 
@@ -216,7 +216,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                                     moreCheckBean.setId(areasEntity.getId());
                                     List<QuYuBean.DatasEntity.AreasEntity.HwdcAreaManagesEntity> hwdcAreaManages = areasEntity.getHwdcAreaManages();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (hwdcAreaManages != null && hwdcAreaManages.size() > 0) {
                                         for (int i1 = 0; i1 < hwdcAreaManages.size(); i1++) {
                                             int id = hwdcAreaManages.get(i1).getId();
@@ -264,7 +264,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(SydcLiebiaoActivity.this);
-                        if (shaiXuanBeanDatas==null){
+                        if (shaiXuanBeanDatas == null) {
                             return;
                         }
                         /**
@@ -289,7 +289,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                          * */
                         shoujia = shaiXuanBeanDatas.getShoujia();
                         List<OneCheckBean> list2 = new ArrayList<>();
-                        list2.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list2.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (shoujia != null && shoujia.size() > 0) {
                             for (int i = 0; i < shoujia.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.ShoujiaEntity shoujiaEntity = shoujia.get(i);
@@ -337,7 +337,7 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     }
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -522,7 +522,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         mjId = mianjiEntity.getId() + "";
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null)
+                    mDatas.clear();
                 //            Toast.makeText(this, " "+mjId, Toast.LENGTH_SHORT).show();
                 initData();
                 break;
@@ -537,7 +538,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         sjId = shoujia.get(itemPosition - 1).getId() + "";
                     }
                 }
-                mDatas.clear();
+                if (mDatas != null)
+                    mDatas.clear();
                 initData();
                 break;
         }
@@ -551,7 +553,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             sjId = "-1";
             zidingyiPriceList.clear();
             zidingyiPriceList = priceRegin;
-            mDatas.clear();
+            if (mDatas != null)
+                mDatas.clear();
             initData();
         }
     }
@@ -561,7 +564,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
         page = 1;
         mMoreSelectedBeanList.clear();
         mMoreSelectedBeanList = moreSelectedBeanList;
-        mDatas.clear();
+        if (mDatas != null)
+            mDatas.clear();
         initData();
     }
 
@@ -584,7 +588,10 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
             } else {
                 area = item.getSpecificLocationCn();
             }
-            String price=isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn();
+            if (type == 0) {
+                helper.setVisible(R.id.tv_mianji, false);
+            }
+            String price = isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, MyUtils.getSubText(area, price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
@@ -601,11 +608,11 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 break;
             //地图
             case R.id.img_dingwei:
-                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class), 0);
                 break;
             //消息
             case R.id.img_message:
-                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
+                setResult(100, new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
                 finish();
                 startActivity(new Intent(mContext, MainActivity.class));
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -615,20 +622,21 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                 intent.putExtra("popcontent", getResources().getString(R.string.shangyedichan));
                 intent.putExtra("state", 5);
                 intent.putExtra("state2", type);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==11){
-            searchText=data.getStringExtra("searchText");
+        if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
             if (!TextUtils.isEmpty(searchText)) {
                 searchTv.setText(searchText);
             }
-            page=1;
-            mDatas.clear();
+            page = 1;
+            if (mDatas != null)
+                mDatas.clear();
             initData();
         }
     }

@@ -219,12 +219,6 @@ public class ZuHousedetailsActivity extends UMShareActivity {
                         initViewPager();
                         initData();
                     }
-
-                    @Override
-                    public void onError(Response<HouseDetailsBean> response) {
-                        super.onError(response);
-                        Log.e("xxx",response.getException().getMessage());
-                    }
                 });
     }
 

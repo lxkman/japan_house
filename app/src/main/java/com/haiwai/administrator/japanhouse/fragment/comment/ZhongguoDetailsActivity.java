@@ -440,6 +440,9 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         String floorImg = datas.getFloorImg();
         String str2 = floorImg.replace("", "");//去掉所用空格
         huxinglist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
+        if (huxinglist.size()<=0||huxinglist==null){
+            HuxingRecycler.setVisibility(View.GONE);
+        }
         if (mLiebiaoAdapter == null) {
             mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, huxinglist);
         }

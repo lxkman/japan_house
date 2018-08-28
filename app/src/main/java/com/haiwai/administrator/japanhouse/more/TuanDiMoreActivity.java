@@ -109,8 +109,8 @@ public class TuanDiMoreActivity extends BaseActivity {
         actTuandiGuanlihuishe.setText(ja ? datas.getManagementSocietyJpn() : datas.getManagementSocietyCn());/*管理会社*/
         actTuandiGuanlifei.setText(ja ? datas.getAdministrativeFeeJpn() : datas.getAdministrativeFeeCn());/*管理费*/
         actTuandiGuanli.setText(ja ? datas.getManageJpn() : datas.getManageCn());/*管理*/
-        actTuandiHuxing.setText(ja ? datas.getHouseType() : datas.getHouseType());/*户型*/
-        actTuandiFangjianzhuangkuang.setText(ja ? datas.getBuildingConstructionJpn() : datas.getBuildingConstructionCn());/*建筑构造*/
+        actTuandiHuxing.setText(ja ? datas.getDoorModelJpn() : datas.getDoorModelCn());/*户型*/
+        actTuandiFangjianzhuangkuang.setText(ja ? datas.getRoomStatusJpn() : datas.getRoomStatusCn());/*房屋状况*/
         actTuandiChuangwaifengjing.setText(ja ? datas.getSceneryJpn() : datas.getSceneryCn());/*窗外风景*/
         actTuandiGongyongbufen.setText(ja ? datas.getCommonPartsJpn() : datas.getCommonPartsCn());/*共用部分*/
         actTuandiZhoubianhuanjing.setText(ja ? datas.getSurroundingsJpn() : datas.getSurroundingsCn());/*周边环境*/

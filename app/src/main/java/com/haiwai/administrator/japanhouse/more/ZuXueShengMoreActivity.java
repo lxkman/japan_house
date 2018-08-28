@@ -61,7 +61,7 @@ public class ZuXueShengMoreActivity extends BaseActivity {
         tvHouseArea.setText(ja ? datas.getAreaJpn() : datas.getAreaCn());/*面积*/
         tvHouseHuxing.setText(ja ? datas.getDoorModelJpn() : datas.getDoorModelCn());/*户型*/
         tvMoreLouceng.setText(ja ? datas.getFloorJpn() : datas.getFloorCn());/*楼层*/
-        tvHouseYears.setText(ja ? datas.getYearBuiltJpn() : datas.getYearBuiltCn());/*建筑年份*/
+        tvHouseYears.setText(ja ? datas.getSignYearJpn() : datas.getSignYearCn());/*签约年限*/
         tvHouseChaoxiang.setText(ja ? datas.getOrientationJpn() : datas.getOrientationCn());/*朝向*/
         tvHouseZhuyaochezhan.setText(ja ? datas.getTrainStationJpn() : datas.getTrainStationCn());/*主要车站*/
         tvHouseChezhanjuli.setText(ja ? datas.getStationDistanceJpn() : datas.getStationDistanceCn());/*车站距离*/

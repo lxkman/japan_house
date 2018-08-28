@@ -80,10 +80,10 @@ public class XieZiLouMoreActivity extends BaseActivity {
         actXiezilouShoujia.setText(ja?datas.getSellingPriceJpn():datas.getSellingPriceCn());/*售价*/
         actXiezilouMianji.setText(ja?datas.getAreaJpn():datas.getAreaCn());/*面积*/
         actXiezilouSuoyouquan.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*所有权*/
-        actXiezilouDiyuyongtu.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*地域用途*/
+        actXiezilouDiyuyongtu.setText(ja?datas.getRegionalPurposesJpn():datas.getRegionalPurposesCn());/*地域用途*/
         actXiezilouJianzhunianfen.setText(ja?datas.getYearBuiltJpn():datas.getYearBuiltCn());/*建筑年份*/
         actXiezilouHuibaolv.setText(ja?datas.getReturnRateJpn():datas.getReturnRateCn());/*回报率*/
-        actXiezilouRujuriqi.setText(ja?datas.getDoichoIrinoJpn():datas.getDistrictCn());/*入居日期*/
+        actXiezilouRujuriqi.setText(ja?datas.getDoichoIrinoJpn():datas.getDoichoIrinoCn());/*入居日期*/
         actXiezilouDiduan.setText(ja?datas.getDistrictJpn():datas.getDistrictCn());/*地段*/
         actXiezilouJutiweizhi.setText(ja?datas.getSpecificLocationJpn():datas.getSpecificLocationCn());/*具体位置*/
         actXiezilouChezhanjuli.setText(ja?datas.getStationDistanceJpn():datas.getStationDistanceCn());/*车站距离*/
@@ -97,7 +97,7 @@ public class XieZiLouMoreActivity extends BaseActivity {
         actXiezilouShoumaileixing.setText(ja ? datas.getLeaseTypeJpn() : datas.getLeaseTypeCn());/*售卖类型*/
 
 //        actShangpuYingyeleixing.setText(ja ? datas.() : datas.getActualityCn());/*营业类型*/
-//        actShangpuZhuyaochezhan.setText(ja?datas.getRailwayStationJpn():datas.getRailwayStationCn());/*主要车站*/
+        actXiezilouZhuyaochezhan.setText(ja?datas.getRailwayStationJpn():datas.getRailwayStationCn());/*主要车站*/
 //        actShangpuJianzhugongsi.setText(ja?datas.getConstructionCompanyJpn():datas.getConstructionCompanyCn());/*建筑公司*/
 
     }

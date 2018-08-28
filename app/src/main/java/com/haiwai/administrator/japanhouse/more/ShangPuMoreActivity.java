@@ -92,7 +92,7 @@ public class ShangPuMoreActivity extends BaseActivity {
         actShangpuShoujia.setText(ja?datas.getSellingPriceJpn():datas.getSellingPriceCn());/*售价*/
         actShangpuMianji.setText(ja?datas.getAreaJpn():datas.getAreaCn());/*面积*/
         actShangpuSuoyouquan.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*所有权*/
-        actShangpuDiyuyongtu.setText(ja?datas.getOwnershipJpn():datas.getOwnershipCn());/*地域用途*/
+        actShangpuDiyuyongtu.setText(ja?datas.getRegionalPurposesJpn():datas.getRegionalPurposesCn());/*地域用途*/
         actShangpuJianzhunianfen.setText(ja?datas.getYearBuiltJpn():datas.getYearBuiltCn());/*建筑年份*/
         actShangpuJianzhugouzao.setText(ja?datas.getBuildingConstructionJpn():datas.getBuildingConstructionCn());/*建筑构造*/
         actShangpuChaoxiang.setText(ja?datas.getOrientationJpn():datas.getOrientationCn());/*朝向*/
@@ -111,8 +111,8 @@ public class ShangPuMoreActivity extends BaseActivity {
         actShangpuTiaojian.setText(ja ? datas.getConditionJpn() : datas.getConditionCn());/*条件*/
         actShangpuShoumaileixing.setText(ja ? datas.getLeaseTypeJpn() : datas.getLeaseTypeCn());/*售卖类型*/
         actShangpuXianzhuang.setText(ja ? datas.getActualityJpn() : datas.getActualityCn());/*现状*/
-//        actShangpuYingyeleixing.setText(ja ? datas.() : datas.getActualityCn());/*营业类型*/
-//        actShangpuZhuyaochezhan.setText(ja?datas.getRailwayStationJpn():datas.getRailwayStationCn());/*主要车站*/
+        actShangpuYingyeleixing.setText(ja ? datas.getBusinessTypeJpn() : datas.getBusinessTypeCn());/*营业类型*/
+        actShangpuZhuyaochezhan.setText(ja?datas.getRailwayStationJpn():datas.getRailwayStationCn());/*主要车站*/
 //        actShangpuJianzhugongsi.setText(ja?datas.getConstructionCompanyJpn():datas.getConstructionCompanyCn());/*建筑公司*/
 
     }

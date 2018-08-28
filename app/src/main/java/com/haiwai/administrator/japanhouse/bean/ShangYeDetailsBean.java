@@ -229,6 +229,24 @@ public class ShangYeDetailsBean {
         private String specificLocationJpn;
         private HwdcBrokerBean hwdcBroker;
         private int isSc;
+        private String businessTypeJpn;
+        private String businessTypeCn;
+
+        public String getBusinessTypeCn() {
+            return businessTypeCn;
+        }
+
+        public void setBusinessTypeCn(String businessTypeCn) {
+            this.businessTypeCn = businessTypeCn;
+        }
+
+        public String getBusinessTypeJpn() {
+            return businessTypeJpn;
+        }
+
+        public void setBusinessTypeJpn(String businessTypeJpn) {
+            this.businessTypeJpn = businessTypeJpn;
+        }
 
         public int getIsSc() {
             return isSc;

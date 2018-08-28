@@ -185,7 +185,11 @@ public class TudiFragment extends BaseFragment implements TJNewHousePresenter.Ho
             }
             helper.setText(R.id.tv_house_address,area);
             helper.setVisible(R.id.tv_house_room,false);
-            helper.setVisible(R.id.img_video_logo,true);
+            if (TextUtils.isEmpty(item.getVideoImgs())){
+                helper.setVisible(R.id.img_video_logo, false);
+            }else {
+                helper.setVisible(R.id.img_video_logo, true);
+            }
             helper.setText(R.id.tv_house_area,isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price,isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
 

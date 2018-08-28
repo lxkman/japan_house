@@ -191,7 +191,11 @@ public class NewhouseFragment extends BaseFragment implements TJNewHousePresente
             helper.setText(R.id.tv_house_address, area);
 //            helper.setText(R.id.tv_house_room,isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setVisible(R.id.tv_house_room, false);
-            helper.setVisible(R.id.img_video_logo, true);
+            if (TextUtils.isEmpty(item.getVideoImgs())){
+                helper.setVisible(R.id.img_video_logo, false);
+            }else {
+                helper.setVisible(R.id.img_video_logo, true);
+            }
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
 

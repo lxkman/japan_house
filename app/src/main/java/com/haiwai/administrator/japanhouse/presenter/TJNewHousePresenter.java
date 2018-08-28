@@ -33,14 +33,14 @@ public class TJNewHousePresenter {
         if (CacheUtils.get("cityId")==null){
             return;
         }
-        int cityId = CacheUtils.get("cityId");
-        HttpParams params = new HttpParams();
-        params.put("pageNo", pageNo);
-        params.put("hType", hType);
-        params.put("cId", cityId);
-        OkGo.<HouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/recommendlist")
-                .tag(this)
-                .params(params)
+            int cityId = CacheUtils.get("cityId");
+            HttpParams params = new HttpParams();
+            params.put("pageNo", pageNo);
+            params.put("hType", hType);
+            params.put("cId", cityId);
+            OkGo.<HouseListBean>post(MyUrls.BASEURL + "/app/houseresourse/recommendlist")
+                    .tag(this)
+                    .params(params)
                 .execute(new DialogCallback<HouseListBean>(activity, HouseListBean.class) {
                     @Override
                     public void onSuccess(Response<HouseListBean> response) {

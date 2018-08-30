@@ -102,7 +102,7 @@ public class MyApplication extends Application {
         UMShareAPI.get(this);
         PlatformConfig.setWeixin("wxca521fc7f3d6651c", "77b9bc1be83185f84a4c7b3cf14d75ee");
         PlatformConfig.setQQZone("1106973785", "yCBP1SDVMUbuLd4f");
-        PlatformConfig.setSinaWeibo("3051729109", "e0c269439ddb81a528e90dbb909012e9", "https://sns.whalecloud.com/sina2/callback");
+        PlatformConfig.setSinaWeibo("3051729109", "e0c269439ddb81a528e90dbb909012e9", "http://www.flcjapan.com");
     }
 
     private void initRc() {

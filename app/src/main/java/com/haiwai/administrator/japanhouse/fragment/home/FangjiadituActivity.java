@@ -45,6 +45,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,11 +91,11 @@ public class FangjiadituActivity extends BaseActivity {
     private List<ChartBean.DatasBean.ZxtlistBean> zxtlist;
     private double bigVal;
     private double endVal;
-    private int avgMoney;
+    private float avgMoney;
     private String Tag;
     private float monthbfboneline;
     private float yeaybfboneline;
-    private int avgMoneyoneline;
+    private float avgMoneyoneline;
     private double bigValoneline;
     private double endValoneline;
     private double longitude;
@@ -156,7 +157,9 @@ public class FangjiadituActivity extends BaseActivity {
             return;
         }
         for (int i = 0; i < cityzxt.size(); i++) {
-            mlist.add((float) cityzxt.get(i).getAvgPrice());
+            DecimalFormat decimalFormat1=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            float p1= Float.parseFloat(decimalFormat1.format(cityzxt.get(i).getAvgPrice()));//
+            mlist.add(p1);
             xValue.add(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())));
             value.put(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())), mlist.get(i));
         }
@@ -246,21 +249,32 @@ public class FangjiadituActivity extends BaseActivity {
         TextView tv_cityname = (TextView) dialog.findViewById(R.id.tv_cityname);
         tv_cityname.setText(cityName+"均价");
         TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
-        tv_dialog_price.setText(avgMoney + "元/平");
+        DecimalFormat decimalFormat1=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        String p1=decimalFormat1.format(avgMoney);//
+        // format 返回的是字符串
+        tv_dialog_price.setText(p1 + "元/平");
         Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
         //一定要加这行！！！！！！！！！！！
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         if (monthbfb >= 0) {//上月增长
-            tv_mouth.setText(monthbfb + "");
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format(monthbfb);//format 返回的是字符串
+            tv_mouth.setText(p + "");
         } else {//下降
-            tv_mouth.setText(monthbfb * (-1) + "");
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format((monthbfb* (-1)));//format 返回的是字符串
+            tv_mouth.setText(p + "");
             tv_mouth.setCompoundDrawables(drawable, null, null, null);
         }
         if (yearbfb >= 0) {//去年增长
-            tv_years.setText(yearbfb + "");
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format(yearbfb);//format 返回的是字符串
+            tv_years.setText(p + "");
         } else {//下降
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format((yearbfb* (-1)));//format 返回的是字符串
             tv_years.setCompoundDrawables(drawable, null, null, null);
-            tv_years.setText(yearbfb * (-1) + "");
+            tv_years.setText(p + "");
         }
         //绘制折线图
         initLineChart(dialog);
@@ -289,21 +303,32 @@ public class FangjiadituActivity extends BaseActivity {
         TextView tv_cityname = (TextView) dialog.findViewById(R.id.tv_cityname);
         tv_cityname.setText(cityName+"均价");
         TextView tv_dialog_price = (TextView) dialog.findViewById(R.id.tv_dialog_price);
-        tv_dialog_price.setText(avgMoneyoneline + "元/平");
+        DecimalFormat decimalFormat1=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        String p1=decimalFormat1.format(avgMoneyoneline);//format 返回的是字符串
+        tv_dialog_price.setText(p1 + "元/平");
         Drawable drawable = getResources().getDrawable(R.drawable.xiajiantou);
         //一定要加这行！！！！！！！！！！！
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+
         if (monthbfboneline >= 0) {//上月增长
-            tv_mouth.setText(monthbfboneline + "");
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format(monthbfboneline);//format 返回的是字符串
+            tv_mouth.setText(p + "");
         } else {//下降
-            tv_mouth.setText(monthbfboneline * (-1) + "");
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format((monthbfboneline * (-1)));//format 返回的是字符串
+            tv_mouth.setText(p+ "");
             tv_mouth.setCompoundDrawables(drawable, null, null, null);
         }
         if (yeaybfboneline >= 0) {//去年增长
-            tv_years.setText(yeaybfboneline + "");
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format(yeaybfboneline);//format 返回的是字符串
+            tv_years.setText(p + "");
         } else {//下降
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            String p=decimalFormat.format((yeaybfboneline * (-1)));//format 返回的是字符串
             tv_years.setCompoundDrawables(drawable, null, null, null);
-            tv_years.setText(yeaybfboneline * (-1) + "");
+            tv_years.setText(p + "");
         }
         //绘制折线图
         initLineChartOneLine(dialog);
@@ -376,7 +401,9 @@ public class FangjiadituActivity extends BaseActivity {
                         FangjiaMapBean.DatasBean.CityBean city = datas.getCity();
                         avgMoneyoneline = city.getAvgMoney();
                         avgMoney = city.getAvgMoney();
-                        tv_junjia.setText(avgMoney+"元/㎡");
+                        DecimalFormat decimalFormat=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+                        String p=decimalFormat.format(avgMoney);//format 返回的是字符串
+                        tv_junjia.setText(p+"元/㎡");
                         cityName=isJa?city.getAdministrationNameJpn():city.getAdministrationNameCn();
                         cityzxt = datas.getCityzxt();
                         monthbfboneline = datas.getMonthbfb();

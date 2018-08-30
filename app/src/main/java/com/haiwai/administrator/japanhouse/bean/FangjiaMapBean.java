@@ -137,7 +137,7 @@ public class FangjiaMapBean {
             private double longitude;
             private double latitude;
             private int houseNum;
-            private int avgMoney;
+            private float avgMoney;
             private int priceStete;
             private List<?> hwdcAreaManages;
 
@@ -229,11 +229,11 @@ public class FangjiaMapBean {
                 this.houseNum = houseNum;
             }
 
-            public int getAvgMoney() {
+            public float getAvgMoney() {
                 return avgMoney;
             }
 
-            public void setAvgMoney(int avgMoney) {
+            public void setAvgMoney(float avgMoney) {
                 this.avgMoney = avgMoney;
             }
 

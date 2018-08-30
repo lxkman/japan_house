@@ -35,6 +35,7 @@ import com.linecorp.linesdk.auth.LineLoginResult;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.umeng.socialize.UMShareAPI;
 
 import org.zackratos.ultimatebar.UltimateBar;
 
@@ -150,30 +151,30 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
 
     private void initLoginNet() {
         if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(this,getResources().getString(R.string.phonenumber));
             return;
         } else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
-            Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(this,getResources().getString(R.string.shoujihaogeshierror));
             return;
         } else if (!TextUtils.isEmpty(edtPhone.getText().toString()) && MyUtils.isMobileNO(edtPhone.getText().toString())) {
             String phone = edtPhone.getText().toString();
             String substring = phone.substring(0, 3);
             if (substring.equals("050") || substring.equals("060") || substring.equals("070") || substring.equals("080") || substring.equals("090")) {
                 if (tvShowPop.getText().equals("+86")) {
-                    Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                     return;
                 }
             } else {
                 if (tvShowPop.getText().equals("+81")) {
-                    Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                     return;
                 }
             }
             if (TextUtils.isEmpty(edtPass.getText().toString())) {
-                Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.pass));
                 return;
             } else if (!MyUtils.isPswRuleNO(edtPass.getText().toString())) {
-                Toast.makeText(this, "请输入6-16位数字和字母组成的密码", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.qingshurushuzihezimumima));
             } else {
                 HttpParams params = new HttpParams();
                 params.put("tPhone", edtPhone.getText().toString());
@@ -194,7 +195,7 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
                                     RcConnect.rongCloudConection(loginBean.getDatas().getRongCloudToken());
 
                                     CacheUtils.put(Constants.USERINFO, loginBean.getDatas());
-                                    TUtils.showFail(LoginActivity.this, "登陆成功");
+                                    TUtils.showFail(LoginActivity.this, getResources().getString(R.string.dengluchenggong));
 
                                     HashMap<String, Boolean> hm = new HashMap<>();
                                     //会话类型 以及是否聚合显示
@@ -209,9 +210,9 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
                                     RongIM.getInstance().startConversationList(LoginActivity.this, hm);
                                     finish();
                                 } else if (loginBean.getCode().equals("-1")) {
-                                    TUtils.showFail(LoginActivity.this, "登陆失败");
+                                    TUtils.showFail(LoginActivity.this, getResources().getString(R.string.denglushibai));
                                 } else if (loginBean.getCode().equals("206")) {
-                                    TUtils.showFail(LoginActivity.this, "用户名或者密码错误");
+                                    TUtils.showFail(LoginActivity.this, getResources().getString(R.string.yonghuminghuomimacuowu));
                                 } else {
                                     TUtils.showFail(LoginActivity.this, loginBean.getMsg());
                                 }
@@ -278,9 +279,9 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
                     Log.e("======>>", "login LINE FAILED!");
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
     @Override
     public void getThirdLogin(Response<LoginBean> response) {
@@ -293,7 +294,7 @@ public class LoginActivity extends UMLoginActivity implements ThirdLoginPresente
                     RcConnect.rongCloudConection(response.body().getDatas().getRongCloudToken());
 
                     CacheUtils.put(Constants.USERINFO, response.body().getDatas());
-                    TUtils.showFail(LoginActivity.this, "登陆成功");
+                    TUtils.showFail(LoginActivity.this, getResources().getString(R.string.dengluchenggong));
 
                     HashMap<String, Boolean> hm = new HashMap<>();
                     //会话类型 以及是否聚合显示

@@ -24,6 +24,7 @@ import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.haiwai.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -76,10 +77,10 @@ public class ForgetPswActivity extends BaseActivity {
                 break;
             case R.id.tv_get_code:
                 if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-                    Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.phonenumber));
                     return;
                 }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
-                    Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.shoujihaogeshierror));
                     return;
                 }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())) {
                     String phone = edtPhone.getText().toString();
@@ -87,13 +88,13 @@ public class ForgetPswActivity extends BaseActivity {
                     if (substring.equals("050") || substring.equals("060") || substring.equals("070") || substring.equals("080") || substring.equals("090")) {
                         QuNumber = "1";//国际
                         if (checkQuyu.getText().equals("+86")) {
-                            Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                             return;
                         }
                     } else {
                         QuNumber = "2";//国内
                         if (checkQuyu.getText().equals("+81")) {
-                            Toast.makeText(this, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                             return;
                         }
                     }
@@ -132,11 +133,11 @@ public class ForgetPswActivity extends BaseActivity {
                         SuccessBean successBean = response.body();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
-                            Toast.makeText(ForgetPswActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(ForgetPswActivity.this,getString(R.string.fasongchegngong));
                         }else if (successBean.getCode().equals("-1")){
-                            Toast.makeText(ForgetPswActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(ForgetPswActivity.this,getString(R.string.fasongshibai));
                         }else if (successBean.getCode().equals("500")){
-                            Toast.makeText(ForgetPswActivity.this, "内部服务器错误", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(ForgetPswActivity.this,getString(R.string.neibufuwuqicuowu));
                         }else {
                             Toast.makeText(ForgetPswActivity.this,successBean.getMsg()+"", Toast.LENGTH_SHORT).show();
                         }
@@ -183,38 +184,38 @@ public class ForgetPswActivity extends BaseActivity {
     }
     private void initNet() {
         if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(this,getResources().getString(R.string.phonenumber));
             return;
         }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
-            Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+            TUtils.showFail(this,getResources().getString(R.string.shoujihaogeshierror));
             return;
         }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())){
             String phone = edtPhone.getText().toString();
             String substring = phone.substring(0, 3);
             if (substring.equals("050")||substring.equals("060")||substring.equals("070")||substring.equals("080")||substring.equals("090")){
                 if (checkQuyu.getText().equals("+86")){
-                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                     return;
                 }
             }else {
                 if (checkQuyu.getText().equals("+81")){
-                    Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                     return;
                 }
             }
             if(TextUtils.isEmpty(edtYanzhengCode.getText().toString())) {
-                Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.yanzhengma));
                 return;
             }else if(TextUtils.isEmpty(edtPass.getText().toString())) {
-                Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.pass));
                 return;
             }else if (!MyUtils.isPswRuleNO(edtPass.getText().toString())){
-                Toast.makeText(this, "请输入6-16位数字和字母组成的密码", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.qingshurushuzihezimumima));
             }else if(TextUtils.isEmpty(edtPassSure.getText().toString())) {
-                Toast.makeText(this, "请输入确认密码", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.surepass));
                 return;
             }else if(!edtPass.getText().toString().equals(edtPassSure.getText().toString())) {
-                Toast.makeText(this, "两次输入的密码不一致，请重新输入", Toast.LENGTH_SHORT).show();
+                TUtils.showFail(this,getResources().getString(R.string.liangcimimabuyiyang));
                 return;
             }else {
                 HttpParams params = new HttpParams();

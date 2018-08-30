@@ -81,9 +81,9 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                             titleCn = TouDetailsBean.getDatas().getTitleCn();
                             titleJpn = TouDetailsBean.getDatas().getTitleJpn();
                             boolean ja = MyUtils.isJa();
-                            title.setText(ja?titleCn:titleJpn);
+                            title.setText(ja?titleJpn:titleCn);
                             time.setText(MyUtils.getDateTimeFromMillisecond(createTime));
-                            neirong.setText(ja?contentCn:contentJpn);
+                            neirong.setText(ja?contentJpn:contentCn);
                         }
                     }
                 });

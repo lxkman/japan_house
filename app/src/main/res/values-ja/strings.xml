@@ -648,4 +648,15 @@
     <string name="remenchakan">人気のあるビュー</string>
     <string name="quanbuhuifu">すべて返信</string>
     <string name="renhuifu">人々は返信する</string>
+    <string name="shoujihaogeshierror">電話番号のフォーマットエラー</string>
+    <string name="qingxuanzezhengquequhao">正しい市外局番を選択してください</string>
+    <string name="liangcimimabuyiyang">2回入力したパスワードが一致しないため、再入力してください</string>
+    <string name="qingshurushuzihezimumima">6〜16桁のパスワードと文字を入力してください</string>
+    <string name="fasongchegngong">正常に送信されました</string>
+    <string name="fasongshibai">送信に失敗しました</string>
+    <string name="neibufuwuqicuowu">内部サーバーエラー</string>
+    <string name="zhucesuccess">成功した登録</string>
+    <string name="zhuceshibai">登録に失敗しました</string>
+    <string name="cihaomayizhuce">この番号はすでに登録されています</string>
+    <string name="yonghuminghuomimacuowu">ユーザー名またはパスワードが間違っています</string>
 </resources>

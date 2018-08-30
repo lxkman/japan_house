@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,6 +24,7 @@ import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SendSmsTimerUtils;
+import com.haiwai.administrator.japanhouse.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -149,9 +151,11 @@ public class BindPhoneActivity extends BaseActivity {
         }else {
             quhao="86";
         }
+        Log.d("RegisterActivity", QuNumber+"---------"+quhao);
         params.put("phone", "00"+quhao+edtPhone.getText().toString());
         params.put("sendType",QuNumber);
-        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
+        params.put("vPhone",edtPhone.getText().toString());
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/send/msg/sendmsg")
                 .tag(this)
                 .params(params)
                 .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {
@@ -161,13 +165,18 @@ public class BindPhoneActivity extends BaseActivity {
                         SuccessBean successBean = response.body();
                         if (successBean.getCode().equals("200")){
                             SendSmsTimerUtils.sendSms(tvGetCode, R.color.shihuangse, R.color.shihuangse);
-                            Toast.makeText(BindPhoneActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(BindPhoneActivity.this,getString(R.string.fasongchegngong));
+                        }else if (successBean.getCode().equals("-1")){
+                            TUtils.showFail(BindPhoneActivity.this,getString(R.string.fasongshibai));
+                        }else if (successBean.getCode().equals("500")){
+                            TUtils.showFail(BindPhoneActivity.this,getString(R.string.neibufuwuqicuowu));
                         }else {
-                            Toast.makeText(BindPhoneActivity.this, successBean.getCode(), Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(BindPhoneActivity.this,successBean.getMsg());
                         }
                     }
                 });
     }
+
     private void initPop() {
         //屏幕变暗
         WindowManager.LayoutParams lp =  getWindow().getAttributes();

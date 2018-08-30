@@ -61,10 +61,10 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.tv_getcode:
                 if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-                    Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.phonenumber));
                     return;
                 }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
-                    Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.shoujihaogeshierror));
                     return;
                 }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())) {
                     String phone = edtPhone.getText().toString();
@@ -80,9 +80,8 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
             case R.id.btn_next:
                 if (!TextUtils.isEmpty(edtCode.getText().toString())){
                     initIsCode();
-
                 }else {
-                    Toast.makeText(mContext, "请输入正确的验证码", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.inputcode));
                 }
                 break;
         }
@@ -127,7 +126,7 @@ public class MineBindPhoneActivity extends BaseActivity implements View.OnClickL
         params.put("phone", "00"+quhao+edtPhone.getText().toString());
         params.put("sendType",QuNumber);
         params.put("vPhone",edtPhone.getText().toString());
-        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/send/msg/sendmsg")
+        OkGo.<SuccessBean>post(MyUrls.BASEURL + "/app/send/msg/sendmsg")
                 .tag(this)
                 .params(params)
                 .execute(new DialogCallback<SuccessBean>(this, SuccessBean.class) {

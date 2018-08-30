@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="详情"
+            android:text="@string/xiangqing"
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -104,7 +104,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="10dp"
-                   android:text="全部回复"
+                   android:text="@string/quanbuhuifu"
                    android:textColor="@color/black"
                    android:textSize="16sp" />
            </LinearLayout>
@@ -141,7 +141,7 @@
            android:id="@+id/send"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="发送"
+           android:text="@string/rc_ext_send"
            android:textSize="16sp"
            android:layout_centerVertical="true"
            android:textColor="@color/colorAccent"
@@ -174,7 +174,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:background="@null"
-           android:hint="请输入评论内容"
+           android:hint="@string/qingshurupinlunneirong"
            android:textSize="14sp"
            />
 

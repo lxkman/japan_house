@@ -22,6 +22,7 @@ import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.haiwai.administrator.japanhouse.utils.TUtils;
 import com.haiwai.administrator.japanhouse.view.BaseDialog;
 import com.haiwai.administrator.japanhouse.view.MyFooter;
 import com.haiwai.administrator.japanhouse.view.MyHeader;
@@ -49,6 +50,8 @@ public class DingYueActivity extends BaseActivity {
     ImageView backImg;
     @BindView(R.id.mrecycler)
     SwipeMenuRecyclerView mrecycler;
+    @BindView(R.id.no_more_data)
+    TextView state;
     private List<String> mList=new ArrayList();
     private LiebiaoAdapter liebiaoAdapter;
     private String token;
@@ -105,7 +108,7 @@ public class DingYueActivity extends BaseActivity {
                         List<MsgBean.DatasBean> datas = msgBean.getDatas();
                         if (mRefreshData == null || mRefreshData.size() == 0) {
                             if (datas == null || datas.size() == 0) {
-                                Toast.makeText(mContext, "无数据~", Toast.LENGTH_SHORT).show();
+                                state.setText(getString(R.string.zanwugengduoshuju));
                                 return;
                             }
                             mRefreshData = datas;
@@ -123,13 +126,9 @@ public class DingYueActivity extends BaseActivity {
                                 }
                             });
                             mrecycler.setAdapter(liebiaoAdapter);
-                            if (datas == null || datas.size() == 0) {
-                                Toast.makeText(mContext, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
-                                return;
-                            }
                             if (!isLoadMore) {
                                 mRefreshData = datas;
-                                Toast.makeText(mContext, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
+                                TUtils.showFail(mContext, getString(R.string.refresh_success));
                             } else {
                                 mRefreshData.addAll(datas);
                             }

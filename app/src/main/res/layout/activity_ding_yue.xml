@@ -2,46 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    >
+    android:orientation="vertical">
+
     <LinearLayout
-        android:background="@color/shihuangse"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dip">
+        android:layout_height="50dip"
+        android:background="@color/shihuangse"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/back_img"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
             android:padding="15dp"
-            android:src="@drawable/back"
-            android:layout_width="50dip"
-            android:layout_height="50dip" />
-        <TextView
-            android:gravity="center"
+            android:src="@drawable/back" />
 
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:text="@string/mine_dingyue"
+        <TextView
             android:layout_width="0dip"
+
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:gravity="center"
+            android:text="@string/mine_dingyue"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
         <ImageView
-            android:padding="13dp"
             android:layout_width="50dip"
-            android:layout_height="50dip" />
+            android:layout_height="50dip"
+            android:padding="13dp" />
     </LinearLayout>
-    <com.liaoinstan.springview.widget.SpringView
-        android:layout_marginTop="10dip"
-        android:id="@+id/act_history_springView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
-        android:nestedScrollingEnabled="false"
-        android:background="#fff"
-        android:id="@+id/mrecycler"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
-    </com.liaoinstan.springview.widget.SpringView>
+
+        <TextView
+            android:id="@+id/no_more_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/act_history_springView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dip">
+
+            <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                android:id="@+id/mrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:nestedScrollingEnabled="false"/>
+        </com.liaoinstan.springview.widget.SpringView>
+    </RelativeLayout>
 
 </LinearLayout>

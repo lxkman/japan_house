@@ -635,4 +635,14 @@
     <string name="sharesuccess">分享成功啦</string>
     <string name="sharefail">分享失败了</string>
     <string name="sharcancel">分享取消了</string>
+    <string name="songkaizairumore">松开载入更多</string>
+    <string name="lookmore">查看更多</string>
+    <string name="ganghgang">刚刚</string>
+    <string name="songkaishuaxinshuju">松开刷新数据</string>
+    <string name="xialashuaxin">下拉刷新</string>
+    <string name="zaishuaxin">正在刷新</string>
+    <string name="toutiao">头条</string>
+    <string name="remenchakan">热门查看</string>
+    <string name="quanbuhuifu">全部回复</string>
+    <string name="renhuifu">人回复</string>
 </resources>

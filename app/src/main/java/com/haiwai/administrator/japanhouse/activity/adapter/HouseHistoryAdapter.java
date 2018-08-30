@@ -2,6 +2,7 @@ package com.haiwai.administrator.japanhouse.activity.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.haiwai.administrator.japanhouse.MyApplication;
 import com.haiwai.administrator.japanhouse.R;
 import com.haiwai.administrator.japanhouse.model.HouseRecordListBean;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 
 import java.util.List;
 
@@ -50,9 +52,16 @@ public class HouseHistoryAdapter extends RecyclerView.Adapter {
             Glide.with(context)
                     .load(datas.get(position).getImageUrl())
                     .into(viewHolder.icon);
+            String area;
+            if (MyApplication.isJapanese()) {
+                area = datas.get(position).getAddressJpn();
+            } else {
+                area = datas.get(position).getAddressCn();
+            }
+            String price=MyApplication.isJapanese() ? datas.get(position).getPriceJpn() : datas.get(position).getPriceCn();
             viewHolder.name.setText(MyApplication.isJapanese() ? datas.get(position).getTitleJpn() : datas.get(position).getTitleCn());
-            viewHolder.address.setText(MyApplication.isJapanese() ? datas.get(position).getAddressJpn() : datas.get(position).getAddressCn());
             viewHolder.price.setText(MyApplication.isJapanese() ? datas.get(position).getPriceJpn() : datas.get(position).getPriceCn());
+            viewHolder.address.setText(getSubText(area, price));
             viewHolder.room.setText(MyApplication.isJapanese() ? datas.get(position).getDoorModelJpn() : datas.get(position).getDoorModelCn());
             viewHolder.area.setText(MyApplication.isJapanese() ? datas.get(position).getAreaJpn(): datas.get(position).getAreaCn());
 
@@ -70,6 +79,16 @@ public class HouseHistoryAdapter extends RecyclerView.Adapter {
                 }
             });
         }
+    }
+
+    public  String getSubText(String area, String price) {
+        if (TextUtils.isEmpty(price)) {
+            return area;
+        }
+        if (area.length() >= 14 - price.length()) {
+            area = area.substring(0, 14 - price.length()) + "...";
+        }
+        return area;
     }
 
     @Override

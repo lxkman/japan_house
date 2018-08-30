@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="头条"
+            android:text="@string/toutiao"
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="热门查看"
+            android:text="@string/remenchakan"
             android:textSize="16sp"
             android:textColor="@color/colorAccent"
             android:layout_margin="10dp"

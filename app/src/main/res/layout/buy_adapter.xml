@@ -48,7 +48,7 @@
                android:id="@+id/te1"
                android:layout_marginRight="20dp"
                android:layout_alignParentRight="true"
-               android:text="人回复"
+               android:text="@string/renhuifu"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content" />
        </RelativeLayout>

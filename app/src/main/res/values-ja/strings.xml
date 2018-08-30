@@ -638,4 +638,14 @@
     <string name="sharesuccess">共有の成功</string>
     <string name="sharefail">共有に失敗しました</string>
     <string name="sharcancel">共有がキャンセルされました</string>
+    <string name="songkaizairumore">より多くのリリースと読み込み</string>
+    <string name="lookmore">もっと見る</string>
+    <string name="ganghgang">ちょうど</string>
+    <string name="songkaishuaxinshuju">リフレッシュデータを解放する</string>
+    <string name="xialashuaxin">プルダウンリフレッシュ</string>
+    <string name="zaishuaxin">リフレッシュ</string>
+    <string name="toutiao">見出し</string>
+    <string name="remenchakan">人気のあるビュー</string>
+    <string name="quanbuhuifu">すべて返信</string>
+    <string name="renhuifu">人々は返信する</string>
 </resources>

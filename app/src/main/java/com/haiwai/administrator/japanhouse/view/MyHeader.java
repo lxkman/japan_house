@@ -81,7 +81,7 @@ public class MyHeader extends BaseHeader {
                 int d = m / (60 * 24);
                 headerTime.setText(d + "天前");
             } else if (m == 0) {
-                headerTime.setText("刚刚");
+                headerTime.setText(R.string.ganghgang);
             }
         }
     }
@@ -93,11 +93,11 @@ public class MyHeader extends BaseHeader {
     @Override
     public void onLimitDes(View rootView, boolean upORdown) {
         if (!upORdown) {
-            headerTitle.setText("松开刷新数据");
+            headerTitle.setText(R.string.songkaishuaxinshuju);
             if (headerArrow.getVisibility() == View.VISIBLE)
                 headerArrow.startAnimation(mRotateUpAnim);
         } else {
-            headerTitle.setText("下拉刷新");
+            headerTitle.setText(R.string.xialashuaxin);
             if (headerArrow.getVisibility() == View.VISIBLE)
                 headerArrow.startAnimation(mRotateDownAnim);
         }
@@ -106,7 +106,7 @@ public class MyHeader extends BaseHeader {
     @Override
     public void onStartAnim() {
         freshTime = System.currentTimeMillis();
-        headerTitle.setText("正在刷新");
+        headerTitle.setText(R.string.zaishuaxin);
         headerArrow.setVisibility(View.INVISIBLE);
         headerArrow.clearAnimation();
         headerProgressbar.setVisibility(View.VISIBLE);

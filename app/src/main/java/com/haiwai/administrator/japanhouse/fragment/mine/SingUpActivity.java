@@ -112,7 +112,7 @@ public class SingUpActivity extends BaseActivity implements SingUpPresenter.Sing
         if (isRefresh) {
             TUtils.showFail(this, getString(R.string.refresh_success));
         }
-        state.setText(getString(R.string.no_more_order_data));
+        state.setText(getString(R.string.no_more_singup_data));
         if (response != null && response.body() != null && response.body().getDatas() != null) {
             if (page == 1) {
                 if (response.body().getDatas().size() > 0) {

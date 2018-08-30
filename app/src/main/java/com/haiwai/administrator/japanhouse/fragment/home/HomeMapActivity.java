@@ -103,6 +103,7 @@ public class HomeMapActivity extends BaseActivity {
 
             }
         });
+        vpLook.setOffscreenPageLimit(3);
         rgLook.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

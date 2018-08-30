@@ -49,9 +49,9 @@ public class MyFooter extends BaseFooter {
     @Override
     public void onLimitDes(View rootView, boolean upORdown) {
         if (upORdown) {
-            footerTitle.setText("松开载入更多");
+            footerTitle.setText(R.string.songkaizairumore);
         } else {
-            footerTitle.setText("查看更多");
+            footerTitle.setText(R.string.lookmore);
         }
     }
 
@@ -63,7 +63,7 @@ public class MyFooter extends BaseFooter {
 
     @Override
     public void onFinishAnim() {
-        footerTitle.setText("查看更多");
+        footerTitle.setText(R.string.lookmore);
         footerTitle.setVisibility(View.VISIBLE);
         footerProgressbar.setVisibility(View.INVISIBLE);
     }

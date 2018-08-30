@@ -190,10 +190,20 @@ public class BusinessDichanActivity extends BaseActivity implements BaseQuickAda
             }
             String price=isJa?item.getSellingPriceJpn() : item.getSellingPriceCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
-                    .setText(R.id.tv_area,MyUtils.getSubText(area, price))
+                    .setText(R.id.tv_area,getSubText(area, price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_price, price);
         }
+    }
+
+    public String getSubText(String area, String price) {
+        if (TextUtils.isEmpty(price)) {
+            return area;
+        }
+        if (area.length() >= 11 - price.length()) {
+            area = area.substring(0, 11 - price.length()) + "...";
+        }
+        return area;
     }
 
 }

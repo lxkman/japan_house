@@ -134,8 +134,8 @@ public class FangjiaMapBean {
             private int isDeleted;
             private String citylevel;
             private String status;
-            private int longitude;
-            private int latitude;
+            private double longitude;
+            private double latitude;
             private int houseNum;
             private int avgMoney;
             private int priceStete;
@@ -205,19 +205,19 @@ public class FangjiaMapBean {
                 this.status = status;
             }
 
-            public int getLongitude() {
+            public double getLongitude() {
                 return longitude;
             }
 
-            public void setLongitude(int longitude) {
+            public void setLongitude(double longitude) {
                 this.longitude = longitude;
             }
 
-            public int getLatitude() {
+            public double getLatitude() {
                 return latitude;
             }
 
-            public void setLatitude(int latitude) {
+            public void setLatitude(double latitude) {
                 this.latitude = latitude;
             }
 
@@ -311,7 +311,6 @@ public class FangjiaMapBean {
             private int houseNum;
             private double avgMoney;
             private int priceStete;
-            private List<?> hwdcAreaManages;
 
             public int getId() {
                 return id;
@@ -417,13 +416,6 @@ public class FangjiaMapBean {
                 this.priceStete = priceStete;
             }
 
-            public List<?> getHwdcAreaManages() {
-                return hwdcAreaManages;
-            }
-
-            public void setHwdcAreaManages(List<?> hwdcAreaManages) {
-                this.hwdcAreaManages = hwdcAreaManages;
-            }
         }
 
         public static class CityzxtBean {

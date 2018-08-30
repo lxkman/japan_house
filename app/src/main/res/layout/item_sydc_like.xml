@@ -7,19 +7,35 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/iv_tupian"
-            android:layout_width="130dp"
-            android:layout_height="90dp"
-            android:layout_margin="15dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/test_tjesf_iv"/>
+
+        <FrameLayout
+            android:id="@+id/fl_xx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/iv_tupian"
+                android:layout_width="130dp"
+                android:layout_height="90dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/test_cnxh_iv" />
+
+            <ImageView
+                android:id="@+id/iv_isplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:src="@drawable/home_vedio_icon_iv" />
+        </FrameLayout>
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/iv_tupian"
+            android:layout_toRightOf="@+id/fl_xx"
             android:text="泰和·金府大厦"
             android:textColor="@color/text_black"/>
         <TextView
@@ -28,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/iv_tupian"
+            android:layout_toRightOf="@+id/fl_xx"
             android:drawableLeft="@drawable/home_map_like_iv"
             android:drawablePadding="5dp"
             android:text="东京"/>
@@ -38,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_area"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/iv_tupian"
+            android:layout_toRightOf="@+id/fl_xx"
             android:text="150㎡ - 175㎡"
             android:textColor="@color/gray"/>
         <TextView
@@ -47,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:text="17500万"
             android:textColor="@color/colorPrimary"

@@ -421,9 +421,13 @@ public class FangjiadituActivity extends BaseActivity {
                                     return false;
                                 }
                             });
-
                         }
+                    }
 
+                    @Override
+                    public void onError(Response<FangjiaMapBean> response) {
+                        super.onError(response);
+                        Log.e("xxx",response.getException().getMessage());
                     }
                 });
     }

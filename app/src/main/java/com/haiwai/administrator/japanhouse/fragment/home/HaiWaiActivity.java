@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -185,7 +186,8 @@ public class HaiWaiActivity extends BaseActivity implements BaseQuickAdapter.OnI
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, area)
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
-                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn(): item.getSellingPriceCn());
+                    .setText(R.id.tv_price, isJa ? item.getSellingPriceJpn(): item.getSellingPriceCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 }

@@ -187,7 +187,8 @@ public class ChineseFangyuanActivity extends BaseActivity implements BaseQuickAd
                     .setText(R.id.tv_area, MyUtils.getSubText(area, price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
                     .setText(R.id.tv_price, price)
-                    .setText(R.id.tv_ting, isJa ? item.getHouseTypeJpn() : item.getHouseTypeCn());
+                    .setText(R.id.tv_ting, isJa ? item.getHouseTypeJpn() : item.getHouseTypeCn())
+                    .setVisible(R.id.iv_isplay, !TextUtils.isEmpty(item.getVideoImgs()));
         }
     }
 }

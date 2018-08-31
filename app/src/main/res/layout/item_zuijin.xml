@@ -23,8 +23,8 @@
                 android:layout_marginLeft="15dip">
                 <ImageView
                     android:id="@+id/img_house"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="132dip"
+                    android:layout_height="90dip"
                     android:background="@drawable/default_img"
                     android:scaleType="fitXY"/>
                 <ImageView
@@ -71,6 +71,7 @@
                         android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
                         android:text="东京"
+                        android:singleLine="true"
                         android:textSize="13sp"/>
                     <TextView
                         android:id="@+id/tv_price"

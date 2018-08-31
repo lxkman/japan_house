@@ -68,19 +68,11 @@
                    android:id="@+id/time"
                    />
            </LinearLayout>
-
-           <LinearLayout
+           <WebView
+               android:id="@+id/webView"
                android:layout_margin="10dp"
                android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <TextView
-                   android:id="@+id/neirong"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="北京搜狐焦点网为购房者提供北京房产信息、家居装修资讯，北京房产楼盘详情、买房流程、业主论坛、家居装修等全面内容信息，北京搜狐焦点网互联网的购房平台"
-                   />
-
-           </LinearLayout>
+               android:layout_height="wrap_content"/>
 
            <View
                android:layout_width="match_parent"

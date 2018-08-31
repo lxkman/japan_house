@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,12 +32,13 @@ import com.lzy.okgo.model.Response;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class TouDetailActivity extends AppCompatActivity implements View.OnClickListener, ToutiaoAdapter.OnItemPraiseListener {
 
     private ImageView img_beak;
     private TextView title;
     private TextView time;
-    private TextView neirong;
     private RecyclerView detail_recy;
     private TextView send;
     private ImageView biaoqing;
@@ -51,6 +53,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
     private Long createTime;
     private String titleCn;
     private String titleJpn;
+    private WebView mWebview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
                             boolean ja = MyUtils.isJa();
                             title.setText(ja?titleJpn:titleCn);
                             time.setText(MyUtils.getDateTimeFromMillisecond(createTime));
-                            neirong.setText(ja?contentJpn:contentCn);
+                            mWebview.loadData(ja?contentJpn:contentCn, "text/html;charset=UTF-8", null);
                         }
                     }
                 });
@@ -95,7 +98,7 @@ public class TouDetailActivity extends AppCompatActivity implements View.OnClick
         img_beak = (ImageView) findViewById(R.id.img_beak);
         this.title = (TextView) findViewById(R.id.title);
         time = (TextView) findViewById(R.id.time);
-        neirong = (TextView) findViewById(R.id.neirong);
+        mWebview = (WebView) findViewById(R.id.webView);
         detail_recy = (RecyclerView) findViewById(R.id.detail_recy);
         send = (TextView) findViewById(R.id.send);
         biaoqing = (ImageView) findViewById(R.id.biaoqing);

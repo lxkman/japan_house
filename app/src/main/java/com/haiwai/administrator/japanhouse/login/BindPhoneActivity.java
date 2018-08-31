@@ -76,10 +76,10 @@ public class BindPhoneActivity extends BaseActivity {
                 break;
             case R.id.tv_get_code:
                 if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-                    Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.phonenumber));
                     return;
                 }else if (!MyUtils.isMobileNO(edtPhone.getText().toString())) {
-                    Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    TUtils.showFail(this,getResources().getString(R.string.shoujihaogeshierror));
                     return;
                 }else if (!TextUtils.isEmpty(edtPhone.getText().toString())&&MyUtils.isMobileNO(edtPhone.getText().toString())) {
                     String phone = edtPhone.getText().toString();
@@ -87,13 +87,13 @@ public class BindPhoneActivity extends BaseActivity {
                     if (substring.equals("050") || substring.equals("060") || substring.equals("070") || substring.equals("080") || substring.equals("090")) {
                         QuNumber = "1";//国际
                         if (checkQuyu.getText().equals("+86")) {
-                            Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                             return;
                         }
                     } else {
                         QuNumber = "2";//国内
                         if (checkQuyu.getText().equals("+81")) {
-                            Toast.makeText(mContext, "请选择正确的区号", Toast.LENGTH_SHORT).show();
+                            TUtils.showFail(this,getResources().getString(R.string.qingxuanzezhengquequhao));
                             return;
                         }
                     }
@@ -135,7 +135,6 @@ public class BindPhoneActivity extends BaseActivity {
                         if (successBean.getCode().equals("200")){
                             startActivity(new Intent(BindPhoneActivity.this,LoginActivity.class));
                             finish();
-                            Toast.makeText(BindPhoneActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(BindPhoneActivity.this, successBean.getCode(), Toast.LENGTH_SHORT).show();
                         }

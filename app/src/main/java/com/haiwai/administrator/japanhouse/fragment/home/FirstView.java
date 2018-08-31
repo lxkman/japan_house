@@ -110,6 +110,20 @@ public class FirstView implements View.OnClickListener {
         mrecycler3.setAdapter(threeAdapter);
     }
 
+    private void initData2() {
+        if (adapterPosition == 0) {
+            quYuAdapter = new QuYuAdapter(R.layout.leixing_item2, mQuyuListBean);
+            mrecycler2.setAdapter(quYuAdapter);
+            mList3 = mQuyuListBean.get(adapterPosition2).getCheckBeanList();
+        } else if (adapterPosition == 1) {
+            diTieAdapter = new DiTieAdapter(R.layout.leixing_item2, mDitieListBean);
+            mrecycler2.setAdapter(diTieAdapter);
+            mList3 = mDitieListBean.get(adapterPosition2).getCheckBeanList();
+        }
+        threeAdapter = new ThreeAdapter(R.layout.leixing_item2, mList3);
+        mrecycler3.setAdapter(threeAdapter);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -166,7 +180,7 @@ public class FirstView implements View.OnClickListener {
                     setFirstChecked(mQuyuListBean);
                     setFirstChecked(mDitieListBean);
                     oneAdapter.notifyDataSetChanged();
-                    initData();
+                    initData2();
                 }
             });
         }

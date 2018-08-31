@@ -495,14 +495,28 @@ public class SydcBigLiebiaoActivity extends BaseActivity implements MyItemClickL
 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
-        if (shoujia != null && shoujia.size() > 0) {
-            page = 1;
-            isZiDingyiPrice = true;
-            sjId = "-1";
-            zidingyiPriceList.clear();
-            zidingyiPriceList = priceRegin;
-            mDatas.clear();
+        if (postion == 1) {//区域
+            isDitie = false;
+            quyuList = priceRegin;
+            if (mDatas != null)
+                mDatas.clear();
             initData();
+        } else if (postion == 2) {//地铁
+            isDitie = true;
+            ditieList = priceRegin;
+            if (mDatas != null)
+                mDatas.clear();
+            initData();
+        } else {
+            if (shoujia != null && shoujia.size() > 0) {
+                page = 1;
+                isZiDingyiPrice = true;
+                sjId = "-1";
+                zidingyiPriceList.clear();
+                zidingyiPriceList = priceRegin;
+                mDatas.clear();
+                initData();
+            }
         }
     }
 

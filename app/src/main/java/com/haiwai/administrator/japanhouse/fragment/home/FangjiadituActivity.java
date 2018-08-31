@@ -147,8 +147,8 @@ public class FangjiadituActivity extends BaseActivity {
     }
 
     private void initChartList() {
-        Log.d("FangjiadituActivity", "cityzxt.get(i).getDays():" + cityzxt.get(0).getDays()+"------+");
-        Log.d("FangjiadituActivity", MyUtils.getTimeFromMillisecondMD(cityzxt.get(0).getDays())+"-----+");
+//        Log.d("FangjiadituActivity", "cityzxt.get(i).getDays():" + cityzxt.get(0).getDays()+"------+");
+//        Log.d("FangjiadituActivity", MyUtils.getTimeFromMillisecondMD(cityzxt.get(0).getDays())+"-----+");
         mlist.clear();
         mlist1.clear();
         xValue.clear();

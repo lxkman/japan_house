@@ -48,19 +48,18 @@
                 android:layout_marginTop="20dip"
                 android:layout_marginLeft="20dip"
                 android:layout_width="45dip"
-                android:src="@drawable/deful_touxiang"
                 android:layout_height="45dip" />
+
             <TextView
                 android:id="@+id/manager_name"
-                android:paddingLeft="10dip"
-                android:gravity="center_vertical"
-                android:textColor="#fff"
-                android:textSize="15sp"
-                android:text="杨金金"
-                android:layout_weight="1"
-                android:layout_marginTop="20dip"
                 android:layout_width="0dip"
-                android:layout_height="45dip" />
+                android:layout_height="45dip"
+                android:layout_marginTop="20dip"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:textColor="#fff"
+                android:textSize="15sp" />
             <LinearLayout
                 android:gravity="center"
                 android:orientation="vertical"
@@ -70,14 +69,14 @@
                 android:layout_marginTop="20dip"
                 android:layout_width="90dip"
                 android:layout_height="40dip">
+
                 <TextView
                     android:id="@+id/manager_huifulv"
-                    android:textColor="#ffc910"
-                    android:textSize="12sp"
-                    android:text="100%"
                     android:layout_width="wrap_content"
                     android:layout_height="0dip"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:textColor="#ffc910"
+                    android:textSize="12sp" />
                 <TextView
                     android:textColor="#fff"
                     android:textSize="12sp"
@@ -123,14 +122,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         />
+
                     <TextView
                         android:id="@+id/manager_location"
-                        android:textColor="#333"
-                        android:gravity="center_vertical"
-                        android:text="：昌平"
                         android:layout_width="0dip"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        android:gravity="center_vertical"
+                        android:text="："
+                        android:textColor="#333" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -170,15 +170,15 @@
                     android:layout_width="0dip"
                     android:layout_weight="1"
                     android:layout_height="match_parent">
+
                     <TextView
                         android:id="@+id/manager_count"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="6"
-                        android:textColor="@color/shihuangse"
                         android:layout_width="match_parent"
                         android:layout_height="0dip"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/shihuangse"
+                        android:textSize="18sp" />
                     <TextView
                         android:gravity="center"
                         android:textSize="13sp"

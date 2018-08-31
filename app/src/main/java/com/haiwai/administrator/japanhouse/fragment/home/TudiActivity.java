@@ -140,7 +140,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
         mrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mrecycler.setNestedScrollingEnabled(false);
         springview = (SpringView) fifthView.findViewById(R.id.springview);
-        tvNoContent= (TextView) fifthView.findViewById(R.id.tv_noContent);
+        tvNoContent = (TextView) fifthView.findViewById(R.id.tv_noContent);
         HttpParams params = new HttpParams();
         params.put("hType", 2);
         OkGo.<OldHouseShaiXuanBean>post(MyUrls.BASEURL + "/app/onescreening/selectallscree")
@@ -178,7 +178,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                         List<MoreCheckBean> ditieListBean = new ArrayList<MoreCheckBean>();
                         List<OneCheckBean> oneCheckBeanList1 = new ArrayList<OneCheckBean>();
                         oneCheckBeanList1.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
-                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true,getResources().getString(R.string.buxian));
+                        MoreCheckBean moreCheckBean1 = new MoreCheckBean(true, getResources().getString(R.string.buxian));
                         moreCheckBean1.setCheckBeanList(oneCheckBeanList1);
                         quyuListBean.add(moreCheckBean1);
                         ditieListBean.add(moreCheckBean1);
@@ -219,7 +219,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                                     moreCheckBean.setId(subwaylinesEntity.getId());
                                     List<QuYuBean.DatasEntity.SubwaylinesEntity.SubwayStationsEntity> subwayStations = subwaylinesEntity.getSubwayStations();
                                     List<OneCheckBean> oneCheckBeanList = new ArrayList<OneCheckBean>();
-                                    oneCheckBeanList.add(new OneCheckBean(true,getResources().getString(R.string.buxian)));
+                                    oneCheckBeanList.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
                                     if (subwayStations != null && subwayStations.size() > 0) {
                                         for (int i1 = 0; i1 < subwayStations.size(); i1++) {
                                             int id = subwayStations.get(i1).getId();
@@ -241,7 +241,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                         popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(TudiActivity.this);
-                        if (shaiXuanBeanDatas==null){
+                        if (shaiXuanBeanDatas == null) {
                             return;
                         }
                         /**
@@ -249,7 +249,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                          * */
                         mianji = shaiXuanBeanDatas.getMianji();
                         List<OneCheckBean> list1 = new ArrayList<>();
-                        list1.add(new OneCheckBean(false,getResources().getString(R.string.buxian)));
+                        list1.add(new OneCheckBean(false, getResources().getString(R.string.buxian)));
                         if (mianji != null && mianji.size() > 0) {
                             for (int i = 0; i < mianji.size(); i++) {
                                 OldHouseShaiXuanBean.DatasEntity.MianjiEntity mianjiEntity = mianji.get(i);
@@ -314,7 +314,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     }
 
     private void initData() {
-        if (!NetWorkUtils.isNetworkConnected(this)){
+        if (!NetWorkUtils.isNetworkConnected(this)) {
             tvNoContent.setVisibility(View.VISIBLE);
             tvNoContent.setText(R.string.wangluoshiqulianjie);
             springview.setVisibility(View.GONE);
@@ -451,14 +451,26 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
 
     @Override
     public void onItemClick(View view, int postion, List<String> priceRegin) {
-        if (shoujia != null && shoujia.size() > 0) {
-            page = 1;
-            isZiDingyiPrice = true;
-            sjId = "-1";
-            zidingyiPriceList.clear();
-            zidingyiPriceList = priceRegin;
+        if (postion == 1) {//区域
+            isDitie = false;
+            quyuList = priceRegin;
             mDatas.clear();
             initData();
+        } else if (postion == 2) {//地铁
+            isDitie = true;
+            ditieList = priceRegin;
+            mDatas.clear();
+            initData();
+        } else {
+            if (shoujia != null && shoujia.size() > 0) {
+                page = 1;
+                isZiDingyiPrice = true;
+                sjId = "-1";
+                zidingyiPriceList.clear();
+                zidingyiPriceList = priceRegin;
+                mDatas.clear();
+                initData();
+            }
         }
     }
 
@@ -490,7 +502,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
             } else {
                 area = item.getSpecificLocationCn();
             }
-            String price=isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn();
+            String price = isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn();
             helper.setText(R.id.tv_title, isJa ? item.getTitleJpn() : item.getTitleCn())
                     .setText(R.id.tv_area, MyUtils.getSubText(area, price))
                     .setText(R.id.tv_mianji, isJa ? item.getAreaJpn() : item.getAreaCn())
@@ -506,10 +518,10 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 finish();
                 break;
             case R.id.img_dingwei:
-                startActivityForResult(new Intent(mContext, HomeMapActivity.class),0);
+                startActivityForResult(new Intent(mContext, HomeMapActivity.class), 0);
                 break;
             case R.id.img_message:
-                setResult(100,new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
+                setResult(100, new Intent());//从搜索进来的就要干掉HomeSearchActivity,因为它也是singleTask的启动模式
                 finish();
                 startActivity(new Intent(mContext, MainActivity.class));
                 EventBus.getDefault().post(new EventBean(Constants.EVENT_CHAT));
@@ -518,7 +530,7 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
                 Intent intent = new Intent(mContext, HomeSearchActivity.class);
                 intent.putExtra("popcontent", getResources().getString(R.string.tudi));
                 intent.putExtra("state", 3);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
                 break;
         }
     }
@@ -526,12 +538,12 @@ public class TudiActivity extends BaseActivity implements MyItemClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==11){
-            searchText=data.getStringExtra("searchText");
+        if (resultCode == 11) {
+            searchText = data.getStringExtra("searchText");
             if (!TextUtils.isEmpty(searchText)) {
                 searchTv.setText(searchText);
             }
-            page=1;
+            page = 1;
             mDatas.clear();
             initData();
         }

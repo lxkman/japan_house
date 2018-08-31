@@ -24,6 +24,7 @@
                 android:layout_marginLeft="15dip"
                 android:layout_gravity="center_vertical"
                 android:layout_width="132dip"
+                android:scaleType="fitXY"
                 android:layout_height="90dip" />
             <LinearLayout
                 android:layout_marginLeft="10dip"
@@ -67,6 +68,7 @@
                                 android:gravity="center_vertical"
                                 android:textSize="13sp"
                                 android:text="东京"
+                                android:singleLine="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
                         </LinearLayout>
@@ -110,6 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="20dip">
                     <TextView
+                        android:id="@+id/tv_intro1"
                         android:textSize="12sp"
                         android:textColor="#cca18a"
                         android:padding="3dip"
@@ -119,6 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="21dip" />
                     <TextView
+                        android:id="@+id/tv_intro2"
                         android:textSize="12sp"
                         android:textColor="#cca18a"
                         android:layout_marginLeft="15dip"
@@ -129,6 +133,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="21dip" />
                     <TextView
+                        android:id="@+id/tv_intro3"
                         android:textSize="12sp"
                         android:textColor="#cca18a"
                         android:layout_marginLeft="16dip"

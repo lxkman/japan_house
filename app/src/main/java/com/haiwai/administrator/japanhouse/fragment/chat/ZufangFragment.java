@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.haiwai.administrator.japanhouse.MyApplication;
 import com.haiwai.administrator.japanhouse.R;
 import com.haiwai.administrator.japanhouse.base.BaseFragment;
 import com.haiwai.administrator.japanhouse.bean.ManZuBean;
@@ -32,6 +33,7 @@ import com.haiwai.administrator.japanhouse.fragment.comment.XiezilouDetailsActiv
 import com.haiwai.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.home.BieshudetailsActivity;
+import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SharedPreferencesUtils;
@@ -196,12 +198,22 @@ public class ZufangFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder helper, ManZuBean.DatasBean item) {
             boolean isJa = MyUtils.isJa();
+            String area;
+            if (MyApplication.isJapanese()) {
+                area = item.getSpecificLocationJpn();
+            } else {
+                area = item.getSpecificLocationCn();
+            }
+            String price=MyApplication.isJapanese() ? item.getPriceJpn() : item.getPriceCn();
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
-            helper.setText(R.id.tv_house_address, isJa ? item.getSpecificLocationJpn() : item.getSpecificLocationCn());
+            helper.setText(R.id.tv_house_address, MyUtils.getSubText(area,price));
             helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
-            Glide.with(mContext).load(item.getRoomImgs()).into((ImageView) helper.getView(R.id.img_house));
+            Glide.with(MyApplication.getGloableContext())
+                    .load(TextUtils.isEmpty(item.getVideoImgs()) ? MyUtils.getSpiltText(item.getRoomImgs()) : item.getVideoImgs())
+                    .apply(GlideReqUtils.getReq())
+                    .into((ImageView) helper.getView(R.id.img_house));
         }
     }
     @Override

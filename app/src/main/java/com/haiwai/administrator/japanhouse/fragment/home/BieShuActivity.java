@@ -86,6 +86,10 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
     private boolean isDitie;
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
+    private FirstView firstView;
+    private SecView secView;
+    private ThreeView threeView;
+    private MoreView fourView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +157,15 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                             return;
                         }
                         shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        firstView = new FirstView(BieShuActivity.this);
+                        popupViews.add(firstView.firstView());
+                        secView = new SecView(BieShuActivity.this);
+                        popupViews.add(secView.secView());
+                        threeView = new ThreeView(BieShuActivity.this);
+                        popupViews.add(threeView.firstView());
+                        fourView = new MoreView(BieShuActivity.this);
+                        popupViews.add(fourView.secView());
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, inflate);
                         initShaiXuan();
                     }
                 });
@@ -235,8 +248,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                         /**
                          * 第一个界面
                          * */
-                        FirstView firstView = new FirstView(BieShuActivity.this);
-                        popupViews.add(firstView.firstView());
+//                        FirstView firstView = new FirstView(BieShuActivity.this);
+//                        popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(BieShuActivity.this);
                         if (shaiXuanBeanDatas == null) {
@@ -254,8 +267,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                                 list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
                             }
                         }
-                        SecView secView = new SecView(BieShuActivity.this);
-                        popupViews.add(secView.secView());
+//                        SecView secView = new SecView(BieShuActivity.this);
+//                        popupViews.add(secView.secView());
                         secView.setListener(BieShuActivity.this);
                         secView.insertData(list1, dropDownMenu);
 
@@ -271,8 +284,8 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                                 list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
                             }
                         }
-                        ThreeView threeView = new ThreeView(BieShuActivity.this);
-                        popupViews.add(threeView.firstView());
+//                        ThreeView threeView = new ThreeView(BieShuActivity.this);
+//                        popupViews.add(threeView.firstView());
                         threeView.insertData(list2, dropDownMenu);
                         threeView.setListener(BieShuActivity.this);
                         /**
@@ -299,14 +312,14 @@ public class BieShuActivity extends BaseActivity implements MyItemClickListener 
                                 moreCheckBeanList.add(moreCheckBean);
                             }
                         }
-                        MoreView fourView = new MoreView(BieShuActivity.this);
-                        popupViews.add(fourView.secView());
+//                        MoreView fourView = new MoreView(BieShuActivity.this);
+//                        popupViews.add(fourView.secView());
                         fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(BieShuActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, inflate);
+//                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, inflate);
                     }
                 });
     }

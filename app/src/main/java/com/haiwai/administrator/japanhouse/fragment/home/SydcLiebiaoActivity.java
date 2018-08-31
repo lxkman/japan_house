@@ -94,6 +94,10 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
     private boolean isDitie;
     private List<String> quyuList = new ArrayList<>();
     private List<String> ditieList = new ArrayList<>();
+    private FirstView firstView;
+    private SecView secView;
+    private ThreeView threeView;
+    private MoreView fourView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +182,15 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                             return;
                         }
                         shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        firstView = new FirstView(SydcLiebiaoActivity.this);
+                        popupViews.add(firstView.firstView());
+                        secView = new SecView(SydcLiebiaoActivity.this);
+                        popupViews.add(secView.secView());
+                        threeView = new ThreeView(SydcLiebiaoActivity.this);
+                        popupViews.add(threeView.firstView());
+                        fourView = new MoreView(SydcLiebiaoActivity.this);
+                        popupViews.add(fourView.secView());
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                         initShaiXuan();
                     }
                 });
@@ -260,8 +273,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                         /**
                          * 第一个界面
                          * */
-                        FirstView firstView = new FirstView(SydcLiebiaoActivity.this);
-                        popupViews.add(firstView.firstView());
+//                        FirstView firstView = new FirstView(SydcLiebiaoActivity.this);
+//                        popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(SydcLiebiaoActivity.this);
                         if (shaiXuanBeanDatas == null) {
@@ -279,8 +292,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                                 list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
                             }
                         }
-                        SecView secView = new SecView(SydcLiebiaoActivity.this);
-                        popupViews.add(secView.secView());
+//                        SecView secView = new SecView(SydcLiebiaoActivity.this);
+//                        popupViews.add(secView.secView());
                         secView.setListener(SydcLiebiaoActivity.this);
                         secView.insertData(list1, dropDownMenu);
 
@@ -296,8 +309,8 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                                 list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
                             }
                         }
-                        ThreeView threeView = new ThreeView(SydcLiebiaoActivity.this);
-                        popupViews.add(threeView.firstView());
+//                        ThreeView threeView = new ThreeView(SydcLiebiaoActivity.this);
+//                        popupViews.add(threeView.firstView());
                         threeView.insertData(list2, dropDownMenu);
                         threeView.setListener(SydcLiebiaoActivity.this);
                         /**
@@ -324,14 +337,14 @@ public class SydcLiebiaoActivity extends BaseActivity implements MyItemClickList
                                 moreCheckBeanList.add(moreCheckBean);
                             }
                         }
-                        MoreView fourView = new MoreView(SydcLiebiaoActivity.this);
-                        popupViews.add(fourView.secView());
+//                        MoreView fourView = new MoreView(SydcLiebiaoActivity.this);
+//                        popupViews.add(fourView.secView());
                         fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(SydcLiebiaoActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+//                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                     }
                 });
     }

@@ -82,6 +82,10 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
     private String[] headers;
     private String cityId;
     private List<HaiwaiCityListBean.DatasEntity> citysdatas;
+    private SecView firstView;
+    private ThreeView threeView;
+    private SecView secView;
+    private MoreView fourView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +154,16 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                         if (haiwaiCityListBean == null) {
                             return;
                         }
+                        firstView = new SecView(HaiwaiListActivity.this);
+                        popupViews.add(firstView.secView());
+                        threeView = new ThreeView(HaiwaiListActivity.this);
+                        popupViews.add(threeView.firstView());
+                        secView = new SecView(HaiwaiListActivity.this);
+                        popupViews.add(secView.secView());
+                        fourView = new MoreView(HaiwaiListActivity.this);
+                        popupViews.add(fourView.secView());
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+
                         citysdatas = haiwaiCityListBean.getDatas();
                         citylist = new ArrayList<>();
                         citylist.add(new OneCheckBean(true, getResources().getString(R.string.buxian)));
@@ -161,8 +175,6 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                                 citylist.add(new OneCheckBean(false, isJa ? citysdatas.get(i).getAdministrationNameJpn() : citysdatas.get(i).getAdministrationNameCn()));
                             }
                         }
-                        SecView firstView = new SecView(HaiwaiListActivity.this);
-                        popupViews.add(firstView.secView());
                         firstView.insertData2(citylist, dropDownMenu, true);
                         firstView.setListener(HaiwaiListActivity.this);
                         initShaiXuan();
@@ -200,8 +212,8 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                                 list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
                             }
                         }
-                        ThreeView threeView = new ThreeView(HaiwaiListActivity.this);
-                        popupViews.add(threeView.firstView());
+//                        ThreeView threeView = new ThreeView(HaiwaiListActivity.this);
+//                        popupViews.add(threeView.firstView());
                         threeView.insertData(list2, dropDownMenu);
                         threeView.setListener(HaiwaiListActivity.this);
 
@@ -217,8 +229,8 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                                 list1.add(new OneCheckBean(false, isJa ? huxingEntity.getScreeValJpn() : huxingEntity.getScreeValCn()));
                             }
                         }
-                        SecView secView = new SecView(HaiwaiListActivity.this);
-                        popupViews.add(secView.secView());
+//                        SecView secView = new SecView(HaiwaiListActivity.this);
+//                        popupViews.add(secView.secView());
                         secView.setListener(HaiwaiListActivity.this);
                         secView.insertData(list1, dropDownMenu);
                         /**
@@ -245,14 +257,14 @@ public class HaiwaiListActivity extends BaseActivity implements MyItemClickListe
                                 moreCheckBeanList.add(moreCheckBean);
                             }
                         }
-                        MoreView fourView = new MoreView(HaiwaiListActivity.this);
-                        popupViews.add(fourView.secView());
+//                        MoreView fourView = new MoreView(HaiwaiListActivity.this);
+//                        popupViews.add(fourView.secView());
                         fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(HaiwaiListActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+//                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                     }
                 });
     }

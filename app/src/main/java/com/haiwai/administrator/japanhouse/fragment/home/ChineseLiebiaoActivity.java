@@ -90,6 +90,10 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
     private List<String> ditieList = new ArrayList<>();
     private String cityId;
     private String searchText;
+    private FirstView firstView;
+    private ThreeView threeView;
+    private SecView secView;
+    private MoreView fourView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +160,15 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                             return;
                         }
                         shaiXuanBeanDatas = shaiXuanBean.getDatas();
+                        firstView = new FirstView(ChineseLiebiaoActivity.this);
+                        popupViews.add(firstView.firstView());
+                        threeView = new ThreeView(ChineseLiebiaoActivity.this);
+                        popupViews.add(threeView.firstView());
+                        secView = new SecView(ChineseLiebiaoActivity.this);
+                        popupViews.add(secView.secView());
+                        fourView = new MoreView(ChineseLiebiaoActivity.this);
+                        popupViews.add(fourView.secView());
+                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                         initShaiXuan();
                     }
                 });
@@ -238,8 +251,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                         /**
                          * 第一个界面
                          * */
-                        FirstView firstView = new FirstView(ChineseLiebiaoActivity.this);
-                        popupViews.add(firstView.firstView());
+//                        FirstView firstView = new FirstView(ChineseLiebiaoActivity.this);
+//                        popupViews.add(firstView.firstView());
                         firstView.insertData(quyuListBean, ditieListBean, dropDownMenu);
                         firstView.setListener(ChineseLiebiaoActivity.this);
                         if (shaiXuanBeanDatas==null){
@@ -257,8 +270,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                                 list2.add(new OneCheckBean(false, isJa ? shoujiaEntity.getScreeValJpn() : shoujiaEntity.getScreeValCn()));
                             }
                         }
-                        ThreeView threeView = new ThreeView(ChineseLiebiaoActivity.this);
-                        popupViews.add(threeView.firstView());
+//                        ThreeView threeView = new ThreeView(ChineseLiebiaoActivity.this);
+//                        popupViews.add(threeView.firstView());
                         threeView.insertData(list2, dropDownMenu);
                         threeView.setListener(ChineseLiebiaoActivity.this);
 
@@ -274,8 +287,8 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                                 list1.add(new OneCheckBean(false, isJa ? mianjiEntity.getScreeValJpn() : mianjiEntity.getScreeValCn()));
                             }
                         }
-                        SecView secView = new SecView(ChineseLiebiaoActivity.this);
-                        popupViews.add(secView.secView());
+//                        SecView secView = new SecView(ChineseLiebiaoActivity.this);
+//                        popupViews.add(secView.secView());
                         secView.setListener(ChineseLiebiaoActivity.this);
                         secView.insertData(list1, dropDownMenu);
                         /**
@@ -302,14 +315,14 @@ public class ChineseLiebiaoActivity extends BaseActivity implements MyItemClickL
                                 moreCheckBeanList.add(moreCheckBean);
                             }
                         }
-                        MoreView fourView = new MoreView(ChineseLiebiaoActivity.this);
-                        popupViews.add(fourView.secView());
+//                        MoreView fourView = new MoreView(ChineseLiebiaoActivity.this);
+//                        popupViews.add(fourView.secView());
                         fourView.insertData(moreCheckBeanList, dropDownMenu);
                         fourView.setListener(ChineseLiebiaoActivity.this);
                         /**
                          * Dropdownmenu下面的主体部分
                          * */
-                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
+//                        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fifthView);
                     }
                 });
     }

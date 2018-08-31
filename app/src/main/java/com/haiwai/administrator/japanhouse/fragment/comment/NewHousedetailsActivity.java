@@ -433,8 +433,6 @@ public class NewHousedetailsActivity extends UMShareActivity {
                 });
 
             }
-
-
         }
         tvAllNum.setText(mBannerList.size() + "");
         vpVidio.setAdapter(adapter);

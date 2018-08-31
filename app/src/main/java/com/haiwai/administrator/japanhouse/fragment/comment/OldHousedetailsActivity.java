@@ -218,12 +218,14 @@ public class OldHousedetailsActivity extends UMShareActivity {
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
+                        if (hwdcBroker!=null){
+                            tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                            Glide.with(OldHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
+                        }
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
-                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
-                        Glide.with(OldHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         isSc = datas.getIsSc();
                         if (isSc==0){//收藏
                             isStart=true;
@@ -236,6 +238,12 @@ public class OldHousedetailsActivity extends UMShareActivity {
                         initLocation();
                         initMap();
                         initData();
+                    }
+
+                    @Override
+                    public void onError(Response<HouseDetailsBean> response) {
+                        super.onError(response);
+                        Log.d("OldHousedetailsActivity", response.getException().getMessage()+"------");
                     }
                 });
     }
@@ -278,6 +286,9 @@ public class OldHousedetailsActivity extends UMShareActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.manager_data:
+                if (datas.getHwdcBroker()==null){
+                    return;
+                }
                 Intent Managerintent = new Intent(OldHousedetailsActivity.this, ManagerActivity.class);
                 Managerintent.putExtra("ManagerId",datas.getHwdcBroker().getId()+"");
                 startActivity(Managerintent);

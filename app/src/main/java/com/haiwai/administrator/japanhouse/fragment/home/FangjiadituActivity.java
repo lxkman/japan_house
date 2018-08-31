@@ -163,7 +163,9 @@ public class FangjiadituActivity extends BaseActivity {
             float p1= Float.parseFloat(decimalFormat1.format(cityzxt.get(i).getAvgPrice()));//
             mlist.add(p1);
             xValue.add(MyUtils.getTimeFromMillisecondMD(cityzxt.get(i).getDays()));
-            value.put(MyUtils.getTimeFromMillisecondMD(cityzxt.get(i).getDays()), mlist.get(i));
+            DecimalFormat decimalFormat=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            float p= Float.parseFloat(decimalFormat.format(mlist.get(i)));//
+            value.put(MyUtils.getTimeFromMillisecondMD(cityzxt.get(i).getDays()), p);
         }
         if (zxtlist != null && zxtlist.size() > 0) {
             for (int i = 0; i < zxtlist.size(); i++) {

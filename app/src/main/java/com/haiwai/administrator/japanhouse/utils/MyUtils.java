@@ -117,7 +117,19 @@ public class MyUtils {
         String timeStr = simpleDateFormat.format(date);
         return timeStr;
     }
-
+    /**
+     * 从时间(毫秒)中提取出时间(月日)
+     * 时间格式:  时:分
+     *
+     * @param millisecond
+     * @return
+     */
+    public static String getTimeFromMillisecondMD(Long millisecond) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd");
+        Date date = new Date(millisecond);
+        String timeStr = simpleDateFormat.format(date);
+        return timeStr;
+    }
     public static boolean isJa() {
         String country = CacheUtils.get(Constants.COUNTRY);
         if (country != null && country.equals("ja")) {

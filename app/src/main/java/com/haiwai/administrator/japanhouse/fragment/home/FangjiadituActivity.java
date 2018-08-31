@@ -147,6 +147,8 @@ public class FangjiadituActivity extends BaseActivity {
     }
 
     private void initChartList() {
+        Log.d("FangjiadituActivity", "cityzxt.get(i).getDays():" + cityzxt.get(0).getDays()+"------+");
+        Log.d("FangjiadituActivity", MyUtils.getTimeFromMillisecondMD(cityzxt.get(0).getDays())+"-----+");
         mlist.clear();
         mlist1.clear();
         xValue.clear();
@@ -160,13 +162,13 @@ public class FangjiadituActivity extends BaseActivity {
             DecimalFormat decimalFormat1=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
             float p1= Float.parseFloat(decimalFormat1.format(cityzxt.get(i).getAvgPrice()));//
             mlist.add(p1);
-            xValue.add(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())));
-            value.put(MyUtils.getDateToStringM(String.valueOf(cityzxt.get(i).getDays())), mlist.get(i));
+            xValue.add(MyUtils.getTimeFromMillisecondMD(cityzxt.get(i).getDays()));
+            value.put(MyUtils.getTimeFromMillisecondMD(cityzxt.get(i).getDays()), mlist.get(i));
         }
         if (zxtlist != null && zxtlist.size() > 0) {
             for (int i = 0; i < zxtlist.size(); i++) {
                 mlist1.add((float) zxtlist.get(i).getAvgPrice());
-                value1.put(MyUtils.getDateToStringM(String.valueOf(zxtlist.get(i).getDays())), mlist1.get(i));
+                value1.put(MyUtils.getTimeFromMillisecondMD(zxtlist.get(i).getDays()), mlist1.get(i));
             }
         }
 
@@ -176,16 +178,16 @@ public class FangjiadituActivity extends BaseActivity {
         yValue.add(MyUtils.floatToString((float) ((float) endValoneline + num * 2)));
         yValue.add(MyUtils.floatToString((float) ((float) endValoneline + num * 3)));
         yValue.add((float) bigValoneline);
-        Log.d("FangjiadituActivity", "bigValoneline:" + bigValoneline + "---------");
-        for (int i = 0; i < yValue.size(); i++) {
-            Log.d("FangjiadituActivity", "yValue.get(i):" + yValue.get(i) + "-----------");
-        }
-        for (int i = 0; i < mlist.size(); i++) {
-            Log.d("FangjiadituActivity", "mlist.get(i):" + mlist.get(i) + "-------");
-        }
-        for (int i = 0; i < mlist1.size(); i++) {
-            Log.d("FangjiadituActivity", "mlist1.get(i):" + mlist1.get(i) + "-------");
-        }
+//        Log.d("FangjiadituActivity", "bigValoneline:" + bigValoneline + "---------");
+//        for (int i = 0; i < yValue.size(); i++) {
+//            Log.d("FangjiadituActivity", "yValue.get(i):" + yValue.get(i) + "-----------");
+//        }
+//        for (int i = 0; i < mlist.size(); i++) {
+//            Log.d("FangjiadituActivity", "mlist.get(i):" + mlist.get(i) + "-------");
+//        }
+//        for (int i = 0; i < mlist1.size(); i++) {
+//            Log.d("FangjiadituActivity", "mlist1.get(i):" + mlist1.get(i) + "-------");
+//        }
     }
 
 
@@ -343,6 +345,9 @@ public class FangjiadituActivity extends BaseActivity {
     private void initLineChartOneLine(BaseDialog dialog) {
         initChartList();
         ChartViewOneLine chartview = (ChartViewOneLine) dialog.findViewById(R.id.chartview);
+        for (int i = 0; i < xValue.size(); i++) {
+            Log.d("FangjiadituActivity", "xValue:" + xValue+"------");
+        }
         chartview.setValueOneLine(value, xValue, yValue);
     }
 

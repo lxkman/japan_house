@@ -659,4 +659,8 @@
     <string name="zhuceshibai">登録に失敗しました</string>
     <string name="cihaomayizhuce">この番号はすでに登録されています</string>
     <string name="yonghuminghuomimacuowu">ユーザー名またはパスワードが間違っています</string>
+    <string name="yingyongxuyaoquanxian">アプリはこの許可を必要とします</string>
+    <string name="quedingtuichuma">あなたは本当にやめるのですか？</string>
+    <string name="fenxiang">シェア</string>
+    <string name="quedingyaoquxiaodingyuema">このリスティングから退会してもよろしいですか？</string>
 </resources>

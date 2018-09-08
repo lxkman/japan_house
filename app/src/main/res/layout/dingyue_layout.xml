@@ -24,7 +24,7 @@
                 android:textSize="15sp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="您确定要取消订阅此房源通知吗？"
+                android:text="@string/quedingyaoquxiaodingyuema"
                 android:layout_width="wrap_content"
                 android:textColor="@color/text_black"
                 android:layout_height="wrap_content" />

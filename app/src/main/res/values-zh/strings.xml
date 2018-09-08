@@ -657,4 +657,8 @@
     <string name="zhuceshibai">注册失败</string>
     <string name="cihaomayizhuce">此号码已被注册</string>
     <string name="yonghuminghuomimacuowu">用户名或者密码错误</string>
+    <string name="yingyongxuyaoquanxian">应用需要此权限</string>
+    <string name="quedingtuichuma">您确定退出吗？</string>
+    <string name="fenxiang">分享</string>
+    <string name="quedingyaoquxiaodingyuema">您确定要取消订阅此房源通知吗？</string>
 </resources>

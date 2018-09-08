@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             } else {
                 //用户不同意，向用户展示该权限作用
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    TUtils.showFail(MainActivity.this, "应用需要此权限");
+                    TUtils.showFail(MainActivity.this, getString(R.string.yingyongxuyaoquanxian));
                 }
             }
         }

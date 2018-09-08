@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.haiwai.administrator.japanhouse.MainActivity;
 import com.haiwai.administrator.japanhouse.R;
 import com.haiwai.administrator.japanhouse.base.BaseActivity;
 import com.haiwai.administrator.japanhouse.bean.LancherBean;
@@ -96,7 +97,7 @@ public class GuidePageActivity extends BaseActivity {
             } else {
                 //用户不同意，向用户展示该权限作用
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    TUtils.showFail(GuidePageActivity.this, "应用需要此权限");
+                    TUtils.showFail(GuidePageActivity.this, getString(R.string.yingyongxuyaoquanxian));
                 }
             }
         }

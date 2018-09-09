@@ -185,10 +185,7 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
 
         if (response != null && response.body() != null) {
             villaDetailsBean = response.body().getDatas();
-            if (villaDetailsBean==null){
-                return;
-            }
-            if (villaDetailsBean.getHwdcBroker()==null){
+            if (villaDetailsBean == null) {
                 return;
             }
             hwdcBroker = villaDetailsBean.getHwdcBroker();
@@ -206,8 +203,10 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         tvTudiArea.setText(isja ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn());
         tvJianzhuArea.setText(isja ? villaDetailsBean.getCoveredAreaJpn() : villaDetailsBean.getCoveredAreaCn());
         tvDetailsLocation.setText(isja ? villaDetailsBean.getSpecificLocationJpn() : villaDetailsBean.getSpecificLocationCn());
-        Glide.with(BieshudetailsActivity.this).load(hwdcBroker.getPic()).into(tvDetailsManagerHead);
-        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+        if (hwdcBroker != null) {
+            Glide.with(BieshudetailsActivity.this).load(hwdcBroker.getPic()).into(tvDetailsManagerHead);
+            tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+        }
         isSc = villaDetailsBean.getIsSc();
         if (isSc == 0) {//收藏
             isStart = true;
@@ -372,8 +371,6 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         JZVideoPlayer.releaseAllVideos();
     }
 
-
-
     private void initLoveRecycler() {
         HttpParams params = new HttpParams();
         if (isja) {
@@ -381,12 +378,12 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         } else {
             params.put("languageType", 0);
         }
-        if (CacheUtils.get("cityId")==null){
+        if (CacheUtils.get("cityId") == null) {
             return;
         }
         int cityId = CacheUtils.get("cityId");
         params.put("pageNo", "1");
-        params.put("cId",cityId);
+        params.put("cId", cityId);
         OkGo.<BieShuListBean>post(MyUrls.BASEURL + "/app/villadom/searchlist")
                 .tag(this)
                 .params(params)
@@ -431,12 +428,12 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length()>5){
+            if (area.length() > 5) {
                 area = area.substring(0, 5) + "...";
             }
-            helper.setText(R.id.tv_house_address,area);
+            helper.setText(R.id.tv_house_address, area);
             helper.setText(R.id.tv_house_name, isja ? item.getTitleJpn() : item.getTitleCn());
-//            helper.setText(R.id.tv_house_room,isja?item.getDoorModelJpn():item.getDoorModelCn());
+            //            helper.setText(R.id.tv_house_room,isja?item.getDoorModelJpn():item.getDoorModelCn());
             helper.setVisible(R.id.tv_house_room, false);
             helper.setText(R.id.tv_house_area, isja ? item.getCoveredAreaJpn() : item.getCoveredAreaCn());
             helper.setText(R.id.tv_price, isja ? item.getSellingPriceJpn() : item.getSellingPriceCn());
@@ -472,18 +469,24 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
     //百度地图的包名
     private final static String BAIDU_PKG = "com.baidu.BaiduMap";
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More, R.id.tv_details_manager_phone, R.id.tv_details_location,R.id.manager_data})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_See_More, R.id.tv_details_manager_phone, R.id.tv_details_location, R.id.manager_data})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.manager_data:
+                if (hwdcBroker==null){
+                    return;
+                }
                 Intent Managerintent = new Intent(BieshudetailsActivity.this, ManagerActivity.class);
-                Managerintent.putExtra("ManagerId",villaDetailsBean.getHwdcBroker().getId()+"");
+                Managerintent.putExtra("ManagerId", villaDetailsBean.getHwdcBroker().getId() + "");
                 startActivity(Managerintent);
                 break;
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.tv_details_manager_phone:
+                if (hwdcBroker==null){
+                    return;
+                }
                 ShowCallDialog(hwdcBroker.getPhone() + "");
                 break;
             case R.id.img_start:
@@ -496,7 +499,7 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
                         isStart = false;
                     }
                 } else {
-                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -508,14 +511,14 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
                 double mylongitude = CacheUtils.get("mylongitude");
                 //检测地图是否安装和唤起
                 if (checkMapAppsIsExist(BieshudetailsActivity.this, BAIDU_PKG)) {
-                    Toast.makeText(mContext,getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + mylatitude
                             + "," + mylongitude + BAIDU_DESTINATION + villaDetailsBean.getLatitude() + "," + villaDetailsBean.getLongitude()
                             + BAIDU_MODE));
                     startActivity(intent);
                 } else {
-                    Toast.makeText(mContext,getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.tv_See_More:
@@ -601,7 +604,7 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            TUtils.showFail(mContext,getResources().getString(R.string.shoucangchenggong));
+                            TUtils.showFail(mContext, getResources().getString(R.string.shoucangchenggong));
                         } else {
                             Toast.makeText(BieshudetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -628,7 +631,7 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
-                            TUtils.showFail(mContext,getResources().getString(R.string.quxiaoshoucangchenggong));
+                            TUtils.showFail(mContext, getResources().getString(R.string.quxiaoshoucangchenggong));
                         } else {
                             Toast.makeText(BieshudetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -638,7 +641,7 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
     }
 
     private void showDialog(int grary, int animationStyle) {
-        final String url="http://www.flcjapan.com/hwdch5/info/villaDetails.html?id="+houseId;
+        final String url = "http://www.flcjapan.com/hwdch5/info/villaDetails.html?id=" + houseId;
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
@@ -672,9 +675,9 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         weixin_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?villaDetailsBean.getTitleJpn():villaDetailsBean.getTitleCn()
-                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs())?villaDetailsBean.getRoomImgs():villaDetailsBean.getVideoImgs()
-                        , isJa?villaDetailsBean.getAreaJpn():villaDetailsBean.getAreaCn(),
+                shareWebUrl(url, isJa ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn()
+                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs()) ? villaDetailsBean.getRoomImgs() : villaDetailsBean.getVideoImgs()
+                        , isJa ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn(),
                         BieshudetailsActivity.this, SHARE_MEDIA.WEIXIN);
             }
         });
@@ -682,9 +685,9 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?villaDetailsBean.getTitleJpn():villaDetailsBean.getTitleCn()
-                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs())?villaDetailsBean.getRoomImgs():villaDetailsBean.getVideoImgs()
-                        , isJa?villaDetailsBean.getAreaJpn():villaDetailsBean.getAreaCn(),
+                shareWebUrl(url, isJa ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn()
+                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs()) ? villaDetailsBean.getRoomImgs() : villaDetailsBean.getVideoImgs()
+                        , isJa ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn(),
                         BieshudetailsActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE);
             }
         });
@@ -692,9 +695,9 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         weibo_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?villaDetailsBean.getTitleJpn():villaDetailsBean.getTitleCn()
-                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs())?villaDetailsBean.getRoomImgs():villaDetailsBean.getVideoImgs()
-                        , isJa?villaDetailsBean.getAreaJpn():villaDetailsBean.getAreaCn(),
+                shareWebUrl(url, isJa ? villaDetailsBean.getTitleJpn() : villaDetailsBean.getTitleCn()
+                        , TextUtils.isEmpty(villaDetailsBean.getVideoImgs()) ? villaDetailsBean.getRoomImgs() : villaDetailsBean.getVideoImgs()
+                        , isJa ? villaDetailsBean.getAreaJpn() : villaDetailsBean.getAreaCn(),
                         BieshudetailsActivity.this, SHARE_MEDIA.SINA);
             }
         });

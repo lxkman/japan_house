@@ -297,6 +297,9 @@ public class OldHousedetailsActivity extends UMShareActivity {
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.tv_details_manager_phone:
+                if (hwdcBroker==null){
+                    return;
+                }
                 ShowCallDialog(hwdcBroker.getPhone()+"");
                 break;
             case R.id.img_start:

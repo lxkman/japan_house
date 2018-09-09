@@ -184,6 +184,7 @@ public class NewHousedetailsActivity extends UMShareActivity {
     private String stationNameCn;
     private double mlongitude;
     private double mlatitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -232,8 +233,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
                         bannerlist = datas.getBannerlist();
                         hxtlist = datas.getHxtlist();
                         hwdcBroker = datas.getHwdcBroker();
-                        if (datas.getHwdcBroker()==null){
-                            return;
+                        if (hwdcBroker!= null) {
+                            tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                            Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         }
                         subwayStationNum = datas.getSubwayStationNum();
                         HouseDetailsBean.DatasBean.HwdcSubwayStationBean hwdcSubwayStation = datas.getHwdcSubwayStation();
@@ -242,8 +244,6 @@ public class NewHousedetailsActivity extends UMShareActivity {
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
                         tvDetailsArea.setText(isJa ? datas.getAreaJpn() : datas.getAreaCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
-                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
-                        Glide.with(NewHousedetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         tvDetailsPhone.setText(datas.getKpPhone() + "");
                         isSc = datas.getIsSc();
                         if (isSc == 0) {//收藏
@@ -254,15 +254,15 @@ public class NewHousedetailsActivity extends UMShareActivity {
                             imgStart.setImageResource(R.drawable.shoucang);
                         }
                         isJgdy = datas.getIsJgdy();
-                        if (isJgdy ==0){//已订阅价格变动
+                        if (isJgdy == 0) {//已订阅价格变动
                             tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
-                        }else {//未订阅
+                        } else {//未订阅
                             tvDetailsBianjia.setBackground(getResources().getDrawable(R.drawable.border_shihuangse));
                         }
                         isKpdy = datas.getIsKpdy();
-                        if (isKpdy ==0){//已订阅开盘通知
+                        if (isKpdy == 0) {//已订阅开盘通知
                             tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
-                        }else {//未订阅
+                        } else {//未订阅
                             tvDetailsKaipan.setBackground(getResources().getDrawable(R.drawable.border_shihuangse));
                         }
                         initViewPager();
@@ -274,8 +274,7 @@ public class NewHousedetailsActivity extends UMShareActivity {
                     @Override
                     public void onError(Response<HouseDetailsBean> response) {
                         super.onError(response);
-                        ;
-                                Log.d("newhouse",response.getException().getMessage()+"---------");
+                        Log.e("xxx", response.getException().getMessage() + "---------");
                     }
                 });
     }
@@ -312,10 +311,10 @@ public class NewHousedetailsActivity extends UMShareActivity {
         mBaiduMap = mapView.getMap();
 
         UiSettings uiSettings = mBaiduMap.getUiSettings();
-//        uiSettings. setScrollGesturesEnabled(false);//禁用平移的功能
-//        uiSettings. setZoomGesturesEnabled(false);//禁用缩放手势
-//        uiSettings. setOverlookingGesturesEnabled(false);//禁用俯视（3D）功能
-//        uiSettings .setRotateGesturesEnabled(false);//禁用地图旋转功能
+        //        uiSettings. setScrollGesturesEnabled(false);//禁用平移的功能
+        //        uiSettings. setZoomGesturesEnabled(false);//禁用缩放手势
+        //        uiSettings. setOverlookingGesturesEnabled(false);//禁用俯视（3D）功能
+        //        uiSettings .setRotateGesturesEnabled(false);//禁用地图旋转功能
         uiSettings.setAllGesturesEnabled(false);//禁止所有手势
 
         myListener = new MyLocationListenner();
@@ -340,9 +339,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
                 Intent intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
                 intent.putExtra("lat", String.valueOf(datas.getLatitude()));
                 intent.putExtra("log", String.valueOf(datas.getLongitude()));
-                intent.putExtra("subwayStationNum", subwayStationNum+"");
-                intent.putExtra("stationNameCn", stationNameCn+"");
-                intent.putExtra("HouseName", datas.getTitleCn()+"");
+                intent.putExtra("subwayStationNum", subwayStationNum + "");
+                intent.putExtra("stationNameCn", stationNameCn + "");
+                intent.putExtra("HouseName", datas.getTitleCn() + "");
                 intent.putExtra("TAG", "1");
                 startActivity(intent);
             }
@@ -382,7 +381,7 @@ public class NewHousedetailsActivity extends UMShareActivity {
 
 
     private void initViewPager() {
-        if (bannerlist==null&&bannerlist.size()<=0){
+        if (bannerlist == null && bannerlist.size() <= 0) {
             return;
         }
         if (mBannerList.size() <= 0) {
@@ -509,9 +508,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
         intent = new Intent(NewHousedetailsActivity.this, MapActivity.class);
         intent.putExtra("lat", datas.getLatitude() + "");
         intent.putExtra("log", datas.getLongitude() + "");
-        intent.putExtra("subwayStationNum", subwayStationNum+"");
-        intent.putExtra("stationNameCn", stationNameCn+"");
-        intent.putExtra("HouseName", datas.getTitleCn()+"");
+        intent.putExtra("subwayStationNum", subwayStationNum + "");
+        intent.putExtra("stationNameCn", stationNameCn + "");
+        intent.putExtra("HouseName", datas.getTitleCn() + "");
         findViewById(R.id.lishinew_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -521,7 +520,7 @@ public class NewHousedetailsActivity extends UMShareActivity {
             }
         });
 
-        if (datas.getHxtlist()!=null&&datas.getHxtlist().size()>0){
+        if (datas.getHxtlist() != null && datas.getHxtlist().size() > 0) {
             if (mLiebiaoAdapter == null) {
                 mLiebiaoAdapter = new LiebiaoAdapter(R.layout.huxing_item, hxtlist);
             }
@@ -642,44 +641,51 @@ public class NewHousedetailsActivity extends UMShareActivity {
     }
 
     private int noticeType;
-    @OnClick({tv_details_bianjia,R.id.tv_details_kaipan,R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone,R.id.manager_data})
+
+    @OnClick({tv_details_bianjia, R.id.tv_details_kaipan, R.id.img_share, R.id.img_start, R.id.tv_See_More, R.id.back_img, R.id.shop_layout, R.id.school_layout, R.id.youeryuan_layout, R.id.yiyuan_layout, R.id.bdMap_layout, R.id.tv_details_manager_phone, R.id.manager_data})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.manager_data:
+                if (hwdcBroker==null){
+                    return;
+                }
                 Intent Managerintent = new Intent(NewHousedetailsActivity.this, ManagerActivity.class);
-                Managerintent.putExtra("ManagerId",datas.getHwdcBroker().getId()+"");
+                Managerintent.putExtra("ManagerId", hwdcBroker.getId() + "");
                 startActivity(Managerintent);
-            break;
+                break;
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case tv_details_bianjia:
                 if (MyUtils.isLogin(this)) {
-                noticeType=0;
-                if (isJgdy==0){
-                    Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
-                }else {
-                    initHuoDong(noticeType);
+                    noticeType = 0;
+                    if (isJgdy == 0) {
+                        Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
+                    } else {
+                        initHuoDong(noticeType);
+                    }
+                } else {
+                    Toast.makeText(mContext, getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
+                    MyUtils.StartLoginActivity(this);
                 }
-        } else {
-                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
-            MyUtils.StartLoginActivity(this);
-        }
                 break;
             case R.id.tv_details_kaipan:
                 if (MyUtils.isLogin(this)) {
-                noticeType=1;
-                if (isKpdy==0){
-                    Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
-                }else {
-                    initHuoDong(noticeType);
-                }
+                    noticeType = 1;
+                    if (isKpdy == 0) {
+                        Toast.makeText(mContext, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
+                    } else {
+                        initHuoDong(noticeType);
+                    }
                 } else {
-                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
             case R.id.tv_details_manager_phone:
+                if (hwdcBroker==null){
+                    return;
+                }
                 ShowCallDialog(hwdcBroker.getPhone() + "");
                 break;
             case R.id.img_start:
@@ -755,41 +761,41 @@ public class NewHousedetailsActivity extends UMShareActivity {
                         final SuccessBean oldHouseListBean = response.body();
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
-                            if (noticeType==0){
+                            if (noticeType == 0) {
                                 tvDetailsBianjia.setBackgroundColor(Color.parseColor("#ffd09c"));
-                            }else if (noticeType==1){
+                            } else if (noticeType == 1) {
                                 tvDetailsKaipan.setBackgroundColor(Color.parseColor("#ffd09c"));
                             }
                             PushAgent mPushAgent = PushAgent.getInstance(NewHousedetailsActivity.this);
-                            if (noticeType==0){//变价
+                            if (noticeType == 0) {//变价
                                 Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.bianjiatongzhidingyuechenggong), Toast.LENGTH_SHORT).show();
                                 mPushAgent.getTagManager().add(new TagManager.TCallBack() {
                                     @Override
                                     public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
                                         //isSuccess表示操作是否成功
-                                        if (!isSuccess){
-                                            Log.d("MyApplication", "失败"+"-----------");
-                                        }else {
-                                            Log.d("MyApplication", "成功"+"-----------");
+                                        if (!isSuccess) {
+                                            Log.d("MyApplication", "失败" + "-----------");
+                                        } else {
+                                            Log.d("MyApplication", "成功" + "-----------");
                                         }
                                     }
-                                }, "xfjgid"+houseId);
-                            }else {//开盘
+                                }, "xfjgid" + houseId);
+                            } else {//开盘
                                 Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.kaipamtongzhidingyuechenggong), Toast.LENGTH_SHORT).show();
                                 mPushAgent.getTagManager().add(new TagManager.TCallBack() {
                                     @Override
                                     public void onMessage(final boolean isSuccess, final ITagManager.Result result) {
 
                                     }
-                                }, "xfkpid"+houseId);
+                                }, "xfkpid" + houseId);
                             }
 
-                        }else if (code1.equals("205")){
+                        } else if (code1.equals("205")) {
                             Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.ninyijingdingyueguole), Toast.LENGTH_SHORT).show();
-                        }else if(code1.equals("201")){
+                        } else if (code1.equals("201")) {
                             SharedPreferencesUtils.getInstace(NewHousedetailsActivity.this).setStringPreference("token", "");
                             MyUtils.StartLoginActivity(NewHousedetailsActivity.this);
-                        }else {
+                        } else {
                             Toast.makeText(NewHousedetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -878,7 +884,7 @@ public class NewHousedetailsActivity extends UMShareActivity {
 
     //分享弹窗
     private void showDialog(int grary, int animationStyle) {
-        final String url="http://www.flcjapan.com/hwdch5/info/newDetails.html?id="+houseId;
+        final String url = "http://www.flcjapan.com/hwdch5/info/newDetails.html?id=" + houseId;
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
@@ -912,9 +918,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
         weixin_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
-                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getRoomImgs():datas.getVideoImgs()
-                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                shareWebUrl(url, isJa ? datas.getTitleJpn() : datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs()) ? datas.getRoomImgs() : datas.getVideoImgs()
+                        , isJa ? datas.getAreaJpn() : datas.getAreaCn(),
                         NewHousedetailsActivity.this, SHARE_MEDIA.WEIXIN);
             }
         });
@@ -922,9 +928,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
         pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
-                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getRoomImgs():datas.getVideoImgs()
-                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                shareWebUrl(url, isJa ? datas.getTitleJpn() : datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs()) ? datas.getRoomImgs() : datas.getVideoImgs()
+                        , isJa ? datas.getAreaJpn() : datas.getAreaCn(),
                         NewHousedetailsActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE);
             }
         });
@@ -932,9 +938,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
         weibo_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
-                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getRoomImgs():datas.getVideoImgs()
-                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                shareWebUrl(url, isJa ? datas.getTitleJpn() : datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs()) ? datas.getRoomImgs() : datas.getVideoImgs()
+                        , isJa ? datas.getAreaJpn() : datas.getAreaCn(),
                         NewHousedetailsActivity.this, SHARE_MEDIA.SINA);
             }
         });
@@ -975,10 +981,10 @@ public class NewHousedetailsActivity extends UMShareActivity {
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length()>5){
+            if (area.length() > 5) {
                 area = area.substring(0, 5) + "...";
             }
-            helper.setText(R.id.tv_house_address,area);
+            helper.setText(R.id.tv_house_address, area);
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
             helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());

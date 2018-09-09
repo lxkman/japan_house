@@ -150,7 +150,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         token = SharedPreferencesUtils.getInstace(this).getStringPreference("token", "");
         houseId = getIntent().getStringExtra("houseId");
         cityId = getIntent().getStringExtra("cityId");
-        new HouseLogPresenter(this).setHouseLog("6",houseId,"");
+        new HouseLogPresenter(this).setHouseLog("6", houseId, "");
         String city = CacheUtils.get(Constants.COUNTRY);
         if (city != null && city.equals("ja")) {
             isJa = true;
@@ -169,16 +169,17 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
                     public void onSuccess(Response<ZhongGuoDetailsBean> response) {
                         int code = response.code();
                         ZhongGuoDetailsBean ChinaListBean = response.body();
-                        if (ChinaListBean==null){
+                        if (ChinaListBean == null) {
                             return;
                         }
                         datas = ChinaListBean.getDatas();
-                        if (datas==null){
+                        if (datas == null) {
                             return;
                         }
                         hwdcBroker = datas.getHwdcBroker();
-                        if (hwdcBroker==null){
-                            return;
+                        if (hwdcBroker != null) {
+                            tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
+                            Glide.with(ZhongguoDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         }
                         tvDetailsName.setText(isJa ? datas.getTitleJpn() : datas.getTitleCn());
                         tvDetailsPrice.setText(isJa ? datas.getSellingPriceJpn() : datas.getSellingPriceCn());
@@ -189,8 +190,6 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
                         tvDetailsChaoxiang.setText(isJa ? datas.getOrientationJpn() : datas.getOrientationCn());
                         tvDetailsWuye.setText(isJa ? datas.getTenementJpn() : datas.getTenementCn());
                         tvDetailsLocation.setText(isJa ? datas.getSpecificLocationJpn() : datas.getSpecificLocationCn());
-                        tvDetailsManagerName.setText(hwdcBroker.getBrokerName());
-                        Glide.with(ZhongguoDetailsActivity.this).load(hwdcBroker.getPic() + "").into(tvDetailsManagerHead);
                         isSc = datas.getIsSc();
                         if (isSc == 0) {//收藏
                             isStart = true;
@@ -285,12 +284,12 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
             } else {
                 area = item.getSpecificLocationCn();
             }
-            if (area.length()>5){
+            if (area.length() > 5) {
                 area = area.substring(0, 5) + "...";
             }
-            helper.setText(R.id.tv_house_address,area);
+            helper.setText(R.id.tv_house_address, area);
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
-//            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
+            //            helper.setText(R.id.tv_house_room,isJa?item.getDoorModelJpn():item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getSellingPriceJpn() : item.getSellingPriceCn());
             Glide.with(ZhongguoDetailsActivity.this).load(TextUtils.isEmpty(item.getVideoImgs()) ?
@@ -300,7 +299,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
 
 
     private void initViewPager() {
-        if (datas.getImgs().equals("")){
+        if (datas.getImgs().equals("")) {
             return;
         }
         houseImgs = datas.getImgs();
@@ -440,7 +439,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         String floorImg = datas.getFloorImg();
         String str2 = floorImg.replace("", "");//去掉所用空格
         huxinglist = Arrays.asList(str2.split(","));//截取逗号分开的数据并添加到list中
-        if (huxinglist.size()<=0||huxinglist==null){
+        if (huxinglist.size() <= 0 || huxinglist == null) {
             HuxingRecycler.setVisibility(View.GONE);
         }
         if (mLiebiaoAdapter == null) {
@@ -545,18 +544,24 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         }
     }
 
-    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img,R.id.tv_details_manager_phone,R.id.tv_details_location,R.id.manager_data})
+    @OnClick({R.id.img_share, R.id.img_start, R.id.back_img, R.id.tv_details_manager_phone, R.id.tv_details_location, R.id.manager_data})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.manager_data:
+                if (hwdcBroker==null){
+                    return;
+                }
                 Intent Managerintent = new Intent(this, ManagerActivity.class);
-                Managerintent.putExtra("ManagerId",datas.getHwdcBroker().getId()+"");
+                Managerintent.putExtra("ManagerId", datas.getHwdcBroker().getId() + "");
                 startActivity(Managerintent);
                 break;
             case R.id.img_share:
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.tv_details_manager_phone:
+                if (hwdcBroker==null){
+                    return;
+                }
                 ShowCallDialog(hwdcBroker.getPhone() + "");
                 break;
             case R.id.tv_details_location:
@@ -564,15 +569,15 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
                 if (checkMapAppsIsExist(ZhongguoDetailsActivity.this, BAIDU_PKG)) {
                     double mylatitude = CacheUtils.get("mylatitude");
                     double mylongitude = CacheUtils.get("mylongitude");
-                   Toast.makeText(mContext,getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.zhengzaidakaibaiduditu), Toast.LENGTH_SHORT).show();
                     Toast.makeText(ZhongguoDetailsActivity.this, "后台没给经纬度", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent();
-//                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
-//                            + "," + "139.75" + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
-//                            + BAIDU_MODE));
-//                    startActivity(intent);
+                    //                    Intent intent = new Intent();
+                    //                    intent.setData(Uri.parse(BAIDU_HEAD + BAIDU_ORIGIN + "35.68"
+                    //                            + "," + "139.75" + BAIDU_DESTINATION + datas.getLatitude() + "," + datas.getLongitude()
+                    //                            + BAIDU_MODE));
+                    //                    startActivity(intent);
                 } else {
-                    Toast.makeText(mContext,getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.baidudituweianzhuang), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.img_start:
@@ -585,7 +590,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
                         isStart = false;
                     }
                 } else {
-                    Toast.makeText(mContext,getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.qingxiandenglu), Toast.LENGTH_SHORT).show();
                     MyUtils.StartLoginActivity(this);
                 }
                 break;
@@ -613,7 +618,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang2);
-                            Toast.makeText(mContext,getResources().getString(R.string.shoucangchenggong), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, getResources().getString(R.string.shoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ZhongguoDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -640,7 +645,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
                         String code1 = oldHouseListBean.getCode();
                         if (code1.equals("200")) {
                             imgStart.setImageResource(R.drawable.shoucang);
-                            Toast.makeText(mContext,getResources().getString(R.string.quxiaoshoucangchenggong), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, getResources().getString(R.string.quxiaoshoucangchenggong), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ZhongguoDetailsActivity.this, code1, Toast.LENGTH_SHORT).show();
                         }
@@ -650,7 +655,7 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
     }
 
     private void showDialog(int grary, int animationStyle) {
-        final String url="http://www.flcjapan.com/hwdch5/info/chinaDetails.html?id="+houseId;
+        final String url = "http://www.flcjapan.com/hwdch5/info/chinaDetails.html?id=" + houseId;
         BaseDialog.Builder builder = new BaseDialog.Builder(this);
         //设置触摸dialog外围是否关闭
         //设置监听事件
@@ -684,9 +689,9 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         weixin_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
-                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getHouseImgs():datas.getVideoImgs()
-                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                shareWebUrl(url, isJa ? datas.getTitleJpn() : datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs()) ? datas.getHouseImgs() : datas.getVideoImgs()
+                        , isJa ? datas.getAreaJpn() : datas.getAreaCn(),
                         ZhongguoDetailsActivity.this, SHARE_MEDIA.WEIXIN);
             }
         });
@@ -694,9 +699,9 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         pengyouquan_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
-                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getHouseImgs():datas.getVideoImgs()
-                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                shareWebUrl(url, isJa ? datas.getTitleJpn() : datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs()) ? datas.getHouseImgs() : datas.getVideoImgs()
+                        , isJa ? datas.getAreaJpn() : datas.getAreaCn(),
                         ZhongguoDetailsActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE);
             }
         });
@@ -704,9 +709,9 @@ public class ZhongguoDetailsActivity extends UMShareActivity {
         weibo_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareWebUrl(url, isJa?datas.getTitleJpn():datas.getTitleCn()
-                        , TextUtils.isEmpty(datas.getVideoImgs())?datas.getHouseImgs():datas.getVideoImgs()
-                        , isJa?datas.getAreaJpn():datas.getAreaCn(),
+                shareWebUrl(url, isJa ? datas.getTitleJpn() : datas.getTitleCn()
+                        , TextUtils.isEmpty(datas.getVideoImgs()) ? datas.getHouseImgs() : datas.getVideoImgs()
+                        , isJa ? datas.getAreaJpn() : datas.getAreaCn(),
                         ZhongguoDetailsActivity.this, SHARE_MEDIA.SINA);
             }
         });

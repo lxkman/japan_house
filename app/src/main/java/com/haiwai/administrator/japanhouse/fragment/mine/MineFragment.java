@@ -191,7 +191,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
 
         if (TextUtils.equals(eventBean.getMsg(), Constants.EVENT_MINE)) {
-            list.clear();
+//            list.clear();
             userPresenter.getUserInfo(MyApplication.getUserToken());
             presenter.getHouseRecordList(MyApplication.getUserToken(), page);
         }

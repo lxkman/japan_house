@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.haiwai.administrator.japanhouse.MyApplication;
 import com.haiwai.administrator.japanhouse.R;
 import com.haiwai.administrator.japanhouse.base.BaseFragment;
+import com.haiwai.administrator.japanhouse.bean.ManShouBean;
 import com.haiwai.administrator.japanhouse.bean.ManZuBean;
 import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.fragment.comment.GaoerfuDetailsActivity;
@@ -37,6 +38,9 @@ import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.haiwai.administrator.japanhouse.view.MyFooter;
+import com.haiwai.administrator.japanhouse.view.MyHeader;
+import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -51,11 +55,35 @@ public class ZufangFragment extends BaseFragment {
 
     private RecyclerView mrecycler;
     private LiebiaoAdapter mLiebiaoAdapter;
+    private SpringView springview;
     private List<String> mList=new ArrayList();
+    private List<ManZuBean.DatasBean> mRefreshData;
+    private boolean isLoadMore;
+    private int page = 1;
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_zufang, null);
         mrecycler= (RecyclerView) view.findViewById(R.id.Mrecycler);
+        springview = (SpringView) view.findViewById(R.id.springview);
+        springview.setHeader(new MyHeader(mContext));
+        springview.setFooter(new MyFooter(mContext));
+        springview.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                isLoadMore = false;
+                page = 1;
+                initNet();
+                springview.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                isLoadMore = true;
+                page++;
+                initNet();
+                springview.onFinishFreshAndLoad();
+            }
+        });
         return view;
     }
     @Override
@@ -68,30 +96,57 @@ public class ZufangFragment extends BaseFragment {
         String brokerId = SharedPreferencesUtils.getInstace(mContext).getStringPreference("brokerId", "");
         HttpParams params = new HttpParams();
         params.put("brokerId", brokerId);
-        params.put("pageNo", 1);
+        params.put("pageNo", page);
         OkGo.<ManZuBean>post(MyUrls.BASEURL + "/app/brokerhouse/brokerhousezflist")
                 .tag(this)
                 .params(params)
                 .execute(new DialogCallback<ManZuBean>(mActivity, ManZuBean.class) {
                     @Override
                     public void onSuccess(Response<ManZuBean> response) {
-                        int code = response.code();
-                        final ManZuBean ManZuBean = response.body();
-                        if (ManZuBean==null){
-                            return;
-                        }
-                        String code1 = ManZuBean.getCode();
-                        final List<com.haiwai.administrator.japanhouse.bean.ManZuBean.DatasBean> datas = ManZuBean.getDatas();
-                        if (datas==null){
-                            return;
-                        }
-                        if (code1.equals("200")) {
-                            if (mLiebiaoAdapter == null) {
-                                mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zufang,datas);
+                        final List<ManZuBean.DatasBean> datas = response.body().getDatas();
+                        if (mRefreshData == null || mRefreshData.size() == 0) {
+                            if (datas == null || datas.size() == 0) {
+                                return;
                             }
+                            mRefreshData = datas;
+                                mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zufang,mRefreshData);
                             mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
                             mrecycler.setNestedScrollingEnabled(false);
                             mrecycler.setAdapter(mLiebiaoAdapter);
+                        } else {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(mContext, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (!isLoadMore) {
+                                mRefreshData = datas;
+                                Toast.makeText(mContext, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
+                            } else {
+                                mRefreshData.addAll(datas);
+                            }
+                            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zufang,mRefreshData);
+                            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+                            mrecycler.setNestedScrollingEnabled(false);
+                            mrecycler.setAdapter(mLiebiaoAdapter);
+                        }
+
+//                        int code = response.code();
+//                        final ManZuBean ManZuBean = response.body();
+//                        if (ManZuBean==null){
+//                            return;
+//                        }
+//                        String code1 = ManZuBean.getCode();
+//
+//                        if (datas==null){
+//                            return;
+//                        }
+//                        if (code1.equals("200")) {
+//                            if (mLiebiaoAdapter == null) {
+//                                mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zufang,datas);
+//                            }
+//                            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+//                            mrecycler.setNestedScrollingEnabled(false);
+//                            mrecycler.setAdapter(mLiebiaoAdapter);
                             mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -170,9 +225,9 @@ public class ZufangFragment extends BaseFragment {
                                     }
                                 }
                             });
-                        } else {
-                            Toast.makeText(mContext, ManZuBean.getMsg(), Toast.LENGTH_SHORT).show();
-                        }
+//                        } else {
+//                            Toast.makeText(mContext, ManZuBean.getMsg(), Toast.LENGTH_SHORT).show();
+//                        }
 
 
                     }

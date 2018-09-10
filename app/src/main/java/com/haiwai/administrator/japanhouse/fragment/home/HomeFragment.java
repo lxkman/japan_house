@@ -75,6 +75,7 @@ import com.youth.banner.listener.OnBannerListener;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -785,7 +786,7 @@ public class HomeFragment extends BaseFragment {
         protected void convert(BaseViewHolder helper, HomePageBean.DatasEntity.TjjjrEntity item) {
             RatingBarView ratingBarView = helper.getView(R.id.ratingBarView);
             ratingBarView.setRatingCount(5);//设置RatingBarView总数
-            ratingBarView.setSelectedCount((int) item.getAvgStar());//设置RatingBarView选中数
+            ratingBarView.setSelectedCount(Integer.parseInt(new DecimalFormat("0").format(item.getAvgStar())));//设置RatingBarView选中数
             ratingBarView.setSelectedIconResId(R.drawable.start_check);//设置RatingBarView选中的图片id
             ratingBarView.setNormalIconResId(R.drawable.start_nocheck);//设置RatingBarView正常图片id
             ratingBarView.setClickable(false);//设置RatingBarView是否可点击

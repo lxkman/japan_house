@@ -138,7 +138,7 @@ public class ManagerBean {
             private Object token;
             private Object lastTime;
             private Object birthday;
-            private int avgStar;
+            private double avgStar;
             private String areaNameCn;
             private String areaNameJpn;
 
@@ -366,11 +366,11 @@ public class ManagerBean {
                 this.birthday = birthday;
             }
 
-            public int getAvgStar() {
+            public double getAvgStar() {
                 return avgStar;
             }
 
-            public void setAvgStar(int avgStar) {
+            public void setAvgStar(double avgStar) {
                 this.avgStar = avgStar;
             }
 

@@ -27,6 +27,7 @@ import com.haiwai.administrator.japanhouse.fragment.comment.HaiWaiDetailsActivit
 import com.haiwai.administrator.japanhouse.fragment.comment.JiudianDetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.OldHousedetailsActivity;
+import com.haiwai.administrator.japanhouse.fragment.comment.OldhouseFragment;
 import com.haiwai.administrator.japanhouse.fragment.comment.ShangpuDetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.TudidetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.XiaoQuDetailsActivity;
@@ -34,10 +35,14 @@ import com.haiwai.administrator.japanhouse.fragment.comment.XiezilouDetailsActiv
 import com.haiwai.administrator.japanhouse.fragment.comment.ZhongguoDetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.ZuHousedetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.home.BieshudetailsActivity;
+import com.haiwai.administrator.japanhouse.model.HouseListBean;
 import com.haiwai.administrator.japanhouse.utils.GlideReqUtils;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
 import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SharedPreferencesUtils;
+import com.haiwai.administrator.japanhouse.view.MyFooter;
+import com.haiwai.administrator.japanhouse.view.MyHeader;
+import com.liaoinstan.springview.widget.SpringView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -55,17 +60,43 @@ public class ShoufangFragment extends BaseFragment {
     private RecyclerView mrecycler;
     private TextView tv_refresh_time;
     private TextView tvNoData;
+    private SpringView springview;
     private LiebiaoAdapter mLiebiaoAdapter;
-    private List<String> mList=new ArrayList();
+    private List<String> mList = new ArrayList();
+    private List<ManShouBean.DatasBean> mRefreshData;
+    private boolean isLoadMore;
+    private int page = 1;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_shoufang, null);
-        mrecycler= (RecyclerView) view.findViewById(R.id.Mrecycler);
-        tv_refresh_time= (TextView) view.findViewById(R.id.tv_refresh_time);
-        tvNoData= (TextView) view.findViewById(tv_wushuju);
+        mrecycler = (RecyclerView) view.findViewById(R.id.Mrecycler);
+        tv_refresh_time = (TextView) view.findViewById(R.id.tv_refresh_time);
+        tvNoData = (TextView) view.findViewById(tv_wushuju);
+        springview = (SpringView) view.findViewById(R.id.springview);
         tv_refresh_time.setVisibility(View.GONE);
+        springview.setHeader(new MyHeader(mContext));
+        springview.setFooter(new MyFooter(mContext));
+        springview.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                isLoadMore = false;
+                page = 1;
+                initNet();
+                springview.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                isLoadMore = true;
+                page++;
+                initNet();
+                springview.onFinishFreshAndLoad();
+            }
+        });
         return view;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -76,32 +107,41 @@ public class ShoufangFragment extends BaseFragment {
         String brokerId = SharedPreferencesUtils.getInstace(mContext).getStringPreference("brokerId", "");
         HttpParams params = new HttpParams();
         params.put("brokerId", brokerId);
-        params.put("pageNo", 1);
+        params.put("pageNo", page);
         OkGo.<ManShouBean>post(MyUrls.BASEURL + "/app/brokerhouse/selecthouselist")
                 .tag(this)
                 .params(params)
                 .execute(new DialogCallback<ManShouBean>(mActivity, ManShouBean.class) {
                     @Override
                     public void onSuccess(Response<ManShouBean> response) {
-                        int code = response.code();
-                        final ManShouBean ManShouBean = response.body();
-                        if (ManShouBean==null){
-                            tvNoData.setVisibility(View.VISIBLE);
-                            return;
-                        }
-                        String code1 = ManShouBean.getCode();
-                        final List<com.haiwai.administrator.japanhouse.bean.ManShouBean.DatasBean> datas = ManShouBean.getDatas();
-                        if (datas==null){
-                            tvNoData.setVisibility(View.VISIBLE);
-                            return;
-                        }
-                        if (code1.equals("200")) {
-                            if (mLiebiaoAdapter == null) {
-                                mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin,datas);
+                        final List<ManShouBean.DatasBean> datas = response.body().getDatas();
+                        if (mRefreshData == null || mRefreshData.size() == 0) {
+                            if (datas == null || datas.size() == 0) {
+                                tvNoData.setVisibility(View.VISIBLE);
+                                return;
                             }
-                            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL,false));
+                            mRefreshData = datas;
+                            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, mRefreshData);
+                            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                             mrecycler.setNestedScrollingEnabled(false);
                             mrecycler.setAdapter(mLiebiaoAdapter);
+                        } else {
+                            if (datas == null || datas.size() == 0) {
+                                Toast.makeText(mContext, R.string.meiyougengduoshujule, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (!isLoadMore) {
+                                mRefreshData = datas;
+                                Toast.makeText(mContext, R.string.shuaxinchenggong, Toast.LENGTH_SHORT).show();
+                            } else {
+                                mRefreshData.addAll(datas);
+                            }
+                            mLiebiaoAdapter = new LiebiaoAdapter(R.layout.item_zuijin, mRefreshData);
+                            mrecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                            mrecycler.setNestedScrollingEnabled(false);
+                            mrecycler.setAdapter(mLiebiaoAdapter);
+                        }
+
                             mLiebiaoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -180,12 +220,13 @@ public class ShoufangFragment extends BaseFragment {
                                     }
                                 }
                             });
-                        } else {
-                            Toast.makeText(mContext, ManShouBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
+//                        else {
+//                            Toast.makeText(mContext, ManShouBean.getMsg(), Toast.LENGTH_SHORT).show();
+//                        }
 
 
-                    }
+//                    }
                 });
     }
 
@@ -197,7 +238,7 @@ public class ShoufangFragment extends BaseFragment {
     class LiebiaoAdapter extends BaseQuickAdapter<ManShouBean.DatasBean, BaseViewHolder> {
 
         public LiebiaoAdapter(@LayoutRes int layoutResId, @Nullable List<ManShouBean.DatasBean> data) {
-            super(layoutResId,data);
+            super(layoutResId, data);
         }
 
         @Override
@@ -209,9 +250,9 @@ public class ShoufangFragment extends BaseFragment {
             } else {
                 area = item.getAddressCn();
             }
-            String price=MyApplication.isJapanese() ? item.getPriceJpn() : item.getPriceCn();
+            String price = MyApplication.isJapanese() ? item.getPriceJpn() : item.getPriceCn();
             helper.setText(R.id.tv_house_name, isJa ? item.getTitleJpn() : item.getTitleCn());
-            helper.setText(R.id.tv_house_address, MyUtils.getSubText(area,price));
+            helper.setText(R.id.tv_house_address, MyUtils.getSubText(area, price));
             helper.setText(R.id.tv_house_room, isJa ? item.getDoorModelJpn() : item.getDoorModelCn());
             helper.setText(R.id.tv_house_area, isJa ? item.getAreaJpn() : item.getAreaCn());
             helper.setText(R.id.tv_price, isJa ? item.getPriceJpn() : item.getPriceCn());
@@ -221,6 +262,7 @@ public class ShoufangFragment extends BaseFragment {
                     .into((ImageView) helper.getView(R.id.img_house));
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

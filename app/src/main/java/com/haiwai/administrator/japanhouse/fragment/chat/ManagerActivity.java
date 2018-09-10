@@ -24,6 +24,7 @@ import com.haiwai.administrator.japanhouse.base.BaseActivity;
 import com.haiwai.administrator.japanhouse.bean.ManagerBean;
 import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.utils.MyUrls;
+import com.haiwai.administrator.japanhouse.utils.MyUtils;
 import com.haiwai.administrator.japanhouse.utils.SharedPreferencesUtils;
 import com.haiwai.administrator.japanhouse.view.BaseDialog;
 import com.haiwai.administrator.japanhouse.view.CircleImageView;
@@ -33,6 +34,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +81,7 @@ public class ManagerActivity extends BaseActivity {
     private List<Fragment> mBaseFragmentList = new ArrayList<>();
     private FragmentManager fm;
     private MyAdapter myAdapter;
-    private int avgStar;
+    private double avgStar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class ManagerActivity extends BaseActivity {
         setContentView(R.layout.activity_manager);
         ButterKnife.bind(this);
         initManager();
-        initRatingBar();
+
         initData();
         initListener();
     }
@@ -119,23 +121,31 @@ public class ManagerActivity extends BaseActivity {
 
                         avgStar = datas.getBrokerinfo().getAvgStar();
                         if (code1.equals("200")) {
+                            boolean ja = MyUtils.isJa();
                             Glide.with(ManagerActivity.this).load(datas.getBrokerinfo().getPic()).into(managerHeadImg);
                             managerName.setText(datas.getBrokerinfo().getBrokerName() + "");
                             managerHuifulv.setText(datas.getBrokerinfo().getTurnover() + "%");
                             managerYears.setText(datas.getDaynum() + "");
                             managerCount.setText(datas.getFwrs() + "");
-                            managerLocation.setText("："+datas.getBrokerinfo().getIntimacyCn() + "");
+                            managerLocation.setText(ja?"："+datas.getBrokerinfo().getAreaNameCn():"："+datas.getBrokerinfo().getAreaNameJpn() );
                             managerHeadImg.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
 //                                    ImManager.enterChat(ManagerActivity.this,datas.getBrokerinfo().getId()+"",datas.getBrokerinfo().getBrokerName(),datas.getBrokerinfo().getPic());
                                 }
                             });
+                            initRatingBar();
                         } else {
                             Toast.makeText(ManagerActivity.this, ManagerBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
 
 
+                    }
+
+                    @Override
+                    public void onError(Response<ManagerBean> response) {
+                        super.onError(response);
+                                Log.d("aaa",response.getException().getMessage()+"-----------");
                     }
                 });
 
@@ -227,7 +237,7 @@ public class ManagerActivity extends BaseActivity {
     private void initRatingBar() {
         ratingBarView = (RatingBarView) findViewById(R.id.ratingBarView);
         ratingBarView.setRatingCount(5);//设置RatingBarView总数
-        ratingBarView.setSelectedCount(avgStar);//设置RatingBarView选中数
+        ratingBarView.setSelectedCount(Integer.parseInt(new DecimalFormat("0").format(avgStar)));//设置RatingBarView选中数
         ratingBarView.setSelectedIconResId(R.drawable.start_check);//设置RatingBarView选中的图片id
         ratingBarView.setNormalIconResId(R.drawable.start_nocheck);//设置RatingBarView正常图片id
         ratingBarView.setClickable(false);//设置RatingBarView是否可点击

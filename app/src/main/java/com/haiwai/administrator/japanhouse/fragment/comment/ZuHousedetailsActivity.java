@@ -451,6 +451,10 @@ public class ZuHousedetailsActivity extends UMShareActivity {
         findViewById(R.id.lishi_zu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (hwdcBroker != null) {
                     ImManager.enterChatDetails(ZuHousedetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
@@ -599,6 +603,7 @@ public class ZuHousedetailsActivity extends UMShareActivity {
                 break;
             case R.id.tv_details_manager_phone:
                 if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ShowCallDialog(hwdcBroker.getPhone() + "");

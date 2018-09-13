@@ -663,4 +663,6 @@
     <string name="quedingtuichuma">あなたは本当にやめるのですか？</string>
     <string name="fenxiang">シェア</string>
     <string name="quedingyaoquxiaodingyuema">このリスティングから退会してもよろしいですか？</string>
+    <string name="zanweiguanlianjingjiren">関連ブローカー</string>
+    <string name="morenjingjiren">デフォルトマネージャー</string>
 </resources>

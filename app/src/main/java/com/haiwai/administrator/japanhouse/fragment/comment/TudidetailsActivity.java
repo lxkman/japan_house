@@ -435,6 +435,10 @@ public class TudidetailsActivity extends UMShareActivity {
         findViewById(R.id.tudi_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (hwdcBroker != null) {
                     ImManager.enterChatDetails(TudidetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
@@ -528,7 +532,8 @@ public class TudidetailsActivity extends UMShareActivity {
                 showDialog(Gravity.BOTTOM, R.style.Bottom_Top_aniamtion);
                 break;
             case R.id.tv_details_manager_phone:
-                if (hwdcBroker == null) {
+                if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ShowCallDialog(hwdcBroker.getPhone() + "");

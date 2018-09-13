@@ -421,6 +421,10 @@ public class XiaoQuDetailsActivity extends UMShareActivity {
         findViewById(R.id.xiaoqu_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (hwdcBroker != null) {
                     ImManager.enterChatDetails(XiaoQuDetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
@@ -512,6 +516,7 @@ public class XiaoQuDetailsActivity extends UMShareActivity {
                 break;
             case R.id.tv_details_manager_phone:
                 if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ShowCallDialog(hwdcBroker.getPhone() + "");

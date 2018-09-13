@@ -73,7 +73,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@id/tv_suiyi"
                             android:gravity="center"
-                            android:text="10"
+                            android:text="1"
                             android:textColor="#fff" />
                     </RelativeLayout>
 
@@ -431,7 +431,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dip"
-                    android:text="杨金金"
+                    android:text="@string/morenjingjiren"
                     android:textColor="#333"
                     android:textSize="14dip" />
             </LinearLayout>

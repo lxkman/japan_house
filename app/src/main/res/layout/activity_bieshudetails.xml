@@ -66,7 +66,7 @@
                             android:id="@+id/tv_all_num"
                             android:textColor="#fff"
                             android:layout_marginLeft="5dp"
-                            android:text="10"
+                            android:text="1"
                             android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
@@ -346,7 +346,7 @@
                     android:textColor="#333"
                     android:textSize="14dip"
                     android:paddingLeft="10dip"
-                    android:text="杨金金"
+                    android:text="@string/morenjingjiren"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
             </LinearLayout>

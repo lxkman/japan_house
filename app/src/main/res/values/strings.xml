@@ -662,4 +662,6 @@
     <string name="quedingtuichuma">您确定退出吗？</string>
     <string name="fenxiang">分享</string>
     <string name="quedingyaoquxiaodingyuema">您确定要取消订阅此房源通知吗？</string>
+    <string name="zanweiguanlianjingjiren">暂未关联经纪人</string>
+    <string name="morenjingjiren">默认经纪人</string>
 </resources>

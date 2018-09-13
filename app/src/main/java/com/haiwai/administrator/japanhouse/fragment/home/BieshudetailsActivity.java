@@ -37,6 +37,7 @@ import com.haiwai.administrator.japanhouse.bean.SuccessBean;
 import com.haiwai.administrator.japanhouse.callback.DialogCallback;
 import com.haiwai.administrator.japanhouse.fragment.chat.ManagerActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.BannerDetailsActivity;
+import com.haiwai.administrator.japanhouse.fragment.comment.NewHousedetailsActivity;
 import com.haiwai.administrator.japanhouse.fragment.comment.VideoDetailsActivity;
 import com.haiwai.administrator.japanhouse.im.ImManager;
 import com.haiwai.administrator.japanhouse.login.LoginActivity;
@@ -167,6 +168,10 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
         findViewById(R.id.xiezilou_wl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (hwdcBroker != null) {
                     ImManager.enterChatDetails(BieshudetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
                 }
@@ -485,6 +490,7 @@ public class BieshudetailsActivity extends UMShareActivity implements VillaDetai
                 break;
             case R.id.tv_details_manager_phone:
                 if (hwdcBroker==null){
+                    Toast.makeText(mContext, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ShowCallDialog(hwdcBroker.getPhone() + "");

@@ -516,6 +516,9 @@ public class NewHousedetailsActivity extends UMShareActivity {
             public void onClick(View v) {
                 if (hwdcBroker != null) {
                     ImManager.enterChatDetails(NewHousedetailsActivity.this, hwdcBroker.getId() + "", hwdcBroker.getBrokerName(), hwdcBroker.getPic());
+                }else {
+                    Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -684,6 +687,7 @@ public class NewHousedetailsActivity extends UMShareActivity {
                 break;
             case R.id.tv_details_manager_phone:
                 if (hwdcBroker==null){
+                    Toast.makeText(NewHousedetailsActivity.this, getResources().getString(R.string.zanweiguanlianjingjiren), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ShowCallDialog(hwdcBroker.getPhone() + "");
